@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Family
+namespace Game
 {
 
     class Villager
@@ -30,12 +30,8 @@ namespace Family
             _lifeExpectancy = 85;
             _parentFamily = parentFamily;
             _statusInFamily = Status.SINGLE;
+            _fiance = null;
 
-        }
-        public float GoldGeneration()
-        {
-            //TODO: gold gain calculation
-            return 1;
         }
 
         Family _parentFamily;
@@ -43,7 +39,10 @@ namespace Family
         Jobs _job;
         float _lifeExpectancy;
         float _age;
-        Status _statusInFamily;
+
+        Status _statusInFamily; //!! 
+        Villager _fiance; //!!!!!
+
         Healths _health; //a death has numerous consequences. Once they are fullfilled, this object is dropped.
         float _faith; //scale from 0 to 100.
         float _happiness; //scale from 0 to 100.
@@ -54,6 +53,29 @@ namespace Family
         public Jobs Job { get { return _job; } }
         public float LifeExpectancy { get { return _lifeExpectancy; } }
 
+
+        /// <summary>
+        /// if single, this will return an exeption!
+        /// </summary>
+        internal Villager Fiance
+        {
+            get
+            {
+                if (_statusInFamily == Status.SINGLE || _fiance == null)
+                {
+                    throw new InvalidOperationException();
+                }
+                return _fiance;
+            }
+            set
+            {
+                if (_statusInFamily != Status.SINGLE)
+                {
+                    throw new InvalidOperationException();
+                }
+                _fiance = value;
+            }
+        }
         public Status StatusInFamily
         {
             get
@@ -138,6 +160,11 @@ namespace Family
             if (_lifeExpectancy <= _age) 
             {
                 _health = Healths.DEAD;
+                if (_statusInFamily == Status.ENGAGED)
+                {
+                    _fiance.StatusInFamily = Status.SINGLE;
+                    _fiance.Fiance = null;
+                }
             }
         }
         /// <summary>
@@ -147,6 +174,12 @@ namespace Family
         internal void AgeTick(float time)
         {
             _age += time;
+        }
+
+        public float GoldGeneration()
+        {
+            //TODO: gold gain calculation
+            return 1;
         }
         #endregion
     }

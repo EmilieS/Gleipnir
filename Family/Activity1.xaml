@@ -1,4 +1,4 @@
-﻿<Activity x:Class="Family.Activity1" 
+﻿<Activity x:Class="Game.Activity1" 
           xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" 
           mc:Ignorable="sap2010"
           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
