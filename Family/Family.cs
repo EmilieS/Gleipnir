@@ -56,7 +56,34 @@ namespace Family
             _goldStash=0;
             return goldLeft;
         }
-
+        public float FaithAverage()
+        {
+            float faith=0;
+            int nbFamilyMembers=_familyMembers.Count;
+            if (nbFamilyMembers == 0)
+            {
+                throw new NullReferenceException();
+            }
+            for (int i = 0; i < nbFamilyMembers; i++)
+            {
+                faith += _familyMembers[i].Faith;
+            }
+            return faith / nbFamilyMembers;
+        }
+        public float HapinessAverage()
+        {
+            float happiness = 0;
+            int nbFamilyMembers = _familyMembers.Count;
+            if (nbFamilyMembers == 0)
+            {
+                throw new NullReferenceException();
+            }
+            for (int i = 0; i < nbFamilyMembers; i++)
+            {
+                happiness += _familyMembers[i].Happiness;
+            }
+            return happiness / nbFamilyMembers;
+        }
 
     }
 }

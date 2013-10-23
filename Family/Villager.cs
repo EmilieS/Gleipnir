@@ -9,7 +9,7 @@ namespace Family
 
     class Villager
     {
-        public Villager(Family parentFamily)
+        public Villager(Family parentFamily)//TODO: autre constructeur pour le début...
         {
             Random rand=new Random();//to be moved elsewhere.
 
@@ -18,7 +18,12 @@ namespace Family
                 case 0: _gender = Genders.MALE; _job = parentFamily.Father.Job; break; 
                 case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; break;
             }
-            //TODO if new villager is a man, his job is the same as his father, same for woman->mother's job
+            if (rand.Next(101) < 2)
+                _faith = 13;
+            else
+                _faith = parentFamily.FaithAverage();
+
+            _happiness = parentFamily.HapinessAverage();            
             _job = Jobs.FARMER;
             _health = Healths.HEATHY;
             _age = 0;
@@ -29,7 +34,7 @@ namespace Family
         }
         public float GoldGeneration()
         {
-            //TODO: gold gain claculation
+            //TODO: gold gain calculation
             return 1;
         }
 
@@ -40,7 +45,11 @@ namespace Family
         float _age;
         Status _statusInFamily;
         Healths _health; //a death has numerous consequences. Once they are fullfilled, this object is dropped.
+        float _faith; //scale from 0 to 100.
+        float _happiness; //scale from 0 to 100.
 
+        public float Faith  { get { return _faith; } }
+        public float Happiness { get { return _happiness; } }
         public Genders Gender { get { return _gender; } }
         public Jobs Job { get { return _job; } }
         public float LifeExpectancy { get { return _lifeExpectancy; } }
@@ -87,7 +96,7 @@ namespace Family
 
         }
         /// <summary>
-        /// Sets the new life expectancy based on the time left you want. if shorter than before.
+        /// Sets the new life expectancy based on the time left you want. only if shorter than before.
         /// </summary>
         /// <param name="lifeExpectancy"></param>
         public void SetLifeExpectancyLeft(float timeLeft)
@@ -103,17 +112,24 @@ namespace Family
         /// Reduces the life expectancy by 'time'.(minimum is 0)
         /// </summary>
         /// <param name="time"></param>
-        public void ReduceLifeExpectancy(float time)
+        public void ReduceLifeExpectancy(float timeleft)
         {
-            if (_lifeExpectancy > time)
+            if (_lifeExpectancy > timeleft)
             {
-                _lifeExpectancy -= time;
+                _lifeExpectancy -= timeleft;
             }
             else
             {
                 _lifeExpectancy = 0;
             }
         }
+        public void Kill()
+        {
+            _lifeExpectancy = 0;
+        }
+
+        #region worldtick
+
         /// <summary>
         /// should only be called at world tick. If you want to kill a villager, use kill.
         /// </summary>
@@ -124,10 +140,15 @@ namespace Family
                 _health = Healths.DEAD;
             }
         }
-        public void Kill()
+        /// <summary>
+        /// should only be called at world tick.
+        /// </summary>
+        /// <param name="time"></param>
+        internal void AgeTick(float time)
         {
-            _lifeExpectancy = 0;
+            _age += time;
         }
+        #endregion
     }
 
 }

@@ -8,10 +8,10 @@ namespace Family
 {
     //public class VillagerProperties
     //{
-        enum  Genders
+         enum Genders 
         {
-            MALE = false,
-            FEMALE = true
+            MALE = 0,
+            FEMALE = 1
         };
         enum Jobs
         {
