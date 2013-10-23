@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gleipnir", "Gleipnir\Gleipnir.csproj", "{FDDDBDE4-3157-48EF-A3B7-7C76E3E2446A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Family", "Family\Family.csproj", "{98EC024C-6439-44B1-8B1E-29E457B2201F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game", "Family\Game.csproj", "{98EC024C-6439-44B1-8B1E-29E457B2201F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
