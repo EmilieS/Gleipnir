@@ -8,15 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Gleipnir
+namespace GamePage
 {
-    public partial class Form1 : Form
+    public partial class gamePage : Form
     {
-        public Form1()
+        public gamePage()
         {
             InitializeComponent();
         }
-
-
     }
 }

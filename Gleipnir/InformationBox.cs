@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Gleipnir
+namespace GamePage
 {
-    public partial class UserControl1 : UserControl
+    public partial class InformationBox : UserControl
     {
-        public UserControl1()
+        public InformationBox()
         {
             InitializeComponent();
         }

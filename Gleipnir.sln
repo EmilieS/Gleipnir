@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gleipnir", "Gleipnir\Gleipnir.csproj", "{FDDDBDE4-3157-48EF-A3B7-7C76E3E2446A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePage", "Gleipnir\GamePage.csproj", "{FDDDBDE4-3157-48EF-A3B7-7C76E3E2446A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

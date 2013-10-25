@@ -1,6 +1,6 @@
-﻿namespace Gleipnir
+﻿namespace GamePage
 {
-    partial class UserControl1
+    partial class InformationBox
     {
         /// <summary> 
         /// Variable nécessaire au concepteur.
