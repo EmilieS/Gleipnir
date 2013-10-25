@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePage", "Gleipnir\GamePa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomePage", "HomePage\HomePage.csproj", "{6D0ED232-A308-47CA-B698-02BD6539060E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updates", "Updates\Updates.csproj", "{7C691930-0634-47D4-9E30-88066C3FD44C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobs", "Jobs\Jobs.csproj", "{0DE259B4-3C19-4825-B395-0155BA971B8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +23,14 @@ Global
 		{6D0ED232-A308-47CA-B698-02BD6539060E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D0ED232-A308-47CA-B698-02BD6539060E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D0ED232-A308-47CA-B698-02BD6539060E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C691930-0634-47D4-9E30-88066C3FD44C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C691930-0634-47D4-9E30-88066C3FD44C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C691930-0634-47D4-9E30-88066C3FD44C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C691930-0634-47D4-9E30-88066C3FD44C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DE259B4-3C19-4825-B395-0155BA971B8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DE259B4-3C19-4825-B395-0155BA971B8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DE259B4-3C19-4825-B395-0155BA971B8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DE259B4-3C19-4825-B395-0155BA971B8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
