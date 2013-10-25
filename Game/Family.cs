@@ -23,12 +23,15 @@ namespace Game
                 }
                 _goldStash = mother.ParentFamily.takeFromGoldStash(mother.ParentFamily.GoldStash / 10); //10%
                 _goldStash += father.ParentFamily.takeFromGoldStash(father.ParentFamily.GoldStash / 10); //10%
+            removeFromFamily(mother, mother.ParentFamily);
+            removeFromFamily(father, father.ParentFamily);
             }
             _mother = mother;
             _father = father;
             _mother.StatusInFamily = Status.MARRIED;
             _father.StatusInFamily = Status.MARRIED;
-            _familyMembers=new List<Villager>();
+
+            _familyMembers=new FamilyMemberList(this);
             _familyMembers.Add(_mother);
             _familyMembers.Add(_father);
             _mother.ParentFamily = this;
@@ -49,17 +52,23 @@ namespace Game
         int _goldStash;
         Villager _mother;
         Villager _father;
-        public readonly List<Villager> _familyMembers;
+        FamilyMemberList _familyMembers; 
 
         public int GoldStash { get { return _goldStash; } }
         public Villager Mother { get { return _mother; } }
         public Villager Father { get { return _father; } }
+        public IFamilyMemberList FamilyMembers { get { return _familyMembers; } }
+
+        static private void removeFromFamily(Villager villager, Family parentFamily)
+        {
+            parentFamily.FamilyMembers.Remove(villager);
+        }
 
         public Villager newFamilyMember()
         {
             if (_mother == null || _father == null)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("missing parent");
             }
                 Villager kid = new Villager(this);
                 _familyMembers.Add(kid);

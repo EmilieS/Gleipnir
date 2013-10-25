@@ -23,7 +23,7 @@ namespace Game
 -actualiser le bonheur 
 -actualiser la foi...
 -ajouter l'or
--retirer l'or
+-retirer l'or => offrandes
 
 -faire liste de marriage
         */

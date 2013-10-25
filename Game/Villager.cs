@@ -29,7 +29,6 @@ namespace Game
             _health = Healths.HEATHY;
             _age = 0;
             _lifeExpectancy = 85;
-            _parentFamily = parentFamily;
             _statusInFamily = Status.SINGLE;
             _fiance = null;
 

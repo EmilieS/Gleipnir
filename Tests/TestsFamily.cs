@@ -106,10 +106,18 @@ namespace Tests
                 Villager boyf2 = family2.newFamilyMember();
                 boyf2.Gender = Genders.MALE;
 
+                Assert.That(family2.FamilyMembers.Contains(boyf2));
+
                 Family family3 = new Family(girlf1, boyf2);
                 Assert.That(family3.GoldStash == 20);
                 Assert.That(family1.GoldStash == 90);
                 Assert.That(family2.GoldStash == 90);
+                Assert.That(!family2.FamilyMembers.Contains(boyf2));
+                Assert.That(family3.FamilyMembers.Contains(boyf2));
+               
+
+
+
 
                 Villager girl2f1 = family1.newFamilyMember();
                 girl2f1.Gender = Genders.FEMALE;
@@ -121,8 +129,13 @@ namespace Tests
                 Assert.Throws<InvalidOperationException>(() => new Family(girl2f1, girl2f2), "gender issue!");
 
                 Villager boy2f1 = family1.newFamilyMember();
-               boy2f1.Gender = Genders.MALE;
-               Assert.Throws<InvalidOperationException>(() => new Family(girl2f1, boy2f1), "same family!");
+                boy2f1.Gender = Genders.MALE;
+                Assert.Throws<InvalidOperationException>(() => new Family(girl2f1, boy2f1), "same family!");
+
+                motherf1.Kill();
+                motherf1.DieOrIsAlive();
+                Assert.Throws<InvalidOperationException>(() => family1.newFamilyMember(), "missing parent");
+
 
                 //TODO job check.
 
