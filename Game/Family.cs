@@ -11,8 +11,16 @@ namespace Game
         //TODO initial constructor.
         public Family(Villager mother, Villager father)
         {
+            if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE)
+            {
+                throw new InvalidOperationException("gender issue!");
+            }
             if (mother.ParentFamily != null && father.ParentFamily != null)
             {
+                if (mother.ParentFamily == father.ParentFamily)
+                {
+                    throw new InvalidOperationException("same family!");
+                }
                 _goldStash = mother.ParentFamily.takeFromGoldStash(mother.ParentFamily.GoldStash / 10); //10%
                 _goldStash += father.ParentFamily.takeFromGoldStash(father.ParentFamily.GoldStash / 10); //10%
             }
@@ -41,16 +49,22 @@ namespace Game
         int _goldStash;
         Villager _mother;
         Villager _father;
-        readonly List<Villager> _familyMembers;
+        public readonly List<Villager> _familyMembers;
 
         public int GoldStash { get { return _goldStash; } }
         public Villager Mother { get { return _mother; } }
         public Villager Father { get { return _father; } }
 
-        public void newFamilyMember()
+        public Villager newFamilyMember()
         {
-            if (_mother!=null && _father!=null)
-            _familyMembers.Add(new Villager(this));
+            if (_mother == null || _father == null)
+            {
+                throw new InvalidOperationException();
+            }
+                Villager kid = new Villager(this);
+                _familyMembers.Add(kid);
+                return kid;
+            
         }
         /// <summary>
         /// takes from the gold stash the amount asked, if not the maximum it can. Returns true amount.
@@ -71,6 +85,15 @@ namespace Game
             int goldLeft=_goldStash;
             _goldStash=0;
             return goldLeft;
+        }
+
+        public void addTOGoldStash(int amount)
+        {
+            if (amount < 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            _goldStash += amount;
         }
         public float FaithAverage()
         {

@@ -35,13 +35,13 @@ namespace Game
 
             _name = "Afaire";
 
-            _fiance.PropertyChanged += (sender, e) =>
-            {
-                _fiance = null;
-            };
+
+
         }
         public Villager()
-        { }
+        {
+        
+        }
         
 
 
@@ -75,19 +75,33 @@ namespace Game
         {
             get
             {
-                if (_statusInFamily == Status.SINGLE || _fiance == null)
+                /*if (_statusInFamily == Status.SINGLE || _fiance == null)
                 {
                     throw new InvalidOperationException();
-                }
+                }*/
                 return _fiance;
             }
             set
             {
-                if (_statusInFamily != Status.SINGLE)
+                /*if (_statusInFamily != Status.SINGLE)
                 {
                     throw new InvalidOperationException();
-                }
+                }*/
+
                 _fiance = value;
+                if (value != null)
+                {
+
+                    if (StatusInFamily == Status.SINGLE) { StatusInFamily = Status.ENGAGED; }
+                    _fiance.PropertyChanged += (sender, e) =>
+                    {
+                        if (_fiance == sender)
+                        {
+                            _fiance = null;
+                           if(StatusInFamily == Status.ENGAGED ){ _statusInFamily=Status.SINGLE;}
+                        }
+                    };
+                }
             }
         }
         public Status StatusInFamily
@@ -176,8 +190,8 @@ namespace Game
                 _health = Healths.DEAD;
                 if (_statusInFamily == Status.ENGAGED)
                 {
-                    _fiance.StatusInFamily = Status.SINGLE;
-                    _fiance.Fiance = null;
+                    /*_fiance.StatusInFamily = Status.SINGLE;
+                    _fiance.Fiance = null;*/
                 }
                 else if (_statusInFamily == Status.MARRIED)
                 {
