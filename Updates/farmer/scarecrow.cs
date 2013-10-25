@@ -7,5 +7,8 @@ namespace Updates.farmer
 {
     class scarecrow
     {
+        public scarecrow()
+        {
+        }
     }
 }
