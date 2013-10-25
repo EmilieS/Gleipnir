@@ -34,6 +34,11 @@ namespace Game
             _fiance = null;
 
             _name = "Afaire";
+
+            _fiance.PropertyChanged += (sender, e) =>
+            {
+                _fiance = null;
+            };
         }
         public Villager()
         { }
@@ -50,7 +55,7 @@ namespace Game
 
         Status _statusInFamily; //!! 
         Villager _fiance; //!!!!!
-        public event PropertyChangedEventHandler VillagerDied;
+
 
         Healths _health; //a death has numerous consequences. Once they are fullfilled, this object is dropped.
         float _faith; //scale from 0 to 100.
@@ -58,7 +63,7 @@ namespace Game
 
         public float Faith  { get { return _faith; } }
         public float Happiness { get { return _happiness; } }
-        public Genders Gender { get { return _gender; } }
+        public Genders Gender { get { return _gender; } set { _gender = value; } } //obligé d'avoir le set pour les tests...
         public Jobs Job { get { return _job; } }
         public float LifeExpectancy { get { return _lifeExpectancy; } }
 
@@ -66,7 +71,7 @@ namespace Game
         /// <summary>
         /// if single, this will return an exeption!
         /// </summary>
-        internal Villager Fiance
+        public Villager Fiance //public pour tests
         {
             get
             {
@@ -96,7 +101,7 @@ namespace Game
                 _statusInFamily = value; //riqueraque
             }
         }
-        internal Family ParentFamily
+        public Family ParentFamily
         {
             get
             {
@@ -164,7 +169,7 @@ namespace Game
         /// <summary>
         /// should only be called at world tick. If you want to kill a villager, use kill.
         /// </summary>
-        internal void DieOrIsAlive()
+        public void DieOrIsAlive()
         {
             if (_lifeExpectancy <= _age) 
             {
@@ -174,7 +179,11 @@ namespace Game
                     _fiance.StatusInFamily = Status.SINGLE;
                     _fiance.Fiance = null;
                 }
-                PropertyChangedEventHandler h = VillagerDied;
+                else if (_statusInFamily == Status.MARRIED)
+                {
+                  //  _fiance.Fiance = null;//we keep the married status.
+                }
+                PropertyChangedEventHandler h = PropertyChanged;
                 if (h != null) { h(this, new PropertyChangedEventArgs("died")); }
             }
         }

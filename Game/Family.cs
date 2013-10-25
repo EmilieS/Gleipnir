@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    class Family
+    public class Family
     {
         //TODO initial constructor.
         public Family(Villager mother, Villager father)
         {
-            _goldStash = mother.ParentFamily.takeFromGoldStash(mother.ParentFamily.GoldStash / 10); //10%
-            _goldStash += father.ParentFamily.takeFromGoldStash(father.ParentFamily.GoldStash / 10); //10%
+            if (mother.ParentFamily != null && father.ParentFamily != null)
+            {
+                _goldStash = mother.ParentFamily.takeFromGoldStash(mother.ParentFamily.GoldStash / 10); //10%
+                _goldStash += father.ParentFamily.takeFromGoldStash(father.ParentFamily.GoldStash / 10); //10%
+            }
             _mother = mother;
             _father = father;
             _mother.StatusInFamily = Status.MARRIED;
@@ -22,7 +25,19 @@ namespace Game
             _familyMembers.Add(_father);
             _mother.ParentFamily = this;
             _father.ParentFamily = this;
+            _mother.PropertyChanged += (sender, e) =>
+            {
+                _mother = null;
+            };
+            _father.PropertyChanged += (sender, e) =>
+            {
+                _father = null;
+            };
         }
+
+        public Family() { }
+
+
         int _goldStash;
         Villager _mother;
         Villager _father;
