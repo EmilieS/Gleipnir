@@ -8,26 +8,26 @@ namespace Game
 {
     //public class VillagerProperties
     //{
-         enum Genders 
+        public enum Genders 
         {
             MALE = 0,
             FEMALE = 1
         };
-        enum Jobs
+        public enum Jobs
         {
             FARMER = 0,
             CONSTRUCTION_WORKER = 1,
             COOK = 10,
 
         };
-        enum Healths
+        public enum Healths
         {
             DEAD = 0,
             HEATHY = 1,
             SICK = 2
         };
 
-        enum Status
+        public enum Status
         {
             SINGLE = 0,
             MARRIED = 1,

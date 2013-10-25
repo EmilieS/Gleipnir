@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 namespace Game
 {
 
-    class Villager
+    public class Villager : INotifyPropertyChanged
     {
-        public Villager(Family parentFamily)//TODO: autre constructeur pour le début...
+        internal Villager(Family parentFamily)    //TODO: autre constructeur pour le début...
         {
             Random rand=new Random();//to be moved elsewhere.
 
@@ -32,8 +33,15 @@ namespace Game
             _statusInFamily = Status.SINGLE;
             _fiance = null;
 
+            _name = "Afaire";
         }
+        public Villager()
+        { }
+        
 
+
+        //TODO : generate name.
+        string _name;
         Family _parentFamily;
         Genders _gender;
         Jobs _job;
@@ -42,6 +50,7 @@ namespace Game
 
         Status _statusInFamily; //!! 
         Villager _fiance; //!!!!!
+        public event PropertyChangedEventHandler VillagerDied;
 
         Healths _health; //a death has numerous consequences. Once they are fullfilled, this object is dropped.
         float _faith; //scale from 0 to 100.
@@ -165,6 +174,8 @@ namespace Game
                     _fiance.StatusInFamily = Status.SINGLE;
                     _fiance.Fiance = null;
                 }
+                PropertyChangedEventHandler h = VillagerDied;
+                if (h != null) { h(this, new PropertyChangedEventArgs("died")); }
             }
         }
         /// <summary>
@@ -182,6 +193,10 @@ namespace Game
             return 1;
         }
         #endregion
+
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 
 }

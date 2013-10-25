@@ -34,6 +34,7 @@ namespace Game
 
         public void newFamilyMember()
         {
+            if (_mother!=null && _father!=null)
             _familyMembers.Add(new Villager(this));
         }
         /// <summary>
@@ -84,6 +85,7 @@ namespace Game
             }
             return happiness / nbFamilyMembers;
         }
+        
 
     }
 }
