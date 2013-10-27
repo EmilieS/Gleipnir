@@ -7,5 +7,6 @@ namespace Updates.Crafter.Materials
 {
     class Cement
     {
+        
     }
 }

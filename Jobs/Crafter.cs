@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Updates;
 
 namespace Jobs
 {
@@ -12,15 +13,15 @@ namespace Jobs
 
         public Crafter()
         {
-            materials = new Crafter.Materials.CrafterMaterials();
+
         }
-        
         public int CreationLifeLevel
         {
             get{return _creationLifeLevel;}
         }
         public double Effectiveness
         {
+            // The effectiveness is calculated with power of materials.
             
         }
     }
