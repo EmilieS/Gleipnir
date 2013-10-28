@@ -23,11 +23,11 @@ namespace Jobs
         {
         }
 
-        public void GenerateGold()
+        public void GenerateGoldAndHappiness()
         {
         }
 
-        public void AddHappiness()
+        public void ModifyGoldGeneration()
         {
         }
     }

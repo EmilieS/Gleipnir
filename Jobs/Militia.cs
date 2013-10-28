@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Jobs
 {
-    public class Apothecary
+    class Militia
     {
         List<object> _Persons;
 
-        public Apothecary()
+        public Militia()
         {
             _Persons.Add(Villager.Name);
         }

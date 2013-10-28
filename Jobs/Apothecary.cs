@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Jobs
 {
-    public class Apothecary
+    class Apothecary
     {
         List<object> _Persons;
 

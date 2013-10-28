@@ -40,6 +40,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blacksmith.cs" />
+    <Compile Include="Cooker.cs" />
+    <Compile Include="Apothecary.cs" />
+    <Compile Include="Tailor.cs" />
+    <Compile Include="Miller.cs" />
+    <Compile Include="Militia.cs" />
+    <Compile Include="Worker.cs" />
+    <Compile Include="Farmer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
