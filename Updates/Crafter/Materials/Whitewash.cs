@@ -7,23 +7,23 @@ namespace Updates.Crafter.Materials
 {
     class Whitewash
     {
-        MaterialsProperties _prop;
+        public double _power;
+        public bool _isBought;
 
         internal Whitewash()
         {
-            _prop = new MaterialsProperties();
 
+            _power = 300;
+            _isBought = false;
         }
-        public MaterialsProperties MaterialProperties
+
+        public bool IsBought
         {
-            get { return _prop; }
+            get { return _isBought; }
         }
-        public void SetPowerOfWhitewash()
+        public double PowerOfWhitewash
         {
-            if (_prop.IsBought == true)
-            {
-                _prop.Power = 300.0;
-            }
+            get { return _power; }
         }
 
     }

@@ -53,6 +53,7 @@
     <Compile Include="Cooker\Level4.cs" />
     <Compile Include="Crafter\Hoist.cs" />
     <Compile Include="Crafter\Materials\Cement.cs" />
+    <Compile Include="Crafter\Materials\MaterialsEnum.cs" />
     <Compile Include="Crafter\Materials\MaterialsProperties.cs" />
     <Compile Include="Crafter\Materials\Reinforced.cs" />
     <Compile Include="Crafter\Materials\Whitewash.cs" />
