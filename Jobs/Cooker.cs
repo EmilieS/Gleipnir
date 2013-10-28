@@ -1,18 +1,19 @@
-﻿using System;
+﻿using Game;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jobs
+namespace GameJobs
 {
-    class Cooker
+    class Cooker : INotifyPropertyChanged
     {
         List<object> _Persons;
 
         public Cooker()
         {
-            _Persons.Add(Villager.Name);
         }
 
         public void AddPerson()
@@ -30,5 +31,7 @@ namespace Jobs
         public void ModifyGoldGeneration()
         {
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

@@ -1,18 +1,20 @@
-﻿using System;
+﻿using Game;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jobs
+namespace GameJobs
 {
-    class Worker
+    class Construction_Worker : INotifyPropertyChanged
     {
         List<object> _Persons;
+        Jobs _job;
 
-        public Worker()
+        public Construction_Worker()
         {
-            _Persons.Add(Villager.Name);
         }
 
         public void AddPerson()
@@ -30,5 +32,7 @@ namespace Jobs
         public void ModifyGoldGeneration()
         {
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

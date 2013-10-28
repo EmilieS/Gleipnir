@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Game
 {
-
     public class Villager : INotifyPropertyChanged
     {
         internal Villager(Family parentFamily)    //TODO: autre constructeur pour le début...
@@ -42,9 +42,8 @@ namespace Game
         
         }
         
-
-
-        //TODO : generate name.
+         //TODO : generate name.
+        List<string> nameList;
         string _name;
         Family _parentFamily;
         Genders _gender;
@@ -55,20 +54,35 @@ namespace Game
         Status _statusInFamily; //!! 
         Villager _fiance; //!!!!!
 
-
         Healths _health; //a death has numerous consequences. Once they are fullfilled, this object is dropped.
         float _faith; //scale from 0 to 100.
         float _happiness; //scale from 0 to 100.
 
         public float Faith  { get { return _faith; } }
-        public float Happiness { get { return _happiness; } }
+        public float Happiness { get { return _happiness; } set { _happiness = value; } }
         public Genders Gender { get { return _gender; } set { _gender = value; } } //obligé d'avoir le set pour les tests...
         public Jobs Job { get { return _job; } }
         public float LifeExpectancy { get { return _lifeExpectancy; } }
 
+        float _goldInWallet;
 
         /// <summary>
-        /// if single, this will return an exeption!
+        /// Gets or Sets the villager's name
+        /// </summary>
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                string[] nameTab = File.ReadAllLines(@"D:\LS4Tonio\IN'TECH_INFO\PI\Gleipnir\Gleipnir\name_list.txt");
+                Random randomInt = new Random();    // Random number
+
+                _name = nameTab[randomInt.Next(nameTab.Count())];
+            }
+        }
+
+        /// <summary>
+        /// If single, this will return an exeption!
         /// </summary>
         public Villager Fiance //public pour tests
         {
@@ -103,6 +117,9 @@ namespace Game
                 }
             }
         }
+        /// <summary>
+        /// Define if the villager is single/engaged/married
+        /// </summary>
         public Status StatusInFamily
         {
             get
@@ -114,6 +131,9 @@ namespace Game
                 _statusInFamily = value; //riqueraque
             }
         }
+        /// <summary>
+        /// Family's villager
+        /// </summary>
         public Family ParentFamily
         {
             get
@@ -126,6 +146,10 @@ namespace Game
             }
         }
 
+        /// <summary>
+        /// Define which job the villager is
+        /// </summary>
+        /// <param name="NewJob"></param>
         public void setJob(Jobs NewJob)
         {
             _job = NewJob;
@@ -172,13 +196,15 @@ namespace Game
                 _lifeExpectancy = 0;
             }
         }
+        /// <summary>
+        /// Destroy object when villager died
+        /// </summary>
         public void Kill()
         {
             _lifeExpectancy = 0;
         }
 
-        #region worldtick
-
+        #region WhenWorldUpdate
         /// <summary>
         /// should only be called at world tick. If you want to kill a villager, use kill.
         /// </summary>
@@ -200,6 +226,7 @@ namespace Game
                 if (h != null) { h(this, new PropertyChangedEventArgs("died")); }
             }
         }
+        
         /// <summary>
         /// should only be called at world tick.
         /// </summary>
@@ -209,14 +236,15 @@ namespace Game
             _age += time;
         }
 
-        public float GoldGeneration()
+        /// <summary>
+        /// Add money the villager earn
+        /// </summary>
+        /// <param name="goldAdd"></param>
+        public void Wallet(float goldAdd)
         {
-            //TODO: gold gain calculation
-            return 1;
+            _goldInWallet += goldAdd;
         }
         #endregion
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

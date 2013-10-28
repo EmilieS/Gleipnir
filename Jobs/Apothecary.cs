@@ -1,34 +1,59 @@
-﻿using System;
+﻿using Game;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jobs
+namespace GameJobs
 {
-    class Apothecary
+    class Apothecary : INotifyPropertyChanged
     {
-        List<object> _Persons;
+        float _gold;
+        List<Villager> _workers;
+        Jobs _job;
 
         public Apothecary()
         {
-            _Persons.Add(Villager.Name);
+            _gold = 75;
+            _job = Jobs.APOTHECARY;
         }
 
-        public void AddPerson()
+        public void AddPerson(Villager person)
         {
+            if (person.Job == 0)
+            {
+                person.setJob(_job);
+                _workers.Add(person);
+            }
         }
 
-        public void RemovePerson()
+        public void RemovePerson(Villager person)
         {
+            if (person.Job > 0)
+                person.setJob(Jobs.NONE);
         }
 
-        public void GenerateGoldAndHappiness()
+        public void GenerateGold()
         {
+            _gold = ModifyGoldGeneration(_gold);
+            foreach (Villager person in _workers)
+            {
+                person.Wallet(_gold);
+            }
         }
 
-        public void ModifyGoldGeneration()
+        public float ModifyGoldGeneration(float lastGoldGeneration)
         {
+            return lastGoldGeneration - _workers.Count;
         }
+
+        public void AddHappiness(Villager person)
+        {
+            person.Happiness += 5;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

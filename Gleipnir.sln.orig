@@ -5,9 +5,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePage", "Gleipnir\GamePa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updates", "Updates\Updates.csproj", "{014ADB5A-45D5-48CA-A386-CFBB01A556EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updates", "Updates\Updates.csproj", "{7C691930-0634-47D4-9E30-88066C3FD44C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomePage", "HomePage\HomePage.csproj", "{6D0ED232-A308-47CA-B698-02BD6539060E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobs", "Jobs\Jobs.csproj", "{0DE259B4-3C19-4825-B395-0155BA971B8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{F59615B1-E40D-49C1-A86D-FFD821026A26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game", "Game\Game.csproj", "{2B78158A-B99C-4116-98F4-C4786D93FAAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,20 +28,24 @@ Global
 		{014ADB5A-45D5-48CA-A386-CFBB01A556EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{014ADB5A-45D5-48CA-A386-CFBB01A556EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{014ADB5A-45D5-48CA-A386-CFBB01A556EF}.Release|Any CPU.Build.0 = Release|Any CPU
-=======
 		{6D0ED232-A308-47CA-B698-02BD6539060E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6D0ED232-A308-47CA-B698-02BD6539060E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D0ED232-A308-47CA-B698-02BD6539060E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D0ED232-A308-47CA-B698-02BD6539060E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7C691930-0634-47D4-9E30-88066C3FD44C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C691930-0634-47D4-9E30-88066C3FD44C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C691930-0634-47D4-9E30-88066C3FD44C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C691930-0634-47D4-9E30-88066C3FD44C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0DE259B4-3C19-4825-B395-0155BA971B8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0DE259B4-3C19-4825-B395-0155BA971B8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DE259B4-3C19-4825-B395-0155BA971B8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DE259B4-3C19-4825-B395-0155BA971B8B}.Release|Any CPU.Build.0 = Release|Any CPU
->>>>>>> origin/Stéphane
+=======
+		{F59615B1-E40D-49C1-A86D-FFD821026A26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F59615B1-E40D-49C1-A86D-FFD821026A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F59615B1-E40D-49C1-A86D-FFD821026A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F59615B1-E40D-49C1-A86D-FFD821026A26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B78158A-B99C-4116-98F4-C4786D93FAAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B78158A-B99C-4116-98F4-C4786D93FAAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B78158A-B99C-4116-98F4-C4786D93FAAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B78158A-B99C-4116-98F4-C4786D93FAAF}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> origin/Emilie
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
