@@ -75,6 +75,9 @@ namespace Game
                 return kid;
             
         }
+
+
+
         /// <summary>
         /// takes from the gold stash the amount asked, if not the maximum it can. Returns true amount.
         /// </summary>
@@ -95,6 +98,8 @@ namespace Game
             _goldStash=0;
             return goldLeft;
         }
+
+
 
         public void addTOGoldStash(int amount)
         {
@@ -118,9 +123,9 @@ namespace Game
             }
             return faith / nbFamilyMembers;
         }
-        public float HapinessAverage()
+        public double HapinessAverage()
         {
-            float happiness = 0;
+            double happiness = 0;
             int nbFamilyMembers = _familyMembers.Count;
             if (nbFamilyMembers == 0)
             {
