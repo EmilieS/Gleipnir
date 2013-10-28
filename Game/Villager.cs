@@ -185,7 +185,7 @@ namespace Game
             }
         }
 
-        private void CallForHelp() //a revoir.
+        private void CallForHelp() //TODO : add timer /brainstorm how to use this.
         {
             if (_happiness < 25 && (_health & Healths.UNHAPPY) == 0)
             {
@@ -194,11 +194,46 @@ namespace Game
                 if (h != null) { h(this, new PropertyChangedEventArgs("unhappy")); }
             }
         }
+
+        private void CallForHelpEnded() //once the CallForHelp timer is ended.
+        {
+            if (_happiness > 27)
+            {
+                _health = _health & ~Healths.UNHAPPY;
+                AddOrRemoveFaith(20);
+            }
+            else if (_happiness < 25)
+            {
+                AddOrRemoveFaith(-20);
+            }
+        }
+
+
+
         /// <summary>
         /// can be negative to take away happiness.
         /// </summary>
         /// <param name="amount"></param>
         public void AddOrRemoveHappiness(double amount)
+        {
+            if (_happiness + amount < 0)
+            {
+                _happiness = 0;
+            }
+            else if (_happiness + amount > 100)
+            {
+                _happiness = 100;
+            }
+            else
+            {
+                _happiness += amount;
+            }
+        }
+        /// <summary>
+        /// can be negative to take away faith.
+        /// </summary>
+        /// <param name="amount"></param>
+        public void AddOrRemoveFaith(double amount)
         {
             if (_happiness + amount < 0)
             {
@@ -223,15 +258,6 @@ namespace Game
             if (_lifeExpectancy <= _age) 
             {
                 _health = Healths.DEAD;
-                /*if (_statusInFamily == Status.ENGAGED) //now is in Fiance. probably not the best way either.
-                {
-                    //_fiance.StatusInFamily = Status.SINGLE;
-                    //_fiance.Fiance = null;
-                }
-                else if (_statusInFamily == Status.MARRIED)
-                {
-                  //  _fiance.Fiance = null;//we keep the married status.
-                }*/
                 PropertyChangedEventHandler h = PropertyChanged;
                 if (h != null) { h(this, new PropertyChangedEventArgs("died")); }
             }
@@ -250,6 +276,18 @@ namespace Game
             //TODO: gold gain calculation
             return 1;
         }
+
+        internal void IsSick() 
+        {
+            if ((_health & Healths.SICK) != 0) //need to see if we can attach this to an event in an intelligent manner.
+            {
+                //TODO
+
+            }
+        }
+
+
+
 
         #endregion
         public event PropertyChangedEventHandler PropertyChanged;

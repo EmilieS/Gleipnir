@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Game
 {
@@ -74,6 +75,11 @@ namespace Game
                     MenList[i].Fiance = woman;
                     woman.StatusInFamily = Status.ENGAGED;
                     MenList[i].StatusInFamily = Status.ENGAGED;
+
+                    /*Timer timer = new Timer;
+                    timer.Interval=5000;
+                    timer.Start*/
+
                     break;
                 }
                 i++;
@@ -157,7 +163,27 @@ namespace Game
             }
             return happiness / nbFamilyMembers;
         }
-        
 
+
+        #region worldtick (or every set interval)
+        internal void IsPoorOrRich()
+        {
+            if (_goldStash / FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
+            {
+                for (int i=0; i<FamilyMembers.Count; i++)
+                {
+                    FamilyMembers[i].AddOrRemoveFaith(-0.1);
+                }
+            }
+            else if (_goldStash / FamilyMembers.Count > (Game.TotalGold / Game.TotalPop) *4)
+            {
+                for (int i = 0; i < FamilyMembers.Count; i++)
+                {
+                    FamilyMembers[i].AddOrRemoveFaith(0.1);
+                }
+
+            }
+        }
+        #endregion
     }
 }
