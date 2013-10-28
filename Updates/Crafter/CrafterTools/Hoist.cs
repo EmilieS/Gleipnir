@@ -7,5 +7,6 @@ namespace Updates.Crafter
 {
     class Hoist
     {
+        
     }
 }

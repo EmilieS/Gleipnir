@@ -19,10 +19,10 @@ namespace Jobs
         {
             get{return _creationLifeLevel;}
         }
-        public double Effectiveness
-        {
-            // The effectiveness is calculated with power of materials.
+        //public double Effectiveness
+        //{
+        //    // The effectiveness is calculated with power of materials.
             
-        }
+        //}
     }
 }

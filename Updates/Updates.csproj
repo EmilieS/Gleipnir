@@ -46,25 +46,24 @@
     <Compile Include="Blacksmith\plow.cs" />
     <Compile Include="Blacksmith\saw.cs" />
     <Compile Include="Blacksmith\surgery.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Cooker\Level1.cs" />
     <Compile Include="Cooker\Level2.cs" />
     <Compile Include="Cooker\Level3.cs" />
     <Compile Include="Cooker\Level4.cs" />
-    <Compile Include="Crafter\Hoist.cs" />
+    <Compile Include="Crafter\CrafterTools\Hoist.cs" />
     <Compile Include="Crafter\Materials\Cement.cs" />
-    <Compile Include="Crafter\Materials\MaterialsEnum.cs" />
-    <Compile Include="Crafter\Materials\MaterialsProperties.cs" />
+    <Compile Include="Crafter\Materials\Materials.cs" />
     <Compile Include="Crafter\Materials\Reinforced.cs" />
     <Compile Include="Crafter\Materials\Whitewash.cs" />
-    <Compile Include="Crafter\Pulley.cs" />
-    <Compile Include="Crafter\Scaffolding.cs" />
+    <Compile Include="Crafter\CrafterTools\Pulley.cs" />
+    <Compile Include="Crafter\CrafterTools\Scaffolding.cs" />
     <Compile Include="farmer\fertilizer.cs" />
     <Compile Include="farmer\fields_expansion.cs" />
     <Compile Include="farmer\irrigation.cs" />
     <Compile Include="farmer\scarecrow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

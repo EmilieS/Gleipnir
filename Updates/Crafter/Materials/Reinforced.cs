@@ -18,8 +18,9 @@ namespace Updates.Crafter.Materials
         public bool IsBought
         {
             get { return _isBought; }
+            set { value = _isBought; }
         }
-        public double PowerOfWhitewash
+        public double PowerOfReinforced
         {
             get { return _power; }
         }
