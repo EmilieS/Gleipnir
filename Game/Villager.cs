@@ -12,12 +12,14 @@ namespace Game
     {
         internal Villager(Family parentFamily)    //TODO: autre constructeur pour le début...
         {
+            _statusInFamily = Status.SINGLE;
+
             Random rand=new Random();//to be moved elsewhere.
 
             switch (rand.Next(2))
             {
-                case 0: _gender = Genders.MALE; _job = parentFamily.Father.Job; break; 
-                case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; break;
+                case 0: _gender = Genders.MALE; _job = parentFamily.Father.Job; Game._singleMen.Add(this); break; //changera    
+                case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; break; 
             }
             if (rand.Next(101) < 2)
                 _faith = 13;
@@ -29,7 +31,7 @@ namespace Game
             _health = Healths.NONE;
             _age = 0;
             _lifeExpectancy = 85;
-            _statusInFamily = Status.SINGLE;
+
             _fiance = null;
 
             _name = "Afaire";
@@ -250,15 +252,6 @@ namespace Game
         }
 
         #endregion
-
-        static internal void Engage(Villager woman, Villager man)
-        {
-            woman.Fiance = man;
-            man.Fiance = woman;
-            woman.StatusInFamily = Status.ENGAGED;
-            man.StatusInFamily = Status.ENGAGED;
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
     }
 

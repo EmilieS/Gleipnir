@@ -82,6 +82,7 @@ namespace Tests
             [Test]
             public void NewFamily()
             {
+                /*var MyGame=*/ new Game.Game();
                 Villager motherf1 = new Villager();
                 Villager fatherf1 = new Villager();
                 motherf1.Gender = Genders.FEMALE;

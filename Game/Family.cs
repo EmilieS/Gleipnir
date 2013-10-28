@@ -63,6 +63,22 @@ namespace Game
         {
             parentFamily.FamilyMembers.Remove(villager);
         }
+        static private void Engage(Villager woman, List<Villager> MenList)
+        {
+            int i = 0;
+            while (i < MenList.Count)
+            {
+                if (woman.ParentFamily != MenList[i].ParentFamily)
+                {
+                    woman.Fiance = MenList[i];
+                    MenList[i].Fiance = woman;
+                    woman.StatusInFamily = Status.ENGAGED;
+                    MenList[i].StatusInFamily = Status.ENGAGED;
+                    break;
+                }
+                i++;
+            }
+        }
 
         public Villager newFamilyMember()
         {
@@ -72,8 +88,12 @@ namespace Game
             }
                 Villager kid = new Villager(this);
                 _familyMembers.Add(kid);
-                return kid;
-            
+                if (kid.Gender == Genders.FEMALE)
+                {
+                    Engage(kid, Game._singleMen);
+                }
+                
+                return kid;           
         }
 
 
