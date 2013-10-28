@@ -20,11 +20,14 @@ namespace Game
             COOK = 10,
 
         };
+        [Flags]
         public enum Healths
         {
-            DEAD = 0,
-            HEATHY = 1,
-            SICK = 2
+            NONE = 0, ///Healthy
+            DEAD = 1,            
+            SICK = 2,
+            DEPRESSED = 4,
+            UNHAPPY=1<<4
         };
 
         public enum Status
@@ -33,5 +36,7 @@ namespace Game
             MARRIED = 1,
             ENGAGED = 2
         }
+
+
     //}
 }
