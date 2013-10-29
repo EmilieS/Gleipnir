@@ -43,7 +43,6 @@ namespace Game
         }
         
          //TODO : generate name.
-        List<string> nameList;
         string _name;
         Family _parentFamily;
         Genders _gender;
@@ -147,6 +146,14 @@ namespace Game
         }
 
         /// <summary>
+        /// Get amount of gold the villager have
+        /// </summary>
+        public float Wallet
+        {
+            get { return _goldInWallet; }
+        }
+
+        /// <summary>
         /// Define which job the villager is
         /// </summary>
         /// <param name="NewJob"></param>
@@ -240,7 +247,7 @@ namespace Game
         /// Add money the villager earn
         /// </summary>
         /// <param name="goldAdd"></param>
-        public void Wallet(float goldAdd)
+        public void AddGoldInWallet(float goldAdd)
         {
             _goldInWallet += goldAdd;
         }
