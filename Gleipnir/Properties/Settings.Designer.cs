@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GamePage.Properties {
+namespace GamePages.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

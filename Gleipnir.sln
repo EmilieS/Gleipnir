@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePage", "Gleipnir\GamePage.csproj", "{FDDDBDE4-3157-48EF-A3B7-7C76E3E2446A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePages", "Gleipnir\GamePages.csproj", "{FDDDBDE4-3157-48EF-A3B7-7C76E3E2446A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updates", "Updates\Updates.csproj", "{014ADB5A-45D5-48CA-A386-CFBB01A556EF}"
 EndProject

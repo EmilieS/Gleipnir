@@ -83,7 +83,6 @@ namespace Game
 
         #region death & family issues.
         //=====================================================================================
-        #region worldtick
         //public for tests... should be internal.
         /// <summary>
         /// should only be called at world tick. If you want to kill a villager, use kill.
@@ -219,9 +218,10 @@ namespace Game
         {
             _lifeExpectancy = 0;
         }
+        #region worldtick
 
         #region WhenWorldUpdate
-        
+
         private void Suicide()
         {
             if (_happiness == 0 && (_health & Healths.DEPRESSED) == 0) //a revoir
@@ -330,6 +330,7 @@ namespace Game
             }
             return 0;
         }
+        #endregion
     }
 
 }
