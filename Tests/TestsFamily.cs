@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Game;
+using System.Timers;
 
 namespace Tests
 {
@@ -68,7 +69,7 @@ namespace Tests
 
                 guy1.Kill();
                 guy1.DieOrIsAlive();
-                Assert.That(girl.StatusInFamily == Status.ENGAGED);
+               /* Assert.That(girl.StatusInFamily == Status.ENGAGED);
                 Assert.That(girl.Fiance==guy2);
 
                 guy2.Kill();
@@ -76,12 +77,13 @@ namespace Tests
                 Assert.That(girl.StatusInFamily == Status.SINGLE);
                 Assert.That(girl.Fiance == null);
 
-                
+                */
             }
 
             [Test]
             public void NewFamily()
             {
+                var MyGame = new Game.Game();
                 Villager motherf1 = new Villager();
                 Villager fatherf1 = new Villager();
                 motherf1.Gender = Genders.FEMALE;
@@ -141,5 +143,41 @@ namespace Tests
 
             }
 
+            [Test]
+            public void EngagementTest()
+            {
+                /*var MyGame=*/
+                new Game.Game();
+                Villager motherf1 = new Villager();
+                Villager fatherf1 = new Villager();
+                motherf1.Gender = Genders.FEMALE;
+                motherf1.Fiance = fatherf1;
+                fatherf1.Fiance = motherf1;
+                Family family1 = new Family(motherf1, fatherf1);
+
+                Villager motherf2 = new Villager();
+                Villager fatherf2 = new Villager();
+                motherf2.Gender = Genders.FEMALE;
+                motherf2.Fiance = fatherf2;
+                fatherf2.Fiance = motherf2;
+                Family family2 = new Family(motherf2, fatherf2);
+
+                Villager kidf1;
+                do
+                {
+                    kidf1 = family1.newFamilyMember();
+                } while (kidf1.Gender != Genders.MALE);
+
+                Villager kidf2;
+
+                do
+                {
+                    kidf2=family2.newFamilyMember();
+                }while (kidf1.Gender == kidf2.Gender);
+                Assert.That(kidf1.StatusInFamily == Status.ENGAGED);
+                Assert.That(kidf2.StatusInFamily == Status.ENGAGED);
+
+            }
+            
     }
 }

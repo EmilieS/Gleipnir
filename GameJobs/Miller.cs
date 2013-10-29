@@ -98,7 +98,7 @@ namespace GameJobs
         /// <param name="person"></param>
         public void AddHappiness(Villager person)
         {
-            person.Happiness += 7;
+            person.AddOrRemoveHappiness(7);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

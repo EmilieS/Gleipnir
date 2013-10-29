@@ -72,11 +72,9 @@ namespace Tests
             cooker.AddPerson(a);
             cooker.AddPerson(b);
 
-            c.Happiness = 50;
-            Assert.That(c.Happiness, Is.EqualTo(50));
-
+            Assert.That(c.Happiness, Is.EqualTo(80));
             cooker.AddHappiness(c);
-            Assert.That(c.Happiness, Is.EqualTo(60));
+            Assert.That(c.Happiness, Is.EqualTo(90));
         }
     }
 }

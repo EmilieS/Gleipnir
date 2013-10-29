@@ -1,6 +1,6 @@
-﻿namespace GamePage
+﻿namespace GamePages
 {
-    partial class gamePage
+    partial class GamePage
     {
         /// <summary>
         /// Required designer variable.

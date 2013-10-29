@@ -14,16 +14,16 @@ namespace Updates
 
         public UpdatesLists()
         {
-            blacksmithUpdates.Add(furnace);
-            blacksmithUpdates.Add(hoist);
-            blacksmithUpdates.Add(plow);
-            blacksmithUpdates.Add(saw);
-            blacksmithUpdates.Add(surgery);
+            //blacksmithUpdates.Add(furnace);
+            //blacksmithUpdates.Add(hoist);
+            //blacksmithUpdates.Add(plow);
+            //blacksmithUpdates.Add(saw);
+            //blacksmithUpdates.Add(surgery);
 
-            farmerUpdates.Add(fertilizer);
-            farmerUpdates.Add(fields_expansion);
-            farmerUpdates.Add(irrigation);
-            farmerUpdates.Add(scarecrow);
+            //farmerUpdates.Add(fertilizer);
+            //farmerUpdates.Add(fields_expansion);
+            //farmerUpdates.Add(irrigation);
+            //farmerUpdates.Add(scarecrow);
         }
     }
 }

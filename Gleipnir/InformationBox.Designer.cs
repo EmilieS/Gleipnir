@@ -1,4 +1,4 @@
-﻿namespace GamePage
+﻿namespace GamePages
 {
     partial class InformationBox
     {
