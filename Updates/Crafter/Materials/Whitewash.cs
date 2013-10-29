@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Updates.Crafter.Materials
 {
-    class Whitewash
+    public class Whitewash
     {
         public double _power;
         public bool _isBought;
@@ -16,16 +16,15 @@ namespace Updates.Crafter.Materials
             _power = 300;
             _isBought = false;
         }
-
+        
         public bool IsBought
         {
             get { return _isBought; }
-            set { value = _isBought; }
+            set { _isBought = value ; }
         }
         public double PowerOfWhitewash
         {
             get { return _power; }
         }
-
     }
 }

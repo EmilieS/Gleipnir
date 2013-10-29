@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Updates.Crafter.Materials
 {
-    class Cement
+    public class Cement
     {
         bool _isBought;
         double _power;
@@ -18,7 +18,7 @@ namespace Updates.Crafter.Materials
         public bool IsBought
         {
             get { return _isBought; }
-            set { value = _isBought; }
+            set { _isBought = value; }
         }
         public double PowerOfCement
         {

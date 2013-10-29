@@ -8,13 +8,13 @@ namespace Updates.Crafter.Materials
     // Materials get the power added to origin buildings
     public class Materials
     {
-        Whitewash w = new Whitewash();
-        Cement c = new Cement();
-        Reinforced r = new Reinforced();
+        public Whitewash w = new Whitewash();
+        public Cement c = new Cement();
+        public Reinforced r = new Reinforced();
 
         double _totalPower;
 
-        internal Materials()
+        public Materials()
         {
             _totalPower = 0;
         }
@@ -23,24 +23,20 @@ namespace Updates.Crafter.Materials
         // Add his power
         public double SetTotalPower()
         {
+            _totalPower = 0;
             if (w.IsBought == true)
             {
                 _totalPower += w.PowerOfWhitewash;
             }
-            if (c.IsBought == true)
+            if (w.IsBought == true && c.IsBought == true)
             {
                 _totalPower += c.PowerOfCement;
             }
-            if (r.IsBought == true)
+            if (w.IsBought == true && c.IsBought == true && r.IsBought == true)
             {
                 _totalPower += r.PowerOfReinforced;
             }
             return _totalPower;
-        }
-
-        public double TotalPower
-        {
-            get { return _totalPower; }
         }
 
     }

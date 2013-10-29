@@ -11,12 +11,51 @@ namespace Tests
     [TestFixture]
     class TestMaterials
     {
-        Materials m = new Material();
 
         [Test]
         public void IsPowerAdded()
         {
-            Materials
+            var m = new Materials();
+
+            m.w.IsBought = true;
+            double SetDone = m.SetTotalPower();
+            Assert.That(SetDone, Is.EqualTo(300));
+
+            m.c.IsBought = true;
+            SetDone = m.SetTotalPower();
+            Assert.That(SetDone, Is.EqualTo(1300));
+
+            m.r.IsBought = true;
+            SetDone = m.SetTotalPower();
+            Assert.That(SetDone, Is.EqualTo(11300));
+
+        }
+        [Test]
+        public void AreMaterialsSet()
+        {
+            var m = new Materials();
+
+            m.w.IsBought = true;
+            Assert.That(m.w.IsBought);
+        }
+
+        /// <summary>
+        /// Test if the upgrades could be added with prerequisite
+        /// </summary>
+        [Test]
+        public void MaterialsInheritanceTest()
+        {
+            var m = new Materials();
+
+            
+            m.r.IsBought = true;
+            double SetDone = m.SetTotalPower();
+            Assert.That(SetDone, Is.Not.EqualTo(11300));
+
+            m.c.IsBought = true;
+            SetDone = m.SetTotalPower();
+            Assert.That(SetDone, Is.Not.EqualTo(1300));
+
         }
     }
 }

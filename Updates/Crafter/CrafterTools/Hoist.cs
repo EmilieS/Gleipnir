@@ -7,6 +7,12 @@ namespace Updates.Crafter
 {
     class Hoist
     {
-        
+        bool _isBought;
+
+        public bool IsBought
+        {
+            get { return _isBought; }
+            set { _isBought = value; }
+        }
     }
 }
