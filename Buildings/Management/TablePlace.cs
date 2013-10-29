@@ -22,7 +22,7 @@ namespace Buildings.Management
         }
         public void SetFaith()
         {
-            prop.AddFaith = 1;
+            prop.AddFaith = 4;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Updates.Crafter.Materials;
 
 namespace Buildings
 {
@@ -13,6 +14,11 @@ namespace Buildings
         double _addedHappiness;
         double _addedFaith;
         double _enterPrice;
+        double _robustness;
+        double _addedRobustness;
+
+        // this a provisory solution : using a new "materials"  to implement robustness
+        Materials mat = new Materials();
 
         public BuildingsProperties()
         {
@@ -21,6 +27,8 @@ namespace Buildings
             _addedHappiness = 0;
             _addedFaith = 0;
             _enterPrice = 0;
+            _robustness = 0;
+            _addedRobustness = mat.SetTotalPower();
         }
 
         public int HorizontalPos
@@ -49,5 +57,6 @@ namespace Buildings
             get { return _enterPrice; }
             set { _enterPrice = value; }
         }
+        
     }
 }
