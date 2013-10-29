@@ -42,7 +42,11 @@ namespace Game
             _statusInFamily = Status.SINGLE;
         }
         
+<<<<<<< HEAD
          //TODO : generate name.
+=======
+        //TODO : generate name.
+>>>>>>> origin/Emilie
         string _name;
         Family _parentFamily;
         Genders _gender;
@@ -58,8 +62,13 @@ namespace Game
         double _happiness; //scale from 0 to 100.
         public event PropertyChangedEventHandler PropertyChanged;
 
+<<<<<<< HEAD
+        public float Faith  { get { return _faith; } }
+        public float Happiness { get { return _happiness; } set { _happiness = value; } }
+=======
         public double Faith  { get { return _faith; } }
         public double Happiness { get { return _happiness; } }
+>>>>>>> origin/Emilie
         public Genders Gender { get { return _gender; } set { _gender = value; } } //obligé d'avoir le set pour les tests...
         public Jobs Job { get { return _job; } }
         public double LifeExpectancy { get { return _lifeExpectancy; } }
@@ -80,6 +89,21 @@ namespace Game
         }
 
         float _goldInWallet;
+
+        /// <summary>
+        /// Gets or Sets the villager's name
+        /// </summary>
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                string[] nameTab = File.ReadAllLines(@"D:\LS4Tonio\IN'TECH_INFO\PI\Gleipnir\Gleipnir\name_list.txt");
+                Random randomInt = new Random();    // Random number
+
+                _name = nameTab[randomInt.Next(nameTab.Count())];
+            }
+        }
 
         #region death & family issues.
         //=====================================================================================
@@ -111,21 +135,6 @@ namespace Game
         }
         #endregion
         /// <summary>
-        /// Gets or Sets the villager's name
-        /// </summary>
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                string[] nameTab = File.ReadAllLines(@"D:\LS4Tonio\IN'TECH_INFO\PI\Gleipnir\Gleipnir\name_list.txt");
-                Random randomInt = new Random();    // Random number
-
-                _name = nameTab[randomInt.Next(nameTab.Count())];
-            }
-        }
-
-        /// <summary>
         /// If single, this will return an exeption!
         /// </summary>
         public Villager Fiance //public pour tests //cannot catch this with an Assert.Throws...
@@ -153,12 +162,36 @@ namespace Game
                 }
             }
         }
+<<<<<<< HEAD
         /// <summary>
         /// Define if the villager is single/engaged/married
         /// </summary>
+        public Status StatusInFamily
+        {
+            get
+            {
+                return _statusInFamily;
+            }
+            internal set
+            {
+                _statusInFamily = value; //riqueraque
+            }
+        }
         /// <summary>
         /// Family's villager
         /// </summary>
+        public Family ParentFamily
+        {
+            get
+            {
+                return  _parentFamily;
+            }
+            set
+            {
+                _parentFamily = value; //riqueraque
+            }
+        }
+
         /// <summary>
         /// Get amount of gold the villager have
         /// </summary>
@@ -171,6 +204,12 @@ namespace Game
         /// Define which job the villager is
         /// </summary>
         /// <param name="NewJob"></param>
+        public void setJob(Jobs NewJob)
+        {
+            _job = NewJob;
+        }
+=======
+>>>>>>> origin/Emilie
 
         /// <summary>
         /// Sets the new life expectancy no matter what time was left.
@@ -220,8 +259,9 @@ namespace Game
             _lifeExpectancy = 0;
         }
 
+<<<<<<< HEAD
         #region WhenWorldUpdate
-        
+=======
         private void Suicide()
         {
             if (_happiness == 0 && (_health & Healths.DEPRESSED) == 0) //a revoir
@@ -232,8 +272,10 @@ namespace Game
         }
         //======================================================================================
         #endregion
+
         #region happiness & faith evolution
         //------------------------------------------------------------------------------------------------------------------------------
+>>>>>>> origin/Emilie
         /// <summary>
         /// can be negative to take away happiness.
         /// </summary>
@@ -272,6 +314,9 @@ namespace Game
                 if (h != null) { h(this, new PropertyChangedEventArgs("unhappy")); }
             }
         }
+<<<<<<< HEAD
+        
+=======
 
         private void CallForHelpEnded() //once the CallForHelp timer is ended.
         {
@@ -287,6 +332,7 @@ namespace Game
         }
 
 
+>>>>>>> origin/Emilie
         /// <summary>
         /// can be negative to take away faith.
         /// </summary>
@@ -306,17 +352,27 @@ namespace Game
                 _faith += amount;
             }
         }
-        //-------------------------------------------------------------------------------------------------------------------------------
-        #endregion
-  
+<<<<<<< HEAD
+
         /// <summary>
         /// Add money the villager earn
         /// </summary>
         /// <param name="goldAdd"></param>
         public void AddGoldInWallet(float goldAdd)
+=======
+        //-------------------------------------------------------------------------------------------------------------------------------
+        #endregion
+  
+        public float GoldGeneration()
+>>>>>>> origin/Emilie
         {
             _goldInWallet += goldAdd;
         }
+<<<<<<< HEAD
+        #endregion
+
+        public event PropertyChangedEventHandler PropertyChanged;
+=======
         /// <summary>
         /// amount set by player. Returns the true amount taken.(imagine family is broke)
         /// </summary>
@@ -330,6 +386,7 @@ namespace Game
             }
             return 0;
         }
+>>>>>>> origin/Emilie
     }
 
 }

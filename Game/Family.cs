@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Game
 {
@@ -63,6 +64,27 @@ namespace Game
         {
             parentFamily.FamilyMembers.Remove(villager);
         }
+        static private void Engage(Villager woman, List<Villager> MenList)
+        {
+            int i = 0;
+            while (i < MenList.Count)
+            {
+                if (woman.ParentFamily != MenList[i].ParentFamily)
+                {
+                    woman.Fiance = MenList[i];
+                    MenList[i].Fiance = woman;
+                    woman.StatusInFamily = Status.ENGAGED;
+                    MenList[i].StatusInFamily = Status.ENGAGED;
+
+                    /*Timer timer = new Timer;
+                    timer.Interval=5000;
+                    timer.Start*/
+
+                    break;
+                }
+                i++;
+            }
+        }
 
         public Villager newFamilyMember()
         {
@@ -72,9 +94,16 @@ namespace Game
             }
                 Villager kid = new Villager(this);
                 _familyMembers.Add(kid);
-                return kid;
-            
+                if (kid.Gender == Genders.FEMALE)
+                {
+                    Engage(kid, Game._singleMen);
+                }
+                
+                return kid;           
         }
+
+
+
         /// <summary>
         /// takes from the gold stash the amount asked, if not the maximum it can. Returns true amount.
         /// </summary>
@@ -96,6 +125,8 @@ namespace Game
             return goldLeft;
         }
 
+
+
         public void addTOGoldStash(int amount)
         {
             if (amount < 0)
@@ -104,9 +135,9 @@ namespace Game
             }
             _goldStash += amount;
         }
-        public float FaithAverage()
+        public double FaithAverage()
         {
-            float faith=0;
+            double faith=0;
             int nbFamilyMembers=_familyMembers.Count;
             if (nbFamilyMembers == 0)
             {
@@ -118,9 +149,9 @@ namespace Game
             }
             return faith / nbFamilyMembers;
         }
-        public float HapinessAverage()
+        public double HapinessAverage()
         {
-            float happiness = 0;
+            double happiness = 0;
             int nbFamilyMembers = _familyMembers.Count;
             if (nbFamilyMembers == 0)
             {
@@ -132,7 +163,49 @@ namespace Game
             }
             return happiness / nbFamilyMembers;
         }
-        
+
+
+        #region happiness evolution
+        //-------------------------------------------------------------------------------------------------------------------------------
+
+        internal void FamilyMemberDied(Villager deadVillager)
+        {
+            for (int i = 0; i < FamilyMembers.Count; i++)
+            {
+                if (FamilyMembers[i] != deadVillager)
+                {
+                    FamilyMembers[i].AddOrRemoveHappiness(-5);
+                }
+            }
+        }
+        internal void FamilyMemberIsSick()
+        {
+            for (int i = 0; i < FamilyMembers.Count; i++)
+            {
+                    FamilyMembers[i].AddOrRemoveHappiness(-0.1); //Everybody, even the sick person(who already has a minus).
+            }
+        }
+        internal void IsPoorOrRich()
+        {
+            if (_goldStash / FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
+            {
+                for (int i=0; i<FamilyMembers.Count; i++)
+                {
+                    FamilyMembers[i].AddOrRemoveHappiness(-0.1);
+                }
+            }
+            else if (_goldStash / FamilyMembers.Count > (Game.TotalGold / Game.TotalPop) *4)
+            {
+                for (int i = 0; i < FamilyMembers.Count; i++)
+                {
+                    FamilyMembers[i].AddOrRemoveHappiness(0.1);
+                }
+
+            }
+        }
+        //---------------------------------------------------------------------------------------------------------------------------------
+        #endregion
+
 
     }
 }
