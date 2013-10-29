@@ -135,9 +135,9 @@ namespace Game
             }
             _goldStash += amount;
         }
-        public float FaithAverage()
+        public double FaithAverage()
         {
-            float faith=0;
+            double faith=0;
             int nbFamilyMembers=_familyMembers.Count;
             if (nbFamilyMembers == 0)
             {
@@ -165,25 +165,47 @@ namespace Game
         }
 
 
-        #region worldtick (or every set interval)
+        #region happiness evolution
+        //-------------------------------------------------------------------------------------------------------------------------------
+
+        internal void FamilyMemberDied(Villager deadVillager)
+        {
+            for (int i = 0; i < FamilyMembers.Count; i++)
+            {
+                if (FamilyMembers[i] != deadVillager)
+                {
+                    FamilyMembers[i].AddOrRemoveHappiness(-5);
+                }
+            }
+        }
+        internal void FamilyMemberIsSick()
+        {
+            for (int i = 0; i < FamilyMembers.Count; i++)
+            {
+                    FamilyMembers[i].AddOrRemoveHappiness(-0.1); //Everybody, even the sick person(who already has a minus).
+            }
+        }
         internal void IsPoorOrRich()
         {
             if (_goldStash / FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
             {
                 for (int i=0; i<FamilyMembers.Count; i++)
                 {
-                    FamilyMembers[i].AddOrRemoveFaith(-0.1);
+                    FamilyMembers[i].AddOrRemoveHappiness(-0.1);
                 }
             }
             else if (_goldStash / FamilyMembers.Count > (Game.TotalGold / Game.TotalPop) *4)
             {
                 for (int i = 0; i < FamilyMembers.Count; i++)
                 {
-                    FamilyMembers[i].AddOrRemoveFaith(0.1);
+                    FamilyMembers[i].AddOrRemoveHappiness(0.1);
                 }
 
             }
         }
+        //---------------------------------------------------------------------------------------------------------------------------------
         #endregion
+
+
     }
 }

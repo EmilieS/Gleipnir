@@ -27,7 +27,8 @@ namespace Game
             DEAD = 1,            
             SICK = 2,
             DEPRESSED = 4,
-            UNHAPPY=1<<4
+            UNHAPPY=1<<4,
+            HERETIC=1<<5
         };
 
         public enum Status

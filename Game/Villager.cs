@@ -31,13 +31,8 @@ namespace Game
             _health = Healths.NONE;
             _age = 0;
             _lifeExpectancy = 85;
-
             _fiance = null;
-
             _name = "Afaire";
-
-
-
         }
         public Villager()
         {
@@ -47,8 +42,6 @@ namespace Game
             _statusInFamily = Status.SINGLE;
         }
         
-
-
         //TODO : generate name.
         string _name;
         Family _parentFamily;
@@ -60,18 +53,62 @@ namespace Game
         Status _statusInFamily; //!! 
         Villager _fiance; //!!!!!
 
-
         Healths _health; //a death has numerous consequences. Once they are fullfilled, this object is dropped.
-        float _faith; //scale from 0 to 100.
+        double _faith; //scale from 0 to 100.
         double _happiness; //scale from 0 to 100.
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public float Faith  { get { return _faith; } }
+        public double Faith  { get { return _faith; } }
         public double Happiness { get { return _happiness; } }
         public Genders Gender { get { return _gender; } set { _gender = value; } } //obligé d'avoir le set pour les tests...
         public Jobs Job { get { return _job; } }
         public double LifeExpectancy { get { return _lifeExpectancy; } }
 
+        public Status StatusInFamily
+        {
+            get { return _statusInFamily; }
+            internal set { _statusInFamily = value; }//riqueraque
+        }
+        public Family ParentFamily
+        {
+            get { return _parentFamily; }
+            set { _parentFamily = value; } //riqueraque
+        }
+        public void setJob(Jobs NewJob)
+        {
+            _job = NewJob;
+        }
 
+
+        #region death & family issues.
+        //=====================================================================================
+        #region worldtick
+        //public for tests... should be internal.
+        /// <summary>
+        /// should only be called at world tick. If you want to kill a villager, use kill.
+        /// </summary>
+        public void DieOrIsAlive()
+        {
+            if (_lifeExpectancy <= _age) 
+            {
+                _health = Healths.DEAD;
+                if (_parentFamily != null)
+                {
+                    _parentFamily.FamilyMemberDied(this);
+                }
+                PropertyChangedEventHandler h = PropertyChanged;
+                if (h != null) { h(this, new PropertyChangedEventArgs("died")); }                
+            }
+        }
+        /// <summary>
+        /// should only be called at world tick.
+        /// </summary>
+        /// <param name="time"></param>
+        internal void AgeTick(float time)
+        {
+            _age += time;
+        }
+        #endregion
         /// <summary>
         /// if single, this will return an exeption!
         /// </summary>
@@ -88,46 +125,17 @@ namespace Game
                 _fiance = value;
                 if (value != null)
                 {
-
-                    if (StatusInFamily == Status.SINGLE) { StatusInFamily = Status.ENGAGED; }
-
+                    if (StatusInFamily == Status.SINGLE) {StatusInFamily = Status.ENGAGED; }
                     _fiance.PropertyChanged += (sender, e) =>
                     {
-                        if (e.PropertyName =="died" && _fiance == sender)
-                        {                            
+                        if (e.PropertyName == "died" && _fiance == sender)
+                        {
                             _fiance = null;
-                           if(StatusInFamily == Status.ENGAGED ){ _statusInFamily=Status.SINGLE;}
+                            if (StatusInFamily == Status.ENGAGED) { _statusInFamily = Status.SINGLE; }
                         }
                     };
                 }
             }
-        }
-        public Status StatusInFamily
-        {
-            get
-            {
-                return _statusInFamily;
-            }
-            internal set
-            {
-                _statusInFamily = value; //riqueraque
-            }
-        }
-        public Family ParentFamily
-        {
-            get
-            {
-                return  _parentFamily;
-            }
-            set
-            {
-                _parentFamily = value; //riqueraque
-            }
-        }
-
-        public void setJob(Jobs NewJob)
-        {
-            _job = NewJob;
         }
 
         /// <summary>
@@ -141,7 +149,6 @@ namespace Game
                 throw new IndexOutOfRangeException();
             }
             _lifeExpectancy = lifeExpectancy;
-
         }
         /// <summary>
         /// Sets the new life expectancy based on the time left you want. only if shorter than before.
@@ -178,10 +185,43 @@ namespace Game
 
         private void Suicide()
         {
-            if (_happiness == 0 && (_health & Healths.DEPRESSED)==0) //a revoir
+            if (_happiness == 0 && (_health & Healths.DEPRESSED) == 0) //a revoir
             {
                 SetLifeExpectancyLeft(0.4);
                 _health = _health | Healths.DEPRESSED;
+            }
+        }
+        //======================================================================================
+        #endregion
+
+        #region happiness & faith evolution
+        //------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// can be negative to take away happiness.
+        /// </summary>
+        /// <param name="amount"></param>
+        public void AddOrRemoveHappiness(double amount)
+        {
+            if (_happiness + amount < 0)
+            {
+                _happiness = 0;
+            }
+            else if (_happiness + amount > 100)
+            {
+                _happiness = 100;
+            }
+            else
+            {
+                _happiness += amount;
+            }
+        }
+
+        internal void IsSick()
+        {
+            if ((_health & Healths.SICK) != 0) //need to see if we can attach this to an event in an intelligent manner.
+            {
+                AddOrRemoveHappiness(0.1);
+                ParentFamily.FamilyMemberIsSick();
             }
         }
 
@@ -209,88 +249,46 @@ namespace Game
         }
 
 
-
-        /// <summary>
-        /// can be negative to take away happiness.
-        /// </summary>
-        /// <param name="amount"></param>
-        public void AddOrRemoveHappiness(double amount)
-        {
-            if (_happiness + amount < 0)
-            {
-                _happiness = 0;
-            }
-            else if (_happiness + amount > 100)
-            {
-                _happiness = 100;
-            }
-            else
-            {
-                _happiness += amount;
-            }
-        }
         /// <summary>
         /// can be negative to take away faith.
         /// </summary>
         /// <param name="amount"></param>
         public void AddOrRemoveFaith(double amount)
         {
-            if (_happiness + amount < 0)
+            if (_faith + amount < 0)
             {
-                _happiness = 0;
+                _faith = 0;
             }
-            else if (_happiness + amount > 100)
+            else if (_faith + amount > 100)
             {
-                _happiness = 100;
+                _faith = 100;
             }
             else
             {
-                _happiness += amount;
+                _faith += amount;
             }
         }
-        #region worldtick 
-        //public for tests... should be internal.
-        /// <summary>
-        /// should only be called at world tick. If you want to kill a villager, use kill.
-        /// </summary>
-        public void DieOrIsAlive()
-        {
-            if (_lifeExpectancy <= _age) 
-            {
-                _health = Healths.DEAD;
-                PropertyChangedEventHandler h = PropertyChanged;
-                if (h != null) { h(this, new PropertyChangedEventArgs("died")); }
-            }
-        }
-        /// <summary>
-        /// should only be called at world tick.
-        /// </summary>
-        /// <param name="time"></param>
-        internal void AgeTick(float time)
-        {
-            _age += time;
-        }
-
+        //-------------------------------------------------------------------------------------------------------------------------------
+        #endregion
+  
         public float GoldGeneration()
         {
             //TODO: gold gain calculation
             return 1;
         }
-
-        internal void IsSick() 
+        /// <summary>
+        /// amount set by player. Returns the true amount taken.(imagine family is broke)
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        internal int HandInOfferings(int amount)//see if we can do this in a more intelligent manner.
         {
-            if ((_health & Healths.SICK) != 0) //need to see if we can attach this to an event in an intelligent manner.
+            if ((_health & Healths.HERETIC) == 0)
             {
-                //TODO
-
+                return ParentFamily.takeFromGoldStash(amount);
             }
+            return 0;
         }
-
-
-
-
-        #endregion
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 
 }
