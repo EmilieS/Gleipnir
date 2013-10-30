@@ -149,7 +149,7 @@ namespace Game
             }
             return faith / nbFamilyMembers;
         }
-        public double HapinessAverage()
+        public double HappinessAverage()
         {
             double happiness = 0;
             int nbFamilyMembers = _familyMembers.Count;
