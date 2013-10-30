@@ -7,5 +7,8 @@ namespace Updates
 {
     class hoist
     {
+        public hoist()
+        {
+        }
     }
 }

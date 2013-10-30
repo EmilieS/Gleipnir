@@ -7,5 +7,12 @@ namespace Updates.Blacksmith
 {
     class furnace
     {
+        public furnace()
+        {
+        }
+
+        public void AddHappinessAndGold()
+        {
+        }
     }
 }

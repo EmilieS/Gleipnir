@@ -7,5 +7,8 @@ namespace Updates.farmer
 {
     class fields_expansion
     {
+        public fields_expansion()
+        {
+        }
     }
 }

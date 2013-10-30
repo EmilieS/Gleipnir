@@ -7,5 +7,8 @@ namespace Updates.Blacksmith
 {
     class surgery
     {
+        public surgery()
+        {
+        }
     }
 }

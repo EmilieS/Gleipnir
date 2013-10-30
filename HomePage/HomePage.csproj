@@ -7,7 +7,7 @@
     <ProjectGuid>{6D0ED232-A308-47CA-B698-02BD6539060E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HomePage</RootNamespace>
+    <RootNamespace>GamePages</RootNamespace>
     <AssemblyName>HomePage</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -44,16 +44,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="HomePage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="HomePage.Designer.cs">
+      <DependentUpon>HomePage.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="HomePage.resx">
+      <DependentUpon>HomePage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -83,6 +83,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\button_homepage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GameJobs\GameJobs.csproj">
+      <Project>{0de259b4-3c19-4825-b395-0155ba971b8b}</Project>
+      <Name>GameJobs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Game\Game.csproj">
+      <Project>{2b78158a-b99c-4116-98f4-c4786d93faaf}</Project>
+      <Name>Game</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gleipnir\GamePages.csproj">
+      <Project>{fdddbde4-3157-48ef-a3b7-7c76e3e2446a}</Project>
+      <Name>GamePages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Updates\Updates.csproj">
+      <Project>{014adb5a-45d5-48ca-a386-cfbb01a556ef}</Project>
+      <Name>Updates</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

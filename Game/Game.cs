@@ -40,8 +40,8 @@ namespace Game
         List<Family> _families;
 
         static public List<Villager> _singleMen; //changera plus tard. //TODO : warning, static!
-        static public double TotalGold{get; set;} //changera //warning, static!
-        static public int TotalPop{get; set;}  //changera //warning, static!
+        static public double TotalGold {get; set;} //changera //warning, static!
+        static public int TotalPop {get; set;}  //changera //warning, static!
         static public int Offerings { get; set; } //changera //warning, static!
 
         static public void BigEvent()

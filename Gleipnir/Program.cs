@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Game;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GamePage
+namespace GamePages
 {
     static class Program
     {
@@ -16,7 +17,7 @@ namespace GamePage
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new gamePage());
+            Application.Run(new HomePage());
         }
     }
 }

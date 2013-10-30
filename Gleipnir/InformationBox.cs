@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GamePage
+namespace GamePages
 {
     public partial class InformationBox : UserControl
     {

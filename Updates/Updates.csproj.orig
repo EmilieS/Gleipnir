@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F59615B1-E40D-49C1-A86D-FFD821026A26}</ProjectGuid>
+    <ProjectGuid>{014ADB5A-45D5-48CA-A386-CFBB01A556EF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tests</RootNamespace>
-    <AssemblyName>Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>Updates</RootNamespace>
+    <AssemblyName>Updates</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,34 +39,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestBuildings.cs" />
-    <Compile Include="TestMaterials.cs" />
-    <Compile Include="TestsFamily.cs" />
+    <Compile Include="Blacksmith\furnace.cs" />
+    <Compile Include="Blacksmith\hoist.cs" />
+    <Compile Include="Blacksmith\plow.cs" />
+    <Compile Include="Blacksmith\saw.cs" />
+    <Compile Include="Blacksmith\surgery.cs" />
+<<<<<<< HEAD
+    <Compile Include="Cooker\Level1.cs" />
+    <Compile Include="Cooker\Level2.cs" />
+    <Compile Include="Cooker\Level3.cs" />
+    <Compile Include="Cooker\Level4.cs" />
+    <Compile Include="Crafter\CrafterTools\Hoist.cs" />
+    <Compile Include="Crafter\Materials\Cement.cs" />
+    <Compile Include="Crafter\Materials\Materials.cs" />
+    <Compile Include="Crafter\Materials\Reinforced.cs" />
+    <Compile Include="Crafter\Materials\Whitewash.cs" />
+    <Compile Include="Crafter\CrafterTools\Pulley.cs" />
+    <Compile Include="Crafter\CrafterTools\Scaffolding.cs" />
+    <Compile Include="farmer\fertilizer.cs" />
+    <Compile Include="farmer\fields_expansion.cs" />
+    <Compile Include="farmer\irrigation.cs" />
+    <Compile Include="farmer\scarecrow.cs" />
+=======
+    <Compile Include="Farmer\fertilizer.cs" />
+    <Compile Include="Farmer\fields_expansion.cs" />
+    <Compile Include="Farmer\irrigation.cs" />
+    <Compile Include="Farmer\scarecrow.cs" />
+    <Compile Include="UpdatesLists.cs" />
+>>>>>>> origin/develop
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestsHappiness.cs" />
-    <Compile Include="TestsJobs.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GameJobs\GameJobs.csproj">
-      <Project>{0de259b4-3c19-4825-b395-0155ba971b8b}</Project>
-      <Name>GameJobs</Name>
-       </ProjectReference>
-    <ProjectReference Include="..\Buildings\Buildings.csproj">
-      <Project>{fbb065a0-784e-4708-8525-2a8364d2ea35}</Project>
-      <Name>Buildings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Game\Game.csproj">
-      <Project>{2b78158a-b99c-4116-98f4-c4786d93faaf}</Project>
-      <Name>Game</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Updates\Updates.csproj">
-      <Project>{7c691930-0634-47d4-9e30-88066c3fd44c}</Project>
-      <Name>Updates</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F59615B1-E40D-49C1-A86D-FFD821026A26}</ProjectGuid>
+    <ProjectGuid>{0DE259B4-3C19-4825-B395-0155BA971B8B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tests</RootNamespace>
-    <AssemblyName>Tests</AssemblyName>
+    <RootNamespace>GameJobs</RootNamespace>
+    <AssemblyName>GameJobs</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,33 +39,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestBuildings.cs" />
-    <Compile Include="TestMaterials.cs" />
-    <Compile Include="TestsFamily.cs" />
+<<<<<<< HEAD:Jobs/Jobs.csproj
+    <Compile Include="Crafter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestsHappiness.cs" />
-    <Compile Include="TestsJobs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GameJobs\GameJobs.csproj">
-      <Project>{0de259b4-3c19-4825-b395-0155ba971b8b}</Project>
-      <Name>GameJobs</Name>
-       </ProjectReference>
-    <ProjectReference Include="..\Buildings\Buildings.csproj">
-      <Project>{fbb065a0-784e-4708-8525-2a8364d2ea35}</Project>
-      <Name>Buildings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Game\Game.csproj">
-      <Project>{2b78158a-b99c-4116-98f4-c4786d93faaf}</Project>
-      <Name>Game</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Updates\Updates.csproj">
       <Project>{7c691930-0634-47d4-9e30-88066c3fd44c}</Project>
       <Name>Updates</Name>
-    </ProjectReference>
+=======
+    <Compile Include="Blacksmith.cs" />
+    <Compile Include="Cooker.cs" />
+    <Compile Include="Apothecary.cs" />
+    <Compile Include="Tailor.cs" />
+    <Compile Include="Miller.cs" />
+    <Compile Include="Militia.cs" />
+    <Compile Include="Construction_Worker.cs" />
+    <Compile Include="Farmer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Game\Game.csproj">
+      <Project>{2b78158a-b99c-4116-98f4-c4786d93faaf}</Project>
+      <Name>Game</Name>
+>>>>>>> origin/develop:GameJobs/GameJobs.csproj
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
