@@ -10,13 +10,13 @@ namespace Buildings.Hobbies
     {
         BuildingsProperties prop = new BuildingsProperties();
 
-        public BuildingsProperties BuildingsProperties
+        public BuildingsProperties BuildingsProp
         {
             get { return prop; }
         }
-        public void SetHappiness()
+        public double SetHappiness
         {
-            prop.AddHapiness = 3;
+            get { return 3; }
         }
         public void SetEnterPrice()
         {

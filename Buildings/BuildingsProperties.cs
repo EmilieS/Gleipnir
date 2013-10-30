@@ -7,14 +7,14 @@ using Updates.Crafter.Materials;
 
 namespace Buildings
 {
-    class BuildingsProperties
+    public class BuildingsProperties
     {
         int _verticalPos;
         int _horizontalPos;
         double _addedHappiness;
         double _addedFaith;
         double _enterPrice;
-        double _robustness;
+        //double _robustness;
         double _addedRobustness;
 
         // this a provisory solution : using a new "materials"  to implement robustness
@@ -27,7 +27,7 @@ namespace Buildings
             _addedHappiness = 0;
             _addedFaith = 0;
             _enterPrice = 0;
-            _robustness = 0;
+            //_robustness = 0;
             _addedRobustness = mat.SetTotalPower();
         }
 

@@ -47,11 +47,18 @@
     <Compile Include="Hobbies\PartyRoom.cs" />
     <Compile Include="Hobbies\Tavern.cs" />
     <Compile Include="Hobbies\Theater.cs" />
+    <Compile Include="JobsBuildings\Farm.cs" />
+    <Compile Include="JobsBuildings\Forge.cs" />
+    <Compile Include="JobsBuildings\Mill.cs" />
+    <Compile Include="JobsBuildings\Restaurant.cs" />
     <Compile Include="Management\TablePlace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="JobsBuildings\" />
+    <ProjectReference Include="..\Updates\Updates.csproj">
+      <Project>{7c691930-0634-47d4-9e30-88066c3fd44c}</Project>
+      <Name>Updates</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

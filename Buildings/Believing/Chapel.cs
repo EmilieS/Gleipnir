@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Buildings.Believing
 {
-    class Chapel
+    public class Chapel
     {
         BuildingsProperties prop = new BuildingsProperties();
 
@@ -14,9 +14,9 @@ namespace Buildings.Believing
         {
             get { return prop; }
         }
-        public void SetFaith()
+        public double SetFaith
         {
-            prop.AddFaith = 4;
+            get { return 4; }
         }
     }
 }

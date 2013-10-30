@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Buildings.Hobbies
 {
-    class Theater
+    public class Theater
     {
         BuildingsProperties prop = new BuildingsProperties();
 
@@ -14,9 +14,9 @@ namespace Buildings.Hobbies
         {
             get { return prop; }
         }
-        public void SetHappiness()
+        public double SetHappiness
         {
-            prop.AddHapiness = 5;
+            get { return 5; }
         }
         public void SetEnterPrice()
         {
