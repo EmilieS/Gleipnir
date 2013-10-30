@@ -23,6 +23,7 @@ namespace Tests
             [Test]
             public void Death()
             {
+                var MyGame = new Game.Game();
                 Villager mother = new Villager();
                 Villager father = new Villager();
                 mother.Gender = Genders.FEMALE;
@@ -54,6 +55,7 @@ namespace Tests
             [Test]
             public void Fiance()
             {
+                var MyGame = new Game.Game();
                 Villager girl = new Villager();
                 girl.Gender = Genders.FEMALE;
                 Villager guy1 = new Villager();
