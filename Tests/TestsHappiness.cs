@@ -49,7 +49,7 @@ namespace Tests
         public void familyRichOrPoor()//totalpop & totalgold don't work yet
         {
             var MyGame = new Game.Game();
-            Assert.That(Game.Game.TotalPop==6);
+            Assert.That(Game.Game.TotalPop==10);
 
             Villager mother = new Villager();
             Villager father = new Villager();

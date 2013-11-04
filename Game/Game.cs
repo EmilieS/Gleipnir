@@ -38,7 +38,7 @@ namespace Game
             Family FamilyD = new Family(VillagerDF, VillagerDH);
             Family FamilyE = new Family(VillagerEF, VillagerEH);
 
-           _families=new List<Family>();
+           _families = new List<Family>();
 
            _singleMen = new List<Villager>();
 
@@ -48,7 +48,7 @@ namespace Game
             _families.Add(FamilyD);
             _families.Add(FamilyE);
 
-            TotalPop = 6;
+            TotalPop = (_families.Count * 2);
             TotalGold = 0;
             Offerings = 0;
         }
