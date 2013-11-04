@@ -17,11 +17,21 @@ namespace Tests
         [Test]
         public void TestBaths()
         {
+            var f = new Family();
             var b = new Baths();
             var v = new Villager();
 
             v.AddOrRemoveHappiness(b.SetHappiness);
             Assert.That(v.Happiness, Is.EqualTo(83));
+
+            f.addTOGoldStash(250);
+            b.SetNewGoldStash(f.GoldStash);
+            Assert.That(f.GoldStash == 50);
+            b.SetNewGoldStash(f.GoldStash);
+            Assert.That(f.GoldStash == 0);
+            
+            
+            
         }
         [Test]
         public void TestBrothel()

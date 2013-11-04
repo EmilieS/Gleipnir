@@ -49,7 +49,7 @@ namespace Game
         Jobs _job;
         double _lifeExpectancy;
         float _age;
-
+        float _goldInWallet;
         Status _statusInFamily; //!! 
         Villager _fiance; //!!!!!
 
@@ -79,7 +79,7 @@ namespace Game
             _job = NewJob;
         }
 
-        float _goldInWallet;
+       
 
         #region death & family issues.
         //=====================================================================================

@@ -24,8 +24,12 @@ namespace Game
                 }
                 _goldStash = mother.ParentFamily.takeFromGoldStash(mother.ParentFamily.GoldStash / 10); //10%
                 _goldStash += father.ParentFamily.takeFromGoldStash(father.ParentFamily.GoldStash / 10); //10%
-            removeFromFamily(mother, mother.ParentFamily);
-            removeFromFamily(father, father.ParentFamily);
+                removeFromFamily(mother, mother.ParentFamily);
+                removeFromFamily(father, father.ParentFamily);
+            }
+            else
+            {
+                _goldStash = 0;
             }
             _mother = mother;
             _father = father;

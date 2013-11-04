@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Crafter.cs" />
     <Compile Include="Blacksmith.cs" />
     <Compile Include="Cooker.cs" />
     <Compile Include="Apothecary.cs" />
