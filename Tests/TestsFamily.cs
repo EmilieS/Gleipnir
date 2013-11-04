@@ -23,6 +23,7 @@ namespace Tests
             [Test]
             public void Death()
             {
+                var MyGame = new Game.Game();
                 Villager mother = new Villager();
                 Villager father = new Villager();
                 mother.Gender = Genders.FEMALE;
@@ -35,10 +36,12 @@ namespace Tests
                 Assert.That(family.Mother.ParentFamily == family);
                 Assert.That(family.Mother == mother && family.Father== father);
                 Assert.That(mother.StatusInFamily == Status.MARRIED && mother.StatusInFamily == Status.MARRIED);
+                Assert.That(family.FamilyMembers.Count == 2);
 
                 mother.Kill();
                 mother.DieOrIsAlive();
 
+                Assert.That(family.FamilyMembers.Count == 1);
                 Assert.That(family.Mother == null);
 
                 Assert.That(mother.Fiance.Fiance == null);
@@ -52,6 +55,7 @@ namespace Tests
             [Test]
             public void Fiance()
             {
+                var MyGame = new Game.Game();
                 Villager girl = new Villager();
                 girl.Gender = Genders.FEMALE;
                 Villager guy1 = new Villager();

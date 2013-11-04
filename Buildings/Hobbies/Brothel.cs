@@ -20,9 +20,9 @@ namespace Buildings.Hobbies
             get { return 8; }
         }
 
-        public void SetEnterPrice()
+        public int  SetEnterPrice
         {
-            prop.EnterPrice = 20;
+           get{return 12;}
         }
     }
 }

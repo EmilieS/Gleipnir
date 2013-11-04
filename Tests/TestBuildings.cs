@@ -29,9 +29,6 @@ namespace Tests
             Assert.That(f.GoldStash == 50);
             b.SetNewGoldStash(f.GoldStash);
             Assert.That(f.GoldStash == 0);
-            
-            
-            
         }
         [Test]
         public void TestBrothel()

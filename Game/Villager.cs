@@ -26,7 +26,7 @@ namespace Game
             else
                 _faith = parentFamily.FaithAverage();
 
-            _happiness = parentFamily.HapinessAverage();            
+            _happiness = parentFamily.HappinessAverage();            
             _job = Jobs.FARMER;
             _health = Healths.NONE;
             _age = 0;
@@ -94,7 +94,9 @@ namespace Game
                 _health = Healths.DEAD;
                 if (_parentFamily != null)
                 {
+
                     _parentFamily.FamilyMemberDied(this);
+                    _parentFamily.FamilyMembers.Remove(this);
                 }
                 PropertyChangedEventHandler h = PropertyChanged;
                 if (h != null) { h(this, new PropertyChangedEventArgs("died")); }                
@@ -108,22 +110,6 @@ namespace Game
         {
             _age += time;
         }
-        #endregion
-        /// <summary>
-        /// Gets or Sets the villager's name
-        /// </summary>
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                string[] nameTab = File.ReadAllLines(@"D:\LS4Tonio\IN'TECH_INFO\PI\Gleipnir\Gleipnir\name_list.txt");
-                Random randomInt = new Random();    // Random number
-
-                _name = nameTab[randomInt.Next(nameTab.Count())];
-            }
-        }
-
         /// <summary>
         /// If single, this will return an exeption!
         /// </summary>
@@ -140,7 +126,7 @@ namespace Game
                 _fiance = value;
                 if (value != null)
                 {
-                    if (StatusInFamily == Status.SINGLE) {StatusInFamily = Status.ENGAGED; }
+                    if (StatusInFamily == Status.SINGLE) { StatusInFamily = Status.ENGAGED; }
                     _fiance.PropertyChanged += (sender, e) =>
                     {
                         if (e.PropertyName == "died" && _fiance == sender)
@@ -152,6 +138,24 @@ namespace Game
                 }
             }
         }
+        //======================================================================================
+        #endregion
+        /// <summary>
+        /// Gets or Sets the villager's name
+        /// </summary>
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                string[] nameTab = File.ReadAllLines(@"D:\LS4Tonio\IN'TECH_INFO\PI\Gleipnir\Gleipnir\name_list.txt");
+                Random randomInt = new Random();    // Random number
+
+                _name = nameTab[randomInt.Next(nameTab.Count())];
+            }
+        }
+
+       
         /// <summary>
         /// Define if the villager is single/engaged/married
         /// </summary>
@@ -212,7 +216,7 @@ namespace Game
             }
         }
         /// <summary>
-        /// Destroy object when villager died
+        /// kill a villager.
         /// </summary>
         public void Kill()
         {
