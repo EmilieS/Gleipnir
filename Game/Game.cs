@@ -35,6 +35,10 @@ namespace Game
             _families.Add(FamilyA);
             _families.Add(FamilyB);
             _families.Add(FamilyC);
+
+            TotalPop = 6;
+            TotalGold = 0;
+            Offerings = 0;
         }
 
         List<Family> _families;
