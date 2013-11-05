@@ -10,7 +10,7 @@ namespace GameJobs
 {
     public class Construction_Worker : INotifyPropertyChanged
     {
-        float _gold;
+        double _gold;
         List<Villager> _workers;
         Jobs _job;
 
@@ -24,7 +24,7 @@ namespace GameJobs
         /// <summary>
         /// Gets Gold amount is generate per tick
         /// </summary>
-        public float Gold
+        public double Gold
         {
             get { return _gold; }
         }
@@ -79,7 +79,7 @@ namespace GameJobs
         /// Less Gold generation if many job workers
         /// </summary>
         /// <returns></returns>
-        public float ModifyGoldGeneration()
+        public double ModifyGoldGeneration()
         {
             if (_workers.Count > 1)
             {
@@ -91,6 +91,7 @@ namespace GameJobs
             }
             return _gold;
         }
+        
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }
