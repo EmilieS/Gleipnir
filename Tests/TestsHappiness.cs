@@ -38,6 +38,9 @@ namespace Tests
             Assert.That(family.FamilyMembers.Count == 3);
             mother.Kill();
             mother.DieOrIsAlive();
+            father.CloseStep();
+            mother.CloseStep();
+            family.CloseStep();
             Assert.That(family.FamilyMembers.Count == 2);
             for (int i = 0; i < family.FamilyMembers.Count; i++)
             {
@@ -45,6 +48,7 @@ namespace Tests
             }
             Assert.That(family.HappinessAverage() == 75, "family average is not 75");
         }
+
         [Test]
         public void familyRichOrPoor()//totalpop & totalgold don't work yet
         {

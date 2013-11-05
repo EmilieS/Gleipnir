@@ -37,14 +37,6 @@ namespace Game
             _familyMembers.Add(_father);
             _mother.ParentFamily = this;
             _father.ParentFamily = this;
-            _mother.PropertyChanged += (sender, e) =>
-            {
-                _mother = null;
-            };
-            _father.PropertyChanged += (sender, e) =>
-            {
-                _father = null;
-            };
         }
 
         public Family() { }
@@ -206,6 +198,19 @@ namespace Game
         //---------------------------------------------------------------------------------------------------------------------------------
         #endregion
 
+        public void CloseStep()
+        {
 
+            if (_mother.IsDead()) { _mother = null; }
+            if (_father.IsDead()) { _father = null; }
+
+
+            for (int i = 0; i < _familyMembers.Count; i++)
+            {
+                _familyMembers[i].CloseStep();
+                if (_familyMembers[i].IsDead()) { _familyMembers.Remove(_familyMembers[i]); }
+            }
+            //TODO :  put current values in value history.
+        }
     }
 }

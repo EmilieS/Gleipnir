@@ -40,6 +40,9 @@ namespace Tests
 
                 mother.Kill();
                 mother.DieOrIsAlive();
+                father.CloseStep();
+                mother.CloseStep();
+                family.CloseStep();
 
                 Assert.That(family.FamilyMembers.Count == 1);
                 Assert.That(family.Mother == null);
@@ -73,15 +76,21 @@ namespace Tests
 
                 guy1.Kill();
                 guy1.DieOrIsAlive();
-               /* Assert.That(girl.StatusInFamily == Status.ENGAGED);
-                Assert.That(girl.Fiance==guy2);
+                girl.CloseStep();
+                guy1.CloseStep();
+                guy2.CloseStep();
+                 Assert.That(girl.StatusInFamily == Status.ENGAGED);
+                 Assert.That(girl.Fiance==guy2);
 
-                guy2.Kill();
-                guy2.DieOrIsAlive();
-                Assert.That(girl.StatusInFamily == Status.SINGLE);
-                Assert.That(girl.Fiance == null);
+                 guy2.Kill();
+                 guy2.DieOrIsAlive();
+                 girl.CloseStep();
+                 guy1.CloseStep();
+                 guy2.CloseStep();
+                 Assert.That(girl.StatusInFamily == Status.SINGLE);
+                 Assert.That(girl.Fiance == null);
 
-                */
+                 
             }
 
             [Test]
@@ -140,6 +149,9 @@ namespace Tests
 
                 motherf1.Kill();
                 motherf1.DieOrIsAlive();
+                fatherf1.CloseStep();
+                motherf1.CloseStep();
+                family1.CloseStep();
                 Assert.Throws<InvalidOperationException>(() => family1.newFamilyMember(), "missing parent");
 
 

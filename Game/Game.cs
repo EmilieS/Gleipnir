@@ -57,8 +57,21 @@ namespace Game
         {
             TotalGold += amount; //curious to find out if TotalGold can be negative.
         }
+        List<string> _currentText; 
+        public void NextStep() //public for testing (again)
+        {
+            CloseStep();
+            
+        }
 
-
+        private void CloseStep()
+        {
+            for (int i = 0; i < _families.Count; i++)
+            {
+                _families[i].CloseStep();
+            }
+            //TODO : Villagers, Villages.
+        }
 
         //variables à avoir: les coefficients des métiers
         //liste familles?

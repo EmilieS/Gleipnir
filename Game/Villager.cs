@@ -92,12 +92,11 @@ namespace Game
             if (_lifeExpectancy <= _age) 
             {
                 _health = Healths.DEAD;
-                if (_parentFamily != null)
+                if (ParentFamily != null)
                 {
-
-                    _parentFamily.FamilyMemberDied(this);
-                    _parentFamily.FamilyMembers.Remove(this);
+                    ParentFamily.FamilyMemberDied(this);
                 }
+
                 PropertyChangedEventHandler h = PropertyChanged;
                 if (h != null) { h(this, new PropertyChangedEventArgs("died")); }                
             }
@@ -124,17 +123,9 @@ namespace Game
             set
             {
                 _fiance = value;
-                if (value != null)
+                 if (value != null)
                 {
                     if (StatusInFamily == Status.SINGLE) { StatusInFamily = Status.ENGAGED; }
-                    _fiance.PropertyChanged += (sender, e) =>
-                    {
-                        if (e.PropertyName == "died" && _fiance == sender)
-                        {
-                            _fiance = null;
-                            if (StatusInFamily == Status.ENGAGED) { _statusInFamily = Status.SINGLE; }
-                        }
-                    };
                 }
             }
         }
@@ -257,15 +248,19 @@ namespace Game
                 _happiness += amount;
             }
         }
-
-        internal void IsSick()
+        internal bool IsDead()
         {
-            if ((_health & Healths.SICK) != 0) //need to see if we can attach this to an event in an intelligent manner.
+            return ((_health & Healths.DEAD) != 0);                    
+        }
+        internal void Sickly()
+        {
+            if ((_health & Healths.SICK) != 0) 
             {
                 AddOrRemoveHappiness(0.1);
                 ParentFamily.FamilyMemberIsSick();
             }
         }
+
 
         private void CallForHelp() //TODO : add timer /brainstorm how to use this.
         {
@@ -335,6 +330,22 @@ namespace Game
             return 0;
         }
         #endregion
+
+
+        public void CloseStep()
+        {
+
+            if (_fiance != null)
+            {
+             if( _fiance.IsDead())
+             {
+                   _fiance = null;
+                    if (_statusInFamily == Status.ENGAGED) { _statusInFamily = Status.SINGLE; }
+             }
+            }
+
+            //TODO :  put current values in value history.
+        }
     }
 
 }
