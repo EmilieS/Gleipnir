@@ -127,7 +127,6 @@ namespace Game
         /// <returns></returns>
         public void SetOfferingsPoints(int playerChoice)
         {
-            //TODO: Modify families' gold stash
             if (playerChoice <= 0)
             {
                 _offeringsPoints = 1;
@@ -139,6 +138,14 @@ namespace Game
             else
             {
                 _offeringsPoints = playerChoice;
+            }
+
+            if (_offeringsPoints >= 1 && _offeringsPoints <= 100)
+            {
+                foreach (Family fam in _family)
+                {
+                    fam.takeFromGoldStash(playerChoice);
+                }
             }
         }
     }
