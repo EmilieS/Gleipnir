@@ -27,10 +27,10 @@ namespace Game
             }
 
             //TODO: Set village's Gold
-            _familiesGold = CalculateVillageGold();
+            CalculateVillageGold();
 
             //TODO: Set village's faith
-            _villageFaith = CalculateAverageVillageFaith();
+            CalculateAverageVillageFaith();
 
             //TODO: Set village's happiness
             _villageHappiness = CalculateAverageVillageHappiness();
@@ -43,7 +43,7 @@ namespace Game
         /// Add a family to the village
         /// </summary>
         /// <param name="family"></param>
-        public void addFamily(Family family)
+        public void AddFamily(Family family)
         {
             if (!_family.Equals(family))
             {
@@ -55,13 +55,18 @@ namespace Game
         /// Remove a familyfrom the village
         /// </summary>
         /// <param name="family"></param>
-        public void removeFamily(Family family)
+        public void RemoveFamily(Family family)
         {
             if(_family.Equals(family))
             {
                 _family.Remove(family);
             }
         }
+
+        /// <summary>
+        /// Gets all families in the village
+        /// </summary>
+        public List<Family> FamiliesList { get { return _family; } }
 
         /// <summary>
         /// Gets the total gold for the village.
@@ -73,14 +78,18 @@ namespace Game
         /// Addition of all gold of all families
         /// </summary>
         /// <returns></returns>
-        public double CalculateVillageGold()
+        public void CalculateVillageGold()
         {
             double result = 0;
             foreach (Family fam in _family)
             {
                 result += fam.GoldStash;
             }
-            return result;
+
+            if (result < 0) 
+                throw new IndexOutOfRangeException();
+            else 
+                _familiesGold = result;
         }
 
         /// <summary>
@@ -92,14 +101,18 @@ namespace Game
         /// Dertermine average faith for all families in the village.
         /// </summary>
         /// <returns></returns>
-        public double CalculateAverageVillageFaith()
+        public void CalculateAverageVillageFaith()
         {
             double result = 0;
             foreach (Family fam in _family)
             {
                 result += fam.FaithAverage();
             }
-            return result = result / _family.Count;
+
+            if (result < 0 && result > 100)
+                throw new IndexOutOfRangeException();
+            else
+                _villageFaith = result / _family.Count;
         }
 
         /// <summary>
