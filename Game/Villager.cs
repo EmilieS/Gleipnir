@@ -321,7 +321,7 @@ namespace Game
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        internal int HandInOfferings(int amount)//see if we can do this in a more intelligent manner.
+        internal double HandInOfferings(double amount)//see if we can do this in a more intelligent manner.
         {
             if ((_health & Healths.HERETIC) == 0)
             {

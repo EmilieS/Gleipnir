@@ -42,12 +42,12 @@ namespace Game
         public Family() { }
 
 
-        int _goldStash;
+        double _goldStash;
         Villager _mother;
         Villager _father;
         FamilyMemberList _familyMembers; 
 
-        public int GoldStash { get { return _goldStash; } }
+        public double GoldStash { get { return _goldStash; } }
         public Villager Mother { get { return _mother; } }
         public Villager Father { get { return _father; } }
         public IFamilyMemberList FamilyMembers { get { return _familyMembers; } }
@@ -101,7 +101,7 @@ namespace Game
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        public int takeFromGoldStash(int amount)
+        public double takeFromGoldStash(double amount)
         {
             if (amount < 0)
             {
@@ -112,14 +112,14 @@ namespace Game
                 _goldStash -= amount;
                 return amount;
             }
-            int goldLeft=_goldStash;
+            double goldLeft=_goldStash;
             _goldStash=0;
             return goldLeft;
         }
 
 
 
-        public void addTOGoldStash(int amount)
+        public void addTOGoldStash(double amount)
         {
             if (amount < 0)
             {

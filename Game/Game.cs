@@ -11,7 +11,7 @@ namespace Game
         public Game()
         {
             //TODO intialisation partie
-            Villager VillagerAH =new Villager();
+            Villager VillagerAH = new Villager();
             VillagerAH.Gender = Genders.MALE;
             Villager VillagerAF = new Villager();
             VillagerAF.Gender = Genders.FEMALE;
@@ -19,24 +19,36 @@ namespace Game
             VillagerBH.Gender = Genders.MALE;
             Villager VillagerBF = new Villager();
             VillagerBF.Gender = Genders.FEMALE;
-            Villager VillagerCH= new Villager();
+            Villager VillagerCH = new Villager();
             VillagerCH.Gender = Genders.MALE;
             Villager VillagerCF = new Villager();
             VillagerCF.Gender = Genders.FEMALE;
+            Villager VillagerDH = new Villager();
+            VillagerDH.Gender = Genders.MALE;
+            Villager VillagerDF = new Villager();
+            VillagerDF.Gender = Genders.FEMALE;
+            Villager VillagerEH = new Villager();
+            VillagerEH.Gender = Genders.MALE;
+            Villager VillagerEF = new Villager();
+            VillagerEF.Gender = Genders.FEMALE;
 
             Family FamilyA = new Family(VillagerAF, VillagerAH);
             Family FamilyB = new Family(VillagerBF, VillagerBH);
             Family FamilyC = new Family(VillagerCF, VillagerCH);
+            Family FamilyD = new Family(VillagerDF, VillagerDH);
+            Family FamilyE = new Family(VillagerEF, VillagerEH);
 
-           _families=new List<Family>();
+           _families = new List<Family>();
 
            _singleMen = new List<Villager>();
 
             _families.Add(FamilyA);
             _families.Add(FamilyB);
             _families.Add(FamilyC);
+            _families.Add(FamilyD);
+            _families.Add(FamilyE);
 
-            TotalPop = 6;
+            TotalPop = (_families.Count * 2);
             TotalGold = 0;
             Offerings = 0;
         }
