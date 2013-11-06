@@ -50,6 +50,24 @@
     <Compile Include="GamePage.Designer.cs">
       <DependentUpon>GamePage.cs</DependentUpon>
     </Compile>
+    <Compile Include="HomepageUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HomepageUC.Designer.cs">
+      <DependentUpon>HomepageUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InformationsUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InformationsUC.Designer.cs">
+      <DependentUpon>InformationsUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabIndex.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabIndex.Designer.cs">
+      <DependentUpon>TabIndex.cs</DependentUpon>
+    </Compile>
     <Compile Include="HomePage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +84,15 @@
     </Compile>
     <EmbeddedResource Include="GamePage.resx">
       <DependentUpon>GamePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HomepageUC.resx">
+      <DependentUpon>HomepageUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InformationsUC.resx">
+      <DependentUpon>InformationsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabIndex.resx">
+      <DependentUpon>TabIndex.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HomePage.resx">
       <DependentUpon>HomePage.cs</DependentUpon>

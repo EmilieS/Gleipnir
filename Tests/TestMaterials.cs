@@ -46,7 +46,6 @@ namespace Tests
         public void MaterialsInheritanceTest()
         {
             var m = new Materials();
-
             
             m.r.IsBought = true;
             double SetDone = m.SetTotalPower();
@@ -55,7 +54,6 @@ namespace Tests
             m.c.IsBought = true;
             SetDone = m.SetTotalPower();
             Assert.That(SetDone, Is.Not.EqualTo(1300));
-
         }
     }
 }
