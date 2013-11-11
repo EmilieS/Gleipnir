@@ -139,7 +139,7 @@
             this.Controls.Add(this.Village);
             this.Controls.Add(this.villageName);
             this.Name = "InformationsUC";
-            this.Size = new System.Drawing.Size(859, 27);
+            this.Size = new System.Drawing.Size(864, 27);
             this.ResumeLayout(false);
             this.PerformLayout();
 

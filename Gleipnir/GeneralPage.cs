@@ -13,12 +13,12 @@ using System.Windows.Forms;
 
 namespace GamePages
 {
-    public partial class HomePage : Form
+    public partial class GeneralPage : Form
     {
         HomepageUC Home = new HomepageUC();
         Game.Game _startedGame;
        
-        public HomePage()
+        public GeneralPage()
         {
             InitializeComponent();
 

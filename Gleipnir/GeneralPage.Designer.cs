@@ -1,6 +1,6 @@
 ﻿namespace GamePages
 {
-    partial class HomePage
+    partial class GeneralPage
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomePage));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeneralPage));
             this.SuspendLayout();
             // 
             // HomePage
