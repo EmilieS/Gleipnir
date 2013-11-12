@@ -18,6 +18,7 @@ namespace Game
         public Village(List<Family> families)
         {
             //TODO: Families List
+            _jobs = new List<Jobs>();
             _family = families;
 
             //TODO: Jobs List
@@ -45,10 +46,8 @@ namespace Game
         /// <param name="family"></param>
         public void AddFamily(Family family)
         {
-            if (!_family.Equals(family))
-            {
-                _family.Add(family);
-            }
+            if (_family.Contains(family)) throw new InvalidOperationException();
+            else _family.Add(family);
         }
 
         /// <summary>
@@ -57,10 +56,8 @@ namespace Game
         /// <param name="family"></param>
         public void RemoveFamily(Family family)
         {
-            if(_family.Equals(family))
-            {
-                _family.Remove(family);
-            }
+            if (_family.Contains(family)) _family.Remove(family);
+            else throw new InvalidOperationException();
         }
 
         /// <summary>
@@ -108,11 +105,12 @@ namespace Game
             {
                 result += fam.FaithAverage();
             }
+            result = result / _family.Count;
 
             if (result < 0 && result > 100)
                 throw new IndexOutOfRangeException();
             else
-                _villageFaith = result / _family.Count;
+                _villageFaith = result;
         }
 
         /// <summary>
