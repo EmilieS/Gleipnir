@@ -32,15 +32,17 @@ namespace Game
             Villager VillagerEF = new Villager();
             VillagerEF.Gender = Genders.FEMALE;
 
-            Family FamilyA = new Family(VillagerAF, VillagerAH);
-            Family FamilyB = new Family(VillagerBF, VillagerBH);
-            Family FamilyC = new Family(VillagerCF, VillagerCH);
-            Family FamilyD = new Family(VillagerDF, VillagerDH);
-            Family FamilyE = new Family(VillagerEF, VillagerEH);
+            Village = new Village(this);
+            Family FamilyA = new Family(VillagerAF, VillagerAH, Village);
+            Family FamilyB = new Family(VillagerBF, VillagerBH, Village);
+            Family FamilyC = new Family(VillagerCF, VillagerCH, Village);
+            Family FamilyD = new Family(VillagerDF, VillagerDH, Village);
+            Family FamilyE = new Family(VillagerEF, VillagerEH, Village);
 
            _families = new List<Family>();
 
            _singleMen = new List<Villager>();
+
 
             _families.Add(FamilyA);
             _families.Add(FamilyB);
@@ -55,17 +57,18 @@ namespace Game
 
         List<Family> _families;
 
-        static public List<Villager> _singleMen; //changera plus tard. //TODO : warning, static!
-        static public double TotalGold {get; set;} //changera //warning, static!
-        static public int TotalPop {get; set;}  //changera //warning, static!
-        static public int Offerings { get; set; } //changera //warning, static!
+        public Village Village { get; set; }
+        public List<Villager> _singleMen; 
+        public double TotalGold {get; set;} //changera //warning, static!
+        public int TotalPop {get; set;}  //changera //warning, static!
+        public int Offerings { get; set; } //changera //warning, static!
 
         static public void BigEvent()
         {
             //TODO
         }
 
-        static public void AddOrRemoveFromTotalGold(double amount)
+        public void AddOrRemoveFromTotalGold(double amount)
         {
             TotalGold += amount; //curious to find out if TotalGold can be negative.
         }
@@ -78,9 +81,13 @@ namespace Game
 
         private void CloseStep()
         {
-            for (int i = 0; i < _families.Count; i++)
+            for (int i = 0; i < Village.FamiliesList.Count; i++)
             {
-                _families[i].CloseStep();
+                for (int j=0; j<Village.FamiliesList[i].FamilyMembers.Count; j++)
+                {
+                    Village.FamiliesList[i].FamilyMembers[j].CloseStep();
+                }
+                Village.FamiliesList[i].CloseStep();
             }
             //TODO : Villagers, Villages.
         }

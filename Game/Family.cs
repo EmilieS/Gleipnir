@@ -26,6 +26,8 @@ namespace Game
                 _goldStash += father.ParentFamily.takeFromGoldStash(father.ParentFamily.GoldStash / 10); //10%
             removeFromFamily(mother, mother.ParentFamily);
             removeFromFamily(father, father.ParentFamily);
+
+            father.ParentFamily.OwnerVillage.FamiliesList.Add(this);
             }
             _mother = mother;
             _father = father;
@@ -39,18 +41,42 @@ namespace Game
             _father.ParentFamily = this;
         }
 
-        public Family() { }
+        public Family(Village village) { _ownerVillage = village; }
+
+        public Family(Villager mother, Villager father, Village village)
+        {
+            _mother = mother;
+            _father = father;
+            _mother.StatusInFamily = Status.MARRIED;
+            _father.StatusInFamily = Status.MARRIED;
+
+            _familyMembers = new FamilyMemberList(this);
+            _familyMembers.Add(_mother);
+            _familyMembers.Add(_father);
+            _mother.ParentFamily = this;
+            _father.ParentFamily = this;
+            village.FamiliesList.Add(this);
+        }
 
 
+
+        Village _ownerVillage;
         double _goldStash;
         Villager _mother;
         Villager _father;
         FamilyMemberList _familyMembers; 
+ 
 
         public double GoldStash { get { return _goldStash; } }
         public Villager Mother { get { return _mother; } }
         public Villager Father { get { return _father; } }
         public IFamilyMemberList FamilyMembers { get { return _familyMembers; } }
+
+        public Village OwnerVillage
+        {
+            get { return _ownerVillage; }
+            set { _ownerVillage = value; } //riqueraque
+        }
 
         static private void removeFromFamily(Villager villager, Family parentFamily)
         {
@@ -88,9 +114,9 @@ namespace Game
                 _familyMembers.Add(kid);
                 if (kid.Gender == Genders.FEMALE)
                 {
-                    Engage(kid, Game._singleMen);
+                    Engage(kid, _ownerVillage.ThisGame._singleMen);
                 }
-                
+
                 return kid;           
         }
 
@@ -179,14 +205,14 @@ namespace Game
         }
         public void IsPoorOrRich_HappinessImpact() //public for tests
         {
-            if (_goldStash / FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
+            if (_goldStash / FamilyMembers.Count < (OwnerVillage.ThisGame.TotalGold / OwnerVillage.ThisGame.TotalPop) / 2)
             {
                 for (int i=0; i<FamilyMembers.Count; i++)
                 {
                     FamilyMembers[i].AddOrRemoveHappiness(-0.1);
                 }
             }
-            else if (_goldStash / FamilyMembers.Count > (Game.TotalGold / Game.TotalPop) *4)
+            else if (_goldStash / FamilyMembers.Count > (OwnerVillage.ThisGame.TotalGold / OwnerVillage.ThisGame.TotalPop) * 4)
             {
                 for (int i = 0; i < FamilyMembers.Count; i++)
                 {
@@ -207,7 +233,6 @@ namespace Game
 
             for (int i = 0; i < _familyMembers.Count; i++)
             {
-                _familyMembers[i].CloseStep();
                 if (_familyMembers[i].IsDead()) { _familyMembers.Remove(_familyMembers[i]); }
             }
             //TODO :  put current values in value history.

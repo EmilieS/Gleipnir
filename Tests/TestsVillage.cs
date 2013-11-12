@@ -16,7 +16,7 @@ namespace Tests
         {
             var myGame = new Game.Game();
             List<Family> families = new List<Family>();
-            Village village = new Village(families);
+            Village village = new Village(families, myGame);
 
             #region CreatedFamilies
             Villager m1 = new Villager();
@@ -61,7 +61,7 @@ namespace Tests
         {
             var myGame = new Game.Game();
             List<Family> families = new List<Family>();
-            Village village = new Village(families);
+            Village village = new Village(families, myGame);
 
             #region CreatedFamilies
             Villager m1 = new Villager();
@@ -103,7 +103,7 @@ namespace Tests
         {
             var myGame = new Game.Game();
             List<Family> families = new List<Family>();
-            Village village = new Village(families);
+            Village village = new Village(families, myGame);
 
             #region CreatedFamilies
             Villager m1 = new Villager();

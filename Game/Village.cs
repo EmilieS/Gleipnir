@@ -15,13 +15,13 @@ namespace Game
         double _villageHappiness;
         int _offeringsPoints;
 
-        public Village(List<Family> families)
+        public Village(Game thisGame)
         {
-            //TODO: Families List
-            _family = families;
-
+            _familiesList=new FamilyInVillageList(this);
+            _thisGame = thisGame;
+            
             //TODO: Jobs List
-            foreach (Jobs job in _jobs)
+            /*foreach (Jobs job in _jobs)
             {
                 _jobs.Add(job);
             }
@@ -37,36 +37,31 @@ namespace Game
 
             //TODO: Set village's offerings points
             _offeringsPoints = 10;
+             */
+             
+        }
+        public Village(List<Family> families, Game thisGame)
+        {
+            _familiesList = new FamilyInVillageList(this);
+            for (int i=0; i<families.Count; i++)
+            {
+            _familiesList.Add(families[i]);
+            }
         }
 
-        /// <summary>
-        /// Add a family to the village
-        /// </summary>
-        /// <param name="family"></param>
+        Game _thisGame;
+        public Game ThisGame { get { return _thisGame; } }
+        FamilyInVillageList _familiesList;
+        public FamilyInVillageList FamiliesList { get { return _familiesList; } }
+
         public void AddFamily(Family family)
         {
-            if (!_family.Equals(family))
-            {
-                _family.Add(family);
-            }
+            _familiesList.Add(family);
         }
-
-        /// <summary>
-        /// Remove a familyfrom the village
-        /// </summary>
-        /// <param name="family"></param>
         public void RemoveFamily(Family family)
         {
-            if(_family.Equals(family))
-            {
-                _family.Remove(family);
-            }
+            _familiesList.Remove(family);
         }
-
-        /// <summary>
-        /// Gets all families in the village
-        /// </summary>
-        public List<Family> FamiliesList { get { return _family; } }
 
         /// <summary>
         /// Gets the total gold for the village.

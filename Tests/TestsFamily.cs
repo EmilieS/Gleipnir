@@ -162,21 +162,23 @@ namespace Tests
             [Test]
             public void EngagementTest()
             {
-                /*var MyGame=*/
-                new Game.Game();
+                var MyGame= new Game.Game();
+                var village = new Village(MyGame);
                 Villager motherf1 = new Villager();
                 Villager fatherf1 = new Villager();
                 motherf1.Gender = Genders.FEMALE;
                 motherf1.Fiance = fatherf1;
                 fatherf1.Fiance = motherf1;
-                Family family1 = new Family(motherf1, fatherf1);
+                Family family1 = new Family(motherf1, fatherf1, village);
 
                 Villager motherf2 = new Villager();
                 Villager fatherf2 = new Villager();
                 motherf2.Gender = Genders.FEMALE;
                 motherf2.Fiance = fatherf2;
                 fatherf2.Fiance = motherf2;
-                Family family2 = new Family(motherf2, fatherf2);
+                Family family2 = new Family(motherf2, fatherf2, village);
+                Assert.That(family1.OwnerVillage != null, "family1.OwnerVillage is Null");
+                Assert.That(family1.OwnerVillage.ThisGame != null, "family1.OwnerVillage.ThisGame is Null");
 
                 Villager kidf1;
                 do
