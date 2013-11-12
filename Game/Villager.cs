@@ -14,6 +14,9 @@ namespace Game
         internal Villager(Game g, Family parentFamily, string name)    //TODO: autre constructeur pour le début...
             : base(g)
         {
+            _faith = new HistorizedValue<double>(20);
+            _happiness = new HistorizedValue<double>(20);
+            _health = new HistorizedValue<Healths>(20);
             _statusInFamily = Status.SINGLE;
 
             Random rand=new Random();//to be moved elsewhere.
@@ -29,7 +32,7 @@ namespace Game
                 _faith.Current = parentFamily.FaithAverage();
 
             _happiness.Current = parentFamily.HappinessAverage();            
-            _job = Jobs.FARMER;
+            //_job = Jobs.FARMER;
             _health.Current = Healths.NONE;
             _age = 0;
             _lifeExpectancy = 85;
@@ -38,6 +41,9 @@ namespace Game
         public Villager(Game g, Genders gender)
             : base(g)
         {
+            _faith = new HistorizedValue<double>(20);
+            _happiness = new HistorizedValue<double>(20);
+            _health = new HistorizedValue<Healths>(20);
             _faith.Current = 100;
             _happiness.Current = 80;
             _lifeExpectancy = 85;

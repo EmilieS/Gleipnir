@@ -32,7 +32,8 @@ namespace Game
         }
 
         readonly List<GameItem> _items;
-        public readonly List<Village> _villages; //a revoir!
+        readonly List<Village> _villages; //a revoir!
+        public IReadOnlyList<Village> Villages { get { return _villages; } }
         public List<Villager> _singleMen; 
         public double TotalGold {get; set;} //will change
         public int TotalPop {get; set;}  //will change
@@ -72,20 +73,12 @@ namespace Game
 
 
 
-        private void CloseStep() //a changer.
+        public void CloseStep() //public for debug
         {
-            for (int k = 0; k < _villages.Count; k++)
+            foreach (GameItem item in _items)
             {
-                for (int i = 0; i < _villages[k].FamiliesList.Count; i++)
-                {
-                    for (int j = 0; j < _villages[k].FamiliesList[i].FamilyMembers.Count; j++)
-                    {
-                        _villages[k].FamiliesList[i].FamilyMembers[j].CloseStep();
-                    }
-                    _villages[k].FamiliesList[i].CloseStep();
-                }
+                item.CloseStep();
             }
-            //TODO : Villagers, Villages.
         }
 
         //variables à avoir: les coefficients des métiers

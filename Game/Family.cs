@@ -14,6 +14,7 @@ namespace Game
         internal Family(Game game, Villager mother, Villager father, string name)
             : base (game)
         {
+            _goldStash = new HistorizedValue<double>(20);
             if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE)
             {
                 throw new InvalidOperationException("gender issue!");
@@ -28,6 +29,11 @@ namespace Game
                 _goldStash.Current += father.ParentFamily.takeFromGoldStash(father.ParentFamily.GoldStash / 10); //10%
                 removeFromFamily(mother, mother.ParentFamily);
                 removeFromFamily(father, father.ParentFamily);
+            }
+            if (mother.Fiance == null && father.Fiance == null)//for tests.
+            {
+                mother.Fiance = father;
+                father.Fiance = mother;
             }
             else { _goldStash.Current = 15; }
             _name = name;

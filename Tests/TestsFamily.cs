@@ -24,38 +24,29 @@ namespace Tests
             public void Death()
             {
                 var MyGame = new Game.Game();
-                //Game._villages.
-                Villager mother = new Villager();
-                Villager father = new Villager();
-                mother.Gender = Genders.FEMALE;
-                mother.Fiance = father;
-                father.Fiance = mother;
-                Family family = new Family(mother, father);
+                Family family = MyGame.Villages[0].CreateFamilyFromScratch();
 
-                mother.ParentFamily = family;
-                Assert.That(mother.Fiance.Fiance == mother);
+                Assert.That(family.Mother.Fiance.Fiance == family.Mother);
                 Assert.That(family.Mother.ParentFamily == family);
-                Assert.That(family.Mother == mother && family.Father== father);
-                Assert.That(mother.StatusInFamily == Status.MARRIED && mother.StatusInFamily == Status.MARRIED);
+                Assert.That(family.Mother == family.Mother && family.Father == family.Father);
+                Assert.That(family.Mother.StatusInFamily == Status.MARRIED && family.Mother.StatusInFamily == Status.MARRIED);
                 Assert.That(family.FamilyMembers.Count == 2);
 
-                mother.Kill();
-                mother.DieOrIsAlive();
-                father.CloseStep();
-                mother.CloseStep();
-                family.CloseStep();
+                family.Mother.Kill();
+                family.Mother.DieOrIsAlive();
+                MyGame.CloseStep();
+
 
                 Assert.That(family.FamilyMembers.Count == 1);
                 Assert.That(family.Mother == null);
 
-                Assert.That(mother.Fiance.Fiance == null);
                 Assert.That(family.Father.Fiance == null);
-                Assert.That(father.StatusInFamily == Status.MARRIED);
+                Assert.That(family.Father.StatusInFamily == Status.MARRIED);
             }
 
 
-
-
+            
+            /*
             [Test]
             public void Fiance()
             {
@@ -196,7 +187,7 @@ namespace Tests
                 Assert.That(kidf1.StatusInFamily == Status.ENGAGED);
                 Assert.That(kidf2.StatusInFamily == Status.ENGAGED);
 
-            }
+            }*/
             
     }
 }

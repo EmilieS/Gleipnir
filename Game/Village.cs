@@ -24,6 +24,7 @@ namespace Game
             : base(thisGame)
         {
             Debug.Assert(!String.IsNullOrWhiteSpace(name));
+            Debug.Assert(thisGame != null, "thisGame is null!");
             _name = name;
             _familiesList=new FamilyInVillageList(this);
 
@@ -79,9 +80,11 @@ namespace Game
         //TODO : CreateFamilyFromScratch
         public Family CreateFamilyFromScratch()
         {
-            Villager VillagerAM = new Villager(_thisGame, Genders.MALE);
-            Villager VillagerAF = new Villager(_thisGame, Genders.FEMALE);
-            var newFamily = new Family(_thisGame, VillagerAF, VillagerAM, "default");
+            //Debug.Assert(_thisGame != null, "_thisGame est null!");
+            Debug.Assert(Game != null, "Game est null!");
+            Villager VillagerAM = new Villager(Game, Genders.MALE);
+            Villager VillagerAF = new Villager(Game, Genders.FEMALE);
+            var newFamily = new Family(Game, VillagerAF, VillagerAM, "default");
             FamiliesList.Add(newFamily);
             return newFamily;
         }
