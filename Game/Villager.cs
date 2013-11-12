@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    public class Villager : INotifyPropertyChanged
+    public class Villager : GameItem
     {
-        internal Villager(Family parentFamily)    //TODO: autre constructeur pour le début...
+        internal Villager(Game g, Family parentFamily, string name)    //TODO: autre constructeur pour le début...
+            : base(g)
         {
             _statusInFamily = Status.SINGLE;
 
@@ -22,22 +23,22 @@ namespace Game
                 case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; break; 
             }
             if (rand.Next(101) < 2)
-                _faith = 13;
+                _faith.Current = 13;
             else
-                _faith = parentFamily.FaithAverage();
+                _faith.Current = parentFamily.FaithAverage();
 
-            _happiness = parentFamily.HappinessAverage();            
+            _happiness.Current = parentFamily.HappinessAverage();            
             _job = Jobs.FARMER;
-            _health = Healths.NONE;
+            _health.Current = Healths.NONE;
             _age = 0;
             _lifeExpectancy = 85;
             _fiance = null;
-            _name = "Afaire";
         }
-        public Villager()
+        public Villager(Game g)//à eliminer.
+            : base(g)
         {
-            _faith = 100;
-            _happiness = 80;
+            _faith.Current = 100;
+            _happiness.Current = 80;
             _lifeExpectancy = 85;
             _statusInFamily = Status.SINGLE;
         }
@@ -53,14 +54,15 @@ namespace Game
         Status _statusInFamily; //!! 
         Villager _fiance; //!!!!!
 
-        Healths _health; //a death has numerous consequences. Once they are fullfilled, this object is dropped.
-        double _faith; //scale from 0 to 100.
-        double _happiness; //scale from 0 to 100.
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        public double Faith  { get { return _faith; } }
-        public double Happiness { get { return _happiness; } }
-        public Genders Gender { get { return _gender; } set { _gender = value; } } //obligé d'avoir le set pour les tests...
+        readonly HistorizedValue<double> _faith; //scale from 0 to 100.
+        readonly HistorizedValue<double> _happiness; //scale from 0 to 100.
+        readonly HistorizedValue<Healths> _health;
+
+
+        public double Faith  { get { return _faith.Current ; } } //hmm
+        public double Happiness { get { return _happiness.Current; } } //hmm
+        public Genders Gender { get { return _gender; }} 
         public Jobs Job { get { return _job; } }
         public double LifeExpectancy { get { return _lifeExpectancy; } }
 
@@ -91,14 +93,12 @@ namespace Game
         {
             if (_lifeExpectancy <= _age) 
             {
-                _health = Healths.DEAD;
+                _health.Current = Healths.DEAD;
                 if (ParentFamily != null)
                 {
                     ParentFamily.FamilyMemberDied(this);
                 }
-
-                PropertyChangedEventHandler h = PropertyChanged;
-                if (h != null) { h(this, new PropertyChangedEventArgs("died")); }                
+                    
             }
         }
         /// <summary>
@@ -219,10 +219,10 @@ namespace Game
 
         private void Suicide()
         {
-            if (_happiness == 0 && (_health & Healths.DEPRESSED) == 0) //a revoir
+            if (_happiness.Current == 0 && (_health.Current & Healths.DEPRESSED) == 0) //a revoir
             {
                 SetLifeExpectancyLeft(0.4);
-                _health = _health | Healths.DEPRESSED;
+                _health.Current = _health.Current | Healths.DEPRESSED;
             }
         }
         //======================================================================================
@@ -235,26 +235,26 @@ namespace Game
         /// <param name="amount"></param>
         public void AddOrRemoveHappiness(double amount)
         {
-            if (_happiness + amount < 0)
+            if (_happiness.Current + amount < 0)
             {
-                _happiness = 0;
+                _happiness.Current = 0;
             }
-            else if (_happiness + amount > 100)
+            else if (_happiness.Current + amount > 100)
             {
-                _happiness = 100;
+                _happiness.Current = 100;
             }
             else
             {
-                _happiness += amount;
+                _happiness.Current += amount;
             }
         }
         internal bool IsDead()
         {
-            return ((_health & Healths.DEAD) != 0);                    
+            return ((_health.Current & Healths.DEAD) != 0);                    
         }
         internal void Sickly()
         {
-            if ((_health & Healths.SICK) != 0) 
+            if ((_health.Current & Healths.SICK) != 0) 
             {
                 AddOrRemoveHappiness(0.1);
                 ParentFamily.FamilyMemberIsSick();
@@ -264,22 +264,21 @@ namespace Game
 
         private void CallForHelp() //TODO : add timer /brainstorm how to use this.
         {
-            if (_happiness < 25 && (_health & Healths.UNHAPPY) == 0)
+            if (_happiness.Current < 25 && (_health.Current & Healths.UNHAPPY) == 0)
             {
-                _health = _health | Healths.UNHAPPY;
-                PropertyChangedEventHandler h = PropertyChanged;
-                if (h != null) { h(this, new PropertyChangedEventArgs("unhappy")); }
+                _health.Current = _health.Current | Healths.UNHAPPY;
+            
             }
         }
 
         private void CallForHelpEnded() //once the CallForHelp timer is ended.
         {
-            if (_happiness > 27)
+            if (_happiness.Current > 27)
             {
-                _health = _health & ~Healths.UNHAPPY;
+                _health.Current = _health.Current & ~Healths.UNHAPPY;
                 AddOrRemoveFaith(20);
             }
-            else if (_happiness < 25)
+            else if (_happiness.Current < 25)
             {
                 AddOrRemoveFaith(-20);
             }
@@ -292,17 +291,17 @@ namespace Game
         /// <param name="amount"></param>
         public void AddOrRemoveFaith(double amount)
         {
-            if (_faith + amount < 0)
+            if (_faith.Current + amount < 0)
             {
-                _faith = 0;
+                _faith.Current = 0;
             }
-            else if (_faith + amount > 100)
+            else if (_faith.Current + amount > 100)
             {
-                _faith = 100;
+                _faith.Current = 100;
             }
             else
             {
-                _faith += amount;
+                _faith.Current += amount;
             }
         }
         //-------------------------------------------------------------------------------------------------------------------------------
@@ -323,7 +322,7 @@ namespace Game
         /// <returns></returns>
         internal double HandInOfferings(double amount)//see if we can do this in a more intelligent manner.
         {
-            if ((_health & Healths.HERETIC) == 0)
+            if ((_health.Current & Healths.HERETIC) == 0)
             {
                 return ParentFamily.takeFromGoldStash(amount);
             }
@@ -332,7 +331,7 @@ namespace Game
         #endregion
 
 
-        public void CloseStep()
+        override internal void CloseStep()
         {
 
             if (_fiance != null)

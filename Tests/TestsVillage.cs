@@ -117,7 +117,7 @@ namespace Tests
             m2.Gender = Genders.FEMALE;
             Villager f2 = new Villager();
             f2.Gender = Genders.MALE;
-            Family family2 = new Family(m2, f2);
+            Family family2 = new Family(this, m2, f2);
             family2.addTOGoldStash(100);
             #endregion
 

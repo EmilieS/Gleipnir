@@ -10,59 +10,70 @@ namespace Game
     {
         public Game()
         {
+            _items = new List<GameItem>();
             //TODO intialisation partie
-            Villager VillagerAH = new Villager();
+            Villager VillagerAH = new Villager(this);
             VillagerAH.Gender = Genders.MALE;
-            Villager VillagerAF = new Villager();
+            Villager VillagerAF = new Villager(this);
             VillagerAF.Gender = Genders.FEMALE;
-            Villager VillagerBH = new Villager();
+            Villager VillagerBH = new Villager(this);
             VillagerBH.Gender = Genders.MALE;
-            Villager VillagerBF = new Villager();
+            Villager VillagerBF = new Villager(this);
             VillagerBF.Gender = Genders.FEMALE;
-            Villager VillagerCH = new Villager();
+            Villager VillagerCH = new Villager(this);
             VillagerCH.Gender = Genders.MALE;
-            Villager VillagerCF = new Villager();
+            Villager VillagerCF = new Villager(this);
             VillagerCF.Gender = Genders.FEMALE;
-            Villager VillagerDH = new Villager();
+            Villager VillagerDH = new Villager(this);
             VillagerDH.Gender = Genders.MALE;
-            Villager VillagerDF = new Villager();
+            Villager VillagerDF = new Villager(this);
             VillagerDF.Gender = Genders.FEMALE;
-            Villager VillagerEH = new Villager();
+            Villager VillagerEH = new Villager(this);
             VillagerEH.Gender = Genders.MALE;
-            Villager VillagerEF = new Villager();
+            Villager VillagerEF = new Villager(this);
             VillagerEF.Gender = Genders.FEMALE;
 
-            Village = new Village(this);
-            Family FamilyA = new Family(VillagerAF, VillagerAH, Village);
-            Family FamilyB = new Family(VillagerBF, VillagerBH, Village);
-            Family FamilyC = new Family(VillagerCF, VillagerCH, Village);
-            Family FamilyD = new Family(VillagerDF, VillagerDH, Village);
-            Family FamilyE = new Family(VillagerEF, VillagerEH, Village);
+            _villages = new List<Village>();
+             CreateVillage("default");
 
-           _families = new List<Family>();
+             Family FamilyA = new Family(VillagerAF, VillagerAH, _villages[0]);
+             Family FamilyB = new Family(VillagerBF, VillagerBH, _villages[0]);
+             Family FamilyC = new Family(VillagerCF, VillagerCH, _villages[0]);
+             Family FamilyD = new Family(VillagerDF, VillagerDH, _villages[0]);
+             Family FamilyE = new Family(VillagerEF, VillagerEH, _villages[0]);
+
+
 
            _singleMen = new List<Villager>();
 
-
-            _families.Add(FamilyA);
-            _families.Add(FamilyB);
-            _families.Add(FamilyC);
-            _families.Add(FamilyD);
-            _families.Add(FamilyE);
-
-            TotalPop = (_families.Count * 2);
+            TotalPop = 10;
             TotalGold = 0;
             Offerings = 0;
         }
 
-        List<Family> _families;
-
-        public Village Village { get; set; }
+        readonly List<GameItem> _items;
+        readonly List<Village> _villages;
         public List<Villager> _singleMen; 
         public double TotalGold {get; set;} //changera //warning, static!
         public int TotalPop {get; set;}  //changera //warning, static!
         public int Offerings { get; set; } //changera //warning, static!
 
+        internal void GameItemCreated(GameItem item)
+        {
+            _items.Add(item);
+        }
+
+        internal void GameItemDestroyed(GameItem item)
+        {
+            _items.Remove(item);
+        }
+        public Village CreateVillage(string name)
+        {
+            if (String.IsNullOrWhiteSpace(name)) throw new ArgumentNullException("name");
+            var v = new Village(this, name);
+            _villages.Add(v);
+            return v;
+        }
         static public void BigEvent()
         {
             //TODO
@@ -79,15 +90,20 @@ namespace Game
             
         }
 
-        private void CloseStep()
+
+
+        private void CloseStep() //a changer.
         {
-            for (int i = 0; i < Village.FamiliesList.Count; i++)
+            for (int k = 0; k < _villages.Count; k++)
             {
-                for (int j=0; j<Village.FamiliesList[i].FamilyMembers.Count; j++)
+                for (int i = 0; i < _villages[k].FamiliesList.Count; i++)
                 {
-                    Village.FamiliesList[i].FamilyMembers[j].CloseStep();
+                    for (int j = 0; j < _villages[k].FamiliesList[i].FamilyMembers.Count; j++)
+                    {
+                        _villages[k].FamiliesList[i].FamilyMembers[j].CloseStep();
+                    }
+                    _villages[k].FamiliesList[i].CloseStep();
                 }
-                Village.FamiliesList[i].CloseStep();
             }
             //TODO : Villagers, Villages.
         }

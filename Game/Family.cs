@@ -7,10 +7,11 @@ using System.Timers;
 
 namespace Game
 {
-    public class Family
+    public class Family : GameItem
     {
         //TODO initial constructor.
-        public Family(Villager mother, Villager father)
+        internal Family(Game game, Villager mother, Villager father)
+            : base (game)
         {
             if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE)
             {
@@ -24,11 +25,10 @@ namespace Game
                 }
                 _goldStash = mother.ParentFamily.takeFromGoldStash(mother.ParentFamily.GoldStash / 10); //10%
                 _goldStash += father.ParentFamily.takeFromGoldStash(father.ParentFamily.GoldStash / 10); //10%
-            removeFromFamily(mother, mother.ParentFamily);
-            removeFromFamily(father, father.ParentFamily);
-
-            father.ParentFamily.OwnerVillage.FamiliesList.Add(this);
+                removeFromFamily(mother, mother.ParentFamily);
+                removeFromFamily(father, father.ParentFamily);
             }
+            else { _goldStash = 15; }
             _mother = mother;
             _father = father;
             _mother.StatusInFamily = Status.MARRIED;
@@ -41,9 +41,12 @@ namespace Game
             _father.ParentFamily = this;
         }
 
-        public Family(Village village) { _ownerVillage = village; }
+        public Family(Village village) //a eliminer
+            : base(village.ThisGame) 
+        { _ownerVillage = village; }
 
-        public Family(Villager mother, Villager father, Village village)
+        public Family(Villager mother, Villager father, Village village)//a eliminer
+            : base(village.ThisGame)
         {
             _mother = mother;
             _father = father;
@@ -110,7 +113,7 @@ namespace Game
             {
                 throw new InvalidOperationException("missing parent");
             }
-                Villager kid = new Villager(this);
+                Villager kid = new Villager( _ownerVillage.Game, this, "default");
                 _familyMembers.Add(kid);
                 if (kid.Gender == Genders.FEMALE)
                 {
@@ -224,7 +227,7 @@ namespace Game
         //---------------------------------------------------------------------------------------------------------------------------------
         #endregion
 
-        public void CloseStep()
+        override internal void CloseStep() 
         {
 
             if (_mother.IsDead()) { _mother = null; }

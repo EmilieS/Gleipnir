@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Game
 {
-    public class Village
+    public class Village : GameItem
     {
         List<Family> _family;
         List<Jobs> _jobs;
@@ -15,10 +16,17 @@ namespace Game
         double _villageHappiness;
         int _offeringsPoints;
 
-        public Village(Game thisGame)
+        readonly string _name;
+        FamilyInVillageList _familiesList;
+        public FamilyInVillageList FamiliesList { get { return _familiesList; } }
+
+        internal Village(Game thisGame, string name)
+            : base(thisGame)
         {
+            Debug.Assert(!String.IsNullOrWhiteSpace(name));
+            _name = name;
             _familiesList=new FamilyInVillageList(this);
-            _thisGame = thisGame;
+
             
             //TODO: Jobs List
             /*foreach (Jobs job in _jobs)
@@ -40,7 +48,8 @@ namespace Game
              */
              
         }
-        public Village(List<Family> families, Game thisGame)
+        public Village(List<Family> families, Game thisGame)//a éliminer.
+            : base(thisGame)
         {
             _familiesList = new FamilyInVillageList(this);
             for (int i=0; i<families.Count; i++)
@@ -51,8 +60,7 @@ namespace Game
 
         Game _thisGame;
         public Game ThisGame { get { return _thisGame; } }
-        FamilyInVillageList _familiesList;
-        public FamilyInVillageList FamiliesList { get { return _familiesList; } }
+
 
         public void AddFamily(Family family)
         {
@@ -62,6 +70,14 @@ namespace Game
         {
             _familiesList.Remove(family);
         }
+
+        public Family CreateFamily(Villager mother, Villager father)
+        {
+            var newFamily= new Family(_thisGame, mother, father);
+            FamiliesList.Add(newFamily);
+            return newFamily;
+        }
+        //TODO : CreateFamilyFromScratch
 
         /// <summary>
         /// Gets the total gold for the village.
@@ -155,6 +171,11 @@ namespace Game
                     fam.takeFromGoldStash(playerChoice);
                 }
             }
+        }
+        override internal void CloseStep()
+        {
+
+            throw new NotImplementedException();
         }
     }
 }
