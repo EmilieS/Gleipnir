@@ -9,7 +9,7 @@ namespace Game
 {
     public class Village : GameItem
     {
-        List<Family> _family;
+
         List<Jobs> _jobs;
         double _familiesGold;
         double _villageFaith;
@@ -27,7 +27,6 @@ namespace Game
             _name = name;
             _familiesList=new FamilyInVillageList(this);
 
-            
             //TODO: Jobs List
             /*foreach (Jobs job in _jobs)
             {
@@ -78,6 +77,13 @@ namespace Game
             return newFamily;
         }
         //TODO : CreateFamilyFromScratch
+        public Family CreateFamilyFromScratch()
+        {
+            Villager VillagerAH = new Villager(this, );
+            VillagerAH.Gender = Genders.MALE;
+            Villager VillagerAF = new Villager(this);
+            VillagerAF.Gender = Genders.FEMALE;
+        }
 
         /// <summary>
         /// Gets the total gold for the village.
@@ -92,7 +98,7 @@ namespace Game
         public void CalculateVillageGold()
         {
             double result = 0;
-            foreach (Family fam in _family)
+            foreach (Family fam in _familiesList)
             {
                 result += fam.GoldStash;
             }
@@ -115,7 +121,7 @@ namespace Game
         public void CalculateAverageVillageFaith()
         {
             double result = 0;
-            foreach (Family fam in _family)
+            foreach (Family fam in _familiesList)
             {
                 result += fam.FaithAverage();
             }
@@ -123,7 +129,7 @@ namespace Game
             if (result < 0 && result > 100)
                 throw new IndexOutOfRangeException();
             else
-                _villageFaith = result / _family.Count;
+                _villageFaith = result / _familiesList.Count;
         }
 
         /// <summary>
@@ -138,11 +144,11 @@ namespace Game
         public double CalculateAverageVillageHappiness()
         {
             double result = 0;
-            foreach (Family fam in _family)
+            foreach (Family fam in _familiesList)
             {
                 result += fam.HappinessAverage();
             }
-            return result = result / _family.Count;
+            return result = result / _familiesList.Count;
         }
 
         /// <summary>
@@ -166,16 +172,28 @@ namespace Game
 
             if (_offeringsPoints >= 1 && _offeringsPoints <= 100)
             {
-                foreach (Family fam in _family)
+                foreach (Family fam in _familiesList  )
                 {
                     fam.takeFromGoldStash(playerChoice);
                 }
             }
         }
+        internal override void OnDestroy()
+        {
+            Debug.Assert(_familiesList.Count == 0, "there is still a family in this village!");
+        }
         override internal void CloseStep()
         {
-
-            throw new NotImplementedException();
+            //TODO :  put current values in value history.
+            foreach(Family family in _familiesList)
+            {
+                if (family.FamilyMembers.Count == 0)
+                {
+                    _familiesList.Remove(family);
+                }
+            }  
+            //jobs
+            //TODO : events!
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,13 +65,13 @@ namespace Game
 
 
         Village _ownerVillage;
-        double _goldStash;
+        HistorizedValue<double> _goldStash;
         Villager _mother;
         Villager _father;
         FamilyMemberList _familyMembers; 
  
 
-        public double GoldStash { get { return _goldStash; } }
+        public double GoldStash { get { return _goldStash.Current; } }
         public Villager Mother { get { return _mother; } }
         public Villager Father { get { return _father; } }
         public IFamilyMemberList FamilyMembers { get { return _familyMembers; } }
@@ -208,14 +209,14 @@ namespace Game
         }
         public void IsPoorOrRich_HappinessImpact() //public for tests
         {
-            if (_goldStash / FamilyMembers.Count < (OwnerVillage.ThisGame.TotalGold / OwnerVillage.ThisGame.TotalPop) / 2)
+            if (_goldStash.Historic.Last / FamilyMembers.Count < (OwnerVillage.ThisGame.TotalGold / OwnerVillage.ThisGame.TotalPop) / 2)
             {
                 for (int i=0; i<FamilyMembers.Count; i++)
                 {
                     FamilyMembers[i].AddOrRemoveHappiness(-0.1);
                 }
             }
-            else if (_goldStash / FamilyMembers.Count > (OwnerVillage.ThisGame.TotalGold / OwnerVillage.ThisGame.TotalPop) * 4)
+            else if (_goldStash.Historic.Last / FamilyMembers.Count > (OwnerVillage.ThisGame.TotalGold / OwnerVillage.ThisGame.TotalPop) * 4)
             {
                 for (int i = 0; i < FamilyMembers.Count; i++)
                 {
@@ -226,10 +227,22 @@ namespace Game
         }
         //---------------------------------------------------------------------------------------------------------------------------------
         #endregion
+        internal override void OnDestroy()
+        {
+            Debug.Assert(_familyMembers.Count==0, "there is still someone in this family!");
 
+            _mother = null;
+            _father = null;
+            _ownerVillage = null;
+
+        }
         override internal void CloseStep() 
         {
 
+
+            //TODO :  put current values in value history.
+            _goldStash.Conclude();
+            //TODO : check everything it is linked to.
             if (_mother.IsDead()) { _mother = null; }
             if (_father.IsDead()) { _father = null; }
 
@@ -238,7 +251,8 @@ namespace Game
             {
                 if (_familyMembers[i].IsDead()) { _familyMembers.Remove(_familyMembers[i]); }
             }
-            //TODO :  put current values in value history.
+
+            //TODO : events!
         }
     }
 }

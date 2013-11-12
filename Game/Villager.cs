@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Game
 {
@@ -330,20 +331,34 @@ namespace Game
         }
         #endregion
 
+        override protected void OnDestroy()
+        {
+            Debug.Assert(IsDead(), "the villager is still alive!");
+            _fiance = null;
+            _parentFamily = null;
+            //_job = null;
+        }
 
-        override internal void CloseStep()
+        override internal void CloseStep() //a revoir le contenu exact
         {
 
-            if (_fiance != null)
-            {
-             if( _fiance.IsDead())
-             {
-                   _fiance = null;
-                    if (_statusInFamily == Status.ENGAGED) { _statusInFamily = Status.SINGLE; }
-             }
-            }
+            _happiness.Conclude();
+            _faith.Conclude();
+            _health.Conclude();
 
             //TODO :  put current values in value history.
+
+                if (_fiance != null)//par rapp à ca...
+                {
+                    if (_fiance.IsDead())
+                    {
+                        _fiance = null;
+                        if (_statusInFamily == Status.ENGAGED) { _statusInFamily = Status.SINGLE; }
+                    }
+                }
+                //TODO : events!
+
+            
         }
     }
 
