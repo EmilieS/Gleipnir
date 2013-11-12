@@ -35,12 +35,13 @@ namespace Game
             _lifeExpectancy = 85;
             _fiance = null;
         }
-        public Villager(Game g)//à eliminer.
+        public Villager(Game g, Genders gender)
             : base(g)
         {
             _faith.Current = 100;
             _happiness.Current = 80;
             _lifeExpectancy = 85;
+            _gender = gender;
             _statusInFamily = Status.SINGLE;
         }
         
@@ -331,7 +332,7 @@ namespace Game
         }
         #endregion
 
-        override protected void OnDestroy()
+        override internal void OnDestroy()
         {
             Debug.Assert(IsDead(), "the villager is still alive!");
             _fiance = null;

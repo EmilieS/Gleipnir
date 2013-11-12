@@ -30,7 +30,7 @@ namespace Game
             _game = null;
         }
 
-        protected abstract void OnDestroy();
+        internal abstract void OnDestroy();
 
         internal abstract void CloseStep();
     }

@@ -11,7 +11,7 @@ namespace Game
     public class Family : GameItem
     {
         //TODO initial constructor.
-        internal Family(Game game, Villager mother, Villager father)
+        internal Family(Game game, Villager mother, Villager father, string name)
             : base (game)
         {
             if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE)
@@ -24,12 +24,13 @@ namespace Game
                 {
                     throw new InvalidOperationException("same family!");
                 }
-                _goldStash = mother.ParentFamily.takeFromGoldStash(mother.ParentFamily.GoldStash / 10); //10%
-                _goldStash += father.ParentFamily.takeFromGoldStash(father.ParentFamily.GoldStash / 10); //10%
+                _goldStash.Current = mother.ParentFamily.takeFromGoldStash(mother.ParentFamily.GoldStash / 10); //10%
+                _goldStash.Current += father.ParentFamily.takeFromGoldStash(father.ParentFamily.GoldStash / 10); //10%
                 removeFromFamily(mother, mother.ParentFamily);
                 removeFromFamily(father, father.ParentFamily);
             }
-            else { _goldStash = 15; }
+            else { _goldStash.Current = 15; }
+            _name = name;
             _mother = mother;
             _father = father;
             _mother.StatusInFamily = Status.MARRIED;
@@ -68,9 +69,10 @@ namespace Game
         HistorizedValue<double> _goldStash;
         Villager _mother;
         Villager _father;
-        FamilyMemberList _familyMembers; 
- 
+        FamilyMemberList _familyMembers;
+        readonly string _name;
 
+        public string Name { get { return _name; } }
         public double GoldStash { get { return _goldStash.Current; } }
         public Villager Mother { get { return _mother; } }
         public Villager Father { get { return _father; } }
@@ -137,13 +139,13 @@ namespace Game
             {
                 throw new ArgumentOutOfRangeException();
             }
-            if (amount<=_goldStash)
+            if (amount<=_goldStash.Current)
             {
-                _goldStash -= amount;
+                _goldStash.Current -= amount;
                 return amount;
             }
-            double goldLeft=_goldStash;
-            _goldStash=0;
+            double goldLeft=_goldStash.Current;
+            _goldStash.Current=0;
             return goldLeft;
         }
 
@@ -155,7 +157,7 @@ namespace Game
             {
                 throw new ArgumentOutOfRangeException();
             }
-            _goldStash += amount;
+            _goldStash.Current += amount;
         }
         public double FaithAverage()
         {

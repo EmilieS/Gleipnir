@@ -12,35 +12,15 @@ namespace Game
         {
             _items = new List<GameItem>();
             //TODO intialisation partie
-            Villager VillagerAH = new Villager(this);
-            VillagerAH.Gender = Genders.MALE;
-            Villager VillagerAF = new Villager(this);
-            VillagerAF.Gender = Genders.FEMALE;
-            Villager VillagerBH = new Villager(this);
-            VillagerBH.Gender = Genders.MALE;
-            Villager VillagerBF = new Villager(this);
-            VillagerBF.Gender = Genders.FEMALE;
-            Villager VillagerCH = new Villager(this);
-            VillagerCH.Gender = Genders.MALE;
-            Villager VillagerCF = new Villager(this);
-            VillagerCF.Gender = Genders.FEMALE;
-            Villager VillagerDH = new Villager(this);
-            VillagerDH.Gender = Genders.MALE;
-            Villager VillagerDF = new Villager(this);
-            VillagerDF.Gender = Genders.FEMALE;
-            Villager VillagerEH = new Villager(this);
-            VillagerEH.Gender = Genders.MALE;
-            Villager VillagerEF = new Villager(this);
-            VillagerEF.Gender = Genders.FEMALE;
 
-            _villages = new List<Village>();
+             _villages = new List<Village>(); 
              CreateVillage("default");
 
-             Family FamilyA = new Family(VillagerAF, VillagerAH, _villages[0]);
-             Family FamilyB = new Family(VillagerBF, VillagerBH, _villages[0]);
-             Family FamilyC = new Family(VillagerCF, VillagerCH, _villages[0]);
-             Family FamilyD = new Family(VillagerDF, VillagerDH, _villages[0]);
-             Family FamilyE = new Family(VillagerEF, VillagerEH, _villages[0]);
+             Family FamilyA = _villages[0].CreateFamilyFromScratch();
+             Family FamilyB = _villages[0].CreateFamilyFromScratch();
+             Family FamilyC = _villages[0].CreateFamilyFromScratch();
+             Family FamilyD = _villages[0].CreateFamilyFromScratch();
+             Family FamilyE = _villages[0].CreateFamilyFromScratch();
 
 
 
@@ -52,11 +32,11 @@ namespace Game
         }
 
         readonly List<GameItem> _items;
-        readonly List<Village> _villages;
+        public readonly List<Village> _villages; //a revoir!
         public List<Villager> _singleMen; 
-        public double TotalGold {get; set;} //changera //warning, static!
-        public int TotalPop {get; set;}  //changera //warning, static!
-        public int Offerings { get; set; } //changera //warning, static!
+        public double TotalGold {get; set;} //will change
+        public int TotalPop {get; set;}  //will change
+        public int Offerings { get; set; } //will change
 
         internal void GameItemCreated(GameItem item)
         {

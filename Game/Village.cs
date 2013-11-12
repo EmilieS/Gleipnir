@@ -72,17 +72,18 @@ namespace Game
 
         public Family CreateFamily(Villager mother, Villager father)
         {
-            var newFamily= new Family(_thisGame, mother, father);
+            var newFamily= new Family(_thisGame, mother, father, "default");
             FamiliesList.Add(newFamily);
             return newFamily;
         }
         //TODO : CreateFamilyFromScratch
         public Family CreateFamilyFromScratch()
         {
-            Villager VillagerAH = new Villager(this, );
-            VillagerAH.Gender = Genders.MALE;
-            Villager VillagerAF = new Villager(this);
-            VillagerAF.Gender = Genders.FEMALE;
+            Villager VillagerAM = new Villager(_thisGame, Genders.MALE);
+            Villager VillagerAF = new Villager(_thisGame, Genders.FEMALE);
+            var newFamily = new Family(_thisGame, VillagerAF, VillagerAM, "default");
+            FamiliesList.Add(newFamily);
+            return newFamily;
         }
 
         /// <summary>

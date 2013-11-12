@@ -15,8 +15,8 @@ namespace Tests
             [Test]
             public void dummy()
             {
-                Villager villager = new Villager();
-                Assert.That(villager.Gender == Genders.MALE);
+                
+                Assert.That(1+1==2);
 
             }
 
@@ -24,6 +24,7 @@ namespace Tests
             public void Death()
             {
                 var MyGame = new Game.Game();
+                //Game._villages.
                 Villager mother = new Villager();
                 Villager father = new Villager();
                 mother.Gender = Genders.FEMALE;
