@@ -23,7 +23,7 @@ namespace GamePages
             _isStarted = false;
         }
 
-        public  void new_game(object sender, EventArgs e)
+        public void new_game(object sender, EventArgs e)
         {
             this.Visible = false;
             IsStarted = true;
@@ -40,7 +40,7 @@ namespace GamePages
             set { _isStarted = value; }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void Exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }

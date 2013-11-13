@@ -35,7 +35,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "InformationBox";
-            this.Size = new System.Drawing.Size(225, 236);
+            this.Size = new System.Drawing.Size(269, 258);
             this.ResumeLayout(false);
 
         }

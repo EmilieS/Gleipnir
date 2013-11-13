@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InformationsUC));
             this.changeGoldOfferings = new System.Windows.Forms.Button();
             this.offeringsPoints = new System.Windows.Forms.Label();
             this.happinessVillage = new System.Windows.Forms.Label();
@@ -41,18 +42,20 @@
             // 
             // changeGoldOfferings
             // 
-            this.changeGoldOfferings.Location = new System.Drawing.Point(658, -1);
+            this.changeGoldOfferings.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("changeGoldOfferings.BackgroundImage")));
+            this.changeGoldOfferings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.changeGoldOfferings.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.changeGoldOfferings.Location = new System.Drawing.Point(764, 2);
             this.changeGoldOfferings.Name = "changeGoldOfferings";
             this.changeGoldOfferings.Size = new System.Drawing.Size(94, 23);
             this.changeGoldOfferings.TabIndex = 20;
             this.changeGoldOfferings.Text = "Echange Or/PO";
             this.changeGoldOfferings.UseVisualStyleBackColor = true;
-            this.changeGoldOfferings.Click += new System.EventHandler(this.changeGoldOfferings_Click);
             // 
             // offeringsPoints
             // 
             this.offeringsPoints.AutoSize = true;
-            this.offeringsPoints.Location = new System.Drawing.Point(563, 0);
+            this.offeringsPoints.Location = new System.Drawing.Point(567, 8);
             this.offeringsPoints.Name = "offeringsPoints";
             this.offeringsPoints.Size = new System.Drawing.Size(88, 13);
             this.offeringsPoints.TabIndex = 19;
@@ -61,7 +64,7 @@
             // happinessVillage
             // 
             this.happinessVillage.AutoSize = true;
-            this.happinessVillage.Location = new System.Drawing.Point(473, 0);
+            this.happinessVillage.Location = new System.Drawing.Point(500, 8);
             this.happinessVillage.Name = "happinessVillage";
             this.happinessVillage.Size = new System.Drawing.Size(47, 13);
             this.happinessVillage.TabIndex = 18;
@@ -70,7 +73,7 @@
             // faithVillage
             // 
             this.faithVillage.AutoSize = true;
-            this.faithVillage.Location = new System.Drawing.Point(407, 0);
+            this.faithVillage.Location = new System.Drawing.Point(454, 8);
             this.faithVillage.Name = "faithVillage";
             this.faithVillage.Size = new System.Drawing.Size(21, 13);
             this.faithVillage.TabIndex = 17;
@@ -79,7 +82,7 @@
             // population
             // 
             this.population.AutoSize = true;
-            this.population.Location = new System.Drawing.Point(308, 0);
+            this.population.Location = new System.Drawing.Point(371, 8);
             this.population.Name = "population";
             this.population.Size = new System.Drawing.Size(57, 13);
             this.population.TabIndex = 16;
@@ -88,7 +91,7 @@
             // goldVillage
             // 
             this.goldVillage.AutoSize = true;
-            this.goldVillage.Location = new System.Drawing.Point(248, 0);
+            this.goldVillage.Location = new System.Drawing.Point(309, 7);
             this.goldVillage.Name = "goldVillage";
             this.goldVillage.Size = new System.Drawing.Size(18, 13);
             this.goldVillage.TabIndex = 15;
@@ -96,18 +99,22 @@
             // 
             // menuButton
             // 
-            this.menuButton.Location = new System.Drawing.Point(758, 0);
+            this.menuButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("menuButton.BackgroundImage")));
+            this.menuButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.menuButton.Location = new System.Drawing.Point(864, 2);
             this.menuButton.Name = "menuButton";
             this.menuButton.Size = new System.Drawing.Size(103, 22);
             this.menuButton.TabIndex = 14;
             this.menuButton.Text = "Menu";
             this.menuButton.UseVisualStyleBackColor = true;
+            this.menuButton.Click += new System.EventHandler(this.menuButton_Click);
             // 
             // Village
             // 
             this.Village.AutoSize = true;
             this.Village.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.Village.Location = new System.Drawing.Point(56, 0);
+            this.Village.Location = new System.Drawing.Point(3, 7);
             this.Village.Name = "Village";
             this.Village.Size = new System.Drawing.Size(44, 13);
             this.Village.TabIndex = 13;
@@ -118,7 +125,7 @@
             // 
             this.villageName.AutoSize = true;
             this.villageName.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.villageName.Location = new System.Drawing.Point(97, 0);
+            this.villageName.Location = new System.Drawing.Point(44, 7);
             this.villageName.Name = "villageName";
             this.villageName.Size = new System.Drawing.Size(42, 13);
             this.villageName.TabIndex = 12;
@@ -139,7 +146,7 @@
             this.Controls.Add(this.Village);
             this.Controls.Add(this.villageName);
             this.Name = "InformationsUC";
-            this.Size = new System.Drawing.Size(864, 27);
+            this.Size = new System.Drawing.Size(970, 29);
             this.ResumeLayout(false);
             this.PerformLayout();
 

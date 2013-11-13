@@ -12,14 +12,18 @@ namespace GamePages
 {
     public partial class InformationsUC : UserControl
     {
+        InGameMenu Menu;
         public InformationsUC()
         {
+            Menu = new InGameMenu();
             InitializeComponent();
         }
 
-        private void changeGoldOfferings_Click(object sender, EventArgs e)
-        {
 
+        private void menuButton_Click(object sender, EventArgs e)
+        {
+            this.Controls.Add(Menu);
+            Menu.Show();
         }
     }
 }

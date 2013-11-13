@@ -62,6 +62,12 @@
     <Compile Include="InformationsUC.Designer.cs">
       <DependentUpon>InformationsUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="InGameMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InGameMenu.Designer.cs">
+      <DependentUpon>InGameMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabIndex.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InformationsUC.resx">
       <DependentUpon>InformationsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InGameMenu.resx">
+      <DependentUpon>InGameMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabIndex.resx">
       <DependentUpon>TabIndex.cs</DependentUpon>
@@ -136,6 +145,12 @@
       <Project>{014adb5a-45d5-48ca-a386-cfbb01a556ef}</Project>
       <Name>Updates</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_homepage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_homepage1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
