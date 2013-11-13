@@ -5,40 +5,49 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Game
 {
-    public class Villager : INotifyPropertyChanged
+    public class Villager : GameItem
     {
-        internal Villager(Family parentFamily)    //TODO: autre constructeur pour le début...
+        internal Villager(Game g, Family parentFamily, string name)    //TODO: autre constructeur pour le début...
+            : base(g)
         {
+            _faith = new HistorizedValue<double, Villager>(this, "_faith", 20);
+            _happiness = new HistorizedValue<double, Villager>(this, "_happiness", 20);
+            _health = new HistorizedValue<Healths, Villager>(this, "_health", 20);
             _statusInFamily = Status.SINGLE;
 
             Random rand=new Random();//to be moved elsewhere.
 
             switch (rand.Next(2))
             {
-                case 0: _gender = Genders.MALE; _job = parentFamily.Father.Job; Game._singleMen.Add(this); break; //changera    
+                case 0: _gender = Genders.MALE; _job = parentFamily.Father.Job; parentFamily.Game._singleMen.Add(this); break; //changera    
                 case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; break; 
             }
             if (rand.Next(101) < 2)
-                _faith = 13;
+                _faith.Current = 13;
             else
-                _faith = parentFamily.FaithAverage();
+                _faith.Current = parentFamily.FaithAverage();
 
-            _happiness = parentFamily.HapinessAverage();            
-            _job = Jobs.FARMER;
-            _health = Healths.NONE;
+            _happiness.Current = parentFamily.HappinessAverage();            
+            //_job = Jobs.FARMER;
+            _health.Current = Healths.NONE;
             _age = 0;
             _lifeExpectancy = 85;
             _fiance = null;
-            _name = "Afaire";
         }
-        public Villager()
+        public Villager(Game g, Genders gender)
+            : base(g)
         {
-            _faith = 100;
-            _happiness = 80;
+            _faith = new HistorizedValue<double, Villager>(this, "_faith", 20);
+            _happiness = new HistorizedValue<double, Villager>(this, "_happiness", 20);
+            _health = new HistorizedValue<Healths, Villager>(this, "_health", 20);
+            _faith.Current = 100;
+            _happiness.Current = 80;
             _lifeExpectancy = 85;
+            _gender = gender;
             _statusInFamily = Status.SINGLE;
         }
         
@@ -49,18 +58,19 @@ namespace Game
         Jobs _job;
         double _lifeExpectancy;
         float _age;
-
+        double _goldInWallet;
         Status _statusInFamily; //!! 
         Villager _fiance; //!!!!!
 
-        Healths _health; //a death has numerous consequences. Once they are fullfilled, this object is dropped.
-        double _faith; //scale from 0 to 100.
-        double _happiness; //scale from 0 to 100.
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        public double Faith  { get { return _faith; } }
-        public double Happiness { get { return _happiness; } }
-        public Genders Gender { get { return _gender; } set { _gender = value; } } //obligé d'avoir le set pour les tests...
+        readonly HistorizedValue<double, Villager> _faith; //scale from 0 to 100.
+        readonly HistorizedValue<double, Villager> _happiness; //scale from 0 to 100.
+        readonly HistorizedValue<Healths, Villager> _health;
+
+
+        public double Faith  { get { return _faith.Current ; } } //hmm
+        public double Happiness { get { return _happiness.Current; } } //hmm
+        public Genders Gender { get { return _gender; }} 
         public Jobs Job { get { return _job; } }
         public double LifeExpectancy { get { return _lifeExpectancy; } }
 
@@ -79,7 +89,7 @@ namespace Game
             _job = NewJob;
         }
 
-        float _goldInWallet;
+       
 
         #region death & family issues.
         //=====================================================================================
@@ -91,13 +101,12 @@ namespace Game
         {
             if (_lifeExpectancy <= _age) 
             {
-                _health = Healths.DEAD;
-                if (_parentFamily != null)
+                _health.Current = Healths.DEAD;
+                if (ParentFamily != null)
                 {
-                    _parentFamily.FamilyMemberDied(this);
+                    ParentFamily.FamilyMemberDied(this);
                 }
-                PropertyChangedEventHandler h = PropertyChanged;
-                if (h != null) { h(this, new PropertyChangedEventArgs("died")); }                
+                    
             }
         }
         /// <summary>
@@ -108,6 +117,32 @@ namespace Game
         {
             _age += time;
         }
+        /// <summary>
+        /// If single, this will return an exeption!
+        /// </summary>
+        public Villager Fiance //public pour tests //cannot catch this with an Assert.Throws...
+        {
+            get
+            {
+                //if (_statusInFamily == Status.SINGLE) { throw new InvalidOperationException("villager is single"); } 
+                //if (_fiance == null) { throw new NullReferenceException(); }
+                return _fiance;
+            }
+            set
+            {
+                _fiance = value;
+                 if (value != null)
+                {
+                    if (StatusInFamily == Status.SINGLE) { StatusInFamily = Status.ENGAGED; }
+                }
+            }
+        }
+        internal void FianceDied()//à utiliser
+        {
+            _fiance = null;
+            if (StatusInFamily == Status.ENGAGED) { StatusInFamily = Status.SINGLE; }
+        }
+        //======================================================================================
         #endregion
         /// <summary>
         /// Gets or Sets the villager's name
@@ -124,34 +159,7 @@ namespace Game
             }
         }
 
-        /// <summary>
-        /// If single, this will return an exeption!
-        /// </summary>
-        public Villager Fiance //public pour tests //cannot catch this with an Assert.Throws...
-        {
-            get
-            {
-                //if (_statusInFamily == Status.SINGLE) { throw new InvalidOperationException("villager is single"); } 
-                //if (_fiance == null) { throw new NullReferenceException(); }
-                return _fiance;
-            }
-            set
-            {
-                _fiance = value;
-                if (value != null)
-                {
-                    if (StatusInFamily == Status.SINGLE) {StatusInFamily = Status.ENGAGED; }
-                    _fiance.PropertyChanged += (sender, e) =>
-                    {
-                        if (e.PropertyName == "died" && _fiance == sender)
-                        {
-                            _fiance = null;
-                            if (StatusInFamily == Status.ENGAGED) { _statusInFamily = Status.SINGLE; }
-                        }
-                    };
-                }
-            }
-        }
+       
         /// <summary>
         /// Define if the villager is single/engaged/married
         /// </summary>
@@ -161,7 +169,7 @@ namespace Game
         /// <summary>
         /// Get amount of gold the villager have
         /// </summary>
-        public float Wallet
+        public double Wallet
         {
             get { return _goldInWallet; }
         }
@@ -212,7 +220,7 @@ namespace Game
             }
         }
         /// <summary>
-        /// Destroy object when villager died
+        /// kill a villager.
         /// </summary>
         public void Kill()
         {
@@ -224,10 +232,10 @@ namespace Game
 
         private void Suicide()
         {
-            if (_happiness == 0 && (_health & Healths.DEPRESSED) == 0) //a revoir
+            if (_happiness.Current == 0 && (_health.Current & Healths.DEPRESSED) == 0) //a revoir
             {
                 SetLifeExpectancyLeft(0.4);
-                _health = _health | Healths.DEPRESSED;
+                _health.Current = _health.Current | Healths.DEPRESSED;
             }
         }
         //======================================================================================
@@ -240,47 +248,50 @@ namespace Game
         /// <param name="amount"></param>
         public void AddOrRemoveHappiness(double amount)
         {
-            if (_happiness + amount < 0)
+            if (_happiness.Current + amount < 0)
             {
-                _happiness = 0;
+                _happiness.Current = 0;
             }
-            else if (_happiness + amount > 100)
+            else if (_happiness.Current + amount > 100)
             {
-                _happiness = 100;
+                _happiness.Current = 100;
             }
             else
             {
-                _happiness += amount;
+                _happiness.Current += amount;
             }
         }
-
-        internal void IsSick()
+        internal bool IsDead()
         {
-            if ((_health & Healths.SICK) != 0) //need to see if we can attach this to an event in an intelligent manner.
+            return ((_health.Current & Healths.DEAD) != 0);                    
+        }
+        internal void Sickly()
+        {
+            if ((_health.Current & Healths.SICK) != 0) 
             {
                 AddOrRemoveHappiness(0.1);
                 ParentFamily.FamilyMemberIsSick();
             }
         }
 
+
         private void CallForHelp() //TODO : add timer /brainstorm how to use this.
         {
-            if (_happiness < 25 && (_health & Healths.UNHAPPY) == 0)
+            if (_happiness.Current < 25 && (_health.Current & Healths.UNHAPPY) == 0)
             {
-                _health = _health | Healths.UNHAPPY;
-                PropertyChangedEventHandler h = PropertyChanged;
-                if (h != null) { h(this, new PropertyChangedEventArgs("unhappy")); }
+                _health.Current = _health.Current | Healths.UNHAPPY;
+            
             }
         }
 
         private void CallForHelpEnded() //once the CallForHelp timer is ended.
         {
-            if (_happiness > 27)
+            if (_happiness.Current > 27)
             {
-                _health = _health & ~Healths.UNHAPPY;
+                _health.Current = _health.Current & ~Healths.UNHAPPY;
                 AddOrRemoveFaith(20);
             }
-            else if (_happiness < 25)
+            else if (_happiness.Current < 25)
             {
                 AddOrRemoveFaith(-20);
             }
@@ -293,17 +304,17 @@ namespace Game
         /// <param name="amount"></param>
         public void AddOrRemoveFaith(double amount)
         {
-            if (_faith + amount < 0)
+            if (_faith.Current + amount < 0)
             {
-                _faith = 0;
+                _faith.Current = 0;
             }
-            else if (_faith + amount > 100)
+            else if (_faith.Current + amount > 100)
             {
-                _faith = 100;
+                _faith.Current = 100;
             }
             else
             {
-                _faith += amount;
+                _faith.Current += amount;
             }
         }
         //-------------------------------------------------------------------------------------------------------------------------------
@@ -313,7 +324,7 @@ namespace Game
         /// Add money the villager earn
         /// </summary>
         /// <param name="goldAdd"></param>
-        public void AddGoldInWallet(float goldAdd)
+        public void AddGoldInWallet(double goldAdd)
         {
             _goldInWallet += goldAdd;
         }
@@ -322,15 +333,45 @@ namespace Game
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        internal int HandInOfferings(int amount)//see if we can do this in a more intelligent manner.
+        internal double HandInOfferings(double amount)//see if we can do this in a more intelligent manner.
         {
-            if ((_health & Healths.HERETIC) == 0)
+            if ((_health.Current & Healths.HERETIC) == 0)
             {
                 return ParentFamily.takeFromGoldStash(amount);
             }
             return 0;
         }
         #endregion
+
+        override internal void OnDestroy()
+        {
+            Debug.Assert(IsDead(), "the villager is still alive!");
+            _fiance = null;
+            _parentFamily = null;
+            //_job = null;
+        }
+
+        override internal void CloseStep() //a revoir le contenu exact
+        {
+
+            _happiness.Conclude();
+            _faith.Conclude();
+            _health.Conclude();
+
+            //TODO :  put current values in value history.
+
+                if (_fiance != null)//par rapp à ca... à enlever.
+                {
+                    if (_fiance.IsDead())
+                    {
+                        _fiance = null;
+                        if (_statusInFamily == Status.ENGAGED) { _statusInFamily = Status.SINGLE; }
+                    }
+                }
+                //TODO : events!
+
+            
+        }
     }
 
 }

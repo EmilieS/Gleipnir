@@ -50,11 +50,35 @@
     <Compile Include="GamePage.Designer.cs">
       <DependentUpon>GamePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="HomePage.cs">
+    <Compile Include="HomepageUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HomepageUC.Designer.cs">
+      <DependentUpon>HomepageUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InformationsUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InformationsUC.Designer.cs">
+      <DependentUpon>InformationsUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InGameMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InGameMenu.Designer.cs">
+      <DependentUpon>InGameMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabIndex.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabIndex.Designer.cs">
+      <DependentUpon>TabIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HomePage.Designer.cs">
-      <DependentUpon>HomePage.cs</DependentUpon>
+    <Compile Include="GeneralPage.Designer.cs">
+      <DependentUpon>GeneralPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,8 +91,20 @@
     <EmbeddedResource Include="GamePage.resx">
       <DependentUpon>GamePage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HomePage.resx">
-      <DependentUpon>HomePage.cs</DependentUpon>
+    <EmbeddedResource Include="HomepageUC.resx">
+      <DependentUpon>HomepageUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InformationsUC.resx">
+      <DependentUpon>InformationsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InGameMenu.resx">
+      <DependentUpon>InGameMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabIndex.resx">
+      <DependentUpon>TabIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeneralPage.resx">
+      <DependentUpon>GeneralPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -109,6 +145,12 @@
       <Project>{014adb5a-45d5-48ca-a386-cfbb01a556ef}</Project>
       <Name>Updates</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_homepage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_homepage1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -15,152 +15,177 @@ namespace Tests
             [Test]
             public void dummy()
             {
-                Villager villager = new Villager();
-                Assert.That(villager.Gender == Genders.MALE);
+                
+                Assert.That(1+1==2);
 
             }
 
             [Test]
             public void Death()
             {
-                Villager mother = new Villager();
-                Villager father = new Villager();
-                mother.Gender = Genders.FEMALE;
-                mother.Fiance = father;
-                father.Fiance = mother;
-                Family family = new Family(mother, father);
+                var MyGame = new Game.Game();
+                Family family = MyGame.Villages[0].CreateFamilyFromScratch();
 
-                mother.ParentFamily = family;
-                Assert.That(mother.Fiance.Fiance == mother);
+                Assert.That(family.Mother.Fiance.Fiance == family.Mother);
                 Assert.That(family.Mother.ParentFamily == family);
-                Assert.That(family.Mother == mother && family.Father== father);
-                Assert.That(mother.StatusInFamily == Status.MARRIED && mother.StatusInFamily == Status.MARRIED);
+                Assert.That(family.Mother == family.Mother && family.Father == family.Father);
+                Assert.That(family.Mother.StatusInFamily == Status.MARRIED && family.Mother.StatusInFamily == Status.MARRIED);
+                Assert.That(family.FamilyMembers.Count == 2);
 
-                mother.Kill();
-                mother.DieOrIsAlive();
+                Villager mother=family.Mother;
+                family.Mother.Kill();
+                family.Mother.DieOrIsAlive();
+                MyGame.CloseStep();
 
+
+                Assert.That(family.FamilyMembers.Count == 1);
                 Assert.That(family.Mother == null);
 
                 Assert.That(mother.Fiance.Fiance == null);
                 Assert.That(family.Father.Fiance == null);
-                Assert.That(father.StatusInFamily == Status.MARRIED);
+                Assert.That(family.Father.StatusInFamily == Status.MARRIED);
             }
 
 
-
-
+            
+            
             [Test]
             public void Fiance()
             {
-                Villager girl = new Villager();
-                girl.Gender = Genders.FEMALE;
-                Villager guy1 = new Villager();
-                Villager guy2 = new Villager();
-                guy1.Gender = Genders.MALE;
-                guy2.Gender = Genders.MALE;
+                var MyGame = new Game.Game();
+                Family family1 = MyGame.Villages[0].CreateFamilyFromScratch();
+                Family family2 = MyGame.Villages[0].CreateFamilyFromScratch();
 
-                Assert.That(girl.StatusInFamily == Status.SINGLE);
+                Villager girlf1;
+                do
+                {
+                girlf1=family1.newFamilyMember();
+                }while(girlf1.Gender!=Genders.FEMALE);
+                Villager guy1f2;
+                do
+                {
+                guy1f2=family1.newFamilyMember();
+                }while(guy1f2.Gender!=Genders.MALE);
 
-                girl.Fiance = guy1;
-                Assert.That(girl.StatusInFamily == Status.ENGAGED);
+                Villager guy2f2;
+                do
+                {
+                guy2f2=family1.newFamilyMember();
+                }while(guy2f2.Gender!=Genders.MALE);
 
-                girl.Fiance = guy2;
-                Assert.That(girl.StatusInFamily == Status.ENGAGED);
+                Assert.That(girlf1.StatusInFamily == Status.SINGLE);
 
-                guy1.Kill();
-                guy1.DieOrIsAlive();
-               /* Assert.That(girl.StatusInFamily == Status.ENGAGED);
-                Assert.That(girl.Fiance==guy2);
+                girlf1.Fiance = guy1f2;//hmmm accessibility?
+                Assert.That(girlf1.StatusInFamily == Status.ENGAGED);
 
-                guy2.Kill();
-                guy2.DieOrIsAlive();
-                Assert.That(girl.StatusInFamily == Status.SINGLE);
-                Assert.That(girl.Fiance == null);
+                girlf1.Fiance = guy2f2;
+                Assert.That(girlf1.StatusInFamily == Status.ENGAGED);
 
-                */
+                guy1f2.Kill();
+                guy1f2.DieOrIsAlive();
+                MyGame.CloseStep();
+
+                 Assert.That(girlf1.StatusInFamily == Status.ENGAGED);
+                 Assert.That(girlf1.Fiance==guy2f2);
+
+                 guy2f2.Kill();
+                 guy2f2.DieOrIsAlive();
+                 MyGame.CloseStep();
+
+                 Assert.That(girlf1.StatusInFamily == Status.SINGLE);
+                 Assert.That(girlf1.Fiance == null);
+
+                 
             }
 
             [Test]
             public void NewFamily()
             {
                 var MyGame = new Game.Game();
-                Villager motherf1 = new Villager();
-                Villager fatherf1 = new Villager();
-                motherf1.Gender = Genders.FEMALE;
-                motherf1.Fiance = fatherf1;
-                fatherf1.Fiance = motherf1;
-                Family family1 = new Family(motherf1, fatherf1);
-
+                Family family1 = MyGame.Villages[0].CreateFamilyFromScratch();
+                Family family2 = MyGame.Villages[0].CreateFamilyFromScratch();
+                //need a goldstash assert here.
+                family1.takeFromGoldStash(100);
                 family1.addTOGoldStash(100);
-
-                Villager girlf1=family1.newFamilyMember();
-                girlf1.Gender = Genders.FEMALE;
-
-                Villager motherf2 = new Villager();
-                Villager fatherf2 = new Villager();
-                motherf2.Gender = Genders.FEMALE;
-                motherf2.Fiance = fatherf2;
-                fatherf2.Fiance = motherf2;
-                Family family2 = new Family(motherf2, fatherf2);
-
+                family2.takeFromGoldStash(100);
                 family2.addTOGoldStash(100);
 
-                Villager boyf2 = family2.newFamilyMember();
-                boyf2.Gender = Genders.MALE;
+                Villager girlf1;
+                do
+                {
+                girlf1=family1.newFamilyMember();
+                }while(girlf1.Gender!=Genders.FEMALE);
 
+                Villager boyf2;
+                do
+                {
+                boyf2=family2.newFamilyMember();
+                }while(boyf2.Gender!=Genders.MALE);
+
+                
                 Assert.That(family2.FamilyMembers.Contains(boyf2));
 
-                Family family3 = new Family(girlf1, boyf2);
+                Family family3 = MyGame.Villages[0].CreateFamily(girlf1, boyf2);
                 Assert.That(family3.GoldStash == 20);
                 Assert.That(family1.GoldStash == 90);
                 Assert.That(family2.GoldStash == 90);
                 Assert.That(!family2.FamilyMembers.Contains(boyf2));
                 Assert.That(family3.FamilyMembers.Contains(boyf2));
                
+                //maybe the single list needs to be cleaned.
+                //TODO : check that when a guy dies, he is out of the single list.
+                Villager girl2f1;
+                do
+                {
+                girl2f1=family1.newFamilyMember();
+                }while(girl2f1.Gender!=Genders.FEMALE);
+
+                Villager girl2f2;
+                do
+                {
+                girl2f2=family2.newFamilyMember();
+                }while(girl2f2.Gender!=Genders.FEMALE);
+
+                Assert.Throws<InvalidOperationException>(() => MyGame.Villages[0].CreateFamily(girl2f1, girl2f2), "gender issue!");
 
 
+                Villager boy2f1;
+                do
+                {
+                boy2f1=family1.newFamilyMember();
+                }while(boy2f1.Gender!=Genders.MALE);
+                Assert.Throws<InvalidOperationException>(() =>  MyGame.Villages[0].CreateFamily(girl2f1, boy2f1), "same family!");
 
+                family1.Mother.Kill();
+                family1.Mother.DieOrIsAlive();
+                MyGame.CloseStep();
 
-                Villager girl2f1 = family1.newFamilyMember();
-                girl2f1.Gender = Genders.FEMALE;
-
-                Villager girl2f2 = family1.newFamilyMember();
-                girl2f2.Gender = Genders.FEMALE;
-
-
-                Assert.Throws<InvalidOperationException>(() => new Family(girl2f1, girl2f2), "gender issue!");
-
-                Villager boy2f1 = family1.newFamilyMember();
-                boy2f1.Gender = Genders.MALE;
-                Assert.Throws<InvalidOperationException>(() => new Family(girl2f1, boy2f1), "same family!");
-
-                motherf1.Kill();
-                motherf1.DieOrIsAlive();
                 Assert.Throws<InvalidOperationException>(() => family1.newFamilyMember(), "missing parent");
 
 
-                //TODO job check.
 
             }
-
+/*
             [Test]
             public void EngagementTest()
             {
-                /*var MyGame=*/
-                new Game.Game();
+                var MyGame= new Game.Game();
+                var village = new Village(MyGame);
                 Villager motherf1 = new Villager();
                 Villager fatherf1 = new Villager();
                 motherf1.Gender = Genders.FEMALE;
                 motherf1.Fiance = fatherf1;
                 fatherf1.Fiance = motherf1;
-                Family family1 = new Family(motherf1, fatherf1);
+                Family family1 = new Family(motherf1, fatherf1, village);
 
                 Villager motherf2 = new Villager();
                 Villager fatherf2 = new Villager();
                 motherf2.Gender = Genders.FEMALE;
                 motherf2.Fiance = fatherf2;
                 fatherf2.Fiance = motherf2;
-                Family family2 = new Family(motherf2, fatherf2);
+                Family family2 = new Family(motherf2, fatherf2, village);
+                Assert.That(family1.OwnerVillage != null, "family1.OwnerVillage is Null");
+                Assert.That(family1.OwnerVillage.ThisGame != null, "family1.OwnerVillage.ThisGame is Null");
 
                 Villager kidf1;
                 do
@@ -177,7 +202,7 @@ namespace Tests
                 Assert.That(kidf1.StatusInFamily == Status.ENGAGED);
                 Assert.That(kidf2.StatusInFamily == Status.ENGAGED);
 
-            }
+            }*/
             
     }
 }
