@@ -40,7 +40,7 @@ namespace Tests
             Assert.That(village.FamiliesList.Count, Is.EqualTo(1));
 
             // Try add the same family
-            village.AddFamily(family1);
+            Assert.Throws<InvalidOperationException>(() => village.AddFamily(family1), "Add Family Issue!");
             Assert.That(village.FamiliesList.Count, Is.EqualTo(1));
 
             // Add more families
@@ -52,7 +52,7 @@ namespace Tests
             Assert.That(village.FamiliesList.Count, Is.EqualTo(1));
 
             // Try remove the family ever removed
-            village.RemoveFamily(family1);
+            Assert.Throws<InvalidOperationException>(() => village.RemoveFamily(family1), "Remove family Issue!");
             Assert.That(village.FamiliesList.Count, Is.EqualTo(1));
         }
 
@@ -70,6 +70,7 @@ namespace Tests
             f1.Gender = Genders.MALE;
             Family family1 = new Family(m1, f1);
             family1.addTOGoldStash(100);
+            village.AddFamily(family1);
 
             Villager m2 = new Villager();
             m2.Gender = Genders.FEMALE;
@@ -77,8 +78,10 @@ namespace Tests
             f2.Gender = Genders.MALE;
             Family family2 = new Family(m2, f2);
             family2.addTOGoldStash(100);
+            village.AddFamily(family2);
             #endregion
 
+            village.CalculateVillageGold();
             Assert.That(village.Gold, Is.EqualTo(200));
             // Less gold
             family1.takeFromGoldStash(50);
@@ -93,9 +96,10 @@ namespace Tests
             family2.takeFromGoldStash(100);
             village.CalculateVillageGold();
             Assert.That(village.Gold, Is.EqualTo(0));
-            // Negative gold -> Exception
+            // Negative gold -> 0
             family1.takeFromGoldStash(1);
-            Assert.Throws<IndexOutOfRangeException>(() => village.CalculateVillageGold(), "Gold issue!");
+            village.CalculateVillageGold();
+            Assert.That(village.Gold, Is.EqualTo(0));
         }
 
         [Test]
@@ -112,6 +116,7 @@ namespace Tests
             f1.Gender = Genders.MALE;
             Family family1 = new Family(m1, f1);
             family1.addTOGoldStash(100);
+            village.AddFamily(family1);
 
             Villager m2 = new Villager();
             m2.Gender = Genders.FEMALE;
@@ -119,11 +124,13 @@ namespace Tests
             f2.Gender = Genders.MALE;
             Family family2 = new Family(this, m2, f2);
             family2.addTOGoldStash(100);
+            village.AddFamily(family2);
             #endregion
 
+            village.CalculateAverageVillageFaith();
             Assert.That(village.Faith, Is.EqualTo(100));
             // Less faith
-            m1.AddOrRemoveFaith(50); // family1 = 75% family2 = 100%
+            m1.AddOrRemoveFaith(-50); // family1 = 75% family2 = 100%
             village.CalculateAverageVillageFaith();
             Assert.That(village.Faith, Is.EqualTo(87.5));
             // More faith
@@ -131,10 +138,10 @@ namespace Tests
             village.CalculateAverageVillageFaith();
             Assert.That(village.Faith, Is.EqualTo(100));
             // No faith
-            m1.AddOrRemoveFaith(100);
-            m2.AddOrRemoveFaith(100);
-            f1.AddOrRemoveFaith(100);
-            f2.AddOrRemoveFaith(100);
+            m1.AddOrRemoveFaith(-100);
+            m2.AddOrRemoveFaith(-100);
+            f1.AddOrRemoveFaith(-100);
+            f2.AddOrRemoveFaith(-100);
             village.CalculateAverageVillageFaith();
             Assert.That(village.Faith, Is.EqualTo(0));
         }

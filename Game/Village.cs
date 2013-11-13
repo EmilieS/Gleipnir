@@ -9,7 +9,7 @@ namespace Game
 {
     public class Village : GameItem
     {
-
+        List<Family> _family;
         List<Jobs> _jobs;
         double _familiesGold;
         double _villageFaith;
@@ -20,6 +20,7 @@ namespace Game
         FamilyInVillageList _familiesList;
         public FamilyInVillageList FamiliesList { get { return _familiesList; } }
 
+        // public Village(List<Family> families)
         internal Village(Game thisGame, string name)
             : base(thisGame)
         {
@@ -27,6 +28,8 @@ namespace Game
             Debug.Assert(thisGame != null, "thisGame is null!");
             _name = name;
             _familiesList=new FamilyInVillageList(this);
+            /* _jobs = new List<Jobs>;
+            _family = families;
 
             //TODO: Jobs List
             /*foreach (Jobs job in _jobs)
@@ -58,14 +61,24 @@ namespace Game
             }
         }
 
-
+        /// <summary>
+        /// Add a family to the village
+        /// </summary>
+        /// <param name="family"></param>
         public void AddFamily(Family family)
         {
-            _familiesList.Add(family);
+            if (_family.Contains(family)) throw new InvalidOperationException();
+            else _family.Add(family);
         }
+        
+        /// <summary>
+        /// Remove a familyfrom the village
+        /// </summary>
+        /// <param name="family"></param>
         public void RemoveFamily(Family family)
         {
-            _familiesList.Remove(family);
+            if (_family.Contains(family)) _family.Remove(family);
+            else throw new InvalidOperationException();
         }
 
         public Family CreateFamily(Villager mother, Villager father)
@@ -92,6 +105,11 @@ namespace Game
         /// </summary>
         public double Gold { get { return _familiesGold; } }
 
+        /// <summary>
+        /// Gets all families in the village
+        /// </summary>
+        public List<Family> FamiliesList { get { return _family; } }
+        
         /// <summary>
         /// Addition of all gold of all families
         /// </summary>
@@ -126,11 +144,12 @@ namespace Game
             {
                 result += fam.FaithAverage();
             }
+            result = result / _familiesList.Count;
 
             if (result < 0 && result > 100)
                 throw new IndexOutOfRangeException();
             else
-                _villageFaith = result / _familiesList.Count;
+                _villageFaith = result;
         }
 
         /// <summary>
