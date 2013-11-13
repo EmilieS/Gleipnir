@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace Buildings.JobsBuildings
 {
-    class Farm
+    class ApothecaryOffice
     {
         BuildingsProperties prop = new BuildingsProperties();
-        
+
         public BuildingsProperties BuildingsProperties
         {
             get { return prop; }
         }
-
     }
 }

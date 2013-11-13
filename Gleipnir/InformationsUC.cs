@@ -12,6 +12,7 @@ namespace GamePages
 {
     public partial class InformationsUC : UserControl
     {
+        // TODO : Complete the Transitions, Create ingame menu, go back to a Main menu
         InGameMenu Menu;
         public InformationsUC()
         {
