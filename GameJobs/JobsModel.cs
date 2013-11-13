@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GameJobs
 {
-    public class JobsModel : INotifyPropertyChanged
+    public class JobsModel
     {
         protected List<Villager> _workers;
         protected Jobs _job;
@@ -67,7 +67,7 @@ namespace GameJobs
             _gold = ModifyGoldGeneration();
             foreach (Villager person in _workers)
             {
-                person.AddOrTakeGoldInWallet(_gold);
+                person.AddGoldInWallet(_gold);
             }
         }
 
@@ -90,7 +90,5 @@ namespace GameJobs
         /// </summary>
         /// <param name="person"></param>
         public virtual void AddHappiness() {}
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
