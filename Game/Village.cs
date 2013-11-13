@@ -58,9 +58,6 @@ namespace Game
             }
         }
 
-        Game _thisGame;
-        public Game ThisGame { get { return _thisGame; } }
-
 
         public void AddFamily(Family family)
         {
@@ -73,7 +70,7 @@ namespace Game
 
         public Family CreateFamily(Villager mother, Villager father)
         {
-            var newFamily= new Family(_thisGame, mother, father, "default");
+            var newFamily= new Family(Game, mother, father, "default");
             FamiliesList.Add(newFamily);
             return newFamily;
         }

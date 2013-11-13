@@ -23,7 +23,7 @@ namespace Game
 
             switch (rand.Next(2))
             {
-                case 0: _gender = Genders.MALE; _job = parentFamily.Father.Job; parentFamily.OwnerVillage.ThisGame._singleMen.Add(this); break; //changera    
+                case 0: _gender = Genders.MALE; _job = parentFamily.Father.Job; parentFamily.Game._singleMen.Add(this); break; //changera    
                 case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; break; 
             }
             if (rand.Next(101) < 2)

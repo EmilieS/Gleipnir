@@ -32,6 +32,7 @@ namespace Tests
                 Assert.That(family.Mother.StatusInFamily == Status.MARRIED && family.Mother.StatusInFamily == Status.MARRIED);
                 Assert.That(family.FamilyMembers.Count == 2);
 
+                Villager mother=family.Mother;
                 family.Mother.Kill();
                 family.Mother.DieOrIsAlive();
                 MyGame.CloseStep();
@@ -40,6 +41,7 @@ namespace Tests
                 Assert.That(family.FamilyMembers.Count == 1);
                 Assert.That(family.Mother == null);
 
+                Assert.That(mother.Fiance.Fiance == null);
                 Assert.That(family.Father.Fiance == null);
                 Assert.That(family.Father.StatusInFamily == Status.MARRIED);
             }

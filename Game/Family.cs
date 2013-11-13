@@ -50,11 +50,11 @@ namespace Game
         }
 
         public Family(Village village) //a eliminer
-            : base(village.ThisGame) 
+            : base(village.Game) 
         { _ownerVillage = village; }
 
         public Family(Villager mother, Villager father, Village village)//a eliminer
-            : base(village.ThisGame)
+            : base(village.Game)
         {
             _mother = mother;
             _father = father;
@@ -126,7 +126,7 @@ namespace Game
                 _familyMembers.Add(kid);
                 if (kid.Gender == Genders.FEMALE)
                 {
-                    Engage(kid, _ownerVillage.ThisGame._singleMen);
+                    Engage(kid, Game._singleMen);
                 }
 
                 return kid;           
@@ -217,14 +217,14 @@ namespace Game
         }
         public void IsPoorOrRich_HappinessImpact() //public for tests
         {
-            if (_goldStash.Historic.Last / FamilyMembers.Count < (OwnerVillage.ThisGame.TotalGold / OwnerVillage.ThisGame.TotalPop) / 2)
+            if (_goldStash.Historic.Last / FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
             {
                 for (int i=0; i<FamilyMembers.Count; i++)
                 {
                     FamilyMembers[i].AddOrRemoveHappiness(-0.1);
                 }
             }
-            else if (_goldStash.Historic.Last / FamilyMembers.Count > (OwnerVillage.ThisGame.TotalGold / OwnerVillage.ThisGame.TotalPop) * 4)
+            else if (_goldStash.Historic.Last / FamilyMembers.Count > (Game.TotalGold / Game.TotalPop) * 4)
             {
                 for (int i = 0; i < FamilyMembers.Count; i++)
                 {
