@@ -47,10 +47,12 @@
     <Compile Include="Hobbies\PartyRoom.cs" />
     <Compile Include="Hobbies\Tavern.cs" />
     <Compile Include="Hobbies\Theater.cs" />
+    <Compile Include="JobsBuildings\ApothecaryOffice.cs" />
     <Compile Include="JobsBuildings\Farm.cs" />
     <Compile Include="JobsBuildings\Forge.cs" />
     <Compile Include="JobsBuildings\Mill.cs" />
     <Compile Include="JobsBuildings\Restaurant.cs" />
+    <Compile Include="JobsBuildings\UnionOfCrafter.cs" />
     <Compile Include="Management\TablePlace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

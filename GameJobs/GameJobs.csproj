@@ -42,6 +42,7 @@
     <Compile Include="Blacksmith.cs" />
     <Compile Include="Cooker.cs" />
     <Compile Include="Apothecary.cs" />
+    <Compile Include="JobsModel.cs" />
     <Compile Include="Tailor.cs" />
     <Compile Include="Miller.cs" />
     <Compile Include="Militia.cs" />
