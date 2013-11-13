@@ -14,9 +14,9 @@ namespace Game
         internal Villager(Game g, Family parentFamily, string name)    //TODO: autre constructeur pour le début...
             : base(g)
         {
-            _faith = new HistorizedValue<double>(20);
-            _happiness = new HistorizedValue<double>(20);
-            _health = new HistorizedValue<Healths>(20);
+            _faith = new HistorizedValue<double, Villager>(this, "_faith", 20);
+            _happiness = new HistorizedValue<double, Villager>(this, "_happiness", 20);
+            _health = new HistorizedValue<Healths, Villager>(this, "_health", 20);
             _statusInFamily = Status.SINGLE;
 
             Random rand=new Random();//to be moved elsewhere.
@@ -41,9 +41,9 @@ namespace Game
         public Villager(Game g, Genders gender)
             : base(g)
         {
-            _faith = new HistorizedValue<double>(20);
-            _happiness = new HistorizedValue<double>(20);
-            _health = new HistorizedValue<Healths>(20);
+            _faith = new HistorizedValue<double, Villager>(this, "_faith", 20);
+            _happiness = new HistorizedValue<double, Villager>(this, "_happiness", 20);
+            _health = new HistorizedValue<Healths, Villager>(this, "_health", 20);
             _faith.Current = 100;
             _happiness.Current = 80;
             _lifeExpectancy = 85;
@@ -63,9 +63,9 @@ namespace Game
         Villager _fiance; //!!!!!
 
 
-        readonly HistorizedValue<double> _faith; //scale from 0 to 100.
-        readonly HistorizedValue<double> _happiness; //scale from 0 to 100.
-        readonly HistorizedValue<Healths> _health;
+        readonly HistorizedValue<double, Villager> _faith; //scale from 0 to 100.
+        readonly HistorizedValue<double, Villager> _happiness; //scale from 0 to 100.
+        readonly HistorizedValue<Healths, Villager> _health;
 
 
         public double Faith  { get { return _faith.Current ; } } //hmm
@@ -136,6 +136,11 @@ namespace Game
                     if (StatusInFamily == Status.SINGLE) { StatusInFamily = Status.ENGAGED; }
                 }
             }
+        }
+        internal void FianceDied()//à utiliser
+        {
+            _fiance = null;
+            if (StatusInFamily == Status.ENGAGED) { StatusInFamily = Status.SINGLE; }
         }
         //======================================================================================
         #endregion
@@ -355,7 +360,7 @@ namespace Game
 
             //TODO :  put current values in value history.
 
-                if (_fiance != null)//par rapp à ca...
+                if (_fiance != null)//par rapp à ca... à enlever.
                 {
                     if (_fiance.IsDead())
                     {

@@ -97,73 +97,75 @@ namespace Tests
 
                  
             }
-/*
+
             [Test]
             public void NewFamily()
             {
                 var MyGame = new Game.Game();
-                Villager motherf1 = new Villager();
-                Villager fatherf1 = new Villager();
-                motherf1.Gender = Genders.FEMALE;
-                motherf1.Fiance = fatherf1;
-                fatherf1.Fiance = motherf1;
-                Family family1 = new Family(motherf1, fatherf1);
-
+                Family family1 = MyGame.Villages[0].CreateFamilyFromScratch();
+                Family family2 = MyGame.Villages[0].CreateFamilyFromScratch();
+                //need a goldstash assert here.
+                family1.takeFromGoldStash(100);
                 family1.addTOGoldStash(100);
-
-                Villager girlf1=family1.newFamilyMember();
-                girlf1.Gender = Genders.FEMALE;
-
-                Villager motherf2 = new Villager();
-                Villager fatherf2 = new Villager();
-                motherf2.Gender = Genders.FEMALE;
-                motherf2.Fiance = fatherf2;
-                fatherf2.Fiance = motherf2;
-                Family family2 = new Family(motherf2, fatherf2);
-
+                family2.takeFromGoldStash(100);
                 family2.addTOGoldStash(100);
 
-                Villager boyf2 = family2.newFamilyMember();
-                boyf2.Gender = Genders.MALE;
+                Villager girlf1;
+                do
+                {
+                girlf1=family1.newFamilyMember();
+                }while(girlf1.Gender!=Genders.FEMALE);
 
+                Villager boyf2;
+                do
+                {
+                boyf2=family2.newFamilyMember();
+                }while(boyf2.Gender!=Genders.MALE);
+
+                
                 Assert.That(family2.FamilyMembers.Contains(boyf2));
 
-                Family family3 = new Family(girlf1, boyf2);
+                Family family3 = MyGame.Villages[0].CreateFamily(girlf1, boyf2);
                 Assert.That(family3.GoldStash == 20);
                 Assert.That(family1.GoldStash == 90);
                 Assert.That(family2.GoldStash == 90);
                 Assert.That(!family2.FamilyMembers.Contains(boyf2));
                 Assert.That(family3.FamilyMembers.Contains(boyf2));
                
+                //maybe the single list needs to be cleaned.
+                //TODO : check that when a guy dies, he is out of the single list.
+                Villager girl2f1;
+                do
+                {
+                girl2f1=family1.newFamilyMember();
+                }while(girl2f1.Gender!=Genders.FEMALE);
+
+                Villager girl2f2;
+                do
+                {
+                girl2f2=family2.newFamilyMember();
+                }while(girl2f2.Gender!=Genders.FEMALE);
+
+                Assert.Throws<InvalidOperationException>(() => MyGame.Villages[0].CreateFamily(girl2f1, girl2f2), "gender issue!");
 
 
+                Villager boy2f1;
+                do
+                {
+                boy2f1=family1.newFamilyMember();
+                }while(boy2f1.Gender!=Genders.MALE);
+                Assert.Throws<InvalidOperationException>(() =>  MyGame.Villages[0].CreateFamily(girl2f1, boy2f1), "same family!");
 
+                family1.Mother.Kill();
+                family1.Mother.DieOrIsAlive();
+                MyGame.CloseStep();
 
-                Villager girl2f1 = family1.newFamilyMember();
-                girl2f1.Gender = Genders.FEMALE;
-
-                Villager girl2f2 = family1.newFamilyMember();
-                girl2f2.Gender = Genders.FEMALE;
-
-
-                Assert.Throws<InvalidOperationException>(() => new Family(girl2f1, girl2f2), "gender issue!");
-
-                Villager boy2f1 = family1.newFamilyMember();
-                boy2f1.Gender = Genders.MALE;
-                Assert.Throws<InvalidOperationException>(() => new Family(girl2f1, boy2f1), "same family!");
-
-                motherf1.Kill();
-                motherf1.DieOrIsAlive();
-                fatherf1.CloseStep();
-                motherf1.CloseStep();
-                family1.CloseStep();
                 Assert.Throws<InvalidOperationException>(() => family1.newFamilyMember(), "missing parent");
 
 
-                //TODO job check.
 
             }
-
+/*
             [Test]
             public void EngagementTest()
             {
