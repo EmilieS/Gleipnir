@@ -95,6 +95,9 @@ namespace Game
 
 -faire liste de marriage
         */
-
+        internal void SingleManDestroyed(Villager dead)
+        {
+            _singleMen.Remove(dead);
+        }
     }
 }

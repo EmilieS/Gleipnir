@@ -41,7 +41,7 @@ namespace Tests
                 Assert.That(family.FamilyMembers.Count == 1);
                 Assert.That(family.Mother == null);
 
-                Assert.That(mother.Fiance.Fiance == null);
+                Assert.That(mother.Fiance == null);
                 Assert.That(family.Father.Fiance == null);
                 Assert.That(family.Father.StatusInFamily == Status.MARRIED);
             }
@@ -81,20 +81,21 @@ namespace Tests
                 girlf1.Fiance = guy2f2;
                 Assert.That(girlf1.StatusInFamily == Status.ENGAGED);
 
+
                 guy1f2.Kill();
                 guy1f2.DieOrIsAlive();
                 MyGame.CloseStep();
 
                  Assert.That(girlf1.StatusInFamily == Status.ENGAGED);
                  Assert.That(girlf1.Fiance==guy2f2);
-
+                
                  guy2f2.Kill();
                  guy2f2.DieOrIsAlive();
                  MyGame.CloseStep();
 
                  Assert.That(girlf1.StatusInFamily == Status.SINGLE);
                  Assert.That(girlf1.Fiance == null);
-
+                
                  
             }
 
