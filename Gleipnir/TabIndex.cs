@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GamePages
 {
-    public partial class villagerDetails : UserControl
+    public partial class TabIndex : UserControl
     {
-        public villagerDetails()
+        public TabIndex()
         {
             InitializeComponent();
         }

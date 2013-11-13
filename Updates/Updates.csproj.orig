@@ -4,11 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-<<<<<<< HEAD
     <ProjectGuid>{014ADB5A-45D5-48CA-A386-CFBB01A556EF}</ProjectGuid>
-=======
-    <ProjectGuid>{7C691930-0634-47D4-9E30-88066C3FD44C}</ProjectGuid>
->>>>>>> origin/Stéphane
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Updates</RootNamespace>
@@ -43,41 +39,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
-    <Compile Include="Apothecary\Drugs.cs" />
-    <Compile Include="Apothecary\Surgery.cs" />
->>>>>>> origin/Stéphane
     <Compile Include="Blacksmith\furnace.cs" />
     <Compile Include="Blacksmith\hoist.cs" />
     <Compile Include="Blacksmith\plow.cs" />
     <Compile Include="Blacksmith\saw.cs" />
     <Compile Include="Blacksmith\surgery.cs" />
 <<<<<<< HEAD
-    <Compile Include="Farmer\fertilizer.cs" />
-    <Compile Include="Farmer\fields_expansion.cs" />
-    <Compile Include="Farmer\irrigation.cs" />
-    <Compile Include="Farmer\scarecrow.cs" />
-    <Compile Include="List.cs" />
-=======
-    <Compile Include="Class1.cs" />
     <Compile Include="Cooker\Level1.cs" />
     <Compile Include="Cooker\Level2.cs" />
     <Compile Include="Cooker\Level3.cs" />
     <Compile Include="Cooker\Level4.cs" />
-    <Compile Include="Crafter\Hoist.cs" />
+    <Compile Include="Crafter\CrafterTools\Hoist.cs" />
     <Compile Include="Crafter\Materials\Cement.cs" />
+    <Compile Include="Crafter\Materials\Materials.cs" />
     <Compile Include="Crafter\Materials\Reinforced.cs" />
     <Compile Include="Crafter\Materials\Whitewash.cs" />
-    <Compile Include="Crafter\Pulley.cs" />
-    <Compile Include="Crafter\Scaffolding.cs" />
+    <Compile Include="Crafter\CrafterTools\Pulley.cs" />
+    <Compile Include="Crafter\CrafterTools\Scaffolding.cs" />
     <Compile Include="farmer\fertilizer.cs" />
     <Compile Include="farmer\fields_expansion.cs" />
     <Compile Include="farmer\irrigation.cs" />
     <Compile Include="farmer\scarecrow.cs" />
->>>>>>> origin/Stéphane
+=======
+    <Compile Include="Farmer\fertilizer.cs" />
+    <Compile Include="Farmer\fields_expansion.cs" />
+    <Compile Include="Farmer\irrigation.cs" />
+    <Compile Include="Farmer\scarecrow.cs" />
+    <Compile Include="UpdatesLists.cs" />
+>>>>>>> origin/develop
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

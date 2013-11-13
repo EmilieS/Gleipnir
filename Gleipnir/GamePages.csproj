@@ -32,8 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,29 +44,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FamilyDetails.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="FamilyDetails.Designer.cs">
-      <DependentUpon>FamilyDetails.cs</DependentUpon>
-    </Compile>
     <Compile Include="GamePage.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GamePage.Designer.cs">
       <DependentUpon>GamePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="HomePage.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="HomePage.Designer.cs">
-      <DependentUpon>HomePage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="JobDetails.cs">
+    <Compile Include="HomepageUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="JobDetails.Designer.cs">
-      <DependentUpon>JobDetails.cs</DependentUpon>
+    <Compile Include="HomepageUC.Designer.cs">
+      <DependentUpon>HomepageUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InformationsUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InformationsUC.Designer.cs">
+      <DependentUpon>InformationsUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InGameMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InGameMenu.Designer.cs">
+      <DependentUpon>InGameMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabIndex.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabIndex.Designer.cs">
+      <DependentUpon>TabIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GeneralPage.Designer.cs">
+      <DependentUpon>GeneralPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,23 +88,23 @@
     <Compile Include="InformationBox.Designer.cs">
       <DependentUpon>InformationBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="villagerDetails.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="villagerDetails.Designer.cs">
-      <DependentUpon>villagerDetails.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="FamilyDetails.resx">
-      <DependentUpon>FamilyDetails.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GamePage.resx">
       <DependentUpon>GamePage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HomePage.resx">
-      <DependentUpon>HomePage.cs</DependentUpon>
+    <EmbeddedResource Include="HomepageUC.resx">
+      <DependentUpon>HomepageUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="JobDetails.resx">
-      <DependentUpon>JobDetails.cs</DependentUpon>
+    <EmbeddedResource Include="InformationsUC.resx">
+      <DependentUpon>InformationsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InGameMenu.resx">
+      <DependentUpon>InGameMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabIndex.resx">
+      <DependentUpon>TabIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeneralPage.resx">
+      <DependentUpon>GeneralPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -108,9 +118,6 @@
     </Compile>
     <EmbeddedResource Include="InformationBox.resx">
       <DependentUpon>InformationBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="villagerDetails.resx">
-      <DependentUpon>villagerDetails.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -140,7 +147,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Ebauche Carte du Monde.png" />
+    <None Include="Resources\button_homepage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_homepage1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
