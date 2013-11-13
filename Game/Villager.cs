@@ -89,7 +89,7 @@ namespace Game
             _job = NewJob;
         }
 
-       
+        double _goldInWallet;
 
         #region death & family issues.
         //=====================================================================================
@@ -164,7 +164,7 @@ namespace Game
         /// <summary>
         /// Get amount of gold the villager have
         /// </summary>
-        public float Wallet
+        public double Wallet
         {
             get { return _goldInWallet; }
         }
@@ -319,7 +319,7 @@ namespace Game
         /// Add money the villager earn
         /// </summary>
         /// <param name="goldAdd"></param>
-        public void AddGoldInWallet(float goldAdd)
+        public void AddGoldInWallet(double goldAdd)
         {
             _goldInWallet += goldAdd;
         }

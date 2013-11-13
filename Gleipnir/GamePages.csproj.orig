@@ -175,15 +175,15 @@
       <Name>Updates</Name>
     </ProjectReference>
   </ItemGroup>
-    <ItemGroup>
-    <None Include="Resources\Ebauche Carte du Monde.png" />
-  </ItemGroup>
-
   <ItemGroup>
+<<<<<<< HEAD
     <None Include="Resources\button_homepage.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\button_homepage1.png" />
+=======
+    <None Include="Resources\Ebauche Carte du Monde.png" />
+>>>>>>> origin/Antoine
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

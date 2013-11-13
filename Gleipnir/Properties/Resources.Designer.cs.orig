@@ -63,6 +63,7 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+<<<<<<< HEAD
         internal static System.Drawing.Bitmap button_homepage {
             get {
                 object obj = ResourceManager.GetObject("button_homepage", resourceCulture);
@@ -76,16 +77,11 @@ namespace GamePages.Properties {
         internal static System.Drawing.Bitmap button_homepage1 {
             get {
                 object obj = ResourceManager.GetObject("button_homepage1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
+=======
         internal static System.Drawing.Bitmap Ebauche_Carte_du_Monde {
             get {
                 object obj = ResourceManager.GetObject("Ebauche Carte du Monde", resourceCulture);
+>>>>>>> origin/Antoine
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
