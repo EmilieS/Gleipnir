@@ -44,6 +44,9 @@
             this.happinessVillage = new System.Windows.Forms.Label();
             this.offeringsPoints = new System.Windows.Forms.Label();
             this.changeGoldOfferings = new System.Windows.Forms.Button();
+            this.groupInfoBox = new System.Windows.Forms.GroupBox();
+            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.mapBackground = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.actionsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -129,9 +132,9 @@
             // 
             this.eventFlux.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.eventFlux.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.eventFlux.Location = new System.Drawing.Point(796, 37);
+            this.eventFlux.Location = new System.Drawing.Point(782, 37);
             this.eventFlux.Name = "eventFlux";
-            this.eventFlux.Size = new System.Drawing.Size(200, 415);
+            this.eventFlux.Size = new System.Drawing.Size(214, 415);
             this.eventFlux.TabIndex = 3;
             // 
             // menuButton
@@ -210,12 +213,44 @@
             this.changeGoldOfferings.Text = "Echange Or/PO";
             this.changeGoldOfferings.UseVisualStyleBackColor = true;
             // 
-            // gamePage
+            // groupInfoBox
+            // 
+            this.groupInfoBox.Location = new System.Drawing.Point(782, 458);
+            this.groupInfoBox.Name = "groupInfoBox";
+            this.groupInfoBox.Size = new System.Drawing.Size(214, 260);
+            this.groupInfoBox.TabIndex = 13;
+            this.groupInfoBox.TabStop = false;
+            this.groupInfoBox.Text = "Informations";
+            // 
+            // shapeContainer1
+            // 
+            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
+            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer1.Name = "shapeContainer1";
+            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.mapBackground});
+            this.shapeContainer1.Size = new System.Drawing.Size(1008, 730);
+            this.shapeContainer1.TabIndex = 14;
+            this.shapeContainer1.TabStop = false;
+            // 
+            // mapBackground
+            // 
+            this.mapBackground.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mapBackground.BackgroundImage = global::GamePages.Properties.Resources.Ebauche_Carte_du_Monde;
+            this.mapBackground.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.mapBackground.Location = new System.Drawing.Point(218, 37);
+            this.mapBackground.Name = "mapBackground";
+            this.mapBackground.Size = new System.Drawing.Size(555, 525);
+            // 
+            // GamePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1008, 730);
+            this.Controls.Add(this.groupInfoBox);
             this.Controls.Add(this.changeGoldOfferings);
             this.Controls.Add(this.offeringsPoints);
             this.Controls.Add(this.happinessVillage);
@@ -228,8 +263,9 @@
             this.Controls.Add(this.actionsMenu);
             this.Controls.Add(this.Village);
             this.Controls.Add(this.villageName);
+            this.Controls.Add(this.shapeContainer1);
             this.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.Name = "gamePage";
+            this.Name = "GamePage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.actionsMenu.ResumeLayout(false);
@@ -256,6 +292,9 @@
         private System.Windows.Forms.Label happinessVillage;
         private System.Windows.Forms.Label offeringsPoints;
         private System.Windows.Forms.Button changeGoldOfferings;
+        private System.Windows.Forms.GroupBox groupInfoBox;
+        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
+        private Microsoft.VisualBasic.PowerPacks.RectangleShape mapBackground;
     }
 }
 

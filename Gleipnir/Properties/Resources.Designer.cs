@@ -59,5 +59,15 @@ namespace GamePages.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Ebauche_Carte_du_Monde {
+            get {
+                object obj = ResourceManager.GetObject("Ebauche Carte du Monde", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
