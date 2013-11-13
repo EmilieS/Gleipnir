@@ -48,45 +48,56 @@ namespace Tests
 
 
             
-            /*
+            
             [Test]
             public void Fiance()
             {
                 var MyGame = new Game.Game();
-                Villager girl = new Villager();
-                girl.Gender = Genders.FEMALE;
-                Villager guy1 = new Villager();
-                Villager guy2 = new Villager();
-                guy1.Gender = Genders.MALE;
-                guy2.Gender = Genders.MALE;
+                Family family1 = MyGame.Villages[0].CreateFamilyFromScratch();
+                Family family2 = MyGame.Villages[0].CreateFamilyFromScratch();
 
-                Assert.That(girl.StatusInFamily == Status.SINGLE);
+                Villager girlf1;
+                do
+                {
+                girlf1=family1.newFamilyMember();
+                }while(girlf1.Gender!=Genders.FEMALE);
+                Villager guy1f2;
+                do
+                {
+                guy1f2=family1.newFamilyMember();
+                }while(guy1f2.Gender!=Genders.MALE);
 
-                girl.Fiance = guy1;
-                Assert.That(girl.StatusInFamily == Status.ENGAGED);
+                Villager guy2f2;
+                do
+                {
+                guy2f2=family1.newFamilyMember();
+                }while(guy2f2.Gender!=Genders.MALE);
 
-                girl.Fiance = guy2;
-                Assert.That(girl.StatusInFamily == Status.ENGAGED);
+                Assert.That(girlf1.StatusInFamily == Status.SINGLE);
 
-                guy1.Kill();
-                guy1.DieOrIsAlive();
-                girl.CloseStep();
-                guy1.CloseStep();
-                guy2.CloseStep();
-                 Assert.That(girl.StatusInFamily == Status.ENGAGED);
-                 Assert.That(girl.Fiance==guy2);
+                girlf1.Fiance = guy1f2;//hmmm accessibility?
+                Assert.That(girlf1.StatusInFamily == Status.ENGAGED);
 
-                 guy2.Kill();
-                 guy2.DieOrIsAlive();
-                 girl.CloseStep();
-                 guy1.CloseStep();
-                 guy2.CloseStep();
-                 Assert.That(girl.StatusInFamily == Status.SINGLE);
-                 Assert.That(girl.Fiance == null);
+                girlf1.Fiance = guy2f2;
+                Assert.That(girlf1.StatusInFamily == Status.ENGAGED);
+
+                guy1f2.Kill();
+                guy1f2.DieOrIsAlive();
+                MyGame.CloseStep();
+
+                 Assert.That(girlf1.StatusInFamily == Status.ENGAGED);
+                 Assert.That(girlf1.Fiance==guy2f2);
+
+                 guy2f2.Kill();
+                 guy2f2.DieOrIsAlive();
+                 MyGame.CloseStep();
+
+                 Assert.That(girlf1.StatusInFamily == Status.SINGLE);
+                 Assert.That(girlf1.Fiance == null);
 
                  
             }
-
+/*
             [Test]
             public void NewFamily()
             {
