@@ -10,67 +10,76 @@ namespace Game
     {
         public Game()
         {
+            _items = new List<GameItem>();
             //TODO intialisation partie
-            Villager VillagerAH = new Villager();
-            VillagerAH.Gender = Genders.MALE;
-            Villager VillagerAF = new Villager();
-            VillagerAF.Gender = Genders.FEMALE;
-            Villager VillagerBH = new Villager();
-            VillagerBH.Gender = Genders.MALE;
-            Villager VillagerBF = new Villager();
-            VillagerBF.Gender = Genders.FEMALE;
-            Villager VillagerCH = new Villager();
-            VillagerCH.Gender = Genders.MALE;
-            Villager VillagerCF = new Villager();
-            VillagerCF.Gender = Genders.FEMALE;
-            Villager VillagerDH = new Villager();
-            VillagerDH.Gender = Genders.MALE;
-            Villager VillagerDF = new Villager();
-            VillagerDF.Gender = Genders.FEMALE;
-            Villager VillagerEH = new Villager();
-            VillagerEH.Gender = Genders.MALE;
-            Villager VillagerEF = new Villager();
-            VillagerEF.Gender = Genders.FEMALE;
 
-            Family FamilyA = new Family(VillagerAF, VillagerAH);
-            Family FamilyB = new Family(VillagerBF, VillagerBH);
-            Family FamilyC = new Family(VillagerCF, VillagerCH);
-            Family FamilyD = new Family(VillagerDF, VillagerDH);
-            Family FamilyE = new Family(VillagerEF, VillagerEH);
+             _villages = new List<Village>(); 
+             CreateVillage("default");
 
-           _families=new List<Family>();
+             Family FamilyA = _villages[0].CreateFamilyFromScratch();
+             Family FamilyB = _villages[0].CreateFamilyFromScratch();
+             Family FamilyC = _villages[0].CreateFamilyFromScratch();
+             Family FamilyD = _villages[0].CreateFamilyFromScratch();
+             Family FamilyE = _villages[0].CreateFamilyFromScratch();
+
+
 
            _singleMen = new List<Villager>();
 
-            _families.Add(FamilyA);
-            _families.Add(FamilyB);
-            _families.Add(FamilyC);
-            _families.Add(FamilyD);
-            _families.Add(FamilyE);
-
-            TotalPop = 6;
+            TotalPop = 10;
             TotalGold = 0;
             Offerings = 0;
         }
 
-        List<Family> _families;
+        readonly List<GameItem> _items;
+        readonly List<Village> _villages; //a revoir!
+        public IReadOnlyList<Village> Villages { get { return _villages; } }
+        public List<Villager> _singleMen; 
+        public double TotalGold {get; set;} //will change
+        public int TotalPop {get; set;}  //will change
+        public int Offerings { get; set; } //will change
 
-        static public List<Villager> _singleMen; //changera plus tard. //TODO : warning, static!
-        static public double TotalGold {get; set;} //changera //warning, static!
-        static public int TotalPop {get; set;}  //changera //warning, static!
-        static public int Offerings { get; set; } //changera //warning, static!
+        internal void GameItemCreated(GameItem item)
+        {
+            _items.Add(item);
+        }
 
+        internal void GameItemDestroyed(GameItem item)
+        {
+            _items.Remove(item);
+        }
+        public Village CreateVillage(string name)
+        {
+            if (String.IsNullOrWhiteSpace(name)) throw new ArgumentNullException("name");
+            var v = new Village(this, name);
+            _villages.Add(v);
+            return v;
+        }
         static public void BigEvent()
         {
             //TODO
         }
 
-        static public void AddOrRemoveFromTotalGold(double amount)
+        public void AddOrRemoveFromTotalGold(double amount)
         {
             TotalGold += amount; //curious to find out if TotalGold can be negative.
         }
+        List<string> _currentText; 
+        public void NextStep() //public for testing (again)
+        {
+            CloseStep();
+            
+        }
 
 
+
+        public void CloseStep() //public for debug
+        {
+            foreach (GameItem item in _items)
+            {
+                item.CloseStep();
+            }
+        }
 
         //variables à avoir: les coefficients des métiers
         //liste familles?
