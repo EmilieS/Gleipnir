@@ -108,7 +108,7 @@ namespace Game
         /// <summary>
         /// Gets all families in the village
         /// </summary>
-        public List<Family> FamiliesList { get { return _family; } }
+        public List<Family> ListOfFamilies { get { return _family; } }
         
         /// <summary>
         /// Addition of all gold of all families
