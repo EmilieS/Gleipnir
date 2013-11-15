@@ -11,6 +11,7 @@ namespace Buildings
     {
         int _verticalPos;
         int _horizontalPos;
+        
         double _addedHappiness;
         double _addedFaith;
         double _enterPrice;
@@ -57,6 +58,7 @@ namespace Buildings
             get { return _enterPrice; }
             set { _enterPrice = value; }
         }
+
         
     }
 }

@@ -42,6 +42,7 @@
     <Compile Include="Believing\Chapel.cs" />
     <Compile Include="Believing\OfferingWarehouse.cs" />
     <Compile Include="BuildingsProperties.cs" />
+    <Compile Include="BuyConditions.cs" />
     <Compile Include="Hobbies\Baths.cs" />
     <Compile Include="Hobbies\Brothel.cs" />
     <Compile Include="Hobbies\PartyRoom.cs" />
