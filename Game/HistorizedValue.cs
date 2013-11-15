@@ -7,15 +7,21 @@ using System.Diagnostics;
 
 namespace Game
 {
-    class HistorizedValue<T>
+    class HistorizedValue<T, TOwner>
     {
         readonly FIFOBuffer<T> _histo;
         T _current;
+        readonly string _name;
+        readonly TOwner _owner;
+
         bool _hasChangedDuringLastStep;
 
-        public HistorizedValue(int capacity)
+        public HistorizedValue(TOwner owner, string name, int capacity)
         {
+            Debug.Assert(! string.IsNullOrWhiteSpace(name));
             _histo = new FIFOBuffer<T>(capacity);
+            _owner = owner;
+            _name = name;
         }
 
         public FIFOBuffer<T> Historic { get { return _histo; } }

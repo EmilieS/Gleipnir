@@ -14,7 +14,7 @@ namespace Game
         internal Family(Game game, Villager mother, Villager father, string name)
             : base (game)
         {
-            _goldStash = new HistorizedValue<double>(20);
+            _goldStash = new HistorizedValue<double, Family>(this, "_goldstash", 20);
             if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE)
             {
                 throw new InvalidOperationException("gender issue!");
@@ -72,7 +72,7 @@ namespace Game
 
 
         Village _ownerVillage;
-        HistorizedValue<double> _goldStash;
+        HistorizedValue<double, Family> _goldStash;
         Villager _mother;
         Villager _father;
         FamilyMemberList _familyMembers;

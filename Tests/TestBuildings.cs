@@ -14,7 +14,7 @@ namespace Tests
     [TestFixture]
     class TestBuildings
     {
-        [Test]
+        /*[Test]
         public void TestBaths()
         {
             var f = new Family();
@@ -70,7 +70,7 @@ namespace Tests
             v.AddOrRemoveFaith(-50);
             v.AddOrRemoveFaith(t.SetFaith);
             Assert.That(v.Faith, Is.EqualTo(54));
-        }
+        }*/
 
 
     }

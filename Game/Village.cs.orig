@@ -9,7 +9,7 @@ namespace Game
 {
     public class Village : GameItem
     {
-        List<Family> _family;
+
         List<Jobs> _jobs;
         double _familiesGold;
         double _villageFaith;
@@ -20,16 +20,19 @@ namespace Game
         FamilyInVillageList _familiesList;
         public FamilyInVillageList FamiliesList { get { return _familiesList; } }
 
-        // public Village(List<Family> families)
         internal Village(Game thisGame, string name)
             : base(thisGame)
         {
+<<<<<<< HEAD
             Debug.Assert(!String.IsNullOrWhiteSpace(name));
             Debug.Assert(thisGame != null, "thisGame is null!");
             _name = name;
             _familiesList=new FamilyInVillageList(this);
-            /* _jobs = new List<Jobs>;
+=======
+            //TODO: Families List
+            _jobs = new List<Jobs>();
             _family = families;
+>>>>>>> Village
 
             //TODO: Jobs List
             /*foreach (Jobs job in _jobs)
@@ -54,31 +57,31 @@ namespace Game
         public Village(List<Family> families, Game thisGame)//a éliminer.
             : base(thisGame)
         {
+<<<<<<< HEAD
             _familiesList = new FamilyInVillageList(this);
             for (int i=0; i<families.Count; i++)
             {
             _familiesList.Add(families[i]);
             }
-        }
-
-        /// <summary>
-        /// Add a family to the village
-        /// </summary>
-        /// <param name="family"></param>
-        public void AddFamily(Family family)
-        {
+=======
             if (_family.Contains(family)) throw new InvalidOperationException();
             else _family.Add(family);
+>>>>>>> Village
         }
-        
-        /// <summary>
-        /// Remove a familyfrom the village
-        /// </summary>
-        /// <param name="family"></param>
+
+
+        public void AddFamily(Family family)
+        {
+            _familiesList.Add(family);
+        }
         public void RemoveFamily(Family family)
         {
+<<<<<<< HEAD
+            _familiesList.Remove(family);
+=======
             if (_family.Contains(family)) _family.Remove(family);
             else throw new InvalidOperationException();
+>>>>>>> Village
         }
 
         public Family CreateFamily(Villager mother, Villager father)
@@ -105,11 +108,6 @@ namespace Game
         /// </summary>
         public double Gold { get { return _familiesGold; } }
 
-        /// <summary>
-        /// Gets all families in the village
-        /// </summary>
-        public List<Family> ListOfFamilies { get { return _family; } }
-        
         /// <summary>
         /// Addition of all gold of all families
         /// </summary>
@@ -144,12 +142,16 @@ namespace Game
             {
                 result += fam.FaithAverage();
             }
-            result = result / _familiesList.Count;
+            result = result / _family.Count;
 
             if (result < 0 && result > 100)
                 throw new IndexOutOfRangeException();
             else
+<<<<<<< HEAD
+                _villageFaith = result / _familiesList.Count;
+=======
                 _villageFaith = result;
+>>>>>>> Village
         }
 
         /// <summary>

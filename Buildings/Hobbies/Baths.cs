@@ -22,7 +22,7 @@ namespace Buildings.Hobbies
         {
             get { return 200; }
         }
-        public int SetNewGoldStash(int _goldStash)
+        public double SetNewGoldStash(double _goldStash)
         {
             //TODO : Define the formule of limit for spending
             if (_goldStash >= SetEnterPrice) { _goldStash -= SetEnterPrice; }
