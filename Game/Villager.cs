@@ -343,11 +343,37 @@ namespace Game
         }
         #endregion
 
+        internal void FianceDestroyed()
+        {
+            Debug.Assert(_fiance.IsDead());
+            Debug.Assert(_fiance.Fiance == this);
+                _fiance = null;
+                if (_statusInFamily == Status.ENGAGED) 
+                { 
+                    _statusInFamily = Status.SINGLE;
+                    if (Gender == Genders.MALE)
+                    {
+                        Game._singleMen.Add(this);
+                    }
+                }
+            
+        }
         override internal void OnDestroy()
         {
             Debug.Assert(IsDead(), "the villager is still alive!");
-            _fiance = null;
-            _parentFamily = null;
+            if (_fiance != null)
+            {
+                _fiance.FianceDestroyed();
+                _fiance = null;
+            }
+                _parentFamily.FamilyMemberDestroyed(this);
+                Debug.Assert(_parentFamily == null);
+            if ((Gender==Genders.MALE) && (StatusInFamily==Status.SINGLE))
+            {
+                Debug.Assert(_fiance==null);
+                Debug.Assert(Game._singleMen.Contains(this));
+                Game.SingleManDestroyed(this);
+            }
             //_job = null;
         }
 
@@ -359,15 +385,7 @@ namespace Game
             _health.Conclude();
 
             //TODO :  put current values in value history.
-
-                if (_fiance != null)//par rapp à ca... à enlever.
-                {
-                    if (_fiance.IsDead())
-                    {
-                        _fiance = null;
-                        if (_statusInFamily == Status.ENGAGED) { _statusInFamily = Status.SINGLE; }
-                    }
-                }
+            if (IsDead()) { OnDestroy(); }
                 //TODO : events!
 
             

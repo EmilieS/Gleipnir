@@ -48,12 +48,12 @@ namespace Game
             _mother.ParentFamily = this;
             _father.ParentFamily = this;
         }
-
+/*
         public Family(Village village) //a eliminer
             : base(village.Game) 
         { _ownerVillage = village; }
-
-        public Family(Villager mother, Villager father, Village village)//a eliminer
+*/
+        /*public Family(Villager mother, Villager father, Village village)//a eliminer
             : base(village.Game)
         {
             _mother = mother;
@@ -67,7 +67,7 @@ namespace Game
             _mother.ParentFamily = this;
             _father.ParentFamily = this;
             village.FamiliesList.Add(this);
-        }
+        }*/
 
 
 
@@ -235,30 +235,32 @@ namespace Game
         }
         //---------------------------------------------------------------------------------------------------------------------------------
         #endregion
+
+        internal void FamilyMemberDestroyed(Villager dead)
+        {
+            Debug.Assert(dead.IsDead());
+            Debug.Assert(_familyMembers.Contains(dead));
+            if (_mother != null) { if (dead == _mother) { _mother = null; } }
+            if (_father != null) { if (dead == _father) { _father = null; } }
+             _familyMembers.Remove(dead);
+        }
         internal override void OnDestroy()
         {
             Debug.Assert(_familyMembers.Count==0, "there is still someone in this family!");
 
             _mother = null;
             _father = null;
-            _ownerVillage = null;
+            Debug.Assert(_ownerVillage.FamiliesList.Contains(this));
+            _ownerVillage.FamilyDestroyed(this);
+            Debug.Assert(_ownerVillage == null);
 
         }
         override internal void CloseStep() 
         {
-
-
             //TODO :  put current values in value history.
             _goldStash.Conclude();
-            //TODO : check everything it is linked to.
-            if (_mother.IsDead()) { _mother = null; }
-            if (_father.IsDead()) { _father = null; }
 
-
-            for (int i = 0; i < _familyMembers.Count; i++)
-            {
-                if (_familyMembers[i].IsDead()) { _familyMembers.Remove(_familyMembers[i]); }
-            }
+            if(FamilyMembers.Count==0){ OnDestroy(); }
 
             //TODO : events!
         }
