@@ -19,19 +19,19 @@ namespace Game
             _health = new HistorizedValue<Healths, Villager>(this, "_health", 20);
             _statusInFamily = Status.SINGLE;
 
-            Random rand=new Random();//to be moved elsewhere.
+            Random rand = new Random();//to be moved elsewhere.
 
             switch (rand.Next(2))
             {
                 case 0: _gender = Genders.MALE; _job = parentFamily.Father.Job; parentFamily.Game._singleMen.Add(this); break; //changera    
-                case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; break; 
+                case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; break;
             }
             if (rand.Next(101) < 2)
                 _faith.Current = 13;
             else
                 _faith.Current = parentFamily.FaithAverage();
 
-            _happiness.Current = parentFamily.HappinessAverage();            
+            _happiness.Current = parentFamily.HappinessAverage();
             //_job = Jobs.FARMER;
             _health.Current = Healths.NONE;
             _age = 0;
@@ -50,8 +50,8 @@ namespace Game
             _gender = gender;
             _statusInFamily = Status.SINGLE;
         }
-        
-         //TODO : generate name.
+
+        //TODO : generate name.
         string _name;
         Family _parentFamily;
         Genders _gender;
@@ -61,6 +61,7 @@ namespace Game
         double _goldInWallet;
         Status _statusInFamily; //!! 
         Villager _fiance; //!!!!!
+        ActivityStatus _villagerActivity;
 
 
         readonly HistorizedValue<double, Villager> _faith; //scale from 0 to 100.
@@ -68,9 +69,9 @@ namespace Game
         readonly HistorizedValue<Healths, Villager> _health;
 
 
-        public double Faith  { get { return _faith.Current ; } } //hmm
+        public double Faith { get { return _faith.Current; } } //hmm
         public double Happiness { get { return _happiness.Current; } } //hmm
-        public Genders Gender { get { return _gender; }} 
+        public Genders Gender { get { return _gender; } }
         public Jobs Job { get { return _job; } }
         public double LifeExpectancy { get { return _lifeExpectancy; } }
 
@@ -88,8 +89,19 @@ namespace Game
         {
             _job = NewJob;
         }
+        public ActivityStatus ActivityStatus
+        {
+            get
+            {
+                return _villagerActivity;
+            }
+            set
+            {
+                _villagerActivity = value;
+            }
+        }
 
-       
+
 
         #region death & family issues.
         //=====================================================================================
@@ -99,14 +111,14 @@ namespace Game
         /// </summary>
         public void DieOrIsAlive()
         {
-            if (_lifeExpectancy <= _age) 
+            if (_lifeExpectancy <= _age)
             {
                 _health.Current = Healths.DEAD;
                 if (ParentFamily != null)
                 {
                     ParentFamily.FamilyMemberDied(this);
                 }
-                    
+
             }
         }
         /// <summary>
@@ -131,7 +143,7 @@ namespace Game
             set
             {
                 _fiance = value;
-                 if (value != null)
+                if (value != null)
                 {
                     if (StatusInFamily == Status.SINGLE) { StatusInFamily = Status.ENGAGED; }
                 }
@@ -159,7 +171,7 @@ namespace Game
             }
         }
 
-       
+
         /// <summary>
         /// Define if the villager is single/engaged/married
         /// </summary>
@@ -263,11 +275,11 @@ namespace Game
         }
         internal bool IsDead()
         {
-            return ((_health.Current & Healths.DEAD) != 0);                    
+            return ((_health.Current & Healths.DEAD) != 0);
         }
         internal void Sickly()
         {
-            if ((_health.Current & Healths.SICK) != 0) 
+            if ((_health.Current & Healths.SICK) != 0)
             {
                 AddOrRemoveHappiness(0.1);
                 ParentFamily.FamilyMemberIsSick();
@@ -280,7 +292,7 @@ namespace Game
             if (_happiness.Current < 25 && (_health.Current & Healths.UNHAPPY) == 0)
             {
                 _health.Current = _health.Current | Healths.UNHAPPY;
-            
+
             }
         }
 
@@ -319,7 +331,7 @@ namespace Game
         }
         //-------------------------------------------------------------------------------------------------------------------------------
         #endregion
-  
+
         /// <summary>
         /// Add money the villager earn
         /// </summary>
@@ -360,17 +372,17 @@ namespace Game
 
             //TODO :  put current values in value history.
 
-                if (_fiance != null)//par rapp à ca... à enlever.
+            if (_fiance != null)//par rapp à ca... à enlever.
+            {
+                if (_fiance.IsDead())
                 {
-                    if (_fiance.IsDead())
-                    {
-                        _fiance = null;
-                        if (_statusInFamily == Status.ENGAGED) { _statusInFamily = Status.SINGLE; }
-                    }
+                    _fiance = null;
+                    if (_statusInFamily == Status.ENGAGED) { _statusInFamily = Status.SINGLE; }
                 }
-                //TODO : events!
+            }
+            //TODO : events!
 
-            
+
         }
     }
 
