@@ -8,10 +8,12 @@ namespace Game
 {
     class Meeting
     {
-        Meeting()
+        public static void ChangeVillagersStatus(Family family)
         {
+            foreach (Villager villager in family.FamilyMembers)
+            {
+                villager.ActivityStatus = ActivityStatus.CONVOCATED;
+            }
         }
-
-        public void ChangeVillagersStatus() { }
     }
 }
