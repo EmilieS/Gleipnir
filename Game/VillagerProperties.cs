@@ -39,7 +39,8 @@ namespace Game
         {
             SINGLE = 0,
             MARRIED = 1,
-            ENGAGED = 2
+            ENGAGED = 2,
+            MOURNING = 3
         };
 
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Game;
-/*
+
 namespace Tests
 {
     [TestFixture]
@@ -15,15 +15,14 @@ namespace Tests
         public void death()
         {
             var MyGame = new Game.Game();
-            Villager mother = new Villager();
-            Villager father = new Villager();
-            mother.Gender = Genders.FEMALE;
-            mother.Fiance = father;
-            father.Fiance = mother;
-            Family family = new Family(mother, father);
+            var village = MyGame.Villages[0];
+            Family family = MyGame.Villages[0].FamiliesList[0];
+            Villager mother = family.Mother;
+            Villager father = family.Father;
 
-            mother.ParentFamily = family;
-            Assert.That(mother.Fiance.Fiance == mother);
+
+            Assert.That(mother.ParentFamily == family);
+            Assert.That(mother.GetFiance().GetFiance() == mother);
             Assert.That(family.Mother.ParentFamily == family);
             Assert.That(family.Mother == mother && family.Father == father);
             Assert.That(mother.StatusInFamily == Status.MARRIED && mother.StatusInFamily == Status.MARRIED);
@@ -38,9 +37,9 @@ namespace Tests
             Assert.That(family.FamilyMembers.Count == 3);
             mother.Kill();
             mother.DieOrIsAlive();
-            father.CloseStep();
-            mother.CloseStep();
-            family.CloseStep();
+            MyGame.CloseStep();
+            MyGame.CloseStep();
+            MyGame.CloseStep();
             Assert.That(family.FamilyMembers.Count == 2);
             for (int i = 0; i < family.FamilyMembers.Count; i++)
             {
@@ -48,28 +47,27 @@ namespace Tests
             }
             Assert.That(family.HappinessAverage() == 75, "family average is not 75");
         }
-
+        
         [Test]
         public void familyRichOrPoor()//totalpop & totalgold don't work yet
         {
             var MyGame = new Game.Game();
             Assert.That(MyGame.TotalPop == 10);
 
-            Villager mother = new Villager();
-            Villager father = new Villager();
-            mother.Gender = Genders.FEMALE;
-            mother.Fiance = father;
-            father.Fiance = mother;
-            Family family = new Family(mother, father);
+            var village = MyGame.Villages[0];
+            Family family = MyGame.Villages[0].FamiliesList[0];
+            Villager mother = family.Mother;
+            Villager father = family.Father;
 
             mother.ParentFamily = family;
-            Assert.That(mother.Fiance.Fiance == mother);
-            Assert.That(family.Mother.ParentFamily == family);
+            Assert.That(mother.ParentFamily == family);
+            Assert.That(mother.GetFiance().GetFiance() == mother);
             Assert.That(family.Mother == mother && family.Father == father);
             Assert.That(mother.StatusInFamily == Status.MARRIED && mother.StatusInFamily == Status.MARRIED);
             Assert.That(MyGame.TotalGold == 0);
             family.addTOGoldStash(100);
             //Assert.That(Game.Game.TotalGold == 100);
+            MyGame.CloseStep();
             MyGame.TotalGold = 100;
             Villager kid = family.newFamilyMember();
             Assert.That(family.HappinessAverage() == 80, "family average is not 80");
@@ -92,4 +90,3 @@ namespace Tests
         }
     }
 }
-*/

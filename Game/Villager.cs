@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace Game
 {
-    public class Villager : GameItem
+    public partial class Villager : GameItem
     {
         internal Villager(Game g, Family parentFamily, string name)    //TODO: autre constructeur pour le début...
             : base(g)
@@ -17,14 +17,15 @@ namespace Game
             _faith = new HistorizedValue<double, Villager>(this, "_faith", 20);
             _happiness = new HistorizedValue<double, Villager>(this, "_happiness", 20);
             _health = new HistorizedValue<Healths, Villager>(this, "_health", 20);
-            _statusInFamily = Status.SINGLE;
+            _statusInFamily = new HistorizedValue<Status, Villager>(this, "_statusInFamily", 20);
+            _statusInFamily.Current = Status.SINGLE;
 
             Random rand=new Random();//to be moved elsewhere.
-
+            Debug.Assert(g != null);
             switch (rand.Next(2))
             {
-                case 0: _gender = Genders.MALE; _job = parentFamily.Father.Job; parentFamily.Game._singleMen.Add(this); break; //changera    
-                case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; break; 
+                case 0: _gender = Genders.MALE; _job = parentFamily.Father.Job; g.AddSingleMan(this); break; //changera    
+                case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; Engage(this, parentFamily); break; 
             }
             if (rand.Next(101) < 2)
                 _faith.Current = 13;
@@ -36,7 +37,6 @@ namespace Game
             _health.Current = Healths.NONE;
             _age = 0;
             _lifeExpectancy = 85;
-            _fiance = null;
         }
         public Villager(Game g, Genders gender)
             : base(g)
@@ -44,11 +44,12 @@ namespace Game
             _faith = new HistorizedValue<double, Villager>(this, "_faith", 20);
             _happiness = new HistorizedValue<double, Villager>(this, "_happiness", 20);
             _health = new HistorizedValue<Healths, Villager>(this, "_health", 20);
+            _statusInFamily = new HistorizedValue<Status, Villager>(this, "_statusInFamily", 20);
             _faith.Current = 100;
             _happiness.Current = 80;
             _lifeExpectancy = 85;
             _gender = gender;
-            _statusInFamily = Status.SINGLE;
+            _statusInFamily.Current = Status.SINGLE;
         }
         
          //TODO : generate name.
@@ -58,14 +59,14 @@ namespace Game
         Jobs _job;
         double _lifeExpectancy;
         float _age;
-        double _goldInWallet;
-        Status _statusInFamily; //!! 
+        double _goldInWallet;      
         Villager _fiance; //!!!!!
 
 
         readonly HistorizedValue<double, Villager> _faith; //scale from 0 to 100.
         readonly HistorizedValue<double, Villager> _happiness; //scale from 0 to 100.
         readonly HistorizedValue<Healths, Villager> _health;
+        readonly HistorizedValue<Status, Villager> _statusInFamily; //!! TODO : update !
 
 
         public double Faith  { get { return _faith.Current ; } } //hmm
@@ -76,8 +77,8 @@ namespace Game
 
         public Status StatusInFamily
         {
-            get { return _statusInFamily; }
-            internal set { _statusInFamily = value; }//riqueraque
+            get { return _statusInFamily.Current; }
+            internal set { _statusInFamily.Current = value; }//riqueraque
         }
         public Family ParentFamily
         {
@@ -117,31 +118,8 @@ namespace Game
         {
             _age += time;
         }
-        /// <summary>
-        /// If single, this will return an exeption!
-        /// </summary>
-        public Villager Fiance //public pour tests //cannot catch this with an Assert.Throws...
-        {
-            get
-            {
-                //if (_statusInFamily == Status.SINGLE) { throw new InvalidOperationException("villager is single"); } 
-                //if (_fiance == null) { throw new NullReferenceException(); }
-                return _fiance;
-            }
-            set
-            {
-                _fiance = value;
-                 if (value != null)
-                {
-                    if (StatusInFamily == Status.SINGLE) { StatusInFamily = Status.ENGAGED; }
-                }
-            }
-        }
-        internal void FianceDied()//à utiliser
-        {
-            _fiance = null;
-            if (StatusInFamily == Status.ENGAGED) { StatusInFamily = Status.SINGLE; }
-        }
+
+
         //======================================================================================
         #endregion
         /// <summary>
@@ -343,49 +321,49 @@ namespace Game
         }
         #endregion
 
-        internal void FianceDestroyed()
-        {
-            Debug.Assert(_fiance.IsDead());
-            Debug.Assert(_fiance.Fiance == this);
-                _fiance = null;
-                if (_statusInFamily == Status.ENGAGED) 
-                { 
-                    _statusInFamily = Status.SINGLE;
-                    if (Gender == Genders.MALE)
-                    {
-                        Game._singleMen.Add(this);
-                    }
-                }
-            
-        }
+
         override internal void OnDestroy()
         {
+
             Debug.Assert(IsDead(), "the villager is still alive!");
+            if ((Gender == Genders.MALE) && (StatusInFamily == Status.SINGLE))
+            {
+                Debug.Assert(_fiance == null);
+                Debug.Assert(Game.SingleMen.Contains(this));
+                Game.SingleManDestroyed(this);
+            }
+
             if (_fiance != null)
             {
                 _fiance.FianceDestroyed();
-                _fiance = null;
+                Debug.Assert(_fiance == null);
             }
+            Debug.Assert(_fiance == null);
                 _parentFamily.FamilyMemberDestroyed(this);
                 Debug.Assert(_parentFamily == null);
-            if ((Gender==Genders.MALE) && (StatusInFamily==Status.SINGLE))
-            {
-                Debug.Assert(_fiance==null);
-                Debug.Assert(Game._singleMen.Contains(this));
-                Game.SingleManDestroyed(this);
-            }
+                
+
             //_job = null;
         }
 
         override internal void CloseStep() //a revoir le contenu exact
         {
-
+            _statusInFamily.Conclude();
             _happiness.Conclude();
             _faith.Conclude();
             _health.Conclude();
 
+            if (StatusInFamily == Status.ENGAGED)//à enlever plus tard.bref, ici que ca pète.
+            {
+                Debug.Assert(_fiance != null, "Dans CloseStep");
+            }
+            if (StatusInFamily == Status.MARRIED)//à enlever plus tard.bref, ici que ca pète.
+            {
+                Debug.Assert(_fiance != null, "Dans CloseStep");
+            }
+
             //TODO :  put current values in value history.
-            if (IsDead()) { OnDestroy(); }
+            if (IsDead()) { Destroy(); }
                 //TODO : events!
 
             
