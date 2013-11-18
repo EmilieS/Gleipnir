@@ -42,6 +42,7 @@
     <Compile Include="Family.cs" />
     <Compile Include="FamilyInVillageList.cs" />
     <Compile Include="FamilyMemberList.cs" />
+    <Compile Include="VillagerFiance.cs" />
     <Compile Include="FIFOBuffer.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameItem.cs" />
