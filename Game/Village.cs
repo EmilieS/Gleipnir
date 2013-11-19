@@ -129,10 +129,8 @@ namespace Game
                 result += fam.GoldStash;
             }
 
-            if (result < 0) 
-                throw new IndexOutOfRangeException();
-            else 
-                _familiesGold = result;
+            if (result < 0) throw new IndexOutOfRangeException();
+            else  _familiesGold = result;
         }
 
         /// <summary>
@@ -236,6 +234,13 @@ namespace Game
             Debug.Assert(family != null);
             _familiesList.Remove(family);
         }
+
+        internal void DestroyJobs(JobsModel jobName)
+        {
+            Debug.Assert(jobName != null);
+            _jobs.Remove(jobName);
+        }
+
         internal override void OnDestroy()
         {
             Debug.Assert(_familiesList.Count == 0, "there is still a family in this village!");
