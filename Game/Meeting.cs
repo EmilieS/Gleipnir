@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    class Meeting
+    public class Meeting
     {
         public static void ChangeVillagersStatus(Family family)
         {
