@@ -19,6 +19,7 @@ namespace Game
             _health = new HistorizedValue<Healths, Villager>(this, "_health", 20);
             _statusInFamily = new HistorizedValue<Status, Villager>(this, "_statusInFamily", 20);
             _statusInFamily.Current = Status.SINGLE;
+            g.VillagerAdded();
 
             Random rand=new Random();//to be moved elsewhere.
             Debug.Assert(g != null);
@@ -45,6 +46,7 @@ namespace Game
             _happiness = new HistorizedValue<double, Villager>(this, "_happiness", 20);
             _health = new HistorizedValue<Healths, Villager>(this, "_health", 20);
             _statusInFamily = new HistorizedValue<Status, Villager>(this, "_statusInFamily", 20);
+            g.VillagerAdded();
             _faith.Current = 100;
             _happiness.Current = 80;
             _lifeExpectancy = 85;
@@ -339,10 +341,10 @@ namespace Game
                 Debug.Assert(_fiance == null);
             }
             Debug.Assert(_fiance == null);
-                _parentFamily.FamilyMemberDestroyed(this);
-                Debug.Assert(_parentFamily == null);
-                
+            _parentFamily.FamilyMemberDestroyed(this);
+            Debug.Assert(_parentFamily == null);
 
+            Game.VillagerRemoved(this);
             //_job = null;
         }
 

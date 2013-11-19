@@ -11,6 +11,8 @@ namespace Game
     {
         public Game()
         {
+            _totalGold = new HistorizedValue<double, Game>(this, "_totalGold", 20);
+            _totalPop = new HistorizedValue<int, Game>(this, "_totalPop", 20);
             _items = new List<GameItem>();
             //TODO intialisation partie
             _singleMen = new List<Villager>();
@@ -23,12 +25,8 @@ namespace Game
              Family FamilyD = _villages[0].CreateFamilyFromScratch();
              Family FamilyE = _villages[0].CreateFamilyFromScratch();
 
-
-
-
-
-            TotalPop = 10;
-            TotalGold = 0;
+            //TotalPop = 10;
+            //TotalGold = 0;
             Offerings = 0;
         }
 
@@ -37,18 +35,44 @@ namespace Game
         readonly List<Villager> _singleMen;
         public IReadOnlyList<Village> Villages { get { return _villages; } }
         public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
-        public double TotalGold {get; set;} //will change
-        public int TotalPop {get; set;}  //will change
+        readonly HistorizedValue<double, Game> _totalGold;
+        readonly HistorizedValue<int, Game> _totalPop;
+        public double TotalGold { get { return _totalGold.Current; } }
+        public double LastTotalGold { get { return _totalGold.Historic.Last; } }
+        public int TotalPop { get { return _totalPop.Current; } } 
         public int Offerings { get; set; } //will change
-
+        /*public double TotalGold { get 
+        {
+            double totalGold = 0;
+            foreach( Village village in _villages)
+            {
+                totalGold += village.Gold;
+            }
+            return totalGold;
+        } } */
         internal void GameItemCreated(GameItem item)
         {
             _items.Add(item);
         }
-
         internal void GameItemDestroyed(GameItem item)
         {
             _items.Remove(item);
+        }
+        internal void GoldAdded(double amount)
+        {
+            Debug.Assert(amount > 0, "(GoldAdded)");
+            _totalGold.Current += amount;
+        }
+        internal void GoldRemoved(double amount)
+        {
+            Debug.Assert(amount > 0, "(GoldRemoved)");
+            _totalGold.Current -= amount;
+        }
+
+
+        internal void VillagerAdded()
+        {
+            _totalPop.Current++;
         }
 
         internal void AddSingleMan(Villager man)
@@ -69,11 +93,12 @@ namespace Game
         {
             //TODO
         }
-
+/*
         public void AddOrRemoveFromTotalGold(double amount)
         {
-            TotalGold += amount; //curious to find out if TotalGold can be negative.
+            _totalGold.Current += amount; //curious to find out if TotalGold can be negative.
         }
+ * */
         List<string> _currentText; 
         public void NextStep() //public for testing (again)
         {
@@ -85,7 +110,10 @@ namespace Game
 
         public void CloseStep() //public for debug
         {
-            
+            //-----
+            _totalGold.Conclude();
+            _totalPop.Conclude();
+            //-------
             /*foreach (GameItem item in _items)
             {
                 item.CloseStep();
@@ -135,5 +163,14 @@ namespace Game
         {
             _singleMen.Remove(dead);
         }
+        internal void VillagerRemoved(Villager villager)
+        {
+            _totalPop.Current--;
+        }
+        internal void FamilyRemoved(Family family)
+        {
+            _totalGold.Current -= family.GoldStash;
+        }
+
     }
 }

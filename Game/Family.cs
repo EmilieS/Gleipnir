@@ -22,7 +22,8 @@ namespace Game
                 removeFromFamily(mother, mother.ParentFamily);
                 removeFromFamily(father, father.ParentFamily);
             }
-            else { _goldStash.Current = 15; }
+            else { _goldStash.Current = 20; }
+            game.GoldAdded(_goldStash.Current);
             if (mother.StatusInFamily == Status.SINGLE && father.StatusInFamily == Status.SINGLE)
             {
                 mother.Engage(father);
@@ -40,31 +41,10 @@ namespace Game
             _mother.ParentFamily = this;
             _father.ParentFamily = this;
         }
-/*
-        public Family(Village village) //a eliminer
-            : base(village.Game) 
-        { _ownerVillage = village; }
-*/
-        /*public Family(Villager mother, Villager father, Village village)//a eliminer
-            : base(village.Game)
-        {
-            _mother = mother;
-            _father = father;
-            _mother.StatusInFamily = Status.MARRIED;
-            _father.StatusInFamily = Status.MARRIED;
-
-            _familyMembers = new FamilyMemberList(this);
-            _familyMembers.Add(_mother);
-            _familyMembers.Add(_father);
-            _mother.ParentFamily = this;
-            _father.ParentFamily = this;
-            village.FamiliesList.Add(this);
-        }*/
-
 
 
         Village _ownerVillage;
-        HistorizedValue<double, Family> _goldStash;
+        readonly HistorizedValue<double, Family> _goldStash;
         Villager _mother;
         Villager _father;
         FamilyMemberList _familyMembers;
@@ -72,6 +52,7 @@ namespace Game
 
         public string Name { get { return _name; } }
         public double GoldStash { get { return _goldStash.Current; } }
+        public double LastGoldStash { get { return _goldStash.Historic.Last; } }
         public Villager Mother { get { return _mother; } }
         public Villager Father { get { return _father; } }
         public IFamilyMemberList FamilyMembers { get { return _familyMembers; } }
@@ -115,10 +96,12 @@ namespace Game
             if (amount<=_goldStash.Current)
             {
                 _goldStash.Current -= amount;
+                Game.GoldRemoved(amount);
                 return amount;
             }
             double goldLeft=_goldStash.Current;
             _goldStash.Current=0;
+            Game.GoldRemoved(goldLeft);
             return goldLeft;
         }
 
@@ -131,6 +114,7 @@ namespace Game
                 throw new ArgumentOutOfRangeException();
             }
             _goldStash.Current += amount;
+            Game.GoldAdded(amount);
         }
         public double FaithAverage()
         {
@@ -184,14 +168,14 @@ namespace Game
         }
         public void IsPoorOrRich_HappinessImpact() //public for tests
         {
-            if (_goldStash.Historic.Last / FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
+            if (_goldStash.Historic.Last / FamilyMembers.Count < (Game.LastTotalGold / Game.TotalPop) / 2)
             {
                 for (int i=0; i<FamilyMembers.Count; i++)
                 {
                     FamilyMembers[i].AddOrRemoveHappiness(-0.1);
                 }
             }
-            else if (_goldStash.Historic.Last / FamilyMembers.Count > (Game.TotalGold / Game.TotalPop) * 4)
+            else if (_goldStash.Historic.Last / FamilyMembers.Count > (Game.LastTotalGold / Game.TotalPop) * 3)
             {
                 for (int i = 0; i < FamilyMembers.Count; i++)
                 {
@@ -221,6 +205,7 @@ namespace Game
             Debug.Assert(_ownerVillage.FamiliesList.Contains(this));
             _ownerVillage.FamilyDestroyed(this);
             Debug.Assert(_ownerVillage == null);
+            Game.FamilyRemoved(this);
 
         }
         override internal void CloseStep() 
