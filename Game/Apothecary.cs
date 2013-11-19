@@ -10,13 +10,11 @@ namespace Game
 {
     public class Apothecary : JobsModel
     {
-        public Apothecary()
+        public Apothecary(Game game, string name)
+            : base(game, name)
         {
             _job = Jobs.APOTHECARY;
-            jobName = "Apothicaire";
-            _workers = new List<Villager>();
-            coefficient = 15;
-            _gold = ModifyGoldGeneration();
+            _coefficient = 15;
         }
     }
 }

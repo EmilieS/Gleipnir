@@ -10,13 +10,11 @@ namespace Game
 {
     public class Cooker : JobsModel
     {
-        public Cooker()
+        public Cooker(Game game, string name)
+            : base(game, name)
         {
             _job = Jobs.COOKER;
-            jobName = "Cuisiner";
-            _workers = new List<Villager>();
-            coefficient = 13;
-            _gold = ModifyGoldGeneration();
+            _coefficient = 13;
         }
 
         /// <summary>
@@ -25,15 +23,7 @@ namespace Game
         /// <param name="person"></param>
         public override void AddHappiness()
         {
-            /*foreach (Villager v in Village) // DONT WORK FOR THE MOMENT
-            {
-                v.AddOrRemoveHappiness(10);
-            }*/
-
-            foreach (Villager person in _workers)
-            {
-                person.AddOrRemoveHappiness(-10);
-            }
+            //TODO: Add happiness to all villager not in workers
         }
     }
 }

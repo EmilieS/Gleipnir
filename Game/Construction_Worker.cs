@@ -10,13 +10,11 @@ namespace Game
 {
     public class Construction_Worker : JobsModel
     {
-        public Construction_Worker()
+        public Construction_Worker(Game game, string name)
+            : base(game, name)
         {
             _job = Jobs.CONSTRUCTION_WORKER;
-            jobName = "Constructeur";
-            _workers = new List<Villager>();
-            coefficient = 10;
-            _gold = ModifyGoldGeneration();
+            _coefficient = 10;
         }
     }
 }

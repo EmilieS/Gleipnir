@@ -13,18 +13,16 @@ namespace Game
             _items = new List<GameItem>();
             //TODO intialisation partie
 
-             _villages = new List<Village>(); 
-             CreateVillage("default");
+            _villages = new List<Village>();
+            CreateVillage("default");
 
-             Family FamilyA = _villages[0].CreateFamilyFromScratch();
-             Family FamilyB = _villages[0].CreateFamilyFromScratch();
-             Family FamilyC = _villages[0].CreateFamilyFromScratch();
-             Family FamilyD = _villages[0].CreateFamilyFromScratch();
-             Family FamilyE = _villages[0].CreateFamilyFromScratch();
+            Family FamilyA = _villages[0].CreateFamilyFromScratch();
+            Family FamilyB = _villages[0].CreateFamilyFromScratch();
+            Family FamilyC = _villages[0].CreateFamilyFromScratch();
+            Family FamilyD = _villages[0].CreateFamilyFromScratch();
+            Family FamilyE = _villages[0].CreateFamilyFromScratch();
 
-
-
-           _singleMen = new List<Villager>();
+            _singleMen = new List<Villager>();
 
             TotalPop = 10;
             TotalGold = 0;
@@ -34,9 +32,9 @@ namespace Game
         readonly List<GameItem> _items;
         readonly List<Village> _villages; //a revoir!
         public IReadOnlyList<Village> Villages { get { return _villages; } }
-        public List<Villager> _singleMen; 
-        public double TotalGold {get; set;} //will change
-        public int TotalPop {get; set;}  //will change
+        public List<Villager> _singleMen;
+        public double TotalGold { get; set; } //will change
+        public int TotalPop { get; set; }  //will change
         public int Offerings { get; set; } //will change
 
         internal void GameItemCreated(GameItem item)
@@ -64,14 +62,12 @@ namespace Game
         {
             TotalGold += amount; //curious to find out if TotalGold can be negative.
         }
-        List<string> _currentText; 
+        List<string> _currentText;
         public void NextStep() //public for testing (again)
         {
             CloseStep();
-            
+
         }
-
-
 
         public void CloseStep() //public for debug
         {
@@ -87,13 +83,13 @@ namespace Game
 
         //le 'main' de la dll sera ici : TODO
         /*
--regarder si _lifexpectancy<age => morts.
--actualiser le bonheur 
--actualiser la foi...
--ajouter l'or
--retirer l'or => offrandes
+        -regarder si _lifexpectancy<age => morts.
+        -actualiser le bonheur 
+        -actualiser la foi...
+        -ajouter l'or
+        -retirer l'or => offrandes
 
--faire liste de marriage
+        -faire liste de marriage
         */
         internal void SingleManDestroyed(Villager dead)
         {

@@ -2,28 +2,35 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Game
 {
-    public class JobsModel
+    public class JobsModel : GameItem
     {
+        protected Village _ownerVillage;
         protected List<Villager> _workers;
         protected Jobs _job;
-        protected string jobName;
-        protected double goldBase = 5;
-        protected double coefficient;
+        protected readonly string _jobName;
+        protected internal double goldBase;
+        protected double _coefficient;
         protected double _gold;
 
-        /// <summary>
-        /// Gets Gold amount is generate per tick
-        /// </summary>
-        public double Gold
+        internal JobsModel(Game game, string name)
+            : base(game)
         {
-            get { return _gold; }
+            goldBase = 5;
+            _jobName = name;
+            _workers = new List<Villager>();
+            _gold = ModifyGoldGeneration();
         }
+
+        public double GoldGenerated { get { return _gold; } }
+        public string Name { get { return _jobName; } }
+        public double Coefficient { get { return _coefficient; } }
 
         /// <summary>
         /// Gets the Workers list
@@ -39,11 +46,14 @@ namespace Game
         /// <param name="person"></param>
         public void AddPerson(Villager person)
         {
-            if (person.Job == 0)
+            if (person == null) throw new ArgumentNullException();
+            if (!_workers.Contains(person))
             {
                 person.setJob(_job);
                 _workers.Add(person);
+                _gold = ModifyGoldGeneration();
             }
+            else throw new InvalidOperationException();
         }
 
         /// <summary>
@@ -52,11 +62,14 @@ namespace Game
         /// <param name="person"></param>
         public void RemovePerson(Villager person)
         {
-            if (person.Job > 0)
+            if (person == null) throw new ArgumentNullException();
+            if (_workers.Contains(person))
             {
                 person.setJob(Jobs.NONE);
                 _workers.Remove(person);
+                _gold = ModifyGoldGeneration();
             }
+            else throw new InvalidOperationException();
         }
 
         /// <summary>
@@ -79,9 +92,9 @@ namespace Game
         {
             double result;
             if (_workers.Count > 1 && _workers.Count <= 35)
-                result = (goldBase * coefficient) - (_workers.Count - 1);
+                result = (goldBase * _coefficient) - (_workers.Count - 1);
             else if (_workers.Count > 35) result = (goldBase * 5);
-            else result = (goldBase * coefficient);
+            else result = (goldBase * _coefficient);
             return result;
         }
 
@@ -90,5 +103,18 @@ namespace Game
         /// </summary>
         /// <param name="person"></param>
         public virtual void AddHappiness() {}
+
+        internal override void OnDestroy()
+        {
+            Debug.Assert(_workers.Count == 0, "There is still someone in this Job!");
+
+        }
+
+        internal override void CloseStep()
+        {
+            //TODO: Put current values in history values
+
+            if (_workers.Count == 0) OnDestroy();
+        }
     }
 }

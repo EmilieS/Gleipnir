@@ -10,70 +10,65 @@ namespace Tests
 {
     [TestFixture]
     class TestsJobs
-    {/*
+    {
         [Test]
-        public void ApothecaryTests()
+        public void Job()
         {
-            Villager a = new Villager();
-            Villager b = new Villager();
-            Villager c = new Villager();
-            Apothecary apothecary = new Apothecary();
+            // Create game
+            Game.Game game = new Game.Game();
+            var village = game.Villages[0];
+            var v0 = village.FamiliesList[0].FamilyMembers[0];
+            var v1 = village.FamiliesList[0].FamilyMembers[1];
+            var v2 = village.FamiliesList[1].FamilyMembers[0];
+            var v3 = village.FamiliesList[1].FamilyMembers[1];
+            var v4 = village.FamiliesList[2].FamilyMembers[0];
+            var v5 = village.FamiliesList[2].FamilyMembers[1];
+            var cooker = village.JobsList[3];
 
-            // Add new worker to Apothecary job
-            Assert.That(apothecary.Workers.Count, Is.EqualTo(0));
-            apothecary.AddPerson(a);
-            Assert.That(apothecary.Workers.Count, Is.EqualTo(1));
-            Assert.That(a.Job, Is.EqualTo(Jobs.APOTHECARY));
+            // Jobs are created
+            int i;
+            for(i=0; i<8; i++)
+                Assert.That(village.JobsList[i], Is.Not.Null);
+
+            // Add new worker to job
+            Assert.That(cooker.Workers.Count, Is.EqualTo(0));
+            cooker.AddPerson(v0);
+            Assert.That(cooker.Workers.Count, Is.EqualTo(1));
+            Assert.That(v0.Job, Is.EqualTo(Jobs.COOKER));
 
             // Try add the same worker to Apothecary job
-            apothecary.AddPerson(a);
-            Assert.That(apothecary.Workers.Count, Is.EqualTo(1));
+            Assert.Throws<InvalidOperationException>(() => cooker.AddPerson(v0), "Add worker issue!");
+            Assert.That(cooker.Workers.Count, Is.EqualTo(1));
 
             // See gold generation
-            Assert.That(apothecary.Gold, Is.EqualTo(75));
-            apothecary.GenerateGold();
-            Assert.That(a.Wallet, Is.EqualTo(75));
-            Assert.That(c.Wallet, Is.EqualTo(0));
+            Assert.That(cooker.GoldGenerated, Is.EqualTo(65));
+            cooker.GenerateGold();
+            Assert.That(v0.Wallet, Is.EqualTo(65));
+            Assert.That(v1.Wallet, Is.EqualTo(0));
 
             // Add other worker
-            apothecary.AddPerson(b);
-            Assert.That(apothecary.Workers.Count, Is.EqualTo(2));
+            cooker.AddPerson(v1);
+            Assert.That(cooker.Workers.Count, Is.EqualTo(2));
 
             // New Gold generation
-            apothecary.GenerateGold();
-            Assert.That(apothecary.Gold, Is.EqualTo(74));
-            Assert.That(a.Wallet, Is.EqualTo(149));
-            Assert.That(b.Wallet, Is.EqualTo(74));
+            cooker.GenerateGold();
+            Assert.That(cooker.GoldGenerated, Is.EqualTo(64));
+            Assert.That(v0.Wallet, Is.EqualTo(129));
+            Assert.That(v1.Wallet, Is.EqualTo(64));
 
             // Remove worker
-            apothecary.RemovePerson(a);
-            Assert.That(apothecary.Workers.Count, Is.EqualTo(1));
-            Assert.That(a.Job, Is.EqualTo(Jobs.NONE));
+            cooker.RemovePerson(v0);
+            Assert.That(cooker.Workers.Count, Is.EqualTo(1));
+            Assert.That(v0.Job, Is.EqualTo(Jobs.NONE));
 
             // Try remove the same worker
-            apothecary.RemovePerson(a);
-            Assert.That(apothecary.Workers.Count, Is.EqualTo(1));
+            Assert.Throws<InvalidOperationException>(() => cooker.RemovePerson(v0), "Remove worker issue!");
+            Assert.That(cooker.Workers.Count, Is.EqualTo(1));
 
             // Gold generation up
-            apothecary.GenerateGold();
-            Assert.That(apothecary.Gold, Is.EqualTo(75));
-            Assert.That(b.Wallet, Is.EqualTo(149));
+            cooker.GenerateGold();
+            Assert.That(cooker.GoldGenerated, Is.EqualTo(65));
+            Assert.That(v1.Wallet, Is.EqualTo(129));
         }
-
-        [Test]
-        public void CookerTests()
-        {
-            Villager a = new Villager();
-            Villager b = new Villager();
-            Villager c = new Villager();
-            Cooker cooker = new Cooker();
-
-            cooker.AddPerson(a);
-            cooker.AddPerson(b);
-
-            Assert.That(c.Happiness, Is.EqualTo(80));
-            cooker.AddHappiness(c);
-            Assert.That(c.Happiness, Is.EqualTo(90));
-        }*/
     }
 }
