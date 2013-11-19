@@ -64,15 +64,13 @@ namespace Game
         {
             TotalGold += amount; //curious to find out if TotalGold can be negative.
         }
-        List<string> _currentText; 
+        List<string> _currentText;
+
         public void NextStep() //public for testing (again)
         {
             CloseStep();
             
         }
-
-
-
         public void CloseStep() //public for debug
         {
             foreach (GameItem item in _items)
@@ -85,7 +83,7 @@ namespace Game
         //liste familles?
 
 
-        //le 'main' de la dll sera ici : TODO
+        //TODO : le 'main' de la dll sera ici
         /*
 -regarder si _lifexpectancy<age => morts.
 -actualiser le bonheur 

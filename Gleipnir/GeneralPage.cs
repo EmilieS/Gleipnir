@@ -57,5 +57,7 @@ namespace GamePages
             this.Controls.Add(Home);
             Home.Show();
         }
+
+
     }
 }

@@ -41,7 +41,20 @@ namespace Game
             MARRIED = 1,
             ENGAGED = 2
         };
-
+        public enum ActivityStatus
+        {
+            NONE = 0,
+            HOBBY = 10,
+            WORKING = 20,
+            CONVOCATED = 30,
+            PUSHINGOUT = 40    //Make the fest 
+        }
+        public enum Missions
+        {
+            NONE = 0,
+            ORACLE = 10,
+            ASSASSIN = 20
+        }
 
     //}
 }
