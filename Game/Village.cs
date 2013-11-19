@@ -18,7 +18,7 @@ namespace Game
 
         readonly string _name;
         FamilyInVillageList _familiesList;
-        public FamilyInVillageList FamiliesList { get { return _familiesList; } }
+        public IReadOnlyList<Family> FamiliesList { get { return _familiesList; } }
 
         // public Village(List<Family> families)
         internal Village(Game thisGame, string name)
@@ -83,8 +83,13 @@ namespace Game
 
         public Family CreateFamily(Villager mother, Villager father)
         {
+            if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE) { throw new InvalidOperationException("gender issue! (CreateFamily)"); }
+            if (mother.ParentFamily != null && father.ParentFamily != null)
+            {
+                if (mother.ParentFamily == father.ParentFamily){ throw new InvalidOperationException("same family!"); }
+            }
             var newFamily= new Family(Game, mother, father, "default");
-            FamiliesList.Add(newFamily);
+            _familiesList.Add(newFamily);
             return newFamily;
         }
         //TODO : CreateFamilyFromScratch
@@ -95,7 +100,7 @@ namespace Game
             Villager VillagerAM = new Villager(Game, Genders.MALE);
             Villager VillagerAF = new Villager(Game, Genders.FEMALE);
             var newFamily = new Family(Game, VillagerAF, VillagerAM, "default");
-            FamiliesList.Add(newFamily);
+            _familiesList.Add(newFamily);
             return newFamily;
         }
 
@@ -198,6 +203,11 @@ namespace Game
                 }
             }
         }
+        internal void FamilyDestroyed(Family family)
+        {
+            Debug.Assert(family != null);
+            _familiesList.Remove(family);
+        }
         internal override void OnDestroy()
         {
             Debug.Assert(_familiesList.Count == 0, "there is still a family in this village!");
@@ -205,13 +215,7 @@ namespace Game
         override internal void CloseStep()
         {
             //TODO :  put current values in value history.
-            foreach(Family family in _familiesList)
-            {
-                if (family.FamilyMembers.Count == 0)
-                {
-                    _familiesList.Remove(family);
-                }
-            }  
+
             //jobs
             //TODO : events!
         }

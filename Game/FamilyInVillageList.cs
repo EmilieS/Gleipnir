@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    public class FamilyInVillageList
+    public class FamilyInVillageList : IReadOnlyList<Family>
     {
 
         public FamilyInVillageList(Village owner)
@@ -55,11 +55,11 @@ namespace Game
        {
            return _families.GetEnumerator();
        }
-        /*
+       
        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
        {
            return GetEnumerator();
-       }*/
+       }
 
 
     }
