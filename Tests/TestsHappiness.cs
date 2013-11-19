@@ -64,29 +64,47 @@ namespace Tests
             Assert.That(mother.GetFiance().GetFiance() == mother);
             Assert.That(family.Mother == mother && family.Father == father);
             Assert.That(mother.StatusInFamily == Status.MARRIED && mother.StatusInFamily == Status.MARRIED);
-            Assert.That(MyGame.TotalGold == 0);
+            Assert.AreEqual(10, MyGame.TotalPop);
+            Assert.AreEqual(20, family.GoldStash);
+            Assert.AreEqual(100, MyGame.TotalGold);// 5 families, 20 gold per family
             family.addTOGoldStash(100);
-            //Assert.That(Game.Game.TotalGold == 100);
+            Assert.That(family.GoldStash == 120);
+            Assert.That(MyGame.TotalPop == 10);
+            Assert.AreEqual(200, MyGame.TotalGold);
             MyGame.CloseStep();
-            MyGame.TotalGold = 100;
+            Assert.AreEqual(200, MyGame.LastTotalGold);
+
             Villager kid = family.newFamilyMember();
             Assert.That(family.HappinessAverage() == 80, "family average is not 80");
-            //Assert.That(Game.Game.TotalPop == 9);//once it works...
-            MyGame.TotalPop = 9;
+            Assert.That(MyGame.TotalPop == 11);
             family.IsPoorOrRich_HappinessImpact();
             Assert.That(family.HappinessAverage() == 80, "family average is not 80");
 
-            MyGame.TotalPop = 109;
-
+            family.addTOGoldStash(3000-120);
+            MyGame.CloseStep();
+            Assert.AreEqual(3080, MyGame.TotalGold);
+            Assert.AreEqual(1000, family.LastGoldStash / family.FamilyMembers.Count);
+            Assert.AreEqual(280, MyGame.LastTotalGold / MyGame.TotalPop);
             family.IsPoorOrRich_HappinessImpact();
-            Assert.That(family.HappinessAverage() == 80.1, "family average is not 80.1");
+            Assert.AreEqual(80.1, family.HappinessAverage(), "family average is not 80.1");
 
-            MyGame.TotalPop = 9;
-            MyGame.TotalGold = 10000;
+            family.takeFromGoldStash(2940);
+            MyGame.Villages[0].FamiliesList[1].addTOGoldStash(2940+2000);
+            while (MyGame.TotalPop < 100)
+            {
+                MyGame.Villages[0].FamiliesList[1].newFamilyMember();
+            }
+            MyGame.CloseStep();
+            Assert.AreEqual(60, family.LastGoldStash);
+            Assert.AreEqual(20, family.LastGoldStash / family.FamilyMembers.Count);
+            Assert.AreEqual(5080, MyGame.LastTotalGold);
+            double isequalto = 50.8;
+            Assert.AreEqual(isequalto, MyGame.LastTotalGold / MyGame.TotalPop);
+            Assert.AreEqual(3, family.FamilyMembers.Count());
             family.IsPoorOrRich_HappinessImpact();
+            Assert.AreEqual(80, family.HappinessAverage(), "family average is not 80");
             family.IsPoorOrRich_HappinessImpact();
             Assert.That(family.HappinessAverage() == 79.9, "family average is not 79.9");
-
         }
     }
 }
