@@ -15,27 +15,20 @@ namespace Game
             : base (game)
         {
             _goldStash = new HistorizedValue<double, Family>(this, "_goldstash", 20);
-            if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE)
-            {
-                throw new InvalidOperationException("gender issue!");
-            }
             if (mother.ParentFamily != null && father.ParentFamily != null)
             {
-                if (mother.ParentFamily == father.ParentFamily)
-                {
-                    throw new InvalidOperationException("same family!");
-                }
                 _goldStash.Current = mother.ParentFamily.takeFromGoldStash(mother.ParentFamily.GoldStash / 10); //10%
                 _goldStash.Current += father.ParentFamily.takeFromGoldStash(father.ParentFamily.GoldStash / 10); //10%
                 removeFromFamily(mother, mother.ParentFamily);
                 removeFromFamily(father, father.ParentFamily);
             }
-            if (mother.Fiance == null && father.Fiance == null)//for tests.
+            else { _goldStash.Current = 20; }
+            game.GoldAdded(_goldStash.Current);
+            if (mother.StatusInFamily == Status.SINGLE && father.StatusInFamily == Status.SINGLE)
             {
-                mother.Fiance = father;
-                father.Fiance = mother;
+                mother.Engage(father);
             }
-            else { _goldStash.Current = 15; }
+
             _name = name;
             _mother = mother;
             _father = father;
@@ -49,30 +42,9 @@ namespace Game
             _father.ParentFamily = this;
         }
 
-        public Family(Village village) //a eliminer
-            : base(village.Game) 
-        { _ownerVillage = village; }
-
-        public Family(Villager mother, Villager father, Village village)//a eliminer
-            : base(village.Game)
-        {
-            _mother = mother;
-            _father = father;
-            _mother.StatusInFamily = Status.MARRIED;
-            _father.StatusInFamily = Status.MARRIED;
-
-            _familyMembers = new FamilyMemberList(this);
-            _familyMembers.Add(_mother);
-            _familyMembers.Add(_father);
-            _mother.ParentFamily = this;
-            _father.ParentFamily = this;
-            village.FamiliesList.Add(this);
-        }
-
-
 
         Village _ownerVillage;
-        HistorizedValue<double, Family> _goldStash;
+        readonly HistorizedValue<double, Family> _goldStash;
         Villager _mother;
         Villager _father;
         FamilyMemberList _familyMembers;
@@ -80,6 +52,7 @@ namespace Game
 
         public string Name { get { return _name; } }
         public double GoldStash { get { return _goldStash.Current; } }
+        public double LastGoldStash { get { return _goldStash.Historic.Last; } }
         public Villager Mother { get { return _mother; } }
         public Villager Father { get { return _father; } }
         public IFamilyMemberList FamilyMembers { get { return _familyMembers; } }
@@ -94,27 +67,7 @@ namespace Game
         {
             parentFamily.FamilyMembers.Remove(villager);
         }
-        static private void Engage(Villager woman, List<Villager> MenList)
-        {
-            int i = 0;
-            while (i < MenList.Count)
-            {
-                if (woman.ParentFamily != MenList[i].ParentFamily)
-                {
-                    woman.Fiance = MenList[i];
-                    MenList[i].Fiance = woman;
-                    woman.StatusInFamily = Status.ENGAGED;
-                    MenList[i].StatusInFamily = Status.ENGAGED;
 
-                    /*Timer timer = new Timer;
-                    timer.Interval=5000;
-                    timer.Start*/
-
-                    break;
-                }
-                i++;
-            }
-        }
 
         public Villager newFamilyMember()
         {
@@ -124,11 +77,6 @@ namespace Game
             }
                 Villager kid = new Villager( _ownerVillage.Game, this, "default");
                 _familyMembers.Add(kid);
-                if (kid.Gender == Genders.FEMALE)
-                {
-                    Engage(kid, Game._singleMen);
-                }
-
                 return kid;           
         }
 
@@ -148,10 +96,12 @@ namespace Game
             if (amount<=_goldStash.Current)
             {
                 _goldStash.Current -= amount;
+                Game.GoldRemoved(amount);
                 return amount;
             }
             double goldLeft=_goldStash.Current;
             _goldStash.Current=0;
+            Game.GoldRemoved(goldLeft);
             return goldLeft;
         }
 
@@ -164,6 +114,7 @@ namespace Game
                 throw new ArgumentOutOfRangeException();
             }
             _goldStash.Current += amount;
+            Game.GoldAdded(amount);
         }
         public double FaithAverage()
         {
@@ -217,14 +168,14 @@ namespace Game
         }
         public void IsPoorOrRich_HappinessImpact() //public for tests
         {
-            if (_goldStash.Historic.Last / FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
+            if (_goldStash.Historic.Last / FamilyMembers.Count < (Game.LastTotalGold / Game.TotalPop) / 2)
             {
                 for (int i=0; i<FamilyMembers.Count; i++)
                 {
                     FamilyMembers[i].AddOrRemoveHappiness(-0.1);
                 }
             }
-            else if (_goldStash.Historic.Last / FamilyMembers.Count > (Game.TotalGold / Game.TotalPop) * 4)
+            else if (_goldStash.Historic.Last / FamilyMembers.Count > (Game.LastTotalGold / Game.TotalPop) * 3)
             {
                 for (int i = 0; i < FamilyMembers.Count; i++)
                 {
@@ -235,30 +186,34 @@ namespace Game
         }
         //---------------------------------------------------------------------------------------------------------------------------------
         #endregion
+
+        internal void FamilyMemberDestroyed(Villager dead)
+        {
+            Debug.Assert(dead != null);
+            Debug.Assert(dead.IsDead());
+            Debug.Assert(_familyMembers.Contains(dead));
+            if (_mother != null) { if (dead == _mother) { _mother = null; } }
+            if (_father != null) { if (dead == _father) { _father = null; } }
+             _familyMembers.Remove(dead);
+        }
         internal override void OnDestroy()
         {
             Debug.Assert(_familyMembers.Count==0, "there is still someone in this family!");
-
+            Debug.Assert(_ownerVillage != null);
             _mother = null;
             _father = null;
-            _ownerVillage = null;
+            Debug.Assert(_ownerVillage.FamiliesList.Contains(this));
+            _ownerVillage.FamilyDestroyed(this);
+            Debug.Assert(_ownerVillage == null);
+            Game.FamilyRemoved(this);
 
         }
         override internal void CloseStep() 
         {
-
-
             //TODO :  put current values in value history.
             _goldStash.Conclude();
-            //TODO : check everything it is linked to.
-            if (_mother.IsDead()) { _mother = null; }
-            if (_father.IsDead()) { _father = null; }
 
-
-            for (int i = 0; i < _familyMembers.Count; i++)
-            {
-                if (_familyMembers[i].IsDead()) { _familyMembers.Remove(_familyMembers[i]); }
-            }
+            if(FamilyMembers.Count==0){ OnDestroy(); }
 
             //TODO : events!
         }

@@ -8,7 +8,7 @@ namespace Game
 {
     public class Meeting
     {
-        public static void ChangeVillagersStatus(Family family)
+        public  void ChangeVillagersStatus(Family family)
         {
             foreach (Villager villager in family.FamilyMembers)
             {

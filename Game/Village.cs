@@ -10,7 +10,7 @@ namespace Game
     public class Village : GameItem
     {
         List<Family> _family;
-        List<Jobs> _jobs;
+        List<JobsModel> _jobs;
         double _familiesGold;
         double _villageFaith;
         double _villageHappiness;
@@ -18,7 +18,7 @@ namespace Game
 
         readonly string _name;
         FamilyInVillageList _familiesList;
-        public FamilyInVillageList FamiliesList { get { return _familiesList; } }
+        public IReadOnlyList<Family> FamiliesList { get { return _familiesList; } }
 
         // public Village(List<Family> families)
         internal Village(Game thisGame, string name)
@@ -27,7 +27,9 @@ namespace Game
             Debug.Assert(!String.IsNullOrWhiteSpace(name));
             Debug.Assert(thisGame != null, "thisGame is null!");
             _name = name;
-            _familiesList=new FamilyInVillageList(this);
+            _familiesList = new FamilyInVillageList(this);
+            _jobs = CreateJobs();
+            #region Old code
             /* _jobs = new List<Jobs>;
             _family = families;
 
@@ -49,7 +51,7 @@ namespace Game
             //TODO: Set village's offerings points
             _offeringsPoints = 10;
              */
-             
+            #endregion
         }
         public Village(List<Family> families, Game thisGame)//a éliminer.
             : base(thisGame)
@@ -83,8 +85,13 @@ namespace Game
 
         public Family CreateFamily(Villager mother, Villager father)
         {
+            if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE) { throw new InvalidOperationException("gender issue! (CreateFamily)"); }
+            if (mother.ParentFamily != null && father.ParentFamily != null)
+            {
+                if (mother.ParentFamily == father.ParentFamily){ throw new InvalidOperationException("same family!"); }
+            }
             var newFamily= new Family(Game, mother, father, "default");
-            FamiliesList.Add(newFamily);
+            _familiesList.Add(newFamily);
             return newFamily;
         }
         //TODO : CreateFamilyFromScratch
@@ -95,7 +102,7 @@ namespace Game
             Villager VillagerAM = new Villager(Game, Genders.MALE);
             Villager VillagerAF = new Villager(Game, Genders.FEMALE);
             var newFamily = new Family(Game, VillagerAF, VillagerAM, "default");
-            FamiliesList.Add(newFamily);
+            _familiesList.Add(newFamily);
             return newFamily;
         }
 
@@ -198,6 +205,37 @@ namespace Game
                 }
             }
         }
+
+        public List<JobsModel> JobsList { get { return _jobs; } }
+
+        private List<JobsModel> CreateJobs()
+        {
+            Debug.Assert(Game != null, "Game doesn't exist!");
+            List<JobsModel> jobList = new List<JobsModel>();
+            var apothecary = new Apothecary(Game, "Apoticaire");
+            var blacksmith = new Blacksmith(Game, "Forgeron");
+            var construction_worker = new Construction_Worker(Game, "Ouvrier");
+            var cooker = new Cooker(Game, "Cuisinier");
+            var farmer = new Farmer(Game, "Fermier");
+            var militia = new Militia(Game, "Milice");
+            var miller = new Miller(Game, "Meunier");
+            var tailor = new Tailor(Game, "Tailleur");
+            jobList.Add(apothecary);
+            jobList.Add(blacksmith);
+            jobList.Add(construction_worker);
+            jobList.Add(cooker);
+            jobList.Add(farmer);
+            jobList.Add(militia);
+            jobList.Add(miller);
+            jobList.Add(tailor);
+            return jobList;
+        }
+
+        internal void FamilyDestroyed(Family family)
+        {
+            Debug.Assert(family != null);
+            _familiesList.Remove(family);
+        }
         internal override void OnDestroy()
         {
             Debug.Assert(_familiesList.Count == 0, "there is still a family in this village!");
@@ -205,13 +243,7 @@ namespace Game
         override internal void CloseStep()
         {
             //TODO :  put current values in value history.
-            foreach(Family family in _familiesList)
-            {
-                if (family.FamilyMembers.Count == 0)
-                {
-                    _familiesList.Remove(family);
-                }
-            }  
+
             //jobs
             //TODO : events!
         }

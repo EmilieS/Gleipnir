@@ -39,11 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Meeting.cs" />
+=======
     <Compile Include="Apothecary.cs" />
     <Compile Include="Blacksmith.cs" />
     <Compile Include="Construction_Worker.cs" />
     <Compile Include="Cooker.cs" />
+>>>>>>> origin/develop
     <Compile Include="Family.cs" />
     <Compile Include="FamilyInVillageList.cs" />
     <Compile Include="FamilyMemberList.cs" />
@@ -58,8 +61,11 @@
     <Compile Include="Militia.cs" />
     <Compile Include="Miller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
     <Compile Include="SamhainFest.cs" />
+=======
     <Compile Include="Tailor.cs" />
+>>>>>>> origin/develop
     <Compile Include="Village.cs" />
     <Compile Include="Villager.cs" />
     <Compile Include="VillagerProperties.cs" />
