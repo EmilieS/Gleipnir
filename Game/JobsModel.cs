@@ -107,14 +107,11 @@ namespace Game
         internal override void OnDestroy()
         {
             Debug.Assert(_workers.Count == 0, "There is still someone in this Job!");
-
+            _ownerVillage.DestroyJobs(this);
         }
 
         internal override void CloseStep()
         {
-            //TODO: Put current values in history values
-
-            if (_workers.Count == 0) OnDestroy();
         }
     }
 }

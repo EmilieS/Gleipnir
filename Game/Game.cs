@@ -81,8 +81,6 @@ namespace Game
             
         }
 
-
-
         public void CloseStep() //public for debug
         {
             
