@@ -12,7 +12,7 @@ namespace Game
     {
         //TODO initial constructor.
         internal Family(Game game, Villager mother, Villager father, string name)
-            : base (game)
+            : base(game)
         {
             _goldStash = new HistorizedValue<double, Family>(this, "_goldstash", 20);
             if (mother.ParentFamily != null && father.ParentFamily != null)
@@ -35,13 +35,12 @@ namespace Game
             _mother.StatusInFamily = Status.MARRIED;
             _father.StatusInFamily = Status.MARRIED;
 
-            _familyMembers=new FamilyMemberList(this);
+            _familyMembers = new FamilyMemberList(this);
             _familyMembers.Add(_mother);
             _familyMembers.Add(_father);
             _mother.ParentFamily = this;
             _father.ParentFamily = this;
         }
-
 
         Village _ownerVillage;
         readonly HistorizedValue<double, Family> _goldStash;
@@ -68,19 +67,16 @@ namespace Game
             parentFamily.FamilyMembers.Remove(villager);
         }
 
-
         public Villager newFamilyMember()
         {
             if (_mother == null || _father == null)
             {
                 throw new InvalidOperationException("missing parent");
             }
-                Villager kid = new Villager( _ownerVillage.Game, this, "default");
-                _familyMembers.Add(kid);
-                return kid;           
+            Villager kid = new Villager(_ownerVillage.Game, this, "default");
+            _familyMembers.Add(kid);
+            return kid;
         }
-
-
 
         /// <summary>
         /// takes from the gold stash the amount asked, if not the maximum it can. Returns true amount.
@@ -89,23 +85,20 @@ namespace Game
         /// <returns></returns>
         public double takeFromGoldStash(double amount)
         {
-            if (amount < 0)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-            if (amount<=_goldStash.Current)
+            if (amount < 0) throw new ArgumentOutOfRangeException();
+            if (amount <= _goldStash.Current)
             {
                 _goldStash.Current -= amount;
                 Game.GoldRemoved(amount);
                 return amount;
             }
-            double goldLeft=_goldStash.Current;
-            _goldStash.Current=0;
+            else if (amount > _goldStash.Current) throw new ArgumentOutOfRangeException();
+
+            double goldLeft = _goldStash.Current;
+            _goldStash.Current = 0;
             Game.GoldRemoved(goldLeft);
             return goldLeft;
         }
-
-
 
         public void addTOGoldStash(double amount)
         {
@@ -118,8 +111,8 @@ namespace Game
         }
         public double FaithAverage()
         {
-            double faith=0;
-            int nbFamilyMembers=_familyMembers.Count;
+            double faith = 0;
+            int nbFamilyMembers = _familyMembers.Count;
             if (nbFamilyMembers == 0)
             {
                 throw new NullReferenceException();
@@ -145,10 +138,8 @@ namespace Game
             return happiness / nbFamilyMembers;
         }
 
-
         #region happiness evolution
         //-------------------------------------------------------------------------------------------------------------------------------
-
         internal void FamilyMemberDied(Villager deadVillager)
         {
             for (int i = 0; i < FamilyMembers.Count; i++)
@@ -163,14 +154,14 @@ namespace Game
         {
             for (int i = 0; i < FamilyMembers.Count; i++)
             {
-                    FamilyMembers[i].AddOrRemoveHappiness(-0.1); //Everybody, even the sick person(who already has a minus).
+                FamilyMembers[i].AddOrRemoveHappiness(-0.1); //Everybody, even the sick person(who already has a minus).
             }
         }
         public void IsPoorOrRich_HappinessImpact() //public for tests
         {
             if (_goldStash.Historic.Last / FamilyMembers.Count < (Game.LastTotalGold / Game.TotalPop) / 2)
             {
-                for (int i=0; i<FamilyMembers.Count; i++)
+                for (int i = 0; i < FamilyMembers.Count; i++)
                 {
                     FamilyMembers[i].AddOrRemoveHappiness(-0.1);
                 }
@@ -194,11 +185,11 @@ namespace Game
             Debug.Assert(_familyMembers.Contains(dead));
             if (_mother != null) { if (dead == _mother) { _mother = null; } }
             if (_father != null) { if (dead == _father) { _father = null; } }
-             _familyMembers.Remove(dead);
+            _familyMembers.Remove(dead);
         }
         internal override void OnDestroy()
         {
-            Debug.Assert(_familyMembers.Count==0, "there is still someone in this family!");
+            Debug.Assert(_familyMembers.Count == 0, "there is still someone in this family!");
             Debug.Assert(_ownerVillage != null);
             _mother = null;
             _father = null;
@@ -208,12 +199,12 @@ namespace Game
             Game.FamilyRemoved(this);
 
         }
-        override internal void CloseStep() 
+        override internal void CloseStep()
         {
             //TODO :  put current values in value history.
             _goldStash.Conclude();
 
-            if(FamilyMembers.Count==0){ OnDestroy(); }
+            if (FamilyMembers.Count == 0) { OnDestroy(); }
 
             //TODO : events!
         }

@@ -9,7 +9,6 @@ namespace Game
 {
     public class Village : GameItem
     {
-        List<Family> _family;
         List<JobsModel> _jobs;
         double _familiesGold;
         double _villageFaith;
@@ -63,26 +62,6 @@ namespace Game
             }
         }
 
-        /// <summary>
-        /// Add a family to the village
-        /// </summary>
-        /// <param name="family"></param>
-        public void AddFamily(Family family)
-        {
-            if (_family.Contains(family)) throw new InvalidOperationException();
-            else _family.Add(family);
-        }
-        
-        /// <summary>
-        /// Remove a familyfrom the village
-        /// </summary>
-        /// <param name="family"></param>
-        public void RemoveFamily(Family family)
-        {
-            if (_family.Contains(family)) _family.Remove(family);
-            else throw new InvalidOperationException();
-        }
-
         public Family CreateFamily(Villager mother, Villager father)
         {
             if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE) { throw new InvalidOperationException("gender issue! (CreateFamily)"); }
@@ -94,7 +73,7 @@ namespace Game
             _familiesList.Add(newFamily);
             return newFamily;
         }
-        //TODO : CreateFamilyFromScratch
+        
         public Family CreateFamilyFromScratch()
         {
             //Debug.Assert(_thisGame != null, "_thisGame est null!");
@@ -111,11 +90,6 @@ namespace Game
         /// Addition of all families' gold
         /// </summary>
         public double Gold { get { return _familiesGold; } }
-
-        /// <summary>
-        /// Gets all families in the village
-        /// </summary>
-        public List<Family> ListOfFamilies { get { return _family; } }
         
         /// <summary>
         /// Addition of all gold of all families

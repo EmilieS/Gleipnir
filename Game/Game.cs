@@ -19,11 +19,11 @@ namespace Game
             _villages = new List<Village>();
             CreateVillage("default");
 
-             Family FamilyA = _villages[0].CreateFamilyFromScratch();
-             Family FamilyB = _villages[0].CreateFamilyFromScratch();
-             Family FamilyC = _villages[0].CreateFamilyFromScratch();
-             Family FamilyD = _villages[0].CreateFamilyFromScratch();
-             Family FamilyE = _villages[0].CreateFamilyFromScratch();
+            Family FamilyA = _villages[0].CreateFamilyFromScratch();
+            Family FamilyB = _villages[0].CreateFamilyFromScratch();
+            Family FamilyC = _villages[0].CreateFamilyFromScratch();
+            Family FamilyD = _villages[0].CreateFamilyFromScratch();
+            Family FamilyE = _villages[0].CreateFamilyFromScratch();
 
             //TotalPop = 10;
             //TotalGold = 0;
@@ -39,7 +39,7 @@ namespace Game
         readonly HistorizedValue<int, Game> _totalPop;
         public double TotalGold { get { return _totalGold.Current; } }
         public double LastTotalGold { get { return _totalGold.Historic.Last; } }
-        public int TotalPop { get { return _totalPop.Current; } } 
+        public int TotalPop { get { return _totalPop.Current; } }
         public int Offerings { get; set; } //will change
         /*public double TotalGold { get 
         {
@@ -69,7 +69,6 @@ namespace Game
             _totalGold.Current -= amount;
         }
 
-
         internal void VillagerAdded()
         {
             _totalPop.Current++;
@@ -93,17 +92,17 @@ namespace Game
         {
             //TODO
         }
-/*
-        public void AddOrRemoveFromTotalGold(double amount)
-        {
-            _totalGold.Current += amount; //curious to find out if TotalGold can be negative.
-        }
- * */
-        List<string> _currentText; 
+        /*
+                public void AddOrRemoveFromTotalGold(double amount)
+                {
+                    _totalGold.Current += amount; //curious to find out if TotalGold can be negative.
+                }
+         * */
+        List<string> _currentText;
         public void NextStep() //public for testing (again)
         {
             CloseStep();
-            
+
         }
 
         public void CloseStep() //public for debug
@@ -116,7 +115,7 @@ namespace Game
             {
                 item.CloseStep();
             }*/
-            int i=0;
+            int i = 0;
             int tmpCount = _items.Count;
 
             GameItem tmpItem;
@@ -124,7 +123,7 @@ namespace Game
             {
                 Debug.Assert(_items[i] != null);
                 Debug.Assert(_items[i].Game != null);
-                tmpItem =_items[i];
+                tmpItem = _items[i];
                 tmpItem.CloseStep();
 
                 if (tmpItem.IsDestroyed)
@@ -169,6 +168,5 @@ namespace Game
         {
             _totalGold.Current -= family.GoldStash;
         }
-
     }
 }
