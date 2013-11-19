@@ -286,6 +286,20 @@ namespace Game
             }
         }
 
+        /// <summary>
+        /// Set a villager as Heretic 
+        /// </summary>
+        internal void SetHeretic()
+        {
+            if (_faith.Current < 20 && (_health.Current & Healths.DEAD) == 0)
+            {
+                _health.Current = Healths.HERETIC;
+            }
+        }
+        internal bool IsHeretic()
+        {
+            return ((_health.Current & Healths.HERETIC) != 0); 
+        }
 
         private void CallForHelp() //TODO : add timer /brainstorm how to use this.
         {

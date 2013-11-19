@@ -64,18 +64,13 @@ namespace Game
         {
             TotalGold += amount; //curious to find out if TotalGold can be negative.
         }
-        List<string> _currentText; 
-
-        
+        List<string> _currentText;
 
         public void NextStep() //public for testing (again)
         {
             CloseStep();
             
         }
-
-
-
         public void CloseStep() //public for debug
         {
             foreach (GameItem item in _items)
