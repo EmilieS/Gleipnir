@@ -83,6 +83,11 @@ namespace Game
 
         public Family CreateFamily(Villager mother, Villager father)
         {
+            if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE) { throw new InvalidOperationException("gender issue! (CreateFamily)"); }
+            if (mother.ParentFamily != null && father.ParentFamily != null)
+            {
+                if (mother.ParentFamily == father.ParentFamily){ throw new InvalidOperationException("same family!"); }
+            }
             var newFamily= new Family(Game, mother, father, "default");
             _familiesList.Add(newFamily);
             return newFamily;

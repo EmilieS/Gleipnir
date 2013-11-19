@@ -15,10 +15,8 @@ namespace Game
             : base (game)
         {
             _goldStash = new HistorizedValue<double, Family>(this, "_goldstash", 20);
-            if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE){throw new InvalidOperationException("gender issue!");}
             if (mother.ParentFamily != null && father.ParentFamily != null)
             {
-                if (mother.ParentFamily == father.ParentFamily){throw new InvalidOperationException("same family!");}
                 _goldStash.Current = mother.ParentFamily.takeFromGoldStash(mother.ParentFamily.GoldStash / 10); //10%
                 _goldStash.Current += father.ParentFamily.takeFromGoldStash(father.ParentFamily.GoldStash / 10); //10%
                 removeFromFamily(mother, mother.ParentFamily);

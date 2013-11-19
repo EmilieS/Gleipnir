@@ -158,9 +158,11 @@ namespace Tests
                 {
                 girl2f2=family2.newFamilyMember();
                 }while(girl2f2.Gender!=Genders.FEMALE);
+                MyGame.CloseStep();
+
+                Action Totest = delegate() { MyGame.Villages[0].CreateFamily(girl2f1, girl2f2); };
 
                 Assert.Throws<InvalidOperationException>(() => MyGame.Villages[0].CreateFamily(girl2f1, girl2f2), "gender issue!");
-
                 Assert.That(!MyGame.SingleMen.Contains(family1.Father));
                 MyGame.CloseStep();
 
@@ -181,7 +183,7 @@ namespace Tests
 
                 Assert.Throws<InvalidOperationException>(() => family1.newFamilyMember(), "missing parent");
 
-
+                
 
             }
 

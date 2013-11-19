@@ -357,15 +357,18 @@ namespace Game
             {
                 Debug.Assert(_fiance != null, "Dans CloseStep");
             }
-            if (StatusInFamily == Status.MARRIED)//à enlever plus tard.bref, ici que ca pète.
+            else if (StatusInFamily == Status.MARRIED)//à enlever plus tard.bref, ici que ca pète.
             {
                 Debug.Assert(_fiance != null, "Dans CloseStep");
             }
-
+            else
+            {
+                Debug.Assert(_fiance == null, "Dans CloseStep");
+            }
             //TODO :  put current values in value history.
             if (IsDead()) { Destroy(); }
                 //TODO : events!
-
+            
             
         }
     }

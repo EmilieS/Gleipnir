@@ -91,12 +91,13 @@ namespace Game
                 item.CloseStep();
             }*/
             int i=0;
-            int j = 0;
             int tmpCount = _items.Count;
 
             GameItem tmpItem;
-            while (i < tmpCount && j<_items.Count)
+            while (i < tmpCount)
             {
+                Debug.Assert(_items[i] != null);
+                Debug.Assert(_items[i].Game != null);
                 tmpItem =_items[i];
                 tmpItem.CloseStep();
 
@@ -104,9 +105,8 @@ namespace Game
                     tmpCount--;
                 else
                     i++;
-                j++;
-
-            }            
+            }
+            tmpItem = null;
         }
 
         //variables à avoir: les coefficients des métiers
