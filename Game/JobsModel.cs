@@ -110,7 +110,7 @@ namespace Game
 
         }
 
-        internal override void CloseStep()
+        internal override void CloseStep(List<IEvent> eventList)
         {
             //TODO: Put current values in history values
 

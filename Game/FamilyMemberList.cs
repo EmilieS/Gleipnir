@@ -15,6 +15,7 @@ namespace Game
         }
        private readonly List<Villager> _members;
        internal readonly Family _owner;
+       internal bool FamilyMemberListChanged { get; set; }
 
        public void Add(Villager villager)
        {
@@ -26,6 +27,7 @@ namespace Game
            }
            villager.ParentFamily = _owner;
            _members.Add(villager);
+           FamilyMemberListChanged = true;
        }
 
        public void Remove(Villager villager)
@@ -36,6 +38,13 @@ namespace Game
            }
            villager.ParentFamily = null;
            _members.Remove(villager);
+           FamilyMemberListChanged = true;
+       }
+       internal bool Conclude()
+       {
+           bool changed=FamilyMemberListChanged;
+           FamilyMemberListChanged = false;
+           return changed;
        }
 
 

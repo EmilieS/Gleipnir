@@ -17,6 +17,7 @@ namespace Game
             //TODO intialisation partie
             _singleMen = new List<Villager>();
             _villages = new List<Village>();
+            _eventList = new List<IEvent>();
             CreateVillage("default");
 
              Family FamilyA = _villages[0].CreateFamilyFromScratch();
@@ -102,22 +103,16 @@ namespace Game
         List<string> _currentText; 
         public void NextStep() //public for testing (again)
         {
+            DieOrIsAlive();
             CloseStep();
             
         }
 
+        List<IEvent> _eventList;
+        public IReadOnlyList<IEvent> EventList{get{return _eventList;}}
 
-
-        public void CloseStep() //public for debug
+        internal void DieOrIsAlive()
         {
-            //-----
-            _totalGold.Conclude();
-            _totalPop.Conclude();
-            //-------
-            /*foreach (GameItem item in _items)
-            {
-                item.CloseStep();
-            }*/
             int i=0;
             int tmpCount = _items.Count;
 
@@ -127,7 +122,7 @@ namespace Game
                 Debug.Assert(_items[i] != null);
                 Debug.Assert(_items[i].Game != null);
                 tmpItem =_items[i];
-                tmpItem.CloseStep();
+                tmpItem.DieOrIsAlive(_eventList);
 
                 if (tmpItem.IsDestroyed)
                     tmpCount--;
@@ -135,6 +130,15 @@ namespace Game
                     i++;
             }
             tmpItem = null;
+        }
+        internal void CloseStep() //public for debug
+        {
+            foreach (GameItem item in _items)
+            {
+                item.CloseStep(_eventList);
+            }
+            _totalGold.Conclude();
+            _totalPop.Conclude();
         }
 
         //variables à avoir: les coefficients des métiers
