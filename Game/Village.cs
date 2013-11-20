@@ -69,7 +69,7 @@ namespace Game
         /// <param name="family"></param>
         public void AddFamily(Family family)
         {
-            if (_family.Contains(family)) throw new InvalidOperationException();
+            if (_family.Contains(family)) throw new InvalidOperationException("family already belongs from village!");
             else _family.Add(family);
         }
         
@@ -80,7 +80,7 @@ namespace Game
         public void RemoveFamily(Family family)
         {
             if (_family.Contains(family)) _family.Remove(family);
-            else throw new InvalidOperationException();
+            else throw new InvalidOperationException("family does not belong from village!");
         }
 
         public Family CreateFamily(Villager mother, Villager father)
@@ -243,7 +243,7 @@ namespace Game
         override internal void CloseStep(List<IEvent> eventList)
         {
             //TODO :  put current values in value history.
-
+            if (_familiesList.Conclude()) { eventList.Add(new EventProperty<Village>(this, "FamiliesList")); }
             //jobs
             //TODO : events!
         }

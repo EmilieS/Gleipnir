@@ -107,7 +107,7 @@ namespace Game
                 i++;
             }
         }
-
+        #region called by DieOrIsAlive
         internal void FianceDestroyed()
         {
             Debug.Assert(_fiance != null);
@@ -129,7 +129,7 @@ namespace Game
                 Mourn();
             }
             Debug.Assert(_fiance == null);
-            //DeleteFiance();
         }
+        #endregion
     }
 }

@@ -55,7 +55,8 @@ namespace Game
         {
             get 
             {
-                if( _items.Count == 0 ) throw new InvalidOperationException();
+                Debug.Assert(_items.Count != 0, "there are no items!(T Last(FIFOBUFFER))");
+                if( _items.Count == 0 ) throw new InvalidOperationException("there are no items!(T Last(FIFOBUFFER))");
                 return _items[0]; 
             }
         }

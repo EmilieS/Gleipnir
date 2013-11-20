@@ -16,6 +16,7 @@ namespace Game
         }
        private readonly List<Family> _families;
        internal readonly Village _owner;
+       internal bool FamilyInVillageListChanged { get; set; }
 
        public void Add(Family family)
        {
@@ -38,7 +39,12 @@ namespace Game
            family.OwnerVillage = null;
            _families.Remove(family);
        }
-
+       internal bool Conclude()
+       {
+           bool changed = FamilyInVillageListChanged;
+           FamilyInVillageListChanged = false;
+           return changed;
+       }
 
 
        public Family this[int index]

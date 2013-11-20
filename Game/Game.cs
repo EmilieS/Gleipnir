@@ -39,7 +39,7 @@ namespace Game
         readonly HistorizedValue<double, Game> _totalGold;
         readonly HistorizedValue<int, Game> _totalPop;
         public double TotalGold { get { return _totalGold.Current; } }
-        public double LastTotalGold { get { return _totalGold.Historic.Last; } }
+        public double LastTotalGold { get { return _totalGold.Historic.Last; } }//for tests, should get eliminated
         public int TotalPop { get { return _totalPop.Current; } } 
         public int Offerings { get; set; } //will change
         /*public double TotalGold { get 
@@ -100,9 +100,10 @@ namespace Game
             _totalGold.Current += amount; //curious to find out if TotalGold can be negative.
         }
  * */
-        List<string> _currentText; 
         public void NextStep() //public for testing (again)
         {
+            ImpactHappiness();
+            Evolution();
             DieOrIsAlive();
             CloseStep();
             
@@ -110,8 +111,22 @@ namespace Game
 
         List<IEvent> _eventList;
         public IReadOnlyList<IEvent> EventList{get{return _eventList;}}
+        private void ImpactHappiness()
+        {
+            foreach (GameItem item in _items)
+            {
+                item.ImpactHappiness();
+            }
+        }
+        private void Evolution()
+        {
+            foreach (GameItem item in _items)
+            {
+                item.Evolution();
+            }
+        }
 
-        internal void DieOrIsAlive()
+        private void DieOrIsAlive()
         {
             int i=0;
             int tmpCount = _items.Count;
@@ -131,14 +146,14 @@ namespace Game
             }
             tmpItem = null;
         }
-        internal void CloseStep() //public for debug
+        private void CloseStep()
         {
             foreach (GameItem item in _items)
             {
                 item.CloseStep(_eventList);
             }
-            _totalGold.Conclude();
-            _totalPop.Conclude();
+            if(_totalGold.Conclude()){ _eventList.Add(new EventProperty<Game>(this, "TotalGold")); }
+            if(_totalPop.Conclude()){ _eventList.Add(new EventProperty<Game>(this, "TotalPop")); }
         }
 
         //variables à avoir: les coefficients des métiers

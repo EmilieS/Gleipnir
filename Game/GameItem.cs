@@ -22,6 +22,11 @@ namespace Game
 
         public bool IsDestroyed { get { return _game == null; } }
 
+
+        internal virtual void ImpactHappiness() {}
+
+        internal virtual void Evolution() {}
+
         internal void Destroy()
         {
             Debug.Assert(_game != null, "Destroy must be called only once.");
@@ -29,7 +34,6 @@ namespace Game
             _game.GameItemDestroyed(this);
             _game = null;
         }
-
         internal abstract void OnDestroy();
         internal virtual void DieOrIsAlive(List<IEvent> eventList){}
 
