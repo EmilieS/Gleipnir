@@ -27,7 +27,7 @@ namespace Game
 
             //TotalPop = 10;
             //TotalGold = 0;
-            Offerings = 0;
+            _offerings = 100;
         }
 
         readonly List<GameItem> _items;
@@ -37,10 +37,11 @@ namespace Game
         public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
         readonly HistorizedValue<double, Game> _totalGold;
         readonly HistorizedValue<int, Game> _totalPop;
+        int _offerings;
         public double TotalGold { get { return _totalGold.Current; } }
         public double LastTotalGold { get { return _totalGold.Historic.Last; } }
         public int TotalPop { get { return _totalPop.Current; } }
-        public int Offerings { get; set; } //will change
+        public int Offerings { get { return _offerings; } } //will change
         /*public double TotalGold { get 
         {
             double totalGold = 0;
@@ -67,6 +68,12 @@ namespace Game
         {
             Debug.Assert(amount > 0, "(GoldRemoved)");
             _totalGold.Current -= amount;
+        }
+        internal void AddOrTakeFromOfferings(int amount)
+        {
+            int result = Offerings + amount;
+            if (result < 0) _offerings = 0;
+            else _offerings += amount;
         }
 
         internal void VillagerAdded()

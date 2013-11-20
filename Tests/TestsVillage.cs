@@ -62,7 +62,8 @@ namespace Tests
             Assert.That(village.Gold, Is.EqualTo(0));
 
             // Negative gold -> 0
-            Assert.Throws<ArgumentOutOfRangeException>(() => family1.takeFromGoldStash(1), "Negative gold issue!");
+            family1.takeFromGoldStash(1);
+            Assert.That(family1.GoldStash, Is.EqualTo(0));
             village.CalculateVillageGold();
             Assert.That(village.Gold, Is.EqualTo(0));
         }
@@ -102,6 +103,51 @@ namespace Tests
 
             village.CalculateAverageVillageFaith();
             Assert.That(village.Faith, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void happinessTests()
+        {
+            var myGame = new Game.Game();
+            var village = myGame.Villages[0];
+            var families = village.FamiliesList;
+            var family1 = families[0];
+
+            Assert.That(village.CalculateAverageVillageHappiness(), Is.EqualTo(80));
+
+            // Less happiness for one family
+            family1.FamilyMembers[0].AddOrRemoveHappiness(-50);
+            family1.FamilyMembers[1].AddOrRemoveHappiness(-50);
+            Assert.That(village.CalculateAverageVillageHappiness(), Is.EqualTo(70));
+
+            // More happiness for one family
+            family1.FamilyMembers[0].AddOrRemoveHappiness(100);
+            family1.FamilyMembers[1].AddOrRemoveHappiness(100);
+            Assert.That(village.CalculateAverageVillageHappiness(), Is.EqualTo(84));
+        }
+
+        [Test]
+        public void offeringsTests()
+        {
+            var myGame = new Game.Game();
+            var village = myGame.Villages[0];
+            var families = village.FamiliesList;
+            var family1 = families[0];
+
+            // Default
+            Assert.That(myGame.Offerings, Is.EqualTo(100));
+            Assert.That(village.OfferingsPointsPerTick, Is.EqualTo(0));
+
+            // Modify gold take per tick
+            village.SetOfferingsPoints(5);
+            Assert.That(village.OfferingsPointsPerTick, Is.EqualTo(5));
+
+            // Take gold in families and add offering to player
+            Assert.That(family1.GoldStash, Is.EqualTo(20));
+            Assert.That(myGame.Offerings, Is.EqualTo(100));
+            village.TransformGoldToOfferingsPoints(village.OfferingsPointsPerTick);
+            Assert.That(family1.GoldStash, Is.EqualTo(15));
+            Assert.That(myGame.Offerings, Is.EqualTo(125));
         }
     }
 }

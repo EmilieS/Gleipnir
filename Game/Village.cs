@@ -151,6 +151,11 @@ namespace Game
         }
 
         /// <summary>
+        /// Gets player's offerings points
+        /// </summary>
+        public int OfferingsPointsPerTick { get { return _offeringsPoints; } }
+
+        /// <summary>
         /// Modify number offering points generated
         /// </summary>
         /// <returns></returns>
@@ -168,14 +173,25 @@ namespace Game
             {
                 _offeringsPoints = playerChoice;
             }
+        }
 
-            if (_offeringsPoints >= 1 && _offeringsPoints <= 100)
+        /// <summary>
+        /// Take gold from families and add offerings points
+        /// </summary>
+        /// <param name="amount"></param>
+        public void TransformGoldToOfferingsPoints(int amount)
+        {
+            if (amount >= 1 && amount <= 100)
             {
-                foreach (Family fam in _familiesList  )
+                int offerings = 0;
+                foreach (Family fam in _familiesList)
                 {
-                    fam.takeFromGoldStash(playerChoice);
+                    fam.takeFromGoldStash(amount);
+                    offerings += amount;
                 }
+                Game.AddOrTakeFromOfferings(offerings);
             }
+            else throw new ArgumentOutOfRangeException();
         }
 
         public List<JobsModel> JobsList { get { return _jobs; } }

@@ -92,12 +92,18 @@ namespace Game
                 Game.GoldRemoved(amount);
                 return amount;
             }
-            else if (amount > _goldStash.Current) throw new ArgumentOutOfRangeException();
-
-            double goldLeft = _goldStash.Current;
-            _goldStash.Current = 0;
-            Game.GoldRemoved(goldLeft);
-            return goldLeft;
+            else if (amount > _goldStash.Current && _goldStash.Current > 0)
+            {
+                double goldLeft = _goldStash.Current;
+                _goldStash.Current = 0;
+                Game.GoldRemoved(goldLeft);
+                return goldLeft;
+            }
+            else
+            {
+                _goldStash.Current = 0;
+                return 0;
+            }
         }
 
         public void addTOGoldStash(double amount)

@@ -111,11 +111,15 @@ namespace Tests
             var MyGame = new Game.Game();
             Family family1 = MyGame.Villages[0].CreateFamilyFromScratch();
             Family family2 = MyGame.Villages[0].CreateFamilyFromScratch();
-            //need a goldstash assert here.
+
             family1.takeFromGoldStash(100);
+            Assert.That(family1.GoldStash, Is.EqualTo(0));
             family1.addTOGoldStash(100);
+            Assert.That(family1.GoldStash, Is.EqualTo(100));
             family2.takeFromGoldStash(100);
+            Assert.That(family2.GoldStash, Is.EqualTo(0));
             family2.addTOGoldStash(100);
+            Assert.That(family2.GoldStash, Is.EqualTo(100));
 
             Villager girlf1;
             do
