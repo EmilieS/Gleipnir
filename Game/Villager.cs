@@ -60,9 +60,10 @@ namespace Game
         Genders _gender;
         Jobs _job;
         double _lifeExpectancy;
-        float _age;
+        double _age;
         double _goldInWallet;      
         Villager _fiance; //!!!!!
+        public Healths Health{get{return _health.Current;}}
 
 
         readonly HistorizedValue<double, Villager> _faith; //scale from 0 to 100.
@@ -71,6 +72,7 @@ namespace Game
         readonly HistorizedValue<Status, Villager> _statusInFamily; //!! TODO : update !
 
 
+        public double Age { get { return _age; } }
         public double Faith  { get { return _faith.Current ; } } //hmm
         public double Happiness { get { return _happiness.Current; } } //hmm
         public Genders Gender { get { return _gender; }} 
@@ -80,12 +82,12 @@ namespace Game
         public Status StatusInFamily
         {
             get { return _statusInFamily.Current; }
-            internal set { _statusInFamily.Current = value; }//riqueraque
+            internal set { _statusInFamily.Current = value; }
         }
         public Family ParentFamily
         {
             get { return _parentFamily; }
-            set { _parentFamily = value; } //riqueraque
+            internal set { _parentFamily = value; } 
         }
         public void setJob(Jobs NewJob)
         {
@@ -96,22 +98,7 @@ namespace Game
 
         #region death & family issues.
         //=====================================================================================
-        //public for tests... should be internal.
-        /// <summary>
-        /// should only be called at world tick. If you want to kill a villager, use kill.
-        /// </summary>
-        public void DieOrIsAlive()
-        {
-            if (_lifeExpectancy <= _age) 
-            {
-                _health.Current = Healths.DEAD;
-                if (ParentFamily != null)
-                {
-                    ParentFamily.FamilyMemberDied(this);
-                }
-                    
-            }
-        }
+
         /// <summary>
         /// should only be called at world tick.
         /// </summary>
@@ -348,30 +335,31 @@ namespace Game
             //_job = null;
         }
 
-        override internal void CloseStep() //a revoir le contenu exact
+        /// <summary>
+        /// should only be called at world tick. If you want to kill a villager, use kill.
+        /// </summary>
+        override internal void DieOrIsAlive(List<IEvent> eventList)
         {
-            _statusInFamily.Conclude();
-            _happiness.Conclude();
-            _faith.Conclude();
-            _health.Conclude();
+            if (_lifeExpectancy <= _age)
+            {
+                _health.Current = Healths.DEAD;
+                if (ParentFamily != null)
+                {
+                    ParentFamily.FamilyMemberDied(this);
+                }
 
-            if (StatusInFamily == Status.ENGAGED)//à enlever plus tard.bref, ici que ca pète.
-            {
-                Debug.Assert(_fiance != null, "Dans CloseStep");
             }
-            else if (StatusInFamily == Status.MARRIED)//à enlever plus tard.bref, ici que ca pète.
-            {
-                Debug.Assert(_fiance != null, "Dans CloseStep");
-            }
-            else
-            {
-                Debug.Assert(_fiance == null, "Dans CloseStep");
-            }
-            //TODO :  put current values in value history.
-            if (IsDead()) { Destroy(); }
-                //TODO : events!
-            
-            
+            Debug.Assert(((StatusInFamily == Status.ENGAGED || StatusInFamily == Status.MARRIED) && _fiance != null) || ((StatusInFamily == Status.SINGLE || StatusInFamily == Status.MOURNING) && _fiance == null), "Dans DieOrIsAlive");
+            if (IsDead()) { eventList.Add(new VillagerDyingEvent(this)); Destroy(); }
+        }
+
+        override internal void CloseStep(List<IEvent> eventList)
+        {
+            if (_statusInFamily.Conclude()) { eventList.Add(new EventProperty<Villager>(this, "StatusInFamily")); }
+            if (_happiness.Conclude()) { eventList.Add(new EventProperty<Villager>(this, "Happiness")); }        
+            if (_faith.Conclude()){eventList.Add(new EventProperty<Villager>(this, "Faith")); }
+            if (_health.Conclude()){eventList.Add(new EventProperty<Villager>(this, "Health")); }
+                  
         }
     }
 

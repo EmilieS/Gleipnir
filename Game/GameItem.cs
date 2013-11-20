@@ -31,7 +31,8 @@ namespace Game
         }
 
         internal abstract void OnDestroy();
+        internal virtual void DieOrIsAlive(List<IEvent> eventList){}
 
-        internal abstract void CloseStep();
+        internal abstract void CloseStep(List<IEvent> eventList);
     }
 }

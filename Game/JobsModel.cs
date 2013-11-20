@@ -110,7 +110,7 @@ namespace Game
             _ownerVillage.DestroyJobs(this);
         }
 
-        internal override void CloseStep()
+        internal override void CloseStep(List<IEvent> eventList)
         {
         }
     }

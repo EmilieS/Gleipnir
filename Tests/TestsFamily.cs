@@ -34,8 +34,8 @@ namespace Tests
 
                 Villager mother=family.Mother;
                 family.Mother.Kill();
-                family.Mother.DieOrIsAlive();
-                MyGame.CloseStep();
+                //family.Mother.DieOrIsAlive();
+                MyGame.NextStep();
 
 
                 Assert.That(family.FamilyMembers.Count == 1);
@@ -44,7 +44,7 @@ namespace Tests
                 Assert.Throws<InvalidOperationException>(() => family.Father.GetFiance(), "villager is mourning!");
                 Assert.That(family.Father.StatusInFamily == Status.MOURNING);
 
-                MyGame.CloseStep();
+                MyGame.NextStep();
             }
 
 
@@ -81,10 +81,10 @@ namespace Tests
                 Assert.That(!MyGame.SingleMen.Contains(guy1f2));
 
                 guy1f2.Kill();
-                guy1f2.DieOrIsAlive();
-                MyGame.CloseStep();//
-                MyGame.CloseStep();
-                MyGame.CloseStep();
+                //guy1f2.DieOrIsAlive();
+                MyGame.NextStep();//
+                MyGame.NextStep();
+                MyGame.NextStep();
                 Assert.That(girlf1.StatusInFamily == Status.SINGLE, "is not single!");
                 Assert.Throws<InvalidOperationException>(() => girlf1.GetFiance(), "is single");
 
@@ -97,8 +97,8 @@ namespace Tests
                 Assert.That(guy2f2.GetFiance() == girlf1);
                 
                  guy2f2.Kill();
-                 guy2f2.DieOrIsAlive();
-                 MyGame.CloseStep();
+                 //guy2f2.DieOrIsAlive();
+                 MyGame.NextStep();
 
                  Assert.That(girlf1.StatusInFamily == Status.SINGLE);
                  Assert.Throws<InvalidOperationException>(() => girlf1.GetFiance(), "fiance is single");
@@ -158,13 +158,13 @@ namespace Tests
                 {
                 girl2f2=family2.newFamilyMember();
                 }while(girl2f2.Gender!=Genders.FEMALE);
-                MyGame.CloseStep();
+                MyGame.NextStep();
 
                 Action Totest = delegate() { MyGame.Villages[0].CreateFamily(girl2f1, girl2f2); };
 
                 Assert.Throws<InvalidOperationException>(() => MyGame.Villages[0].CreateFamily(girl2f1, girl2f2), "gender issue!");
                 Assert.That(!MyGame.SingleMen.Contains(family1.Father));
-                MyGame.CloseStep();
+                MyGame.NextStep();
 
 
 
@@ -178,8 +178,8 @@ namespace Tests
                 
 
                 family1.Mother.Kill();
-                family1.Mother.DieOrIsAlive();
-                MyGame.CloseStep();
+                //family1.Mother.DieOrIsAlive();
+                MyGame.NextStep();
 
                 Assert.Throws<InvalidOperationException>(() => family1.newFamilyMember(), "missing parent");
 

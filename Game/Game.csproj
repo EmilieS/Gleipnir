@@ -43,9 +43,12 @@
     <Compile Include="Blacksmith.cs" />
     <Compile Include="Construction_Worker.cs" />
     <Compile Include="Cooker.cs" />
+    <Compile Include="Event.cs" />
     <Compile Include="Family.cs" />
     <Compile Include="FamilyInVillageList.cs" />
     <Compile Include="FamilyMemberList.cs" />
+    <Compile Include="IEvent.cs" />
+    <Compile Include="IWindow.cs" />
     <Compile Include="VillagerFiance.cs" />
     <Compile Include="Farmer.cs" />
     <Compile Include="FIFOBuffer.cs" />

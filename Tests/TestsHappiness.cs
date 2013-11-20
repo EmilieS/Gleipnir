@@ -36,10 +36,10 @@ namespace Tests
             Assert.That(family.HappinessAverage() == 80, "family average is not 80");
             Assert.That(family.FamilyMembers.Count == 3);
             mother.Kill();
-            mother.DieOrIsAlive();
-            MyGame.CloseStep();
-            MyGame.CloseStep();
-            MyGame.CloseStep();
+            //mother.DieOrIsAlive();
+            MyGame.NextStep();
+            MyGame.NextStep();
+            MyGame.NextStep();
             Assert.That(family.FamilyMembers.Count == 2);
             for (int i = 0; i < family.FamilyMembers.Count; i++)
             {
@@ -59,7 +59,6 @@ namespace Tests
             Villager mother = family.Mother;
             Villager father = family.Father;
 
-            mother.ParentFamily = family;
             Assert.That(mother.ParentFamily == family);
             Assert.That(mother.GetFiance().GetFiance() == mother);
             Assert.That(family.Mother == mother && family.Father == father);
@@ -71,7 +70,7 @@ namespace Tests
             Assert.That(family.GoldStash == 120);
             Assert.That(MyGame.TotalPop == 10);
             Assert.AreEqual(200, MyGame.TotalGold);
-            MyGame.CloseStep();
+            MyGame.NextStep();
             Assert.AreEqual(200, MyGame.LastTotalGold);
 
             Villager kid = family.newFamilyMember();
@@ -81,7 +80,7 @@ namespace Tests
             Assert.That(family.HappinessAverage() == 80, "family average is not 80");
 
             family.addTOGoldStash(3000-120);
-            MyGame.CloseStep();
+            MyGame.NextStep();
             Assert.AreEqual(3080, MyGame.TotalGold);
             Assert.AreEqual(1000, family.LastGoldStash / family.FamilyMembers.Count);
             Assert.AreEqual(280, MyGame.LastTotalGold / MyGame.TotalPop);
@@ -94,7 +93,7 @@ namespace Tests
             {
                 MyGame.Villages[0].FamiliesList[1].newFamilyMember();
             }
-            MyGame.CloseStep();
+            MyGame.NextStep();
             Assert.AreEqual(60, family.LastGoldStash);
             Assert.AreEqual(20, family.LastGoldStash / family.FamilyMembers.Count);
             Assert.AreEqual(5080, MyGame.LastTotalGold);

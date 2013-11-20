@@ -245,7 +245,7 @@ namespace Game
         {
             Debug.Assert(_familiesList.Count == 0, "there is still a family in this village!");
         }
-        override internal void CloseStep()
+        override internal void CloseStep(List<IEvent> eventList)
         {
             //TODO :  put current values in value history.
 
