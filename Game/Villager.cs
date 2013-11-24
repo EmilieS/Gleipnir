@@ -26,14 +26,14 @@ namespace Game
             switch (rand.Next(2))
             {
                 case 0: _gender = Genders.MALE; _job = parentFamily.Father.Job; g.AddSingleMan(this); break; //changera    
-                case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; Engage(this, parentFamily); break; 
+                case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; Engage(this, parentFamily); break;
             }
             if (rand.Next(101) < 2)
                 _faith.Current = 13;
             else
                 _faith.Current = parentFamily.FaithAverage();
 
-            _happiness.Current = parentFamily.HappinessAverage();            
+            _happiness.Current = parentFamily.HappinessAverage();
             //_job = Jobs.FARMER;
             _health.Current = Healths.NONE;
             _age = 0;
@@ -61,7 +61,7 @@ namespace Game
         Jobs _job;
         double _lifeExpectancy;
         float _age;
-        double _goldInWallet;      
+        double _goldInWallet;
         Villager _fiance; //!!!!!
         ActivityStatus _villagerActivity;
 
@@ -72,9 +72,9 @@ namespace Game
         readonly HistorizedValue<Status, Villager> _statusInFamily; //!! TODO : update !
 
 
-        public double Faith  { get { return _faith.Current ; } } //hmm
+        public double Faith { get { return _faith.Current; } } //hmm
         public double Happiness { get { return _happiness.Current; } } //hmm
-        public Genders Gender { get { return _gender; }} 
+        public Genders Gender { get { return _gender; } }
         public Jobs Job { get { return _job; } }
         public double LifeExpectancy { get { return _lifeExpectancy; } }
 
@@ -255,11 +255,11 @@ namespace Game
         }
         internal bool IsDead()
         {
-            return ((_health.Current & Healths.DEAD) != 0);                    
+            return ((_health.Current & Healths.DEAD) != 0);
         }
         internal void Sickly()
         {
-            if ((_health.Current & Healths.SICK) != 0) 
+            if ((_health.Current & Healths.SICK) != 0)
             {
                 AddOrRemoveHappiness(0.1);
                 ParentFamily.FamilyMemberIsSick();
@@ -269,16 +269,13 @@ namespace Game
         /// <summary>
         /// Set a villager as Heretic 
         /// </summary>
-        internal void SetHeretic()
+        public void SetHeretic()
         {
-            if (_faith.Current < 20 && (_health.Current & Healths.DEAD) == 0)
-            {
-                _health.Current = Healths.HERETIC;
-            }
+            _health.Current = Healths.HERETIC;
         }
-        internal bool IsHeretic()
+        public bool IsHeretic()
         {
-            return ((_health.Current & Healths.HERETIC) != 0); 
+            return ((_health.Current & Healths.HERETIC) != 0);
         }
 
         private void CallForHelp() //TODO : add timer /brainstorm how to use this.
@@ -396,7 +393,7 @@ namespace Game
             //TODO :  put current values in value history.
             if (IsDead()) { Destroy(); }
             //TODO : events!
-            
+
 
         }
     }
