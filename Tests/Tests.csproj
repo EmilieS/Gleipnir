@@ -50,6 +50,7 @@
     <Compile Include="TestsJobs.cs" />
     <Compile Include="TestsMeeting.cs" />
     <Compile Include="TestsVillage.cs" />
+    <Compile Include="TestVillageFest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Buildings\Buildings.csproj">

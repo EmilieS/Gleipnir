@@ -6,16 +6,20 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    class SamhainFest
+    public class SamhainFest : GameItem
     {
         double _duration;
-        
+
         // TODO : define the duration of  the villageFest, implement duration
-        SamhainFest()
+        public SamhainFest(Game g)
+            : base(g)
         {
             _duration = 15;
         }
-
+        /// <summary>
+        /// This is the duration of Samhain
+        /// For the moment at 24/11/13 I don't know how to implement this.
+        /// </summary>
         public double Duration
         {
             get
@@ -32,12 +36,12 @@ namespace Game
                     if (!villager.IsHeretic())
                     {
                         villager.ActivityStatus = ActivityStatus.PUSHINGOUT;
+                        villager.AddOrRemoveHappiness(15.0);
+                        villager.AddOrRemoveFaith(15.0);
                     }
-                    villager.AddOrRemoveHappiness(15);
-                    villager.AddOrRemoveFaith(15);
                 }
             }
         }
-       
+
     }
 }
