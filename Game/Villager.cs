@@ -38,11 +38,6 @@ namespace Game
             _health.Current = Healths.NONE;
             _age = 0;
             _lifeExpectancy = 85;
-
-            _statusInFamily.Conclude();
-            _happiness.Conclude();
-            _faith.Conclude();
-            _health.Conclude();
         }
         public Villager(Game g, Genders gender)
             : base(g)
@@ -72,7 +67,7 @@ namespace Game
         double _lifeExpectancy;
         double _age;
         double _goldInWallet;
-        Villager _fiance; //!!!!!
+        Villager _fiance;
         public Healths Health { get { return _health.Current; } }
 
 
@@ -109,14 +104,7 @@ namespace Game
         #region death & family issues.
         //=====================================================================================
 
-        /// <summary>
-        /// should only be called at world tick.
-        /// </summary>
-        /// <param name="time"></param>
-        internal void AgeTick(float time)
-        {
-            _age += time;
-        }
+
 
 
         //======================================================================================
@@ -242,29 +230,7 @@ namespace Game
         {
             return ((_health.Current & Healths.DEAD) != 0);
         }
-
-        private void CallForHelp() //TODO : add timer /brainstorm how to use this.
-        {
-            if (_happiness.Current < 25 && (_health.Current & Healths.UNHAPPY) == 0)
-            {
-                _health.Current = _health.Current | Healths.UNHAPPY;
-
-            }
-        }
-
-        private void CallForHelpEnded() //once the CallForHelp timer is ended.
-        {
-            if (_happiness.Current > 27)
-            {
-                _health.Current = _health.Current & ~Healths.UNHAPPY;
-                AddOrRemoveFaith(20);
-            }
-            else if (_happiness.Current < 25)
-            {
-                AddOrRemoveFaith(-20);
-            }
-        }
-
+      
 
         /// <summary>
         /// can be negative to take away faith.
@@ -322,7 +288,68 @@ namespace Game
         }
         #endregion
         #region called by Evolution
+        /// <summary>
+        /// should only be called at world tick.
+        /// </summary>
+        /// <param name="time"></param>
+        internal void AgeTick(double time)
+        {
+            _age += time;
+        }
+        internal void RegularBirths(double time)
+        {
+            if (StatusInFamily!=Status.MARRIED && _gender!=Genders.FEMALE)
+                return;
+            Debug.Assert(_parentFamily!=null);
+            
+            int i =0;
+            int count = Game._regularBirthDates.Count();
+            while(i<count && Game._regularBirthDates[i]<_age+time)
+            {
+                if (_age < Game._regularBirthDates[i])
+                { _parentFamily.newFamilyMember(); }
+            }
 
+        }
+
+        int _callForHelpTickTimer;
+        private void CallForHelpCheck()
+        {
+            if ((_health.Current & Healths.UNHAPPY) == 0)
+            {
+                CallForHelp();
+            }
+            if ((_health.Current & Healths.UNHAPPY) != 0)
+            {
+                if (_callForHelpTickTimer == 20)//can get adjusted
+                {
+                    _callForHelpTickTimer = 0;
+                    CallForHelpEnded();
+                }
+                else { _callForHelpTickTimer++; }
+            }
+
+        }
+        private void CallForHelp()
+        {
+            if (_happiness.Current < 25 && (_health.Current & Healths.UNHAPPY) == 0)
+            {
+                _health.Current = _health.Current | Healths.UNHAPPY;
+
+            }
+        }
+        private void CallForHelpEnded()
+        {
+            if (_happiness.Current > 27)
+            {
+                AddOrRemoveFaith(20);
+            }
+            else if (_happiness.Current < 25)
+            {
+                AddOrRemoveFaith(-20);
+            }
+            _health.Current = _health.Current & ~Healths.UNHAPPY;
+        }
         #endregion
         #region called by DieOrIsAlive
         override internal void OnDestroy()
@@ -356,7 +383,13 @@ namespace Game
         }
         internal override void Evolution()
         {
-            //TODO: unhappy check
+            
+            double time = Game._ageTickTime;
+            RegularBirths(time);
+            AgeTick(time);
+
+            CallForHelpCheck();
+
             //TODO: fric.
             //TODO: faith blabla
             //otherstuff
