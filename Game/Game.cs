@@ -111,7 +111,6 @@ namespace Game
         {
             DieOrIsAlive();
             CloseStep();
-
         }
 
         List<IEvent> _eventList;

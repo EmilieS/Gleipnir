@@ -26,9 +26,7 @@ namespace Tests
             // Kill a family
             family1.FamilyMembers[0].Kill();
             family1.FamilyMembers[1].Kill();
-            family1.FamilyMembers[0].DieOrIsAlive();
-            family1.FamilyMembers[1].DieOrIsAlive();
-            myGame.CloseStep();
+            myGame.NextStep();
             Assert.That(village.FamiliesList.Count, Is.EqualTo(5));
         }
         
