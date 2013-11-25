@@ -16,7 +16,7 @@ namespace Tests
         {
             var MyGame = new Game.Game();
             Assert.AreEqual(10, MyGame.TotalPop);
-            for (int i = 0; i < 12*18; i++)
+            for (int i = 0; i < /*12*18*/216; i++)
             {
                 MyGame.NextStep();
             }
@@ -28,17 +28,12 @@ namespace Tests
                 MyGame.NextStep();
             }
             int j = 0;
-            Family family1 = MyGame.Villages[0].CreateFamilyFromScratch();
-            Family family2 = MyGame.Villages[0].CreateFamilyFromScratch();
-            Family family3 = MyGame.Villages[0].CreateFamilyFromScratch();
-            while (MyGame.Villages[0].FamiliesList.Count == 8)
+            while (MyGame.Villages[0].FamiliesList.Count == 5)
             {
                 MyGame.NextStep();
                 j++;
             }
-            //Assert.AreEqual(15, MyGame.TotalPop);
-            //Assert.AreEqual(1, j);
-           //Assert.AreEqual(4, MyGame.SingleMen.Count);
+            Assert.Greater(MyGame.Villages[0].FamiliesList.Count, 5);
             //Assert.AreEqual(6, MyGame.Villages[0].FamiliesList.Count);
         }
     }

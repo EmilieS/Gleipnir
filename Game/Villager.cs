@@ -21,14 +21,13 @@ namespace Game
             _statusInFamily.Current = Status.SINGLE;
             g.VillagerAdded();
 
-            Random rand = new Random();//to be moved elsewhere.
             Debug.Assert(g != null);
-            switch (rand.Next(2))
+            switch (Game.Rand.Next(2))
             {
                 case 0: _gender = Genders.MALE; _job = parentFamily.Father.Job; g.AddSingleMan(this); break; //changera    
                 case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; Engage(this, parentFamily); break;
             }
-            if (rand.Next(101) < 2)
+            if (Game.Rand.Next(101) < 2)
                 _faith.Current = 13;
             else
                 _faith.Current = parentFamily.FaithAverage();
@@ -37,7 +36,8 @@ namespace Game
             //_job = Jobs.FARMER;
             _health.Current = Healths.NONE;
             _age = 0;
-            _lifeExpectancy = 85;
+            //_lifeExpectancy = 85;
+            _lifeExpectancy = 85*12;
         }
         public Villager(Game g, Genders gender)
             : base(g)
@@ -49,7 +49,8 @@ namespace Game
             g.VillagerAdded();
             _faith.Current = 100;
             _happiness.Current = 80;
-            _lifeExpectancy = 85;
+           // _lifeExpectancy = 85;
+            _lifeExpectancy = 85 * 12;
             _gender = gender;
             _statusInFamily.Current = Status.SINGLE;
 
@@ -351,7 +352,7 @@ namespace Game
 
             int i = 0;
             int count = Game._regularBirthDates.Count();
-            while (i < count && Game._regularBirthDates[i] < _age)
+            while (i < count && Game._regularBirthDates[i] <= _age)
             {
                 if (_age - time < Game._regularBirthDates[i])
                 { 

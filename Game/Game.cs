@@ -19,15 +19,24 @@ namespace Game
             _villages = new List<Village>();
             _eventList = new List<IEvent>();
             _regularBirthDates= new double[5];
-            _ageTickTime = 0.0834;//time(years) between each tick.
+            //===to be changed
+            //_ageTickTime = 0.0834;//time(years) between each tick.
+            _ageTickTime = 1;
+            Rand = new Random();//to be moved elsewhere.
 
-            int j=18;
+            /*int j=18;
             for (int i = 0; i < 5; i++)//must be kept orderly
             {
                 _regularBirthDates[i] = j;
                 j=j + 4;
+            }*/
+            int j = 216;
+            for (int i = 0; i < 5; i++)//must be kept orderly
+            {
+                _regularBirthDates[i] = j;
+                j = j + 4*12;
             }
- 
+            //===
             CreateVillage("default");
 
              Family FamilyA = _villages[0].CreateFamilyFromScratch();
@@ -52,6 +61,7 @@ namespace Game
         public int Offerings { get; set; } //will change
         readonly internal double[] _regularBirthDates;
         readonly internal double _ageTickTime;
+        public Random Rand;
 
         /*public double TotalGold { get 
         {
