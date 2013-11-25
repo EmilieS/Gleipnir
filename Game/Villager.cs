@@ -21,19 +21,19 @@ namespace Game
             _statusInFamily.Current = Status.SINGLE;
             g.VillagerAdded();
 
-            Random rand=new Random();//to be moved elsewhere.
+            Random rand = new Random();//to be moved elsewhere.
             Debug.Assert(g != null);
             switch (rand.Next(2))
             {
                 case 0: _gender = Genders.MALE; _job = parentFamily.Father.Job; g.AddSingleMan(this); break; //changera    
-                case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; Engage(this, parentFamily); break; 
+                case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; Engage(this, parentFamily); break;
             }
             if (rand.Next(101) < 2)
                 _faith.Current = 13;
             else
                 _faith.Current = parentFamily.FaithAverage();
 
-            _happiness.Current = parentFamily.HappinessAverage();            
+            _happiness.Current = parentFamily.HappinessAverage();
             //_job = Jobs.FARMER;
             _health.Current = Healths.NONE;
             _age = 0;
@@ -53,29 +53,27 @@ namespace Game
             _gender = gender;
             _statusInFamily.Current = Status.SINGLE;
         }
-        
-         //TODO : generate name.
+
+        //TODO : generate name.
         string _name;
         Family _parentFamily;
         Genders _gender;
         Jobs _job;
         double _lifeExpectancy;
         double _age;
-        double _goldInWallet;      
+        double _goldInWallet;
         Villager _fiance; //!!!!!
         public Healths Health{get{return _health.Current;}}
-
 
         readonly HistorizedValue<double, Villager> _faith; //scale from 0 to 100.
         readonly HistorizedValue<double, Villager> _happiness; //scale from 0 to 100.
         readonly HistorizedValue<Healths, Villager> _health;
         readonly HistorizedValue<Status, Villager> _statusInFamily; //!! TODO : update !
 
-
         public double Age { get { return _age; } }
-        public double Faith  { get { return _faith.Current ; } } //hmm
+        public double Faith { get { return _faith.Current; } } //hmm
         public double Happiness { get { return _happiness.Current; } } //hmm
-        public Genders Gender { get { return _gender; }} 
+        public Genders Gender { get { return _gender; } }
         public Jobs Job { get { return _job; } }
         public double LifeExpectancy { get { return _lifeExpectancy; } }
 
@@ -94,10 +92,9 @@ namespace Game
             _job = NewJob;
         }
 
-       
-
         #region death & family issues.
         //=====================================================================================
+
 
         /// <summary>
         /// should only be called at world tick.
@@ -126,13 +123,6 @@ namespace Game
             }
         }
 
-       
-        /// <summary>
-        /// Define if the villager is single/engaged/married
-        /// </summary>
-        /// <summary>
-        /// Family's villager
-        /// </summary>
         /// <summary>
         /// Get amount of gold the villager have
         /// </summary>
@@ -140,11 +130,6 @@ namespace Game
         {
             get { return _goldInWallet; }
         }
-
-        /// <summary>
-        /// Define which job the villager is
-        /// </summary>
-        /// <param name="NewJob"></param>
 
         /// <summary>
         /// Sets the new life expectancy no matter what time was left.
@@ -158,6 +143,7 @@ namespace Game
             }
             _lifeExpectancy = lifeExpectancy;
         }
+
         /// <summary>
         /// Sets the new life expectancy based on the time left you want. only if shorter than before.
         /// </summary>
@@ -171,6 +157,7 @@ namespace Game
             }
 
         }
+
         /// <summary>
         /// Reduces the life expectancy by 'time'.(minimum is 0)
         /// </summary>
@@ -186,6 +173,7 @@ namespace Game
                 _lifeExpectancy = 0;
             }
         }
+
         /// <summary>
         /// kill a villager.
         /// </summary>
@@ -193,8 +181,8 @@ namespace Game
         {
             _lifeExpectancy = 0;
         }
-        #region worldtick
 
+        #region worldtick
         #region WhenWorldUpdate
 
         private void Suicide()
@@ -205,10 +193,10 @@ namespace Game
                 _health.Current = _health.Current | Healths.DEPRESSED;
             }
         }
-        //======================================================================================
+
         #endregion
         #region happiness & faith evolution
-        //------------------------------------------------------------------------------------------------------------------------------
+
         /// <summary>
         /// can be negative to take away happiness.
         /// </summary>
@@ -230,24 +218,23 @@ namespace Game
         }
         internal bool IsDead()
         {
-            return ((_health.Current & Healths.DEAD) != 0);                    
+            return ((_health.Current & Healths.DEAD) != 0);
         }
         internal void Sickly()
         {
-            if ((_health.Current & Healths.SICK) != 0) 
+            if ((_health.Current & Healths.SICK) != 0)
             {
                 AddOrRemoveHappiness(0.1);
                 ParentFamily.FamilyMemberIsSick();
             }
         }
 
-
         private void CallForHelp() //TODO : add timer /brainstorm how to use this.
         {
             if (_happiness.Current < 25 && (_health.Current & Healths.UNHAPPY) == 0)
             {
                 _health.Current = _health.Current | Healths.UNHAPPY;
-            
+
             }
         }
 
@@ -263,7 +250,6 @@ namespace Game
                 AddOrRemoveFaith(-20);
             }
         }
-
 
         /// <summary>
         /// can be negative to take away faith.
@@ -284,9 +270,9 @@ namespace Game
                 _faith.Current += amount;
             }
         }
-        //-------------------------------------------------------------------------------------------------------------------------------
+
         #endregion
-  
+
         /// <summary>
         /// Add money the villager earn
         /// </summary>
@@ -295,6 +281,7 @@ namespace Game
         {
             _goldInWallet += goldAdd;
         }
+
         /// <summary>
         /// amount set by player. Returns the true amount taken.(imagine family is broke)
         /// </summary>
@@ -310,10 +297,8 @@ namespace Game
         }
         #endregion
 
-
         override internal void OnDestroy()
         {
-
             Debug.Assert(IsDead(), "the villager is still alive!");
             if ((Gender == Genders.MALE) && (StatusInFamily == Status.SINGLE))
             {

@@ -20,15 +20,15 @@ namespace Game
             _eventList = new List<IEvent>();
             CreateVillage("default");
 
-             Family FamilyA = _villages[0].CreateFamilyFromScratch();
-             Family FamilyB = _villages[0].CreateFamilyFromScratch();
-             Family FamilyC = _villages[0].CreateFamilyFromScratch();
-             Family FamilyD = _villages[0].CreateFamilyFromScratch();
-             Family FamilyE = _villages[0].CreateFamilyFromScratch();
+            Family FamilyA = _villages[0].CreateFamilyFromScratch();
+            Family FamilyB = _villages[0].CreateFamilyFromScratch();
+            Family FamilyC = _villages[0].CreateFamilyFromScratch();
+            Family FamilyD = _villages[0].CreateFamilyFromScratch();
+            Family FamilyE = _villages[0].CreateFamilyFromScratch();
 
             //TotalPop = 10;
             //TotalGold = 0;
-            Offerings = 0;
+            _offerings = 100;
         }
 
         readonly List<GameItem> _items;
@@ -38,10 +38,11 @@ namespace Game
         public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
         readonly HistorizedValue<double, Game> _totalGold;
         readonly HistorizedValue<int, Game> _totalPop;
+        int _offerings;
         public double TotalGold { get { return _totalGold.Current; } }
         public double LastTotalGold { get { return _totalGold.Historic.Last; } }
-        public int TotalPop { get { return _totalPop.Current; } } 
-        public int Offerings { get; set; } //will change
+        public int TotalPop { get { return _totalPop.Current; } }
+        public int Offerings { get { return _offerings; } } //will change
         /*public double TotalGold { get 
         {
             double totalGold = 0;
@@ -69,7 +70,12 @@ namespace Game
             Debug.Assert(amount > 0, "(GoldRemoved)");
             _totalGold.Current -= amount;
         }
-
+        internal void AddOrTakeFromOfferings(int amount)
+        {
+            int result = Offerings + amount;
+            if (result < 0) _offerings = 0;
+            else _offerings += amount;
+        }
 
         internal void VillagerAdded()
         {
@@ -94,25 +100,25 @@ namespace Game
         {
             //TODO
         }
-/*
-        public void AddOrRemoveFromTotalGold(double amount)
-        {
-            _totalGold.Current += amount; //curious to find out if TotalGold can be negative.
-        }
- * */
-        List<string> _currentText; 
+        /*
+                public void AddOrRemoveFromTotalGold(double amount)
+                {
+                    _totalGold.Current += amount; //curious to find out if TotalGold can be negative.
+                }
+         * */
+        List<string> _currentText;
         public void NextStep() //public for testing (again)
         {
             DieOrIsAlive();
             CloseStep();
-            
+
         }
 
         List<IEvent> _eventList;
         public IReadOnlyList<IEvent> EventList{get{return _eventList;}}
         internal void DieOrIsAlive()
         {
-            int i=0;
+            int i = 0;
             int tmpCount = _items.Count;
 
             GameItem tmpItem;
@@ -120,7 +126,7 @@ namespace Game
             {
                 Debug.Assert(_items[i] != null);
                 Debug.Assert(_items[i].Game != null);
-                tmpItem =_items[i];
+                tmpItem = _items[i];
                 tmpItem.DieOrIsAlive(_eventList);
 
                 if (tmpItem.IsDestroyed)
@@ -174,6 +180,5 @@ namespace Game
         {
             _totalGold.Current -= family.GoldStash;
         }
-
     }
 }

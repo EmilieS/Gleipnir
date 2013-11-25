@@ -42,7 +42,6 @@ namespace Game
             _father.ParentFamily = this;
         }
 
-
         Village _ownerVillage;
         readonly HistorizedValue<double, Family> _goldStash;
         Villager _mother;
@@ -68,7 +67,6 @@ namespace Game
             parentFamily.FamilyMembers.Remove(villager);
         }
 
-
         public Villager newFamilyMember()
         {
             if (_mother == null || _father == null)
@@ -80,8 +78,6 @@ namespace Game
             return kid;
         }
 
-
-
         /// <summary>
         /// takes from the gold stash the amount asked, if not the maximum it can. Returns true amount.
         /// </summary>
@@ -89,23 +85,26 @@ namespace Game
         /// <returns></returns>
         public double takeFromGoldStash(double amount)
         {
-            if (amount < 0)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
+            if (amount < 0) throw new ArgumentOutOfRangeException();
             if (amount <= _goldStash.Current)
             {
                 _goldStash.Current -= amount;
                 Game.GoldRemoved(amount);
                 return amount;
             }
-            double goldLeft = _goldStash.Current;
-            _goldStash.Current = 0;
-            Game.GoldRemoved(goldLeft);
-            return goldLeft;
+            else if (amount > _goldStash.Current && _goldStash.Current > 0)
+            {
+                double goldLeft = _goldStash.Current;
+                _goldStash.Current = 0;
+                Game.GoldRemoved(goldLeft);
+                return goldLeft;
+            }
+            else
+            {
+                _goldStash.Current = 0;
+                return 0;
+            }
         }
-
-
 
         public void addTOGoldStash(double amount)
         {
@@ -145,10 +144,8 @@ namespace Game
             return happiness / nbFamilyMembers;
         }
 
-
         #region happiness evolution
         //-------------------------------------------------------------------------------------------------------------------------------
-
         internal void FamilyMemberDied(Villager deadVillager)
         {
             for (int i = 0; i < FamilyMembers.Count; i++)
@@ -196,6 +193,7 @@ namespace Game
             if (_father != null) { if (dead == _father) { _father = null; } }
             _familyMembers.Remove(dead);
         }
+        
         internal override void OnDestroy()
         {
             Debug.Assert(_familyMembers.Count == 0, "there is still someone in this family!");
@@ -208,10 +206,12 @@ namespace Game
             Game.FamilyRemoved(this);
 
         }
+        
         override internal void DieOrIsAlive(List<IEvent> eventList)
         {
             if (FamilyMembers.Count == 0) { eventList.Add(new FamilyEndEvent(this)); OnDestroy(); }
         }
+        
         override internal void CloseStep(List<IEvent> eventList)
         {
             if (_goldStash.Conclude()) { eventList.Add(new EventProperty<Family>(this, "LastGoldStash")); }
