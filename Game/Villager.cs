@@ -269,7 +269,7 @@ namespace Game
         /// <summary>
         /// Set a villager as Heretic 
         /// </summary>
-        internal void SetHeretic()
+        public void SetHeretic()
         {
             if (_faith.Current < 20 && (_health.Current & Healths.DEAD) == 0)
             {
