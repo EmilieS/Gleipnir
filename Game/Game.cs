@@ -147,7 +147,7 @@ namespace Game
             {
                 Debug.Assert(_items[i] != null);
                 Debug.Assert(_items[i].Game != null);
-                _items[i].Creation();//must do family version (marriage)
+                _items[i].Creation(_eventList);//must do family version (marriage)
 
                 i++;
             }

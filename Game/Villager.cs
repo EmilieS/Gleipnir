@@ -335,9 +335,15 @@ namespace Game
             }
             _health.Current = _health.Current & ~Healths.UNHAPPY;
         }
+        private void MatchMaking()
+        {
+            if (_gender == Genders.MALE || _statusInFamily.Current!=Status.SINGLE)
+                return;
+            Engage(this, _parentFamily);
+        }
         #endregion
         #region called by Creation
-        internal void RegularBirths(double time)
+        private void RegularBirths(double time, List<IEvent> eventList)
         {
             if (StatusInFamily != Status.MARRIED || _gender != Genders.FEMALE)
                 return;
@@ -348,9 +354,29 @@ namespace Game
             while (i < count && Game._regularBirthDates[i] < _age)
             {
                 if (_age - time < Game._regularBirthDates[i])
-                { _parentFamily.newFamilyMember(); }
+                { 
+                   eventList.Add(new VillagerBirthEvent(_parentFamily.newFamilyMember())); 
+                }
                 i++;
             }
+        }
+        int _engagedTickTimer;
+        private void RegularFamilyCreation(List<IEvent> eventList)
+        {
+            if (_statusInFamily.Current != Status.ENGAGED)
+                return;
+            if (_engagedTickTimer == 10)
+            {
+                if(_gender==Genders.FEMALE)
+                {
+                    eventList.Add(new FamilyBirthEvent(_parentFamily.OwnerVillage.CreateFamily(this, _fiance)));
+                }
+                else
+                {
+                    eventList.Add(new FamilyBirthEvent(_parentFamily.OwnerVillage.CreateFamily(_fiance, this)));
+                }
+            }
+            else{_engagedTickTimer++;}
 
         }
         #endregion
@@ -391,15 +417,16 @@ namespace Game
             AgeTick(time);
 
             CallForHelpCheck();
-
+            MatchMaking();
             //TODO: fric.
             //TODO: faith blabla
             //otherstuff
         }
-        internal override void Creation()
+        internal override void Creation(List<IEvent> eventList)
         {
             double time = Game._ageTickTime;
-            RegularBirths(time);//has to be after AgeTick.
+            RegularBirths(time, eventList);//has to be after AgeTick.
+            RegularFamilyCreation(eventList);
         }
         /// <summary>
         /// should only be called at world tick. If you want to kill a villager, use kill.

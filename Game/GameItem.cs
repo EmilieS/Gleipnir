@@ -27,7 +27,7 @@ namespace Game
 
         internal virtual void Evolution() {}
 
-        internal virtual void Creation() {}
+        internal virtual void Creation(List<IEvent> eventList) { }
 
         internal void Destroy()
         {

@@ -29,6 +29,7 @@ namespace Game
             _fiance.DeleteFiance();
             _statusInFamily.Current = Status.SINGLE;
             DeleteFiance();
+            _engagedTickTimer = 0;
 
         }
 
