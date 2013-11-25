@@ -19,6 +19,7 @@ namespace Game
             _health = new HistorizedValue<Healths, Villager>(this, "_health", 20);
             _statusInFamily = new HistorizedValue<Status, Villager>(this, "_statusInFamily", 20);
             _statusInFamily.Current = Status.SINGLE;
+            
             g.VillagerAdded();
 
             Random rand = new Random();//to be moved elsewhere.
@@ -52,6 +53,7 @@ namespace Game
             _lifeExpectancy = 85;
             _gender = gender;
             _statusInFamily.Current = Status.SINGLE;
+             
         }
 
         //TODO : generate name.
@@ -64,6 +66,7 @@ namespace Game
         double _goldInWallet;
         Villager _fiance; //!!!!!
         ActivityStatus _villagerActivity;
+        Missions _mission = Missions.NONE; 
 
 
         readonly HistorizedValue<double, Villager> _faith; //scale from 0 to 100.
@@ -82,6 +85,11 @@ namespace Game
         {
             get { return _statusInFamily.Current; }
             internal set { _statusInFamily.Current = value; }//riqueraque
+        }
+        public Missions Mission
+        {
+            get { return _mission; }
+            set { _mission = value; }
         }
         public Family ParentFamily
         {
