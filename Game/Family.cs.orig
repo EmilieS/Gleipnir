@@ -40,6 +40,7 @@ namespace Game
             _familyMembers.Add(_father);
             _mother.ParentFamily = this;
             _father.ParentFamily = this;
+
         }
 
         Village _ownerVillage;
@@ -51,7 +52,12 @@ namespace Game
 
         public string Name { get { return _name; } }
         public double GoldStash { get { return _goldStash.Current; } }
-        public double LastGoldStash { get { return _goldStash.Historic.Last; } }
+        public double LastGoldStash { get {
+            if (_goldStash.Historic.Count > 0)
+                return _goldStash.Historic.Last;
+            else 
+                return _goldStash.Current;
+        } }//for tests, should be eliminated
         public Villager Mother { get { return _mother; } }
         public Villager Father { get { return _father; } }
         public IFamilyMemberList FamilyMembers { get { return _familyMembers; } }
@@ -59,14 +65,16 @@ namespace Game
         public Village OwnerVillage
         {
             get { return _ownerVillage; }
-            set { _ownerVillage = value; } //riqueraque
+            internal set { _ownerVillage = value; }
         }
-
         static private void removeFromFamily(Villager villager, Family parentFamily)
         {
             parentFamily.FamilyMembers.Remove(villager);
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> fx-CloseStep
         public Villager newFamilyMember()
         {
             if (_mother == null || _father == null)
@@ -77,7 +85,10 @@ namespace Game
             _familyMembers.Add(kid);
             return kid;
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> fx-CloseStep
         /// <summary>
         /// takes from the gold stash the amount asked, if not the maximum it can. Returns true amount.
         /// </summary>
@@ -85,26 +96,13 @@ namespace Game
         /// <returns></returns>
         public double takeFromGoldStash(double amount)
         {
-<<<<<<< HEAD
-            if (amount < 0)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-=======
             if (amount < 0) throw new ArgumentOutOfRangeException();
->>>>>>> fx-village_tests
             if (amount <= _goldStash.Current)
             {
                 _goldStash.Current -= amount;
                 Game.GoldRemoved(amount);
                 return amount;
             }
-<<<<<<< HEAD
-            double goldLeft = _goldStash.Current;
-            _goldStash.Current = 0;
-            Game.GoldRemoved(goldLeft);
-            return goldLeft;
-=======
             else if (amount > _goldStash.Current && _goldStash.Current > 0)
             {
                 double goldLeft = _goldStash.Current;
@@ -117,9 +115,11 @@ namespace Game
                 _goldStash.Current = 0;
                 return 0;
             }
->>>>>>> fx-village_tests
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> fx-CloseStep
         public void addTOGoldStash(double amount)
         {
             if (amount < 0)
@@ -157,6 +157,7 @@ namespace Game
             }
             return happiness / nbFamilyMembers;
         }
+<<<<<<< HEAD
 
         #region happiness evolution
         //-------------------------------------------------------------------------------------------------------------------------------
@@ -170,6 +171,10 @@ namespace Game
                 }
             }
         }
+=======
+        //====================WORLD=TICK=STUFF=============================
+        #region called by ImpactHappiness
+>>>>>>> fx-CloseStep
         internal void FamilyMemberIsSick()
         {
             for (int i = 0; i < FamilyMembers.Count; i++)
@@ -177,27 +182,38 @@ namespace Game
                 FamilyMembers[i].AddOrRemoveHappiness(-0.1); //Everybody, even the sick person(who already has a minus).
             }
         }
-        public void IsPoorOrRich_HappinessImpact() //public for tests
+        private void IsPoorOrRich_HappinessImpact()
         {
-            if (_goldStash.Historic.Last / FamilyMembers.Count < (Game.LastTotalGold / Game.TotalPop) / 2)
+            if (_goldStash.Current/ FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
             {
                 for (int i = 0; i < FamilyMembers.Count; i++)
                 {
                     FamilyMembers[i].AddOrRemoveHappiness(-0.1);
                 }
             }
-            else if (_goldStash.Historic.Last / FamilyMembers.Count > (Game.LastTotalGold / Game.TotalPop) * 3)
+            else if (_goldStash.Current / FamilyMembers.Count > (Game.TotalGold / Game.TotalPop) * 3)
             {
                 for (int i = 0; i < FamilyMembers.Count; i++)
                 {
                     FamilyMembers[i].AddOrRemoveHappiness(0.1);
                 }
-
             }
         }
-        //---------------------------------------------------------------------------------------------------------------------------------
         #endregion
+        #region called by Evolution
 
+        #endregion
+        #region called by DieOrIsAlive
+        internal void FamilyMemberDied(Villager deadVillager)
+        {
+            for (int i = 0; i < FamilyMembers.Count; i++)
+            {
+                if (FamilyMembers[i] != deadVillager)
+                {
+                    FamilyMembers[i].AddOrRemoveHappiness(-5);
+                }
+            }
+        }
         internal void FamilyMemberDestroyed(Villager dead)
         {
             Debug.Assert(dead != null);
@@ -207,6 +223,7 @@ namespace Game
             if (_father != null) { if (dead == _father) { _father = null; } }
             _familyMembers.Remove(dead);
         }
+        
         internal override void OnDestroy()
         {
             Debug.Assert(_familyMembers.Count == 0, "there is still someone in this family!");
@@ -217,27 +234,30 @@ namespace Game
             _ownerVillage.FamilyDestroyed(this);
             Debug.Assert(_ownerVillage == null);
             Game.FamilyRemoved(this);
+        }
+        #endregion 
+        #region worldtickcalls
+        override internal void ImpactHappiness() 
+        {
+            IsPoorOrRich_HappinessImpact();        
+        }
+        override internal void Evolution()
+        {
+            //RegularBirths done in villager.
 
         }
-<<<<<<< HEAD
+        
         override internal void DieOrIsAlive(List<IEvent> eventList)
         {
             if (FamilyMembers.Count == 0) { eventList.Add(new FamilyEndEvent(this)); OnDestroy(); }
         }
+        
         override internal void CloseStep(List<IEvent> eventList)
         {
             if (_goldStash.Conclude()) { eventList.Add(new EventProperty<Family>(this, "LastGoldStash")); }
             if (_familyMembers.Conclude()) { eventList.Add(new EventProperty<Family>(this, "FamilyMembers")); }
-=======
-        override internal void CloseStep()
-        {
-            //TODO :  put current values in value history.
-            _goldStash.Conclude();
-
-            if (FamilyMembers.Count == 0) { OnDestroy(); }
-
-            //TODO : events!
->>>>>>> fx-village_tests
         }
+        #endregion
+        //=================================================================
     }
 }
