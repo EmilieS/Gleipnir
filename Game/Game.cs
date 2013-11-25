@@ -115,6 +115,7 @@ namespace Game
         {
             ImpactHappiness();
             Evolution();
+            Creation();
             DieOrIsAlive();
             CloseStep();
             
@@ -136,7 +137,22 @@ namespace Game
                 item.Evolution();
             }
         }
+        private void Creation()
+        {
+            int i = 0;
+            //int tmpCount = _items.Count;
 
+            //GameItem tmpItem;
+            while (i < _items.Count)
+            {
+                Debug.Assert(_items[i] != null);
+                Debug.Assert(_items[i].Game != null);
+                _items[i].Creation();//must do family version (marriage)
+
+                i++;
+            }
+            //tmpItem = null;
+        }
         private void DieOrIsAlive()
         {
             int i=0;

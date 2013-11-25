@@ -27,6 +27,8 @@ namespace Game
 
         internal virtual void Evolution() {}
 
+        internal virtual void Creation() {}
+
         internal void Destroy()
         {
             Debug.Assert(_game != null, "Destroy must be called only once.");

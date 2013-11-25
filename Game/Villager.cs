@@ -276,7 +276,7 @@ namespace Game
             return 0;
         }
         #endregion
-        ///====================WORLD=TICK=STUFF============================
+        //====================WORLD=TICK=STUFF============================
         #region called by ImpactHappiness
         private void SickHappinessImpact()
         {
@@ -295,21 +295,6 @@ namespace Game
         internal void AgeTick(double time)
         {
             _age += time;
-        }
-        internal void RegularBirths(double time)
-        {
-            if (StatusInFamily!=Status.MARRIED && _gender!=Genders.FEMALE)
-                return;
-            Debug.Assert(_parentFamily!=null);
-            
-            int i =0;
-            int count = Game._regularBirthDates.Count();
-            while(i<count && Game._regularBirthDates[i]<_age+time)
-            {
-                if (_age < Game._regularBirthDates[i])
-                { _parentFamily.newFamilyMember(); }
-            }
-
         }
 
         int _callForHelpTickTimer;
@@ -351,6 +336,24 @@ namespace Game
             _health.Current = _health.Current & ~Healths.UNHAPPY;
         }
         #endregion
+        #region called by Creation
+        internal void RegularBirths(double time)
+        {
+            if (StatusInFamily != Status.MARRIED || _gender != Genders.FEMALE)
+                return;
+            Debug.Assert(_parentFamily != null);
+
+            int i = 0;
+            int count = Game._regularBirthDates.Count();
+            while (i < count && Game._regularBirthDates[i] < _age)
+            {
+                if (_age - time < Game._regularBirthDates[i])
+                { _parentFamily.newFamilyMember(); }
+                i++;
+            }
+
+        }
+        #endregion
         #region called by DieOrIsAlive
         override internal void OnDestroy()
         {
@@ -385,7 +388,6 @@ namespace Game
         {
             
             double time = Game._ageTickTime;
-            RegularBirths(time);
             AgeTick(time);
 
             CallForHelpCheck();
@@ -393,6 +395,11 @@ namespace Game
             //TODO: fric.
             //TODO: faith blabla
             //otherstuff
+        }
+        internal override void Creation()
+        {
+            double time = Game._ageTickTime;
+            RegularBirths(time);//has to be after AgeTick.
         }
         /// <summary>
         /// should only be called at world tick. If you want to kill a villager, use kill.
@@ -416,8 +423,14 @@ namespace Game
             if (_statusInFamily.Conclude()) { eventList.Add(new EventProperty<Villager>(this, "StatusInFamily")); }
             if (_happiness.Conclude()) { eventList.Add(new EventProperty<Villager>(this, "Happiness")); }
             if (_faith.Conclude()) { eventList.Add(new EventProperty<Villager>(this, "Faith")); }
-            if (_health.Conclude()) { eventList.Add(new EventProperty<Villager>(this, "Health")); }
-
+            if (_health.Conclude()) 
+            {
+                if ((_health.Current & Healths.UNHAPPY) != 0 && (_health.Historic.Last & Healths.UNHAPPY) == 0)
+                {
+                    eventList.Add(new VillagerCallForHelp(this));
+                }
+                else { eventList.Add(new EventProperty<Villager>(this, "Health")); }           
+            }
         }
         #endregion
         //=================================================================

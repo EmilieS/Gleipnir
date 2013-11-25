@@ -150,7 +150,7 @@ namespace Game
                 FamilyMembers[i].AddOrRemoveHappiness(-0.1); //Everybody, even the sick person(who already has a minus).
             }
         }
-        public void IsPoorOrRich_HappinessImpact() //public for tests
+        private void IsPoorOrRich_HappinessImpact()
         {
             if (_goldStash.Current/ FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
             {
