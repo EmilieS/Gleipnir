@@ -25,17 +25,18 @@ namespace Tests
             Villager father2 = family2.Father;
             var meeting = new Meeting();
 
-            meeting.ChangeVillagersStatus(family2, village);
+            meeting.ChangeVillagersStatus(family2);
 
-            Assert.That((mother2.ActivityStatus & ActivityStatus.CONVOCATED) != 0);
-            Assert.That((father2.ActivityStatus & ActivityStatus.CONVOCATED) != 0);
-            
-            meeting.ChangeVillagersStatus(family, village);
-            Assert.That((mother2.ActivityStatus & ActivityStatus.CONVOCATED) != 0);
-            Assert.That((father2.ActivityStatus & ActivityStatus.CONVOCATED) != 0);
+            Assert.That(mother2.ActivityStatus == ActivityStatus.CONVOCATED);
+            Assert.That(father2.ActivityStatus == ActivityStatus.CONVOCATED);  
+         
+            meeting.ChangeVillagersStatus(family);
 
-            Assert.That((mother.ActivityStatus & ActivityStatus.CONVOCATED) != 0);
-            Assert.That((father.ActivityStatus & ActivityStatus.CONVOCATED) != 0);
+            Assert.That(mother2.ActivityStatus  == ActivityStatus.WORKING);
+            Assert.That(father2.ActivityStatus == ActivityStatus.WORKING);
+
+            Assert.That(mother.ActivityStatus == ActivityStatus.CONVOCATED);
+            Assert.That(father.ActivityStatus == ActivityStatus.CONVOCATED);
             
 
         }
