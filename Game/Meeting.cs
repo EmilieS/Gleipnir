@@ -8,11 +8,11 @@ namespace Game
 {
     public class Meeting
     {
+
         public void ChangeVillagersStatus(Family family, Village village)
         {
             bool _convocatedYet = false;
-            int index = 0;
-
+            int i = 0;
 
             foreach (Family f in village.FamiliesList)
             {
@@ -25,7 +25,7 @@ namespace Game
                             _convocatedYet = true;
                         }
                     }
-                    index++;
+                    i++;
                 }
             }
 
@@ -38,12 +38,17 @@ namespace Game
             }
             else
             {
-                List<Villager> FamilySelected  = new List<Villager>(); // How to access to one family specially ??????? 
-                foreach(Villager villager in FamilySelected)
+                foreach (Villager villager in village.FamiliesList[i].FamilyMembers)
                 {
                     villager.ActivityStatus = ActivityStatus.WORKING;
                 }
+                foreach (Villager villager in family.FamilyMembers)
+                {
+                    villager.ActivityStatus = ActivityStatus.CONVOCATED;
+                }
             }
         }
+
+
     }
 }
