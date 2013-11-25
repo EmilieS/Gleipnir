@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    public class SamhainFest : GameItem
+    public class SamhainFest 
     {
         double _duration;
 
         // TODO : define the duration of  the villageFest, implement duration
-        public SamhainFest(Game g)
-            : base(g)
+        public SamhainFest()
+            
         {
             _duration = 15;
         }
