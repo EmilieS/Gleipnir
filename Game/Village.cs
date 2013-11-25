@@ -151,6 +151,11 @@ namespace Game
         }
 
         /// <summary>
+        /// Gets player's offerings points
+        /// /// </summary>
+        public int OfferingsPointsPerTick { get { return _offeringsPoints; } }
+
+        /// <summary>
         /// Modify number offering points generated
         /// </summary>
         /// <returns></returns>
