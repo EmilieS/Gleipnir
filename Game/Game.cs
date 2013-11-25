@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.IO;
 
 namespace Game
 {
@@ -18,6 +19,8 @@ namespace Game
             _singleMen = new List<Villager>();
             _villages = new List<Village>();
             _eventList = new List<IEvent>();
+            var namesPath = File.ReadAllLines(@"Extra\nameList.txt");
+            _nameGenerator = new NameGenerator(namesPath, 1, 1);
             CreateVillage("default");
 
             Family FamilyA = _villages[0].CreateFamilyFromScratch();
@@ -32,8 +35,10 @@ namespace Game
         }
 
         readonly List<GameItem> _items;
-        readonly List<Village> _villages; //a revoir!
+        readonly List<Village> _villages;
         readonly List<Villager> _singleMen;
+        NameGenerator _nameGenerator;
+        public NameGenerator NameList { get { return _nameGenerator; } }
         public IReadOnlyList<Village> Villages { get { return _villages; } }
         public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
         readonly HistorizedValue<double, Game> _totalGold;
@@ -42,7 +47,7 @@ namespace Game
         public double TotalGold { get { return _totalGold.Current; } }
         public double LastTotalGold { get { return _totalGold.Historic.Last; } }
         public int TotalPop { get { return _totalPop.Current; } }
-        public int Offerings { get { return _offerings; } } //will change
+        public int Offerings { get { return _offerings; } }
         /*public double TotalGold { get 
         {
             double totalGold = 0;
@@ -135,7 +140,7 @@ namespace Game
             }
             tmpItem = null;
         }
-        internal void CloseStep() //public for debug
+        internal void CloseStep()
         {
             foreach (GameItem item in _items)
             {

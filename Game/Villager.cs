@@ -38,6 +38,8 @@ namespace Game
             _health.Current = Healths.NONE;
             _age = 0;
             _lifeExpectancy = 85;
+
+            _name = parentFamily.FirstNameList.NextName;
         }
         public Villager(Game g, Genders gender)
             : base(g)
@@ -114,13 +116,6 @@ namespace Game
         public string Name
         {
             get { return _name; }
-            set
-            {
-                string[] nameTab = File.ReadAllLines(@"D:\LS4Tonio\IN'TECH_INFO\PI\Gleipnir\Gleipnir\name_list.txt");
-                Random randomInt = new Random();    // Random number
-
-                _name = nameTab[randomInt.Next(nameTab.Count())];
-            }
         }
 
         /// <summary>
