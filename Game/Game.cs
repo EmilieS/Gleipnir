@@ -18,6 +18,25 @@ namespace Game
             _singleMen = new List<Villager>();
             _villages = new List<Village>();
             _eventList = new List<IEvent>();
+            _regularBirthDates= new double[5];
+            //===to be changed
+            //_ageTickTime = 0.0834;//time(years) between each tick.
+            _ageTickTime = 1;
+            Rand = new Random();//to be moved elsewhere.
+
+            /*int j=18;
+            for (int i = 0; i < 5; i++)//must be kept orderly
+            {
+                _regularBirthDates[i] = j;
+                j=j + 4;
+            }*/
+            int j = 216;
+            for (int i = 0; i < 5; i++)//must be kept orderly
+            {
+                _regularBirthDates[i] = j;
+                j = j + 4*12;
+            }
+            //===
             CreateVillage("default");
 
             Family FamilyA = _villages[0].CreateFamilyFromScratch();
@@ -26,8 +45,6 @@ namespace Game
             Family FamilyD = _villages[0].CreateFamilyFromScratch();
             Family FamilyE = _villages[0].CreateFamilyFromScratch();
 
-            //TotalPop = 10;
-            //TotalGold = 0;
             _offerings = 100;
         }
 
@@ -40,9 +57,13 @@ namespace Game
         readonly HistorizedValue<int, Game> _totalPop;
         int _offerings;
         public double TotalGold { get { return _totalGold.Current; } }
-        public double LastTotalGold { get { return _totalGold.Historic.Last; } }
+        public double LastTotalGold { get { return _totalGold.Historic.Last; } }//for tests, should get eliminated
         public int TotalPop { get { return _totalPop.Current; } }
         public int Offerings { get { return _offerings; } } //will change
+        readonly internal double[] _regularBirthDates;
+        readonly internal double _ageTickTime;
+        public Random Rand;
+
         /*public double TotalGold { get 
         {
             double totalGold = 0;
@@ -100,22 +121,54 @@ namespace Game
         {
             //TODO
         }
-        /*
-                public void AddOrRemoveFromTotalGold(double amount)
-                {
-                    _totalGold.Current += amount; //curious to find out if TotalGold can be negative.
-                }
-         * */
+/*
+        public void AddOrRemoveFromTotalGold(double amount)
+        {
+            _totalGold.Current += amount; //curious to find out if TotalGold can be negative.
+        }
+ * */
         List<string> _currentText;
         public void NextStep() //public for testing (again)
         {
+            ImpactHappiness();
+            Evolution();
+            Creation();
             DieOrIsAlive();
             CloseStep();
         }
 
         List<IEvent> _eventList;
         public IReadOnlyList<IEvent> EventList{get{return _eventList;}}
-        internal void DieOrIsAlive()
+        private void ImpactHappiness()
+        {
+            foreach (GameItem item in _items)
+            {
+                item.ImpactHappiness();
+            }
+        }
+        private void Evolution()
+        {
+            foreach (GameItem item in _items)
+            {
+                item.Evolution();
+            }
+        }
+        private void Creation()
+        {
+            int i = 0;
+            //int tmpCount = _items.Count;
+            //GameItem tmpItem;
+            while (i < _items.Count)
+            {
+                Debug.Assert(_items[i] != null);
+                Debug.Assert(_items[i].Game != null);
+                _items[i].Creation(_eventList);//must do family version (marriage)
+
+                i++;
+            }
+            //tmpItem = null;
+        }
+        private void DieOrIsAlive()
         {
             int i = 0;
             int tmpCount = _items.Count;
@@ -135,14 +188,14 @@ namespace Game
             }
             tmpItem = null;
         }
-        internal void CloseStep() //public for debug
+        private void CloseStep()
         {
             foreach (GameItem item in _items)
             {
                 item.CloseStep(_eventList);
             }
-            _totalGold.Conclude();
-            _totalPop.Conclude();
+            if(_totalGold.Conclude()){ _eventList.Add(new EventProperty<Game>(this, "TotalGold")); }
+            if(_totalPop.Conclude()){ _eventList.Add(new EventProperty<Game>(this, "TotalPop")); }
         }
 
         //variables à avoir: les coefficients des métiers

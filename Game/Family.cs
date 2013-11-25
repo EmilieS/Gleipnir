@@ -40,6 +40,7 @@ namespace Game
             _familyMembers.Add(_father);
             _mother.ParentFamily = this;
             _father.ParentFamily = this;
+
         }
 
         Village _ownerVillage;
@@ -51,7 +52,12 @@ namespace Game
 
         public string Name { get { return _name; } }
         public double GoldStash { get { return _goldStash.Current; } }
-        public double LastGoldStash { get { return _goldStash.Historic.Last; } }
+        public double LastGoldStash { get {
+            if (_goldStash.Historic.Count > 0)
+                return _goldStash.Historic.Last;
+            else 
+                return _goldStash.Current;
+        } }//for tests, should be eliminated
         public Villager Mother { get { return _mother; } }
         public Villager Father { get { return _father; } }
         public IFamilyMemberList FamilyMembers { get { return _familyMembers; } }
@@ -59,14 +65,12 @@ namespace Game
         public Village OwnerVillage
         {
             get { return _ownerVillage; }
-            set { _ownerVillage = value; } //riqueraque
+            internal set { _ownerVillage = value; }
         }
-
         static private void removeFromFamily(Villager villager, Family parentFamily)
         {
             parentFamily.FamilyMembers.Remove(villager);
         }
-
         public Villager newFamilyMember()
         {
             if (_mother == null || _father == null)
@@ -77,7 +81,6 @@ namespace Game
             _familyMembers.Add(kid);
             return kid;
         }
-
         /// <summary>
         /// takes from the gold stash the amount asked, if not the maximum it can. Returns true amount.
         /// </summary>
@@ -105,7 +108,6 @@ namespace Game
                 return 0;
             }
         }
-
         public void addTOGoldStash(double amount)
         {
             if (amount < 0)
@@ -143,9 +145,37 @@ namespace Game
             }
             return happiness / nbFamilyMembers;
         }
+        //====================WORLD=TICK=STUFF=============================
+        #region called by ImpactHappiness
+        internal void FamilyMemberIsSick()
+        {
+            for (int i = 0; i < FamilyMembers.Count; i++)
+            {
+                FamilyMembers[i].AddOrRemoveHappiness(-0.1); //Everybody, even the sick person(who already has a minus).
+            }
+        }
+        private void IsPoorOrRich_HappinessImpact()
+        {
+            if (_goldStash.Current/ FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
+            {
+                for (int i = 0; i < FamilyMembers.Count; i++)
+                {
+                    FamilyMembers[i].AddOrRemoveHappiness(-0.1);
+                }
+            }
+            else if (_goldStash.Current / FamilyMembers.Count > (Game.TotalGold / Game.TotalPop) * 3)
+            {
+                for (int i = 0; i < FamilyMembers.Count; i++)
+                {
+                    FamilyMembers[i].AddOrRemoveHappiness(0.1);
+                }
+            }
+        }
+        #endregion
+        #region called by Evolution
 
-        #region happiness evolution
-        //-------------------------------------------------------------------------------------------------------------------------------
+        #endregion
+        #region called by DieOrIsAlive
         internal void FamilyMemberDied(Villager deadVillager)
         {
             for (int i = 0; i < FamilyMembers.Count; i++)
@@ -156,34 +186,6 @@ namespace Game
                 }
             }
         }
-        internal void FamilyMemberIsSick()
-        {
-            for (int i = 0; i < FamilyMembers.Count; i++)
-            {
-                FamilyMembers[i].AddOrRemoveHappiness(-0.1); //Everybody, even the sick person(who already has a minus).
-            }
-        }
-        public void IsPoorOrRich_HappinessImpact() //public for tests
-        {
-            if (_goldStash.Historic.Last / FamilyMembers.Count < (Game.LastTotalGold / Game.TotalPop) / 2)
-            {
-                for (int i = 0; i < FamilyMembers.Count; i++)
-                {
-                    FamilyMembers[i].AddOrRemoveHappiness(-0.1);
-                }
-            }
-            else if (_goldStash.Historic.Last / FamilyMembers.Count > (Game.LastTotalGold / Game.TotalPop) * 3)
-            {
-                for (int i = 0; i < FamilyMembers.Count; i++)
-                {
-                    FamilyMembers[i].AddOrRemoveHappiness(0.1);
-                }
-
-            }
-        }
-        //---------------------------------------------------------------------------------------------------------------------------------
-        #endregion
-
         internal void FamilyMemberDestroyed(Villager dead)
         {
             Debug.Assert(dead != null);
@@ -204,6 +206,16 @@ namespace Game
             _ownerVillage.FamilyDestroyed(this);
             Debug.Assert(_ownerVillage == null);
             Game.FamilyRemoved(this);
+        }
+        #endregion 
+        #region worldtickcalls
+        override internal void ImpactHappiness() 
+        {
+            IsPoorOrRich_HappinessImpact();        
+        }
+        override internal void Evolution()
+        {
+            //RegularBirths done in villager.
 
         }
         
@@ -217,5 +229,7 @@ namespace Game
             if (_goldStash.Conclude()) { eventList.Add(new EventProperty<Family>(this, "LastGoldStash")); }
             if (_familyMembers.Conclude()) { eventList.Add(new EventProperty<Family>(this, "FamilyMembers")); }
         }
+        #endregion
+        //=================================================================
     }
 }

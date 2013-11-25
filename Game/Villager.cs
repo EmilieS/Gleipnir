@@ -21,14 +21,13 @@ namespace Game
             _statusInFamily.Current = Status.SINGLE;
             g.VillagerAdded();
 
-            Random rand = new Random();//to be moved elsewhere.
             Debug.Assert(g != null);
-            switch (rand.Next(2))
+            switch (Game.Rand.Next(2))
             {
                 case 0: _gender = Genders.MALE; _job = parentFamily.Father.Job; g.AddSingleMan(this); break; //changera    
                 case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; Engage(this, parentFamily); break;
             }
-            if (rand.Next(101) < 2)
+            if (Game.Rand.Next(101) < 2)
                 _faith.Current = 13;
             else
                 _faith.Current = parentFamily.FaithAverage();
@@ -37,7 +36,8 @@ namespace Game
             //_job = Jobs.FARMER;
             _health.Current = Healths.NONE;
             _age = 0;
-            _lifeExpectancy = 85;
+            //_lifeExpectancy = 85;
+            _lifeExpectancy = 85*12;
         }
         public Villager(Game g, Genders gender)
             : base(g)
@@ -49,9 +49,15 @@ namespace Game
             g.VillagerAdded();
             _faith.Current = 100;
             _happiness.Current = 80;
-            _lifeExpectancy = 85;
+           // _lifeExpectancy = 85;
+            _lifeExpectancy = 85 * 12;
             _gender = gender;
             _statusInFamily.Current = Status.SINGLE;
+
+            _statusInFamily.Conclude();
+            _happiness.Conclude();
+            _faith.Conclude();
+            _health.Conclude();
         }
 
         //TODO : generate name.
@@ -62,8 +68,8 @@ namespace Game
         double _lifeExpectancy;
         double _age;
         double _goldInWallet;
-        Villager _fiance; //!!!!!
-        public Healths Health{get{return _health.Current;}}
+        Villager _fiance;
+        public Healths Health { get { return _health.Current; } }
 
         readonly HistorizedValue<double, Villager> _faith; //scale from 0 to 100.
         readonly HistorizedValue<double, Villager> _happiness; //scale from 0 to 100.
@@ -85,7 +91,7 @@ namespace Game
         public Family ParentFamily
         {
             get { return _parentFamily; }
-            internal set { _parentFamily = value; } 
+            internal set { _parentFamily = value; }
         }
         public void setJob(Jobs NewJob)
         {
@@ -96,14 +102,6 @@ namespace Game
         //=====================================================================================
 
 
-        /// <summary>
-        /// should only be called at world tick.
-        /// </summary>
-        /// <param name="time"></param>
-        internal void AgeTick(float time)
-        {
-            _age += time;
-        }
 
 
         //======================================================================================
@@ -122,6 +120,7 @@ namespace Game
                 _name = nameTab[randomInt.Next(nameTab.Count())];
             }
         }
+
 
         /// <summary>
         /// Get amount of gold the villager have
@@ -220,37 +219,7 @@ namespace Game
         {
             return ((_health.Current & Healths.DEAD) != 0);
         }
-        internal void Sickly()
-        {
-            if ((_health.Current & Healths.SICK) != 0)
-            {
-                AddOrRemoveHappiness(0.1);
-                ParentFamily.FamilyMemberIsSick();
-            }
-        }
-
-        private void CallForHelp() //TODO : add timer /brainstorm how to use this.
-        {
-            if (_happiness.Current < 25 && (_health.Current & Healths.UNHAPPY) == 0)
-            {
-                _health.Current = _health.Current | Healths.UNHAPPY;
-
-            }
-        }
-
-        private void CallForHelpEnded() //once the CallForHelp timer is ended.
-        {
-            if (_happiness.Current > 27)
-            {
-                _health.Current = _health.Current & ~Healths.UNHAPPY;
-                AddOrRemoveFaith(20);
-            }
-            else if (_happiness.Current < 25)
-            {
-                AddOrRemoveFaith(-20);
-            }
-        }
-
+      
         /// <summary>
         /// can be negative to take away faith.
         /// </summary>
@@ -296,7 +265,111 @@ namespace Game
             return 0;
         }
         #endregion
+        //====================WORLD=TICK=STUFF============================
+        #region called by ImpactHappiness
+        private void SickHappinessImpact()
+        {
+            if ((_health.Current & Healths.SICK) != 0)
+            {
+                AddOrRemoveHappiness(0.1);
+                ParentFamily.FamilyMemberIsSick();
+            }
+        }
+        #endregion
+        #region called by Evolution
+        /// <summary>
+        /// should only be called at world tick.
+        /// </summary>
+        /// <param name="time"></param>
+        internal void AgeTick(double time)
+        {
+            _age += time;
+        }
 
+        int _callForHelpTickTimer;
+        private void CallForHelpCheck()
+        {
+            if ((_health.Current & Healths.UNHAPPY) == 0)
+            {
+                CallForHelp();
+            }
+            if ((_health.Current & Healths.UNHAPPY) != 0)
+            {
+                if (_callForHelpTickTimer == 20)//can get adjusted
+                {
+                    _callForHelpTickTimer = 0;
+                    CallForHelpEnded();
+                }
+                else { _callForHelpTickTimer++; }
+            }
+
+        }
+        private void CallForHelp()
+        {
+            if (_happiness.Current < 25 && (_health.Current & Healths.UNHAPPY) == 0)
+            {
+                _health.Current = _health.Current | Healths.UNHAPPY;
+
+            }
+        }
+        private void CallForHelpEnded()
+        {
+            if (_happiness.Current > 27)
+            {
+                AddOrRemoveFaith(20);
+            }
+            else if (_happiness.Current < 25)
+            {
+                AddOrRemoveFaith(-20);
+            }
+            _health.Current = _health.Current & ~Healths.UNHAPPY;
+        }
+        private void MatchMaking()
+        {
+            if (_gender == Genders.MALE || _statusInFamily.Current!=Status.SINGLE)
+                return;
+            Engage(this, _parentFamily);
+        }
+        #endregion
+        #region called by Creation
+        private void RegularBirths(double time, List<IEvent> eventList)
+        {
+            if (StatusInFamily != Status.MARRIED || _gender != Genders.FEMALE)
+                return;
+            Debug.Assert(_parentFamily != null);
+
+            int i = 0;
+            int count = Game._regularBirthDates.Count();
+            while (i < count && Game._regularBirthDates[i] <= _age)
+            {
+                if (_age - time < Game._regularBirthDates[i])
+                { 
+                   eventList.Add(new VillagerBirthEvent(_parentFamily.newFamilyMember())); 
+                }
+                i++;
+            }
+        }
+        int _engagedTickTimer;
+        private void RegularFamilyCreation(List<IEvent> eventList)
+        {
+            if (_statusInFamily.Current != Status.ENGAGED)
+                return;
+            if (_engagedTickTimer == 10)
+            {
+                if(_gender==Genders.FEMALE)
+                {
+                    eventList.Add(new FamilyBirthEvent(_parentFamily.OwnerVillage.CreateFamily(this, _fiance)));
+                }
+                else
+                {
+                    eventList.Add(new FamilyBirthEvent(_parentFamily.OwnerVillage.CreateFamily(_fiance, this)));
+                }
+            }
+            else{_engagedTickTimer++;}
+
+        }
+        #endregion
+        #region called by DieOrIsAlive
         override internal void OnDestroy()
         {
             Debug.Assert(IsDead(), "the villager is still alive!");
@@ -319,7 +392,30 @@ namespace Game
             Game.VillagerRemoved(this);
             //_job = null;
         }
+        #endregion
+        #region worldtickcalls
+        override internal void ImpactHappiness()
+        {
+            SickHappinessImpact();
+        }
+        internal override void Evolution()
+        {
+            
+            double time = Game._ageTickTime;
+            AgeTick(time);
 
+            CallForHelpCheck();
+            MatchMaking();
+            //TODO: fric.
+            //TODO: faith blabla
+            //otherstuff
+        }
+        internal override void Creation(List<IEvent> eventList)
+        {
+            double time = Game._ageTickTime;
+            RegularBirths(time, eventList);//has to be after AgeTick.
+            RegularFamilyCreation(eventList);
+        }
         /// <summary>
         /// should only be called at world tick. If you want to kill a villager, use kill.
         /// </summary>
@@ -337,15 +433,21 @@ namespace Game
             Debug.Assert(((StatusInFamily == Status.ENGAGED || StatusInFamily == Status.MARRIED) && _fiance != null) || ((StatusInFamily == Status.SINGLE || StatusInFamily == Status.MOURNING) && _fiance == null), "Dans DieOrIsAlive");
             if (IsDead()) { eventList.Add(new VillagerDyingEvent(this)); Destroy(); }
         }
-
         override internal void CloseStep(List<IEvent> eventList)
         {
             if (_statusInFamily.Conclude()) { eventList.Add(new EventProperty<Villager>(this, "StatusInFamily")); }
-            if (_happiness.Conclude()) { eventList.Add(new EventProperty<Villager>(this, "Happiness")); }        
-            if (_faith.Conclude()){eventList.Add(new EventProperty<Villager>(this, "Faith")); }
-            if (_health.Conclude()){eventList.Add(new EventProperty<Villager>(this, "Health")); }
-                  
+            if (_happiness.Conclude()) { eventList.Add(new EventProperty<Villager>(this, "Happiness")); }
+            if (_faith.Conclude()) { eventList.Add(new EventProperty<Villager>(this, "Faith")); }
+            if (_health.Conclude()) 
+            {
+                if ((_health.Current & Healths.UNHAPPY) != 0 && (_health.Historic.Last & Healths.UNHAPPY) == 0)
+                {
+                    eventList.Add(new VillagerCallForHelp(this));
+                }
+                else { eventList.Add(new EventProperty<Villager>(this, "Health")); }           
+            }
         }
+        #endregion
+        //=================================================================
     }
-
 }

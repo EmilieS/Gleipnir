@@ -151,11 +151,6 @@ namespace Game
         }
 
         /// <summary>
-        /// Gets player's offerings points
-        /// </summary>
-        public int OfferingsPointsPerTick { get { return _offeringsPoints; } }
-
-        /// <summary>
         /// Modify number offering points generated
         /// </summary>
         /// <returns></returns>
@@ -238,7 +233,7 @@ namespace Game
         override internal void CloseStep(List<IEvent> eventList)
         {
             //TODO :  put current values in value history.
-
+            if (_familiesList.Conclude()) { eventList.Add(new EventProperty<Village>(this, "FamiliesList")); }
             //jobs
             //TODO : events!
         }

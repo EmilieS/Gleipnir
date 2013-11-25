@@ -76,7 +76,7 @@ namespace Tests
             Villager kid = family.newFamilyMember();
             Assert.That(family.HappinessAverage() == 80, "family average is not 80");
             Assert.That(MyGame.TotalPop == 11);
-            family.IsPoorOrRich_HappinessImpact();
+            MyGame.NextStep();
             Assert.That(family.HappinessAverage() == 80, "family average is not 80");
 
             family.addTOGoldStash(3000-120);
@@ -84,7 +84,6 @@ namespace Tests
             Assert.AreEqual(3080, MyGame.TotalGold);
             Assert.AreEqual(1000, family.LastGoldStash / family.FamilyMembers.Count);
             Assert.AreEqual(280, MyGame.LastTotalGold / MyGame.TotalPop);
-            family.IsPoorOrRich_HappinessImpact();
             Assert.AreEqual(80.1, family.HappinessAverage(), "family average is not 80.1");
 
             family.takeFromGoldStash(2940);
@@ -100,9 +99,8 @@ namespace Tests
             double isequalto = 50.8;
             Assert.AreEqual(isequalto, MyGame.LastTotalGold / MyGame.TotalPop);
             Assert.AreEqual(3, family.FamilyMembers.Count());
-            family.IsPoorOrRich_HappinessImpact();
             Assert.AreEqual(80, family.HappinessAverage(), "family average is not 80");
-            family.IsPoorOrRich_HappinessImpact();
+            MyGame.NextStep();
             Assert.That(family.HappinessAverage() == 79.9, "family average is not 79.9");
         }
     }

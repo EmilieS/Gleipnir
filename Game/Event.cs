@@ -17,7 +17,9 @@ namespace Game
         {
             GameItem = item;
         }
-
+        public virtual void Do(IWindow b)
+        {
+        }
         public virtual void PublishMessage(IWindow b)
         {
         }
@@ -69,6 +71,20 @@ namespace Game
             b.PushAlert(toPush);
         }
     }
+    public class VillagerCallForHelp : Event<Villager>
+    {
+        internal VillagerCallForHelp(Villager v)
+            : base(v)
+        {
+        }
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushAlert(String.Format("{0} prie que son malheur soit bientot terminé.", GameItem.Name));
+        }
+    }
+
+
+
     public class FamilyEndEvent : Event<Family>
     {
         internal FamilyEndEvent(Family v)
@@ -79,6 +95,31 @@ namespace Game
         override public void PublishMessage(IWindow b)
         {
             b.PushTrace(String.Format("La famille {0} est terminée.", GameItem.Name));
+        }
+    }
+
+    public class VillagerBirthEvent : Event<Villager>
+    {
+        internal VillagerBirthEvent(Villager v)
+            : base(v)
+        {
+        }
+
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushTrace( String.Format("Un nouveau villageois est né ! Il a été nommé {0}.", GameItem.Name)); 
+        }
+    }
+    public class FamilyBirthEvent : Event<Family>
+    {
+        internal FamilyBirthEvent(Family v)
+            : base(v)
+        {
+        }
+
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushTrace(String.Format("Une nouvelle famille s'est consituée {0}.", GameItem.Name));
         }
     }
 }

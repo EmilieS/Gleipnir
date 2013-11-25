@@ -29,6 +29,7 @@ namespace Game
             _fiance.DeleteFiance();
             _statusInFamily.Current = Status.SINGLE;
             DeleteFiance();
+            _engagedTickTimer = 0;
 
         }
 
@@ -107,7 +108,7 @@ namespace Game
                 i++;
             }
         }
-
+        #region called by DieOrIsAlive
         internal void FianceDestroyed()
         {
             Debug.Assert(_fiance != null);
@@ -129,7 +130,7 @@ namespace Game
                 Mourn();
             }
             Debug.Assert(_fiance == null);
-            //DeleteFiance();
         }
+        #endregion
     }
 }

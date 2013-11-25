@@ -47,8 +47,6 @@ namespace Game
            return changed;
        }
 
-
-
        public Villager this[int index]
        {
            get { return _members[index]; }
