@@ -36,5 +36,42 @@ namespace Tests
             Assert.Greater(MyGame.Villages[0].FamiliesList.Count, 5);
             //Assert.AreEqual(6, MyGame.Villages[0].FamiliesList.Count);
         }
+        [Test]
+        public void Events()
+        {
+            var MyGame = new Game.Game();
+            var MyWindow = new Tests.IWindowImplementationForTests();
+            Villager villager1=MyGame.Villages[0].FamiliesList[0].Mother;
+
+            foreach (IEvent e in MyGame.EventList)
+            {
+                e.PublishMessage(MyWindow);
+                e.Do(MyWindow);
+            }
+            MyGame.NextStep();
+            Assert.AreEqual(0, MyWindow.nb_pushAlert);
+            Assert.AreEqual(0, MyWindow.nb_pushTrace);
+
+            MyGame.NextStep();
+
+            foreach (IEvent e in MyGame.EventList)
+            {
+                e.PublishMessage(MyWindow);
+                e.Do(MyWindow);
+            }
+            Assert.AreEqual(2, MyWindow.goldtouched);
+            //Assert.AreEqual(15, MyWindow.nb_pushTrace);//11
+            Assert.AreEqual(0, MyWindow.nb_pushAlert);
+            villager1.Kill();
+            MyGame.NextStep();
+            foreach (IEvent Event in MyGame.EventList)
+            {
+                Event.PublishMessage(MyWindow);
+                Event.Do(MyWindow);
+            }
+            //Assert.AreEqual(1, MyWindow.goldtouched);
+           // Assert.AreEqual(34, MyWindow.nb_pushTrace);//32
+            Assert.AreEqual(1, MyWindow.nb_pushAlert);
+        }
     }
 }

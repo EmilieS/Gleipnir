@@ -155,13 +155,13 @@
         #endregion
 
         private System.Windows.Forms.Button changeGoldOfferings;
-        private System.Windows.Forms.Label offeringsPoints;
-        private System.Windows.Forms.Label happinessVillage;
-        private System.Windows.Forms.Label faithVillage;
-        private System.Windows.Forms.Label population;
-        private System.Windows.Forms.Label goldVillage;
+        internal System.Windows.Forms.Label offeringsPoints;
+        internal System.Windows.Forms.Label happinessVillage;
+        internal System.Windows.Forms.Label faithVillage;
+        internal System.Windows.Forms.Label population;
+        internal System.Windows.Forms.Label goldVillage;
         private System.Windows.Forms.Button menuButton;
         private System.Windows.Forms.Label Village;
-        private System.Windows.Forms.Label villageName;
+        internal System.Windows.Forms.Label villageName;
     }
 }

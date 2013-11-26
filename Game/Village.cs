@@ -28,6 +28,7 @@ namespace Game
             _name = name;
             _familiesList = new FamilyInVillageList(this);
             _jobs = CreateJobs();
+            _offeringsPoints = 1;
             #region Old code
             /* _jobs = new List<Jobs>;
             _family = families;

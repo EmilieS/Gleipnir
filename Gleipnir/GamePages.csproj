@@ -44,6 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventFluxUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EventFluxUC.Designer.cs">
+      <DependentUpon>EventFluxUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GameEventUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GameEventUC.Designer.cs">
+      <DependentUpon>GameEventUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="GamePage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +100,12 @@
     <Compile Include="InformationBox.Designer.cs">
       <DependentUpon>InformationBox.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="EventFluxUC.resx">
+      <DependentUpon>EventFluxUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameEventUC.resx">
+      <DependentUpon>GameEventUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GamePage.resx">
       <DependentUpon>GamePage.cs</DependentUpon>
     </EmbeddedResource>

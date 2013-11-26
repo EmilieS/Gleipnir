@@ -8,6 +8,7 @@ namespace Game
 {
     public interface IEvent
     {
-         void PublishMessage(IWindow b);
+          void PublishMessage(IWindow b);
+          void Do(IWindow b);
     }
 }

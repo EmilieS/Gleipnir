@@ -40,6 +40,28 @@ namespace Game
             b.PushTrace(String.Format("Property {0} has changed...", ChangedProperty));
         }
     }
+    public class GameEventProperty: EventProperty<Game>
+    {
+        internal GameEventProperty(Game item, string propName)
+            : base(item, propName)
+        {
+        }
+        public override void Do(IWindow b)
+        {
+            switch (ChangedProperty)
+            {
+                case "Offerings": b.PushGeneralCoins(GameItem.Offerings); break;
+                case "TotalPop": b.PushPopulation(GameItem.TotalPop) ; break;
+                case "TotalGold": b.PushGeneralGold(GameItem.TotalGold); break;
+            }
+            //GameItem.GetType().GetProperty(ChangedProperty, typeof(string));
+        }
+
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushTrace(String.Format("Property {0} has changed...", ChangedProperty));
+        }
+    }
 
     public class VillagerDyingEvent : Event<Villager>
     {
@@ -59,7 +81,7 @@ namespace Game
             {
                 toPush = String.Format("{0} est mort de sa maladie", GameItem.Name);
             }
-            else if (GameItem.Age > 80)
+            else if (GameItem.Age > 80)//80 à revoir !
             {
                 toPush = String.Format("{0} est mort de viellesse", GameItem.Name);
             }
@@ -68,7 +90,7 @@ namespace Game
                 toPush = String.Format("{0} est mort mystèrieusement", GameItem.Name);
             }
 
-            b.PushAlert(toPush);
+            b.PushAlert(toPush,"Mort");
         }
     }
     public class VillagerCallForHelp : Event<Villager>
@@ -79,7 +101,7 @@ namespace Game
         }
         override public void PublishMessage(IWindow b)
         {
-            b.PushAlert(String.Format("{0} prie que son malheur soit bientot terminé.", GameItem.Name));
+            b.PushAlert(String.Format("{0} prie que son malheur soit bientot terminé.", GameItem.Name), "Prière");
         }
     }
 

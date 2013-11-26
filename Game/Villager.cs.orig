@@ -54,11 +54,7 @@ namespace Game
             _lifeExpectancy = 85 * 12;
             _gender = gender;
             _statusInFamily.Current = Status.SINGLE;
-            _name = name;
-            _statusInFamily.Conclude();
-            _happiness.Conclude();
-            _faith.Conclude();
-            _health.Conclude();
+            _name = name;_health.Conclude();
         }
 
         //TODO : generate name.
@@ -68,7 +64,6 @@ namespace Game
         Jobs _job;
         double _lifeExpectancy;
         double _age;
-        double _goldInWallet;
         Villager _fiance;
         public Healths Health { get { return _health.Current; } }
 
@@ -113,15 +108,6 @@ namespace Game
         public string Name
         {
             get { return _name; }
-        }
-
-
-        /// <summary>
-        /// Get amount of gold the villager have
-        /// </summary>
-        public double Wallet
-        {
-            get { return _goldInWallet; }
         }
 
         /// <summary>
@@ -236,28 +222,6 @@ namespace Game
 
         #endregion
 
-        /// <summary>
-        /// Add money the villager earn
-        /// </summary>
-        /// <param name="goldAdd"></param>
-        public void AddGoldInWallet(double goldAdd)
-        {
-            _goldInWallet += goldAdd;
-        }
-
-        /// <summary>
-        /// amount set by player. Returns the true amount taken.(imagine family is broke)
-        /// </summary>
-        /// <param name="amount"></param>
-        /// <returns></returns>
-        internal double HandInOfferings(double amount)//see if we can do this in a more intelligent manner.
-        {
-            if ((_health.Current & Healths.HERETIC) == 0)
-            {
-                return ParentFamily.takeFromGoldStash(amount);
-            }
-            return 0;
-        }
         #endregion
         //====================WORLD=TICK=STUFF============================
         #region called by ImpactHappiness
@@ -271,10 +235,15 @@ namespace Game
         }
         #endregion
         #region called by Evolution
-        /// <summary>
-        /// should only be called at world tick.
-        /// </summary>
-        /// <param name="time"></param>
+        internal void HandInOfferings()
+        {
+            int amount = _parentFamily.OwnerVillage.OfferingsPointsPerTick;
+            if ((_health.Current & Healths.HERETIC) == 0)
+            {
+                Game.AddOrTakeFromOfferings(ParentFamily.takeFromGoldStash(amount));
+            }
+
+        }
         internal void AgeTick(double time)
         {
             _age += time;
@@ -397,7 +366,7 @@ namespace Game
             
             double time = Game._ageTickTime;
             AgeTick(time);
-
+            HandInOfferings();
             CallForHelpCheck();
             MatchMaking();
             //TODO: fric.

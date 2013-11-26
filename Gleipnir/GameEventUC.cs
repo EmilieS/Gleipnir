@@ -7,15 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Game;
 
 namespace GamePages
 {
-    public partial class TabIndex : UserControl
+    public partial class GameEventUC : UserControl
     {
-        public TabIndex()
+        public GameEventUC()
         {
             InitializeComponent();
         }
+
+
     }
 }

@@ -15,9 +15,9 @@ namespace Game
         protected List<Villager> _workers;
         protected Jobs _job;
         protected readonly string _jobName;
-        protected internal double goldBase;
-        protected double _coefficient;
-        protected double _gold;
+        protected internal int goldBase;
+        protected int _coefficient;
+        protected int _gold;
 
         internal JobsModel(Game game, string name)
             : base(game)
@@ -28,7 +28,7 @@ namespace Game
             _gold = ModifyGoldGeneration();
         }
 
-        public double GoldGenerated { get { return _gold; } }
+        public int GoldGenerated { get { return _gold; } }
         public string Name { get { return _jobName; } }
         public double Coefficient { get { return _coefficient; } }
 
@@ -80,7 +80,7 @@ namespace Game
             _gold = ModifyGoldGeneration();
             foreach (Villager person in _workers)
             {
-                person.AddGoldInWallet(_gold);
+                person.ParentFamily.addTOGoldStash(_gold);
             }
         }
 
@@ -88,9 +88,9 @@ namespace Game
         /// Less Gold generation if many job workers
         /// </summary>
         /// <returns></returns>
-        public double ModifyGoldGeneration()
+        public int ModifyGoldGeneration()
         {
-            double result;
+            int result;
             if (_workers.Count > 1 && _workers.Count <= 35)
                 result = (goldBase * _coefficient) - (_workers.Count - 1);
             else if (_workers.Count > 35) result = (goldBase * 5);
