@@ -26,16 +26,16 @@ namespace GamePages
             if (eventTab[9] == null && i < 9)
             {
                 eventTab[i] = GameEvent;
-                this.Controls.Add(GameEvent);
-                GameEvent.Show();
+                this.Controls.Add(eventTab[i]);
+                eventTab[i].Show();
                 i++;
             }
             else
             {
                 ReguleTab();
                 eventTab[i] = GameEvent;
-                this.Controls.Add(GameEvent);
-                GameEvent.Show();
+                this.Controls.Add(eventTab[i]);
+                eventTab[i].Show();
             }
         }
         internal void ReguleTab()

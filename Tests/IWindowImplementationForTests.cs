@@ -20,23 +20,13 @@ namespace Tests
             nb_pushAlert++;
         }
 
-        public void PushGeneralCoins(int value)
-        {
-
-        }
-        public void PushGeneralGold(int value)
-        {
-
-        }
-        public void PushGeneralHappiness(double value)
-        {
-
-        }
-        public void PushGeneralFaith(double value)
-        {
-
-        }
+        public void PushGeneralCoins(int value) { }
+        public void PushGeneralGold(int value) { }
+        public void PushGeneralHappiness(double value) { }
+        public void PushGeneralFaith(double value) { }
+        public void PushName(string name) { }
         public int nb_pushTrace;
         public int nb_pushAlert;
+        public void PushPopulation(int pop) { }
     }
 }
