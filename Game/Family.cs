@@ -14,7 +14,7 @@ namespace Game
         internal Family(Game game, Villager mother, Villager father, string name)
             : base(game)
         {
-            _goldStash = new HistorizedValue<double, Family>(this, "_goldstash", 20);
+            _goldStash = new HistorizedValue<int, Family>(this, "_goldstash", 20);
             if (mother.ParentFamily != null && father.ParentFamily != null)
             {
                 _goldStash.Current = mother.ParentFamily.takeFromGoldStash(mother.ParentFamily.GoldStash / 10); //10%
@@ -44,14 +44,14 @@ namespace Game
         }
 
         Village _ownerVillage;
-        readonly HistorizedValue<double, Family> _goldStash;
+        readonly HistorizedValue<int, Family> _goldStash;
         Villager _mother;
         Villager _father;
         FamilyMemberList _familyMembers;
         readonly string _name;
 
         public string Name { get { return _name; } }
-        public double GoldStash { get { return _goldStash.Current; } }
+        public int GoldStash { get { return _goldStash.Current; } }
         public double LastGoldStash { get {
             if (_goldStash.Historic.Count > 0)
                 return _goldStash.Historic.Last;
@@ -86,7 +86,7 @@ namespace Game
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        public double takeFromGoldStash(double amount)
+        public int takeFromGoldStash(int amount)
         {
             if (amount < 0) throw new ArgumentOutOfRangeException();
             if (amount <= _goldStash.Current)
@@ -97,7 +97,8 @@ namespace Game
             }
             else if (amount > _goldStash.Current && _goldStash.Current > 0)
             {
-                double goldLeft = _goldStash.Current;
+                int goldLeft = _goldStash.Current;
+                Debug.Assert(goldLeft >= 0, "(takeFromGoldStash) negative _goldStash.Current.");
                 _goldStash.Current = 0;
                 Game.GoldRemoved(goldLeft);
                 return goldLeft;
@@ -108,7 +109,7 @@ namespace Game
                 return 0;
             }
         }
-        public void addTOGoldStash(double amount)
+        public void addTOGoldStash(int amount)
         {
             if (amount < 0)
             {
@@ -117,6 +118,12 @@ namespace Game
             _goldStash.Current += amount;
             Game.GoldAdded(amount);
         }
+        /*internal void PayOfferings()//done in villager.(requires to know if villager is a heretic or not)
+        {
+           int payed=takeFromGoldStash(_ownerVillage.OfferingsPointsPerTick);
+
+
+        }*/
         public double FaithAverage()
         {
             double faith = 0;

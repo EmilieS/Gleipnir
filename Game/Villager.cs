@@ -53,11 +53,6 @@ namespace Game
             _lifeExpectancy = 85 * 12;
             _gender = gender;
             _statusInFamily.Current = Status.SINGLE;
-
-            _statusInFamily.Conclude();
-            _happiness.Conclude();
-            _faith.Conclude();
-            _health.Conclude();
         }
 
         //TODO : generate name.
@@ -250,20 +245,9 @@ namespace Game
         {
             _goldInWallet += goldAdd;
         }
+        
 
-        /// <summary>
-        /// amount set by player. Returns the true amount taken.(imagine family is broke)
-        /// </summary>
-        /// <param name="amount"></param>
-        /// <returns></returns>
-        internal double HandInOfferings(double amount)//see if we can do this in a more intelligent manner.
-        {
-            if ((_health.Current & Healths.HERETIC) == 0)
-            {
-                return ParentFamily.takeFromGoldStash(amount);
-            }
-            return 0;
-        }
+
         #endregion
         //====================WORLD=TICK=STUFF============================
         #region called by ImpactHappiness
@@ -277,10 +261,15 @@ namespace Game
         }
         #endregion
         #region called by Evolution
-        /// <summary>
-        /// should only be called at world tick.
-        /// </summary>
-        /// <param name="time"></param>
+        internal void HandInOfferings()
+        {
+            int amount = _parentFamily.OwnerVillage.OfferingsPointsPerTick;
+            if ((_health.Current & Healths.HERETIC) == 0)
+            {
+                Game.AddOrTakeFromOfferings(ParentFamily.takeFromGoldStash(amount));
+            }
+
+        }
         internal void AgeTick(double time)
         {
             _age += time;
@@ -403,7 +392,7 @@ namespace Game
             
             double time = Game._ageTickTime;
             AgeTick(time);
-
+            HandInOfferings();
             CallForHelpCheck();
             MatchMaking();
             //TODO: fric.

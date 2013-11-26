@@ -134,7 +134,7 @@ namespace Tests
 
             // Default
             Assert.That(myGame.Offerings, Is.EqualTo(100));
-            Assert.That(village.OfferingsPointsPerTick, Is.EqualTo(0));
+            Assert.That(village.OfferingsPointsPerTick, Is.EqualTo(1));
 
             // Modify gold take per tick
             village.SetOfferingsPoints(5);
