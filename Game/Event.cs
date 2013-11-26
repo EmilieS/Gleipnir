@@ -90,7 +90,7 @@ namespace Game
                 toPush = String.Format("{0} est mort mystèrieusement", GameItem.Name);
             }
 
-            b.PushAlert(toPush);
+            b.PushAlert(toPush,"Mort");
         }
     }
     public class VillagerCallForHelp : Event<Villager>
@@ -101,7 +101,7 @@ namespace Game
         }
         override public void PublishMessage(IWindow b)
         {
-            b.PushAlert(String.Format("{0} prie que son malheur soit bientot terminé.", GameItem.Name));
+            b.PushAlert(String.Format("{0} prie que son malheur soit bientot terminé.", GameItem.Name), "Prière");
         }
     }
 

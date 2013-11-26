@@ -64,7 +64,7 @@ namespace GamePages
         {
             Stats.goldVillage.Text = value.ToString();
         }
-        public void PushAlert(string message)
+        public void PushAlert(string message, string title)
         {
             eventFlux.CreateNewEventAndShow(message, null);
         }

@@ -15,7 +15,7 @@ namespace Tests
         {
             nb_pushTrace++;
         }
-        public void PushAlert(string message)
+        public void PushAlert(string message, string title)
         {
             nb_pushAlert++;
         }
