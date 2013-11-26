@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,9 @@ namespace Game
                 mother.Engage(father);
             }
 
+            var firstNamesPath = File.ReadAllLines(@"Extra\nameList.txt");
+            _firstNameGenerator = new NameGenerator(firstNamesPath, 1, 1);
+
             _name = name;
             _mother = mother;
             _father = father;
@@ -49,6 +53,7 @@ namespace Game
         Villager _father;
         FamilyMemberList _familyMembers;
         readonly string _name;
+        NameGenerator _firstNameGenerator;
 
         public string Name { get { return _name; } }
         public double GoldStash { get { return _goldStash.Current; } }
@@ -61,6 +66,7 @@ namespace Game
         public Villager Mother { get { return _mother; } }
         public Villager Father { get { return _father; } }
         public IFamilyMemberList FamilyMembers { get { return _familyMembers; } }
+        public NameGenerator FirstNameList { get { return _firstNameGenerator; } }
 
         public Village OwnerVillage
         {
@@ -75,9 +81,10 @@ namespace Game
         {
             if (_mother == null || _father == null)
             {
-                throw new InvalidOperationException("missing parent");
+                throw new InvalidOperationException("Missing parent");
             }
-            Villager kid = new Villager(_ownerVillage.Game, this, "default");
+            var name = this.FirstNameList.NextName;
+            Villager kid = new Villager(_ownerVillage.Game, this, name);
             _familyMembers.Add(kid);
             return kid;
         }

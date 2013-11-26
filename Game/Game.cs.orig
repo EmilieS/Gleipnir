@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.IO;
 
 namespace Game
 {
@@ -18,6 +19,7 @@ namespace Game
             _singleMen = new List<Villager>();
             _villages = new List<Village>();
             _eventList = new List<IEvent>();
+<<<<<<< HEAD
             _regularBirthDates= new double[5];
             //===to be changed
             //_ageTickTime = 0.0834;//time(years) between each tick.
@@ -37,6 +39,12 @@ namespace Game
                 j = j + 4*12;
             }
             //===
+=======
+            var namesPath = File.ReadAllLines(@"Extra\nameList.txt");
+            _nameGenerator = new NameGenerator(namesPath, 1, 1);
+            var firstNamesPath = File.ReadAllLines(@"Extra\firstNameList.txt");
+            _firstNameGenerator = new NameGenerator(namesPath, 1, 1);
+>>>>>>> fx-name_generator
             CreateVillage("default");
 
             Family FamilyA = _villages[0].CreateFamilyFromScratch();
@@ -45,37 +53,34 @@ namespace Game
             Family FamilyD = _villages[0].CreateFamilyFromScratch();
             Family FamilyE = _villages[0].CreateFamilyFromScratch();
 
-<<<<<<< HEAD
-            //TotalPop = 10;
-            //TotalGold = 0;
             _offerings = 100;
-=======
-            Offerings = 0;
->>>>>>> fx-CloseStep
         }
 
         readonly List<GameItem> _items;
-        readonly List<Village> _villages; //a revoir!
+        readonly List<Village> _villages;
         readonly List<Villager> _singleMen;
-        public IReadOnlyList<Village> Villages { get { return _villages; } }
-        public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
+        NameGenerator _nameGenerator;
+        NameGenerator _firstNameGenerator;
         readonly HistorizedValue<double, Game> _totalGold;
         readonly HistorizedValue<int, Game> _totalPop;
         int _offerings;
+
+        public NameGenerator NameList { get { return _nameGenerator; } }
+        public NameGenerator FirstNameList { get { return _firstNameGenerator; } }
+        public IReadOnlyList<Village> Villages { get { return _villages; } }
+        public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
         public double TotalGold { get { return _totalGold.Current; } }
-<<<<<<< HEAD
-        public double LastTotalGold { get { return _totalGold.Historic.Last; } }
-        public int TotalPop { get { return _totalPop.Current; } }
-        public int Offerings { get { return _offerings; } } //will change
-=======
         public double LastTotalGold { get { return _totalGold.Historic.Last; } }//for tests, should get eliminated
-        public int TotalPop { get { return _totalPop.Current; } } 
-        public int Offerings { get; set; } //will change
+        public int TotalPop { get { return _totalPop.Current; } }
+<<<<<<< HEAD
+        public int Offerings { get { return _offerings; } } //will change
         readonly internal double[] _regularBirthDates;
         readonly internal double _ageTickTime;
         public Random Rand;
 
->>>>>>> fx-CloseStep
+=======
+        public int Offerings { get { return _offerings; } }
+>>>>>>> fx-name_generator
         /*public double TotalGold { get 
         {
             double totalGold = 0;
@@ -133,22 +138,13 @@ namespace Game
         {
             //TODO
         }
-<<<<<<< HEAD
-        /*
-                public void AddOrRemoveFromTotalGold(double amount)
-                {
-                    _totalGold.Current += amount; //curious to find out if TotalGold can be negative.
-                }
-         * */
-        List<string> _currentText;
-=======
 /*
         public void AddOrRemoveFromTotalGold(double amount)
         {
             _totalGold.Current += amount; //curious to find out if TotalGold can be negative.
         }
  * */
->>>>>>> fx-CloseStep
+        List<string> _currentText;
         public void NextStep() //public for testing (again)
         {
             ImpactHappiness();
@@ -160,9 +156,6 @@ namespace Game
 
         List<IEvent> _eventList;
         public IReadOnlyList<IEvent> EventList{get{return _eventList;}}
-<<<<<<< HEAD
-        internal void DieOrIsAlive()
-=======
         private void ImpactHappiness()
         {
             foreach (GameItem item in _items)
@@ -181,7 +174,6 @@ namespace Game
         {
             int i = 0;
             //int tmpCount = _items.Count;
-
             //GameItem tmpItem;
             while (i < _items.Count)
             {
@@ -194,7 +186,6 @@ namespace Game
             //tmpItem = null;
         }
         private void DieOrIsAlive()
->>>>>>> fx-CloseStep
         {
             int i = 0;
             int tmpCount = _items.Count;
@@ -214,7 +205,11 @@ namespace Game
             }
             tmpItem = null;
         }
+<<<<<<< HEAD
         private void CloseStep()
+=======
+        internal void CloseStep()
+>>>>>>> fx-name_generator
         {
             foreach (GameItem item in _items)
             {

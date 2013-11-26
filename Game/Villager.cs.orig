@@ -21,10 +21,6 @@ namespace Game
             _statusInFamily.Current = Status.SINGLE;
             g.VillagerAdded();
 
-<<<<<<< HEAD
-            Random rand = new Random();//to be moved elsewhere.
-=======
->>>>>>> fx-CloseStep
             Debug.Assert(g != null);
             switch (Game.Rand.Next(2))
             {
@@ -42,8 +38,9 @@ namespace Game
             _age = 0;
             //_lifeExpectancy = 85;
             _lifeExpectancy = 85*12;
+            _name = name;
         }
-        public Villager(Game g, Genders gender)
+        public Villager(Game g, Genders gender, string name)
             : base(g)
         {
             _faith = new HistorizedValue<double, Villager>(this, "_faith", 20);
@@ -57,7 +54,7 @@ namespace Game
             _lifeExpectancy = 85 * 12;
             _gender = gender;
             _statusInFamily.Current = Status.SINGLE;
-
+            _name = name;
             _statusInFamily.Conclude();
             _happiness.Conclude();
             _faith.Conclude();
@@ -65,20 +62,15 @@ namespace Game
         }
 
         //TODO : generate name.
-        string _name;
+        readonly string _name;
         Family _parentFamily;
         Genders _gender;
         Jobs _job;
         double _lifeExpectancy;
         double _age;
         double _goldInWallet;
-<<<<<<< HEAD
-        Villager _fiance; //!!!!!
-        public Healths Health{get{return _health.Current;}}
-=======
         Villager _fiance;
         public Healths Health { get { return _health.Current; } }
->>>>>>> fx-CloseStep
 
         readonly HistorizedValue<double, Villager> _faith; //scale from 0 to 100.
         readonly HistorizedValue<double, Villager> _happiness; //scale from 0 to 100.
@@ -107,55 +99,23 @@ namespace Game
             _job = NewJob;
         }
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> fx-CloseStep
         #region death & family issues.
         //=====================================================================================
 
 
-<<<<<<< HEAD
-        /// <summary>
-        /// should only be called at world tick.
-        /// </summary>
-        /// <param name="time"></param>
-        internal void AgeTick(float time)
-        {
-            _age += time;
-        }
-=======
->>>>>>> fx-CloseStep
 
 
         //======================================================================================
         #endregion
         /// <summary>
-        /// Gets or Sets the villager's name
+        /// Gets the villager's name
         /// </summary>
         public string Name
         {
             get { return _name; }
-            set
-            {
-                string[] nameTab = File.ReadAllLines(@"D:\LS4Tonio\IN'TECH_INFO\PI\Gleipnir\Gleipnir\name_list.txt");
-                Random randomInt = new Random();    // Random number
-
-                _name = nameTab[randomInt.Next(nameTab.Count())];
-            }
         }
 
-<<<<<<< HEAD
-=======
 
-        /// <summary>
-        /// Define if the villager is single/engaged/married
-        /// </summary>
-        /// <summary>
-        /// Family's villager
-        /// </summary>
->>>>>>> fx-CloseStep
         /// <summary>
         /// Get amount of gold the villager have
         /// </summary>
@@ -252,43 +212,8 @@ namespace Game
         internal bool IsDead()
         {
             return ((_health.Current & Healths.DEAD) != 0);
-<<<<<<< HEAD
-        }
-        internal void Sickly()
-        {
-            if ((_health.Current & Healths.SICK) != 0)
-            {
-                AddOrRemoveHappiness(0.1);
-                ParentFamily.FamilyMemberIsSick();
-            }
-        }
-
-        private void CallForHelp() //TODO : add timer /brainstorm how to use this.
-        {
-            if (_happiness.Current < 25 && (_health.Current & Healths.UNHAPPY) == 0)
-            {
-                _health.Current = _health.Current | Healths.UNHAPPY;
-
-            }
-        }
-
-        private void CallForHelpEnded() //once the CallForHelp timer is ended.
-        {
-            if (_happiness.Current > 27)
-            {
-                _health.Current = _health.Current & ~Healths.UNHAPPY;
-                AddOrRemoveFaith(20);
-            }
-            else if (_happiness.Current < 25)
-            {
-                AddOrRemoveFaith(-20);
-            }
-        }
-=======
         }
       
->>>>>>> fx-CloseStep
-
         /// <summary>
         /// can be negative to take away faith.
         /// </summary>
@@ -407,8 +332,6 @@ namespace Game
                 return;
             Debug.Assert(_parentFamily != null);
 
-<<<<<<< HEAD
-=======
             int i = 0;
             int count = Game._regularBirthDates.Count();
             while (i < count && Game._regularBirthDates[i] <= _age)
@@ -441,7 +364,6 @@ namespace Game
         }
         #endregion
         #region called by DieOrIsAlive
->>>>>>> fx-CloseStep
         override internal void OnDestroy()
         {
             Debug.Assert(IsDead(), "the villager is still alive!");
