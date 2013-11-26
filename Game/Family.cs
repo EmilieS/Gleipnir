@@ -77,9 +77,10 @@ namespace Game
         {
             if (_mother == null || _father == null)
             {
-                throw new InvalidOperationException("missing parent");
+                throw new InvalidOperationException("Missing parent");
             }
-            Villager kid = new Villager(_ownerVillage.Game, this, "default");
+            var name = this.FirstNameList.NextName;
+            Villager kid = new Villager(_ownerVillage.Game, this, name);
             _familyMembers.Add(kid);
             return kid;
         }

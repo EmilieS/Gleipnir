@@ -39,9 +39,9 @@ namespace Game
             _age = 0;
             _lifeExpectancy = 85;
 
-            _name = parentFamily.FirstNameList.NextName;
+            _name = name;
         }
-        public Villager(Game g, Genders gender)
+        public Villager(Game g, Genders gender, string name)
             : base(g)
         {
             _faith = new HistorizedValue<double, Villager>(this, "_faith", 20);
@@ -54,10 +54,11 @@ namespace Game
             _lifeExpectancy = 85;
             _gender = gender;
             _statusInFamily.Current = Status.SINGLE;
+            _name = name;
         }
 
         //TODO : generate name.
-        string _name;
+        readonly string _name;
         Family _parentFamily;
         Genders _gender;
         Jobs _job;
@@ -111,7 +112,7 @@ namespace Game
         //======================================================================================
         #endregion
         /// <summary>
-        /// Gets or Sets the villager's name
+        /// Gets the villager's name
         /// </summary>
         public string Name
         {

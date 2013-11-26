@@ -21,6 +21,8 @@ namespace Game
             _eventList = new List<IEvent>();
             var namesPath = File.ReadAllLines(@"Extra\nameList.txt");
             _nameGenerator = new NameGenerator(namesPath, 1, 1);
+            var firstNamesPath = File.ReadAllLines(@"Extra\firstNameList.txt");
+            _firstNameGenerator = new NameGenerator(namesPath, 1, 1);
             CreateVillage("default");
 
             Family FamilyA = _villages[0].CreateFamilyFromScratch();
@@ -38,12 +40,15 @@ namespace Game
         readonly List<Village> _villages;
         readonly List<Villager> _singleMen;
         NameGenerator _nameGenerator;
-        public NameGenerator NameList { get { return _nameGenerator; } }
-        public IReadOnlyList<Village> Villages { get { return _villages; } }
-        public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
+        NameGenerator _firstNameGenerator;
         readonly HistorizedValue<double, Game> _totalGold;
         readonly HistorizedValue<int, Game> _totalPop;
         int _offerings;
+
+        public NameGenerator NameList { get { return _nameGenerator; } }
+        public NameGenerator FirstNameList { get { return _firstNameGenerator; } }
+        public IReadOnlyList<Village> Villages { get { return _villages; } }
+        public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
         public double TotalGold { get { return _totalGold.Current; } }
         public double LastTotalGold { get { return _totalGold.Historic.Last; } }
         public int TotalPop { get { return _totalPop.Current; } }
