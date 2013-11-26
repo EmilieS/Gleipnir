@@ -61,7 +61,7 @@ namespace Game
         readonly string _name;
         Family _parentFamily;
         Genders _gender;
-        Jobs _job;
+        JobsModel _job;
         double _lifeExpectancy;
         double _age;
         Villager _fiance;
@@ -76,7 +76,7 @@ namespace Game
         public double Faith { get { return _faith.Current; } } //hmm
         public double Happiness { get { return _happiness.Current; } } //hmm
         public Genders Gender { get { return _gender; } }
-        public Jobs Job { get { return _job; } }
+        public JobsModel Job { get { return _job; } }
         public double LifeExpectancy { get { return _lifeExpectancy; } }
 
         public Status StatusInFamily
@@ -89,7 +89,7 @@ namespace Game
             get { return _parentFamily; }
             internal set { _parentFamily = value; }
         }
-        public void setJob(Jobs NewJob)
+        public void setJob(JobsModel NewJob)
         {
             _job = NewJob;
         }

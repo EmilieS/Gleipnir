@@ -34,7 +34,7 @@ namespace Tests
             Assert.That(cooker.Workers.Count, Is.EqualTo(0));
             cooker.AddPerson(v0);
             Assert.That(cooker.Workers.Count, Is.EqualTo(1));
-            Assert.That(v0.Job, Is.EqualTo(Jobs.COOKER));
+            Assert.That(v0.Job==cooker);
 
             // Try add the same worker to Apothecary job
             Assert.Throws<InvalidOperationException>(() => cooker.AddPerson(v0), "Add worker issue!");
@@ -60,7 +60,7 @@ namespace Tests
             // Remove worker
             cooker.RemovePerson(v0);
             Assert.That(cooker.Workers.Count, Is.EqualTo(1));
-            Assert.That(v0.Job, Is.EqualTo(Jobs.NONE));
+            Assert.That(v0.Job==null);
 
             // Try remove the same worker
             Assert.Throws<InvalidOperationException>(() => cooker.RemovePerson(v0), "Remove worker issue!");

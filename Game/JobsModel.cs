@@ -49,7 +49,7 @@ namespace Game
             if (person == null) throw new ArgumentNullException();
             if (!_workers.Contains(person))
             {
-                person.setJob(_job);
+                person.setJob(this);
                 _workers.Add(person);
                 _gold = ModifyGoldGeneration();
             }
@@ -65,7 +65,7 @@ namespace Game
             if (person == null) throw new ArgumentNullException();
             if (_workers.Contains(person))
             {
-                person.setJob(Jobs.NONE);
+                person.setJob(null);
                 _workers.Remove(person);
                 _gold = ModifyGoldGeneration();
             }
