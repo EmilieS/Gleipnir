@@ -11,8 +11,9 @@ namespace Game
     {
         public Game()
         {
-            _totalGold = new HistorizedValue<double, Game>(this, "_totalGold", 20);
+            _totalGold = new HistorizedValue<int, Game>(this, "_totalGold", 20);
             _totalPop = new HistorizedValue<int, Game>(this, "_totalPop", 20);
+            _offerings = new HistorizedValue<int, Game>(this, "_offerings", 20);
             _items = new List<GameItem>();
             //TODO intialisation partie
             _singleMen = new List<Villager>();
@@ -45,7 +46,7 @@ namespace Game
             Family FamilyD = _villages[0].CreateFamilyFromScratch();
             Family FamilyE = _villages[0].CreateFamilyFromScratch();
 
-            _offerings = 100;
+            _offerings.Current = 100;
         }
 
         readonly List<GameItem> _items;
@@ -53,13 +54,13 @@ namespace Game
         readonly List<Villager> _singleMen;
         public IReadOnlyList<Village> Villages { get { return _villages; } }
         public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
-        readonly HistorizedValue<double, Game> _totalGold;
+        readonly HistorizedValue<int, Game> _totalGold;
         readonly HistorizedValue<int, Game> _totalPop;
-        int _offerings;
+        readonly HistorizedValue<int, Game> _offerings;
         public double TotalGold { get { return _totalGold.Current; } }
         public double LastTotalGold { get { return _totalGold.Historic.Last; } }//for tests, should get eliminated
         public int TotalPop { get { return _totalPop.Current; } }
-        public int Offerings { get { return _offerings; } } //will change
+        public int Offerings { get { return _offerings.Current; } }
         readonly internal double[] _regularBirthDates;
         readonly internal double _ageTickTime;
         public Random Rand;
@@ -81,21 +82,21 @@ namespace Game
         {
             _items.Remove(item);
         }
-        internal void GoldAdded(double amount)
+        internal void GoldAdded(int amount)
         {
-            Debug.Assert(amount > 0, "(GoldAdded)");
+            Debug.Assert(amount >= 0, "(GoldAdded) negative amount");
             _totalGold.Current += amount;
         }
-        internal void GoldRemoved(double amount)
+        internal void GoldRemoved(int amount)
         {
-            Debug.Assert(amount > 0, "(GoldRemoved)");
+            Debug.Assert(amount >= 0, "(GoldRemoved) negative amount.");
             _totalGold.Current -= amount;
         }
         internal void AddOrTakeFromOfferings(int amount)
         {
             int result = Offerings + amount;
-            if (result < 0) _offerings = 0;
-            else _offerings += amount;
+            if (result < 0) _offerings.Current = 0;
+            else _offerings.Current += amount;
         }
 
         internal void VillagerAdded()
@@ -155,6 +156,7 @@ namespace Game
         }
         private void Creation()
         {
+            //TODO : CLEAN _eventList
             int i = 0;
             //int tmpCount = _items.Count;
             //GameItem tmpItem;
