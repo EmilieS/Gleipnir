@@ -198,6 +198,8 @@ namespace Game
             }
             if(_totalGold.Conclude()){ _eventList.Add(new EventProperty<Game>(this, "TotalGold")); }
             if(_totalPop.Conclude()){ _eventList.Add(new EventProperty<Game>(this, "TotalPop")); }
+            if(_offerings.Conclude()){ _eventList.Add(new EventProperty<Game>(this, "Offerings")); }
+
         }
 
         //variables à avoir: les coefficients des métiers
