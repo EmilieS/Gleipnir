@@ -47,6 +47,15 @@ namespace GamePages
             InfoBox.Show();
             this.Controls.Add(eventFlux);
             eventFlux.Show();
+
+            _startedGame.NextStep();
+            _startedGame.NextStep();
+
+            foreach (IEvent events in _startedGame.EventList)
+            {
+                events.Do(this);
+                events.PublishMessage(this);
+            }
         }
 
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)

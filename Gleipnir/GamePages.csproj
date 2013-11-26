@@ -56,12 +56,6 @@
     <Compile Include="GameEventUC.Designer.cs">
       <DependentUpon>GameEventUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="GamePage.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GamePage.Designer.cs">
-      <DependentUpon>GamePage.cs</DependentUpon>
-    </Compile>
     <Compile Include="HomepageUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -105,9 +99,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GameEventUC.resx">
       <DependentUpon>GameEventUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GamePage.resx">
-      <DependentUpon>GamePage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HomepageUC.resx">
       <DependentUpon>HomepageUC.cs</DependentUpon>
