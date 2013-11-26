@@ -91,8 +91,9 @@ namespace Tests
             Assert.AreEqual(3056, MyGame.TotalGold);//4 other families of 2.each family has 20-2*2*2
             double nb1 = 3056;
             double nb2 = 11;
+            double totest = nb1 / nb2;
             Assert.AreEqual(1000, family.LastGoldStash / family.FamilyMembers.Count);
-            Assert.AreEqual(nb1/nb2, MyGame.LastTotalGold / MyGame.TotalPop);
+            Assert.AreEqual(totest, MyGame.LastTotalGold / MyGame.TotalPop);
             //Assert.AreEqual(80.2*3/3, family.HappinessAverage(), "family average is not 80.2");//..HAHAHA...
 
             family.takeFromGoldStash(2937);

@@ -57,8 +57,8 @@ namespace Game
         readonly HistorizedValue<int, Game> _totalGold;
         readonly HistorizedValue<int, Game> _totalPop;
         readonly HistorizedValue<int, Game> _offerings;
-        public double TotalGold { get { return _totalGold.Current; } }
-        public double LastTotalGold { get { return _totalGold.Historic.Last; } }//for tests, should get eliminated
+        public int TotalGold { get { return _totalGold.Current; } }
+        public int LastTotalGold { get { return _totalGold.Historic.Last; } }//for tests, should get eliminated
         public int TotalPop { get { return _totalPop.Current; } }
         public int Offerings { get { return _offerings.Current; } }
         readonly internal double[] _regularBirthDates;
@@ -196,9 +196,9 @@ namespace Game
             {
                 item.CloseStep(_eventList);
             }
-            if(_totalGold.Conclude()){ _eventList.Add(new EventProperty<Game>(this, "TotalGold")); }
-            if(_totalPop.Conclude()){ _eventList.Add(new EventProperty<Game>(this, "TotalPop")); }
-            if(_offerings.Conclude()){ _eventList.Add(new EventProperty<Game>(this, "Offerings")); }
+            if(_totalGold.Conclude()){ _eventList.Add(new GameEventProperty(this, "TotalGold")); }
+            if(_totalPop.Conclude()){ _eventList.Add(new GameEventProperty(this, "TotalPop")); }
+            if(_offerings.Conclude()){ _eventList.Add(new GameEventProperty(this, "Offerings")); }
 
         }
 

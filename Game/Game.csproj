@@ -49,7 +49,7 @@
     <Compile Include="FamilyMemberList.cs" />
     <Compile Include="IEvent.cs" />
     <Compile Include="IWindow.cs" />
-    <Compile Include="VillagerFiance.cs" />
+    <Compile Include="Villager.Fiance.cs" />
     <Compile Include="Farmer.cs" />
     <Compile Include="FIFOBuffer.cs" />
     <Compile Include="Game.cs" />

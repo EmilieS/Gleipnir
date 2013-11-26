@@ -40,6 +40,28 @@ namespace Game
             b.PushTrace(String.Format("Property {0} has changed...", ChangedProperty));
         }
     }
+    public class GameEventProperty: EventProperty<Game>
+    {
+        internal GameEventProperty(Game item, string propName)
+            : base(item, propName)
+        {
+        }
+        public override void Do(IWindow b)
+        {
+            switch (ChangedProperty)
+            {
+                case "Offerings": b.PushGeneralCoins(GameItem.Offerings); break;
+                //case "TotalPop": b.Population; break;
+                case "TotalPop": b.PushGeneralGold(GameItem.TotalGold); break;
+            }
+            //GameItem.GetType().GetProperty(ChangedProperty, typeof(string));
+        }
+
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushTrace(String.Format("Property {0} has changed...", ChangedProperty));
+        }
+    }
 
     public class VillagerDyingEvent : Event<Villager>
     {
