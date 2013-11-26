@@ -51,8 +51,8 @@ namespace Game
             switch (ChangedProperty)
             {
                 case "Offerings": b.PushGeneralCoins(GameItem.Offerings); break;
-                //case "TotalPop": b.Population; break;
-                case "TotalPop": b.PushGeneralGold(GameItem.TotalGold); break;
+                case "TotalPop": b.PushPopulation(GameItem.TotalPop) ; break;
+                case "TotalGold": b.PushGeneralGold(GameItem.TotalGold); break;
             }
             //GameItem.GetType().GetProperty(ChangedProperty, typeof(string));
         }
