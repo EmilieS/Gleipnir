@@ -59,7 +59,7 @@ namespace Game
             {
                 toPush = String.Format("{0} est mort de sa maladie", GameItem.Name);
             }
-            else if (GameItem.Age > 80)
+            else if (GameItem.Age > 80)//80 à revoir !
             {
                 toPush = String.Format("{0} est mort de viellesse", GameItem.Name);
             }
