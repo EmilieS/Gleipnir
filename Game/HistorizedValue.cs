@@ -43,6 +43,7 @@ namespace Game
             {
                 _hasChangedDuringLastStep = Comparer<T>.Default.Compare(_histo.Last, _current) != 0;
             }
+            else { _hasChangedDuringLastStep = true; }
             _histo.Push(_current);
             return _hasChangedDuringLastStep;
         }

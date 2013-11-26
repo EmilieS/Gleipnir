@@ -51,8 +51,8 @@ namespace Game
             switch (ChangedProperty)
             {
                 case "Offerings": b.PushGeneralCoins(GameItem.Offerings); break;
-                //case "TotalPop": b.Population; break;
-                case "TotalPop": b.PushGeneralGold(GameItem.TotalGold); break;
+                case "TotalPop": b.PushPopulation(GameItem.TotalPop) ; break;
+                case "TotalGold": b.PushGeneralGold(GameItem.TotalGold); break;
             }
             //GameItem.GetType().GetProperty(ChangedProperty, typeof(string));
         }
@@ -90,7 +90,7 @@ namespace Game
                 toPush = String.Format("{0} est mort mystèrieusement", GameItem.Name);
             }
 
-            b.PushAlert(toPush);
+            b.PushAlert(toPush,"Mort");
         }
     }
     public class VillagerCallForHelp : Event<Villager>
@@ -101,7 +101,7 @@ namespace Game
         }
         override public void PublishMessage(IWindow b)
         {
-            b.PushAlert(String.Format("{0} prie que son malheur soit bientot terminé.", GameItem.Name));
+            b.PushAlert(String.Format("{0} prie que son malheur soit bientot terminé.", GameItem.Name), "Prière");
         }
     }
 

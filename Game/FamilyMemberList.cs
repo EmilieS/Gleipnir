@@ -12,6 +12,7 @@ namespace Game
         {
             _members = new List<Villager>();
             _owner = owner;
+            FamilyMemberListChanged = true;
         }
        private readonly List<Villager> _members;
        internal readonly Family _owner;

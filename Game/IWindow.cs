@@ -10,7 +10,7 @@ namespace Game
     {
 
         void PushTrace(string message);
-        void PushAlert(string message);
+        void PushAlert(string message, string title);
         void PushPopulation(int pop);
         void PushGeneralGold(int value);
         void PushGeneralCoins(int value);
