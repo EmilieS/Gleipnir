@@ -46,6 +46,7 @@ namespace Tests
             foreach (IEvent e in MyGame.EventList)
             {
                 e.PublishMessage(MyWindow);
+                e.Do(MyWindow);
             }
             MyGame.NextStep();
             Assert.AreEqual(0, MyWindow.nb_pushAlert);
@@ -56,7 +57,9 @@ namespace Tests
             foreach (IEvent e in MyGame.EventList)
             {
                 e.PublishMessage(MyWindow);
+                e.Do(MyWindow);
             }
+            Assert.AreEqual(2, MyWindow.goldtouched);
             //Assert.AreEqual(15, MyWindow.nb_pushTrace);//11
             Assert.AreEqual(0, MyWindow.nb_pushAlert);
             villager1.Kill();
@@ -64,7 +67,9 @@ namespace Tests
             foreach (IEvent Event in MyGame.EventList)
             {
                 Event.PublishMessage(MyWindow);
+                Event.Do(MyWindow);
             }
+            //Assert.AreEqual(1, MyWindow.goldtouched);
            // Assert.AreEqual(34, MyWindow.nb_pushTrace);//32
             Assert.AreEqual(1, MyWindow.nb_pushAlert);
         }
