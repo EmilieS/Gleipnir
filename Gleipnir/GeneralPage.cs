@@ -80,6 +80,13 @@ namespace GamePages
         {
             Stats.faithVillage.Text = value.ToString();
         }
-
+        public void PushName(string name)
+        {
+            Stats.villageName.Text = name;
+        }
+        public void PushPopulation(int pop)
+        {
+            Stats.population.Text = pop.ToString();
+        }
     }
 }

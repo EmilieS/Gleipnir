@@ -158,10 +158,10 @@
         internal System.Windows.Forms.Label offeringsPoints;
         internal System.Windows.Forms.Label happinessVillage;
         internal System.Windows.Forms.Label faithVillage;
-        private System.Windows.Forms.Label population;
+        internal System.Windows.Forms.Label population;
         internal System.Windows.Forms.Label goldVillage;
         private System.Windows.Forms.Button menuButton;
         private System.Windows.Forms.Label Village;
-        private System.Windows.Forms.Label villageName;
+        internal System.Windows.Forms.Label villageName;
     }
 }
