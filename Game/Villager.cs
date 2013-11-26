@@ -62,7 +62,6 @@ namespace Game
         Jobs _job;
         double _lifeExpectancy;
         double _age;
-        double _goldInWallet;
         Villager _fiance;
         public Healths Health { get { return _health.Current; } }
 
@@ -114,15 +113,6 @@ namespace Game
 
                 _name = nameTab[randomInt.Next(nameTab.Count())];
             }
-        }
-
-
-        /// <summary>
-        /// Get amount of gold the villager have
-        /// </summary>
-        public double Wallet
-        {
-            get { return _goldInWallet; }
         }
 
         /// <summary>
@@ -236,17 +226,6 @@ namespace Game
         }
 
         #endregion
-
-        /// <summary>
-        /// Add money the villager earn
-        /// </summary>
-        /// <param name="goldAdd"></param>
-        public void AddGoldInWallet(double goldAdd)
-        {
-            _goldInWallet += goldAdd;
-        }
-        
-
 
         #endregion
         //====================WORLD=TICK=STUFF============================

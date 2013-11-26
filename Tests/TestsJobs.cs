@@ -43,18 +43,19 @@ namespace Tests
             // See gold generation
             Assert.That(cooker.GoldGenerated, Is.EqualTo(65));
             cooker.GenerateGold();
-            Assert.That(v0.Wallet, Is.EqualTo(65));
-            Assert.That(v1.Wallet, Is.EqualTo(0));
+            Assert.That(v0.ParentFamily.GoldStash, Is.EqualTo(65+20));
+            Assert.That(v1.ParentFamily.GoldStash, Is.EqualTo(65 + 20));
+            Assert.That(v2.ParentFamily.GoldStash, Is.EqualTo(0+20));
 
             // Add other worker
-            cooker.AddPerson(v1);
+            cooker.AddPerson(v2);
             Assert.That(cooker.Workers.Count, Is.EqualTo(2));
 
             // New Gold generation
             cooker.GenerateGold();
             Assert.That(cooker.GoldGenerated, Is.EqualTo(64));
-            Assert.That(v0.Wallet, Is.EqualTo(129));
-            Assert.That(v1.Wallet, Is.EqualTo(64));
+            Assert.That(v0.ParentFamily.GoldStash, Is.EqualTo(129+20));
+            Assert.That(v2.ParentFamily.GoldStash, Is.EqualTo(64+20));
 
             // Remove worker
             cooker.RemovePerson(v0);
@@ -68,7 +69,7 @@ namespace Tests
             // Gold generation up
             cooker.GenerateGold();
             Assert.That(cooker.GoldGenerated, Is.EqualTo(65));
-            Assert.That(v1.Wallet, Is.EqualTo(129));
+            Assert.That(v2.ParentFamily.GoldStash, Is.EqualTo(129+20));
         }
     }
 }
