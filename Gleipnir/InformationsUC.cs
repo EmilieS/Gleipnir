@@ -11,12 +11,15 @@ using Game;
 
 namespace GamePages
 {
-    public partial class InformationsUC : UserControl
+    public partial class InformationsUC : UserControl // create an interface to engine advance
     {
+        readonly GeneralPage _page;
+
         // TODO : Complete the Transitions, Create ingame menu, go back to a Main menu
         InGameMenu Menu;
-        public InformationsUC()
+        public InformationsUC( GeneralPage p )
         {
+            _page = p;
             Menu = new InGameMenu();
             InitializeComponent();
         }
@@ -28,5 +31,9 @@ namespace GamePages
             Menu.Show();
         }
 
+        private void StepByStep_Click(object sender, EventArgs e)
+        {
+            _page.Step();
+        }
     }
 }
