@@ -38,8 +38,9 @@ namespace Game
             _age = 0;
             //_lifeExpectancy = 85;
             _lifeExpectancy = 85*12;
+            _name = name;
         }
-        public Villager(Game g, Genders gender)
+        public Villager(Game g, Genders gender, string name)
             : base(g)
         {
             _faith = new HistorizedValue<double, Villager>(this, "_faith", 20);
@@ -53,16 +54,16 @@ namespace Game
             _lifeExpectancy = 85 * 12;
             _gender = gender;
             _statusInFamily.Current = Status.SINGLE;
+            _name = name;_health.Conclude();
         }
 
         //TODO : generate name.
-        string _name;
+        readonly string _name;
         Family _parentFamily;
         Genders _gender;
-        Jobs _job;
+        JobsModel _job;
         double _lifeExpectancy;
         double _age;
-        double _goldInWallet;
         Villager _fiance;
         public Healths Health { get { return _health.Current; } }
 
@@ -75,7 +76,7 @@ namespace Game
         public double Faith { get { return _faith.Current; } } //hmm
         public double Happiness { get { return _happiness.Current; } } //hmm
         public Genders Gender { get { return _gender; } }
-        public Jobs Job { get { return _job; } }
+        public JobsModel Job { get { return _job; } }
         public double LifeExpectancy { get { return _lifeExpectancy; } }
 
         public Status StatusInFamily
@@ -88,7 +89,7 @@ namespace Game
             get { return _parentFamily; }
             internal set { _parentFamily = value; }
         }
-        public void setJob(Jobs NewJob)
+        public void setJob(JobsModel NewJob)
         {
             _job = NewJob;
         }
@@ -102,27 +103,11 @@ namespace Game
         //======================================================================================
         #endregion
         /// <summary>
-        /// Gets or Sets the villager's name
+        /// Gets the villager's name
         /// </summary>
         public string Name
         {
             get { return _name; }
-            set
-            {
-                string[] nameTab = File.ReadAllLines(@"D:\LS4Tonio\IN'TECH_INFO\PI\Gleipnir\Gleipnir\name_list.txt");
-                Random randomInt = new Random();    // Random number
-
-                _name = nameTab[randomInt.Next(nameTab.Count())];
-            }
-        }
-
-
-        /// <summary>
-        /// Get amount of gold the villager have
-        /// </summary>
-        public double Wallet
-        {
-            get { return _goldInWallet; }
         }
 
         /// <summary>
@@ -236,17 +221,6 @@ namespace Game
         }
 
         #endregion
-
-        /// <summary>
-        /// Add money the villager earn
-        /// </summary>
-        /// <param name="goldAdd"></param>
-        public void AddGoldInWallet(double goldAdd)
-        {
-            _goldInWallet += goldAdd;
-        }
-        
-
 
         #endregion
         //====================WORLD=TICK=STUFF============================

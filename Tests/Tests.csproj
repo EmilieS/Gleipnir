@@ -46,6 +46,7 @@
     <Compile Include="TestAgingAndBirth.cs" />
     <Compile Include="TestBuildings.cs" />
     <Compile Include="TestMaterials.cs" />
+    <Compile Include="TestNameGenerator.cs" />
     <Compile Include="TestsFamily.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestsHappiness.cs" />

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.IO;
 
 namespace Game
 {
@@ -19,6 +20,10 @@ namespace Game
             _singleMen = new List<Villager>();
             _villages = new List<Village>();
             _eventList = new List<IEvent>();
+            var namesPath = File.ReadAllLines(@"Extra\nameList.txt");
+            _nameGenerator = new NameGenerator(namesPath, 1, 1);
+            var firstNamesPath = File.ReadAllLines(@"Extra\firstNameList.txt");
+            _firstNameGenerator = new NameGenerator(namesPath, 1, 1);
             _regularBirthDates= new double[5];
             //===to be changed
             //_ageTickTime = 0.0834;//time(years) between each tick.
@@ -52,13 +57,19 @@ namespace Game
         readonly List<GameItem> _items;
         readonly List<Village> _villages; //a revoir!
         readonly List<Villager> _singleMen;
-        public IReadOnlyList<Village> Villages { get { return _villages; } }
-        public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
+        NameGenerator _nameGenerator;
+        NameGenerator _firstNameGenerator;
         readonly HistorizedValue<int, Game> _totalGold;
         readonly HistorizedValue<int, Game> _totalPop;
         readonly HistorizedValue<int, Game> _offerings;
-        public int TotalGold { get { return _totalGold.Current; } }
+
+        public NameGenerator NameList { get { return _nameGenerator; } }
+        public NameGenerator FirstNameList { get { return _firstNameGenerator; } }
+        public IReadOnlyList<Village> Villages { get { return _villages; } }
+        public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
+	public int TotalGold { get { return _totalGold.Current; } }
         public int LastTotalGold { get { return _totalGold.Historic.Last; } }//for tests, should get eliminated
+
         public int TotalPop { get { return _totalPop.Current; } }
         public int Offerings { get { return _offerings.Current; } }
         readonly internal double[] _regularBirthDates;
