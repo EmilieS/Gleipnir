@@ -66,6 +66,7 @@ namespace Game
         double _age;
         Villager _fiance;
         public Healths Health { get { return _health.Current; } }
+        ActivityStatus _villagerActivity;
 
         readonly HistorizedValue<double, Villager> _faith; //scale from 0 to 100.
         readonly HistorizedValue<double, Villager> _happiness; //scale from 0 to 100.
@@ -92,6 +93,17 @@ namespace Game
         public void setJob(Jobs NewJob)
         {
             _job = NewJob;
+        }
+        public ActivityStatus ActivityStatus
+        {
+            get
+            {
+                return _villagerActivity;
+            }
+            set
+            {
+                _villagerActivity = value;
+            }
         }
 
         #region death & family issues.
@@ -248,6 +260,17 @@ namespace Game
         {
             _age += time;
         }
+        /// <summary>
+        /// Set a villager as Heretic 
+        /// </summary>
+        public void SetHeretic()
+        {
+            _health.Current = Healths.HERETIC;
+        }
+        public bool IsHeretic()
+        {
+            return ((_health.Current & Healths.HERETIC) != 0);
+        }
 
         int _callForHelpTickTimer;
         private void CallForHelpCheck()
@@ -275,7 +298,7 @@ namespace Game
 
             }
         }
-        private void CallForHelpEnded()
+	private void CallForHelpEnded()
         {
             if (_happiness.Current > 27)
             {
@@ -332,7 +355,7 @@ namespace Game
 
         }
         #endregion
-        #region called by DieOrIsAlive
+	#region called by DieOrIsAlive
         override internal void OnDestroy()
         {
             Debug.Assert(IsDead(), "the villager is still alive!");

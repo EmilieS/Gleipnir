@@ -17,5 +17,7 @@ namespace GamePages
         {
             InitializeComponent();
         }
+
+
     }
 }
