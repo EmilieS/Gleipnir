@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2B78158A-B99C-4116-98F4-C4786D93FAAF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Game</RootNamespace>
+    <AssemblyName>Game</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+<<<<<<< HEAD
+    <Compile Include="Meeting.cs" />
+=======
+    <Compile Include="Apothecary.cs" />
+    <Compile Include="Blacksmith.cs" />
+    <Compile Include="Construction_Worker.cs" />
+    <Compile Include="Cooker.cs" />
+<<<<<<< HEAD
+    <Compile Include="Event.cs" />
+    <Compile Include="Family.cs" />
+    <Compile Include="FamilyInVillageList.cs" />
+    <Compile Include="FamilyMemberList.cs" />
+    <Compile Include="IEvent.cs" />
+    <Compile Include="IWindow.cs" />
+<<<<<<< HEAD
+    <Compile Include="NameGenerator.cs" />
+    <Compile Include="VillagerFiance.cs" />
+=======
+    <Compile Include="Villager.Fiance.cs" />
+>>>>>>> fx-Event
+=======
+>>>>>>> origin/develop
+    <Compile Include="Family.cs" />
+    <Compile Include="FamilyInVillageList.cs" />
+    <Compile Include="FamilyMemberList.cs" />
+    <Compile Include="VillagerFiance.cs" />
+>>>>>>> fx-meeting
+    <Compile Include="Farmer.cs" />
+    <Compile Include="FIFOBuffer.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="GameItem.cs" />
+    <Compile Include="HistorizedValue.cs" />
+    <Compile Include="IFamilyMemberList.cs" />
+    <Compile Include="JobsModel.cs" />
+    <Compile Include="Militia.cs" />
+    <Compile Include="Miller.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
+    <Compile Include="SamhainFest.cs" />
+=======
+    <Compile Include="Tailor.cs" />
+>>>>>>> origin/develop
+    <Compile Include="Village.cs" />
+    <Compile Include="Villager.cs" />
+    <Compile Include="VillagerProperties.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Extra\firstNameList.txt" />
+    <Content Include="Extra\nameList.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
