@@ -10,8 +10,8 @@ namespace Game
 {
     public class Tailor : JobsModel
     {
-        public Tailor(Game game, string name)
-            : base(game, name)
+        public Tailor(Game game, JobList list, string name)
+            : base(game, list, name)
         {
             _job = Jobs.TAILOR;
             _coefficient = 15;

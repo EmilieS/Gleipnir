@@ -10,8 +10,8 @@ namespace Game
 {
     public class Cooker : JobsModel
     {
-        public Cooker(Game game, string name)
-            : base(game, name)
+        public Cooker(Game game, JobList list, string name)
+            : base(game,list, name)
         {
             _job = Jobs.COOKER;
             _coefficient = 13;

@@ -10,8 +10,8 @@ namespace Game
 {
     public class Miller : JobsModel
     {
-        public Miller(Game game, string name)
-            : base(game, name)
+        public Miller(Game game, JobList list, string name)
+            : base(game, list,name)
         {
             _job = Jobs.MILLER;
             _coefficient = 13;

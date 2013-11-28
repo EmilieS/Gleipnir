@@ -20,6 +20,7 @@ namespace Game
             _statusInFamily = new HistorizedValue<Status, Villager>(this, "_statusInFamily", 20);
             _statusInFamily.Current = Status.SINGLE;
             g.VillagerAdded();
+            parentFamily.OwnerVillage.VillagerAdded();
 
             Debug.Assert(g != null);
             switch (Game.Rand.Next(2))
@@ -54,7 +55,8 @@ namespace Game
             _lifeExpectancy = 85 * 12;
             _gender = gender;
             _statusInFamily.Current = Status.SINGLE;
-            _name = name;_health.Conclude();
+            _name = name;//_health.Conclude();
+            Game.Villages[0].VillagerAdded();//hmmmmm
         }
 
         //TODO : generate name.
@@ -349,11 +351,12 @@ namespace Game
                 Debug.Assert(_fiance == null);
             }
             Debug.Assert(_fiance == null);
+            _parentFamily.OwnerVillage.VillagerRemoved(this);
             _parentFamily.FamilyMemberDestroyed(this);
-            Debug.Assert(_parentFamily == null);
-
+            Debug.Assert(_parentFamily == null);            
             Game.VillagerRemoved(this);
-            //_job = null;
+            if (_job!=null)
+             _job.WorkerDestroyed(this);
         }
         #endregion
         #region worldtickcalls

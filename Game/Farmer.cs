@@ -10,8 +10,8 @@ namespace Game
 {
     public class Farmer : JobsModel
     {
-        public Farmer(Game game, string name)
-            : base(game, name)
+        public Farmer(Game game, JobList list, string name)
+            : base(game, list, name)
         {
             _job = Jobs.FARMER;
             _coefficient = 10;

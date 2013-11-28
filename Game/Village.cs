@@ -9,11 +9,13 @@ namespace Game
 {
     public class Village : GameItem
     {
-        List<JobsModel> _jobs;
-        double _familiesGold;
+        //List<JobsModel> _jobs;// needs to be cleansed
+        public readonly JobList Jobs;
+        int _familiesGold;
         double _villageFaith;
         double _villageHappiness;
         int _offeringsPoints;
+        internal readonly HistorizedValue<int, Village> _villagePop;
 
         readonly string _name;
         FamilyInVillageList _familiesList;
@@ -23,11 +25,13 @@ namespace Game
         internal Village(Game thisGame, string name)
             : base(thisGame)
         {
+            _villagePop = new HistorizedValue<int, Village>(this, "_villagePop", 20);
             Debug.Assert(!String.IsNullOrWhiteSpace(name));
             Debug.Assert(thisGame != null, "thisGame is null!");
             _name = name;
             _familiesList = new FamilyInVillageList(this);
-            _jobs = CreateJobs();
+            //_jobs = CreateJobs();
+            Jobs = new JobList(this);
             _offeringsPoints = 1;
             #region Old code
             /* _jobs = new List<Jobs>;
@@ -53,15 +57,11 @@ namespace Game
              */
             #endregion
         }
-        public Village(List<Family> families, Game thisGame)//a éliminer.
-            : base(thisGame)
+        internal void VillagerAdded()
         {
-            _familiesList = new FamilyInVillageList(this);
-            for (int i=0; i<families.Count; i++)
-            {
-            _familiesList.Add(families[i]);
-            }
+            _villagePop.Current++;
         }
+
 
         public Family CreateFamily(Villager mother, Villager father)
         {
@@ -92,7 +92,7 @@ namespace Game
         /// Gets the total gold for the village.
         /// Addition of all families' gold
         /// </summary>
-        public double Gold { get { return _familiesGold; } }
+        public int Gold { get { return _familiesGold; } }
         
         /// <summary>
         /// Addition of all gold of all families
@@ -100,7 +100,7 @@ namespace Game
         /// <returns></returns>
         public void CalculateVillageGold()
         {
-            double result = 0;
+            int result = 0;
             foreach (Family fam in _familiesList)
             {
                 result += fam.GoldStash;
@@ -110,6 +110,7 @@ namespace Game
             else  _familiesGold = result;
         }
 
+        
         /// <summary>
         /// Gets average faith of all families in the village.
         /// </summary>
@@ -197,9 +198,9 @@ namespace Game
             else throw new ArgumentOutOfRangeException();
         }
 
-        public List<JobsModel> JobsList { get { return _jobs; } }
+        //public List<JobsModel> JobsList { get { return _jobs; } }
 
-        private List<JobsModel> CreateJobs()
+        /*private List<JobsModel> CreateJobs()
         {
             Debug.Assert(Game != null, "Game doesn't exist!");
             List<JobsModel> jobList = new List<JobsModel>();
@@ -221,17 +222,22 @@ namespace Game
             jobList.Add(tailor);
             return jobList;
         }
-
+*/
         internal void FamilyDestroyed(Family family)
         {
             Debug.Assert(family != null);
             _familiesList.Remove(family);
         }
 
-        internal void DestroyJobs(JobsModel jobName)
+        //TODO: !!! use new list & all jobs destroyed.
+  /*      internal void DestroyJobs(JobsModel jobName)
         {
             Debug.Assert(jobName != null);
             _jobs.Remove(jobName);
+        }*/
+        internal void VillagerRemoved(Villager villager)
+        {
+            _villagePop.Current--;
         }
 
         internal override void OnDestroy()
