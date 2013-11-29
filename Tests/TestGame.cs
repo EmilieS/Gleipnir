@@ -14,13 +14,18 @@ namespace Tests
         [Test]
         public void killPopulation()
         {
-            int nb_pushAlert = 0;
             var myGame = new Game.Game();
+            var MyWindow = new Tests.IWindowImplementationForTests();
             do
             {
                 myGame.NextStep();
-            } while(nb_pushAlert == 0);
-            Assert.That(nb_pushAlert, Is.EqualTo(1));
+                foreach (IEvent e in myGame.EventList)
+                {
+                    e.PublishMessage(MyWindow);
+                    e.Do(MyWindow);
+                }
+            } while(MyWindow.nb_pushAlert == 0);
+            //Assert.That(MyWindow.nb_pushAlert, Is.EqualTo(1));
         }
     }
 }

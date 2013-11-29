@@ -228,21 +228,28 @@ namespace Game
         #region worldtickcalls
         override internal void ImpactHappiness() 
         {
+            Debug.Assert(_ownerVillage != null, "(ImpactHappiness) ownerVillage == null !!!!!!");
             IsPoorOrRich_HappinessImpact();        
         }
         override internal void Evolution()
         {
             //RegularBirths done in villager.
-
+            Debug.Assert(_ownerVillage != null, "(Evolution) ownerVillage == null !!!!!!");
         }
         
         override internal void DieOrIsAlive(List<IEvent> eventList)
         {
-            if (FamilyMembers.Count == 0) { eventList.Add(new FamilyEndEvent(this)); OnDestroy(); }
+            Debug.Assert(_ownerVillage != null, "(DieOrIsAlive) ownerVillage == null !!!!!!");
+            if (FamilyMembers.Count == 0)
+            {
+                eventList.Add(new FamilyEndEvent(this)); Destroy();
+                Debug.Assert(Game == null, "(DieOrIsAlive) game is not null !!!!!!");//ici en premier.
+            }
         }
         
         override internal void CloseStep(List<IEvent> eventList)
         {
+            Debug.Assert(_ownerVillage != null, "(CloseStep) ownerVillage == null !!!!!!");
             if (_goldStash.Conclude()) { eventList.Add(new EventProperty<Family>(this, "LastGoldStash")); }
             if (_familyMembers.Conclude()) { eventList.Add(new EventProperty<Family>(this, "FamilyMembers")); }
         }

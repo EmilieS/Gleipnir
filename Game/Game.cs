@@ -54,7 +54,7 @@ namespace Game
             _offerings.Current = 100;
         }
 
-        readonly List<GameItem> _items;
+        internal readonly List<GameItem> _items;//internal for tests
         readonly List<Village> _villages; //a revoir!
         readonly List<Villager> _singleMen;
         NameGenerator _nameGenerator;
@@ -91,7 +91,11 @@ namespace Game
         }
         internal void GameItemDestroyed(GameItem item)
         {
+            Debug.Assert(item != null, "(GameItemDestroyed) item is null");
+            Debug.Assert(_items.Contains(item), "(GameItemDestroyed) the item was already removed from the gameitemlist");
             _items.Remove(item);
+            Debug.Assert(!_items.Contains(item), "(GameItemDestroyed) the item was not removed from the gameitemlist");
+
         }
         internal void GoldAdded(int amount)
         {
