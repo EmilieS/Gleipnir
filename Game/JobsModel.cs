@@ -145,7 +145,6 @@ namespace Game
         internal override void Evolution()
         {
             GenerateGold();
-            //TODO : add +gold.
         }
         internal override void CloseStep(List<IEvent> eventList)
         {
