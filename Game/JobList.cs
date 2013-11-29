@@ -18,7 +18,7 @@ namespace Game
         readonly Miller _miller;
         readonly Tailor _tailor;
 
-        public JobsModel Apothecary { get { return _apothecary;} }
+        public JobsModel Apothecary { get { return _apothecary; } }
         public JobsModel Blacksmith { get { return _blacksmith; } }
         public JobsModel Construction_worker { get { return _construction_worker; } }
         public JobsModel Cooker { get { return _cooker; } }
@@ -28,6 +28,9 @@ namespace Game
         public JobsModel Tailor { get { return _tailor; } }
 
         readonly List<JobsModel> _jobList;
+        readonly List<JobsModel> _happinessJobList;
+
+        internal IReadOnlyList<JobsModel> HappinessJobList { get { return _happinessJobList; } }
         //public IReadOnlyList<JobsModel> List { get { return _jobList; } }
         internal readonly Village _owner;
 
@@ -36,14 +39,15 @@ namespace Game
             Game game = village.Game;
             Debug.Assert(game != null, "Game doesn't exist!");
             _jobList = new List<JobsModel>();
-            _apothecary = new Apothecary(game,this, "Apoticaire");
-            _blacksmith = new Blacksmith(game, this,"Forgeron");
-            _construction_worker = new Construction_Worker(game, this,"Ouvrier");
-            _cooker = new Cooker(game, this,"Cuisinier");
-            _farmer = new Farmer(game,this, "Fermier");
-            _militia = new Militia(game,this, "Milice");
-            _miller = new Miller(game,this, "Meunier");
-            _tailor = new Tailor(game,this, "Tailleur");
+            _happinessJobList = new List<JobsModel>();
+            _apothecary = new Apothecary(game, this, "Apoticaire");
+            _blacksmith = new Blacksmith(game, this, "Forgeron");
+            _construction_worker = new Construction_Worker(game, this, "Ouvrier");
+            _cooker = new Cooker(game, this, "Cuisinier");
+            _farmer = new Farmer(game, this, "Fermier");
+            _militia = new Militia(game, this, "Milice");
+            _miller = new Miller(game, this, "Meunier");
+            _tailor = new Tailor(game, this, "Tailleur");
             _jobList.Add(_apothecary);
             _jobList.Add(_blacksmith);
             _jobList.Add(_construction_worker);
@@ -52,6 +56,9 @@ namespace Game
             _jobList.Add(_militia);
             _jobList.Add(_miller);
             _jobList.Add(_tailor);
+            _happinessJobList.Add(_cooker);
+            _happinessJobList.Add(_miller);
+            _happinessJobList.Add(_tailor);
             _owner = village;
         }
         public JobsModel this[int index]

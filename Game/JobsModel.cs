@@ -20,7 +20,7 @@ namespace Game
         protected int _gold;
         internal readonly JobList _owner;
         bool _workerListChanged;
-        
+
         internal JobsModel(Game game, JobList list, string name)
             : base(game)
         {
@@ -103,25 +103,25 @@ namespace Game
                 result = (goldBase * _coefficient) - (_workers.Count - 1);
             else if (_workers.Count > 35) result = (goldBase * 5);
             else result = (goldBase * _coefficient);*/
-            
+
 
             /*
               ((pop totale)/(nbr de villageois avec même métier)) * cste
               */
             Debug.Assert(_owner != null, "(ModifyGoldGeneration) _owner is null");
             Debug.Assert(_owner._owner != null, "(ModifyGoldGeneration) _owner._owner is null");
-            Debug.Assert(_workers.Count!=0, "(ModifyGoldGeneration) there are no workers");
+            Debug.Assert(_workers.Count != 0, "(ModifyGoldGeneration) there are no workers");
 
-            result=(_owner._owner._villagePop.Current / _workers.Count) * _coefficient;
+            result = (_owner._owner._villagePop.Current / _workers.Count) * _coefficient;
 
-                return result;
+            return result;
         }
 
         /// <summary>
         /// Add amount of happiness for all others villagers
         /// </summary>
         /// <param name="person"></param>
-        public virtual void AddHappiness() {}
+        public virtual void AddHappiness(Villager villager) { }
 
         #region called by DieOrIsAlive
         internal void WorkerDestroyed(Villager dead)
@@ -142,8 +142,10 @@ namespace Game
         #endregion
 
         #region worldtickcalls
+
         internal override void ImpactHappiness()
         {
+            //AddHappiness();//needs check
             //TODO
         }
         internal override void Evolution()
@@ -153,7 +155,7 @@ namespace Game
         }
         internal override void CloseStep(List<IEvent> eventList)
         {
-            if(WorkerListConclude()){eventList.Add(new EventProperty<JobsModel>(this, "Workers"));}
+            if (WorkerListConclude()) { eventList.Add(new EventProperty<JobsModel>(this, "Workers")); }
         }
         #endregion
 

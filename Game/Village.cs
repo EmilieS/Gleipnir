@@ -68,14 +68,14 @@ namespace Game
             if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE) { throw new InvalidOperationException("gender issue! (CreateFamily)"); }
             if (mother.ParentFamily != null && father.ParentFamily != null)
             {
-                if (mother.ParentFamily == father.ParentFamily){ throw new InvalidOperationException("same family!"); }
+                if (mother.ParentFamily == father.ParentFamily) { throw new InvalidOperationException("same family!"); }
             }
             var name = Game.NameList.NextName;
-            var newFamily= new Family(Game, mother, father, name);
+            var newFamily = new Family(Game, mother, father, name);
             _familiesList.Add(newFamily);
             return newFamily;
         }
-        
+
         public Family CreateFamilyFromScratch()
         {
             //Debug.Assert(_thisGame != null, "_thisGame est null!");
@@ -93,7 +93,7 @@ namespace Game
         /// Addition of all families' gold
         /// </summary>
         public int Gold { get { return _familiesGold; } }
-        
+
         /// <summary>
         /// Addition of all gold of all families
         /// </summary>
@@ -107,10 +107,10 @@ namespace Game
             }
 
             if (result < 0) throw new IndexOutOfRangeException();
-            else  _familiesGold = result;
+            else _familiesGold = result;
         }
 
-        
+
         /// <summary>
         /// Gets average faith of all families in the village.
         /// </summary>
@@ -230,16 +230,24 @@ namespace Game
         }
 
         //TODO: !!! use new list & all jobs destroyed.
-  /*      internal void DestroyJobs(JobsModel jobName)
-        {
-            Debug.Assert(jobName != null);
-            _jobs.Remove(jobName);
-        }*/
+        /*      internal void DestroyJobs(JobsModel jobName)
+              {
+                  Debug.Assert(jobName != null);
+                  _jobs.Remove(jobName);
+              }*/
         internal void VillagerRemoved(Villager villager)
         {
             _villagePop.Current--;
         }
-
+        #region called by ImpactHappiness
+        internal void JobHappiness(Villager villager)
+        {
+            foreach (JobsModel job in Jobs.HappinessJobList)
+            {
+                job.AddHappiness(villager);
+            }
+        }
+        #endregion
         internal override void OnDestroy()
         {
             Debug.Assert(_familiesList.Count == 0, "there is still a family in this village!");
@@ -248,7 +256,7 @@ namespace Game
         {
             //TODO :  put current values in value history.
             if (_familiesList.Conclude()) { eventList.Add(new EventProperty<Village>(this, "FamiliesList")); }
-            //jobs
+            //JobList is invariant.
             //TODO : events!
         }
     }
