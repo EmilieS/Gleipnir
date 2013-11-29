@@ -177,14 +177,7 @@ namespace Game
         #region worldtick
         #region WhenWorldUpdate
 
-        private void Suicide()
-        {
-            if (_happiness.Current == 0 && (_health.Current & Healths.DEPRESSED) == 0) //a revoir
-            {
-                SetLifeExpectancyLeft(0.4);
-                _health.Current = _health.Current | Healths.DEPRESSED;
-            }
-        }
+
 
         #endregion
         #region happiness & faith evolution
@@ -306,6 +299,14 @@ namespace Game
                 return;
             Engage(this, _parentFamily);
         }
+        private void Suicide()
+        {
+            if (_happiness.Current == 0 && (_health.Current & Healths.DEPRESSED) == 0)
+            {
+                SetLifeExpectancyLeft(1);
+                _health.Current = _health.Current | Healths.DEPRESSED;
+            }
+        }
         #endregion
         #region called by Creation
         private void RegularBirths(double time, List<IEvent> eventList)
@@ -384,6 +385,7 @@ namespace Game
             HandInOfferings();
             CallForHelpCheck();
             MatchMaking();
+            Suicide();
             //TODO: fric.
             //TODO: faith blabla
             //otherstuff
