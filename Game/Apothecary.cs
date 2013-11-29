@@ -10,8 +10,8 @@ namespace Game
 {
     public class Apothecary : JobsModel
     {
-        public Apothecary(Game game, string name)
-            : base(game, name)
+        public Apothecary(Game game, JobList list, string name)
+            : base(game, list, name)
         {
             _job = Jobs.APOTHECARY;
             _coefficient = 15;

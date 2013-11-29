@@ -49,6 +49,7 @@
     <Compile Include="FamilyMemberList.cs" />
     <Compile Include="IEvent.cs" />
     <Compile Include="IWindow.cs" />
+    <Compile Include="JobList.cs" />
     <Compile Include="NameGenerator.cs" />
     <Compile Include="Villager.Fiance.cs" />
     <Compile Include="Farmer.cs" />

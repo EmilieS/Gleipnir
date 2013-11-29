@@ -112,7 +112,7 @@ namespace Tests
             MyGame.Villages[0].FamiliesList[1].addTOGoldStash(5000);
             Assert.AreEqual(1390, MyGame.LastTotalGold);//60+1255+12*3...(12)*3=36 
             Assert.AreEqual(6390, MyGame.TotalGold);
-            double isequalto = 13.9;
+            //double isequalto = 13.9;
             //Assert.AreEqual(isequalto, MyGame.LastTotalGold / MyGame.TotalPop);//..HAHAHA...YOU KIDDING ME?
             Assert.AreEqual(3, family.FamilyMembers.Count());
             //Assert.AreEqual(80.2, family.HappinessAverage(), "family average is not 80.2");//..HAHAHA...
