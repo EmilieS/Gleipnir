@@ -17,6 +17,12 @@ namespace Tests
             // Create game
             Game.Game game = new Game.Game();
             var village = game.Villages[0];
+            foreach (Family f in village.FamiliesList)
+            {
+                foreach (Villager v in f.FamilyMembers)
+                    v.Job.RemovePerson(v);
+            }
+
             var v0 = village.FamiliesList[0].FamilyMembers[0];
             var v1 = village.FamiliesList[0].FamilyMembers[1];
             var v2 = village.FamiliesList[1].FamilyMembers[0];

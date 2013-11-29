@@ -72,32 +72,32 @@ namespace Tests
             Assert.AreEqual(210, MyGame.TotalGold);//4families 20gold, 1 family 130
             Assert.AreEqual(80, family.HappinessAverage(), "family average is not 80");
             MyGame.NextStep();//-1 gold per villager
-            Assert.AreEqual(128, family.GoldStash);//2villagers in family
-            Assert.AreEqual(200, MyGame.TotalGold);//10villagers
+            Assert.AreEqual(148, family.GoldStash);//2villagers in family128
+            Assert.AreEqual(300, MyGame.TotalGold);//10villagers200
             Assert.AreEqual(80.1, family.HappinessAverage(), "family average is not 80,1");
-            Assert.AreEqual(200, MyGame.LastTotalGold);
+            Assert.AreEqual(300, MyGame.LastTotalGold);//200
 
             Villager kid = family.newFamilyMember();
             Assert.AreEqual(80.1,family.HappinessAverage(), "family average is not 80,1");
             Assert.That(MyGame.TotalPop == 11);
             MyGame.NextStep();//4 other families of 2.each family has 20-3*2
             Assert.That(family.HappinessAverage() == 80.1, "family average is not 80,1");
-            Assert.AreEqual(125, family.GoldStash);//3villagers in family
-            Assert.AreEqual(189, MyGame.TotalGold);//11villagers
+            Assert.AreEqual(175, family.GoldStash);//3villagers in family125
+            Assert.AreEqual(399, MyGame.TotalGold);//11villagers189
 
             family.addTOGoldStash(3003-125);
             MyGame.NextStep();//3villagers in family
-            Assert.AreEqual(3000, family.GoldStash);
-            Assert.AreEqual(3056, MyGame.TotalGold);//4 other families of 2.each family has 20-2*2*2
-            double nb1 = 3056;
-            double nb2 = 11;
-            double totest = nb1 / nb2;
-            Assert.AreEqual(1000, family.LastGoldStash / family.FamilyMembers.Count);
-            //Assert.AreEqual(totest, MyGame.LastTotalGold / MyGame.TotalPop);//..HAHAHA...YOU KIDDING ME?
+            Assert.AreEqual(3080, family.GoldStash);//3000
+            Assert.AreEqual(3376, MyGame.TotalGold);//4 other families of 2.each family has 20-2*2*2 3056
+            //double nb1 = 3056;
+            //double nb2 = 11;
+            //double totest = nb1 / nb2;//278
+            Assert.AreEqual(1026.66666666666666, family.LastGoldStash / family.FamilyMembers.Count);//1000
+            Assert.AreEqual(306, MyGame.LastTotalGold / MyGame.TotalPop);//..HAHAHA...YOU KIDDING ME?
             //Assert.AreEqual(80.2*3/3, family.HappinessAverage(), "family average is not 80.2");//..HAHAHA...
 
             family.takeFromGoldStash(2937);
-            Assert.AreEqual(14, MyGame.Villages[0].FamiliesList[1].LastGoldStash);
+            Assert.AreEqual(74, MyGame.Villages[0].FamiliesList[1].LastGoldStash);//14
             MyGame.Villages[0].FamiliesList[1].addTOGoldStash(1255+91-14+36+3);
             while (MyGame.TotalPop < 100)
             {
@@ -106,16 +106,18 @@ namespace Tests
             MyGame.NextStep();
             
 
-            Assert.AreEqual(1294, MyGame.Villages[0].FamiliesList[1].LastGoldStash);
-            Assert.AreEqual(60, family.LastGoldStash);
-            Assert.AreEqual(20, family.LastGoldStash / family.FamilyMembers.Count);
+            Assert.AreEqual(2264, MyGame.Villages[0].FamiliesList[1].LastGoldStash);//1294
+            Assert.AreEqual(170, family.LastGoldStash);//60
+            Assert.AreEqual(56.6666666666666664, family.LastGoldStash / family.FamilyMembers.Count);//20
             MyGame.Villages[0].FamiliesList[1].addTOGoldStash(5000);
-            Assert.AreEqual(1390, MyGame.LastTotalGold);//60+1255+12*3...(12)*3=36 
-            Assert.AreEqual(6390, MyGame.TotalGold);
-            //double isequalto = 13.9;
-            //Assert.AreEqual(isequalto, MyGame.LastTotalGold / MyGame.TotalPop);//..HAHAHA...YOU KIDDING ME?
+            Assert.AreEqual(2710, MyGame.LastTotalGold);//60+1255+12*3...(12)*3=36  1390
+            Assert.AreEqual(7710, MyGame.TotalGold);//6390
+            double isequalto = 27;//13.9
+            Assert.AreEqual(isequalto, MyGame.LastTotalGold / MyGame.TotalPop);//..HAHAHA...YOU KIDDING ME?
             Assert.AreEqual(3, family.FamilyMembers.Count());
-            //Assert.AreEqual(80.2, family.HappinessAverage(), "family average is not 80.2");//..HAHAHA...
+            //Assert.AreEqual(80.2, family.HappinessAverage(), "family average is not 80.2");//..HAHAHA... 80.2
+            //not enough now.
+            MyGame.Villages[0].FamiliesList[1].addTOGoldStash(10000);
             MyGame.NextStep();
             Assert.AreEqual( 80.1, family.HappinessAverage(), "family average is not 80.1");
         }
