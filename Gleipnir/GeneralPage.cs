@@ -21,6 +21,7 @@ namespace GamePages
         InformationsUC Stats = new InformationsUC();
         InformationBox InfoBox = new InformationBox();
         EventFluxUC eventFlux = new EventFluxUC();
+        MapImage map = new MapImage();
         Game.Game _startedGame;
 
         public GeneralPage()
@@ -47,6 +48,8 @@ namespace GamePages
             InfoBox.Show();
             this.Controls.Add(eventFlux);
             eventFlux.Show();
+            this.Controls.Add(map);
+            map.Show();
         }
 
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
