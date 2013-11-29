@@ -37,12 +37,10 @@ namespace GamePages
             eventFlux = new EventFluxUC();
             InitializeComponent();
 
-           
-
             _startedGame = new Game.Game();
             Home.Launched += IsStarted_Changed;
             this.Controls.Add(Home);
-           
+
 
             Home.Show();
 
@@ -66,11 +64,12 @@ namespace GamePages
             eventFlux.Anchor = AnchorStyles.Right;
             Stats.StepByStep.Visible = true;
 
+
+
             trace = new traceBox();
             trace.Show();
-
             Step();
-
+            PushAlert("coucou", "coucou");
         }
 
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
@@ -91,10 +90,11 @@ namespace GamePages
         public void PushAlert(string message, string title)
         {
             eventFlux.CreateNewEventAndShow(message, title);
+            PushTrace(title);
         }
         public void PushTrace(string message)
         {
-            traceMessages = traceMessages +  message + @"
+            traceMessages = traceMessages + message + @"
 ";
             trace.traceBoxViewer.Text = traceMessages;
         }
