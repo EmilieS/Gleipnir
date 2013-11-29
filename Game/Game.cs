@@ -167,7 +167,7 @@ namespace Game
         }
         private void Creation()
         {
-            //TODO : CLEAN _eventList
+            _eventList.RemoveRange(0, _eventList.Count);
             int i = 0;
             //int tmpCount = _items.Count;
             //GameItem tmpItem;
