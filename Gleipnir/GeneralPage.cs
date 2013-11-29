@@ -55,18 +55,21 @@ namespace GamePages
             ActionMenu.Show();
             this.Controls.Add(Stats);
             Stats.Show();
+            Stats.Anchor = AnchorStyles.Right;
+            Stats.Anchor = AnchorStyles.Left;
+            Stats.Anchor = AnchorStyles.Left;
             //TODO : Create InfoBox
             this.Controls.Add(InfoBox);
             InfoBox.Show();
             this.Controls.Add(eventFlux);
             eventFlux.Show();
+            eventFlux.Anchor = AnchorStyles.Right;
             Stats.StepByStep.Visible = true;
 
             trace = new traceBox();
             trace.Show();
 
             Step();
-
 
         }
 
@@ -87,11 +90,12 @@ namespace GamePages
         }
         public void PushAlert(string message, string title)
         {
-            eventFlux.CreateNewEventAndShow(message, null);
+            eventFlux.CreateNewEventAndShow(message, title);
         }
         public void PushTrace(string message)
         {
-            traceMessages =traceMessages +  message + "\n";
+            traceMessages = traceMessages +  message + @"
+";
             trace.traceBoxViewer.Text = traceMessages;
         }
         public void PushGeneralHappiness(double value)

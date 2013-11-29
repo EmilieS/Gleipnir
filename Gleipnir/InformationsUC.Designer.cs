@@ -113,6 +113,8 @@
             // 
             // Village
             // 
+            this.Village.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.Village.AutoSize = true;
             this.Village.BackColor = System.Drawing.SystemColors.ControlDark;
             this.Village.Location = new System.Drawing.Point(3, 7);
@@ -124,6 +126,8 @@
             // 
             // villageName
             // 
+            this.villageName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.villageName.AutoSize = true;
             this.villageName.BackColor = System.Drawing.SystemColors.ControlDark;
             this.villageName.Location = new System.Drawing.Point(44, 7);
