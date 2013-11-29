@@ -170,18 +170,21 @@ namespace Game
         }
         private void IsPoorOrRich_HappinessImpact()
         {
-            if (_goldStash.Current<16 || _goldStash.Current/ FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
+            if (_familyMembers.Count != 0)
             {
-                for (int i = 0; i < FamilyMembers.Count; i++)
+                if (_goldStash.Current < 16 || _goldStash.Current / FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
                 {
-                    FamilyMembers[i].AddOrRemoveHappiness(-0.1);
+                    for (int i = 0; i < FamilyMembers.Count; i++)
+                    {
+                        FamilyMembers[i].AddOrRemoveHappiness(-0.1);
+                    }
                 }
-            }
-            else if (_goldStash.Current / FamilyMembers.Count > (Game.TotalGold / Game.TotalPop) * 3)
-            {
-                for (int i = 0; i < FamilyMembers.Count; i++)
+                else if (_goldStash.Current / FamilyMembers.Count > (Game.TotalGold / Game.TotalPop) * 3)
                 {
-                    FamilyMembers[i].AddOrRemoveHappiness(0.1);
+                    for (int i = 0; i < FamilyMembers.Count; i++)
+                    {
+                        FamilyMembers[i].AddOrRemoveHappiness(0.1);
+                    }
                 }
             }
         }
@@ -213,7 +216,7 @@ namespace Game
         internal override void OnDestroy()
         {
             Debug.Assert(_familyMembers.Count == 0, "there is still someone in this family!");
-            Debug.Assert(_ownerVillage != null);
+            Debug.Assert(_ownerVillage != null, "(OnDestroy) ownerVillage == null !!!!!!");
             _mother = null;
             _father = null;
             Debug.Assert(_ownerVillage.FamiliesList.Contains(this));

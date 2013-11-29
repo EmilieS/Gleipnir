@@ -22,7 +22,6 @@ namespace Game
 
         public bool IsDestroyed { get { return _game == null; } }
 
-
         internal virtual void ImpactHappiness() {}
 
         internal virtual void Evolution() {}

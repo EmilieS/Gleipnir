@@ -37,13 +37,9 @@ namespace GamePages
             eventFlux = new EventFluxUC();
             InitializeComponent();
 
-           
-
             _startedGame = new Game.Game();
             Home.Launched += IsStarted_Changed;
             this.Controls.Add(Home);
-           
-
             Home.Show();
 
             MenuGame.ExpectGoBackToMenu += GoBackToMenu;
