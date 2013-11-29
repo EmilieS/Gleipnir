@@ -170,7 +170,7 @@ namespace Game
         }
         private void IsPoorOrRich_HappinessImpact()
         {
-            if (_goldStash.Current/ FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
+            if (_goldStash.Current<16 || _goldStash.Current/ FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
             {
                 for (int i = 0; i < FamilyMembers.Count; i++)
                 {

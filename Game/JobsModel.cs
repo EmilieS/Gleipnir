@@ -126,9 +126,9 @@ namespace Game
         #region called by DieOrIsAlive
         internal void WorkerDestroyed(Villager dead)
         {
-            Debug.Assert(dead != null);
-            Debug.Assert(dead.IsDead());
-            Debug.Assert(_workers.Contains(dead));
+            Debug.Assert(dead != null, "(JobsModel) villager is null");
+            Debug.Assert(dead.IsDead(),"(JobsModel) villager is not dead ?!");
+            Debug.Assert(_workers.Contains(dead), "(JobModel) villager isn't even in the workerlist!");
             RemovePerson(dead);
         }
         #endregion
@@ -142,16 +142,9 @@ namespace Game
         #endregion
 
         #region worldtickcalls
-
-        internal override void ImpactHappiness()
-        {
-            //AddHappiness();//needs check
-            //TODO
-        }
         internal override void Evolution()
         {
             GenerateGold();
-            //TODO : add +gold.
         }
         internal override void CloseStep(List<IEvent> eventList)
         {

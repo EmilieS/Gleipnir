@@ -21,12 +21,22 @@ namespace Game
             _statusInFamily.Current = Status.SINGLE;
             g.VillagerAdded();
             parentFamily.OwnerVillage.VillagerAdded();
-
+            //eum parent check?!
             Debug.Assert(g != null);
             switch (Game.Rand.Next(2))
             {
-                case 0: _gender = Genders.MALE; _job = parentFamily.Father.Job; g.AddSingleMan(this); break; //changera    
-                case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; Engage(this, parentFamily); break;
+                case 0: _gender = Genders.MALE;
+                    if (parentFamily.Father != null)
+                    {
+                        parentFamily.Father.Job.AddPerson(this);
+                    }
+                        g.AddSingleMan(this); break;   
+                case 1: _gender = Genders.FEMALE;
+                    if (parentFamily.Mother != null)
+                    {
+                        parentFamily.Mother.Job.AddPerson(this);
+                    }
+                    Engage(this, parentFamily); break;
             }
             if (Game.Rand.Next(101) < 2)
                 _faith.Current = 13;
@@ -57,6 +67,7 @@ namespace Game
             _statusInFamily.Current = Status.SINGLE;
             _name = name;//_health.Conclude();
             Game.Villages[0].VillagerAdded();//hmmmmm
+            Game.Villages[0].Jobs.Farmer.AddPerson(this);
         }
 
         //TODO : generate name.
@@ -166,14 +177,7 @@ namespace Game
         #region worldtick
         #region WhenWorldUpdate
 
-        private void Suicide()
-        {
-            if (_happiness.Current == 0 && (_health.Current & Healths.DEPRESSED) == 0) //a revoir
-            {
-                SetLifeExpectancyLeft(0.4);
-                _health.Current = _health.Current | Healths.DEPRESSED;
-            }
-        }
+
 
         #endregion
         #region happiness & faith evolution
@@ -295,6 +299,14 @@ namespace Game
                 return;
             Engage(this, _parentFamily);
         }
+        private void Suicide()
+        {
+            if (_happiness.Current == 0 && (_health.Current & Healths.DEPRESSED) == 0)
+            {
+                SetLifeExpectancyLeft(1);
+                _health.Current = _health.Current | Healths.DEPRESSED;
+            }
+        }
         #endregion
         #region called by Creation
         private void RegularBirths(double time, List<IEvent> eventList)
@@ -350,13 +362,13 @@ namespace Game
                 _fiance.FianceDestroyed();
                 Debug.Assert(_fiance == null);
             }
-            Debug.Assert(_fiance == null);
-            _parentFamily.OwnerVillage.VillagerRemoved(this);
-            _parentFamily.FamilyMemberDestroyed(this);
-            Debug.Assert(_parentFamily == null);
-            Game.VillagerRemoved(this);
             if (_job != null)
                 _job.WorkerDestroyed(this);
+            Debug.Assert(_fiance == null, "he still has a fiance Oo !");
+            _parentFamily.OwnerVillage.VillagerRemoved(this);
+            _parentFamily.FamilyMemberDestroyed(this);
+            Debug.Assert(_parentFamily == null, "he still has a parentfamily Oo !");
+            Game.VillagerRemoved(this);
         }
         #endregion
         #region worldtickcalls
@@ -373,6 +385,7 @@ namespace Game
             HandInOfferings();
             CallForHelpCheck();
             MatchMaking();
+            Suicide();
             //TODO: fric.
             //TODO: faith blabla
             //otherstuff
