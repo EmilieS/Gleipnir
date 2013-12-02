@@ -43,15 +43,18 @@ namespace Tests
             var MyWindow = new Tests.IWindowImplementationForTests();
             Villager villager1=MyGame.Villages[0].FamiliesList[0].Mother;
 
+            Assert.AreEqual(0, MyGame.EventList.Count);
+
+            MyGame.NextStep();
+
+            Assert.AreEqual(0, MyWindow.nb_pushAlert);
+            Assert.AreEqual(0, MyWindow.nb_pushTrace);
             foreach (IEvent e in MyGame.EventList)
             {
                 e.PublishMessage(MyWindow);
                 e.Do(MyWindow);
             }
-            MyGame.NextStep();
-            Assert.AreEqual(0, MyWindow.nb_pushAlert);
-            Assert.AreEqual(0, MyWindow.nb_pushTrace);
-
+            Assert.AreEqual(1, MyWindow.goldtouched);
             MyGame.NextStep();
 
             foreach (IEvent e in MyGame.EventList)

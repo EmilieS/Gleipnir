@@ -83,11 +83,11 @@ namespace Game
         readonly HistorizedValue<double, Villager> _faith; //scale from 0 to 100.
         readonly HistorizedValue<double, Villager> _happiness; //scale from 0 to 100.
         readonly HistorizedValue<Healths, Villager> _health;
-        readonly HistorizedValue<Status, Villager> _statusInFamily; //!! TODO : update !
+        readonly HistorizedValue<Status, Villager> _statusInFamily;
 
         public double Age { get { return _age; } }
-        public double Faith { get { return _faith.Current; } } //hmm
-        public double Happiness { get { return _happiness.Current; } } //hmm
+        public double Faith { get { return _faith.Current; } } 
+        public double Happiness { get { return _happiness.Current; } } 
         public Genders Gender { get { return _gender; } }
         public JobsModel Job { get { return _job; } }
         public double LifeExpectancy { get { return _lifeExpectancy; } }
@@ -107,14 +107,7 @@ namespace Game
             _job = NewJob;
         }
 
-        #region death & family issues.
-        //=====================================================================================
 
-
-
-
-        //======================================================================================
-        #endregion
         /// <summary>
         /// Gets the villager's name
         /// </summary>
@@ -174,13 +167,7 @@ namespace Game
             _lifeExpectancy = 0;
         }
 
-        #region worldtick
-        #region WhenWorldUpdate
 
-
-
-        #endregion
-        #region happiness & faith evolution
 
         /// <summary>
         /// can be negative to take away happiness.
@@ -223,12 +210,32 @@ namespace Game
             else
             {
                 _faith.Current += amount;
+                if ((_health.Current & Healths.HERETIC) == 0)
+                {
+                    if (_faith.Current <= 15)
+                    {
+                        _health.Current = _health.Current | Healths.HERETIC;
+                        if (_job != null)
+                        {
+                            _job.addHereticWorker();
+                        }
+                    }
+                }
+                else
+                {
+                    if (_faith.Current > 15)
+                    {
+                        _health.Current = _health.Current & ~Healths.HERETIC;
+                        if (_job != null)
+                        {
+                            _job.removeHereticWorker();
+                        }
+                    }
+                }
             }
         }
 
-        #endregion
 
-        #endregion
         //====================WORLD=TICK=STUFF============================
         #region called by ImpactHappiness
         private void SickHappinessImpact()
@@ -239,6 +246,14 @@ namespace Game
                 ParentFamily.FamilyMemberIsSick();
             }
         }
+        bool _justWasHeretic;
+        /*private void HereticFaithImpact()
+        {
+            if ((_health.Current & Healths.HERETIC) != 0)
+            {
+                ParentFamily.FamilyMemberIsHeretic();
+            }
+        }*/
         #endregion
         #region called by Evolution
         internal void HandInOfferings()
@@ -254,7 +269,23 @@ namespace Game
         {
             _age += time;
         }
-
+        int _sickTimer;
+        internal void CheckIfSick()
+        {
+            if ((_health.Current & Healths.SICK) != 0)
+            {
+                if (_sickTimer > 30)//should change with different sicknesses?
+                {
+                    _sickTimer = 0;
+                    SetLifeExpectancyLeft(0);
+                }
+                else
+                {
+                    _sickTimer++;
+                }
+            }
+            else { _sickTimer = 0; }
+        }
         int _callForHelpTickTimer;
         private void CallForHelpCheck()
         {
@@ -375,6 +406,7 @@ namespace Game
         override internal void ImpactHappiness()
         {
             SickHappinessImpact();
+            //HereticFaithImpact();
             _parentFamily.OwnerVillage.JobHappiness(this);
         }
         internal override void Evolution()
@@ -385,6 +417,7 @@ namespace Game
             HandInOfferings();
             CallForHelpCheck();
             MatchMaking();
+            CheckIfSick();
             Suicide();
             //TODO: fric.
             //TODO: faith blabla

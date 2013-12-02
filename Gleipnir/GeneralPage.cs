@@ -40,8 +40,6 @@ namespace GamePages
             _startedGame = new Game.Game();
             Home.Launched += IsStarted_Changed;
             this.Controls.Add(Home);
-
-
             Home.Show();
 
             MenuGame.ExpectGoBackToMenu += GoBackToMenu;
