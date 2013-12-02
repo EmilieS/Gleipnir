@@ -32,7 +32,9 @@ namespace Game
 
         internal IReadOnlyList<JobsModel> HappinessJobList { get { return _happinessJobList; } }
         //public IReadOnlyList<JobsModel> List { get { return _jobList; } }
-        internal readonly Village _owner;
+        Village _owner;
+        internal Village Owner { get { return _owner; } }
+
 
         public JobList(Village village)
         {
@@ -79,6 +81,15 @@ namespace Game
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        internal void Destroy()
+        {
+            foreach (JobsModel job in _jobList)
+            {
+                job.Destroy();
+            }
+            _owner = null;
         }
     }
 }

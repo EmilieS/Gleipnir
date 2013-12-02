@@ -18,9 +18,10 @@ namespace Game
         protected internal int goldBase;
         protected int _coefficient;
         protected int _gold;
-        internal readonly JobList _owner;
+        JobList _owner;
         bool _workerListChanged;
         internal int _nbHeretics;
+        internal JobList Owner { get { return _owner; } }
 
         internal JobsModel(Game game, JobList list, string name)
             : base(game)
@@ -114,10 +115,10 @@ namespace Game
               ((pop totale)/(nbr de villageois avec même métier)) * cste
               */
             Debug.Assert(_owner != null, "(ModifyGoldGeneration) _owner is null");
-            Debug.Assert(_owner._owner != null, "(ModifyGoldGeneration) _owner._owner is null");
+            Debug.Assert(_owner.Owner != null, "(ModifyGoldGeneration) _owner._owner is null");
             Debug.Assert(_workers.Count != 0, "(ModifyGoldGeneration) there are no workers");
 
-            result = (_owner._owner._villagePop.Current / _workers.Count) * _coefficient;
+            result = (_owner.Owner._villagePop.Current / _workers.Count) * _coefficient;
 
             return result;
         }
@@ -130,8 +131,7 @@ namespace Game
         {
                 Debug.Assert(_nbHeretics <= Workers.Count, "(removeHereticWorker) there are more heretic workers than workers Oo");
                 Debug.Assert(_nbHeretics >=0, "(removeHereticWorker) negative !");
-
-                _nbHeretics--;
+                _nbHeretics--;         
         }
 
         /// <summary>
@@ -142,9 +142,13 @@ namespace Game
         
         internal void HereticFaithImpact()
         {
-            foreach (Villager v in _workers)
+            if (_nbHeretics < 0)
             {
-                v.AddOrRemoveFaith(-0.1*_nbHeretics);
+                int nbHeretics = _nbHeretics;
+                foreach (Villager v in _workers)
+                {
+                    v.AddOrRemoveFaith(-0.1 * nbHeretics);
+                }
             }
         }
 
@@ -155,6 +159,7 @@ namespace Game
             Debug.Assert(dead != null, "(JobsModel) villager is null");
             Debug.Assert(dead.IsDead(),"(JobsModel) villager is not dead ?!");
             Debug.Assert(_workers.Contains(dead), "(JobModel) villager isn't even in the workerlist!");
+            Debug.Assert((dead.Faith <= 15) == ((dead.Health & Healths.HERETIC) != 0), "(JobModel/villagerdestroyed) heretism is not right!");
             if ((dead.Health & Healths.HERETIC) != 0)
             {
                 removeHereticWorker();
@@ -172,9 +177,13 @@ namespace Game
         #endregion
 
         #region worldtickcalls
-        internal override void Evolution()
+        override internal void ImpactHappiness()
         {
             HereticFaithImpact();
+        }
+        internal override void Evolution()
+        {
+            
             GenerateGold();
         }
         internal override void CloseStep(List<IEvent> eventList)
@@ -185,9 +194,10 @@ namespace Game
 
         internal override void OnDestroy()
         {
-            /*  Debug.Assert(_workers.Count == 0, "There is still someone in this Job!");
-              _ownerVillage.DestroyJobs(this);*/
-            //TO think about.
+            Debug.Assert(_workers.Count == 0, "There is still someone in this Job!");
+
+           /* _owner = null; joblist & different jobs ONLY get destroyed with the village.
+            * so it only gets destroyed WITH its owner, so no need to separate them.*/
         }
     }
 }

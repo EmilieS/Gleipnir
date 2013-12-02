@@ -10,7 +10,7 @@ namespace Game
     public class Village : GameItem
     {
         //List<JobsModel> _jobs;// needs to be cleansed
-        public readonly JobList Jobs;
+        public JobList Jobs;
         int _familiesGold;
         double _villageFaith;
         double _villageHappiness;
@@ -250,6 +250,8 @@ namespace Game
         #endregion
         internal override void OnDestroy()
         {
+            Jobs.Destroy();
+            Jobs = null;
             Debug.Assert(_familiesList.Count == 0, "there is still a family in this village!");
         }
         override internal void CloseStep(List<IEvent> eventList)
