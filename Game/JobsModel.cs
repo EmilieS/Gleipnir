@@ -20,6 +20,7 @@ namespace Game
         protected int _gold;
         internal readonly JobList _owner;
         bool _workerListChanged;
+        internal int _nbHeretics;
 
         internal JobsModel(Game game, JobList list, string name)
             : base(game)
@@ -55,6 +56,10 @@ namespace Game
                 person.setJob(this);
                 _workerListChanged = true;
                 _workers.Add(person);
+                if ((person.Health & Healths.HERETIC) != 0)
+                {
+                    addHereticWorker();
+                }
                 Debug.Assert(_workers.Contains(person), "(AddPerson) the person was not added Oo");
                 //_gold = ModifyGoldGeneration();//not usefull here really...
             }
@@ -116,18 +121,30 @@ namespace Game
 
             return result;
         }
+        internal void addHereticWorker()
+        {
+                Debug.Assert(_nbHeretics <= Workers.Count, "(addHereticWorker) there are more heretic workers than workers Oo");
+                _nbHeretics++;
+        }
+        internal void removeHereticWorker()
+        {
+                Debug.Assert(_nbHeretics <= Workers.Count, "(removeHereticWorker) there are more heretic workers than workers Oo");
+                Debug.Assert(_nbHeretics >=0, "(removeHereticWorker) negative !");
+
+                _nbHeretics--;
+        }
 
         /// <summary>
         /// Add amount of happiness for all others villagers
         /// </summary>
         /// <param name="person"></param>
         public virtual void AddHappiness(Villager villager) { }
-
-        internal void WorkerIsHeretic()
+        
+        internal void HereticFaithImpact()
         {
             foreach (Villager v in _workers)
             {
-                v.AddOrRemoveFaith(-0.1);
+                v.AddOrRemoveFaith(-0.1*_nbHeretics);
             }
         }
 
@@ -138,6 +155,10 @@ namespace Game
             Debug.Assert(dead != null, "(JobsModel) villager is null");
             Debug.Assert(dead.IsDead(),"(JobsModel) villager is not dead ?!");
             Debug.Assert(_workers.Contains(dead), "(JobModel) villager isn't even in the workerlist!");
+            if ((dead.Health & Healths.HERETIC) != 0)
+            {
+                removeHereticWorker();
+            }
             RemovePerson(dead);
         }
         #endregion
@@ -153,6 +174,7 @@ namespace Game
         #region worldtickcalls
         internal override void Evolution()
         {
+            HereticFaithImpact();
             GenerateGold();
         }
         internal override void CloseStep(List<IEvent> eventList)

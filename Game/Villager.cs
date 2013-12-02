@@ -107,14 +107,7 @@ namespace Game
             _job = NewJob;
         }
 
-        #region death & family issues.
-        //=====================================================================================
 
-
-
-
-        //======================================================================================
-        #endregion
         /// <summary>
         /// Gets the villager's name
         /// </summary>
@@ -174,13 +167,7 @@ namespace Game
             _lifeExpectancy = 0;
         }
 
-        #region worldtick
-        #region WhenWorldUpdate
 
-
-
-        #endregion
-        #region happiness & faith evolution
 
         /// <summary>
         /// can be negative to take away happiness.
@@ -223,12 +210,32 @@ namespace Game
             else
             {
                 _faith.Current += amount;
+                if ((_health.Current & Healths.HERETIC) == 0)
+                {
+                    if (_faith.Current <= 15)
+                    {
+                        _health.Current = _health.Current | Healths.HERETIC;
+                        if (_job != null)
+                        {
+                            _job.addHereticWorker();
+                        }
+                    }
+                }
+                else
+                {
+                    if (_faith.Current > 15)
+                    {
+                        _health.Current = _health.Current & ~Healths.HERETIC;
+                        if (_job != null)
+                        {
+                            _job.removeHereticWorker();
+                        }
+                    }
+                }
             }
         }
 
-        #endregion
 
-        #endregion
         //====================WORLD=TICK=STUFF============================
         #region called by ImpactHappiness
         private void SickHappinessImpact()
@@ -239,17 +246,14 @@ namespace Game
                 ParentFamily.FamilyMemberIsSick();
             }
         }
-        private void HereticFaithImpact()
+        bool _justWasHeretic;
+        /*private void HereticFaithImpact()
         {
             if ((_health.Current & Healths.HERETIC) != 0)
             {
                 ParentFamily.FamilyMemberIsHeretic();
             }
-            if (_job != null)
-            {
-                _job.WorkerIsHeretic();
-            }
-        }
+        }*/
         #endregion
         #region called by Evolution
         internal void HandInOfferings()
@@ -402,7 +406,7 @@ namespace Game
         override internal void ImpactHappiness()
         {
             SickHappinessImpact();
-            HereticFaithImpact();
+            //HereticFaithImpact();
             _parentFamily.OwnerVillage.JobHappiness(this);
         }
         internal override void Evolution()
