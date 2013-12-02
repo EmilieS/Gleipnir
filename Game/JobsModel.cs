@@ -123,6 +123,15 @@ namespace Game
         /// <param name="person"></param>
         public virtual void AddHappiness(Villager villager) { }
 
+        internal void WorkerIsHeretic()
+        {
+            foreach (Villager v in _workers)
+            {
+                v.AddOrRemoveFaith(-0.1);
+            }
+        }
+
+
         #region called by DieOrIsAlive
         internal void WorkerDestroyed(Villager dead)
         {

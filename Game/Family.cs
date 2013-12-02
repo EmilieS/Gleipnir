@@ -168,6 +168,13 @@ namespace Game
                 FamilyMembers[i].AddOrRemoveHappiness(-0.1); //Everybody, even the sick person(who already has a minus).
             }
         }
+        internal void FamilyMemberIsHeretic()
+        {
+            for (int i = 0; i < FamilyMembers.Count; i++)
+            {
+                FamilyMembers[i].AddOrRemoveFaith(-0.2); //need to see if the heretic should be included or not.
+            }
+        }
         private void IsPoorOrRich_HappinessImpact()
         {
             if (_familyMembers.Count != 0)

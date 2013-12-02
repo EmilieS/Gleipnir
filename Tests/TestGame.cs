@@ -27,5 +27,22 @@ namespace Tests
             } while(MyWindow.nb_pushAlert == 0);
             //Assert.That(MyWindow.nb_pushAlert, Is.EqualTo(1));
         }
+
+        [Test]
+        public void ToSee()
+        {
+            var myGame = new Game.Game();
+            var MyWindow = new Tests.IWindowImplementationForTests();
+            do
+            {
+                myGame.NextStep();
+                foreach (IEvent e in myGame.EventList)
+                {
+                    e.PublishMessage(MyWindow);
+                    e.Do(MyWindow);
+                }
+            } while (myGame.TotalPop<3000);
+            //Assert.That(MyWindow.nb_pushAlert, Is.EqualTo(1));
+        }
     }
 }
