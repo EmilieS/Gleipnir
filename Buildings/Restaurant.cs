@@ -8,11 +8,6 @@ namespace Buildings.JobsBuildings
 {
     class Restaurant
     {
-        BuildingsProperties prop = new BuildingsProperties();
 
-        public BuildingsProperties BuildingsProperties
-        {
-            get { return prop; }
-        }
     }
 }

@@ -57,6 +57,7 @@ namespace Game
         readonly List<GameItem> _items;
         readonly List<Village> _villages; //a revoir!
         readonly List<Villager> _singleMen;
+        readonly List<object> buildingList; // ---------HERE---------
         NameGenerator _nameGenerator;
         NameGenerator _firstNameGenerator;
         readonly HistorizedValue<int, Game> _totalGold;
@@ -133,7 +134,14 @@ namespace Game
         {
             //TODO
         }
-/*
+        
+        #region Buildings
+        public void AddBuildingIntheList(object building)
+        {
+            buildingList.Add(building);
+        }
+        #endregion
+        /*
         public void AddOrRemoveFromTotalGold(double amount)
         {
             _totalGold.Current += amount; //curious to find out if TotalGold can be negative.

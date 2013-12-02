@@ -8,12 +8,6 @@ namespace Buildings.Management
 {
     class TablePlace
     {
-        BuildingsProperties prop = new BuildingsProperties();
-
-        public BuildingsProperties BuildingsProperties
-        {
-            get { return prop; }
-        }
         public void SetTablePosition()
         {
             //TODO : Define the Table position 

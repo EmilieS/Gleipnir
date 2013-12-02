@@ -9,11 +9,6 @@ namespace Buildings.JobsBuildings
     class UnionOfCrafter
     {
         // Syndicat des ouvriers 
-        BuildingsProperties prop = new BuildingsProperties();
 
-        public BuildingsProperties BuildingsProperties
-        {
-            get { return prop; }
-        }
     }
 }

@@ -17,5 +17,9 @@ namespace GamePages
         {
             InitializeComponent();
         }
+        internal void ShowUnboughtBuildings()
+        {
+
+        }
     }
 }

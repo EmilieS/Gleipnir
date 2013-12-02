@@ -8,12 +8,6 @@ namespace Buildings.JobsBuildings
 {
     class Farm
     {
-        BuildingsProperties prop = new BuildingsProperties();
-        
-        public BuildingsProperties BuildingsProperties
-        {
-            get { return prop; }
-        }
 
     }
 }

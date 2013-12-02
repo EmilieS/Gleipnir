@@ -8,12 +8,7 @@ namespace Buildings.Hobbies
 {
     public class Tavern
     {
-        BuildingsProperties prop = new BuildingsProperties();
 
-        public BuildingsProperties BuildingsProperties
-        {
-            get{return prop;}
-        }
 
         public double SetFaith
         {
@@ -25,9 +20,9 @@ namespace Buildings.Hobbies
             get { return 6; }
         }
 
-        public void SetEnterPrice()
-        {
-            prop.EnterPrice = 2;
-        }
+        //public void SetEnterPrice()
+        //{
+        //    prop.EnterPrice = 2;
+        //}
     }
 }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Updates.Crafter.Materials;
+using Game;
 
 namespace Buildings
 {
-    public class BuildingsProperties
+    public abstract class BuildingsModel
     {
         int _verticalPos;
         int _horizontalPos;
@@ -16,11 +16,13 @@ namespace Buildings
         double _enterPrice;
         //double _robustness;
         double _addedRobustness;
-
+        bool _isBought;
+        string _name;
+        Game.Game actualGame;
         // this a provisory solution : using a new "materials"  to implement robustness
-        Materials mat = new Materials();
 
-        public BuildingsProperties()
+        internal BuildingsModel(Game.Game g)
+            : base()
         {
             _horizontalPos = 0;
             _verticalPos = 0;
@@ -28,15 +30,19 @@ namespace Buildings
             _addedFaith = 0;
             _enterPrice = 0;
             //_robustness = 0;
-            _addedRobustness = mat.SetTotalPower();
+            _isBought = false;
+            g.AddBuildingIntheList(this);
         }
-
         public int HorizontalPos
         {
             get { return _horizontalPos; }
             set { _horizontalPos = value; }
         }
-
+        public string Name
+        {
+            get{return _name;}
+            set { _name = value; }
+        }
         public int VerticalPos
         {
             get { return _verticalPos; }
@@ -57,6 +63,11 @@ namespace Buildings
             get { return _enterPrice; }
             set { _enterPrice = value; }
         }
-        
+        internal bool IsBought
+        {
+            get { return _isBought; }
+            set { _isBought = value; }
+        }
+
     }
 }

@@ -8,11 +8,6 @@ namespace Buildings.Believing
 {
     class OfferingWarehouse
     {
-        BuildingsProperties prop = new BuildingsProperties();
 
-        public BuildingsProperties BuildingsProperties
-        {
-            get { return prop; }
-        }
     }
 }

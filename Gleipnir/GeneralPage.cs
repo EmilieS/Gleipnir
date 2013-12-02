@@ -64,8 +64,6 @@ namespace GamePages
             eventFlux.Anchor = AnchorStyles.Right;
             Stats.StepByStep.Visible = true;
 
-
-
             trace = new traceBox();
             trace.Show();
             Step();
@@ -124,6 +122,8 @@ namespace GamePages
                 events.PublishMessage(this);
             }
         }
+
+
 
     }
 }

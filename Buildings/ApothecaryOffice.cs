@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Game;
 
 namespace Buildings.JobsBuildings
 {
-    class ApothecaryOffice
+    class ApothecaryOffice : BuildingsModel
     {
-        BuildingsProperties prop = new BuildingsProperties();
-
-        public BuildingsProperties BuildingsProperties
+        public ApothecaryOffice(Game.Game g)
+            : base(g)
         {
-            get { return prop; }
+
         }
 
 

@@ -8,12 +8,7 @@ namespace Buildings.Hobbies
 {
     public class Brothel
     {
-        BuildingsProperties prop = new BuildingsProperties();
 
-        public BuildingsProperties BuildingsProperties
-        {
-            get { return prop; }
-        }
 
         public double SetHappiness
         {
