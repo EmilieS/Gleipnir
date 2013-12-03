@@ -50,6 +50,12 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildingButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BuildingButton.Designer.cs">
+      <DependentUpon>BuildingButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="EventFluxUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -80,6 +86,12 @@
     <Compile Include="InGameMenu.Designer.cs">
       <DependentUpon>InGameMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="ScenarioBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ScenarioBox.Designer.cs">
+      <DependentUpon>ScenarioBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabIndex.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -106,6 +118,9 @@
     <Compile Include="Trace.Designer.cs">
       <DependentUpon>Trace.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="BuildingButton.resx">
+      <DependentUpon>BuildingButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EventFluxUC.resx">
       <DependentUpon>EventFluxUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InGameMenu.resx">
       <DependentUpon>InGameMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScenarioBox.resx">
+      <DependentUpon>ScenarioBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabIndex.resx">
       <DependentUpon>TabIndex.cs</DependentUpon>
@@ -171,6 +189,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\button_homepage1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Extra\firstNameList.txt" />
+    <Content Include="Resources\Extra\nameList.txt" />
+    <Content Include="Resources\Extra\scenario.txt" />
+    <Content Include="Resources\firstNameList.txt" />
+    <Content Include="Resources\nameList.txt" />
+    <Content Include="Resources\scenario.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

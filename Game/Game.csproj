@@ -40,17 +40,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Apothecary.cs" />
+    <Compile Include="ApothecaryOffice.cs" />
+    <Compile Include="Baths.cs" />
     <Compile Include="Blacksmith.cs" />
+    <Compile Include="Brothel.cs" />
+    <Compile Include="BuildingsModel.cs" />
+    <Compile Include="Chapel.cs" />
     <Compile Include="Construction_Worker.cs" />
     <Compile Include="Cooker.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Family.cs" />
     <Compile Include="FamilyInVillageList.cs" />
     <Compile Include="FamilyMemberList.cs" />
+    <Compile Include="Farm.cs" />
+    <Compile Include="Forge.cs" />
     <Compile Include="IEvent.cs" />
     <Compile Include="IWindow.cs" />
     <Compile Include="JobList.cs" />
+    <Compile Include="Mill.cs" />
     <Compile Include="NameGenerator.cs" />
+    <Compile Include="OfferingWarehouse.cs" />
+    <Compile Include="PartyRoom.cs" />
+    <Compile Include="Restaurant.cs" />
+    <Compile Include="ScenarioEngine.cs" />
+    <Compile Include="TablePlace.cs" />
+    <Compile Include="Tavern.cs" />
+    <Compile Include="Theater.cs" />
+    <Compile Include="UnionOfCrafter.cs" />
     <Compile Include="Villager.Fiance.cs" />
     <Compile Include="Farmer.cs" />
     <Compile Include="FIFOBuffer.cs" />
@@ -70,6 +86,7 @@
   <ItemGroup>
     <Content Include="Extra\firstNameList.txt" />
     <Content Include="Extra\nameList.txt" />
+    <Content Include="Extra\scenario.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

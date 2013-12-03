@@ -286,6 +286,10 @@ namespace Game
             }
             else { _sickTimer = 0; }
         }
+        public void Heal()
+        {
+            _health.Current = Healths.NONE;
+        }
         int _callForHelpTickTimer;
         private void CallForHelpCheck()
         {

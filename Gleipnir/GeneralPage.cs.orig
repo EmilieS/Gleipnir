@@ -22,7 +22,6 @@ namespace GamePages
         InformationsUC Stats;
         InformationBox InfoBox;
         EventFluxUC eventFlux;
-        ScenarioBox _scenarioBox;
         Game.Game _startedGame;
         traceBox trace;
 
@@ -36,12 +35,16 @@ namespace GamePages
             Stats = new InformationsUC(this);
             InfoBox = new InformationBox();
             eventFlux = new EventFluxUC();
-            _scenarioBox = new ScenarioBox();
             InitializeComponent();
 
             _startedGame = new Game.Game();
             Home.Launched += IsStarted_Changed;
             this.Controls.Add(Home);
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> fx-Event
             Home.Show();
 
             MenuGame.ExpectGoBackToMenu += GoBackToMenu;
@@ -51,11 +54,10 @@ namespace GamePages
             this.Controls.Remove(Home);
             this.Controls.Add(ActionMenu);
             ActionMenu.Show();
-            this.Controls.Add(_scenarioBox);
-            _scenarioBox.Show();
             this.Controls.Add(Stats);
             Stats.Show();
             Stats.Anchor = AnchorStyles.Right;
+            Stats.Anchor = AnchorStyles.Left;
             Stats.Anchor = AnchorStyles.Left;
             //TODO : Create InfoBox
             this.Controls.Add(InfoBox);

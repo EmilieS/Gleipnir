@@ -24,6 +24,7 @@ namespace Game
             _nameGenerator = new NameGenerator(namesPath, 1, 1);
             var firstNamesPath = File.ReadAllLines(@"Extra\firstNameList.txt");
             _firstNameGenerator = new NameGenerator(namesPath, 1, 1);
+
             _regularBirthDates= new double[5];
             //===to be changed
             //_ageTickTime = 0.0834;//time(years) between each tick.

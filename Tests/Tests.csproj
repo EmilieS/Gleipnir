@@ -55,10 +55,6 @@
     <Compile Include="TestsVillage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Buildings\Buildings.csproj">
-      <Project>{fbb065a0-784e-4708-8525-2a8364d2ea35}</Project>
-      <Name>Buildings</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Game\Game.csproj">
       <Project>{2b78158a-b99c-4116-98f4-c4786d93faaf}</Project>
       <Name>Game</Name>
