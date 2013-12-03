@@ -9,33 +9,38 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    public class JobsModel : GameItem
+    public abstract class JobsModel : GameItem
     {
-        protected Village _ownerVillage;
+        //protected Village _ownerVillage;
         protected List<Villager> _workers;
         protected Jobs _job;
         protected readonly string _jobName;
         protected internal int goldBase;
         protected int _coefficient;
         protected int _gold;
+        JobList _owner;
+        bool _workerListChanged;
+        internal int _nbHeretics;
+        internal JobList Owner { get { return _owner; } }
 
-        internal JobsModel(Game game, string name)
+        internal JobsModel(Game game, JobList list, string name)
             : base(game)
         {
             goldBase = 5;
             _jobName = name;
             _workers = new List<Villager>();
-            _gold = ModifyGoldGeneration();
+            //_gold = ModifyGoldGeneration();
+            _owner = list;
         }
 
-        public int GoldGenerated { get { return _gold; } }
+        public int GoldGenerated { get { return _gold; } }//do we really want to communicate this everchanging value??
         public string Name { get { return _jobName; } }
         public double Coefficient { get { return _coefficient; } }
 
         /// <summary>
         /// Gets the Workers list
         /// </summary>
-        public List<Villager> Workers
+        public IReadOnlyList<Villager> Workers
         {
             get { return _workers; }
         }
@@ -49,9 +54,15 @@ namespace Game
             if (person == null) throw new ArgumentNullException();
             if (!_workers.Contains(person))
             {
-                person.setJob(_job);
+                person.setJob(this);
+                _workerListChanged = true;
                 _workers.Add(person);
-                _gold = ModifyGoldGeneration();
+                if ((person.Health & Healths.HERETIC) != 0)
+                {
+                    addHereticWorker();
+                }
+                Debug.Assert(_workers.Contains(person), "(AddPerson) the person was not added Oo");
+                //_gold = ModifyGoldGeneration();//not usefull here really...
             }
             else throw new InvalidOperationException();
         }
@@ -65,9 +76,10 @@ namespace Game
             if (person == null) throw new ArgumentNullException();
             if (_workers.Contains(person))
             {
-                person.setJob(Jobs.NONE);
+                person.setJob(null);
+                _workerListChanged = true;
                 _workers.Remove(person);
-                _gold = ModifyGoldGeneration();
+                //_gold = ModifyGoldGeneration();//not usefull here really
             }
             else throw new InvalidOperationException();
         }
@@ -77,6 +89,8 @@ namespace Game
         /// </summary>
         public void GenerateGold()
         {
+            if (_workers.Count == 0)
+                return;
             _gold = ModifyGoldGeneration();
             foreach (Villager person in _workers)
             {
@@ -90,28 +104,100 @@ namespace Game
         /// <returns></returns>
         public int ModifyGoldGeneration()
         {
-            int result;
+            int result;/*
             if (_workers.Count > 1 && _workers.Count <= 35)
                 result = (goldBase * _coefficient) - (_workers.Count - 1);
             else if (_workers.Count > 35) result = (goldBase * 5);
-            else result = (goldBase * _coefficient);
+            else result = (goldBase * _coefficient);*/
+
+
+            /*
+              ((pop totale)/(nbr de villageois avec même métier)) * cste
+              */
+            Debug.Assert(_owner != null, "(ModifyGoldGeneration) _owner is null");
+            Debug.Assert(_owner.Owner != null, "(ModifyGoldGeneration) _owner._owner is null");
+            Debug.Assert(_workers.Count != 0, "(ModifyGoldGeneration) there are no workers");
+
+            result = (_owner.Owner._villagePop.Current / _workers.Count) * _coefficient;
+
             return result;
+        }
+        internal void addHereticWorker()
+        {
+                Debug.Assert(_nbHeretics <= Workers.Count, "(addHereticWorker) there are more heretic workers than workers Oo");
+                _nbHeretics++;
+        }
+        internal void removeHereticWorker()
+        {
+                Debug.Assert(_nbHeretics <= Workers.Count, "(removeHereticWorker) there are more heretic workers than workers Oo");
+                Debug.Assert(_nbHeretics >=0, "(removeHereticWorker) negative !");
+                _nbHeretics--;         
         }
 
         /// <summary>
         /// Add amount of happiness for all others villagers
         /// </summary>
         /// <param name="person"></param>
-        public virtual void AddHappiness() {}
+        public virtual void AddHappiness(Villager villager) { }
+        
+        internal void HereticFaithImpact()
+        {
+            if (_nbHeretics < 0)
+            {
+                int nbHeretics = _nbHeretics;
+                foreach (Villager v in _workers)
+                {
+                    v.AddOrRemoveFaith(-0.1 * nbHeretics);
+                }
+            }
+        }
+
+
+        #region called by DieOrIsAlive
+        internal void WorkerDestroyed(Villager dead)
+        {
+            Debug.Assert(dead != null, "(JobsModel) villager is null");
+            Debug.Assert(dead.IsDead(),"(JobsModel) villager is not dead ?!");
+            Debug.Assert(_workers.Contains(dead), "(JobModel) villager isn't even in the workerlist!");
+            Debug.Assert((dead.Faith <= 15) == ((dead.Health & Healths.HERETIC) != 0), "(JobModel/villagerdestroyed) heretism is not right!");
+            if ((dead.Health & Healths.HERETIC) != 0)
+            {
+                removeHereticWorker();
+            }
+            RemovePerson(dead);
+        }
+        #endregion
+        #region called by CloseStep
+        bool WorkerListConclude()
+        {
+            bool changed = _workerListChanged;
+            _workerListChanged = false;
+            return changed;
+        }
+        #endregion
+
+        #region worldtickcalls
+        override internal void ImpactHappiness()
+        {
+            HereticFaithImpact();
+        }
+        internal override void Evolution()
+        {
+            
+            GenerateGold();
+        }
+        internal override void CloseStep(List<IEvent> eventList)
+        {
+            if (WorkerListConclude()) { eventList.Add(new EventProperty<JobsModel>(this, "Workers")); }
+        }
+        #endregion
 
         internal override void OnDestroy()
         {
             Debug.Assert(_workers.Count == 0, "There is still someone in this Job!");
-            _ownerVillage.DestroyJobs(this);
-        }
 
-        internal override void CloseStep(List<IEvent> eventList)
-        {
+           /* _owner = null; joblist & different jobs ONLY get destroyed with the village.
+            * so it only gets destroyed WITH its owner, so no need to separate them.*/
         }
     }
 }

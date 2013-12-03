@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,22 +16,30 @@ namespace GamePages
 {
     public partial class GeneralPage : Form, IWindow
     {
-        HomepageUC Home = new HomepageUC();
-        InGameMenu MenuGame = new InGameMenu();
-        TabIndex ActionMenu = new TabIndex();
-        InformationsUC Stats = new InformationsUC();
-        InformationBox InfoBox = new InformationBox();
-        EventFluxUC eventFlux = new EventFluxUC();
+        HomepageUC Home;
+        InGameMenu MenuGame;
+        TabIndex ActionMenu;
+        InformationsUC Stats;
+        InformationBox InfoBox;
+        EventFluxUC eventFlux;
         Game.Game _startedGame;
+        traceBox trace;
+
+        string traceMessages;
 
         public GeneralPage()
         {
+            Home = new HomepageUC();
+            MenuGame = new InGameMenu();
+            ActionMenu = new TabIndex();
+            Stats = new InformationsUC(this);
+            InfoBox = new InformationBox();
+            eventFlux = new EventFluxUC();
             InitializeComponent();
 
             _startedGame = new Game.Game();
             Home.Launched += IsStarted_Changed;
             this.Controls.Add(Home);
-
             Home.Show();
 
             MenuGame.ExpectGoBackToMenu += GoBackToMenu;
@@ -42,11 +51,22 @@ namespace GamePages
             ActionMenu.Show();
             this.Controls.Add(Stats);
             Stats.Show();
+            Stats.Anchor = AnchorStyles.Right;
+            Stats.Anchor = AnchorStyles.Left;
+            Stats.Anchor = AnchorStyles.Left;
             //TODO : Create InfoBox
             this.Controls.Add(InfoBox);
             InfoBox.Show();
             this.Controls.Add(eventFlux);
             eventFlux.Show();
+            eventFlux.Anchor = AnchorStyles.Right;
+            Stats.StepByStep.Visible = true;
+
+            trace = new traceBox();
+            trace.Show();
+
+            Step();
+
         }
 
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
@@ -66,11 +86,13 @@ namespace GamePages
         }
         public void PushAlert(string message, string title)
         {
-            eventFlux.CreateNewEventAndShow(message, null);
+            eventFlux.CreateNewEventAndShow(message, title);
         }
         public void PushTrace(string message)
         {
-
+            traceMessages = traceMessages +  message + @"
+";
+            trace.traceBoxViewer.Text = traceMessages;
         }
         public void PushGeneralHappiness(double value)
         {
@@ -88,5 +110,16 @@ namespace GamePages
         {
             Stats.population.Text = pop.ToString();
         }
+
+        internal void Step()
+        {
+            _startedGame.NextStep();
+            foreach (IEvent events in _startedGame.EventList)
+            {
+                events.Do(this);
+                events.PublishMessage(this);
+            }
+        }
+
     }
 }

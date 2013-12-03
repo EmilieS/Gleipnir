@@ -20,25 +20,48 @@ namespace Game
             _statusInFamily = new HistorizedValue<Status, Villager>(this, "_statusInFamily", 20);
             _statusInFamily.Current = Status.SINGLE;
             g.VillagerAdded();
-
+            parentFamily.OwnerVillage.VillagerAdded();
             Debug.Assert(g != null);
+            if (Game.Rand.Next(101) < 2)
+            {
+                _faith.Current = 13;
+            }
+            else
+            { 
+                _faith.Current = parentFamily.FaithAverage();
+            }
+            if (_faith.Current <= 15)
+            {
+                _health.Current =  Healths.HERETIC;
+            }
             switch (Game.Rand.Next(2))
             {
-                case 0: _gender = Genders.MALE; _job = parentFamily.Father.Job; g.AddSingleMan(this); break; //changera    
-                case 1: _gender = Genders.FEMALE; _job = parentFamily.Mother.Job; Engage(this, parentFamily); break;
+                case 0: _gender = Genders.MALE;
+                    if (parentFamily.Father != null)
+                    {
+                        if (parentFamily.Father.Job != null)
+                        {
+                            parentFamily.Father.Job.AddPerson(this);
+                        }
+                    }
+                        g.AddSingleMan(this); break;   
+                case 1: _gender = Genders.FEMALE;
+                    if (parentFamily.Mother != null)
+                    {
+                        if (parentFamily.Mother.Job != null)
+                        {
+                            parentFamily.Mother.Job.AddPerson(this);
+                        }
+                    }
+                    Engage(this, parentFamily); break;
             }
-            if (Game.Rand.Next(101) < 2)
-                _faith.Current = 13;
-            else
-                _faith.Current = parentFamily.FaithAverage();
-
             _happiness.Current = parentFamily.HappinessAverage();
             //_job = Jobs.FARMER;
-            _health.Current = Healths.NONE;
             _age = 0;
             //_lifeExpectancy = 85;
-            _lifeExpectancy = 85*12;
+            _lifeExpectancy = 85 * 12;
             _name = name;
+
         }
         public Villager(Game g, Genders gender, string name)
             : base(g)
@@ -50,18 +73,20 @@ namespace Game
             g.VillagerAdded();
             _faith.Current = 100;
             _happiness.Current = 80;
-           // _lifeExpectancy = 85;
+            // _lifeExpectancy = 85;
             _lifeExpectancy = 85 * 12;
             _gender = gender;
             _statusInFamily.Current = Status.SINGLE;
-            _name = name;_health.Conclude();
-        }
+            _name = name;//_health.Conclude();
+            Game.Villages[0].VillagerAdded();//hmmmmm
+            Game.Villages[0].Jobs.Farmer.AddPerson(this);
+      }
 
         //TODO : generate name.
         readonly string _name;
         Family _parentFamily;
         Genders _gender;
-        Jobs _job;
+        JobsModel _job;
         double _lifeExpectancy;
         double _age;
         Villager _fiance;
@@ -71,13 +96,13 @@ namespace Game
         readonly HistorizedValue<double, Villager> _faith; //scale from 0 to 100.
         readonly HistorizedValue<double, Villager> _happiness; //scale from 0 to 100.
         readonly HistorizedValue<Healths, Villager> _health;
-        readonly HistorizedValue<Status, Villager> _statusInFamily; //!! TODO : update !
+        readonly HistorizedValue<Status, Villager> _statusInFamily;
 
         public double Age { get { return _age; } }
-        public double Faith { get { return _faith.Current; } } //hmm
-        public double Happiness { get { return _happiness.Current; } } //hmm
+        public double Faith { get { return _faith.Current; } } 
+        public double Happiness { get { return _happiness.Current; } } 
         public Genders Gender { get { return _gender; } }
-        public Jobs Job { get { return _job; } }
+        public JobsModel Job { get { return _job; } }
         public double LifeExpectancy { get { return _lifeExpectancy; } }
 
         public Status StatusInFamily
@@ -90,7 +115,7 @@ namespace Game
             get { return _parentFamily; }
             internal set { _parentFamily = value; }
         }
-        public void setJob(Jobs NewJob)
+        public void setJob(JobsModel NewJob)
         {
             _job = NewJob;
         }
@@ -106,14 +131,7 @@ namespace Game
             }
         }
 
-        #region death & family issues.
-        //=====================================================================================
 
-
-
-
-        //======================================================================================
-        #endregion
         /// <summary>
         /// Gets the villager's name
         /// </summary>
@@ -173,20 +191,7 @@ namespace Game
             _lifeExpectancy = 0;
         }
 
-        #region worldtick
-        #region WhenWorldUpdate
 
-        private void Suicide()
-        {
-            if (_happiness.Current == 0 && (_health.Current & Healths.DEPRESSED) == 0) //a revoir
-            {
-                SetLifeExpectancyLeft(0.4);
-                _health.Current = _health.Current | Healths.DEPRESSED;
-            }
-        }
-
-        #endregion
-        #region happiness & faith evolution
 
         /// <summary>
         /// can be negative to take away happiness.
@@ -211,30 +216,52 @@ namespace Game
         {
             return ((_health.Current & Healths.DEAD) != 0);
         }
-      
+
         /// <summary>
         /// can be negative to take away faith.
         /// </summary>
         /// <param name="amount"></param>
         public void AddOrRemoveFaith(double amount)
         {
-            if (_faith.Current + amount < 0)
+            double result = _faith.Current + amount;
+            if ((_health.Current & Healths.HERETIC) == 0)
+            {
+                if (result <= 15)
+                {
+                    _health.Current = _health.Current | Healths.HERETIC;
+                    if (_job != null)
+                    {
+                        _job.addHereticWorker();
+                    }
+                }
+            }
+            else
+            {
+                if (result > 15)
+                {
+                    _health.Current = _health.Current & ~Healths.HERETIC;
+                    if (_job != null)
+                    {
+                        _job.removeHereticWorker();
+                    }
+                }
+            }
+            if (result < 0)
             {
                 _faith.Current = 0;
             }
-            else if (_faith.Current + amount > 100)
+            else if (result> 100)
             {
                 _faith.Current = 100;
             }
             else
             {
-                _faith.Current += amount;
+                _faith.Current = result;
             }
+            Debug.Assert((Faith <= 15) == ((Health & Healths.HERETIC) != 0), "(JobModel/villagerdestroyed) heretism is not right!");
         }
 
-        #endregion
 
-        #endregion
         //====================WORLD=TICK=STUFF============================
         #region called by ImpactHappiness
         private void SickHappinessImpact()
@@ -245,8 +272,16 @@ namespace Game
                 ParentFamily.FamilyMemberIsSick();
             }
         }
+
         #endregion
         #region called by Evolution
+        private void HereticFaithImpact()
+        {
+            if ((_health.Current & Healths.HERETIC) != 0)
+            {
+                ParentFamily.FamilyMemberIsHeretic();
+            }
+        }
         internal void HandInOfferings()
         {
             int amount = _parentFamily.OwnerVillage.OfferingsPointsPerTick;
@@ -260,18 +295,23 @@ namespace Game
         {
             _age += time;
         }
-        /// <summary>
-        /// Set a villager as Heretic 
-        /// </summary>
-        public void SetHeretic()
+        int _sickTimer;
+        internal void CheckIfSick()
         {
-            _health.Current = Healths.HERETIC;
+            if ((_health.Current & Healths.SICK) != 0)
+            {
+                if (_sickTimer > 30)//should change with different sicknesses?
+                {
+                    _sickTimer = 0;
+                    SetLifeExpectancyLeft(0);
+                }
+                else
+                {
+                    _sickTimer++;
+                }
+            }
+            else { _sickTimer = 0; }
         }
-        public bool IsHeretic()
-        {
-            return ((_health.Current & Healths.HERETIC) != 0);
-        }
-
         int _callForHelpTickTimer;
         private void CallForHelpCheck()
         {
@@ -312,9 +352,17 @@ namespace Game
         }
         private void MatchMaking()
         {
-            if (_gender == Genders.MALE || _statusInFamily.Current!=Status.SINGLE)
+            if (_gender == Genders.MALE || _statusInFamily.Current != Status.SINGLE)
                 return;
             Engage(this, _parentFamily);
+        }
+        private void Suicide()
+        {
+            if (_happiness.Current == 0 && (_health.Current & Healths.DEPRESSED) == 0)
+            {
+                SetLifeExpectancyLeft(1);
+                _health.Current = _health.Current | Healths.DEPRESSED;
+            }
         }
         #endregion
         #region called by Creation
@@ -329,8 +377,8 @@ namespace Game
             while (i < count && Game._regularBirthDates[i] <= _age)
             {
                 if (_age - time < Game._regularBirthDates[i])
-                { 
-                   eventList.Add(new VillagerBirthEvent(_parentFamily.newFamilyMember())); 
+                {
+                    eventList.Add(new VillagerBirthEvent(_parentFamily.newFamilyMember()));
                 }
                 i++;
             }
@@ -342,7 +390,7 @@ namespace Game
                 return;
             if (_engagedTickTimer == 10)
             {
-                if(_gender==Genders.FEMALE)
+                if (_gender == Genders.FEMALE)
                 {
                     eventList.Add(new FamilyBirthEvent(_parentFamily.OwnerVillage.CreateFamily(this, _fiance)));
                 }
@@ -351,7 +399,7 @@ namespace Game
                     eventList.Add(new FamilyBirthEvent(_parentFamily.OwnerVillage.CreateFamily(_fiance, this)));
                 }
             }
-            else{_engagedTickTimer++;}
+            else { _engagedTickTimer++; }
 
         }
         #endregion
@@ -371,30 +419,31 @@ namespace Game
                 _fiance.FianceDestroyed();
                 Debug.Assert(_fiance == null);
             }
-            Debug.Assert(_fiance == null);
+            if (_job != null)
+                _job.WorkerDestroyed(this);
+            Debug.Assert(_fiance == null, "he still has a fiance Oo !");
+            _parentFamily.OwnerVillage.VillagerRemoved(this);
             _parentFamily.FamilyMemberDestroyed(this);
-            Debug.Assert(_parentFamily == null);
-
+            Debug.Assert(_parentFamily == null, "he still has a parentfamily Oo !");
             Game.VillagerRemoved(this);
-            //_job = null;
         }
         #endregion
         #region worldtickcalls
         override internal void ImpactHappiness()
         {
             SickHappinessImpact();
+            _parentFamily.OwnerVillage.JobHappiness(this);
         }
         internal override void Evolution()
         {
-            
             double time = Game._ageTickTime;
             AgeTick(time);
             HandInOfferings();
             CallForHelpCheck();
             MatchMaking();
-            //TODO: fric.
-            //TODO: faith blabla
-            //otherstuff
+            CheckIfSick();
+            HereticFaithImpact();
+            Suicide();
         }
         internal override void Creation(List<IEvent> eventList)
         {
@@ -409,7 +458,7 @@ namespace Game
         {
             if (_lifeExpectancy <= _age)
             {
-                _health.Current = Healths.DEAD;
+                _health.Current = _health.Current | Healths.DEAD;
                 if (ParentFamily != null)
                 {
                     ParentFamily.FamilyMemberDied(this);
@@ -424,13 +473,13 @@ namespace Game
             if (_statusInFamily.Conclude()) { eventList.Add(new EventProperty<Villager>(this, "StatusInFamily")); }
             if (_happiness.Conclude()) { eventList.Add(new EventProperty<Villager>(this, "Happiness")); }
             if (_faith.Conclude()) { eventList.Add(new EventProperty<Villager>(this, "Faith")); }
-            if (_health.Conclude()) 
+            if (_health.Conclude())
             {
                 if ((_health.Current & Healths.UNHAPPY) != 0 && (_health.Historic.Last & Healths.UNHAPPY) == 0)
                 {
                     eventList.Add(new VillagerCallForHelp(this));
                 }
-                else { eventList.Add(new EventProperty<Villager>(this, "Health")); }           
+                else { eventList.Add(new EventProperty<Villager>(this, "Health")); }
             }
         }
         #endregion

@@ -9,11 +9,13 @@ namespace Game
 {
     public class Village : GameItem
     {
-        List<JobsModel> _jobs;
-        double _familiesGold;
+        //List<JobsModel> _jobs;// needs to be cleansed
+        public JobList Jobs;
+        int _familiesGold;
         double _villageFaith;
         double _villageHappiness;
         int _offeringsPoints;
+        internal readonly HistorizedValue<int, Village> _villagePop;
 
         readonly string _name;
         FamilyInVillageList _familiesList;
@@ -23,11 +25,13 @@ namespace Game
         internal Village(Game thisGame, string name)
             : base(thisGame)
         {
+            _villagePop = new HistorizedValue<int, Village>(this, "_villagePop", 20);
             Debug.Assert(!String.IsNullOrWhiteSpace(name));
             Debug.Assert(thisGame != null, "thisGame is null!");
             _name = name;
             _familiesList = new FamilyInVillageList(this);
-            _jobs = CreateJobs();
+            //_jobs = CreateJobs();
+            Jobs = new JobList(this);
             _offeringsPoints = 1;
             #region Old code
             /* _jobs = new List<Jobs>;
@@ -53,29 +57,25 @@ namespace Game
              */
             #endregion
         }
-        public Village(List<Family> families, Game thisGame)//a éliminer.
-            : base(thisGame)
+        internal void VillagerAdded()
         {
-            _familiesList = new FamilyInVillageList(this);
-            for (int i=0; i<families.Count; i++)
-            {
-            _familiesList.Add(families[i]);
-            }
+            _villagePop.Current++;
         }
+
 
         public Family CreateFamily(Villager mother, Villager father)
         {
             if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE) { throw new InvalidOperationException("gender issue! (CreateFamily)"); }
             if (mother.ParentFamily != null && father.ParentFamily != null)
             {
-                if (mother.ParentFamily == father.ParentFamily){ throw new InvalidOperationException("same family!"); }
+                if (mother.ParentFamily == father.ParentFamily) { throw new InvalidOperationException("same family!"); }
             }
             var name = Game.NameList.NextName;
-            var newFamily= new Family(Game, mother, father, name);
+            var newFamily = new Family(Game, mother, father, name);
             _familiesList.Add(newFamily);
             return newFamily;
         }
-        
+
         public Family CreateFamilyFromScratch()
         {
             //Debug.Assert(_thisGame != null, "_thisGame est null!");
@@ -87,28 +87,44 @@ namespace Game
             _familiesList.Add(newFamily);
             return newFamily;
         }
+        public Family CreateFamilyFromScratch(JobsModel mothersJob, JobsModel fathersJob)
+        {
+            //Debug.Assert(_thisGame != null, "_thisGame est null!");
+            Debug.Assert(Game != null, "Game est null!");
+            Villager VillagerAM = new Villager(Game, Genders.MALE, Game.FirstNameList.NextName);
+            Villager VillagerAF = new Villager(Game, Genders.FEMALE, Game.FirstNameList.NextName);
+            var name = Game.NameList.NextName;
+            var newFamily = new Family(Game, VillagerAF, VillagerAM, name);
+            _familiesList.Add(newFamily);
+            VillagerAF.Job.RemovePerson(VillagerAF);
+            VillagerAM.Job.RemovePerson(VillagerAM);
+            mothersJob.AddPerson(VillagerAF);
+            fathersJob.AddPerson(VillagerAM);
+            return newFamily;
+        }
 
         /// <summary>
         /// Gets the total gold for the village.
         /// Addition of all families' gold
         /// </summary>
-        public double Gold { get { return _familiesGold; } }
-        
+        public int Gold { get { return _familiesGold; } }
+
         /// <summary>
         /// Addition of all gold of all families
         /// </summary>
         /// <returns></returns>
         public void CalculateVillageGold()
         {
-            double result = 0;
+            int result = 0;
             foreach (Family fam in _familiesList)
             {
                 result += fam.GoldStash;
             }
 
             if (result < 0) throw new IndexOutOfRangeException();
-            else  _familiesGold = result;
+            else _familiesGold = result;
         }
+
 
         /// <summary>
         /// Gets average faith of all families in the village.
@@ -197,9 +213,9 @@ namespace Game
             else throw new ArgumentOutOfRangeException();
         }
 
-        public List<JobsModel> JobsList { get { return _jobs; } }
+        //public List<JobsModel> JobsList { get { return _jobs; } }
 
-        private List<JobsModel> CreateJobs()
+        /*private List<JobsModel> CreateJobs()
         {
             Debug.Assert(Game != null, "Game doesn't exist!");
             List<JobsModel> jobList = new List<JobsModel>();
@@ -221,28 +237,43 @@ namespace Game
             jobList.Add(tailor);
             return jobList;
         }
-
+*/
         internal void FamilyDestroyed(Family family)
         {
             Debug.Assert(family != null);
             _familiesList.Remove(family);
         }
 
-        internal void DestroyJobs(JobsModel jobName)
+        //TODO: !!! use new list & all jobs destroyed.
+        /*      internal void DestroyJobs(JobsModel jobName)
+              {
+                  Debug.Assert(jobName != null);
+                  _jobs.Remove(jobName);
+              }*/
+        internal void VillagerRemoved(Villager villager)
         {
-            Debug.Assert(jobName != null);
-            _jobs.Remove(jobName);
+            _villagePop.Current--;
         }
-
+        #region called by ImpactHappiness
+        internal void JobHappiness(Villager villager)
+        {
+            foreach (JobsModel job in Jobs.HappinessJobList)
+            {
+                job.AddHappiness(villager);
+            }
+        }
+        #endregion
         internal override void OnDestroy()
         {
+            Jobs.Destroy();
+            Jobs = null;
             Debug.Assert(_familiesList.Count == 0, "there is still a family in this village!");
         }
         override internal void CloseStep(List<IEvent> eventList)
         {
             //TODO :  put current values in value history.
             if (_familiesList.Conclude()) { eventList.Add(new EventProperty<Village>(this, "FamiliesList")); }
-            //jobs
+            //JobList is invariant.
             //TODO : events!
         }
     }

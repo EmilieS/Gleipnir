@@ -65,7 +65,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label EventTitle;
-        private System.Windows.Forms.Label EventContain;
+        internal System.Windows.Forms.Label EventTitle;
+        internal System.Windows.Forms.Label EventContain;
     }
 }

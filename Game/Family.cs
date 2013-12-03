@@ -168,20 +168,30 @@ namespace Game
                 FamilyMembers[i].AddOrRemoveHappiness(-0.1); //Everybody, even the sick person(who already has a minus).
             }
         }
+        internal void FamilyMemberIsHeretic()
+        {
+            for (int i = 0; i < FamilyMembers.Count; i++)
+            {
+                FamilyMembers[i].AddOrRemoveFaith(-0.2); //need to see if the heretic should be included or not.
+            }
+        }
         private void IsPoorOrRich_HappinessImpact()
         {
-            if (_goldStash.Current/ FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
+            if (_familyMembers.Count != 0)
             {
-                for (int i = 0; i < FamilyMembers.Count; i++)
+                if (_goldStash.Current < 16 || _goldStash.Current / FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
                 {
-                    FamilyMembers[i].AddOrRemoveHappiness(-0.1);
+                    for (int i = 0; i < FamilyMembers.Count; i++)
+                    {
+                        FamilyMembers[i].AddOrRemoveHappiness(-0.1);
+                    }
                 }
-            }
-            else if (_goldStash.Current / FamilyMembers.Count > (Game.TotalGold / Game.TotalPop) * 3)
-            {
-                for (int i = 0; i < FamilyMembers.Count; i++)
+                else if (_goldStash.Current / FamilyMembers.Count > (Game.TotalGold / Game.TotalPop) * 3)
                 {
-                    FamilyMembers[i].AddOrRemoveHappiness(0.1);
+                    for (int i = 0; i < FamilyMembers.Count; i++)
+                    {
+                        FamilyMembers[i].AddOrRemoveHappiness(0.1);
+                    }
                 }
             }
         }
@@ -213,7 +223,7 @@ namespace Game
         internal override void OnDestroy()
         {
             Debug.Assert(_familyMembers.Count == 0, "there is still someone in this family!");
-            Debug.Assert(_ownerVillage != null);
+            Debug.Assert(_ownerVillage != null, "(OnDestroy) ownerVillage == null !!!!!!");
             _mother = null;
             _father = null;
             Debug.Assert(_ownerVillage.FamiliesList.Contains(this));
@@ -225,21 +235,28 @@ namespace Game
         #region worldtickcalls
         override internal void ImpactHappiness() 
         {
+            Debug.Assert(_ownerVillage != null, "(ImpactHappiness) ownerVillage == null !!!!!!");
             IsPoorOrRich_HappinessImpact();        
         }
         override internal void Evolution()
         {
             //RegularBirths done in villager.
-
+            Debug.Assert(_ownerVillage != null, "(Evolution) ownerVillage == null !!!!!!");
         }
         
         override internal void DieOrIsAlive(List<IEvent> eventList)
         {
-            if (FamilyMembers.Count == 0) { eventList.Add(new FamilyEndEvent(this)); OnDestroy(); }
+            Debug.Assert(_ownerVillage != null, "(DieOrIsAlive) ownerVillage == null !!!!!!");
+            if (FamilyMembers.Count == 0)
+            {
+                eventList.Add(new FamilyEndEvent(this)); Destroy();
+                Debug.Assert(Game == null, "(DieOrIsAlive) game is not null !!!!!!");//ici en premier.
+            }
         }
         
         override internal void CloseStep(List<IEvent> eventList)
         {
+            Debug.Assert(_ownerVillage != null, "(CloseStep) ownerVillage == null !!!!!!");
             if (_goldStash.Conclude()) { eventList.Add(new EventProperty<Family>(this, "LastGoldStash")); }
             if (_familyMembers.Conclude()) { eventList.Add(new EventProperty<Family>(this, "FamilyMembers")); }
         }

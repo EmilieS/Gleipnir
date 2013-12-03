@@ -38,6 +38,7 @@
             this.menuButton = new System.Windows.Forms.Button();
             this.Village = new System.Windows.Forms.Label();
             this.villageName = new System.Windows.Forms.Label();
+            this.StepByStep = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // changeGoldOfferings
@@ -55,7 +56,7 @@
             // offeringsPoints
             // 
             this.offeringsPoints.AutoSize = true;
-            this.offeringsPoints.Location = new System.Drawing.Point(567, 8);
+            this.offeringsPoints.Location = new System.Drawing.Point(546, 8);
             this.offeringsPoints.Name = "offeringsPoints";
             this.offeringsPoints.Size = new System.Drawing.Size(88, 13);
             this.offeringsPoints.TabIndex = 19;
@@ -64,7 +65,7 @@
             // happinessVillage
             // 
             this.happinessVillage.AutoSize = true;
-            this.happinessVillage.Location = new System.Drawing.Point(500, 8);
+            this.happinessVillage.Location = new System.Drawing.Point(479, 8);
             this.happinessVillage.Name = "happinessVillage";
             this.happinessVillage.Size = new System.Drawing.Size(47, 13);
             this.happinessVillage.TabIndex = 18;
@@ -73,7 +74,7 @@
             // faithVillage
             // 
             this.faithVillage.AutoSize = true;
-            this.faithVillage.Location = new System.Drawing.Point(454, 8);
+            this.faithVillage.Location = new System.Drawing.Point(433, 8);
             this.faithVillage.Name = "faithVillage";
             this.faithVillage.Size = new System.Drawing.Size(21, 13);
             this.faithVillage.TabIndex = 17;
@@ -82,7 +83,7 @@
             // population
             // 
             this.population.AutoSize = true;
-            this.population.Location = new System.Drawing.Point(371, 8);
+            this.population.Location = new System.Drawing.Point(350, 8);
             this.population.Name = "population";
             this.population.Size = new System.Drawing.Size(57, 13);
             this.population.TabIndex = 16;
@@ -91,7 +92,7 @@
             // goldVillage
             // 
             this.goldVillage.AutoSize = true;
-            this.goldVillage.Location = new System.Drawing.Point(309, 7);
+            this.goldVillage.Location = new System.Drawing.Point(288, 7);
             this.goldVillage.Name = "goldVillage";
             this.goldVillage.Size = new System.Drawing.Size(18, 13);
             this.goldVillage.TabIndex = 15;
@@ -112,6 +113,8 @@
             // 
             // Village
             // 
+            this.Village.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.Village.AutoSize = true;
             this.Village.BackColor = System.Drawing.SystemColors.ControlDark;
             this.Village.Location = new System.Drawing.Point(3, 7);
@@ -123,6 +126,8 @@
             // 
             // villageName
             // 
+            this.villageName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.villageName.AutoSize = true;
             this.villageName.BackColor = System.Drawing.SystemColors.ControlDark;
             this.villageName.Location = new System.Drawing.Point(44, 7);
@@ -132,10 +137,22 @@
             this.villageName.Text = "Ragnar";
             this.villageName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // StepByStep
+            // 
+            this.StepByStep.Location = new System.Drawing.Point(648, 3);
+            this.StepByStep.Name = "StepByStep";
+            this.StepByStep.Size = new System.Drawing.Size(110, 21);
+            this.StepByStep.TabIndex = 21;
+            this.StepByStep.Text = "Step by Step";
+            this.StepByStep.UseVisualStyleBackColor = true;
+            this.StepByStep.Visible = false;
+            this.StepByStep.Click += new System.EventHandler(this.StepByStep_Click);
+            // 
             // InformationsUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.StepByStep);
             this.Controls.Add(this.changeGoldOfferings);
             this.Controls.Add(this.offeringsPoints);
             this.Controls.Add(this.happinessVillage);
@@ -163,5 +180,6 @@
         private System.Windows.Forms.Button menuButton;
         private System.Windows.Forms.Label Village;
         internal System.Windows.Forms.Label villageName;
+        internal System.Windows.Forms.Button StepByStep;
     }
 }

@@ -28,6 +28,8 @@ namespace GamePages
                 eventTab[i] = GameEvent;
                 this.Controls.Add(eventTab[i]);
                 eventTab[i].Show();
+                eventTab[i].EventTitle.Text = title;
+                eventTab[i].EventContain.Text = message;
                 i++;
             }
             else

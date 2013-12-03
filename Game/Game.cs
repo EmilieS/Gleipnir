@@ -43,18 +43,18 @@ namespace Game
                 j = j + 4*12;
             }
             //===
-            CreateVillage("default");
+            Village v=CreateVillage("default");
 
-            Family FamilyA = _villages[0].CreateFamilyFromScratch();
-            Family FamilyB = _villages[0].CreateFamilyFromScratch();
-            Family FamilyC = _villages[0].CreateFamilyFromScratch();
-            Family FamilyD = _villages[0].CreateFamilyFromScratch();
-            Family FamilyE = _villages[0].CreateFamilyFromScratch();
+            Family FamilyA = v.CreateFamilyFromScratch( v.Jobs.Farmer, v.Jobs.Blacksmith);
+            Family FamilyB = v.CreateFamilyFromScratch( v.Jobs.Farmer, v.Jobs.Construction_worker);
+            Family FamilyC = v.CreateFamilyFromScratch();
+            Family FamilyD = v.CreateFamilyFromScratch();
+            Family FamilyE = v.CreateFamilyFromScratch();
 
             _offerings.Current = 100;
         }
 
-        readonly List<GameItem> _items;
+        internal readonly List<GameItem> _items;//internal for tests
         readonly List<Village> _villages; //a revoir!
         readonly List<Villager> _singleMen;
         NameGenerator _nameGenerator;
@@ -91,7 +91,11 @@ namespace Game
         }
         internal void GameItemDestroyed(GameItem item)
         {
+            Debug.Assert(item != null, "(GameItemDestroyed) item is null");
+            Debug.Assert(_items.Contains(item), "(GameItemDestroyed) the item was already removed from the gameitemlist");
             _items.Remove(item);
+            Debug.Assert(!_items.Contains(item), "(GameItemDestroyed) the item was not removed from the gameitemlist");
+
         }
         internal void GoldAdded(int amount)
         {
@@ -167,7 +171,7 @@ namespace Game
         }
         private void Creation()
         {
-            //TODO : CLEAN _eventList
+            _eventList.RemoveRange(0, _eventList.Count);
             int i = 0;
             //int tmpCount = _items.Count;
             //GameItem tmpItem;

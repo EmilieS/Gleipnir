@@ -56,12 +56,6 @@
     <Compile Include="GameEventUC.Designer.cs">
       <DependentUpon>GameEventUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="GamePage.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GamePage.Designer.cs">
-      <DependentUpon>GamePage.cs</DependentUpon>
-    </Compile>
     <Compile Include="HomepageUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -100,14 +94,17 @@
     <Compile Include="InformationBox.Designer.cs">
       <DependentUpon>InformationBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Trace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Trace.Designer.cs">
+      <DependentUpon>Trace.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="EventFluxUC.resx">
       <DependentUpon>EventFluxUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GameEventUC.resx">
       <DependentUpon>GameEventUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GamePage.resx">
-      <DependentUpon>GamePage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HomepageUC.resx">
       <DependentUpon>HomepageUC.cs</DependentUpon>
@@ -136,6 +133,9 @@
     </Compile>
     <EmbeddedResource Include="InformationBox.resx">
       <DependentUpon>InformationBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Trace.resx">
+      <DependentUpon>Trace.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
