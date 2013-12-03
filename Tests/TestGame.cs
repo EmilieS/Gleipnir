@@ -28,7 +28,7 @@ namespace Tests
             //Assert.That(MyWindow.nb_pushAlert, Is.EqualTo(1));
         }
 
-        [Test]
+        /*[Test]
         public void ToSee()
         {
             var myGame = new Game.Game();
@@ -43,7 +43,7 @@ namespace Tests
                 }
             } while (myGame.TotalPop < 3000);
             //Assert.That(MyWindow.nb_pushAlert, Is.EqualTo(1));
-        }
+        }*/
        /* [Test]
         public void ToSee2()
         {

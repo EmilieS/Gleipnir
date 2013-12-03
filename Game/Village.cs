@@ -87,6 +87,21 @@ namespace Game
             _familiesList.Add(newFamily);
             return newFamily;
         }
+        public Family CreateFamilyFromScratch(JobsModel mothersJob, JobsModel fathersJob)
+        {
+            //Debug.Assert(_thisGame != null, "_thisGame est null!");
+            Debug.Assert(Game != null, "Game est null!");
+            Villager VillagerAM = new Villager(Game, Genders.MALE, Game.FirstNameList.NextName);
+            Villager VillagerAF = new Villager(Game, Genders.FEMALE, Game.FirstNameList.NextName);
+            var name = Game.NameList.NextName;
+            var newFamily = new Family(Game, VillagerAF, VillagerAM, name);
+            _familiesList.Add(newFamily);
+            VillagerAF.Job.RemovePerson(VillagerAF);
+            VillagerAM.Job.RemovePerson(VillagerAM);
+            mothersJob.AddPerson(VillagerAF);
+            fathersJob.AddPerson(VillagerAM);
+            return newFamily;
+        }
 
         /// <summary>
         /// Gets the total gold for the village.

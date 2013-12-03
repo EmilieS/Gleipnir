@@ -43,13 +43,13 @@ namespace Game
                 j = j + 4*12;
             }
             //===
-            CreateVillage("default");
+            Village v=CreateVillage("default");
 
-            Family FamilyA = _villages[0].CreateFamilyFromScratch();
-            Family FamilyB = _villages[0].CreateFamilyFromScratch();
-            Family FamilyC = _villages[0].CreateFamilyFromScratch();
-            Family FamilyD = _villages[0].CreateFamilyFromScratch();
-            Family FamilyE = _villages[0].CreateFamilyFromScratch();
+            Family FamilyA = v.CreateFamilyFromScratch( v.Jobs.Farmer, v.Jobs.Blacksmith);
+            Family FamilyB = v.CreateFamilyFromScratch( v.Jobs.Farmer, v.Jobs.Construction_worker);
+            Family FamilyC = v.CreateFamilyFromScratch();
+            Family FamilyD = v.CreateFamilyFromScratch();
+            Family FamilyE = v.CreateFamilyFromScratch();
 
             _offerings.Current = 100;
         }
