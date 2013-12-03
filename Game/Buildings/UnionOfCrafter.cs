@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Buildings.JobsBuildings
+namespace Game.Buildings
 {
-    class Farm
+    class UnionOfCrafter
     {
+        // Syndicat des ouvriers 
 
     }
 }

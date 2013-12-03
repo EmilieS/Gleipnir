@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Buildings.Believing
+namespace Game.Buildings
 {
-    class OfferingWarehouse
+    class Mill
     {
 
     }

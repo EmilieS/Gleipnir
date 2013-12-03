@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Buildings.Hobbies
+namespace Game.Buildings
 {
-    class PartyRoom
+    class BuildingsList 
     {
-
 
     }
 }

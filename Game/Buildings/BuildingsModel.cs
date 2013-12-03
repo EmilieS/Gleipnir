@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Buildings
+namespace Game.Buildings
 {
     public abstract class BuildingsModel
     {
@@ -17,10 +17,10 @@ namespace Buildings
         double _addedRobustness;
         bool _isBought;
         string _name;
-        Game.Game actualGame;
+        Game actualGame;
         // this a provisory solution : using a new "materials"  to implement robustness
 
-        internal BuildingsModel(Game.Game g)
+        internal BuildingsModel(Game g)
             : base()
         {
             _horizontalPos = 0;

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Buildings.Believing
+namespace Game.Buildings
 {
     public class Chapel : BuildingsModel
     {
-        public Chapel(Game.Game g)
+        public Chapel(Game g)
             : base(g)
         {
             AddFaith = 5;

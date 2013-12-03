@@ -4,18 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Buildings.Hobbies
+namespace Game.Buildings
 {
-    public class Theater
+    public class Tavern
     {
+
+
+        public double SetFaith
+        {
+            get { return 4; }
+        }
 
         public double SetHappiness
         {
-            get { return 5; }
+            get { return 6; }
         }
+
         //public void SetEnterPrice()
         //{
-        //    EnterPrice = 50;
+        //    prop.EnterPrice = 2;
         //}
     }
 }

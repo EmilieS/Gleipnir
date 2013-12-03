@@ -4,19 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Buildings.Hobbies
+namespace Game.Buildings
 {
-    public class Baths
+    public class Brothel
     {
+
 
         public double SetHappiness
         {
-            get { return 3; }
-        }
-        private int SetEnterPrice
-        {
-            get { return 200; }
+            get { return 8; }
         }
 
+        public int  SetEnterPrice
+        {
+           get{return 12;}
+        }
     }
 }

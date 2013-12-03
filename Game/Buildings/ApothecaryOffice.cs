@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Game;
 
-namespace Buildings.JobsBuildings
+namespace Game.Buildings
 {
     class ApothecaryOffice : BuildingsModel
     {
-        public ApothecaryOffice(Game.Game g)
+        public ApothecaryOffice(Game g)
             : base(g)
         {
 
