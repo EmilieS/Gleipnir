@@ -216,7 +216,10 @@ namespace Game
         {
             return ((_health.Current & Healths.DEAD) != 0);
         }
-
+        internal bool IsHeretic()
+        {
+            return ((_health.Current & Healths.HERETIC) != 0);
+        }
         /// <summary>
         /// can be negative to take away faith.
         /// </summary>
