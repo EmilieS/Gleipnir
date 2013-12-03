@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    class UnionOfCrafter
+    class UnionOfCrafter : BuildingsModel
     {
+        public UnionOfCrafter(Game g, BuildingsList List, string name)
+            : base()
+        {
+
+        }
         // Syndicat des ouvriers 
 
     }

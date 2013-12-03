@@ -8,7 +8,7 @@ namespace Game.Buildings
 {
     public class Chapel : BuildingsModel
     {
-        public Chapel(Game g)
+        public Chapel(Game g, BuildingsList List, string name)
             : base(g)
         {
             AddFaith = 5;

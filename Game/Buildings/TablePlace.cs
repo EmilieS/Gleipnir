@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    class TablePlace
+    class TablePlace : BuildingsModel
     {
+        public TablePlace(Game g, BuildingsList List, string name)
+            : base(g)
+        {
+
+        }
         //public void SetTablePosition()
         //{
         //    //TODO : Define the Table position 

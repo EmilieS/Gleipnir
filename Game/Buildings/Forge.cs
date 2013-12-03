@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    class Forge
+    class Forge : BuildingsModel
     {
+        public Forge(Game g, BuildingsList List, string name)
+            : base(g)
+        {
 
+        }
     }
 }

@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    class OfferingWarehouse
+    class OfferingWarehouse : BuildingsModel
     {
+        public OfferingWarehouse(Game g, BuildingsList List, string name)
+            : base()
+        {
 
+        }
     }
 }

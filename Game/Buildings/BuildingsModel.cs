@@ -20,8 +20,8 @@ namespace Game.Buildings
         Game actualGame;
         // this a provisory solution : using a new "materials"  to implement robustness
 
-        internal BuildingsModel(Game g)
-            : base()
+        internal BuildingsModel(Game g, BuildingsList List, string name)
+            :base(g)
         {
             _horizontalPos = 0;
             _verticalPos = 0;

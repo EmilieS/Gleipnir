@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    public class Tavern
+    public class Tavern : BuildingsModel
     {
-
+        public Tavern(Game g, BuildingsList List, string name)
+            : base()
+        {
+        }
 
         public double SetFaith
         {

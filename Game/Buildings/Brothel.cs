@@ -6,18 +6,22 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    public class Brothel
+    public class Brothel : BuildingsModel
     {
 
+        public Brothel(Game g,BuildingsList List, string name)
+            : base(g)
+        {
 
+        }
         public double SetHappiness
         {
             get { return 8; }
         }
 
-        public int  SetEnterPrice
+        public int SetEnterPrice
         {
-           get{return 12;}
+            get { return 12; }
         }
     }
 }

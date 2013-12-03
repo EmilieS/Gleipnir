@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    class Restaurant
+    class Restaurant : BuildingsModel
     {
-
+        public Restaurant(Game g, BuildingsList List, string name)
+            : base (g)
+        {
+        }
     }
 }

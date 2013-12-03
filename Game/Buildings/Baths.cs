@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    public class Baths
+    public class Baths : BuildingsModel
     {
+        public Baths(Game g, BuildingsList List, string name)
+            : base(g)
+        {
 
+        }
         public double SetHappiness
         {
             get { return 3; }
