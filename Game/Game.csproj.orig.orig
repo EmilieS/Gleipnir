@@ -40,59 +40,47 @@
   </ItemGroup>
   <ItemGroup>
 <<<<<<< HEAD
-    <Compile Include="Buildings\BuildingsList.cs" />
-    <Compile Include="Jobs\Apothecary.cs" />
-    <Compile Include="Buildings\ApothecaryOffice.cs" />
-    <Compile Include="Buildings\Baths.cs" />
-    <Compile Include="Jobs\Blacksmith.cs" />
-    <Compile Include="Buildings\Brothel.cs" />
-    <Compile Include="Buildings\BuildingsModel.cs" />
-    <Compile Include="Buildings\Chapel.cs" />
-    <Compile Include="Jobs\Construction_Worker.cs" />
-    <Compile Include="Jobs\Cooker.cs" />
-=======
     <Compile Include="Meeting.cs" />
+=======
     <Compile Include="Apothecary.cs" />
     <Compile Include="Blacksmith.cs" />
     <Compile Include="Construction_Worker.cs" />
     <Compile Include="Cooker.cs" />
->>>>>>> develop
+<<<<<<< HEAD
     <Compile Include="Event.cs" />
     <Compile Include="Family.cs" />
     <Compile Include="FamilyInVillageList.cs" />
     <Compile Include="FamilyMemberList.cs" />
-    <Compile Include="Buildings\Farm.cs" />
-    <Compile Include="Buildings\Forge.cs" />
     <Compile Include="IEvent.cs" />
     <Compile Include="IWindow.cs" />
-    <Compile Include="Jobs\JobList.cs" />
-    <Compile Include="Buildings\Mill.cs" />
+<<<<<<< HEAD
     <Compile Include="NameGenerator.cs" />
-    <Compile Include="Buildings\OfferingWarehouse.cs" />
-    <Compile Include="Buildings\PartyRoom.cs" />
-    <Compile Include="Buildings\Restaurant.cs" />
-    <Compile Include="ScenarioEngine.cs" />
-    <Compile Include="Buildings\TablePlace.cs" />
-    <Compile Include="Buildings\Tavern.cs" />
-    <Compile Include="Buildings\Theater.cs" />
-    <Compile Include="Buildings\UnionOfCrafter.cs" />
+    <Compile Include="VillagerFiance.cs" />
+=======
     <Compile Include="Villager.Fiance.cs" />
-    <Compile Include="Jobs\Farmer.cs" />
+>>>>>>> fx-Event
+=======
+>>>>>>> origin/develop
+    <Compile Include="Family.cs" />
+    <Compile Include="FamilyInVillageList.cs" />
+    <Compile Include="FamilyMemberList.cs" />
+    <Compile Include="VillagerFiance.cs" />
+>>>>>>> fx-meeting
+    <Compile Include="Farmer.cs" />
     <Compile Include="FIFOBuffer.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameItem.cs" />
     <Compile Include="HistorizedValue.cs" />
     <Compile Include="IFamilyMemberList.cs" />
-    <Compile Include="Jobs\JobsModel.cs" />
-    <Compile Include="Jobs\Militia.cs" />
-    <Compile Include="Jobs\Miller.cs" />
+    <Compile Include="JobsModel.cs" />
+    <Compile Include="Militia.cs" />
+    <Compile Include="Miller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
 <<<<<<< HEAD
-    <Compile Include="Jobs\Tailor.cs" />
-=======
     <Compile Include="SamhainFest.cs" />
+=======
     <Compile Include="Tailor.cs" />
->>>>>>> develop
+>>>>>>> origin/develop
     <Compile Include="Village.cs" />
     <Compile Include="Villager.cs" />
     <Compile Include="VillagerProperties.cs" />
@@ -100,7 +88,6 @@
   <ItemGroup>
     <Content Include="Extra\firstNameList.txt" />
     <Content Include="Extra\nameList.txt" />
-    <Content Include="Extra\scenario.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

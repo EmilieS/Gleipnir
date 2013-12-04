@@ -59,25 +59,17 @@ namespace Game
         readonly List<Villager> _singleMen;
         NameGenerator _nameGenerator;
         NameGenerator _firstNameGenerator;
-        readonly HistorizedValue<double, Game> _totalGold;
+        readonly HistorizedValue<int, Game> _totalGold;
         readonly HistorizedValue<int, Game> _totalPop;
-        int _offerings;
+        readonly HistorizedValue<int, Game> _offerings;
 
         public NameGenerator NameList { get { return _nameGenerator; } }
         public NameGenerator FirstNameList { get { return _firstNameGenerator; } }
         public IReadOnlyList<Village> Villages { get { return _villages; } }
         public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
-        public double TotalGold { get { return _totalGold.Current; } }
-
-                public double LastTotalGold { get { return _totalGold.Historic.Last; } }//for tests, should get eliminated
-        public IReadOnlyList<Village> Villages { get { return _villages; } }
-        public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
-        readonly HistorizedValue<int, Game> _totalGold;
-        readonly HistorizedValue<int, Game> _totalPop;
-        readonly HistorizedValue<int, Game> _offerings;
-        public int TotalGold { get { return _totalGold.Current; } }
+	public int TotalGold { get { return _totalGold.Current; } }
         public int LastTotalGold { get { return _totalGold.Historic.Last; } }//for tests, should get eliminated
->>>>>>> fx-Event
+
         public int TotalPop { get { return _totalPop.Current; } }
         public int Offerings { get { return _offerings.Current; } }
         readonly internal double[] _regularBirthDates;
@@ -146,8 +138,12 @@ namespace Game
         {
             _totalGold.Current += amount; //curious to find out if TotalGold can be negative.
         }
-*/
+ * */
         List<string> _currentText;
+<<<<<<< HEAD
+=======
+
+>>>>>>> fx-meeting
         public void NextStep() //public for testing (again)
         {
             ImpactHappiness();
@@ -156,10 +152,14 @@ namespace Game
             DieOrIsAlive();
             CloseStep();
         }
+<<<<<<< HEAD
 
         List<IEvent> _eventList;
         public IReadOnlyList<IEvent> EventList{get{return _eventList;}}
         private void ImpactHappiness()
+=======
+        public void CloseStep() //public for debug
+>>>>>>> fx-meeting
         {
             foreach (GameItem item in _items)
             {
@@ -225,7 +225,7 @@ namespace Game
         //liste familles?
 
 
-        //le 'main' de la dll sera ici : TODO
+        //TODO : le 'main' de la dll sera ici
         /*
         -regarder si _lifexpectancy<age => morts.
         -actualiser le bonheur 

@@ -3,10 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-<<<<<<< HEAD
 using System.Diagnostics;
-=======
->>>>>>> develop
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,7 +16,6 @@ namespace GamePages
 {
     public partial class GeneralPage : Form, IWindow
     {
-<<<<<<< HEAD
         HomepageUC Home;
         InGameMenu MenuGame;
         TabIndex ActionMenu;
@@ -39,32 +35,16 @@ namespace GamePages
             Stats = new InformationsUC(this);
             InfoBox = new InformationBox();
             eventFlux = new EventFluxUC();
-=======
-        HomepageUC Home = new HomepageUC();
-        InGameMenu MenuGame = new InGameMenu();
-        TabIndex ActionMenu = new TabIndex();
-        InformationsUC Stats = new InformationsUC();
-        InformationBox InfoBox = new InformationBox();
-        EventFluxUC eventFlux = new EventFluxUC();
-        Game.Game _startedGame;
-
-        public GeneralPage()
-        {
->>>>>>> develop
             InitializeComponent();
 
             _startedGame = new Game.Game();
             Home.Launched += IsStarted_Changed;
             this.Controls.Add(Home);
 <<<<<<< HEAD
-<<<<<<< HEAD
 
 
 =======
 >>>>>>> fx-Event
-=======
-
->>>>>>> develop
             Home.Show();
 
             MenuGame.ExpectGoBackToMenu += GoBackToMenu;
@@ -76,18 +56,14 @@ namespace GamePages
             ActionMenu.Show();
             this.Controls.Add(Stats);
             Stats.Show();
-<<<<<<< HEAD
             Stats.Anchor = AnchorStyles.Right;
             Stats.Anchor = AnchorStyles.Left;
             Stats.Anchor = AnchorStyles.Left;
-=======
->>>>>>> develop
             //TODO : Create InfoBox
             this.Controls.Add(InfoBox);
             InfoBox.Show();
             this.Controls.Add(eventFlux);
             eventFlux.Show();
-<<<<<<< HEAD
             eventFlux.Anchor = AnchorStyles.Right;
             Stats.StepByStep.Visible = true;
 
@@ -95,8 +71,6 @@ namespace GamePages
             trace.Show();
             Step();
             PushAlert("coucou", "coucou");
-=======
->>>>>>> develop
         }
 
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
@@ -106,10 +80,6 @@ namespace GamePages
             this.Controls.Add(Home);
             Home.Show();
         }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> develop
         public void PushGeneralCoins(int value)
         {
             Stats.offeringsPoints.Text = value.ToString();
@@ -120,7 +90,6 @@ namespace GamePages
         }
         public void PushAlert(string message, string title)
         {
-<<<<<<< HEAD
             eventFlux.CreateNewEventAndShow(message, title);
             PushTrace(title);
         }
@@ -129,13 +98,6 @@ namespace GamePages
             traceMessages = traceMessages + message + @"
 ";
             trace.traceBoxViewer.Text = traceMessages;
-=======
-            eventFlux.CreateNewEventAndShow(message, null);
-        }
-        public void PushTrace(string message)
-        {
-
->>>>>>> develop
         }
         public void PushGeneralHappiness(double value)
         {
@@ -153,7 +115,6 @@ namespace GamePages
         {
             Stats.population.Text = pop.ToString();
         }
-<<<<<<< HEAD
 
         internal void Step()
         {
@@ -169,11 +130,3 @@ namespace GamePages
 
     }
 }
-=======
-=======
-
-
->>>>>>> fx-meeting
-    }
-}
->>>>>>> develop

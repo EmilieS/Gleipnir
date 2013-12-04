@@ -10,7 +10,7 @@ namespace Game
     public class Village : GameItem
     {
         //List<JobsModel> _jobs;// needs to be cleansed
-        public readonly JobList Jobs;
+        public JobList Jobs;
         int _familiesGold;
         double _villageFaith;
         double _villageHappiness;
@@ -86,6 +86,21 @@ namespace Game
             var name = Game.NameList.NextName;
             var newFamily = new Family(Game, VillagerAF, VillagerAM, name);
             _familiesList.Add(newFamily);
+            return newFamily;
+        }
+        public Family CreateFamilyFromScratch(JobsModel mothersJob, JobsModel fathersJob)
+        {
+            //Debug.Assert(_thisGame != null, "_thisGame est null!");
+            Debug.Assert(Game != null, "Game est null!");
+            Villager VillagerAM = new Villager(Game, Genders.MALE, Game.FirstNameList.NextName);
+            Villager VillagerAF = new Villager(Game, Genders.FEMALE, Game.FirstNameList.NextName);
+            var name = Game.NameList.NextName;
+            var newFamily = new Family(Game, VillagerAF, VillagerAM, name);
+            _familiesList.Add(newFamily);
+            VillagerAF.Job.RemovePerson(VillagerAF);
+            VillagerAM.Job.RemovePerson(VillagerAM);
+            mothersJob.AddPerson(VillagerAF);
+            fathersJob.AddPerson(VillagerAM);
             return newFamily;
         }
 
@@ -251,6 +266,8 @@ namespace Game
         #endregion
         internal override void OnDestroy()
         {
+            Jobs.Destroy();
+            Jobs = null;
             Debug.Assert(_familiesList.Count == 0, "there is still a family in this village!");
         }
         override internal void CloseStep(List<IEvent> eventList)
