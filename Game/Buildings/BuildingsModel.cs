@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    public abstract class BuildingsModel
+    public class BuildingsModel
     {
         int _verticalPos;
         int _horizontalPos;
@@ -18,10 +18,11 @@ namespace Game.Buildings
         bool _isBought;
         string _name;
         Game actualGame;
+        private Game g;
         // this a provisory solution : using a new "materials"  to implement robustness
 
-        internal BuildingsModel(Game g, BuildingsList List, string name)
-            :base(g)
+
+        public BuildingsModel(Game g)
         {
             _horizontalPos = 0;
             _verticalPos = 0;
@@ -30,7 +31,10 @@ namespace Game.Buildings
             _enterPrice = 0;
             //_robustness = 0;
             _isBought = false;
+            actualGame = g;
             g.AddBuildingIntheList(this);
+            //TODO: Complete member initialization
+            this.g = g;
         }
         public int HorizontalPos
         {
@@ -39,7 +43,7 @@ namespace Game.Buildings
         }
         public string Name
         {
-            get{return _name;}
+            get { return _name; }
             set { _name = value; }
         }
         public int VerticalPos

@@ -9,7 +9,7 @@ namespace Game.Buildings
     class UnionOfCrafter : BuildingsModel
     {
         public UnionOfCrafter(Game g, BuildingsList List, string name)
-            : base()
+            : base(g)
         {
 
         }

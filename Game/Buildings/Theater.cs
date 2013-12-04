@@ -9,7 +9,7 @@ namespace Game.Buildings
     public class Theater : BuildingsModel
     {
         public Theater(Game g, BuildingsList List, string name)
-            :base()
+            : base(g)
         {
 
         }

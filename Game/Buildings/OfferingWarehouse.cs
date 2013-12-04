@@ -9,7 +9,7 @@ namespace Game.Buildings
     class OfferingWarehouse : BuildingsModel
     {
         public OfferingWarehouse(Game g, BuildingsList List, string name)
-            : base()
+            : base(g)
         {
 
         }

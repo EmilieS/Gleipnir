@@ -10,7 +10,7 @@ namespace Game.Buildings
     class ApothecaryOffice : BuildingsModel
     {
         public ApothecaryOffice(Game g ,BuildingsList List, string name)
-            : base()
+            : base(g)
         {
 
         }
