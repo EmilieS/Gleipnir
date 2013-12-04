@@ -11,7 +11,7 @@ namespace Game
     {
         int i = 0;
 
-        string[] scenarioContent = File.ReadAllLines(@"D:\INTECH\PI-2013S\Gleipnir\Game\Extra\scenario.txt", Encoding.UTF8);
+        string[] scenarioContent = File.ReadAllLines(@"Extra\scenario.txt", Encoding.UTF8);
         public ScenarioEngine()
         {
             //ReadScenario();
@@ -22,7 +22,7 @@ namespace Game
             string toPush;
             if (scenarioContent[i] != "END")
             {
-                toPush = scenarioContent[i]+i.ToString();
+                toPush = scenarioContent[i];
                 i++;
                 return toPush;
             }

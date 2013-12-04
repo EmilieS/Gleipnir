@@ -36,9 +36,8 @@ namespace GamePages
             Stats = new InformationsUC(this);
             InfoBox = new InformationBox();
             eventFlux = new EventFluxUC();
-            _scenarioBox = new ScenarioBox();
+            _scenarioBox = new ScenarioBox(this);
             InitializeComponent();
-
             _startedGame = new Game.Game();
             Home.Launched += IsStarted_Changed;
             this.Controls.Add(Home);
@@ -68,9 +67,15 @@ namespace GamePages
             trace = new traceBox();
             trace.Show();
             Step();
-            PushAlert("coucou", "coucou");
-        }
 
+        }
+        internal void LockEverything()
+        {
+            ActionMenu.Enabled = false;
+            Stats.Enabled = false;
+            InfoBox.Enabled = false;
+            eventFlux.Enabled = false;
+        }
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
         {
             ActionMenu.Visible = InfoBox.Visible = Stats.Visible = false;
