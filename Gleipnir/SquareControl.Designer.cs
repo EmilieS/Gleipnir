@@ -1,6 +1,8 @@
-﻿namespace GamePages
+﻿using System.Drawing;
+using System.Windows.Forms;
+namespace GamePages
 {
-    partial class MapGrid
+    partial class SquareControl
     {
         /// <summary> 
         /// Variable nécessaire au concepteur.
@@ -28,34 +30,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // SquareControl
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(18, 17);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(24, 26);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // MapGrid
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pictureBox1);
-            this.Name = "MapGrid";
-            this.Size = new System.Drawing.Size(504, 532);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Name = "SquareControl";
+            this.Size = new System.Drawing.Size(20, 20);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Grid_paint);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBox1;
-
-
     }
 }

@@ -1,8 +1,9 @@
 ﻿using Game;
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,8 @@ namespace GamePages
         InformationsUC Stats = new InformationsUC();
         InformationBox InfoBox = new InformationBox();
         EventFluxUC eventFlux = new EventFluxUC();
-        MapImage map = new MapImage();
+        Board board;
+        SquareControl[,] grid;
         Game.Game _startedGame;
 
         public GeneralPage()
@@ -48,8 +50,30 @@ namespace GamePages
             InfoBox.Show();
             this.Controls.Add(eventFlux);
             eventFlux.Show();
-            this.Controls.Add(map);
-            map.Show();
+
+            // Generate grid
+            board = new Board();
+            grid = new SquareControl[20, 32];
+            for (int i = 0; i < 20; i++)
+            {
+                for (int j = 0; j < 32; j++)
+                {
+                    // Create it
+                    grid[i, j] = new SquareControl(i, j);
+                    // Position it
+                    grid[i, j].Left = 220 + (j * grid[i, j].Width);
+                    grid[i, j].Top = 40 + (i * grid[i, j].Height);
+                    // Add it
+                    Controls.Add(grid[i, j]);
+
+                    // Set up event handling for it.
+                    /*mapWithGrid[i, j].MouseMove += new MouseEventHandler(SquareControl_MouseMove);
+                    mapWithGrid[i, j].MouseLeave += new EventHandler(SquareControl_MouseLeave);
+                    mapWithGrid[i, j].Click += new EventHandler(SquareControl_Click);*/
+                }
+            }
+            board.SetForNewGame();
+            UpdateGrid(board, grid);
         }
 
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
@@ -90,6 +114,34 @@ namespace GamePages
         public void PushPopulation(int pop)
         {
             Stats.population.Text = pop.ToString();
+        }
+
+        // Grid Methods
+        private void UpdateGrid(Board board, SquareControl[,] grid)
+        {
+            // Map the current game board to the square controls.
+            for (int i = 0; i < 20; i++)
+            {
+                for (int j = 0; j < 32; j++)
+                {
+                    grid[i, j].Contents = board.GetSquareContents(i, j);
+                    grid[i, j].Refresh();
+                }
+            }
+        }
+
+        // Grid Events
+        private void SquareControl_MouseMove(object sender, MouseEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void SquareControl_MouseLeave(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void SquareControl_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

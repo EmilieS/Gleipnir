@@ -62,6 +62,7 @@
     <Compile Include="GamePage.Designer.cs">
       <DependentUpon>GamePage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Board.cs" />
     <Compile Include="HomepageUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -80,17 +81,11 @@
     <Compile Include="InGameMenu.Designer.cs">
       <DependentUpon>InGameMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="MapGrid.cs">
+    <Compile Include="SquareControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MapGrid.Designer.cs">
-      <DependentUpon>MapGrid.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MapImage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MapImage.Designer.cs">
-      <DependentUpon>MapImage.cs</DependentUpon>
+    <Compile Include="SquareControl.Designer.cs">
+      <DependentUpon>SquareControl.cs</DependentUpon>
     </Compile>
     <Compile Include="TabIndex.cs">
       <SubType>UserControl</SubType>
@@ -130,11 +125,8 @@
     <EmbeddedResource Include="InGameMenu.resx">
       <DependentUpon>InGameMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MapGrid.resx">
-      <DependentUpon>MapGrid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MapImage.resx">
-      <DependentUpon>MapImage.cs</DependentUpon>
+    <EmbeddedResource Include="SquareControl.resx">
+      <DependentUpon>SquareControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabIndex.resx">
       <DependentUpon>TabIndex.cs</DependentUpon>
@@ -196,6 +188,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\carte.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\emptyPic.png" />
+    <None Include="Resources\testPic.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
