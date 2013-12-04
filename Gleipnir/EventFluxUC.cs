@@ -52,7 +52,7 @@ namespace GamePages
             eventTab[0].Hide();
             this.Controls.Remove(eventTab[0]);
             eventTab[0] = null;
-            for (j = 0; j < 10; j++)
+            for (j = 0; j < 9; j++)
             {
                 eventTab[j] = eventTab[j + 1];
             }

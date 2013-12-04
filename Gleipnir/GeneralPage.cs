@@ -42,7 +42,21 @@ namespace GamePages
             Home.Launched += IsStarted_Changed;
             this.Controls.Add(Home);
             Home.Show();
-
+            PushAlert("coucou", "coucou");
+            PushAlert("coucou", "coucou");
+            PushAlert("coucou", "coucou");
+            PushAlert("coucou", "coucou");
+            PushAlert("coucou", "coucou");
+            PushAlert("coucou", "coucou");
+            PushAlert("coucou", "coucou");
+            PushAlert("coucou", "coucou");
+            PushAlert("coucou", "coucou");
+            PushAlert("coucou", "coucou");
+            PushAlert("coucou", "coucou");
+            PushAlert("coucou", "coucou");
+            PushAlert("coucou", "coucou");
+            PushAlert("coucou", "coucou");
+            PushAlert("coucou", "coucou");
             MenuGame.ExpectGoBackToMenu += GoBackToMenu;
         }
         public void IsStarted_Changed(object sender, PropertyChangedEventArgs e)
@@ -94,7 +108,6 @@ namespace GamePages
         public void PushAlert(string message, string title)
         {
             eventFlux.CreateNewEventAndShow(message, title);
-            PushTrace(title);
         }
         public void PushTrace(string message)
         {
