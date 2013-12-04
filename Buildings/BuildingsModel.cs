@@ -7,7 +7,7 @@ using Game;
 
 namespace Buildings
 {
-    public abstract class BuildingsModel
+    public abstract class BuildingsModel : GameItem
     {
         int _verticalPos;
         int _horizontalPos;
@@ -18,11 +18,13 @@ namespace Buildings
         double _addedRobustness;
         bool _isBought;
         string _name;
-        Game.Game actualGame;
+        /*Game.Game actualGame;*/
+        Village _ownerVillage;
         // this a provisory solution : using a new "materials"  to implement robustness
+        public Village OwnerVillage { get { return _ownerVillage; } }//needs to be done.
 
-        internal BuildingsModel(Game.Game g)
-            : base()
+        internal BuildingsModel(Village ownerVillage)
+            : base(ownerVillage.Game)
         {
             _horizontalPos = 0;
             _verticalPos = 0;
@@ -31,7 +33,8 @@ namespace Buildings
             _enterPrice = 0;
             //_robustness = 0;
             _isBought = false;
-            g.AddBuildingIntheList(this);
+            _ownerVillage = ownerVillage;
+            ownerVillage.Game.AddBuildingIntheList(this);//needs to be in village !
         }
         public int HorizontalPos
         {

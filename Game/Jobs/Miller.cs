@@ -35,5 +35,9 @@ namespace Game
             happinessToAdd = _happinessAddition + _workers.Count * 0.5;
             villager.AddOrRemoveHappiness(happinessToAdd);
         }
+        internal override bool AddPersonPrerequisites()
+        {
+            return true;
+        }
     }
 }

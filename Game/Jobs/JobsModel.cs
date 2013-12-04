@@ -51,6 +51,8 @@ namespace Game
         /// <param name="person"></param>
         public void AddPerson(Villager person)
         {
+            if (!AddPersonPrerequisites())//balancer exception??
+                return;
             if (person == null) throw new ArgumentNullException();
             if (!_workers.Contains(person))
             {
@@ -66,6 +68,8 @@ namespace Game
             }
             else throw new InvalidOperationException();
         }
+
+        internal abstract bool AddPersonPrerequisites();
 
         /// <summary>
         /// Remove the Villager from the Job

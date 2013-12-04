@@ -9,8 +9,8 @@ namespace Game.Buildings
 {
     class ApothecaryOffice : BuildingsModel
     {
-        public ApothecaryOffice(Game g ,BuildingsList List, string name)
-            : base(g)
+        public ApothecaryOffice(Village v ,BuildingsList List, string name)
+            : base(v)
         {
 
         }

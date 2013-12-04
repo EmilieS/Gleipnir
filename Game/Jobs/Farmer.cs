@@ -16,5 +16,9 @@ namespace Game
             _job = Jobs.FARMER;
             _coefficient = 10;
         }
+        internal override bool AddPersonPrerequisites()
+        {
+            return true;
+        }
     }
 }

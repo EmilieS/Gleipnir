@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Game;
 
 namespace Buildings.Believing
 {
     public class Chapel : BuildingsModel
     {
-        public Chapel(Game.Game g)
-            : base(g)
+        public Chapel(Village ownerVillage)
+            : base(ownerVillage)
         {
             AddFaith = 5;
             AddHapiness = 0;

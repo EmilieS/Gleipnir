@@ -139,7 +139,7 @@ namespace Game
         {
             //TODO
         }
-        
+        //TOREDO
         #region Buildings
         public void AddBuildingIntheList(Buildings.BuildingsModel building)
         {

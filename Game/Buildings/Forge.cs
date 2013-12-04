@@ -8,8 +8,8 @@ namespace Game.Buildings
 {
     class Forge : BuildingsModel
     {
-        public Forge(Game g, BuildingsList List, string name)
-            : base(g)
+        public Forge(Village v, BuildingsList List, string name)
+            : base(v)
         {
 
         }

@@ -59,10 +59,12 @@
     <Compile Include="IWindow.cs" />
     <Compile Include="Jobs\JobList.cs" />
     <Compile Include="Buildings\Mill.cs" />
+    <Compile Include="Meeting.cs" />
     <Compile Include="NameGenerator.cs" />
     <Compile Include="Buildings\OfferingWarehouse.cs" />
     <Compile Include="Buildings\PartyRoom.cs" />
     <Compile Include="Buildings\Restaurant.cs" />
+    <Compile Include="SamhainFest.cs" />
     <Compile Include="ScenarioEngine.cs" />
     <Compile Include="Buildings\TablePlace.cs" />
     <Compile Include="Buildings\Tavern.cs" />

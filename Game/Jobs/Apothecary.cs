@@ -16,5 +16,9 @@ namespace Game
             _job = Jobs.APOTHECARY;
             _coefficient = 15;
         }
+        internal override bool AddPersonPrerequisites()
+        {
+            return true;
+        }
     }
 }

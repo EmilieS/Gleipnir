@@ -8,8 +8,8 @@ namespace Game.Buildings
 {
     class UnionOfCrafter : BuildingsModel
     {
-        public UnionOfCrafter(Game g, BuildingsList List, string name)
-            : base(g)
+        public UnionOfCrafter(Village v, BuildingsList List, string name)
+            : base(v)
         {
 
         }

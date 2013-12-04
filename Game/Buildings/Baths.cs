@@ -8,8 +8,8 @@ namespace Game.Buildings
 {
     public class Baths : BuildingsModel
     {
-        public Baths(Game g, BuildingsList List, string name)
-            : base(g)
+        public Baths(Village v, BuildingsList List, string name)
+            : base(v)
         {
 
         }

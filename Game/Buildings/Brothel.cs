@@ -9,8 +9,8 @@ namespace Game.Buildings
     public class Brothel : BuildingsModel
     {
 
-        public Brothel(Game g,BuildingsList List, string name)
-            : base(g)
+        public Brothel(Village v,BuildingsList List, string name)
+            : base(v)
         {
 
         }
