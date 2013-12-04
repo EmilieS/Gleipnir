@@ -42,6 +42,7 @@ namespace Game.Buildings
 
         public BuildingsList(Village village)
         {
+            Game g = village.Game;
             _buildingsList = new List<BuildingsModel>();
             _baths = new Baths(g, this, "Bains");
             _brothel = new Brothel(g, this, "Bordel");
