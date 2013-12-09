@@ -121,6 +121,7 @@ namespace GamePages
             traceMessages = traceMessages + message + @"
 ";
             trace.traceBoxViewer.Text = traceMessages;
+            //PushAlert(message, "PUSHTRACE");//MARCHE
         }
         public void PushGeneralHappiness(double value)
         {
@@ -148,7 +149,7 @@ namespace GamePages
                 events.PublishMessage(this);
             }
             //to go faster...
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 50; i++)
             {
                 _startedGame.NextStep();
                 foreach (IEvent events in _startedGame.EventList)
@@ -156,7 +157,9 @@ namespace GamePages
                     events.Do(this);
                     events.PublishMessage(this);
                 }
+
             }
+            //-----------------
         }
 
 
