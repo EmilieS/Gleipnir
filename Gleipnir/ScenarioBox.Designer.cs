@@ -1,6 +1,6 @@
 ﻿namespace GamePages
 {
-    partial class EventFluxUC
+    partial class ScenarioBox
     {
         /// <summary> 
         /// Variable nécessaire au concepteur.
@@ -28,30 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
+            this.TextLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // vScrollBar1
+            // TextLabel
             // 
-            this.vScrollBar1.Location = new System.Drawing.Point(211, 0);
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(17, 200);
-            this.vScrollBar1.TabIndex = 0;
+            this.TextLabel.AutoSize = true;
+            this.TextLabel.Location = new System.Drawing.Point(3, 61);
+            this.TextLabel.Name = "TextLabel";
+            this.TextLabel.Size = new System.Drawing.Size(105, 13);
+            this.TextLabel.TabIndex = 0;
+            this.TextLabel.Text = "Bienvenue à Ragnar";
+            this.TextLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.TextLabel.Click += new System.EventHandler(this.TextLabel_Click);
             // 
-            // EventFluxUC
+            // ScenarioBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.vScrollBar1);
-            this.Location = new System.Drawing.Point(730, 50);
-            this.Name = "EventFluxUC";
-            this.Size = new System.Drawing.Size(228, 200);
+            this.Controls.Add(this.TextLabel);
+            this.Location = new System.Drawing.Point(230, 400);
+            this.Name = "ScenarioBox";
+            this.Size = new System.Drawing.Size(556, 150);
+            this.Click += new System.EventHandler(this.ScenarioBox_Click);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.VScrollBar vScrollBar1;
+        private System.Windows.Forms.Label TextLabel;
     }
 }

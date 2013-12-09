@@ -24,6 +24,7 @@ namespace Game
             _nameGenerator = new NameGenerator(namesPath, 1, 1);
             var firstNamesPath = File.ReadAllLines(@"Extra\firstNameList.txt");
             _firstNameGenerator = new NameGenerator(namesPath, 1, 1);
+
             _regularBirthDates= new double[5];
             //===to be changed
             //_ageTickTime = 0.0834;//time(years) between each tick.
@@ -57,6 +58,7 @@ namespace Game
         internal readonly List<GameItem> _items;//internal for tests
         readonly List<Village> _villages; //a revoir!
         readonly List<Villager> _singleMen;
+        readonly List<Buildings.BuildingsModel> buildingList; // ---------HERE---------
         NameGenerator _nameGenerator;
         NameGenerator _firstNameGenerator;
         readonly HistorizedValue<int, Game> _totalGold;
@@ -137,7 +139,14 @@ namespace Game
         {
             //TODO
         }
-/*
+        //TOREDO
+        #region Buildings
+        public void AddBuildingIntheList(Buildings.BuildingsModel building)
+        {
+            buildingList.Add(building);
+        }
+        #endregion
+        /*
         public void AddOrRemoveFromTotalGold(double amount)
         {
             _totalGold.Current += amount; //curious to find out if TotalGold can be negative.

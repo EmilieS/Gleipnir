@@ -39,25 +39,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Believing\Chapel.cs" />
-    <Compile Include="Believing\OfferingWarehouse.cs" />
-    <Compile Include="BuildingsProperties.cs" />
-    <Compile Include="BuyConditions.cs" />
-    <Compile Include="Hobbies\Baths.cs" />
-    <Compile Include="Hobbies\Brothel.cs" />
-    <Compile Include="Hobbies\PartyRoom.cs" />
-    <Compile Include="Hobbies\Tavern.cs" />
-    <Compile Include="Hobbies\Theater.cs" />
-    <Compile Include="JobsBuildings\ApothecaryOffice.cs" />
-    <Compile Include="JobsBuildings\Farm.cs" />
-    <Compile Include="JobsBuildings\Forge.cs" />
-    <Compile Include="JobsBuildings\Mill.cs" />
-    <Compile Include="JobsBuildings\Restaurant.cs" />
-    <Compile Include="JobsBuildings\UnionOfCrafter.cs" />
-    <Compile Include="Management\TablePlace.cs" />
+    <Compile Include="Chapel.cs" />
+    <Compile Include="OfferingWarehouse.cs" />
+    <Compile Include="BuildingsModel.cs" />
+    <Compile Include="Baths.cs" />
+    <Compile Include="Brothel.cs" />
+    <Compile Include="PartyRoom.cs" />
+    <Compile Include="Tavern.cs" />
+    <Compile Include="Theater.cs" />
+    <Compile Include="ApothecaryOffice.cs" />
+    <Compile Include="Farm.cs" />
+    <Compile Include="Forge.cs" />
+    <Compile Include="Mill.cs" />
+    <Compile Include="Restaurant.cs" />
+    <Compile Include="UnionOfCrafter.cs" />
+    <Compile Include="TablePlace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Game\Game.csproj">
+      <Project>{2b78158a-b99c-4116-98f4-c4786d93faaf}</Project>
+      <Name>Game</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Updates\Updates.csproj">
       <Project>{7c691930-0634-47d4-9e30-88066c3fd44c}</Project>
       <Name>Updates</Name>

@@ -22,6 +22,7 @@ namespace GamePages
         InformationsUC Stats;
         InformationBox InfoBox;
         EventFluxUC eventFlux;
+        ScenarioBox _scenarioBox;
         Game.Game _startedGame;
         traceBox trace;
 
@@ -35,6 +36,7 @@ namespace GamePages
             Stats = new InformationsUC(this);
             InfoBox = new InformationBox();
             eventFlux = new EventFluxUC();
+            _scenarioBox = new ScenarioBox();
             InitializeComponent();
 
             _startedGame = new Game.Game();
@@ -49,10 +51,11 @@ namespace GamePages
             this.Controls.Remove(Home);
             this.Controls.Add(ActionMenu);
             ActionMenu.Show();
+            this.Controls.Add(_scenarioBox);
+            _scenarioBox.Show();
             this.Controls.Add(Stats);
             Stats.Show();
             Stats.Anchor = AnchorStyles.Right;
-            Stats.Anchor = AnchorStyles.Left;
             Stats.Anchor = AnchorStyles.Left;
             //TODO : Create InfoBox
             this.Controls.Add(InfoBox);
@@ -64,9 +67,8 @@ namespace GamePages
 
             trace = new traceBox();
             trace.Show();
-
             Step();
-
+            PushAlert("coucou", "coucou");
         }
 
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
@@ -87,10 +89,11 @@ namespace GamePages
         public void PushAlert(string message, string title)
         {
             eventFlux.CreateNewEventAndShow(message, title);
+            PushTrace(title);
         }
         public void PushTrace(string message)
         {
-            traceMessages = traceMessages +  message + @"
+            traceMessages = traceMessages + message + @"
 ";
             trace.traceBoxViewer.Text = traceMessages;
         }
@@ -120,6 +123,8 @@ namespace GamePages
                 events.PublishMessage(this);
             }
         }
+
+
 
     }
 }
