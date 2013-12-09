@@ -10,7 +10,7 @@ namespace Game
     public class ScenarioEngine
     {
         int i = 0;
-
+        
         string[] scenarioContent = File.ReadAllLines(@"Extra\scenario.txt", Encoding.UTF8);
         public ScenarioEngine()
         {
@@ -28,7 +28,6 @@ namespace Game
             }
             else
             {
-                i=0;
                 return null;
             }
         }

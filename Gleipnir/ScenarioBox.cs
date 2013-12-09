@@ -28,6 +28,7 @@ namespace GamePages
             sentence = engine.ReadScenario();
             if (sentence == null)
             {
+                actualPage.UnLockEverything(); // doesn't work
                 this.TextLabel.Text = "Vous êtes à Ragnar";
             }
             else
@@ -42,6 +43,7 @@ namespace GamePages
             sentence = engine.ReadScenario();
             if (sentence == null)
             {
+                actualPage.UnLockEverything(); // doesn't work
                 this.TextLabel.Text = "Vous êtes à Ragnar";
             }
             else

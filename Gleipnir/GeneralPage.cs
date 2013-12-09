@@ -43,20 +43,20 @@ namespace GamePages
             this.Controls.Add(Home);
             Home.Show();
             PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");
+            PushAlert("coucou2", "coucou2");
+            PushAlert("coucou3", "coucou3");
+            PushAlert("coucou4", "coucou4");
+            PushAlert("coucou5", "coucou5");
+            PushAlert("coucou6", "coucou6");
+            PushAlert("coucou7", "coucou7");
+            PushAlert("coucou8", "coucou8");
+            //PushAlert("coucou", "coucou");
+            //PushAlert("coucou", "coucou");
+            //PushAlert("coucou", "coucou");
+            //PushAlert("coucou", "coucou");
+            //PushAlert("coucou", "coucou");
+            //PushAlert("coucou", "coucou");
+            //PushAlert("coucou", "coucou");
             MenuGame.ExpectGoBackToMenu += GoBackToMenu;
         }
         public void IsStarted_Changed(object sender, PropertyChangedEventArgs e)
@@ -89,6 +89,13 @@ namespace GamePages
             Stats.Enabled = false;
             InfoBox.Enabled = false;
             eventFlux.Enabled = false;
+        }
+        internal void UnLockEverything()
+        {
+            ActionMenu.Enabled = true;
+            Stats.Enabled = true;
+            InfoBox.Enabled = true;
+            eventFlux.Enabled = true;
         }
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
         {
