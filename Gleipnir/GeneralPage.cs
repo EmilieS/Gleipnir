@@ -42,18 +42,18 @@ namespace GamePages
             Home.Launched += IsStarted_Changed;
             this.Controls.Add(Home);
             Home.Show();
-            PushAlert("coucou1", "coucoudfghjkjhgfd");
-            PushAlert("coucou2", "coucou2546");
-            PushAlert("coucou3", "coucou4543");
-            PushAlert("coucou4", "coucou44545");
-            PushAlert("coucou5", "coucou54545");
-            PushAlert("coucou6", "coucou65454");
-            PushAlert("coucou7", "coucou75454");
-            PushAlert("coucou8", "coucou85454");
-            //PushAlert("coucou", "coucou");
-            //PushAlert("coucou", "coucou");
-            //PushAlert("coucou", "coucou");
-            //PushAlert("coucou", "coucou");
+            PushAlert( "coucoudfghjkjhgfd","coucou1");
+            PushAlert( "coucou2546"    ,  "coucou2");
+            PushAlert( "coucou4543"  ,"coucou3" );
+            PushAlert( "coucou44545"   ,"coucou4" );
+            PushAlert( "coucou54545"   ,"coucou5" );
+            PushAlert( "coucou65454"   ,"coucou6" );
+            PushAlert( "coucou75454"   ,"coucou7" );
+            PushAlert( "coucou8888"   ,"coucou8" );
+            PushAlert("coucou9", "coucou");
+            PushAlert("coucou10", "coucou");
+            PushAlert("coucou11", "coucou");
+            //PushAlert("coucou12", "coucou");
             //PushAlert("coucou", "coucou");
             //PushAlert("coucou", "coucou");
             //PushAlert("coucou", "coucou");
@@ -146,6 +146,16 @@ namespace GamePages
             {
                 events.Do(this);
                 events.PublishMessage(this);
+            }
+            //to go faster...
+            for (int i = 0; i < 10; i++)
+            {
+                _startedGame.NextStep();
+                foreach (IEvent events in _startedGame.EventList)
+                {
+                    events.Do(this);
+                    events.PublishMessage(this);
+                }
             }
         }
 

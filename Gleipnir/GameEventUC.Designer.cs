@@ -54,10 +54,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.EventContain);
             this.Controls.Add(this.EventTitle);
+            this.Controls.Add(this.EventContain);
             this.Name = "GameEventUC";
-            this.Size = new System.Drawing.Size(269, 98);
+            this.Size = new System.Drawing.Size(267, 60);
             this.ResumeLayout(false);
             this.PerformLayout();
 

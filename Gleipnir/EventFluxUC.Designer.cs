@@ -35,9 +35,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.AutoScrollMinSize = new System.Drawing.Size(0, 600);
             this.Location = new System.Drawing.Point(730, 50);
             this.Name = "EventFluxUC";
-            this.Size = new System.Drawing.Size(292, 362);
+            this.Size = new System.Drawing.Size(229, 296);
             this.ResumeLayout(false);
 
         }
