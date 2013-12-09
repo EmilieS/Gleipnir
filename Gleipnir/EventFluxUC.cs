@@ -30,19 +30,21 @@ namespace GamePages
                 eventTab[i] = new GameEventUC();
                 this.Controls.Add(eventTab[i]);
                 eventTab[i].Show();
-                eventTab[i].EventTitle.Text = title;
-                eventTab[i].EventContain.Text = message;
+                eventTab[i].EventTitle.Text = message;
+                eventTab[i].EventContain.Text = title;
                 eventTab[i].Location = new System.Drawing.Point(positionX, positionY);
-                positionY += 68;
+                positionY += 100;
                 i++;
 
             }
             else
             {
                 ReguleTab();
-                eventTab[i] = new GameEventUC();
-                this.Controls.Add(eventTab[i]);
-                eventTab[i].Show();
+                eventTab[9] = new GameEventUC();
+                this.Controls.Add(eventTab[9]);
+                eventTab[9].Show();
+                eventTab[9].EventTitle.Text = title;
+                eventTab[9].EventContain.Text = message;
             }
         }
         internal void ReguleTab()
@@ -54,6 +56,7 @@ namespace GamePages
             for (j = 0; j < 9; j++)
             {
                 eventTab[j] = eventTab[j + 1];
+                positionY += 100;
             }
             eventTab[9] = null;
         }
