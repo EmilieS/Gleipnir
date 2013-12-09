@@ -53,6 +53,8 @@ namespace Game
                 case "Offerings": b.PushGeneralCoins(GameItem.Offerings); break;
                 case "TotalPop": b.PushPopulation(GameItem.TotalPop) ; break;
                 case "TotalGold": b.PushGeneralGold(GameItem.TotalGold); break;
+                case "AverageFaith": b.PushGeneralFaith(GameItem.AverageFaith); break;
+                case "AverageHappiness": b.PushGeneralHappiness(GameItem.AverageHappiness); break;
             }
             //GameItem.GetType().GetProperty(ChangedProperty, typeof(string));
         }
