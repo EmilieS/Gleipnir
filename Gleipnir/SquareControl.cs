@@ -93,21 +93,21 @@ namespace GamePages
         {
             // Clear the square, filling with the appropriate background color.
             Color backColor = NormalBackColor;
-            if (this.Contents == IsForest)
+            if (Contents == IsForest)
                 backColor = ForestBackColorDefault;
-            if (this.Contents == IsWater)
+            if (Contents == IsWater)
                 backColor = WaterBackColorDefault;
-            if (this.Contents == IsRoad)
+            if (Contents == IsRoad)
                 backColor = RoadBackColorDefault;
-            if (this.Contents == IsFarmField)
+            if (Contents == IsFarmField)
                 backColor = FarmFieldBackColorDefault;
-            if (this.Contents == IsFamilyHouse)
+            if (Contents == IsFamilyHouse)
                 backColor = HouseBackColorDefault;
-            if (this.Contents == IsJobBuilding)
+            if (Contents == IsJobBuilding)
                 backColor = JobsBackColorDefault;
-            if (this.Contents == IsHobbyPlace)
+            if (Contents == IsHobbyPlace)
                 backColor = HobbyBackColorDefault;
-            if (this.Contents == IsSpecialBuiding)
+            if (Contents == IsSpecialBuiding)
                 backColor = SpecialsBackColorDefault;
             if (IsValid)
                 backColor = ValidMoveBackColor;

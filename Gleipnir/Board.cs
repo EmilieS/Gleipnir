@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,20 @@ namespace GamePages
                 for (int j = 0; j < 32; j++)
                 {
                     squares[i, j] = Empty;
+                }
+            }
+        }
+        public Board(Board board)
+        {
+            // Create the squares and map.
+            squares = new int[20, 32];
+
+            // Copy the given board.
+            for (int i = 0; i < 20; i++)
+            {
+                for (int j = 0; j < 30; j++)
+                {
+                    squares[i, j] = board.squares[i, j];
                 }
             }
         }
@@ -288,8 +303,10 @@ namespace GamePages
         /// </summary>
         /// <param name="row"></param>
         /// <param name="col"></param>
-        public void PlaceBuilding(int row, int col)
+        /// <param name="value"></param>
+        public void PlaceBuilding(int row, int col, int value)
         {
+            squares[row, col] = value;
         }
     }
 }

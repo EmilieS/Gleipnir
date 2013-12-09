@@ -26,6 +26,14 @@ namespace GamePages
         SquareControl[,] grid;
         Options options;
         Game.Game _startedGame;
+        private ActionState actionState;
+
+        public enum ActionState
+        {
+            None = 0,
+            InPlace = 1,
+            PlacementFinish = 2,
+        }
 
         public GeneralPage()
         {
@@ -131,9 +139,14 @@ namespace GamePages
                 }
             }
         }
+        private void MakePlacement(int row, int col, int value)
+        {
+            board.PlaceBuilding(row, col, value);
+            actionState = ActionState.PlacementFinish;
+        }
 
         // Grid Events
-        /*private void SquareControl_MouseMove(object sender, MouseEventArgs e)
+        private void SquareControl_MouseMove(object sender, MouseEventArgs e)
         {
             SquareControl squareControl = (SquareControl)sender;
 
@@ -160,32 +173,77 @@ namespace GamePages
                     if (options.PreviewSquares)
                     {
                         // Create a temporary board to make the move on.
-                        Board board = new Board(this.board);
-                        board.PlaceBuilding(squareControl.Row, squareControl.Col);
+                        Board copy_board = new Board(board);
+                        copy_board.PlaceBuilding(squareControl.Row, squareControl.Col, Board.Empty);
 
                         // Set up the move preview.
-                        for (int i = 0; i < 8; i++)
-                            for (int j = 0; j < 8; j++)
-                                if (board.GetSquareContents(i, j) != this.board.GetSquareContents(i, j))
+                        for (int i = 0; i < 20; i++)
+                        {
+                            for (int j = 0; j < 32; j++)
+                            {
+                                if (copy_board.GetSquareContents(i, j) != board.GetSquareContents(i, j))
                                 {
                                     // Set and update the square display.
-                                    this.squareControls[i, j].PreviewContents = board.GetSquareContents(i, j);
-                                    this.squareControls[i, j].Refresh();
+                                    grid[i, j].PreviewContents = copy_board.GetSquareContents(i, j);
+                                    grid[i, j].Refresh();
                                 }
+                            }
+                        }
                     }
                 }
 
                 // Change the cursor.
-                squareControl.Cursor = System.Windows.Forms.Cursors.Hand;
+                squareControl.Cursor = Cursors.Hand;
             }
-        }*/
+        }
         private void SquareControl_MouseLeave(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            SquareControl squareControl = (SquareControl)sender;
+
+            // If the square is currently active, deactivate it.
+            if (squareControl.IsActive)
+            {
+                squareControl.IsActive = false;
+                squareControl.Refresh();
+            }
+
+            // If the place is being previewed, clear all affected squares.
+            if (squareControl.PreviewContents != Board.Empty)
+            {
+                // Clear the move preview.
+                for (int i = 0; i < 20; i++)
+                {
+                    for (int j = 0; j < 32; j++)
+                    {
+                        if (grid[i, j].PreviewContents != Board.Empty)
+                        {
+                            grid[i, j].PreviewContents = Board.Empty;
+                            grid[i, j].Refresh();
+                        }
+                    }
+                }
+            }
+
+            // Restore the cursor.
+            squareControl.Cursor = Cursors.Default;
         }
-        private void SquareControl_Click(object sender, EventArgs e)
+        private void SquareControl_Click(object sender, int value, EventArgs e)
         {
-            throw new NotImplementedException();
+            // Check the game state to ensure it's the user's turn.
+            if (actionState != ActionState.InPlace)
+                return;
+
+            SquareControl squareControl = (SquareControl)sender;
+
+            // If the place is valid, make it.
+            if (board.IsValidSquare(squareControl.Row, squareControl.Col))
+            {
+                // Restore the cursor.
+                squareControl.Cursor = System.Windows.Forms.Cursors.Default;
+
+                // Make the move.
+                MakePlacement(squareControl.Row, squareControl.Col, value);
+            }
         }
     }
 }
