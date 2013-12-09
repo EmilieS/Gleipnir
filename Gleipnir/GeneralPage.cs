@@ -24,6 +24,7 @@ namespace GamePages
         EventFluxUC eventFlux = new EventFluxUC();
         Board board;
         SquareControl[,] grid;
+        Options options;
         Game.Game _startedGame;
 
         public GeneralPage()
@@ -52,6 +53,7 @@ namespace GamePages
             eventFlux.Show();
 
             // Generate grid
+            options = new Options();
             board = new Board();
             grid = new SquareControl[20, 32];
             for (int i = 0; i < 20; i++)
@@ -67,9 +69,9 @@ namespace GamePages
                     Controls.Add(grid[i, j]);
 
                     // Set up event handling for it.
-                    /*mapWithGrid[i, j].MouseMove += new MouseEventHandler(SquareControl_MouseMove);
-                    mapWithGrid[i, j].MouseLeave += new EventHandler(SquareControl_MouseLeave);
-                    mapWithGrid[i, j].Click += new EventHandler(SquareControl_Click);*/
+                    /*grid[i, j].MouseMove += new MouseEventHandler(SquareControl_MouseMove);
+                    grid[i, j].MouseLeave += new EventHandler(SquareControl_MouseLeave);
+                    grid[i, j].Click += new EventHandler(SquareControl_Click);*/
                 }
             }
             board.SetForNewGame();
@@ -131,10 +133,52 @@ namespace GamePages
         }
 
         // Grid Events
-        private void SquareControl_MouseMove(object sender, MouseEventArgs e)
+        /*private void SquareControl_MouseMove(object sender, MouseEventArgs e)
         {
-            throw new NotImplementedException();
-        }
+            SquareControl squareControl = (SquareControl)sender;
+
+            // If the square is Empty
+            if (board.IsValidSquare(squareControl.Row, squareControl.Col))
+            {
+                // If the square is selected and his last content is empty
+                if (!squareControl.IsActive && squareControl.PreviewContents == Board.Empty)
+                {
+                    // If the show valid place option is active, mark the
+                    // square.
+                    if (options.ShowValidPlaces)
+                    {
+                        squareControl.IsActive = true;
+
+                        // If the preview moves option is not active, update
+                        // the square display now.
+                        if (!options.PreviewSquares)
+                            squareControl.Refresh();
+                    }
+
+                    // If the preview moves option is active, mark the
+                    // appropriate squares.
+                    if (options.PreviewSquares)
+                    {
+                        // Create a temporary board to make the move on.
+                        Board board = new Board(this.board);
+                        board.PlaceBuilding(squareControl.Row, squareControl.Col);
+
+                        // Set up the move preview.
+                        for (int i = 0; i < 8; i++)
+                            for (int j = 0; j < 8; j++)
+                                if (board.GetSquareContents(i, j) != this.board.GetSquareContents(i, j))
+                                {
+                                    // Set and update the square display.
+                                    this.squareControls[i, j].PreviewContents = board.GetSquareContents(i, j);
+                                    this.squareControls[i, j].Refresh();
+                                }
+                    }
+                }
+
+                // Change the cursor.
+                squareControl.Cursor = System.Windows.Forms.Cursors.Hand;
+            }
+        }*/
         private void SquareControl_MouseLeave(object sender, EventArgs e)
         {
             throw new NotImplementedException();

@@ -18,7 +18,7 @@ namespace GamePages
         public static readonly Color ActiveSquareBackColorDefault = Color.FromArgb(65, 175, 25);
 
         // Background for right zone to place a building
-        public static readonly Color ValidMoveBackColorDefault = Color.FromArgb(75, 200, 30);
+        public static readonly Color ValidPlaceBackColorDefault = Color.FromArgb(75, 200, 30);
 
         // Default backgrounds
         public static readonly Color EmptyBackColorDefault = Color.FromArgb(50, 130, 20);
@@ -33,7 +33,7 @@ namespace GamePages
 
         // Colors used in rendering the control.
         public static Color ActiveSquareBackColor = ActiveSquareBackColorDefault;
-        public static Color ValidMoveBackColor = ValidMoveBackColorDefault;
+        public static Color ValidMoveBackColor = ValidPlaceBackColorDefault;
         public static Color NormalBackColor = EmptyBackColorDefault;
         #endregion
 

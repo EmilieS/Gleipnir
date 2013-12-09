@@ -193,7 +193,7 @@ namespace GamePages
 
             // Set roads
             #region roads
-            for (int i = 0; i < 20; i++)
+            /*for (int i = 0; i < 20; i++)
                 if (i == 4)
                     squares[i, 13] = Road;
                 else if (i == 5)
@@ -226,7 +226,7 @@ namespace GamePages
                     squares[i, 13] = Road;
                 else if (i == 12)
                     for (int j = 12; j < 14; j++)
-                        squares[i, j] = Road;
+                        squares[i, j] = Road;*/
             #endregion
             #endregion
         }
@@ -246,7 +246,7 @@ namespace GamePages
         /// Check all the grid for empty place
         /// </summary>
         /// <returns></returns>
-        public bool HasAnyValidPlace()
+        public bool HasAnyEmptyPlace()
         {
             // Check all the grid
             for (int i = 0; i < 20; i++)
@@ -281,6 +281,15 @@ namespace GamePages
         public void UpdateSquares(int row, int col, int value)
         {
             squares[row, col] = value;
+        }
+
+        /// <summary>
+        /// Place a building on the grid
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
+        public void PlaceBuilding(int row, int col)
+        {
         }
     }
 }
