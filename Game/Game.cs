@@ -78,6 +78,11 @@ namespace Game
         readonly internal double _ageTickTime;
         public Random Rand;
 
+        double _averageHappiness;
+        double _averageFaith;
+        public double AverageHappiness { get { return _averageHappiness; } }
+        public double AverageFaith { get { return _averageFaith; } }
+
         /*public double TotalGold { get 
         {
             double totalGold = 0;
@@ -223,7 +228,17 @@ namespace Game
             if(_totalGold.Conclude()){ _eventList.Add(new GameEventProperty(this, "TotalGold")); }
             if(_totalPop.Conclude()){ _eventList.Add(new GameEventProperty(this, "TotalPop")); }
             if(_offerings.Conclude()){ _eventList.Add(new GameEventProperty(this, "Offerings")); }
-
+            double faith=0;
+            double happiness=0;
+            foreach (Village v in Villages)
+            {
+                happiness +=  v.CalculateAverageVillageHappiness();
+                faith += v.CalculateAverageVillageFaith();      
+            }
+            _averageHappiness = happiness / Villages.Count;
+            _averageFaith = faith / Villages.Count;
+            _eventList.Add(new GameEventProperty(this, "AverageFaith"));
+            _eventList.Add(new GameEventProperty(this, "AverageHappiness"));
         }
 
         //variables à avoir: les coefficients des métiers

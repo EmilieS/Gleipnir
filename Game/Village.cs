@@ -17,7 +17,8 @@ namespace Game
         int _offeringsPoints;
         internal readonly HistorizedValue<int, Village> _villagePop;
         public readonly List<object> _buildingList;
-
+        public double VillageFaith { get { return _villageFaith; } }
+        public double VillageHappiness { get { return _villageHappiness; } }
         readonly string _name;
         FamilyInVillageList _familiesList;
         public IReadOnlyList<Family> FamiliesList { get { return _familiesList; } }
@@ -136,7 +137,7 @@ namespace Game
         /// Dertermine average faith for all families in the village.
         /// </summary>
         /// <returns></returns>
-        public void CalculateAverageVillageFaith()
+        public double CalculateAverageVillageFaith()
         {
             double result = 0;
             foreach (Family fam in _familiesList)
@@ -145,10 +146,11 @@ namespace Game
             }
             result = result / _familiesList.Count;
 
-            if (result < 0 && result > 100)
+            if (result < 0 || result > 100)
                 throw new IndexOutOfRangeException();
-            else
-                _villageFaith = result;
+
+            _villageFaith = result;
+            return result;
         }
 
         /// <summary>
@@ -274,6 +276,7 @@ namespace Game
         {
             //TODO :  put current values in value history.
             if (_familiesList.Conclude()) { eventList.Add(new EventProperty<Village>(this, "FamiliesList")); }
+
             //JobList is invariant.
             //TODO : events!
         }

@@ -36,14 +36,27 @@ namespace GamePages
             Stats = new InformationsUC(this);
             InfoBox = new InformationBox();
             eventFlux = new EventFluxUC();
-            _scenarioBox = new ScenarioBox();
+            _scenarioBox = new ScenarioBox(this);
             InitializeComponent();
-
             _startedGame = new Game.Game();
             Home.Launched += IsStarted_Changed;
             this.Controls.Add(Home);
             Home.Show();
-
+            PushAlert("coucou", "coucou");
+            PushAlert("coucou2", "coucou2");
+            PushAlert("coucou3", "coucou3");
+            PushAlert("coucou4", "coucou4");
+            PushAlert("coucou5", "coucou5");
+            PushAlert("coucou6", "coucou6");
+            PushAlert("coucou7", "coucou7");
+            PushAlert("coucou8", "coucou8");
+            //PushAlert("coucou", "coucou");
+            //PushAlert("coucou", "coucou");
+            //PushAlert("coucou", "coucou");
+            //PushAlert("coucou", "coucou");
+            //PushAlert("coucou", "coucou");
+            //PushAlert("coucou", "coucou");
+            //PushAlert("coucou", "coucou");
             MenuGame.ExpectGoBackToMenu += GoBackToMenu;
         }
         public void IsStarted_Changed(object sender, PropertyChangedEventArgs e)
@@ -68,9 +81,22 @@ namespace GamePages
             trace = new traceBox();
             trace.Show();
             Step();
-            PushAlert("coucou", "coucou");
-        }
 
+        }
+        internal void LockEverything()
+        {
+            ActionMenu.Enabled = false;
+            Stats.Enabled = false;
+            InfoBox.Enabled = false;
+            eventFlux.Enabled = false;
+        }
+        internal void UnLockEverything()
+        {
+            ActionMenu.Enabled = true;
+            Stats.Enabled = true;
+            InfoBox.Enabled = true;
+            eventFlux.Enabled = true;
+        }
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
         {
             ActionMenu.Visible = InfoBox.Visible = Stats.Visible = false;
@@ -89,7 +115,6 @@ namespace GamePages
         public void PushAlert(string message, string title)
         {
             eventFlux.CreateNewEventAndShow(message, title);
-            PushTrace(title);
         }
         public void PushTrace(string message)
         {
@@ -99,11 +124,11 @@ namespace GamePages
         }
         public void PushGeneralHappiness(double value)
         {
-            Stats.happinessVillage.Text = value.ToString();
+            Stats.happinessVillage.Text = value.ToString("F");
         }
         public void PushGeneralFaith(double value)
         {
-            Stats.faithVillage.Text = value.ToString();
+            Stats.faithVillage.Text = value.ToString("F");
         }
         public void PushName(string name)
         {

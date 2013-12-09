@@ -33,11 +33,13 @@
             // 
             // traceBoxViewer
             // 
-            this.traceBoxViewer.Location = new System.Drawing.Point(12, 12);
+            this.traceBoxViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.traceBoxViewer.Location = new System.Drawing.Point(0, 0);
             this.traceBoxViewer.Multiline = true;
             this.traceBoxViewer.Name = "traceBoxViewer";
+            this.traceBoxViewer.ReadOnly = true;
             this.traceBoxViewer.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.traceBoxViewer.Size = new System.Drawing.Size(477, 330);
+            this.traceBoxViewer.Size = new System.Drawing.Size(501, 354);
             this.traceBoxViewer.TabIndex = 0;
             // 
             // traceBox
