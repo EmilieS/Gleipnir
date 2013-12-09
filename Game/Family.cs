@@ -159,6 +159,30 @@ namespace Game
             }
             return happiness / nbFamilyMembers;
         }
+        double _faithAverage;
+        double _happinessAverage;
+        public double FaithAverageValue { get { return _faithAverage; } }
+        public double HappinessAverageValue { get { return _happinessAverage; } }
+        public void CalculateHappinessAndFaithAverage()
+        {
+            double faith = 0;
+            double happiness = 0;
+            int nbFamilyMembers = _familyMembers.Count;
+            if (nbFamilyMembers == 0)
+            {
+                throw new NullReferenceException();
+            }
+            for (int i = 0; i < nbFamilyMembers; i++)
+            {
+                faith += _familyMembers[i].Faith;
+                happiness += _familyMembers[i].Happiness;
+            }
+            _faithAverage= faith / nbFamilyMembers;
+            _happinessAverage= happiness / nbFamilyMembers;
+
+        }
+
+
         //====================WORLD=TICK=STUFF=============================
         #region called by ImpactHappiness
         internal void FamilyMemberIsSick()
@@ -177,7 +201,7 @@ namespace Game
         }
         private void IsPoorOrRich_HappinessImpact()
         {
-            if (_familyMembers.Count != 0)
+            if (_familyMembers.Count != 0)//not needed as long as the families are cleaned
             {
                 if (_goldStash.Current < 16 || _goldStash.Current / FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
                 {

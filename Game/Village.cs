@@ -140,11 +140,25 @@ namespace Game
         public double CalculateAverageVillageFaith()
         {
             double result = 0;
-            foreach (Family fam in _familiesList)
+            /*foreach (Family fam in _familiesList)
             {
                 result += fam.FaithAverage();
+            }*/
+
+            int nb = _familiesList.Count;
+            int nbf = nb;
+            for (int i = 0; i < nb; i++)//had to because some families only get deleted nextstep.
+            {
+                if (_familiesList[i].FamilyMembers.Count != 0)
+                {
+                    result += _familiesList[i].FaithAverage();
+                }
+                else
+                {
+                    nbf--;
+                }
             }
-            result = result / _familiesList.Count;
+            result = result / nbf;
 
             if (result < 0 || result > 100)
                 throw new IndexOutOfRangeException();
@@ -165,12 +179,59 @@ namespace Game
         public double CalculateAverageVillageHappiness()
         {
             double result = 0;
-            foreach (Family fam in _familiesList)
+            int nb = _familiesList.Count;
+            int nbf = nb;
+            for (int i = 0; i < nb; i++)//had to because some families only get deleted nextstep.
+            {
+                if (_familiesList[i].FamilyMembers.Count != 0)
+                {
+                    result += _familiesList[i].HappinessAverage();
+                }
+                else
+                {
+                    nbf--;
+                }
+            }
+            /*foreach (Family fam in _familiesList)
             {
                 result += fam.HappinessAverage();
-            }
-            return result = result / _familiesList.Count;
+            }*/
+            _villageHappiness = result / nbf;
+            return _villageHappiness;
         }
+
+        public void CalculateAverageVillageHappinessAndFaith()//trying to make thing faster.
+        {
+            double totalH = 0;
+            double totalF = 0;
+            int nbf = _familiesList.Count;
+            //int nb = nbf;
+           /* for (int i = 0; i < nb; i++)//had to because some families only get deleted nextstep.
+            {
+                if (_familiesList[i].FamilyMembers.Count != 0)
+                {
+                    _familiesList[i].CalculateHappinessAndFaithAverage();
+                    //totalH += _familiesList[i].HappinessAverage();
+                    //totalF += _familiesList[i].FaithAverage();
+                    totalH += _familiesList[i].HappinessAverageValue;
+                    totalF += _familiesList[i].FaithAverageValue;
+
+                }
+                else
+                {
+                    nbf--;
+                }
+            }*/
+            foreach (Family fam in _familiesList)
+            {
+                fam.CalculateHappinessAndFaithAverage();
+                totalH += fam.HappinessAverageValue;
+                totalF += fam.FaithAverageValue;
+            }
+            _villageHappiness = totalH / nbf;
+            _villageFaith = totalF / nbf;
+        }
+
 
         /// <summary>
         /// Gets player's offerings points
@@ -241,6 +302,23 @@ namespace Game
             return jobList;
         }
 */
+
+        internal void EmptyFamiliesCleaner(List<IEvent> eventList)
+        {
+            int nbf = FamiliesList.Count;
+            int i = 0;
+            Family tmpFamily;
+            while (i < nbf)
+            {
+                tmpFamily = FamiliesList[i];
+                FamiliesList[i].DieOrIsAlive(eventList);
+                if (tmpFamily.IsDestroyed)
+                    nbf--;
+                else
+                    i++;
+            }
+            tmpFamily = null;
+        }
         internal void FamilyDestroyed(Family family)
         {
             Debug.Assert(family != null);

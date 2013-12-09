@@ -218,6 +218,11 @@ namespace Game
                     i++;
             }
             tmpItem = null;
+
+            foreach (Village v in Villages)
+            {
+                v.EmptyFamiliesCleaner(_eventList);
+            }
         }
         private void CloseStep()
         {
@@ -232,8 +237,9 @@ namespace Game
             double happiness=0;
             foreach (Village v in Villages)
             {
-                happiness +=  v.CalculateAverageVillageHappiness();
-                faith += v.CalculateAverageVillageFaith();      
+                  v.CalculateAverageVillageHappinessAndFaith();
+                  happiness += v.VillageHappiness;
+                  faith += v.VillageFaith;
             }
             _averageHappiness = happiness / Villages.Count;
             _averageFaith = faith / Villages.Count;
