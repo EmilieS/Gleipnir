@@ -25,7 +25,6 @@ namespace GamePages
         }
         public void CreateNewEventAndShow(string message, string title)
         {
-
             if (eventTab[9] == null && i < 9)
             {
                 eventTab[i] = new GameEventUC();
@@ -34,7 +33,7 @@ namespace GamePages
                 eventTab[i].EventTitle.Text = title;
                 eventTab[i].EventContain.Text = message;
                 eventTab[i].Location = new System.Drawing.Point(positionX, positionY);
-                positionX += 68;
+                positionY += 68;
                 i++;
 
             }
@@ -52,10 +51,11 @@ namespace GamePages
             eventTab[0].Hide();
             this.Controls.Remove(eventTab[0]);
             eventTab[0] = null;
-            for (j = 0; j < 10; j++)
+            for (j = 0; j < 9; j++)
             {
                 eventTab[j] = eventTab[j + 1];
             }
+            eventTab[9] = null;
         }
     }
 }

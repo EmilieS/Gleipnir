@@ -14,17 +14,21 @@ namespace GamePages
     public partial class ScenarioBox : UserControl
     {
         ScenarioEngine engine = new ScenarioEngine();
-        public ScenarioBox()
+        GeneralPage actualPage;
+        public ScenarioBox(GeneralPage actualGame)
         {
+            actualPage = actualGame;
             InitializeComponent();
         }
 
         private void ScenarioBox_Click(object sender, EventArgs e)
         {
+            actualPage.LockEverything();
             string sentence;
             sentence = engine.ReadScenario();
             if (sentence == null)
             {
+                actualPage.UnLockEverything(); // doesn't work
                 this.TextLabel.Text = "Vous êtes à Ragnar";
             }
             else
@@ -39,6 +43,7 @@ namespace GamePages
             sentence = engine.ReadScenario();
             if (sentence == null)
             {
+                actualPage.UnLockEverything(); // doesn't work
                 this.TextLabel.Text = "Vous êtes à Ragnar";
             }
             else
