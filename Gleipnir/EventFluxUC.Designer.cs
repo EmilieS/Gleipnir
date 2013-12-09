@@ -37,7 +37,7 @@
             this.AutoScroll = true;
             this.Location = new System.Drawing.Point(730, 50);
             this.Name = "EventFluxUC";
-            this.Size = new System.Drawing.Size(228, 200);
+            this.Size = new System.Drawing.Size(292, 362);
             this.ResumeLayout(false);
 
         }
