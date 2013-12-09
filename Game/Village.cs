@@ -137,7 +137,7 @@ namespace Game
         /// Dertermine average faith for all families in the village.
         /// </summary>
         /// <returns></returns>
-        public void CalculateAverageVillageFaith()
+        public double CalculateAverageVillageFaith()
         {
             double result = 0;
             foreach (Family fam in _familiesList)
@@ -146,10 +146,11 @@ namespace Game
             }
             result = result / _familiesList.Count;
 
-            if (result < 0 && result > 100)
+            if (result < 0 || result > 100)
                 throw new IndexOutOfRangeException();
-            else
-                _villageFaith = result;
+
+            _villageFaith = result;
+            return result;
         }
 
         /// <summary>

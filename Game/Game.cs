@@ -233,12 +233,12 @@ namespace Game
             foreach (Village v in Villages)
             {
                 happiness +=  v.CalculateAverageVillageHappiness();
-                faith += v.CalculateAverageVillageHappiness();      
+                faith += v.CalculateAverageVillageFaith();      
             }
             _averageHappiness = happiness / Villages.Count;
             _averageFaith = faith / Villages.Count;
             _eventList.Add(new GameEventProperty(this, "AverageFaith"));
-            _eventList.Add(new GameEventProperty(this, "AverageHappines"));
+            _eventList.Add(new GameEventProperty(this, "AverageHappiness"));
         }
 
         //variables à avoir: les coefficients des métiers

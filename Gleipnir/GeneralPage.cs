@@ -124,11 +124,11 @@ namespace GamePages
         }
         public void PushGeneralHappiness(double value)
         {
-            Stats.happinessVillage.Text = value.ToString();
+            Stats.happinessVillage.Text = value.ToString("F");
         }
         public void PushGeneralFaith(double value)
         {
-            Stats.faithVillage.Text = value.ToString();
+            Stats.faithVillage.Text = value.ToString("F");
         }
         public void PushName(string name)
         {
