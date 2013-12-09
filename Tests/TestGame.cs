@@ -41,7 +41,7 @@ namespace Tests
                     e.PublishMessage(MyWindow);
                     e.Do(MyWindow);
                 }
-            } while (myGame.TotalPop < 3000);
+            } while (myGame.TotalPop < 3000 && myGame.TotalPop>0);
             //Assert.That(MyWindow.nb_pushAlert, Is.EqualTo(1));
         }
        /* [Test]
