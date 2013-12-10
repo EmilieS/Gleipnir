@@ -10,6 +10,19 @@ namespace GamePages
     public class Board
     {
         // Differents value for the box
+        public enum Building
+        {
+            Empty = 0,
+            Map = 1>>0,
+            Forest = 1>>1,
+            Water = 1>>2,
+            Road = 1>>3,
+            Building = 1>>5,
+            FamilyHouse = 1>>6,
+            JobHouse = 1>>7,
+            Hobby = 1>>8,
+            Special = 1>>9
+        }
         public static readonly int Empty = 0;
         public static readonly int Forest = 1;
         public static readonly int Water = 2;
@@ -287,6 +300,23 @@ namespace GamePages
         }
 
         /// <summary>
+        /// Check if the square have a building
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
+        /// <returns></returns>
+        public bool IsBuilding(int row, int col)
+        {
+            if (squares[row, col] == FamilyHouse ||
+                squares[row, col] == JobHouse ||
+                squares[row, col] == Hobby ||
+                squares[row, col] == Specials)
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
         /// Update the square content
         /// </summary>
         /// <param name="row"></param>
@@ -304,9 +334,8 @@ namespace GamePages
         /// <param name="row"></param>
         /// <param name="col"></param>
         /// <param name="value"></param>
-        public void PlaceBuilding(int row, int col, int value)
+        public void PlaceBuilding(int row, int col)
         {
-            squares[row, col] = value;
         }
     }
 }

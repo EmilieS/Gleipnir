@@ -42,8 +42,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.Controls.Add(this.vScrollBar1);
-            this.Location = new System.Drawing.Point(730, 50);
+            this.Location = new System.Drawing.Point(986, 50);
             this.Name = "EventFluxUC";
             this.Size = new System.Drawing.Size(269, 200);
             this.ResumeLayout(false);

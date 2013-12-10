@@ -50,17 +50,18 @@
             this.actionsMenu.Location = new System.Drawing.Point(1, 1);
             this.actionsMenu.Name = "actionsMenu";
             this.actionsMenu.SelectedIndex = 0;
-            this.actionsMenu.Size = new System.Drawing.Size(216, 536);
+            this.actionsMenu.Size = new System.Drawing.Size(216, 606);
             this.actionsMenu.TabIndex = 3;
             this.actionsMenu.TabStop = false;
             // 
             // buildingsTab
             // 
             this.buildingsTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.buildingsTab.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.buildingsTab.Location = new System.Drawing.Point(4, 4);
             this.buildingsTab.Name = "buildingsTab";
             this.buildingsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.buildingsTab.Size = new System.Drawing.Size(208, 498);
+            this.buildingsTab.Size = new System.Drawing.Size(208, 568);
             this.buildingsTab.TabIndex = 0;
             this.buildingsTab.UseVisualStyleBackColor = true;
             // 
@@ -97,9 +98,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.actionsMenu);
-            this.Location = new System.Drawing.Point(0, 23);
             this.Name = "TabIndex";
-            this.Size = new System.Drawing.Size(216, 540);
+            this.Size = new System.Drawing.Size(216, 610);
             this.actionsMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
