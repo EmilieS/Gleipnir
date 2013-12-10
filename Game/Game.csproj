@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buildings\BuildingsList.cs" />
+    <Compile Include="GodSpell\Deluge.cs" />
+    <Compile Include="GodSpell\Epidemic.cs" />
     <Compile Include="Jobs\Apothecary.cs" />
     <Compile Include="Buildings\ApothecaryOffice.cs" />
     <Compile Include="Buildings\Baths.cs" />
@@ -90,6 +92,9 @@
     <Content Include="Extra\firstNameList.txt" />
     <Content Include="Extra\nameList.txt" />
     <Content Include="Extra\scenario.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Sicknesses\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
