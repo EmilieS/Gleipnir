@@ -16,11 +16,11 @@ namespace GamePages
 {
     public partial class GeneralPage : Form, IWindow
     {
-        HomepageUC Home = new HomepageUC();
-        InGameMenu MenuGame = new InGameMenu();
-        TabIndex ActionMenu = new TabIndex();
-        InformationsUC Stats = new InformationsUC();
-        InformationBox InfoBox = new InformationBox();
+        HomepageUC home = new HomepageUC();
+        InGameMenu gameMenu = new InGameMenu();
+        TabIndex actionMenu = new TabIndex();
+        InformationsUC stats = new InformationsUC();
+        InformationBox infoBox = new InformationBox();
         EventFluxUC eventFlux = new EventFluxUC();
         Board board;
         SquareControl[,] grid;
@@ -40,30 +40,30 @@ namespace GamePages
             InitializeComponent();
 
             _startedGame = new Game.Game();
-            Home.Launched += IsStarted_Changed;
-            Home.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
-            this.Controls.Add(Home);
+            home.Launched += IsStarted_Changed;
+            home.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
+            this.Controls.Add(home);
 
-            Home.Show();
+            home.Show();
 
-            MenuGame.ExpectGoBackToMenu += GoBackToMenu;
+            gameMenu.ExpectGoBackToMenu += GoBackToMenu;
         }
         
         public void IsStarted_Changed(object sender, PropertyChangedEventArgs e)
         {
-            this.Controls.Remove(Home);
-            ActionMenu.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top);
+            this.Controls.Remove(home);
+            actionMenu.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top);
             //ActionMenu.Bottom = 3;
-            this.Controls.Add(ActionMenu);
-            ActionMenu.Show();
-            Stats.Anchor = (AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left);
-            this.Controls.Add(Stats);
-            Stats.Show();
+            this.Controls.Add(actionMenu);
+            actionMenu.Show();
+            stats.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+            this.Controls.Add(stats);
+            stats.Show();
             //TODO : Create InfoBox
-            InfoBox.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
-            this.Controls.Add(InfoBox);
-            InfoBox.Show();
-            eventFlux.Anchor = (AnchorStyles.Right);
+            infoBox.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            this.Controls.Add(infoBox);
+            infoBox.Show();
+            eventFlux.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             this.Controls.Add(eventFlux);
             eventFlux.Show();
 
@@ -97,18 +97,18 @@ namespace GamePages
 
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
         {
-            ActionMenu.Visible = InfoBox.Visible = Stats.Visible = false;
+            actionMenu.Visible = infoBox.Visible = stats.Visible = false;
 
-            this.Controls.Add(Home);
-            Home.Show();
+            this.Controls.Add(home);
+            home.Show();
         }
         public void PushGeneralCoins(int value)
         {
-            Stats.offeringsPoints.Text = value.ToString();
+            stats.offeringsPoints.Text = value.ToString();
         }
         public void PushGeneralGold(int value)
         {
-            Stats.goldVillage.Text = value.ToString();
+            stats.goldVillage.Text = value.ToString();
         }
         public void PushAlert(string message, string title)
         {
@@ -120,19 +120,19 @@ namespace GamePages
         }
         public void PushGeneralHappiness(double value)
         {
-            Stats.happinessVillage.Text = value.ToString();
+            stats.happinessVillage.Text = value.ToString();
         }
         public void PushGeneralFaith(double value)
         {
-            Stats.faithVillage.Text = value.ToString();
+            stats.faithVillage.Text = value.ToString();
         }
         public void PushName(string name)
         {
-            Stats.villageName.Text = name;
+            stats.villageName.Text = name;
         }
         public void PushPopulation(int pop)
         {
-            Stats.population.Text = pop.ToString();
+            stats.population.Text = pop.ToString();
         }
 
         // Grid Methods

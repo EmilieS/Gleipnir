@@ -87,6 +87,11 @@ namespace GamePages
             // Square size
             this.Width = 20;
             this.Height = 20;
+
+            // Set double-buffering
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
         }
 
         private void Grid_paint(object sender, PaintEventArgs e)

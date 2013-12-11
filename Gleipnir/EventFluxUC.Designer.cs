@@ -33,9 +33,9 @@
             // 
             // vScrollBar1
             // 
-            this.vScrollBar1.Location = new System.Drawing.Point(252, 0);
+            this.vScrollBar1.Location = new System.Drawing.Point(249, 0);
             this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(17, 200);
+            this.vScrollBar1.Size = new System.Drawing.Size(20, 400);
             this.vScrollBar1.TabIndex = 0;
             // 
             // EventFluxUC
@@ -44,9 +44,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.Controls.Add(this.vScrollBar1);
-            this.Location = new System.Drawing.Point(986, 50);
+            this.Location = new System.Drawing.Point(870, 40);
             this.Name = "EventFluxUC";
-            this.Size = new System.Drawing.Size(269, 200);
+            this.Size = new System.Drawing.Size(270, 400);
             this.ResumeLayout(false);
 
         }
