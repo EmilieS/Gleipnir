@@ -57,7 +57,7 @@
             this.Controls.Add(this.EventContain);
             this.Controls.Add(this.EventTitle);
             this.Name = "GameEventUC";
-            this.Size = new System.Drawing.Size(269, 98);
+            this.Size = new System.Drawing.Size(250, 80);
             this.ResumeLayout(false);
             this.PerformLayout();
 

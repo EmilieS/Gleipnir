@@ -35,9 +35,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.Location = new System.Drawing.Point(730, 50);
+            this.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.Location = new System.Drawing.Point(870, 40);
             this.Name = "EventFluxUC";
-            this.Size = new System.Drawing.Size(292, 362);
+            this.Size = new System.Drawing.Size(270, 400);
             this.ResumeLayout(false);
 
         }

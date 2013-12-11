@@ -135,9 +135,6 @@
     <EmbeddedResource Include="GameEventUC.resx">
       <DependentUpon>GameEventUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GamePage.resx">
-      <DependentUpon>GamePage.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="HomepageUC.resx">
       <DependentUpon>HomepageUC.cs</DependentUpon>
     </EmbeddedResource>
