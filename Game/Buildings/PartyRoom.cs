@@ -6,13 +6,20 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    class PartyRoom : BuildingsModel
+     public class PartyRoom : BuildingsModel
     {
         public PartyRoom(Village v,BuildingsList List, string name )
             : base (v)
         {
 
         }
-
+        override internal void AddToList()
+        {
+            Village.Buildings.Add(this);
+        }
+        internal override void OnOnDestroy()
+        {
+            Village.Buildings.Remove(this);
+        }
     }
 }

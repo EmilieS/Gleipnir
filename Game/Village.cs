@@ -16,7 +16,8 @@ namespace Game
         double _villageHappiness;
         int _offeringsPoints;
         internal readonly HistorizedValue<int, Village> _villagePop;
-        public readonly List<object> _buildingList;
+        public Buildings.BuildingsList Buildings;
+
         public double VillageFaith { get { return _villageFaith; } }
         public double VillageHappiness { get { return _villageHappiness; } }
         readonly string _name;

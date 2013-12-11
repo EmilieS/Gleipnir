@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    public class BuildingsModel : GameItem
+    public abstract class BuildingsModel : GameItem
     {
         int _verticalPos;
         int _horizontalPos;
@@ -21,6 +21,8 @@ namespace Game.Buildings
         private Game g;
         // this a provisory solution : using a new "materials"  to implement robustness
 
+        Village _village;
+        public Village Village { get { return _village; } }
 
         public BuildingsModel(Village v)
             :base(v.Game)
@@ -31,12 +33,16 @@ namespace Game.Buildings
             _addedFaith = 0;
             _enterPrice = 0;
             //_robustness = 0;
-            _isBought = false;
-            actualGame = g;
-            v.Game.AddBuildingIntheList(this);//should be in village. that's where the joblist is!
+            _isBought = false;//old code
+            actualGame = g;            
             //TODO: Complete member initialization
             //this.g = g;
+            _village = v;
+            AddToList();
         }
+        abstract internal void AddToList();
+
+
         public int HorizontalPos
         {
             get { return _horizontalPos; }
@@ -45,7 +51,7 @@ namespace Game.Buildings
         public string Name
         {
             get { return _name; }
-            set { _name = value; }
+            internal set { _name = value; }
         }
         public int VerticalPos
         {
@@ -75,8 +81,11 @@ namespace Game.Buildings
 
         override internal void OnDestroy()
         {
-
+            OnOnDestroy();
+            
+            _village = null;
         }
+        abstract internal void OnOnDestroy();
 
         internal override void CloseStep(List<IEvent> eventList)
         {

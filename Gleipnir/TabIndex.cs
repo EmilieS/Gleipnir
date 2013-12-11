@@ -21,5 +21,10 @@ namespace GamePages
         {
 
         }
+
+        private void Tavern_Click(object sender, EventArgs e)
+        {
+            //TODO: check _isBought 
+        }
     }
 }

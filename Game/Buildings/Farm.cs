@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    class Farm : BuildingsModel
+    public class Farm : BuildingsModel
     {
         public Farm(Village v, BuildingsList List, string name)
             : base(v)
         {
 
+        }
+        override internal void AddToList()
+        {
+            Village.Buildings.Add(this);
+        }
+        internal override void OnOnDestroy()
+        {
+            Village.Buildings.Remove(this);
         }
     }
 }

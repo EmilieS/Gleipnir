@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    class UnionOfCrafter : BuildingsModel
+     public class UnionOfCrafter : BuildingsModel
     {
         public UnionOfCrafter(Village v, BuildingsList List, string name)
             : base(v)
@@ -14,6 +14,13 @@ namespace Game.Buildings
 
         }
         // Syndicat des ouvriers 
-
+        override internal void AddToList()
+        {
+            Village.Buildings.Add(this);
+        }
+        internal override void OnOnDestroy()
+        {
+            Village.Buildings.Remove(this);
+        }
     }
 }
