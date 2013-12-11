@@ -8,6 +8,7 @@ namespace Game.Buildings
 {
     public class BuildingsList : IReadOnlyList<BuildingsModel>
     {
+        readonly List<ApothecaryOffice> _apothecaryOfficeList;
         readonly List<Baths> _bathsList;
         readonly List<Brothel> _brothelList;
         readonly List<Chapel> _chapelList;
@@ -119,7 +120,11 @@ namespace Game.Buildings
             #endregion
             */
         }
-
+        internal void Add(ApothecaryOffice apothecaryOffice)
+        {
+            _apothecaryOfficeList.Add(apothecaryOffice);
+            _buildingsList.Add(apothecaryOffice);
+        }
         internal void Add(Baths baths)
         {
             _bathsList.Add(baths);
@@ -253,6 +258,11 @@ namespace Game.Buildings
             _buildingsList.Remove(unionOfCrafter);
         }
 
+        internal void Remove(ApothecaryOffice apothecaryOffice)
+        {
+            _apothecaryOfficeList.Remove(apothecaryOffice);
+            _buildingsList.Remove(apothecaryOffice);
+        }
         public BuildingsModel this[int index]
         {
             get { return _buildingsList[index]; }

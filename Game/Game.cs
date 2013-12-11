@@ -58,7 +58,6 @@ namespace Game
         internal readonly List<GameItem> _items;//internal for tests
         readonly List<Village> _villages; //a revoir!
         readonly List<Villager> _singleMen;
-        readonly List<Buildings.BuildingsModel> buildingList; // ---------HERE---------
         NameGenerator _nameGenerator;
         NameGenerator _firstNameGenerator;
         readonly HistorizedValue<int, Game> _totalGold;
@@ -144,13 +143,7 @@ namespace Game
         {
             //TODO
         }
-        //TOREDO
-        #region Buildings
-        public void AddBuildingIntheList(Buildings.BuildingsModel building)
-        {
-            buildingList.Add(building);
-        }
-        #endregion
+
         /*
         public void AddOrRemoveFromTotalGold(double amount)
         {

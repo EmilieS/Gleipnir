@@ -19,7 +19,14 @@ namespace Game.Buildings
             sickVillager.Heal();
         }
 
-
+        override internal void AddToList()
+        {
+            Village.Buildings.Add(this);
+        }
+        internal override void OnOnDestroy()
+        {
+            Village.Buildings.Remove(this);
+        }
 
     }
 }

@@ -14,6 +14,13 @@ namespace Game.Buildings
 
         }
         // Syndicat des ouvriers 
-
+        override internal void AddToList()
+        {
+            Village.Buildings.Add(this);
+        }
+        internal override void OnOnDestroy()
+        {
+            Village.Buildings.Remove(this);
+        }
     }
 }

@@ -23,5 +23,13 @@ namespace Game.Buildings
         {
             get { return 12; }
         }
+        override internal void AddToList()
+        {
+            Village.Buildings.Add(this);
+        }
+        internal override void OnOnDestroy()
+        {
+            Village.Buildings.Remove(this);
+        }
     }
 }
