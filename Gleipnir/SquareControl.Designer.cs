@@ -1,6 +1,8 @@
-﻿namespace GamePages
+﻿using System.Drawing;
+using System.Windows.Forms;
+namespace GamePages
 {
-    partial class EventFluxUC
+    partial class SquareControl
     {
         /// <summary> 
         /// Variable nécessaire au concepteur.
@@ -30,21 +32,15 @@
         {
             this.SuspendLayout();
             // 
-            // EventFluxUC
+            // SquareControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
-            this.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.AutoScrollMinSize = new System.Drawing.Size(0, 600);
-            this.Location = new System.Drawing.Point(870, 40);
-            this.Name = "EventFluxUC";
-            this.Size = new System.Drawing.Size(270, 400);
+            this.Name = "SquareControl";
+            this.Size = new System.Drawing.Size(20, 20);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Grid_paint);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
     }
 }

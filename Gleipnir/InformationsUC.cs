@@ -24,7 +24,6 @@ namespace GamePages
             InitializeComponent();
         }
 
-
         private void menuButton_Click(object sender, EventArgs e)
         {
             this.Controls.Add(Menu);
