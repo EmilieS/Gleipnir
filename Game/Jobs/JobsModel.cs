@@ -68,7 +68,7 @@ namespace Game
             }
             else throw new InvalidOperationException();
         }
-
+        //TODO (check if building)
         internal abstract bool AddPersonPrerequisites();
 
         /// <summary>

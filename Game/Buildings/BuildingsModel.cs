@@ -31,7 +31,7 @@ namespace Game.Buildings
             _addedFaith = 0;
             _enterPrice = 0;
             //_robustness = 0;
-            _isBought = false;
+            _isBought = false;//old code
             actualGame = g;
             v.Game.AddBuildingIntheList(this);//should be in village. that's where the joblist is!
             //TODO: Complete member initialization
@@ -45,7 +45,7 @@ namespace Game.Buildings
         public string Name
         {
             get { return _name; }
-            set { _name = value; }
+            internal set { _name = value; }
         }
         public int VerticalPos
         {

@@ -7,7 +7,7 @@ using Game;
 
 namespace Game.Buildings
 {
-    class ApothecaryOffice : BuildingsModel
+     public class ApothecaryOffice : BuildingsModel
     {
         public ApothecaryOffice(Village v ,BuildingsList List, string name)
             : base(v)

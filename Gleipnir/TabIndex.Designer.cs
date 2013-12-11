@@ -33,7 +33,9 @@
             this.happinessTab = new System.Windows.Forms.TabPage();
             this.faithTab = new System.Windows.Forms.TabPage();
             this.godSpellsTab = new System.Windows.Forms.TabPage();
+            this.Tavern = new System.Windows.Forms.Button();
             this.actionsMenu.SuspendLayout();
+            this.buildingsTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // actionsMenu
@@ -57,6 +59,7 @@
             // buildingsTab
             // 
             this.buildingsTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.buildingsTab.Controls.Add(this.Tavern);
             this.buildingsTab.Location = new System.Drawing.Point(4, 4);
             this.buildingsTab.Name = "buildingsTab";
             this.buildingsTab.Padding = new System.Windows.Forms.Padding(3);
@@ -92,6 +95,16 @@
             this.godSpellsTab.TabIndex = 3;
             this.godSpellsTab.UseVisualStyleBackColor = true;
             // 
+            // Tavern
+            // 
+            this.Tavern.Location = new System.Drawing.Point(16, 22);
+            this.Tavern.Name = "Tavern";
+            this.Tavern.Size = new System.Drawing.Size(75, 23);
+            this.Tavern.TabIndex = 0;
+            this.Tavern.Text = "Taverne";
+            this.Tavern.UseVisualStyleBackColor = true;
+            this.Tavern.Click += new System.EventHandler(this.Tavern_Click);
+            // 
             // TabIndex
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -101,6 +114,7 @@
             this.Name = "TabIndex";
             this.Size = new System.Drawing.Size(216, 540);
             this.actionsMenu.ResumeLayout(false);
+            this.buildingsTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -112,6 +126,7 @@
         private System.Windows.Forms.TabPage happinessTab;
         private System.Windows.Forms.TabPage faithTab;
         private System.Windows.Forms.TabPage godSpellsTab;
+        private System.Windows.Forms.Button Tavern;
 
     }
 }

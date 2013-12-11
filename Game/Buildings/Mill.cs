@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    class Mill : BuildingsModel
+     public class Mill : BuildingsModel
     {
         public Mill(Village v,BuildingsList List, string name)
             : base(v)
