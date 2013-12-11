@@ -13,7 +13,14 @@ namespace Game
 
         public Meeting() { }
 
-        public void ChangeVillagersStatus(Family family)
+        public Family ActualConvocated
+        {
+            get { return actualConvocated; }
+            set { actualConvocated = value; }
+
+        }
+
+        public void Convocate(Family family)
         {
             if (actualConvocated != null)
             {
@@ -30,6 +37,21 @@ namespace Game
             actualConvocated = family;
         }
 
+        public void ReleaseConvocated(Family family)
+        {
+            foreach (Villager villager in family.FamilyMembers)
+            {
+                villager.ActivityStatus = ActivityStatus.WORKING;
+            }
+        }
 
+        public void AffectMissionToVillager(Villager villager, Missions expectedMission)
+        {
+            if (expectedMission != villager.Mission)
+            {
+                villager.Mission = expectedMission;
+
+            }
+        }
     }
 }

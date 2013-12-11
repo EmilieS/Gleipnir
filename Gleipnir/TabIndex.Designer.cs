@@ -50,17 +50,18 @@
             this.actionsMenu.Location = new System.Drawing.Point(1, 1);
             this.actionsMenu.Name = "actionsMenu";
             this.actionsMenu.SelectedIndex = 0;
-            this.actionsMenu.Size = new System.Drawing.Size(216, 536);
+            this.actionsMenu.Size = new System.Drawing.Size(216, 566);
             this.actionsMenu.TabIndex = 3;
             this.actionsMenu.TabStop = false;
             // 
             // buildingsTab
             // 
             this.buildingsTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.buildingsTab.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.buildingsTab.Location = new System.Drawing.Point(4, 4);
             this.buildingsTab.Name = "buildingsTab";
             this.buildingsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.buildingsTab.Size = new System.Drawing.Size(208, 498);
+            this.buildingsTab.Size = new System.Drawing.Size(208, 528);
             this.buildingsTab.TabIndex = 0;
             this.buildingsTab.UseVisualStyleBackColor = true;
             // 
@@ -70,7 +71,7 @@
             this.happinessTab.Location = new System.Drawing.Point(4, 4);
             this.happinessTab.Name = "happinessTab";
             this.happinessTab.Padding = new System.Windows.Forms.Padding(3);
-            this.happinessTab.Size = new System.Drawing.Size(208, 498);
+            this.happinessTab.Size = new System.Drawing.Size(208, 568);
             this.happinessTab.TabIndex = 1;
             this.happinessTab.UseVisualStyleBackColor = true;
             // 
@@ -79,7 +80,7 @@
             this.faithTab.Location = new System.Drawing.Point(4, 4);
             this.faithTab.Name = "faithTab";
             this.faithTab.Padding = new System.Windows.Forms.Padding(3);
-            this.faithTab.Size = new System.Drawing.Size(208, 498);
+            this.faithTab.Size = new System.Drawing.Size(208, 568);
             this.faithTab.TabIndex = 2;
             this.faithTab.UseVisualStyleBackColor = true;
             // 
@@ -88,7 +89,7 @@
             this.godSpellsTab.Location = new System.Drawing.Point(4, 4);
             this.godSpellsTab.Name = "godSpellsTab";
             this.godSpellsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.godSpellsTab.Size = new System.Drawing.Size(208, 498);
+            this.godSpellsTab.Size = new System.Drawing.Size(208, 568);
             this.godSpellsTab.TabIndex = 3;
             this.godSpellsTab.UseVisualStyleBackColor = true;
             // 
@@ -97,9 +98,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.actionsMenu);
-            this.Location = new System.Drawing.Point(0, 23);
+            this.Location = new System.Drawing.Point(0, 40);
             this.Name = "TabIndex";
-            this.Size = new System.Drawing.Size(216, 540);
+            this.Size = new System.Drawing.Size(216, 570);
             this.actionsMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 

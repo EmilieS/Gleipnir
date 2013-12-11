@@ -68,7 +68,16 @@
     <Compile Include="GameEventUC.Designer.cs">
       <DependentUpon>GameEventUC.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+=======
+    <Compile Include="GamePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GamePage.Designer.cs">
+      <DependentUpon>GamePage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Board.cs" />
+>>>>>>> fx-map
     <Compile Include="HomepageUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -87,18 +96,20 @@
     <Compile Include="InGameMenu.Designer.cs">
       <DependentUpon>InGameMenu.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="ScenarioBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ScenarioBox.Designer.cs">
       <DependentUpon>ScenarioBox.cs</DependentUpon>
-    </Compile>
+=======
     <Compile Include="Options.cs" />
     <Compile Include="SquareControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="SquareControl.Designer.cs">
       <DependentUpon>SquareControl.cs</DependentUpon>
+>>>>>>> fx-map
     </Compile>
     <Compile Include="TabIndex.cs">
       <SubType>UserControl</SubType>
@@ -135,9 +146,6 @@
     <EmbeddedResource Include="GameEventUC.resx">
       <DependentUpon>GameEventUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GamePage.resx">
-      <DependentUpon>GamePage.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="HomepageUC.resx">
       <DependentUpon>HomepageUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -147,11 +155,13 @@
     <EmbeddedResource Include="InGameMenu.resx">
       <DependentUpon>InGameMenu.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="ScenarioBox.resx">
       <DependentUpon>ScenarioBox.cs</DependentUpon>
-    </EmbeddedResource>
+=======
     <EmbeddedResource Include="SquareControl.resx">
       <DependentUpon>SquareControl.cs</DependentUpon>
+>>>>>>> fx-map
     </EmbeddedResource>
     <EmbeddedResource Include="TabIndex.resx">
       <DependentUpon>TabIndex.cs</DependentUpon>
@@ -172,9 +182,11 @@
     <EmbeddedResource Include="InformationBox.resx">
       <DependentUpon>InformationBox.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="Trace.resx">
       <DependentUpon>Trace.cs</DependentUpon>
     </EmbeddedResource>
+=======
     <None Include="Properties\DataSources\Game.Apothecary.datasource" />
     <None Include="Properties\DataSources\Game.Blacksmith.datasource" />
     <None Include="Properties\DataSources\Game.Construction_Worker.datasource" />
@@ -185,6 +197,7 @@
     <None Include="Properties\DataSources\Game.Miller.datasource" />
     <None Include="Properties\DataSources\Game.Tailor.datasource" />
     <None Include="Properties\DataSources\Game.Village.datasource" />
+>>>>>>> fx-map
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -215,15 +228,20 @@
     <None Include="Resources\button_homepage1.png" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Content Include="Resources\Extra\firstNameList.txt" />
     <Content Include="Resources\Extra\nameList.txt" />
     <Content Include="Resources\Extra\scenario.txt" />
     <Content Include="Resources\firstNameList.txt" />
     <Content Include="Resources\nameList.txt" />
-    <Content Include="Resources\carte.png" />
-    <Content Include="Resources\emptyPic.png" />
-    <Content Include="Resources\testPic.png" />
     <Content Include="Resources\scenario.txt" />
+=======
+    <None Include="Resources\carte.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\emptyPic.png" />
+    <None Include="Resources\testPic.png" />
+>>>>>>> fx-map
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
