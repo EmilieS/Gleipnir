@@ -30,32 +30,22 @@
         {
             this.SuspendLayout();
             // 
-<<<<<<< HEAD
-=======
-            // vScrollBar1
-            // 
-            this.vScrollBar1.Location = new System.Drawing.Point(249, 0);
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(20, 400);
-            this.vScrollBar1.TabIndex = 0;
-            // 
->>>>>>> fx-map
             // EventFluxUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<<<<<<< HEAD
             this.AutoScroll = true;
-            this.Location = new System.Drawing.Point(730, 50);
-            this.Name = "EventFluxUC";
-            this.Size = new System.Drawing.Size(292, 362);
-=======
-            this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.Controls.Add(this.vScrollBar1);
+<<<<<<< HEAD
+            this.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.Location = new System.Drawing.Point(870, 40);
             this.Name = "EventFluxUC";
             this.Size = new System.Drawing.Size(270, 400);
->>>>>>> fx-map
+=======
+            this.AutoScrollMinSize = new System.Drawing.Size(0, 600);
+            this.Location = new System.Drawing.Point(730, 50);
+            this.Name = "EventFluxUC";
+            this.Size = new System.Drawing.Size(229, 296);
+>>>>>>> origin/fx-eventFluxE
             this.ResumeLayout(false);
 
         }

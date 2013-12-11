@@ -57,7 +57,11 @@
             this.Controls.Add(this.EventTitle);
             this.Controls.Add(this.EventContain);
             this.Name = "GameEventUC";
+<<<<<<< HEAD
             this.Size = new System.Drawing.Size(250, 80);
+=======
+            this.Size = new System.Drawing.Size(267, 60);
+>>>>>>> origin/fx-eventFluxE
             this.ResumeLayout(false);
             this.PerformLayout();
 

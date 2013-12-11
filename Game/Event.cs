@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Game
@@ -91,7 +92,7 @@ namespace Game
             {
                 toPush = String.Format("{0} est mort mystèrieusement", GameItem.Name);
             }
-
+            //Debug.Assert(toPush == "i");//va bien dedans!
             b.PushAlert(toPush,"Mort");
         }
     }

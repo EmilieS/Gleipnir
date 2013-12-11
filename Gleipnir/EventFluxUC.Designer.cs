@@ -36,6 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.AutoScrollMinSize = new System.Drawing.Size(0, 600);
             this.Location = new System.Drawing.Point(870, 40);
             this.Name = "EventFluxUC";
             this.Size = new System.Drawing.Size(270, 400);
