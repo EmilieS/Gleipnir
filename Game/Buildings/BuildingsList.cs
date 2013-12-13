@@ -23,6 +23,7 @@ namespace Game.Buildings
         readonly List<Theater> _theaterList;
         readonly List<UnionOfCrafter> _unionOfCrafterList;
 
+        public IReadOnlyList<ApothecaryOffice> ApothecaryOfficeList { get { return _apothecaryOfficeList; } }
         public  IReadOnlyList<BuildingsModel> BathsList { get { return _bathsList; } }
         public  IReadOnlyList<BuildingsModel> BrothelList{ get { return _brothelList; } }
         public  IReadOnlyList<BuildingsModel> ChapelList{ get { return _chapelList; } }
@@ -76,6 +77,7 @@ namespace Game.Buildings
             Game g = village.Game;
             _buildingsList = new List<BuildingsModel>();
 
+            _apothecaryOfficeList = new List<ApothecaryOffice>();
             _bathsList=new List<Buildings.Baths>();
             _brothelList=new List<Buildings.Brothel>();
              _chapelList=new List<Buildings.Chapel>();

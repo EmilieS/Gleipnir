@@ -37,7 +37,10 @@ namespace Game
         }
         internal override bool AddPersonPrerequisites()
         {
-            return true;
+            if (Owner.Owner.Buildings.MillList.Count > 0)
+                return true;
+            else
+                return false;
         }
     }
 }
