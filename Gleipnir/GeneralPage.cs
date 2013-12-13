@@ -355,7 +355,7 @@ namespace GamePages
                 _startedGame.NextStep();
                 foreach (IEvent events in _startedGame.EventList)
                 {
-                    events.Do(this);
+                   events.Do(this);
                     events.PublishMessage(this);
                 }
 

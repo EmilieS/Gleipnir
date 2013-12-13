@@ -19,6 +19,7 @@ namespace Game
             _health = new HistorizedValue<Healths, Villager>(this, "_health", 20);
             _statusInFamily = new HistorizedValue<Status, Villager>(this, "_statusInFamily", 20);
             _statusInFamily.Current = Status.SINGLE;
+            
             g.VillagerAdded();
             parentFamily.OwnerVillage.VillagerAdded();
             Debug.Assert(g != null);
@@ -27,12 +28,12 @@ namespace Game
                 _faith.Current = 13;
             }
             else
-            { 
+            {
                 _faith.Current = parentFamily.FaithAverage();
             }
             if (_faith.Current <= 15)
             {
-                _health.Current =  Healths.HERETIC;
+                _health.Current = Healths.HERETIC;
             }
             switch (Game.Rand.Next(2))
             {
@@ -44,7 +45,7 @@ namespace Game
                             parentFamily.Father.Job.AddPerson(this);
                         }
                     }
-                        g.AddSingleMan(this); break;   
+                    g.AddSingleMan(this); break;
                 case 1: _gender = Genders.FEMALE;
                     if (parentFamily.Mother != null)
                     {
@@ -73,13 +74,14 @@ namespace Game
             g.VillagerAdded();
             _faith.Current = 100;
             _happiness.Current = 80;
+            // _lifeExpectancy = 85;
             _lifeExpectancy = 85 * 12;
             _gender = gender;
             _statusInFamily.Current = Status.SINGLE;
             _name = name;//_health.Conclude();
             Game.Villages[0].VillagerAdded();//hmmmmm
             Game.Villages[0].Jobs.Farmer.AddPerson(this);
-      }
+        }
 
         //TODO : generate name.
         readonly string _name;
@@ -91,7 +93,11 @@ namespace Game
         Villager _fiance;
         public Healths Health { get { return _health.Current; } }
         ActivityStatus _villagerActivity;
+<<<<<<< HEAD
         Missions _mission = Missions.NONE; 
+=======
+        Virus _virus;
+>>>>>>> fx-Epidemic
 
         readonly HistorizedValue<double, Villager> _faith; //scale from 0 to 100.
         readonly HistorizedValue<double, Villager> _happiness; //scale from 0 to 100.
@@ -99,8 +105,8 @@ namespace Game
         readonly HistorizedValue<Status, Villager> _statusInFamily;
 
         public double Age { get { return _age; } }
-        public double Faith { get { return _faith.Current; } } 
-        public double Happiness { get { return _happiness.Current; } } 
+        public double Faith { get { return _faith.Current; } }
+        public double Happiness { get { return _happiness.Current; } }
         public Genders Gender { get { return _gender; } }
         public JobsModel Job { get { return _job; } }
         public double LifeExpectancy { get { return _lifeExpectancy; } }
@@ -221,7 +227,10 @@ namespace Game
         {
             return ((_health.Current & Healths.DEAD) != 0);
         }
-
+        internal bool IsHeretic()
+        {
+            return ((_health.Current & Healths.HERETIC) != 0);
+        }
         /// <summary>
         /// can be negative to take away faith.
         /// </summary>
@@ -255,7 +264,7 @@ namespace Game
             {
                 _faith.Current = 0;
             }
-            else if (result> 100)
+            else if (result > 100)
             {
                 _faith.Current = 100;
             }
@@ -276,6 +285,10 @@ namespace Game
                 AddOrRemoveHappiness(0.1);
                 ParentFamily.FamilyMemberIsSick();
             }
+        }
+        private void ImpactGeneralFaithAdditionOrSubstraction()
+        {
+            AddOrRemoveFaith(Game.FaithToBeAddedOrRemovedForAllVillagersThisRound);
         }
 
         #endregion
@@ -300,35 +313,61 @@ namespace Game
         {
             _age += time;
         }
-        
-        /// <summary>
-        /// Set a villager as Heretic 
-        /// </summary>
-        public void SetHeretic()
-        {
-            _health.Current = Healths.HERETIC;
-        }
-        public bool IsHeretic()
-        {
-            return ((_health.Current & Healths.HERETIC) != 0);
-        }
-
         int _sickTimer;
         internal void CheckIfSick()
         {
             if ((_health.Current & Healths.SICK) != 0)
             {
-                if (_sickTimer > 30)//should change with different sicknesses?
+                int maxtimer;
+                if (this._virus != null)//....
+                {
+                    maxtimer = _virus.MaxTimer;
+                    ReduceLifeExpectancy(_virus.LifeExpectencyReduced);
+                }
+                else
+                {
+                    maxtimer = 30;
+                }
+                if (_sickTimer > maxtimer)
                 {
                     _sickTimer = 0;
                     SetLifeExpectancyLeft(0);
+                    if (_virus != null)
+                    {
+                        _virus.Epidemic.SickVillagerList.Remove(this);
+                    }
                 }
                 else
                 {
                     _sickTimer++;
                 }
+
+
             }
             else { _sickTimer = 0; }
+        }
+
+        public void Heal()
+        {
+            _health.Current = Healths.NONE;
+        }
+        public void SetVirus(Virus virus)
+        {
+            Debug.Assert(virus != null, "(villager SetVirus) virus is null !!!");
+            if ((_health.Current & Healths.SICK) != 0)
+                throw new InvalidOperationException("This villager is already sick");
+            _virus = virus;
+            virus.Epidemic.SickVillagerList.Add(this);
+            _health.Current = _health.Current | Healths.SICK;
+        }
+        public void SetHealed()
+        {
+            if (_virus != null)
+            {
+
+                _virus = null;
+            }
+            _health.Current = _health.Current & ~Healths.SICK;
         }
 
         int _callForHelpTickTimer;
@@ -357,7 +396,7 @@ namespace Game
 
             }
         }
-	private void CallForHelpEnded()
+        private void CallForHelpEnded()
         {
             if (_happiness.Current > 27)
             {
@@ -422,7 +461,7 @@ namespace Game
 
         }
         #endregion
-	#region called by DieOrIsAlive
+        #region called by DieOrIsAlive
         override internal void OnDestroy()
         {
             Debug.Assert(IsDead(), "the villager is still alive!");
@@ -450,6 +489,7 @@ namespace Game
         #region worldtickcalls
         override internal void ImpactHappiness()
         {
+            ImpactGeneralFaithAdditionOrSubstraction();
             SickHappinessImpact();
             _parentFamily.OwnerVillage.JobHappiness(this);
         }
@@ -485,7 +525,7 @@ namespace Game
 
             }
             Debug.Assert(((StatusInFamily == Status.ENGAGED || StatusInFamily == Status.MARRIED) && _fiance != null) || ((StatusInFamily == Status.SINGLE || StatusInFamily == Status.MOURNING) && _fiance == null), "Dans DieOrIsAlive");
-            if (IsDead()) { eventList.Add(new VillagerDyingEvent(this)); Destroy(); }
+            if (IsDead()) { eventList.Add(new VillagerDyingEvent(this, _parentFamily.Name)); Destroy(); }
         }
         override internal void CloseStep(List<IEvent> eventList)
         {

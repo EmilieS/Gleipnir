@@ -24,7 +24,7 @@ namespace Game
             _nameGenerator = new NameGenerator(namesPath, 1, 1);
             var firstNamesPath = File.ReadAllLines(@"Extra\firstNameList.txt");
             _firstNameGenerator = new NameGenerator(namesPath, 1, 1);
-
+            _currentEpidemicList = new List<GodSpell.Epidemic>();
             _regularBirthDates= new double[5];
             //===to be changed
             //_ageTickTime = 0.0834;//time(years) between each tick.
@@ -54,7 +54,7 @@ namespace Game
 
             _offerings.Current = 100;
         }
-
+        readonly List<GodSpell.Epidemic> _currentEpidemicList;
         internal readonly List<GameItem> _items;//internal for tests
         readonly List<Village> _villages; //a revoir!
         readonly List<Villager> _singleMen;
@@ -76,7 +76,8 @@ namespace Game
         readonly internal double[] _regularBirthDates;
         readonly internal double _ageTickTime;
         public Random Rand;
-
+        double _faithToBeAddedOrRemovedForAllVillagersThisRound;
+        internal double FaithToBeAddedOrRemovedForAllVillagersThisRound { get { return _faithToBeAddedOrRemovedForAllVillagersThisRound; } }
         double _averageHappiness;
         double _averageFaith;
         public double AverageHappiness { get { return _averageHappiness; } }
@@ -94,6 +95,22 @@ namespace Game
         internal void GameItemCreated(GameItem item)
         {
             _items.Add(item);
+        }
+        internal void EpidemicCreated(GodSpell.Epidemic epidemic)
+        {
+            _currentEpidemicList.Add(epidemic);
+        }
+        internal void EpidemicDestroyed(GodSpell.Epidemic epidemic)
+        {
+            Debug.Assert(epidemic != null, "( EpidemicDestroyed) item is null");
+            Debug.Assert(_currentEpidemicList.Contains(epidemic), "( EpidemicmDestroyed) the item was already removed from the gameitemlist");
+            if (epidemic.TimeSinceCreation < 15)
+            {
+                _faithToBeAddedOrRemovedForAllVillagersThisRound += 20;
+            }
+            _currentEpidemicList.Remove(epidemic);
+            Debug.Assert(!_currentEpidemicList.Contains(epidemic), "( EpidemicDestroyed) the item was not removed from the gameitemlist");
+
         }
         internal void GameItemDestroyed(GameItem item)
         {
@@ -150,10 +167,23 @@ namespace Game
             _totalGold.Current += amount; //curious to find out if TotalGold can be negative.
         }
  * */
+        void EpidemicFaithImpact()
+        {
+            foreach (GodSpell.Epidemic e in _currentEpidemicList)
+            {
+                if (e.TimeSinceCreation == 15)
+                {
+                    _faithToBeAddedOrRemovedForAllVillagersThisRound += -15;
+
+                }
+            }
+        }
         List<string> _currentText;
         public void NextStep() //public for testing (again)
         {
             ImpactHappiness();
+            _faithToBeAddedOrRemovedForAllVillagersThisRound = 0;//has to be after ImpactHappiness(); !!
+            EpidemicFaithImpact();//has to be before DieOrIsAlive
             Evolution();
             Creation();
             DieOrIsAlive();
@@ -162,6 +192,7 @@ namespace Game
 
         List<IEvent> _eventList;
         public IReadOnlyList<IEvent> EventList{get{return _eventList;}}
+        
         private void ImpactHappiness()
         {
             foreach (GameItem item in _items)

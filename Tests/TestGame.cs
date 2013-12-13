@@ -15,6 +15,8 @@ namespace Tests
         public void killPopulation()
         {
             var myGame = new Game.Game();
+            var villager = myGame.Villages[0].FamiliesList[0].Father;
+            Game.GodSpell.Epidemic epidemic = new Game.GodSpell.Epidemic(myGame, villager);
             var MyWindow = new Tests.IWindowImplementationForTests();
             do
             {
@@ -62,7 +64,7 @@ namespace Tests
                         e.PublishMessage(MyWindow);
                         e.Do(MyWindow);
                     }
-                } while (myGame.TotalPop < 500);
+                } while (myGame.TotalPop < 500 && myGame.TotalPop>0);
             }
             //Assert.That(MyWindow.nb_pushAlert, Is.EqualTo(1));
         }*/
