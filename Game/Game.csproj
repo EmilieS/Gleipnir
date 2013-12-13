@@ -42,6 +42,7 @@
     <Compile Include="Buildings\BuildingsList.cs" />
     <Compile Include="GodSpell\Deluge.cs" />
     <Compile Include="GodSpell\Epidemic.cs" />
+    <Compile Include="Virus.cs" />
     <Compile Include="Jobs\Apothecary.cs" />
     <Compile Include="Buildings\ApothecaryOffice.cs" />
     <Compile Include="Buildings\Baths.cs" />

@@ -92,6 +92,7 @@ namespace Game
         Villager _fiance;
         public Healths Health { get { return _health.Current; } }
         ActivityStatus _villagerActivity;
+        Virus _virus;
 
         readonly HistorizedValue<double, Villager> _faith; //scale from 0 to 100.
         readonly HistorizedValue<double, Villager> _happiness; //scale from 0 to 100.
@@ -303,21 +304,40 @@ namespace Game
         {
             if ((_health.Current & Healths.SICK) != 0)
             {
-                if (_sickTimer > 30)//should change with different sicknesses?
+                int maxtimer;
+                if (this._virus != null)
                 {
-                    _sickTimer = 0;
-                    SetLifeExpectancyLeft(0);
+                    maxtimer = _virus.Timer;
                 }
                 else
                 {
-                    _sickTimer++;
+                    maxtimer = 30;
                 }
+                    if (_sickTimer > maxtimer)//should change with different sicknesses?
+                    {
+                        _sickTimer = 0;
+                        SetLifeExpectancyLeft(0);
+                    }
+                    else
+                    {
+                        _sickTimer++;
+                    }
+                
+                
             }
             else { _sickTimer = 0; }
         }
+
         public void Heal()
         {
             _health.Current = Healths.NONE;
+        }
+        public void SetVirus()
+        {
+            if ((_health.Current & Healths.SICK) !=0)
+                throw new InvalidOperationException("This villager is already sick");
+            _virus = new Virus(this);
+            _health.Current = _health.Current | Healths.SICK;
         }
         int _callForHelpTickTimer;
         private void CallForHelpCheck()
