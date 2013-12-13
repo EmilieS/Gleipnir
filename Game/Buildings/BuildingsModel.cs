@@ -17,8 +17,8 @@ namespace Game.Buildings
         double _addedRobustness;
         bool _isBought;
         string _name;
-        Game actualGame;
-        private Game g;
+        //Game actualGame;
+        //private Game g;
         // this a provisory solution : using a new "materials"  to implement robustness
 
         Village _village;
@@ -34,7 +34,7 @@ namespace Game.Buildings
             _enterPrice = 0;
             //_robustness = 0;
             _isBought = false;//old code
-            actualGame = g;            
+            //actualGame = g;            
             //TODO: Complete member initialization
             //this.g = g;
             _village = v;

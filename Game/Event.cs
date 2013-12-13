@@ -68,29 +68,30 @@ namespace Game
 
     public class VillagerDyingEvent : Event<Villager>
     {
-        internal VillagerDyingEvent(Villager v)
+        internal VillagerDyingEvent(Villager v, string familyName)
             : base(v)
         {
+            _familyName = familyName;
         }
-
+        string _familyName;
         override public void PublishMessage(IWindow b)
         {
             string toPush;
             if ((GameItem.Health & Healths.DEPRESSED) != 0)
             {
-                toPush = String.Format("{0} s'est suicidé", GameItem.Name);
+                toPush = String.Format("{0} {1} s'est suicidé", GameItem.Name, _familyName);
             }
             else if ((GameItem.Health & Healths.SICK) != 0)
             {
-                toPush = String.Format("{0} est mort de sa maladie", GameItem.Name);
+                toPush = String.Format("{0} {1} est mort de sa maladie", GameItem.Name, _familyName);
             }
             else if (GameItem.Age > 80)//80 à revoir !
             {
-                toPush = String.Format("{0} est mort de viellesse", GameItem.Name);
+                toPush = String.Format("{0} {1} est mort de viellesse", GameItem.Name, _familyName);
             }
             else
             {
-                toPush = String.Format("{0} est mort mystèrieusement", GameItem.Name);
+                toPush = String.Format("{0} {1} est mort mystèrieusement", GameItem.Name, _familyName);
             }
             //Debug.Assert(toPush == "i");//va bien dedans!
             b.PushAlert(toPush,"Mort");
