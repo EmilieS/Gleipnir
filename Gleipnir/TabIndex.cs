@@ -24,7 +24,53 @@ namespace GamePages
 
         private void Tavern_Click(object sender, EventArgs e)
         {
-            //TODO: check _isBought 
+            //TODO: check list if unique. 
+            //TODO : check if player can pay
+            //TODO : any other conditions?
+            //TODO : memorise the chosen building choice
+            //TODO : display differently and make clikable the possible squares
+
+            //THEN, once the played cliked on the map in a possible square
+            //TODO : pay
+            //TODO : create building whith correct location.
+
+            //ELSE he cliked elsewhere
+            //CANCEL <= delete the memorised building choice
+        }
+
+        private void ApothicaryOffice_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Chapel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PartyRoom_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Baths_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Brothel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Theater_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Restaurant_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
