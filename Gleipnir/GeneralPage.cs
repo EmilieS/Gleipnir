@@ -149,16 +149,16 @@ namespace GamePages
                 events.PublishMessage(this);
             }
             //to go faster...
-            //for (int i = 0; i < 50; i++)
-            //{
-            //    _startedGame.NextStep();
-            //    foreach (IEvent events in _startedGame.EventList)
-            //    {
-            //        events.Do(this);
-            //        events.PublishMessage(this);
-            //    }
+            for (int i = 0; i < 50; i++)
+            {
+                _startedGame.NextStep();
+                foreach (IEvent events in _startedGame.EventList)
+                {
+                   events.Do(this);
+                    events.PublishMessage(this);
+                }
 
-            //}
+            }
             //-----------------
         }
 

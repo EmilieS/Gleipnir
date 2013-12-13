@@ -27,12 +27,12 @@ namespace Game
                 _faith.Current = 13;
             }
             else
-            { 
+            {
                 _faith.Current = parentFamily.FaithAverage();
             }
             if (_faith.Current <= 15)
             {
-                _health.Current =  Healths.HERETIC;
+                _health.Current = Healths.HERETIC;
             }
             switch (Game.Rand.Next(2))
             {
@@ -44,7 +44,7 @@ namespace Game
                             parentFamily.Father.Job.AddPerson(this);
                         }
                     }
-                        g.AddSingleMan(this); break;   
+                    g.AddSingleMan(this); break;
                 case 1: _gender = Genders.FEMALE;
                     if (parentFamily.Mother != null)
                     {
@@ -80,7 +80,7 @@ namespace Game
             _name = name;//_health.Conclude();
             Game.Villages[0].VillagerAdded();//hmmmmm
             Game.Villages[0].Jobs.Farmer.AddPerson(this);
-      }
+        }
 
         //TODO : generate name.
         readonly string _name;
@@ -100,8 +100,8 @@ namespace Game
         readonly HistorizedValue<Status, Villager> _statusInFamily;
 
         public double Age { get { return _age; } }
-        public double Faith { get { return _faith.Current; } } 
-        public double Happiness { get { return _happiness.Current; } } 
+        public double Faith { get { return _faith.Current; } }
+        public double Happiness { get { return _happiness.Current; } }
         public Genders Gender { get { return _gender; } }
         public JobsModel Job { get { return _job; } }
         public double LifeExpectancy { get { return _lifeExpectancy; } }
@@ -254,7 +254,7 @@ namespace Game
             {
                 _faith.Current = 0;
             }
-            else if (result> 100)
+            else if (result > 100)
             {
                 _faith.Current = 100;
             }
@@ -275,6 +275,10 @@ namespace Game
                 AddOrRemoveHappiness(0.1);
                 ParentFamily.FamilyMemberIsSick();
             }
+        }
+        private void ImpactGeneralFaithAdditionOrSubstraction()
+        {
+            AddOrRemoveFaith(Game.FaithToBeAddedOrRemovedForAllVillagersThisRound);
         }
 
         #endregion
@@ -305,25 +309,30 @@ namespace Game
             if ((_health.Current & Healths.SICK) != 0)
             {
                 int maxtimer;
-                if (this._virus != null)
+                if (this._virus != null)//....
                 {
-                    maxtimer = _virus.Timer;
+                    maxtimer = _virus.MaxTimer;
+                    ReduceLifeExpectancy(_virus.LifeExpectencyReduced);
                 }
                 else
                 {
                     maxtimer = 30;
                 }
-                    if (_sickTimer > maxtimer)//should change with different sicknesses?
+                if (_sickTimer > maxtimer)
+                {
+                    _sickTimer = 0;
+                    SetLifeExpectancyLeft(0);
+                    if (_virus != null)
                     {
-                        _sickTimer = 0;
-                        SetLifeExpectancyLeft(0);
+                        _virus.Epidemic.SickVillagerList.Remove(this);
                     }
-                    else
-                    {
-                        _sickTimer++;
-                    }
-                
-                
+                }
+                else
+                {
+                    _sickTimer++;
+                }
+
+
             }
             else { _sickTimer = 0; }
         }
@@ -332,13 +341,25 @@ namespace Game
         {
             _health.Current = Healths.NONE;
         }
-        public void SetVirus()
+        public void SetVirus(Virus virus)
         {
-            if ((_health.Current & Healths.SICK) !=0)
+            Debug.Assert(virus != null, "(villager SetVirus) virus is null !!!");
+            if ((_health.Current & Healths.SICK) != 0)
                 throw new InvalidOperationException("This villager is already sick");
-            _virus = new Virus(this);
+            _virus = virus;
+            virus.Epidemic.SickVillagerList.Add(this);
             _health.Current = _health.Current | Healths.SICK;
         }
+        public void SetHealed()
+        {
+            if (_virus != null)
+            {
+
+                _virus = null;
+            }
+            _health.Current = _health.Current & ~Healths.SICK;
+        }
+
         int _callForHelpTickTimer;
         private void CallForHelpCheck()
         {
@@ -365,7 +386,7 @@ namespace Game
 
             }
         }
-	private void CallForHelpEnded()
+        private void CallForHelpEnded()
         {
             if (_happiness.Current > 27)
             {
@@ -430,7 +451,7 @@ namespace Game
 
         }
         #endregion
-	#region called by DieOrIsAlive
+        #region called by DieOrIsAlive
         override internal void OnDestroy()
         {
             Debug.Assert(IsDead(), "the villager is still alive!");
@@ -458,6 +479,7 @@ namespace Game
         #region worldtickcalls
         override internal void ImpactHappiness()
         {
+            ImpactGeneralFaithAdditionOrSubstraction();
             SickHappinessImpact();
             _parentFamily.OwnerVillage.JobHappiness(this);
         }

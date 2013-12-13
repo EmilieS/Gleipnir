@@ -9,24 +9,31 @@ namespace Game
     public class Virus
     {
         Villager selectedVillager;
-        int _timeBeforeDeath;
-
-        internal int Timer
+        internal GodSpell.Epidemic Epidemic { get; set; }
+        int _maxTimeBeforeDeath;
+        int _lifeExpectencyReduced;
+        /// <summary>
+        /// life expectency reduced no matter if he gets healed.
+        /// </summary>
+        internal int LifeExpectencyReduced { get { return _lifeExpectencyReduced; } }
+        /// <summary>
+        /// Time before death if not healed.
+        /// </summary>
+        internal int MaxTimer{get { return _maxTimeBeforeDeath; }}
+        public Virus( int maxTimeBeforeDeath=10, int lifeExpectencyReduced=1)
         {
-            get { return _timeBeforeDeath; }
+            _maxTimeBeforeDeath = maxTimeBeforeDeath;
+            _lifeExpectencyReduced = lifeExpectencyReduced;
+            
+            //SetVirusEffects(selectedVillager);
         }
-        public Virus(Villager v)
-        {
-            selectedVillager = v;
-            SetVirusEffects(selectedVillager);
-        }
-
+        /*
         public void SetVirusEffects(Villager selectedVillager)
         {
-            selectedVillager.SetVirus();
+            //selectedVillager.SetVirus();
             selectedVillager.ReduceLifeExpectancy(1);
         }
-
+        */
 
     }
 }
