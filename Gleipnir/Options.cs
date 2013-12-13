@@ -10,11 +10,11 @@ namespace GamePages
     public class Options
     {
         // Define the game options.
-        public bool ShowValidPlaces;
-        public bool PreviewSquares;
-        public Color BoardColor;
-        public Color ValidPlaceColor;
-        public Color ActiveSquareColor;
+        public bool showValidPlaces;
+        public bool previewSquares;
+        public Color boardColor;
+        public Color validPlaceColor;
+        public Color activeSquareColor;
 
         public Options()
         {
@@ -23,20 +23,20 @@ namespace GamePages
 
         public Options(Options options)
         {
-            ShowValidPlaces = options.ShowValidPlaces;
-            PreviewSquares = options.PreviewSquares;
-            BoardColor = options.BoardColor;
-            ValidPlaceColor = options.ValidPlaceColor;
-            ActiveSquareColor = options.ActiveSquareColor;
+            showValidPlaces = options.showValidPlaces;
+            previewSquares = options.previewSquares;
+            boardColor = options.boardColor;
+            validPlaceColor = options.validPlaceColor;
+            activeSquareColor = options.activeSquareColor;
         }
 
         public void RestoreDefaults()
         {
-            ShowValidPlaces = true;
-            PreviewSquares = false;
-            BoardColor = SquareControl.EmptyBackColorDefault;
-            ValidPlaceColor = SquareControl.ValidPlaceBackColorDefault;
-            ActiveSquareColor = SquareControl.ActiveSquareBackColorDefault;
+            showValidPlaces = true;
+            previewSquares = false;
+            boardColor = SquareControl.EmptyBackColorDefault;
+            validPlaceColor = SquareControl.ValidPlaceBackColorDefault;
+            activeSquareColor = SquareControl.ActiveSquareBackColorDefault;
         }
     }
 }

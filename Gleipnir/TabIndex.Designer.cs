@@ -30,17 +30,17 @@
         {
             this.actionsMenu = new System.Windows.Forms.TabControl();
             this.buildingsTab = new System.Windows.Forms.TabPage();
+            this.Restaurant = new System.Windows.Forms.Button();
+            this.Theater = new System.Windows.Forms.Button();
+            this.Brothel = new System.Windows.Forms.Button();
+            this.Baths = new System.Windows.Forms.Button();
+            this.PartyRoom = new System.Windows.Forms.Button();
+            this.Chapel = new System.Windows.Forms.Button();
+            this.ApothicaryOffice = new System.Windows.Forms.Button();
             this.Tavern = new System.Windows.Forms.Button();
             this.happinessTab = new System.Windows.Forms.TabPage();
             this.faithTab = new System.Windows.Forms.TabPage();
             this.godSpellsTab = new System.Windows.Forms.TabPage();
-            this.ApothicaryOffice = new System.Windows.Forms.Button();
-            this.Chapel = new System.Windows.Forms.Button();
-            this.PartyRoom = new System.Windows.Forms.Button();
-            this.Baths = new System.Windows.Forms.Button();
-            this.Brothel = new System.Windows.Forms.Button();
-            this.Theater = new System.Windows.Forms.Button();
-            this.Restaurant = new System.Windows.Forms.Button();
             this.actionsMenu.SuspendLayout();
             this.buildingsTab.SuspendLayout();
             this.SuspendLayout();
@@ -82,6 +82,76 @@
             this.buildingsTab.TabIndex = 0;
             this.buildingsTab.UseVisualStyleBackColor = true;
             // 
+            // Restaurant
+            // 
+            this.Restaurant.Location = new System.Drawing.Point(16, 402);
+            this.Restaurant.Name = "Restaurant";
+            this.Restaurant.Size = new System.Drawing.Size(75, 23);
+            this.Restaurant.TabIndex = 7;
+            this.Restaurant.Text = "Restaurant";
+            this.Restaurant.UseVisualStyleBackColor = true;
+            this.Restaurant.Click += new System.EventHandler(this.Restaurant_Click);
+            // 
+            // Theater
+            // 
+            this.Theater.Location = new System.Drawing.Point(16, 349);
+            this.Theater.Name = "Theater";
+            this.Theater.Size = new System.Drawing.Size(75, 23);
+            this.Theater.TabIndex = 6;
+            this.Theater.Text = "Théatre";
+            this.Theater.UseVisualStyleBackColor = true;
+            this.Theater.Click += new System.EventHandler(this.Theater_Click);
+            // 
+            // Brothel
+            // 
+            this.Brothel.Location = new System.Drawing.Point(16, 293);
+            this.Brothel.Name = "Brothel";
+            this.Brothel.Size = new System.Drawing.Size(93, 23);
+            this.Brothel.TabIndex = 5;
+            this.Brothel.Text = "Maison Close";
+            this.Brothel.UseVisualStyleBackColor = true;
+            this.Brothel.Click += new System.EventHandler(this.Brothel_Click);
+            // 
+            // Baths
+            // 
+            this.Baths.Location = new System.Drawing.Point(16, 233);
+            this.Baths.Name = "Baths";
+            this.Baths.Size = new System.Drawing.Size(68, 24);
+            this.Baths.TabIndex = 4;
+            this.Baths.Text = "Bains";
+            this.Baths.UseVisualStyleBackColor = true;
+            this.Baths.Click += new System.EventHandler(this.Baths_Click);
+            // 
+            // PartyRoom
+            // 
+            this.PartyRoom.Location = new System.Drawing.Point(16, 176);
+            this.PartyRoom.Name = "PartyRoom";
+            this.PartyRoom.Size = new System.Drawing.Size(93, 23);
+            this.PartyRoom.TabIndex = 3;
+            this.PartyRoom.Text = "Salle des Fêtes";
+            this.PartyRoom.UseVisualStyleBackColor = true;
+            this.PartyRoom.Click += new System.EventHandler(this.PartyRoom_Click);
+            // 
+            // Chapel
+            // 
+            this.Chapel.Location = new System.Drawing.Point(16, 122);
+            this.Chapel.Name = "Chapel";
+            this.Chapel.Size = new System.Drawing.Size(75, 23);
+            this.Chapel.TabIndex = 2;
+            this.Chapel.Text = "Chapelle";
+            this.Chapel.UseVisualStyleBackColor = true;
+            this.Chapel.Click += new System.EventHandler(this.Chapel_Click);
+            // 
+            // ApothicaryOffice
+            // 
+            this.ApothicaryOffice.Location = new System.Drawing.Point(16, 72);
+            this.ApothicaryOffice.Name = "ApothicaryOffice";
+            this.ApothicaryOffice.Size = new System.Drawing.Size(75, 23);
+            this.ApothicaryOffice.TabIndex = 1;
+            this.ApothicaryOffice.Text = "Pharmacie";
+            this.ApothicaryOffice.UseVisualStyleBackColor = true;
+            this.ApothicaryOffice.Click += new System.EventHandler(this.ApothicaryOffice_Click);
+            // 
             // Tavern
             // 
             this.Tavern.Location = new System.Drawing.Point(16, 22);
@@ -90,7 +160,6 @@
             this.Tavern.TabIndex = 0;
             this.Tavern.Text = "Taverne";
             this.Tavern.UseVisualStyleBackColor = true;
-            this.Tavern.Click += new System.EventHandler(this.Tavern_Click);
             // 
             // happinessTab
             // 
@@ -119,76 +188,6 @@
             this.godSpellsTab.Size = new System.Drawing.Size(208, 528);
             this.godSpellsTab.TabIndex = 3;
             this.godSpellsTab.UseVisualStyleBackColor = true;
-            // 
-            // ApothicaryOffice
-            // 
-            this.ApothicaryOffice.Location = new System.Drawing.Point(19, 76);
-            this.ApothicaryOffice.Name = "ApothicaryOffice";
-            this.ApothicaryOffice.Size = new System.Drawing.Size(75, 23);
-            this.ApothicaryOffice.TabIndex = 1;
-            this.ApothicaryOffice.Text = "Pharmacie";
-            this.ApothicaryOffice.UseVisualStyleBackColor = true;
-            this.ApothicaryOffice.Click += new System.EventHandler(this.ApothicaryOffice_Click);
-            // 
-            // Chapel
-            // 
-            this.Chapel.Location = new System.Drawing.Point(26, 133);
-            this.Chapel.Name = "Chapel";
-            this.Chapel.Size = new System.Drawing.Size(75, 23);
-            this.Chapel.TabIndex = 2;
-            this.Chapel.Text = "Chapelle";
-            this.Chapel.UseVisualStyleBackColor = true;
-            this.Chapel.Click += new System.EventHandler(this.Chapel_Click);
-            // 
-            // PartyRoom
-            // 
-            this.PartyRoom.Location = new System.Drawing.Point(36, 202);
-            this.PartyRoom.Name = "PartyRoom";
-            this.PartyRoom.Size = new System.Drawing.Size(93, 23);
-            this.PartyRoom.TabIndex = 3;
-            this.PartyRoom.Text = "Salle des Fêtes";
-            this.PartyRoom.UseVisualStyleBackColor = true;
-            this.PartyRoom.Click += new System.EventHandler(this.PartyRoom_Click);
-            // 
-            // Baths
-            // 
-            this.Baths.Location = new System.Drawing.Point(26, 266);
-            this.Baths.Name = "Baths";
-            this.Baths.Size = new System.Drawing.Size(68, 24);
-            this.Baths.TabIndex = 4;
-            this.Baths.Text = "Bains";
-            this.Baths.UseVisualStyleBackColor = true;
-            this.Baths.Click += new System.EventHandler(this.Baths_Click);
-            // 
-            // Brothel
-            // 
-            this.Brothel.Location = new System.Drawing.Point(36, 323);
-            this.Brothel.Name = "Brothel";
-            this.Brothel.Size = new System.Drawing.Size(93, 23);
-            this.Brothel.TabIndex = 5;
-            this.Brothel.Text = "Maison Close";
-            this.Brothel.UseVisualStyleBackColor = true;
-            this.Brothel.Click += new System.EventHandler(this.Brothel_Click);
-            // 
-            // Theater
-            // 
-            this.Theater.Location = new System.Drawing.Point(45, 382);
-            this.Theater.Name = "Theater";
-            this.Theater.Size = new System.Drawing.Size(75, 23);
-            this.Theater.TabIndex = 6;
-            this.Theater.Text = "Théatre";
-            this.Theater.UseVisualStyleBackColor = true;
-            this.Theater.Click += new System.EventHandler(this.Theater_Click);
-            // 
-            // Restaurant
-            // 
-            this.Restaurant.Location = new System.Drawing.Point(36, 429);
-            this.Restaurant.Name = "Restaurant";
-            this.Restaurant.Size = new System.Drawing.Size(75, 23);
-            this.Restaurant.TabIndex = 7;
-            this.Restaurant.Text = "Restaurant";
-            this.Restaurant.UseVisualStyleBackColor = true;
-            this.Restaurant.Click += new System.EventHandler(this.Restaurant_Click);
             // 
             // TabIndex
             // 

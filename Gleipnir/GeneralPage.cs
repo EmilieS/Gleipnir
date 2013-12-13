@@ -26,7 +26,7 @@ namespace GamePages
         Board _board;
         SquareControl[,] _grid;
         Options options;
-        Game.Game _startedGame;
+        Game.Game _game;
         traceBox trace;
 
         private ActionState actionState;
@@ -44,7 +44,7 @@ namespace GamePages
             // Create windows objects
             _home = new HomepageUC();
             _gameMenu = new InGameMenu();
-            _actionMenu = new TabIndex();
+            _actionMenu = new TabIndex(this);
             _stats = new InformationsUC(this);
             _infoBox = new InformationBox();
             _eventFlux = new EventFluxUC();
@@ -65,7 +65,7 @@ namespace GamePages
             //this.Controls.Remove(_home);
 
             // Create the game
-            _startedGame = new Game.Game();
+            _game = new Game.Game();
 
             #region grid generation
             options = new Options();
@@ -94,6 +94,7 @@ namespace GamePages
             _board.SetForNewGame();
             UpdateGrid(_board, _grid);
             #endregion
+
             #region Window elements
             #region Add all elements
             this.Controls.Add(_actionMenu);
@@ -234,7 +235,7 @@ namespace GamePages
         }
 
         // Grid Methods
-        private void UpdateGrid(Board board, SquareControl[,] grid)
+        public void UpdateGrid(Board board, SquareControl[,] grid)
         {
             // Map the current game board to the square controls.
             for (int i = 0; i < 20; i++)
@@ -252,6 +253,19 @@ namespace GamePages
             _board.UpdateSquares(row, col, buildingValue);
             actionState = ActionState.PlacementFinish;
         }
+        public void ShowValidPlaces()
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                for (int j = 0; j < 32; j++)
+                {
+                    if (_board.IsValidSquare(i, j))
+                        _grid[i, j].IsValid = true;
+                    else
+                        _grid[i, j].IsValid = false;
+                }
+            }
+        }
 
         // Grid Events
         private void SquareControl_MouseMove(object sender, MouseEventArgs e)
@@ -265,17 +279,17 @@ namespace GamePages
                 if (!squareControl.IsActive && squareControl.PreviewContents == Board.Empty)
                 {
                     // If the show valid place option is active, mark the square
-                    if (options.ShowValidPlaces)
+                    if (options.showValidPlaces)
                     {
                         squareControl.IsActive = true;
 
                         // If the preview place option is not active, update the square display now
-                        if (!options.PreviewSquares)
+                        if (!options.previewSquares)
                             squareControl.Refresh();
                     }
 
                     // If the preview place option is active, mark the appropriate squares
-                    if (options.PreviewSquares)
+                    if (options.previewSquares)
                     {
                         // Create a temporary board to make the move on
                         Board copy_board = new Board(_board);
@@ -307,17 +321,17 @@ namespace GamePages
                 if (!squareControl.IsActive)
                 {
                     // If the show valid place option is active, mark the square
-                    if (options.ShowValidPlaces)
+                    if (options.showValidPlaces)
                     {
                         squareControl.IsActive = true;
 
                         // If the preview place option is not active, update the square display now
-                        if (!options.PreviewSquares)
+                        if (!options.previewSquares)
                             squareControl.Refresh();
                     }
 
                     // If the preview place option is active, mark the appropriate squares
-                    if (options.PreviewSquares)
+                    if (options.previewSquares)
                     {
                         // Create a temporary board
                         Board copy_board = new Board(_board);
@@ -393,8 +407,20 @@ namespace GamePages
             }
         }
 
-        // InGameMenuButton Events
-        private void menuButton_Click(object sender, EventArgs e)
+        // ActionTab Buildings Methods
+        public void OnClickTavern()
+        {
+            int playerOfferings = _game.Offerings;
+            var tavern = _game.GetBuilding(11);
+            if (tavern.GetPrice <= playerOfferings)
+            {
+                ShowValidPlaces();
+                UpdateGrid(_board, _grid);
+            }
+        }
+
+        // InGameButton Method
+        public void OnClickMenu()
         {
             if (_gameMenu.IsOpen)
             {
@@ -411,8 +437,8 @@ namespace GamePages
         // Game next Step
         internal void Step()
         {
-            _startedGame.NextStep();
-            foreach (IEvent events in _startedGame.EventList)
+            _game.NextStep();
+            foreach (IEvent events in _game.EventList)
             {
                 events.Do(this);
                 events.PublishMessage(this);

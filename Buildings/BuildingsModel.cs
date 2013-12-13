@@ -9,6 +9,7 @@ namespace Buildings
 {
     public abstract class BuildingsModel : GameItem
     {
+        int _costPrice;
         int _verticalPos;
         int _horizontalPos;
         double _addedHappiness;
@@ -34,7 +35,7 @@ namespace Buildings
             //_robustness = 0;
             _isBought = false;
             _ownerVillage = ownerVillage;
-            ownerVillage.Game.AddBuildingIntheList(this); //needs to be in village !
+            ownerVillage.AddBuildingIntheList(this); //needs to be in village !
         }
 
         public int HorizontalPos
@@ -52,6 +53,7 @@ namespace Buildings
             get { return _verticalPos; }
             set { _verticalPos = value; }
         }
+        public int CostPrice { get { return _costPrice; } }
         internal double AddFaith
         {
             get { return _addedFaith; }

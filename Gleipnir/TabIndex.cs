@@ -13,26 +13,31 @@ namespace GamePages
 {
     public partial class TabIndex : UserControl
     {
-        public TabIndex()
+        readonly GeneralPage _page;
+
+        public TabIndex(GeneralPage p)
         {
+            _page = p;
             InitializeComponent();
+
+            Tavern.Click += TavernButton_Click;
         }
         internal void ShowUnboughtBuildings()
         {
 
         }
 
-        private void Tavern_Click(object sender, EventArgs e)
+        private void TavernButton_Click(object sender, EventArgs e)
         {
-            //TODO: check list if unique. 
-            //TODO : check if player can pay
-            //TODO : any other conditions?
-            //TODO : memorise the chosen building choice
-            //TODO : display differently and make clikable the possible squares
+            _page.OnClickTavern();
+            //TODO: check if player can pay
+            //TODO: Check if unique
+            //TODO: memorise the chosen building choice
+            //TODO: display differently and make clikable the possible squares
 
             //THEN, once the played cliked on the map in a possible square
-            //TODO : pay
-            //TODO : create building whith correct location.
+            //TODO: pay
+            //TODO: create building whith correct location.
 
             //ELSE he cliked elsewhere
             //CANCEL <= delete the memorised building choice

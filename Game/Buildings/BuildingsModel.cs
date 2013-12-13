@@ -10,6 +10,7 @@ namespace Game.Buildings
     {
         int _verticalPos;
         int _horizontalPos;
+        int _costPrice;
         double _addedHappiness;
         double _addedFaith;
         double _enterPrice;
@@ -42,7 +43,6 @@ namespace Game.Buildings
         }
         abstract internal void AddToList();
 
-
         public int HorizontalPos
         {
             get { return _horizontalPos; }
@@ -57,6 +57,11 @@ namespace Game.Buildings
         {
             get { return _verticalPos; }
             set { _verticalPos = value; }
+        }
+        public int CostPrice
+        {
+            get { return _costPrice; }
+            set { _costPrice = value; }
         }
         internal double AddFaith
         {
@@ -73,12 +78,11 @@ namespace Game.Buildings
             get { return _enterPrice; }
             set { _enterPrice = value; }
         }
-        internal bool IsBought
+        public bool IsBought
         {
             get { return _isBought; }
             set { _isBought = value; }
         }
-
         override internal void OnDestroy()
         {
             OnOnDestroy();
@@ -86,11 +90,9 @@ namespace Game.Buildings
             _village = null;
         }
         abstract internal void OnOnDestroy();
-
         internal override void CloseStep(List<IEvent> eventList)
         {
             throw new NotImplementedException();
         }
-
     }
 }

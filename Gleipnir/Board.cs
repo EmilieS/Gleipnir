@@ -23,6 +23,7 @@ namespace GamePages
             Hobby = 1>>8,
             Special = 1>>9
         }
+
         public static readonly int Empty = 0;
         public static readonly int Forest = 1;
         public static readonly int Water = 2;
