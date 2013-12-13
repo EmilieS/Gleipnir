@@ -480,7 +480,7 @@ namespace Game
 
             }
             Debug.Assert(((StatusInFamily == Status.ENGAGED || StatusInFamily == Status.MARRIED) && _fiance != null) || ((StatusInFamily == Status.SINGLE || StatusInFamily == Status.MOURNING) && _fiance == null), "Dans DieOrIsAlive");
-            if (IsDead()) { eventList.Add(new VillagerDyingEvent(this)); Destroy(); }
+            if (IsDead()) { eventList.Add(new VillagerDyingEvent(this, _parentFamily.Name)); Destroy(); }
         }
         override internal void CloseStep(List<IEvent> eventList)
         {
