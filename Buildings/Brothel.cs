@@ -8,8 +8,6 @@ namespace Buildings.Hobbies
 {
     public class Brothel
     {
-
-
         public double SetHappiness
         {
             get { return 8; }

@@ -41,7 +41,7 @@
             this.GoBack.Name = "GoBack";
             this.GoBack.Size = new System.Drawing.Size(152, 36);
             this.GoBack.TabIndex = 0;
-            this.GoBack.Text = "Menu";
+            this.GoBack.Text = "Menu Principal";
             this.GoBack.UseVisualStyleBackColor = true;
             this.GoBack.Click += new System.EventHandler(this.GoBack_Click);
             // 
@@ -75,13 +75,15 @@
             // 
             // InGameMenu
             // 
+            this.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Controls.Add(this.InGameQuit);
             this.Controls.Add(this.Save);
             this.Controls.Add(this.InGameSettings);
             this.Controls.Add(this.GoBack);
-            this.Location = new System.Drawing.Point(300, 100);
+            this.Location = new System.Drawing.Point(996, 60);
             this.Name = "InGameMenu";
             this.Size = new System.Drawing.Size(158, 168);
             this.ResumeLayout(false);

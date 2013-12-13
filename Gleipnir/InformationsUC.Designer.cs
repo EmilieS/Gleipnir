@@ -48,6 +48,7 @@
             this.changeGoldOfferings.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("changeGoldOfferings.BackgroundImage")));
             this.changeGoldOfferings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.changeGoldOfferings.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.changeGoldOfferings.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.changeGoldOfferings.Location = new System.Drawing.Point(934, 3);
             this.changeGoldOfferings.Name = "changeGoldOfferings";
             this.changeGoldOfferings.Size = new System.Drawing.Size(94, 28);
@@ -118,7 +119,6 @@
             this.menuButton.TabIndex = 14;
             this.menuButton.Text = "Menu";
             this.menuButton.UseVisualStyleBackColor = true;
-            this.menuButton.Click += new System.EventHandler(this.menuButton_Click);
             // 
             // Village
             // 

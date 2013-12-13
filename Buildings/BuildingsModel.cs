@@ -34,8 +34,9 @@ namespace Buildings
             //_robustness = 0;
             _isBought = false;
             _ownerVillage = ownerVillage;
-            ownerVillage.Game.AddBuildingIntheList(this);//needs to be in village !
+            ownerVillage.Game.AddBuildingIntheList(this); //needs to be in village !
         }
+
         public int HorizontalPos
         {
             get { return _horizontalPos; }
@@ -71,6 +72,5 @@ namespace Buildings
             get { return _isBought; }
             set { _isBought = value; }
         }
-
     }
 }

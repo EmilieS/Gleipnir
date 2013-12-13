@@ -16,14 +16,12 @@ namespace GamePages
         GameEventUC[] eventTab = new GameEventUC[10];
         FIFOList _eventList;
 
-        int i;
         int positionX;
         int positionY;
         public EventFluxUC()
         {
             InitializeComponent();
             _eventList = new FIFOList(10);
-            i = 0;
             positionX = 0;
             positionY = 0;
         }
@@ -94,7 +92,6 @@ namespace GamePages
         {
             get { return _items; }
         }
-
 
         public void Push(GameEventUC v)
         {

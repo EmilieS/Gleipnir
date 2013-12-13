@@ -28,6 +28,7 @@ namespace GamePages
         Options options;
         Game.Game _startedGame;
         traceBox trace;
+
         private ActionState actionState;
         string traceMessages;
         
@@ -40,6 +41,7 @@ namespace GamePages
 
         public GeneralPage()
         {
+            // Create windows objects
             _home = new HomepageUC();
             _gameMenu = new InGameMenu();
             _actionMenu = new TabIndex();
@@ -48,55 +50,23 @@ namespace GamePages
             _eventFlux = new EventFluxUC();
             _scenarioBox = new ScenarioBox(this);
             InitializeComponent();
-            _startedGame = new Game.Game();
+
+            // Show home page
             _home.Launched += IsStarted_Changed;
             _home.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
             this.Controls.Add(_home);
             _home.Show();
-            PushAlert( "coucoudfghjkjhgfd","coucou1");
-            PushAlert( "coucou2546"    ,  "coucou2");
-            PushAlert( "coucou4543"  ,"coucou3" );
-            PushAlert( "coucou44545"   ,"coucou4" );
-            PushAlert( "coucou54545"   ,"coucou5" );
-            PushAlert( "coucou65454"   ,"coucou6" );
-            PushAlert( "coucou75454"   ,"coucou7" );
-            PushAlert( "coucou8888"   ,"coucou8" );
-            PushAlert("coucou9", "coucou");
-            PushAlert("coucou10", "coucou");
-            PushAlert("coucou11", "coucou");
-            //PushAlert("coucou12", "coucou");
-            //PushAlert("coucou", "coucou");
-            //PushAlert("coucou", "coucou");
-            //PushAlert("coucou", "coucou");
-            _gameMenu.ExpectGoBackToMenu += GoBackToMenu;
         }
         
         public void IsStarted_Changed(object sender, PropertyChangedEventArgs e)
         {
-            this.Controls.Remove(_home);
-            _actionMenu.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top);
-            //ActionMenu.Bottom = 3;
-            this.Controls.Add(_actionMenu);
-            _actionMenu.Show();
-            this.Controls.Add(_scenarioBox);
-            _scenarioBox.Show();
-            _stats.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
-            this.Controls.Add(_stats);
-            _stats.Show();
-            //TODO : Create InfoBox
-            _infoBox.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
-            this.Controls.Add(_infoBox);
-            _infoBox.Show();
-            _eventFlux.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
-            this.Controls.Add(_eventFlux);
-            _eventFlux.Show();
-            _stats.StepByStep.Visible = true;
+            // Hide home page
+            _home.Hide();
+            //this.Controls.Remove(_home);
 
-            trace = new traceBox();
-            trace.Show();
-            Step();
+            // Create the game
+            _startedGame = new Game.Game();
 
-            // Generate grid & add it
             #region grid generation
             options = new Options();
             _board = new Board();
@@ -111,7 +81,8 @@ namespace GamePages
                     _grid[i, j].Left = 220 + (j * _grid[i, j].Width);
                     _grid[i, j].Top = 40 + (i * _grid[i, j].Height);
                     // Add it
-                    Controls.Add(_grid[i, j]);
+                    this.Controls.Add(_grid[i, j]);
+                    _grid[i, j].SendToBack();
 
                     // Set up event handling for it.
                     _grid[i, j].MouseMove += new MouseEventHandler(SquareControl_MouseMove);
@@ -119,17 +90,87 @@ namespace GamePages
                     _grid[i, j].Click += new EventHandler(SquareControl_Click);
                 }
             }
+            // Set the grid
             _board.SetForNewGame();
             UpdateGrid(_board, _grid);
             #endregion
+            #region Window elements
+            #region Add all elements
+            this.Controls.Add(_actionMenu);
+            this.Controls.Add(_scenarioBox);
+            this.Controls.Add(_stats);
+            this.Controls.Add(_infoBox);
+            this.Controls.Add(_eventFlux);
+            this.Controls.Add(_gameMenu);
+            #endregion
+            #region Configure all elements
+            // ActionMenu
+            _actionMenu.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top);
+            _actionMenu.SendToBack();
+            _actionMenu.Show();
 
+            // ScenarioBox
+            _scenarioBox.Anchor = AnchorStyles.Bottom;
+            _scenarioBox.SendToBack();
+            _scenarioBox.Show();
+
+            // Stats
+            _stats.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+            _stats.SendToBack();
+            _stats.Show();
+            _stats.StepByStep.Visible = true;
+
+            // InfoBox
+            _infoBox.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            _infoBox.SendToBack();
+            _infoBox.Show();
+
+            // GameMenu
+            _gameMenu.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            _gameMenu.BringToFront();
+            _gameMenu.Hide();
+            _gameMenu.ExpectGoBackToMenu += GoBackToMenu;
+
+            // EventFluw
+            _eventFlux.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            _eventFlux.SendToBack();
+            _eventFlux.Show();
+            #endregion
+            #endregion
+
+            #region Infobox tests
+            PushAlert("coucoudfghjkjhgfd", "coucou1");
+            PushAlert("coucou2546", "coucou2");
+            PushAlert("coucou4543", "coucou3");
+            PushAlert("coucou44545", "coucou4");
+            PushAlert("coucou54545", "coucou5");
+            PushAlert("coucou65454", "coucou6");
+            PushAlert("coucou75454", "coucou7");
+            PushAlert("coucou8888", "coucou8");
+            PushAlert("coucou9", "coucou");
+            PushAlert("coucou10", "coucou");
+            PushAlert("coucou11", "coucou");
+            //PushAlert("coucou12", "coucou");
+            //PushAlert("coucou", "coucou");
+            //PushAlert("coucou", "coucou");
+            //PushAlert("coucou", "coucou");
+            #endregion
+
+            #region Trace Window
+            trace = new traceBox();
+            trace.Show();
+            #endregion
+            
+            Step();
         }
+
         internal void LockEverything()
         {
             _actionMenu.Enabled = false;
             _stats.Enabled = false;
             _infoBox.Enabled = false;
             _eventFlux.Enabled = false;
+            _scenarioBox.Enabled = false;
         }
         internal void UnLockEverything()
         {
@@ -137,10 +178,21 @@ namespace GamePages
             _stats.Enabled = true;
             _infoBox.Enabled = true;
             _eventFlux.Enabled = true;
+            _scenarioBox.Enabled = true;
         }
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
         {
-            _actionMenu.Visible = _infoBox.Visible = _stats.Visible = false;
+            LockEverything();
+            _actionMenu.Hide();
+            this.Controls.Remove(_actionMenu);
+            _infoBox.Hide();
+            this.Controls.Remove(_infoBox);
+            _scenarioBox.Hide();
+            this.Controls.Remove(_scenarioBox);
+            _stats.Hide();
+            this.Controls.Remove(_stats);
+            _eventFlux.Hide();
+            this.Controls.Remove(_eventFlux);
 
             this.Controls.Add(_home);
             _home.Show();
@@ -341,6 +393,22 @@ namespace GamePages
             }
         }
 
+        // InGameMenuButton Events
+        private void menuButton_Click(object sender, EventArgs e)
+        {
+            if (_gameMenu.IsOpen)
+            {
+                _gameMenu.Hide();
+                _gameMenu.IsOpen = false;
+            }
+            else
+            {
+                _gameMenu.Show();
+                _gameMenu.IsOpen = true;
+            }
+        }
+
+        // Game next Step
         internal void Step()
         {
             _startedGame.NextStep();
@@ -349,8 +417,9 @@ namespace GamePages
                 events.Do(this);
                 events.PublishMessage(this);
             }
-            //to go faster...
-            for (int i = 0; i < 50; i++)
+
+            #region Go FASTER
+            /*for (int i = 0; i < 50; i++)
             {
                 _startedGame.NextStep();
                 foreach (IEvent events in _startedGame.EventList)
@@ -359,11 +428,8 @@ namespace GamePages
                     events.PublishMessage(this);
                 }
 
-            }
-            //-----------------
+            }*/
+            #endregion
         }
-
-
-
     }
 }

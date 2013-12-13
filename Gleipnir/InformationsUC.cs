@@ -16,23 +16,35 @@ namespace GamePages
         readonly GeneralPage _page;
 
         // TODO : Complete the Transitions, Create ingame menu, go back to a Main menu
-        InGameMenu Menu;
-        public InformationsUC( GeneralPage p )
+        InGameMenu menu;
+        public InformationsUC(GeneralPage p)
         {
             _page = p;
-            Menu = new InGameMenu();
+            menu = new InGameMenu();
             InitializeComponent();
-        }
 
-        private void menuButton_Click(object sender, EventArgs e)
-        {
-            this.Controls.Add(Menu);
-            Menu.Show();
+            menuButton.Click += menuButton_Click;
         }
 
         private void StepByStep_Click(object sender, EventArgs e)
         {
             _page.Step();
+        }
+
+        private void menuButton_Click(object sender, EventArgs e)
+        {
+            if (menu.IsOpen)
+            {
+                menu.Hide();
+                _page.Controls.Remove(menu);
+                menu.IsOpen = false;
+            }
+            else
+            {
+                _page.Controls.Add(menu);
+                menu.Show();
+                menu.IsOpen = true;
+            }
         }
     }
 }
