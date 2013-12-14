@@ -82,7 +82,7 @@ namespace Game
             Game.Villages[0].VillagerAdded();//hmmmmm
             Game.Villages[0].Jobs.Farmer.AddPerson(this);
         }
-
+        public int _unique_id;
         //TODO : generate name.
         readonly string _name;
         Family _parentFamily;
@@ -154,11 +154,13 @@ namespace Game
         /// <param name="lifeExpectancy"></param>
         public void SetLifeExpectancy(float lifeExpectancy)
         {
+            double lifeExpectancy2 = _lifeExpectancy; //debug code.
             if (lifeExpectancy < 0)
             {
                 throw new IndexOutOfRangeException();
             }
             _lifeExpectancy = lifeExpectancy;
+            Debug.Assert(lifeExpectancy2 >= _lifeExpectancy);
         }
 
         /// <summary>
@@ -167,20 +169,21 @@ namespace Game
         /// <param name="lifeExpectancy"></param>
         public void SetLifeExpectancyLeft(double timeLeft)
         {
-
+            double lifeExpectancy = _lifeExpectancy; //debug code.
             if (_age < _lifeExpectancy && _age + timeLeft < _lifeExpectancy)
             {
                 _lifeExpectancy = _age + timeLeft;
             }
-
+            Debug.Assert(lifeExpectancy>=_lifeExpectancy);
         }
 
         /// <summary>
         /// Reduces the life expectancy by 'time'.(minimum is 0)
         /// </summary>
         /// <param name="time"></param>
-        public void ReduceLifeExpectancy(float timeleft)
+        public void ReduceLifeExpectancy(double timeleft)
         {
+            double lifeExpectancy = _lifeExpectancy;//debug code.
             if (_lifeExpectancy > timeleft)
             {
                 _lifeExpectancy -= timeleft;
@@ -189,6 +192,7 @@ namespace Game
             {
                 _lifeExpectancy = 0;
             }
+            Debug.Assert(lifeExpectancy>=_lifeExpectancy);
         }
 
         /// <summary>
@@ -522,7 +526,11 @@ namespace Game
 
             }
             Debug.Assert(((StatusInFamily == Status.ENGAGED || StatusInFamily == Status.MARRIED) && _fiance != null) || ((StatusInFamily == Status.SINGLE || StatusInFamily == Status.MOURNING) && _fiance == null), "Dans DieOrIsAlive");
-            if (IsDead()) { eventList.Add(new VillagerDyingEvent(this, _parentFamily.Name)); Destroy(); }
+            if (IsDead())
+            { 
+                eventList.Add(new VillagerDyingEvent(this, _parentFamily.Name)); 
+                Destroy(); 
+            }
         }
         override internal void CloseStep(List<IEvent> eventList)
         {

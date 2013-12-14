@@ -46,7 +46,7 @@ namespace Game
             _father.ParentFamily = this;
 
         }
-
+        static int villager_count; //POUR DEBUG
         Village _ownerVillage;
         readonly HistorizedValue<int, Family> _goldStash;
         Villager _mother;
@@ -84,7 +84,9 @@ namespace Game
                 throw new InvalidOperationException("Missing parent");
             }
             var name = this.FirstNameList.NextName;
+            villager_count++;
             Villager kid = new Villager(_ownerVillage.Game, this, name);
+            kid._unique_id = villager_count;
             _familyMembers.Add(kid);
             return kid;
         }

@@ -79,19 +79,19 @@ namespace Game
             string toPush;
             if ((GameItem.Health & Healths.DEPRESSED) != 0)
             {
-                toPush = String.Format("{0} {1} s'est suicidé", GameItem.Name, _familyName);
+                toPush = String.Format("{0} {1} s'est suicidé {2}", GameItem.Name, _familyName, GameItem._unique_id);
             }
             else if ((GameItem.Health & Healths.SICK) != 0)
             {
-                toPush = String.Format("{0} {1} est mort de sa maladie", GameItem.Name, _familyName);
+                toPush = String.Format("{0} {1} est mort de sa maladie {2}", GameItem.Name, _familyName, GameItem._unique_id);
             }
-            else if (GameItem.Age > 80)//80 à revoir !
+            else if (GameItem.Age > 80*12)//80 à revoir !
             {
-                toPush = String.Format("{0} {1} est mort de viellesse", GameItem.Name, _familyName);
+                toPush = String.Format("{0} {1} est mort de viellesse {2}", GameItem.Name, _familyName, GameItem._unique_id);
             }
             else
             {
-                toPush = String.Format("{0} {1} est mort mystèrieusement", GameItem.Name, _familyName);
+                toPush = String.Format("{0} {1} est mort mystèrieusement {2}", GameItem.Name, _familyName, GameItem._unique_id);
             }
             //Debug.Assert(toPush == "i");//va bien dedans!
             b.PushAlert(toPush,"Mort");
