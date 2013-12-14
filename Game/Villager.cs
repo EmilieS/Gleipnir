@@ -531,9 +531,17 @@ namespace Game
             if (_faith.Conclude()) { eventList.Add(new EventProperty<Villager>(this, "Faith")); }
             if (_health.Conclude())
             {
-                if ((_health.Current & Healths.UNHAPPY) != 0 && (_health.Historic.Last & Healths.UNHAPPY) == 0)
+                if ((_health.Current & Healths.UNHAPPY) != 0)
                 {
-                    eventList.Add(new VillagerCallForHelp(this));
+                    if (_health.Historic.Count > 1)
+                    {
+                        if ((_health.Historic[1] & Healths.UNHAPPY) == 0)
+                            eventList.Add(new VillagerCallForHelp(this));
+                    }
+                    else
+                    {
+                        eventList.Add(new VillagerCallForHelp(this));
+                    }
                 }
                 else { eventList.Add(new EventProperty<Villager>(this, "Health")); }
             }

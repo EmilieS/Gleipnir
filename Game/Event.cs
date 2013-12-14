@@ -105,7 +105,7 @@ namespace Game
         }
         override public void PublishMessage(IWindow b)
         {
-            b.PushAlert(String.Format("{0} prie que son malheur soit bientot terminé.", GameItem.Name), "Prière");
+            b.PushAlert(String.Format("{0} {1} prie que son malheur soit bientot terminé.", GameItem.Name, GameItem.ParentFamily.Name), "Prière");
         }
     }
     public class EpidemicDeclaredEvent : Event<GodSpell.Epidemic>
