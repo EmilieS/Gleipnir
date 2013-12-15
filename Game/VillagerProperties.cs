@@ -34,7 +34,8 @@ namespace Game
             DEPRESSED = 4,
             UNHAPPY=1<<4,
             HERETIC=1<<5,
-            ASSASSINATED=1<<6
+            ASSASSINATED=1<<6,
+            EARTHQUAKE_INJURED=1<<7
         };
         public enum Status
         {

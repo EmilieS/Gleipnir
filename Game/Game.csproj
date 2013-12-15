@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Buildings\BuildingsList.cs" />
     <Compile Include="GodSpell\Deluge.cs" />
+    <Compile Include="GodSpell\Earthquake.cs" />
     <Compile Include="GodSpell\Epidemic.cs" />
     <Compile Include="Virus.cs" />
     <Compile Include="Jobs\Apothecary.cs" />
