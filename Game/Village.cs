@@ -17,6 +17,7 @@ namespace Game
         int _offeringsPoints;
         internal readonly HistorizedValue<int, Village> _villagePop;
         public Buildings.BuildingsList Buildings;
+        internal List<Buildings.House> EmptyHouseList;
 
         public double VillageFaith { get { return _villageFaith; } }
         public double VillageHappiness { get { return _villageHappiness; } }
@@ -28,6 +29,8 @@ namespace Game
         internal Village(Game thisGame, string name)
             : base(thisGame)
         {
+            Buildings = new Buildings.BuildingsList(this);
+            EmptyHouseList = new List<Buildings.House>();
             _villagePop = new HistorizedValue<int, Village>(this, "_villagePop", 20);
             Debug.Assert(!String.IsNullOrWhiteSpace(name));
             Debug.Assert(thisGame != null, "thisGame is null!");
@@ -53,6 +56,18 @@ namespace Game
             var name = Game.NameList.NextName;
             var newFamily = new Family(Game, mother, father, name);
             _familiesList.Add(newFamily);
+            Buildings.House house;
+            if (EmptyHouseList.Count == 0)
+            {
+                house = new Buildings.House(this, Jobs.Construction_worker.Workers.Count > 0);
+            }
+            else
+            {
+                house = EmptyHouseList[0];
+                EmptyHouseList.Remove(house);
+            }
+            house.Family = newFamily;
+            newFamily.House = house;
             return newFamily;
         }
         public Family CreateFamilyFromScratch()
@@ -64,6 +79,9 @@ namespace Game
             var name = Game.NameList.NextName;
             var newFamily = new Family(Game, VillagerAF, VillagerAM, name);
             _familiesList.Add(newFamily);
+            Buildings.House house = new Buildings.House(this);
+            house.Family = newFamily;
+            newFamily.House = house;
             return newFamily;
         }
         public Family CreateFamilyFromScratch(JobsModel mothersJob, JobsModel fathersJob)
@@ -80,6 +98,16 @@ namespace Game
             mothersJob.AddPerson(VillagerAF);
             fathersJob.AddPerson(VillagerAM);
             return newFamily;
+        }
+        internal void AddEmptyHouse(Buildings.House house)
+        {
+            Debug.Assert(!EmptyHouseList.Contains(house));
+            EmptyHouseList.Add(house);
+        }
+        internal void RemoveEmptyHouse(Buildings.House house)
+        {
+            Debug.Assert(EmptyHouseList.Contains(house));
+            EmptyHouseList.Remove(house);
         }
 
         /// <summary>

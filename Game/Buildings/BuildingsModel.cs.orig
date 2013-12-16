@@ -46,8 +46,11 @@ namespace Game.Buildings
         }
         abstract internal void AddToList();
 
+<<<<<<< HEAD
+=======
         public int Hp { get { return _hp; } internal set { _hp = value; } }
         public int MaxHp { get{ return _maxHp; } internal set{_maxHp=value; }}
+
         int _damageRepairTimer;
         /// <summary>
         /// must be positive.
@@ -81,6 +84,7 @@ namespace Game.Buildings
         }
         //TODO : Repair.
         //TODO : Timer since Damage
+>>>>>>> origin/Earthquake
         public int HorizontalPos
         {
             get { return _horizontalPos; }
@@ -128,6 +132,9 @@ namespace Game.Buildings
             _village = null;
         }
         abstract internal void OnOnDestroy();
+<<<<<<< HEAD
+=======
+
 
         internal override void Evolution()
         {
@@ -171,6 +178,7 @@ namespace Game.Buildings
 
         }
 
+>>>>>>> origin/Earthquake
         internal override void CloseStep(List<IEvent> eventList)
         {
             //throw new NotImplementedException();
