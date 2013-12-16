@@ -105,10 +105,21 @@ namespace Game
         }
         override public void PublishMessage(IWindow b)
         {
-            b.PushAlert(String.Format("{0} prie que son malheur soit bientot terminé.", GameItem.Name), "Prière");
+            b.PushAlert(String.Format("{0} {1} prie que son malheur soit bientot terminé.", GameItem.Name, GameItem.ParentFamily.Name), "Prière");
         }
     }
+    public class EpidemicDeclaredEvent : Event<GodSpell.Epidemic>
+    {
+        internal EpidemicDeclaredEvent(GodSpell.Epidemic e)
+            : base(e)
+        {
+        }
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushAlert("Plusieurs vilageois sont malades, la population cherche votre aide.", "Epidémie");
+        }
 
+    }
 
 
     public class FamilyEndEvent : Event<Family>

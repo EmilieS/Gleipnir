@@ -461,7 +461,7 @@ namespace GamePages
                 _game.NextStep();
                 foreach (IEvent events in _game.EventList)
                 {
-                    events.Do(this);
+                   events.Do(this);
                     events.PublishMessage(this);
                 }
 
