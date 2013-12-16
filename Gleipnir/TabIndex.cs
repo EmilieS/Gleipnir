@@ -14,14 +14,23 @@ namespace GamePages
     public partial class TabIndex : UserControl
     {
         readonly GeneralPage _page;
+        bool _isOnBought;
 
         public TabIndex(GeneralPage p)
         {
             _page = p;
+            _isOnBought = false;
             InitializeComponent();
 
             Tavern.Click += TavernButton_Click;
         }
+
+        public bool IsOnBought
+        {
+            get { return _isOnBought; }
+            set { _isOnBought = value; }
+        }
+
         internal void ShowUnboughtBuildings()
         {
 
@@ -29,7 +38,7 @@ namespace GamePages
 
         private void TavernButton_Click(object sender, EventArgs e)
         {
-            _page.OnClickTavern();
+            _page.OnBoughtBuilding_Click(11);
             //TODO: check if player can pay
             //TODO: Check if unique
             //TODO: memorise the chosen building choice

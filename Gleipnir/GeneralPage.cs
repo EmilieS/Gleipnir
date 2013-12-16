@@ -30,13 +30,22 @@ namespace GamePages
         traceBox trace;
 
         private ActionState actionState;
+        private BuildingTypeSelected buildingSelected;
+        int buildingIndex;
         string traceMessages;
         
-        public enum ActionState
+        private enum ActionState
         {
             None = 0,
-            InPlace = 1,
-            PlacementFinish = 2,
+            InPlace = 1
+        }
+        private enum BuildingTypeSelected
+        {
+            None = 0,
+            Job = 1,
+            Family = 2,
+            Hobby = 3,
+            Specials = 4
         }
 
         public GeneralPage()
@@ -235,7 +244,7 @@ namespace GamePages
         }
 
         // Grid Methods
-        public void UpdateGrid(Board board, SquareControl[,] grid)
+        private void UpdateGrid(Board board, SquareControl[,] grid)
         {
             // Map the current game board to the square controls.
             for (int i = 0; i < 20; i++)
@@ -247,13 +256,26 @@ namespace GamePages
                 }
             }
         }
-        private void MakePlacement(int row, int col)
+        private void PlaceJobHouse(int row, int col)
         {
-            int buildingValue = Board.JobHouse;
-            _board.UpdateSquares(row, col, buildingValue);
-            actionState = ActionState.PlacementFinish;
+            _board.UpdateSquares(row, col, Board.JobHouse);
         }
-        public void ShowValidPlaces()
+        private void PlaceFamilyHouse(int row, int col)
+        {
+            int buildingValue = Board.FamilyHouse;
+            _board.UpdateSquares(row, col, buildingValue);
+        }
+        private void PlaceHobby(int row, int col)
+        {
+            int buildingValue = Board.Hobby;
+            _board.UpdateSquares(row, col, buildingValue);
+        }
+        private void PlaceSpecial(int row, int col)
+        {
+            int buildingValue = Board.Specials;
+            _board.UpdateSquares(row, col, buildingValue);
+        }
+        private void ShowValidPlaces()
         {
             for (int i = 0; i < 20; i++)
             {
@@ -266,7 +288,7 @@ namespace GamePages
                 }
             }
         }
-        public void HideValidPlaces()
+        private void HideValidPlaces()
         {
             for (int i = 0; i < 20; i++)
             {
@@ -284,7 +306,9 @@ namespace GamePages
             SquareControl squareControl = (SquareControl)sender;
 
             // If the square is Empty and the player wants place a building
-            if (_board.IsValidSquare(squareControl.Row, squareControl.Col) && actionState == ActionState.InPlace)
+            #region Select Empty
+            if (_board.IsValidSquare(squareControl.Row, squareControl.Col) 
+                && actionState == ActionState.InPlace)
             {
                 // If the square is selected and his last content is empty
                 if (!squareControl.IsActive && squareControl.PreviewContents == Board.Empty)
@@ -304,7 +328,6 @@ namespace GamePages
                     {
                         // Create a temporary board to make the move on
                         Board copy_board = new Board(_board);
-                        copy_board.PlaceBuilding(squareControl.Row, squareControl.Col);
 
                         // Set up the move preview
                         for (int i = 0; i < 20; i++)
@@ -325,8 +348,12 @@ namespace GamePages
                 // Change the cursor
                 squareControl.Cursor = Cursors.Hand;
             }
+            #endregion
+
             // If the square is a building
-            else if(_board.IsBuilding(squareControl.Row, squareControl.Col))
+            #region Select Building
+            else if(_board.IsBuilding(squareControl.Row, squareControl.Col) 
+                && actionState == ActionState.None)
             {
                 // If the square is selected
                 if (!squareControl.IsActive)
@@ -346,7 +373,6 @@ namespace GamePages
                     {
                         // Create a temporary board
                         Board copy_board = new Board(_board);
-                        copy_board.PlaceBuilding(squareControl.Row, squareControl.Col);
 
                         // Set up the move preview
                         for (int i = 0; i < 20; i++)
@@ -367,6 +393,7 @@ namespace GamePages
                 // Change the cursor
                 squareControl.Cursor = Cursors.Hand;
             }
+            #endregion
         }
         private void SquareControl_MouseLeave(object sender, EventArgs e)
         {
@@ -402,31 +429,80 @@ namespace GamePages
         private void SquareControl_Click(object sender, EventArgs e)
         {
             // Check the game state to ensure it's the user's turn
-            if (actionState != ActionState.InPlace)
-                return;
-
-            SquareControl squareControl = (SquareControl)sender;
-
-            // If the place is valid, make it
-            if (_board.IsValidSquare(squareControl.Row, squareControl.Col))
+            if (actionState == ActionState.InPlace)
             {
-                // Restore the cursor
-                squareControl.Cursor = System.Windows.Forms.Cursors.Default;
+                SquareControl squareControl = (SquareControl)sender;
 
-                // Make the move
-                MakePlacement(squareControl.Row, squareControl.Col);
+                // Hide Valid places and refresh grid
+                HideValidPlaces();
+                UpdateGrid(_board, _grid);
+                
+                // If the place is valid, make it
+                if (_board.IsValidSquare(squareControl.Row, squareControl.Col))
+                {
+                    // Restore the cursor
+                    squareControl.Cursor = System.Windows.Forms.Cursors.Default;
+
+                    // Place Building
+                    if (buildingSelected == BuildingTypeSelected.Job)
+                        PlaceJobHouse(squareControl.Row, squareControl.Col);
+                    else if (buildingSelected == BuildingTypeSelected.Family)
+                        PlaceFamilyHouse(squareControl.Row, squareControl.Col);
+                    else if (buildingSelected == BuildingTypeSelected.Hobby)
+                        PlaceHobby(squareControl.Row, squareControl.Col);
+                    else if (buildingSelected == BuildingTypeSelected.Specials)
+                        PlaceSpecial(squareControl.Row, squareControl.Col);
+
+                    // Take Offerings Points
+                    _game.AddOrTakeFromOfferings(-(_game.GetBuilding(buildingIndex).GetPrice));
+
+                    // End Placement
+                    actionState = ActionState.None;
+                    buildingSelected = BuildingTypeSelected.None;
+                    _actionMenu.IsOnBought = false;
+
+                    // Update grid
+                    UpdateGrid(_board, _grid);
+                }
+            }
+            else
+            {
+                return;
             }
         }
 
         // ActionTab Buildings Methods
-        public void OnClickTavern()
+        private void FindBuildingSelected(int i)
+        {
+            if (i == 0 || i == 5 || i == 13 || i == 9 || i == 4 || i == 6)
+                buildingSelected = BuildingTypeSelected.Job;
+            else if (i == 1 || i == 2 || i == 8 || i == 11 || i == 12)
+                buildingSelected = BuildingTypeSelected.Hobby;
+            else if (i == 3 || i == 7 || i == 10)
+                buildingSelected = BuildingTypeSelected.Specials;
+            else
+                buildingSelected = BuildingTypeSelected.None;
+        }
+        public void OnBoughtBuilding_Click(int index)
         {
             int playerOfferings = _game.Offerings;
-            var tavern = _game.GetBuilding(11);
-            if (tavern.GetPrice <= playerOfferings)
+            var buildng = _game.GetBuilding(index);
+            buildingIndex = index;
+
+            if (!_actionMenu.IsOnBought && buildng.GetPrice <= playerOfferings)
             {
                 ShowValidPlaces();
                 UpdateGrid(_board, _grid);
+                FindBuildingSelected(index);
+                _actionMenu.IsOnBought = true;
+                actionState = ActionState.InPlace;
+            }
+            else
+            {
+                HideValidPlaces();
+                UpdateGrid(_board, _grid);
+                _actionMenu.IsOnBought = false;
+                actionState = ActionState.None;
             }
         }
 
@@ -456,7 +532,7 @@ namespace GamePages
             }
 
             #region Go FASTER
-            for (int i = 0; i < 50; i++)
+            /*for (int i = 0; i < 50; i++)
             {
                 _game.NextStep();
                 foreach (IEvent events in _game.EventList)
@@ -465,7 +541,7 @@ namespace GamePages
                     events.PublishMessage(this);
                 }
 
-            }
+            }*/
             #endregion
         }
     }

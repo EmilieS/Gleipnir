@@ -52,7 +52,7 @@ namespace Game
             Family FamilyD = v.CreateFamilyFromScratch();
             Family FamilyE = v.CreateFamilyFromScratch();
 
-            _offerings.Current = 100;
+            _offerings.Current = 1000;
 
             #region Set Buildngs Prices
             _buildingsPrices = new BuildingsPrices[14];
@@ -72,6 +72,7 @@ namespace Game
             _buildingsPrices[13] = new BuildingsPrices("unionOfCrafter", 50);
             #endregion
         }
+        
         readonly List<GodSpell.Epidemic> _currentEpidemicList;
         internal readonly List<GameItem> _items;//internal for tests
         readonly List<Village> _villages; //a revoir!
@@ -153,7 +154,7 @@ namespace Game
             Debug.Assert(amount >= 0, "(GoldRemoved) negative amount.");
             _totalGold.Current -= amount;
         }
-        internal void AddOrTakeFromOfferings(int amount)
+        public void AddOrTakeFromOfferings(int amount)
         {
             int result = Offerings + amount;
             if (result < 0) _offerings.Current = 0;

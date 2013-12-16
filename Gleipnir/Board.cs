@@ -328,15 +328,5 @@ namespace GamePages
         {
             squares[row, col] = value;
         }
-
-        /// <summary>
-        /// Place a building on the grid
-        /// </summary>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
-        /// <param name="value"></param>
-        public void PlaceBuilding(int row, int col)
-        {
-        }
     }
 }
