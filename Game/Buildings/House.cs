@@ -9,14 +9,25 @@ namespace Game.Buildings
     public class House: BuildingsModel
     {
         Family _family;
-                public House(Village v, BuildingsList List, string name)
+        public House(Village v, bool IsAProperHouse=true)
             : base(v)
         {
-            Name = name;
+            Name = "Maison";
+            if (IsAProperHouse == true)
+            {
+                Hp = 100;
+                MaxHp = 100;
+            }
+            else
+            {
+                Hp = 5;
+                MaxHp = 15;
+            }
         }
+        public Family Family { get; set; }
         override internal void AddToList()
         {
-            Village.Buildings.Add(this);
+            _village.Buildings.Add(this);
         }
         internal override void OnOnDestroy()
         {
@@ -24,17 +35,31 @@ namespace Game.Buildings
         }
 
 
-        internal override void JustDestroyed()
+        internal override void JustCollapsed()
         {
             if (Hp == 0 && _family != null)
             {
+                
                 foreach (Villager v in _family.FamilyMembers)
                 {
                     v.Kill();
                 }
                 _family = null;
             }
-        }        
+            if (Hp == 0 && Family == null)
+            {
+                Village.RemoveEmptyHouse(this);
+            }
+        }
+
+        internal void FamilyDestroyed()
+        {
+            Family = null;
+            if (Hp > 0)
+            {
+                Village.AddEmptyHouse(this);
+            }
+        }
     }
     
 }

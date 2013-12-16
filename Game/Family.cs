@@ -46,7 +46,7 @@ namespace Game
             _father.ParentFamily = this;
 
         }
-
+        public Buildings.House House { get; internal set; }
         Village _ownerVillage;
         readonly HistorizedValue<int, Family> _goldStash;
         Villager _mother;
@@ -73,7 +73,7 @@ namespace Game
             get { return _ownerVillage; }
             internal set { _ownerVillage = value; }
         }
-        static private void removeFromFamily(Villager villager, Family parentFamily)
+        private void removeFromFamily(Villager villager, Family parentFamily)
         {
             parentFamily.FamilyMembers.Remove(villager);
         }
@@ -250,6 +250,11 @@ namespace Game
             Debug.Assert(_ownerVillage != null, "(OnDestroy) ownerVillage == null !!!!!!");
             _mother = null;
             _father = null;
+            if (House != null)
+            {
+                House.FamilyDestroyed();
+                House = null;
+            }
             Debug.Assert(_ownerVillage.FamiliesList.Contains(this));
             _ownerVillage.FamilyDestroyed(this);
             Debug.Assert(_ownerVillage == null);

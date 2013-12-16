@@ -24,7 +24,7 @@ namespace Game.Buildings
         //private Game g;
         // this a provisory solution : using a new "materials"  to implement robustness
 
-        Village _village;
+        internal Village _village;
         public Village Village { get { return _village; } }
 
         public BuildingsModel(Village v)
@@ -45,8 +45,8 @@ namespace Game.Buildings
         }
         abstract internal void AddToList();
 
-        public int Hp { get; set; }
-        public int MaxHp { get; set; }
+        public int Hp { get { return _hp; } internal set { _hp = value; } }
+        public int MaxHp { get{ return _maxHp; } internal set{_maxHp=value; }}
 
         int _damageRepairTimer;
         /// <summary>
@@ -144,6 +144,7 @@ namespace Game.Buildings
             {
                 if (_destroyedTimer == 3)
                 {
+                    eventList.Add(new BuildingDestroyedEvent(this));
                     Destroy();
                 }
                 else
@@ -151,7 +152,7 @@ namespace Game.Buildings
                     if (_destroyedTimer == 1)
                     {
                         eventList.Add(new BuildingNoHpEvent(this));
-                        JustDestroyed();
+                        JustCollapsed();
                     }
                     _destroyedTimer++;
                 }
@@ -162,14 +163,14 @@ namespace Game.Buildings
             }
         }
 
-        virtual internal void JustDestroyed()
+        virtual internal void JustCollapsed()
         {
 
         }
 
         internal override void CloseStep(List<IEvent> eventList)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
     }
