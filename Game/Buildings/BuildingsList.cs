@@ -8,6 +8,7 @@ namespace Game.Buildings
 {
     public class BuildingsList : IReadOnlyList<BuildingsModel>
     {
+        readonly List<House> _houseList;
         readonly List<ApothecaryOffice> _apothecaryOfficeList;
         readonly List<Baths> _bathsList;
         readonly List<Brothel> _brothelList;
@@ -23,6 +24,7 @@ namespace Game.Buildings
         readonly List<Theater> _theaterList;
         readonly List<UnionOfCrafter> _unionOfCrafterList;
 
+        public IReadOnlyList<House> HouseList { get { return _houseList; } }
         public IReadOnlyList<ApothecaryOffice> ApothecaryOfficeList { get { return _apothecaryOfficeList; } }
         public  IReadOnlyList<BuildingsModel> BathsList { get { return _bathsList; } }
         public  IReadOnlyList<BuildingsModel> BrothelList{ get { return _brothelList; } }
@@ -47,6 +49,7 @@ namespace Game.Buildings
             Game g = village.Game;
             _buildingsList = new List<BuildingsModel>();
 
+            _houseList = new List<House>();
             _apothecaryOfficeList = new List<ApothecaryOffice>();
             _bathsList=new List<Buildings.Baths>();
             _brothelList=new List<Buildings.Brothel>();
@@ -63,6 +66,12 @@ namespace Game.Buildings
             _unionOfCrafterList = new List<Buildings.UnionOfCrafter>();
 
         }
+        internal void Add(House house)
+        {
+            _houseList.Add(house);
+            _buildingsList.Add(house);
+        }
+
         internal void Add(ApothecaryOffice apothecaryOffice)
         {
             _apothecaryOfficeList.Add(apothecaryOffice);
@@ -133,6 +142,11 @@ namespace Game.Buildings
         {
             _unionOfCrafterList.Add(unionOfCrafter);
             _buildingsList.Add(unionOfCrafter);
+        }
+        internal void Remove(House house)
+        {
+            _houseList.Remove(house);
+            _buildingsList.Remove(house);
         }
         internal void Remove(Baths baths)
         {

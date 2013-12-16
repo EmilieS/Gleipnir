@@ -41,6 +41,32 @@ namespace Game
             b.PushTrace(String.Format("Property {0} has changed...", ChangedProperty));
         }
     }
+    public class BuildingNoHpEvent : Event<Buildings.BuildingsModel>
+    {
+        internal BuildingNoHpEvent(Buildings.BuildingsModel building)
+            : base(building)
+        {
+        }
+
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushAlert(String.Format("{0} s'est écroulé", GameItem.Name), "Bâtiment");
+        }
+
+    }
+    public class BuildingDestroyedEvent : Event<Buildings.BuildingsModel>
+    {
+        internal BuildingDestroyedEvent(Buildings.BuildingsModel building)
+            : base(building)
+        {
+        }
+
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushTrace(String.Format("{0} is Destroyed", GameItem.Name));
+        }
+
+    }
     public class GameEventProperty: EventProperty<Game>
     {
         internal GameEventProperty(Game item, string propName)

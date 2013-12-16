@@ -178,6 +178,10 @@ namespace Game
                 }
             }
         }
+        internal void DamagedBuildingsNotRepairedOrRepairedFaithImpact(double amount)
+        {
+            _faithToBeAddedOrRemovedForAllVillagersThisRound += amount;
+        }
         List<string> _currentText;
         public void NextStep() //public for testing (again)
         {

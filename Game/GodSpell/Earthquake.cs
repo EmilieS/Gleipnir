@@ -20,13 +20,16 @@ namespace Game.GodSpell
         internal override void OnDestroy(){}
         internal override void Evolution()
         {
-            //TODO : hit all village buildings.
+            foreach (Buildings.BuildingsModel b in  _village.Buildings)
+            {
+                b.Damage(_force);
+            }
             //TODO in buildings : check how long since last repairs and impact faith of family members or workers.
         }
 
         override internal void DieOrIsAlive(List<IEvent> eventlist)
         {
-            //TO DO : kill off a few people.
+            //TO DO : kill off a few random people.
             Destroy();
         }
         internal override void CloseStep(List<IEvent> eventList){ }              
