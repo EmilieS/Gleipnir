@@ -454,7 +454,7 @@ namespace GamePages
                         PlaceSpecial(squareControl.Row, squareControl.Col);
 
                     // Take Offerings Points
-                    _game.AddOrTakeFromOfferings(-(_game.GetBuilding(buildingIndex).GetPrice));
+                    //_game.AddOrTakeFromOfferings(-(_game.GetBuilding(buildingIndex).GetPrice));
 
                     // End Placement
                     actionState = ActionState.None;
@@ -474,28 +474,32 @@ namespace GamePages
         // ActionTab Buildings Methods
         private void FindBuildingSelected(int i)
         {
-            if (i == 0 || i == 5 || i == 13 || i == 9 || i == 4 || i == 6)
+            if (i >= 0 & i <= 7)
                 buildingSelected = BuildingTypeSelected.Job;
-            else if (i == 1 || i == 2 || i == 8 || i == 11 || i == 12)
+            else if (i >= 8 && i <= 12)
                 buildingSelected = BuildingTypeSelected.Hobby;
-            else if (i == 3 || i == 7 || i == 10)
+            else if (i == 13 || i == 14)
                 buildingSelected = BuildingTypeSelected.Specials;
+            else if (i == 15)
+                buildingSelected = BuildingTypeSelected.Family;
             else
                 buildingSelected = BuildingTypeSelected.None;
         }
         public void OnBoughtBuilding_Click(int index)
         {
-            int playerOfferings = _game.Offerings;
-            var buildng = _game.GetBuilding(index);
             buildingIndex = index;
+            int playerOfferings = _game.Offerings;
+            var buildng = _game.GetBuildingPrices(index);
 
-            if (!_actionMenu.IsOnBought && buildng.GetPrice <= playerOfferings)
+            if (!_actionMenu.IsOnBought 
+                && buildng.GetPrice <= playerOfferings 
+                && actionState == ActionState.None)
             {
+                _actionMenu.IsOnBought = true;
+                actionState = ActionState.InPlace;
                 ShowValidPlaces();
                 UpdateGrid(_board, _grid);
                 FindBuildingSelected(index);
-                _actionMenu.IsOnBought = true;
-                actionState = ActionState.InPlace;
             }
             else
             {

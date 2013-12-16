@@ -54,22 +54,27 @@ namespace Game
 
             _offerings.Current = 1000;
 
+            _buildingsPrices = new BuildingsPrices[17];
             #region Set Buildngs Prices
-            _buildingsPrices = new BuildingsPrices[14];
+            // Jobs
             _buildingsPrices[0] = new BuildingsPrices("apothercaryOffice", 200);
-            _buildingsPrices[1] = new BuildingsPrices("baths", 500);
-            _buildingsPrices[2] = new BuildingsPrices("brothel", 300);
-            _buildingsPrices[3] = new BuildingsPrices("chapel", 450);
+            _buildingsPrices[1] = new BuildingsPrices("forge", 100);
+            _buildingsPrices[2] = new BuildingsPrices("unionOfCrafter", 50);
+            _buildingsPrices[3] = new BuildingsPrices("restaurant", 400);
             _buildingsPrices[4] = new BuildingsPrices("farm", 100);
-            _buildingsPrices[5] = new BuildingsPrices("forge", 100);
-            _buildingsPrices[6] = new BuildingsPrices("mill", 375);
-            _buildingsPrices[7] = new BuildingsPrices("offeringsWarehouse", 150);
-            _buildingsPrices[8] = new BuildingsPrices("partyRoom", 250);
-            _buildingsPrices[9] = new BuildingsPrices("restaurent", 400);
-            _buildingsPrices[10] = new BuildingsPrices("tablePlace", 0);
+            _buildingsPrices[5] = new BuildingsPrices("mill", 375);
+            _buildingsPrices[6] = new BuildingsPrices("militaryCamp", 600);
+            _buildingsPrices[7] = new BuildingsPrices("clothesShop", 300);
+            // Hobbies
+            _buildingsPrices[8] = new BuildingsPrices("baths", 500);
+            _buildingsPrices[9] = new BuildingsPrices("brothel", 300);
+            _buildingsPrices[10] = new BuildingsPrices("partyRoom", 250);
             _buildingsPrices[11] = new BuildingsPrices("tavern", 200);
             _buildingsPrices[12] = new BuildingsPrices("theater", 600);
-            _buildingsPrices[13] = new BuildingsPrices("unionOfCrafter", 50);
+            // Specials
+            _buildingsPrices[13] = new BuildingsPrices("chapel", 450);
+            _buildingsPrices[14] = new BuildingsPrices("offeringsWarehouse", 150);
+            _buildingsPrices[15] = new BuildingsPrices("house", 70);
             #endregion
         }
         
@@ -102,7 +107,7 @@ namespace Game
         public double AverageHappiness { get { return _averageHappiness; } }
         public double AverageFaith { get { return _averageFaith; } }
 
-        public BuildingsPrices GetBuilding(int index)
+        public BuildingsPrices GetBuildingPrices(int index)
         {
             return _buildingsPrices[index];
         }
