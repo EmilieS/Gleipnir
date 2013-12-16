@@ -42,7 +42,7 @@
             // NameView
             // 
             this.NameView.AutoSize = true;
-            this.NameView.Location = new System.Drawing.Point(7, 4);
+            this.NameView.Location = new System.Drawing.Point(20, 37);
             this.NameView.Name = "NameView";
             this.NameView.Size = new System.Drawing.Size(41, 13);
             this.NameView.TabIndex = 0;
@@ -51,7 +51,7 @@
             // ElementName
             // 
             this.ElementName.AutoSize = true;
-            this.ElementName.Location = new System.Drawing.Point(75, 4);
+            this.ElementName.Location = new System.Drawing.Point(113, 37);
             this.ElementName.Name = "ElementName";
             this.ElementName.Size = new System.Drawing.Size(34, 13);
             this.ElementName.TabIndex = 1;
@@ -60,7 +60,7 @@
             // GoldView
             // 
             this.GoldView.AutoSize = true;
-            this.GoldView.Location = new System.Drawing.Point(7, 37);
+            this.GoldView.Location = new System.Drawing.Point(22, 50);
             this.GoldView.Name = "GoldView";
             this.GoldView.Size = new System.Drawing.Size(35, 13);
             this.GoldView.TabIndex = 2;
@@ -69,7 +69,7 @@
             // Gold
             // 
             this.Gold.AutoSize = true;
-            this.Gold.Location = new System.Drawing.Point(75, 37);
+            this.Gold.Location = new System.Drawing.Point(113, 50);
             this.Gold.Name = "Gold";
             this.Gold.Size = new System.Drawing.Size(34, 13);
             this.Gold.TabIndex = 3;
@@ -78,7 +78,7 @@
             // FaithView
             // 
             this.FaithView.AutoSize = true;
-            this.FaithView.Location = new System.Drawing.Point(7, 71);
+            this.FaithView.Location = new System.Drawing.Point(22, 63);
             this.FaithView.Name = "FaithView";
             this.FaithView.Size = new System.Drawing.Size(39, 13);
             this.FaithView.TabIndex = 4;
@@ -87,7 +87,7 @@
             // Faith
             // 
             this.Faith.AutoSize = true;
-            this.Faith.Location = new System.Drawing.Point(75, 71);
+            this.Faith.Location = new System.Drawing.Point(113, 63);
             this.Faith.Name = "Faith";
             this.Faith.Size = new System.Drawing.Size(34, 13);
             this.Faith.TabIndex = 5;
@@ -96,7 +96,7 @@
             // MemberView
             // 
             this.MemberView.AutoSize = true;
-            this.MemberView.Location = new System.Drawing.Point(7, 102);
+            this.MemberView.Location = new System.Drawing.Point(22, 76);
             this.MemberView.Name = "MemberView";
             this.MemberView.Size = new System.Drawing.Size(56, 13);
             this.MemberView.TabIndex = 6;
@@ -105,7 +105,7 @@
             // NbMembers
             // 
             this.NbMembers.AutoSize = true;
-            this.NbMembers.Location = new System.Drawing.Point(75, 102);
+            this.NbMembers.Location = new System.Drawing.Point(113, 76);
             this.NbMembers.Name = "NbMembers";
             this.NbMembers.Size = new System.Drawing.Size(34, 13);
             this.NbMembers.TabIndex = 7;
@@ -113,7 +113,7 @@
             // 
             // GodMeeting
             // 
-            this.GodMeeting.Location = new System.Drawing.Point(10, 132);
+            this.GodMeeting.Location = new System.Drawing.Point(128, 92);
             this.GodMeeting.Name = "GodMeeting";
             this.GodMeeting.Size = new System.Drawing.Size(75, 23);
             this.GodMeeting.TabIndex = 8;
@@ -124,6 +124,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Info;
             this.Controls.Add(this.GodMeeting);
             this.Controls.Add(this.NbMembers);
             this.Controls.Add(this.MemberView);
@@ -133,9 +134,9 @@
             this.Controls.Add(this.GoldView);
             this.Controls.Add(this.ElementName);
             this.Controls.Add(this.NameView);
-            this.Location = new System.Drawing.Point(830, 400);
+            this.Location = new System.Drawing.Point(870, 450);
             this.Name = "InformationBox";
-            this.Size = new System.Drawing.Size(190, 173);
+            this.Size = new System.Drawing.Size(270, 150);
             this.ResumeLayout(false);
             this.PerformLayout();
 

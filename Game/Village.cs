@@ -9,13 +9,17 @@ namespace Game
 {
     public class Village : GameItem
     {
-        List<Family> _family;
-        List<JobsModel> _jobs;
-        double _familiesGold;
+        //List<JobsModel> _jobs;// needs to be cleansed
+        public JobList Jobs;
+        int _familiesGold;
         double _villageFaith;
         double _villageHappiness;
         int _offeringsPoints;
+        internal readonly HistorizedValue<int, Village> _villagePop;
+        public Buildings.BuildingsList Buildings;
 
+        public double VillageFaith { get { return _villageFaith; } }
+        public double VillageHappiness { get { return _villageHappiness; } }
         readonly string _name;
         FamilyInVillageList _familiesList;
         public IReadOnlyList<Family> FamiliesList { get { return _familiesList; } }
@@ -24,11 +28,14 @@ namespace Game
         internal Village(Game thisGame, string name)
             : base(thisGame)
         {
+            _villagePop = new HistorizedValue<int, Village>(this, "_villagePop", 20);
             Debug.Assert(!String.IsNullOrWhiteSpace(name));
             Debug.Assert(thisGame != null, "thisGame is null!");
             _name = name;
             _familiesList = new FamilyInVillageList(this);
-            _jobs = CreateJobs();
+            //_jobs = CreateJobs();
+            Jobs = new JobList(this);
+            _offeringsPoints = 1;
             #region Old code
             /* _jobs = new List<Jobs>;
             _family = families;
@@ -53,56 +60,49 @@ namespace Game
              */
             #endregion
         }
-        public Village(List<Family> families, Game thisGame)//a éliminer.
-            : base(thisGame)
+        internal void VillagerAdded()
         {
-            _familiesList = new FamilyInVillageList(this);
-            for (int i=0; i<families.Count; i++)
-            {
-            _familiesList.Add(families[i]);
-            }
+            _villagePop.Current++;
         }
 
-        /// <summary>
-        /// Add a family to the village
-        /// </summary>
-        /// <param name="family"></param>
-        public void AddFamily(Family family)
-        {
-            if (_family.Contains(family)) throw new InvalidOperationException();
-            else _family.Add(family);
-        }
-        
-        /// <summary>
-        /// Remove a familyfrom the village
-        /// </summary>
-        /// <param name="family"></param>
-        public void RemoveFamily(Family family)
-        {
-            if (_family.Contains(family)) _family.Remove(family);
-            else throw new InvalidOperationException();
-        }
 
         public Family CreateFamily(Villager mother, Villager father)
         {
             if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE) { throw new InvalidOperationException("gender issue! (CreateFamily)"); }
             if (mother.ParentFamily != null && father.ParentFamily != null)
             {
-                if (mother.ParentFamily == father.ParentFamily){ throw new InvalidOperationException("same family!"); }
+                if (mother.ParentFamily == father.ParentFamily) { throw new InvalidOperationException("same family!"); }
             }
-            var newFamily= new Family(Game, mother, father, "default");
+            var name = Game.NameList.NextName;
+            var newFamily = new Family(Game, mother, father, name);
             _familiesList.Add(newFamily);
             return newFamily;
         }
-        //TODO : CreateFamilyFromScratch
+
         public Family CreateFamilyFromScratch()
         {
             //Debug.Assert(_thisGame != null, "_thisGame est null!");
             Debug.Assert(Game != null, "Game est null!");
-            Villager VillagerAM = new Villager(Game, Genders.MALE);
-            Villager VillagerAF = new Villager(Game, Genders.FEMALE);
-            var newFamily = new Family(Game, VillagerAF, VillagerAM, "default");
+            Villager VillagerAM = new Villager(Game, Genders.MALE, Game.FirstNameList.NextName);
+            Villager VillagerAF = new Villager(Game, Genders.FEMALE, Game.FirstNameList.NextName);
+            var name = Game.NameList.NextName;
+            var newFamily = new Family(Game, VillagerAF, VillagerAM, name);
             _familiesList.Add(newFamily);
+            return newFamily;
+        }
+        public Family CreateFamilyFromScratch(JobsModel mothersJob, JobsModel fathersJob)
+        {
+            //Debug.Assert(_thisGame != null, "_thisGame est null!");
+            Debug.Assert(Game != null, "Game est null!");
+            Villager VillagerAM = new Villager(Game, Genders.MALE, Game.FirstNameList.NextName);
+            Villager VillagerAF = new Villager(Game, Genders.FEMALE, Game.FirstNameList.NextName);
+            var name = Game.NameList.NextName;
+            var newFamily = new Family(Game, VillagerAF, VillagerAM, name);
+            _familiesList.Add(newFamily);
+            VillagerAF.Job.RemovePerson(VillagerAF);
+            VillagerAM.Job.RemovePerson(VillagerAM);
+            mothersJob.AddPerson(VillagerAF);
+            fathersJob.AddPerson(VillagerAM);
             return newFamily;
         }
 
@@ -110,30 +110,24 @@ namespace Game
         /// Gets the total gold for the village.
         /// Addition of all families' gold
         /// </summary>
-        public double Gold { get { return _familiesGold; } }
+        public int Gold { get { return _familiesGold; } }
 
-        /// <summary>
-        /// Gets all families in the village
-        /// </summary>
-        public List<Family> ListOfFamilies { get { return _family; } }
-        
         /// <summary>
         /// Addition of all gold of all families
         /// </summary>
         /// <returns></returns>
         public void CalculateVillageGold()
         {
-            double result = 0;
+            int result = 0;
             foreach (Family fam in _familiesList)
             {
                 result += fam.GoldStash;
             }
 
-            if (result < 0) 
-                throw new IndexOutOfRangeException();
-            else 
-                _familiesGold = result;
+            if (result < 0) throw new IndexOutOfRangeException();
+            else _familiesGold = result;
         }
+
 
         /// <summary>
         /// Gets average faith of all families in the village.
@@ -144,19 +138,34 @@ namespace Game
         /// Dertermine average faith for all families in the village.
         /// </summary>
         /// <returns></returns>
-        public void CalculateAverageVillageFaith()
+        public double CalculateAverageVillageFaith()
         {
             double result = 0;
-            foreach (Family fam in _familiesList)
+            /*foreach (Family fam in _familiesList)
             {
                 result += fam.FaithAverage();
-            }
-            result = result / _familiesList.Count;
+            }*/
 
-            if (result < 0 && result > 100)
+            int nb = _familiesList.Count;
+            int nbf = nb;
+            for (int i = 0; i < nb; i++)//had to because some families only get deleted nextstep.
+            {
+                if (_familiesList[i].FamilyMembers.Count != 0)
+                {
+                    result += _familiesList[i].FaithAverage();
+                }
+                else
+                {
+                    nbf--;
+                }
+            }
+            result = result / nbf;
+
+            if (result < 0 || result > 100)
                 throw new IndexOutOfRangeException();
-            else
-                _villageFaith = result;
+
+            _villageFaith = result;
+            return result;
         }
 
         /// <summary>
@@ -171,12 +180,64 @@ namespace Game
         public double CalculateAverageVillageHappiness()
         {
             double result = 0;
-            foreach (Family fam in _familiesList)
+            int nb = _familiesList.Count;
+            int nbf = nb;
+            for (int i = 0; i < nb; i++)//had to because some families only get deleted nextstep.
+            {
+                if (_familiesList[i].FamilyMembers.Count != 0)
+                {
+                    result += _familiesList[i].HappinessAverage();
+                }
+                else
+                {
+                    nbf--;
+                }
+            }
+            /*foreach (Family fam in _familiesList)
             {
                 result += fam.HappinessAverage();
-            }
-            return result = result / _familiesList.Count;
+            }*/
+            _villageHappiness = result / nbf;
+            return _villageHappiness;
         }
+
+        public void CalculateAverageVillageHappinessAndFaith()//trying to make thing faster.
+        {
+            double totalH = 0;
+            double totalF = 0;
+            int nbf = _familiesList.Count;
+            //int nb = nbf;
+           /* for (int i = 0; i < nb; i++)//had to because some families only get deleted nextstep.
+            {
+                if (_familiesList[i].FamilyMembers.Count != 0)
+                {
+                    _familiesList[i].CalculateHappinessAndFaithAverage();
+                    //totalH += _familiesList[i].HappinessAverage();
+                    //totalF += _familiesList[i].FaithAverage();
+                    totalH += _familiesList[i].HappinessAverageValue;
+                    totalF += _familiesList[i].FaithAverageValue;
+
+                }
+                else
+                {
+                    nbf--;
+                }
+            }*/
+            foreach (Family fam in _familiesList)
+            {
+                fam.CalculateHappinessAndFaithAverage();
+                totalH += fam.HappinessAverageValue;
+                totalF += fam.FaithAverageValue;
+            }
+            _villageHappiness = totalH / nbf;
+            _villageFaith = totalF / nbf;
+        }
+
+
+        /// <summary>
+        /// Gets player's offerings points
+        /// /// </summary>
+        public int OfferingsPointsPerTick { get { return _offeringsPoints; } }
 
         /// <summary>
         /// Modify number offering points generated
@@ -196,19 +257,30 @@ namespace Game
             {
                 _offeringsPoints = playerChoice;
             }
-
-            if (_offeringsPoints >= 1 && _offeringsPoints <= 100)
-            {
-                foreach (Family fam in _familiesList  )
-                {
-                    fam.takeFromGoldStash(playerChoice);
-                }
-            }
         }
 
-        public List<JobsModel> JobsList { get { return _jobs; } }
+        /// <summary>
+        /// Take gold from families and add offerings points
+        /// </summary>
+        /// <param name="amount"></param>
+        public void TransformGoldToOfferingsPoints(int amount)
+        {
+            if (amount >= 1 && amount <= 100)
+            {
+                int offerings = 0;
+                foreach (Family fam in _familiesList)
+                {
+                    fam.takeFromGoldStash(amount);
+                    offerings += amount;
+                }
+                Game.AddOrTakeFromOfferings(offerings);
+            }
+            else throw new ArgumentOutOfRangeException();
+        }
 
-        private List<JobsModel> CreateJobs()
+        //public List<JobsModel> JobsList { get { return _jobs; } }
+
+        /*private List<JobsModel> CreateJobs()
         {
             Debug.Assert(Game != null, "Game doesn't exist!");
             List<JobsModel> jobList = new List<JobsModel>();
@@ -230,21 +302,61 @@ namespace Game
             jobList.Add(tailor);
             return jobList;
         }
+*/
 
+        internal void EmptyFamiliesCleaner(List<IEvent> eventList)
+        {
+            int nbf = FamiliesList.Count;
+            int i = 0;
+            Family tmpFamily;
+            while (i < nbf)
+            {
+                tmpFamily = FamiliesList[i];
+                FamiliesList[i].DieOrIsAlive(eventList);
+                if (tmpFamily.IsDestroyed)
+                    nbf--;
+                else
+                    i++;
+            }
+            tmpFamily = null;
+        }
         internal void FamilyDestroyed(Family family)
         {
             Debug.Assert(family != null);
             _familiesList.Remove(family);
         }
+
+        //TODO: !!! use new list & all jobs destroyed.
+        /*      internal void DestroyJobs(JobsModel jobName)
+              {
+                  Debug.Assert(jobName != null);
+                  _jobs.Remove(jobName);
+              }*/
+        internal void VillagerRemoved(Villager villager)
+        {
+            _villagePop.Current--;
+        }
+        #region called by ImpactHappiness
+        internal void JobHappiness(Villager villager)
+        {
+            foreach (JobsModel job in Jobs.HappinessJobList)
+            {
+                job.AddHappiness(villager);
+            }
+        }
+        #endregion
         internal override void OnDestroy()
         {
+            Jobs.Destroy();
+            Jobs = null;
             Debug.Assert(_familiesList.Count == 0, "there is still a family in this village!");
         }
-        override internal void CloseStep()
+        override internal void CloseStep(List<IEvent> eventList)
         {
             //TODO :  put current values in value history.
+            if (_familiesList.Conclude()) { eventList.Add(new EventProperty<Village>(this, "FamiliesList")); }
 
-            //jobs
+            //JobList is invariant.
             //TODO : events!
         }
     }

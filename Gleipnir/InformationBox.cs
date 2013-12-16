@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Game;
 
 namespace GamePages
 {
@@ -16,7 +17,5 @@ namespace GamePages
         {
             InitializeComponent();
         }
-
-
     }
 }

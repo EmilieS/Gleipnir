@@ -8,14 +8,15 @@ namespace Game
 {
     public class FamilyInVillageList : IReadOnlyList<Family>
     {
-
         public FamilyInVillageList(Village owner)
         {
             _families = new List<Family>();
             _owner = owner;
+            FamilyInVillageListChanged = true;
         }
-       private readonly List<Family> _families;
-       internal readonly Village _owner;
+        private readonly List<Family> _families;
+        internal readonly Village _owner;
+       internal bool FamilyInVillageListChanged { get; set; }
 
        public void Add(Family family)
        {
@@ -38,7 +39,12 @@ namespace Game
            family.OwnerVillage = null;
            _families.Remove(family);
        }
-
+       internal bool Conclude()
+       {
+           bool changed = FamilyInVillageListChanged;
+           FamilyInVillageListChanged = false;
+           return changed;
+       }
 
 
        public Family this[int index]
@@ -51,16 +57,14 @@ namespace Game
            get { return _families.Count; }
        }
 
-       public IEnumerator<Family> GetEnumerator()
-       {
-           return _families.GetEnumerator();
-       }
-       
-       System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-       {
-           return GetEnumerator();
-       }
+        public IEnumerator<Family> GetEnumerator()
+        {
+            return _families.GetEnumerator();
+        }
 
-
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }

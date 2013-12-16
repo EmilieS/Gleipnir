@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FDDDBDE4-3157-48EF-A3B7-7C76E3E2446A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GamePages</RootNamespace>
+    <AssemblyName>Gleipnir</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BuildingButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BuildingButton.Designer.cs">
+      <DependentUpon>BuildingButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EventFluxUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EventFluxUC.Designer.cs">
+      <DependentUpon>EventFluxUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GameEventUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GameEventUC.Designer.cs">
+      <DependentUpon>GameEventUC.cs</DependentUpon>
+    </Compile>
+<<<<<<< HEAD
+=======
+    <Compile Include="GamePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GamePage.Designer.cs">
+      <DependentUpon>GamePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Board.cs" />
+>>>>>>> fx-map
+    <Compile Include="HomepageUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HomepageUC.Designer.cs">
+      <DependentUpon>HomepageUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InformationsUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InformationsUC.Designer.cs">
+      <DependentUpon>InformationsUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InGameMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InGameMenu.Designer.cs">
+      <DependentUpon>InGameMenu.cs</DependentUpon>
+    </Compile>
+<<<<<<< HEAD
+    <Compile Include="ScenarioBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ScenarioBox.Designer.cs">
+      <DependentUpon>ScenarioBox.cs</DependentUpon>
+=======
+    <Compile Include="Options.cs" />
+    <Compile Include="SquareControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SquareControl.Designer.cs">
+      <DependentUpon>SquareControl.cs</DependentUpon>
+>>>>>>> fx-map
+    </Compile>
+    <Compile Include="TabIndex.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabIndex.Designer.cs">
+      <DependentUpon>TabIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GeneralPage.Designer.cs">
+      <DependentUpon>GeneralPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="InformationBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InformationBox.Designer.cs">
+      <DependentUpon>InformationBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Trace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Trace.Designer.cs">
+      <DependentUpon>Trace.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="BuildingButton.resx">
+      <DependentUpon>BuildingButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventFluxUC.resx">
+      <DependentUpon>EventFluxUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameEventUC.resx">
+      <DependentUpon>GameEventUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HomepageUC.resx">
+      <DependentUpon>HomepageUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InformationsUC.resx">
+      <DependentUpon>InformationsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InGameMenu.resx">
+      <DependentUpon>InGameMenu.cs</DependentUpon>
+    </EmbeddedResource>
+<<<<<<< HEAD
+    <EmbeddedResource Include="ScenarioBox.resx">
+      <DependentUpon>ScenarioBox.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="SquareControl.resx">
+      <DependentUpon>SquareControl.cs</DependentUpon>
+>>>>>>> fx-map
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabIndex.resx">
+      <DependentUpon>TabIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeneralPage.resx">
+      <DependentUpon>GeneralPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="InformationBox.resx">
+      <DependentUpon>InformationBox.cs</DependentUpon>
+    </EmbeddedResource>
+<<<<<<< HEAD
+    <EmbeddedResource Include="Trace.resx">
+      <DependentUpon>Trace.cs</DependentUpon>
+    </EmbeddedResource>
+=======
+    <None Include="Properties\DataSources\Game.Apothecary.datasource" />
+    <None Include="Properties\DataSources\Game.Blacksmith.datasource" />
+    <None Include="Properties\DataSources\Game.Construction_Worker.datasource" />
+    <None Include="Properties\DataSources\Game.Cooker.datasource" />
+    <None Include="Properties\DataSources\Game.Family.datasource" />
+    <None Include="Properties\DataSources\Game.Farmer.datasource" />
+    <None Include="Properties\DataSources\Game.Militia.datasource" />
+    <None Include="Properties\DataSources\Game.Miller.datasource" />
+    <None Include="Properties\DataSources\Game.Tailor.datasource" />
+    <None Include="Properties\DataSources\Game.Village.datasource" />
+>>>>>>> fx-map
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Game\Game.csproj">
+      <Project>{2b78158a-b99c-4116-98f4-c4786d93faaf}</Project>
+      <Name>Game</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Updates\Updates.csproj">
+      <Project>{014adb5a-45d5-48ca-a386-cfbb01a556ef}</Project>
+      <Name>Updates</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_homepage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_homepage1.png" />
+  </ItemGroup>
+  <ItemGroup>
+<<<<<<< HEAD
+    <Content Include="Resources\Extra\firstNameList.txt" />
+    <Content Include="Resources\Extra\nameList.txt" />
+    <Content Include="Resources\Extra\scenario.txt" />
+    <Content Include="Resources\firstNameList.txt" />
+    <Content Include="Resources\nameList.txt" />
+    <Content Include="Resources\scenario.txt" />
+=======
+    <None Include="Resources\carte.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\emptyPic.png" />
+    <None Include="Resources\testPic.png" />
+>>>>>>> fx-map
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

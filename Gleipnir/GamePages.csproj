@@ -32,8 +32,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,14 +45,30 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GamePage.cs">
-      <SubType>Form</SubType>
+    <Compile Include="BuildingButton.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GamePage.Designer.cs">
-      <DependentUpon>GamePage.cs</DependentUpon>
+    <Compile Include="BuildingButton.Designer.cs">
+      <DependentUpon>BuildingButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="EventFluxUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EventFluxUC.Designer.cs">
+      <DependentUpon>EventFluxUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GameEventUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GameEventUC.Designer.cs">
+      <DependentUpon>GameEventUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Board.cs" />
     <Compile Include="HomepageUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -67,6 +86,19 @@
     </Compile>
     <Compile Include="InGameMenu.Designer.cs">
       <DependentUpon>InGameMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ScenarioBox.Designer.cs">
+      <DependentUpon>ScenarioBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Options.cs" />
+    <Compile Include="SquareControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SquareControl.Designer.cs">
+      <DependentUpon>SquareControl.cs</DependentUpon>
     </Compile>
     <Compile Include="TabIndex.cs">
       <SubType>UserControl</SubType>
@@ -88,8 +120,20 @@
     <Compile Include="InformationBox.Designer.cs">
       <DependentUpon>InformationBox.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="GamePage.resx">
-      <DependentUpon>GamePage.cs</DependentUpon>
+    <Compile Include="Trace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Trace.Designer.cs">
+      <DependentUpon>Trace.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="BuildingButton.resx">
+      <DependentUpon>BuildingButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventFluxUC.resx">
+      <DependentUpon>EventFluxUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameEventUC.resx">
+      <DependentUpon>GameEventUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HomepageUC.resx">
       <DependentUpon>HomepageUC.cs</DependentUpon>
@@ -99,6 +143,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InGameMenu.resx">
       <DependentUpon>InGameMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScenarioBox.resx">
+      <DependentUpon>ScenarioBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SquareControl.resx">
+      <DependentUpon>SquareControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabIndex.resx">
       <DependentUpon>TabIndex.cs</DependentUpon>
@@ -119,6 +169,19 @@
     <EmbeddedResource Include="InformationBox.resx">
       <DependentUpon>InformationBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Trace.resx">
+      <DependentUpon>Trace.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\DataSources\Game.Apothecary.datasource" />
+    <None Include="Properties\DataSources\Game.Blacksmith.datasource" />
+    <None Include="Properties\DataSources\Game.Construction_Worker.datasource" />
+    <None Include="Properties\DataSources\Game.Cooker.datasource" />
+    <None Include="Properties\DataSources\Game.Family.datasource" />
+    <None Include="Properties\DataSources\Game.Farmer.datasource" />
+    <None Include="Properties\DataSources\Game.Militia.datasource" />
+    <None Include="Properties\DataSources\Game.Miller.datasource" />
+    <None Include="Properties\DataSources\Game.Tailor.datasource" />
+    <None Include="Properties\DataSources\Game.Village.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -147,6 +210,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\button_homepage1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Extra\firstNameList.txt" />
+    <Content Include="Resources\Extra\nameList.txt" />
+    <Content Include="Resources\Extra\scenario.txt" />
+    <Content Include="Resources\firstNameList.txt" />
+    <Content Include="Resources\nameList.txt" />
+    <Content Include="Resources\carte.png" />
+    <Content Include="Resources\emptyPic.png" />
+    <Content Include="Resources\testPic.png" />
+    <Content Include="Resources\scenario.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

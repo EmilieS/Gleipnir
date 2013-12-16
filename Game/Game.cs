@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.IO;
 
 namespace Game
 {
@@ -11,36 +12,77 @@ namespace Game
     {
         public Game()
         {
-            _totalGold = new HistorizedValue<double, Game>(this, "_totalGold", 20);
+            _totalGold = new HistorizedValue<int, Game>(this, "_totalGold", 20);
             _totalPop = new HistorizedValue<int, Game>(this, "_totalPop", 20);
+            _offerings = new HistorizedValue<int, Game>(this, "_offerings", 20);
             _items = new List<GameItem>();
             //TODO intialisation partie
             _singleMen = new List<Villager>();
             _villages = new List<Village>();
-            CreateVillage("default");
+            _eventList = new List<IEvent>();
+            var namesPath = File.ReadAllLines(@"Extra\nameList.txt");
+            _nameGenerator = new NameGenerator(namesPath, 1, 1);
+            var firstNamesPath = File.ReadAllLines(@"Extra\firstNameList.txt");
+            _firstNameGenerator = new NameGenerator(namesPath, 1, 1);
+            _currentEpidemicList = new List<GodSpell.Epidemic>();
+            _regularBirthDates= new double[5];
+            //===to be changed
+            //_ageTickTime = 0.0834;//time(years) between each tick.
+            _ageTickTime = 1;
+            Rand = new Random();//to be moved elsewhere.
 
-             Family FamilyA = _villages[0].CreateFamilyFromScratch();
-             Family FamilyB = _villages[0].CreateFamilyFromScratch();
-             Family FamilyC = _villages[0].CreateFamilyFromScratch();
-             Family FamilyD = _villages[0].CreateFamilyFromScratch();
-             Family FamilyE = _villages[0].CreateFamilyFromScratch();
+            /*int j=18;
+            for (int i = 0; i < 5; i++)//must be kept orderly
+            {
+                _regularBirthDates[i] = j;
+                j=j + 4;
+            }*/
+            int j = 216;
+            for (int i = 0; i < 5; i++)//must be kept orderly
+            {
+                _regularBirthDates[i] = j;
+                j = j + 4*12;
+            }
+            //===
+            Village v=CreateVillage("default");
 
-            //TotalPop = 10;
-            //TotalGold = 0;
-            Offerings = 0;
+            Family FamilyA = v.CreateFamilyFromScratch( v.Jobs.Farmer, v.Jobs.Blacksmith);
+            Family FamilyB = v.CreateFamilyFromScratch( v.Jobs.Farmer, v.Jobs.Construction_worker);
+            Family FamilyC = v.CreateFamilyFromScratch();
+            Family FamilyD = v.CreateFamilyFromScratch();
+            Family FamilyE = v.CreateFamilyFromScratch();
+
+            _offerings.Current = 100;
         }
-
-        readonly List<GameItem> _items;
+        readonly List<GodSpell.Epidemic> _currentEpidemicList;
+        internal readonly List<GameItem> _items;//internal for tests
         readonly List<Village> _villages; //a revoir!
         readonly List<Villager> _singleMen;
+        NameGenerator _nameGenerator;
+        NameGenerator _firstNameGenerator;
+        readonly HistorizedValue<int, Game> _totalGold;
+        readonly HistorizedValue<int, Game> _totalPop;
+        readonly HistorizedValue<int, Game> _offerings;
+
+        public NameGenerator NameList { get { return _nameGenerator; } }
+        public NameGenerator FirstNameList { get { return _firstNameGenerator; } }
         public IReadOnlyList<Village> Villages { get { return _villages; } }
         public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
-        readonly HistorizedValue<double, Game> _totalGold;
-        readonly HistorizedValue<int, Game> _totalPop;
-        public double TotalGold { get { return _totalGold.Current; } }
-        public double LastTotalGold { get { return _totalGold.Historic.Last; } }
-        public int TotalPop { get { return _totalPop.Current; } } 
-        public int Offerings { get; set; } //will change
+	public int TotalGold { get { return _totalGold.Current; } }
+        public int LastTotalGold { get { return _totalGold.Historic.Last; } }//for tests, should get eliminated
+
+        public int TotalPop { get { return _totalPop.Current; } }
+        public int Offerings { get { return _offerings.Current; } }
+        readonly internal double[] _regularBirthDates;
+        readonly internal double _ageTickTime;
+        public Random Rand;
+        double _faithToBeAddedOrRemovedForAllVillagersThisRound;
+        internal double FaithToBeAddedOrRemovedForAllVillagersThisRound { get { return _faithToBeAddedOrRemovedForAllVillagersThisRound; } }
+        double _averageHappiness;
+        double _averageFaith;
+        public double AverageHappiness { get { return _averageHappiness; } }
+        public double AverageFaith { get { return _averageFaith; } }
+
         /*public double TotalGold { get 
         {
             double totalGold = 0;
@@ -54,21 +96,46 @@ namespace Game
         {
             _items.Add(item);
         }
+        internal void EpidemicCreated(GodSpell.Epidemic epidemic)
+        {
+            _currentEpidemicList.Add(epidemic);
+        }
+        internal void EpidemicDestroyed(GodSpell.Epidemic epidemic)
+        {
+            Debug.Assert(epidemic != null, "( EpidemicDestroyed) item is null");
+            Debug.Assert(_currentEpidemicList.Contains(epidemic), "( EpidemicmDestroyed) the item was already removed from the gameitemlist");
+            if (epidemic.TimeSinceCreation < 15)
+            {
+                _faithToBeAddedOrRemovedForAllVillagersThisRound += 20;
+            }
+            _currentEpidemicList.Remove(epidemic);
+            Debug.Assert(!_currentEpidemicList.Contains(epidemic), "( EpidemicDestroyed) the item was not removed from the gameitemlist");
+
+        }
         internal void GameItemDestroyed(GameItem item)
         {
+            Debug.Assert(item != null, "(GameItemDestroyed) item is null");
+            Debug.Assert(_items.Contains(item), "(GameItemDestroyed) the item was already removed from the gameitemlist");
             _items.Remove(item);
+            Debug.Assert(!_items.Contains(item), "(GameItemDestroyed) the item was not removed from the gameitemlist");
+
         }
-        internal void GoldAdded(double amount)
+        internal void GoldAdded(int amount)
         {
-            Debug.Assert(amount > 0, "(GoldAdded)");
+            Debug.Assert(amount >= 0, "(GoldAdded) negative amount");
             _totalGold.Current += amount;
         }
-        internal void GoldRemoved(double amount)
+        internal void GoldRemoved(int amount)
         {
-            Debug.Assert(amount > 0, "(GoldRemoved)");
+            Debug.Assert(amount >= 0, "(GoldRemoved) negative amount.");
             _totalGold.Current -= amount;
         }
-
+        internal void AddOrTakeFromOfferings(int amount)
+        {
+            int result = Offerings + amount;
+            if (result < 0) _offerings.Current = 0;
+            else _offerings.Current += amount;
+        }
 
         internal void VillagerAdded()
         {
@@ -93,30 +160,72 @@ namespace Game
         {
             //TODO
         }
-/*
+
+        /*
         public void AddOrRemoveFromTotalGold(double amount)
         {
             _totalGold.Current += amount; //curious to find out if TotalGold can be negative.
         }
  * */
-        List<string> _currentText;
+        void EpidemicFaithImpact()
+        {
+            foreach (GodSpell.Epidemic e in _currentEpidemicList)
+            {
+                if (e.TimeSinceCreation == 15)
+                {
+                    _faithToBeAddedOrRemovedForAllVillagersThisRound += -15;
 
+                }
+            }
+        }
+        List<string> _currentText;
         public void NextStep() //public for testing (again)
         {
+            ImpactHappiness();
+            _faithToBeAddedOrRemovedForAllVillagersThisRound = 0;//has to be after ImpactHappiness(); !!
+            EpidemicFaithImpact();//has to be before DieOrIsAlive
+            Evolution();
+            Creation();
+            DieOrIsAlive();
             CloseStep();
-            
         }
-        public void CloseStep() //public for debug
+
+        List<IEvent> _eventList;
+        public IReadOnlyList<IEvent> EventList{get{return _eventList;}}
+        
+        private void ImpactHappiness()
         {
-            //-----
-            _totalGold.Conclude();
-            _totalPop.Conclude();
-            //-------
-            /*foreach (GameItem item in _items)
+            foreach (GameItem item in _items)
             {
-                item.CloseStep();
-            }*/
-            int i=0;
+                item.ImpactHappiness();
+            }
+        }
+        private void Evolution()
+        {
+            foreach (GameItem item in _items)
+            {
+                item.Evolution();
+            }
+        }
+        private void Creation()
+        {
+            _eventList.RemoveRange(0, _eventList.Count);
+            int i = 0;
+            //int tmpCount = _items.Count;
+            //GameItem tmpItem;
+            while (i < _items.Count)
+            {
+                Debug.Assert(_items[i] != null);
+                Debug.Assert(_items[i].Game != null);
+                _items[i].Creation(_eventList);//must do family version (marriage)
+
+                i++;
+            }
+            //tmpItem = null;
+        }
+        private void DieOrIsAlive()
+        {
+            int i = 0;
             int tmpCount = _items.Count;
 
             GameItem tmpItem;
@@ -124,8 +233,8 @@ namespace Game
             {
                 Debug.Assert(_items[i] != null);
                 Debug.Assert(_items[i].Game != null);
-                tmpItem =_items[i];
-                tmpItem.CloseStep();
+                tmpItem = _items[i];
+                tmpItem.DieOrIsAlive(_eventList);
 
                 if (tmpItem.IsDestroyed)
                     tmpCount--;
@@ -133,6 +242,33 @@ namespace Game
                     i++;
             }
             tmpItem = null;
+
+            foreach (Village v in Villages)
+            {
+                v.EmptyFamiliesCleaner(_eventList);
+            }
+        }
+        private void CloseStep()
+        {
+            foreach (GameItem item in _items)
+            {
+                item.CloseStep(_eventList);
+            }
+            if(_totalGold.Conclude()){ _eventList.Add(new GameEventProperty(this, "TotalGold")); }
+            if(_totalPop.Conclude()){ _eventList.Add(new GameEventProperty(this, "TotalPop")); }
+            if(_offerings.Conclude()){ _eventList.Add(new GameEventProperty(this, "Offerings")); }
+            double faith=0;
+            double happiness=0;
+            foreach (Village v in Villages)
+            {
+                  v.CalculateAverageVillageHappinessAndFaith();
+                  happiness += v.VillageHappiness;
+                  faith += v.VillageFaith;
+            }
+            _averageHappiness = happiness / Villages.Count;
+            _averageFaith = faith / Villages.Count;
+            _eventList.Add(new GameEventProperty(this, "AverageFaith"));
+            _eventList.Add(new GameEventProperty(this, "AverageHappiness"));
         }
 
         //variables à avoir: les coefficients des métiers
@@ -169,6 +305,5 @@ namespace Game
         {
             _totalGold.Current -= family.GoldStash;
         }
-
     }
 }

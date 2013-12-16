@@ -11,10 +11,7 @@ namespace Game
 
         Family actualConvocated;
 
-        public Meeting()
-        {
-
-        }
+        public Meeting() { }
 
         public Family ActualConvocated
         {
