@@ -266,6 +266,17 @@ namespace GamePages
                 }
             }
         }
+        public void HideValidPlaces()
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                for (int j = 0; j < 32; j++)
+                {
+                    if (_board.IsValidSquare(i, j))
+                        _grid[i, j].IsValid = false;
+                }
+            }
+        }
 
         // Grid Events
         private void SquareControl_MouseMove(object sender, MouseEventArgs e)
@@ -445,16 +456,16 @@ namespace GamePages
             }
 
             #region Go FASTER
-            /*for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 50; i++)
             {
-                _startedGame.NextStep();
-                foreach (IEvent events in _startedGame.EventList)
+                _game.NextStep();
+                foreach (IEvent events in _game.EventList)
                 {
                     events.Do(this);
                     events.PublishMessage(this);
                 }
 
-            }*/
+            }
             #endregion
         }
     }

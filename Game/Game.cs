@@ -52,7 +52,7 @@ namespace Game
             Family FamilyD = v.CreateFamilyFromScratch();
             Family FamilyE = v.CreateFamilyFromScratch();
 
-            _offerings.Current = 1000;
+            _offerings.Current = 100;
 
             #region Set Buildngs Prices
             _buildingsPrices = new BuildingsPrices[14];
