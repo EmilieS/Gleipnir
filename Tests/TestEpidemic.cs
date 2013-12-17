@@ -29,15 +29,24 @@ namespace Tests
             Assert.That(villager.LifeExpectancy < lifeExpectancyIni);
             g.NextStep();
             Assert.That(villager.LifeExpectancy == lifeExpectancyIni - 2);
-
-            foreach (Villager v in villager.ParentFamily.FamilyMembers)
+            List<Villager> sickVillagers= new List<Villager>();
+            for (int i = 0; i < 16; i++)
             {
-                Assert.That(((v.Health & Healths.SICK)!=0), "villager is not sick!!!");
+                g.NextStep();
             }
-            foreach (Villager v in villager.Job.Workers)
+            foreach (Villager v in family.FamilyMembers)
             {
-                Assert.That(((v.Health & Healths.SICK)!=0), "villager is not sick!!!");
+                if((v.Health & Healths.SICK)!=0)
+                sickVillagers.Add(v);
             }
+            Assert.That((sickVillagers.Count>1 || family.FamilyMembers.Count<2), "no family members got sick!!!");
+            sickVillagers.Clear();
+            foreach (Villager v in job.Workers)
+            {
+                if ((v.Health & Healths.SICK) != 0)
+                    sickVillagers.Add(v);
+                         }
+            Assert.That((sickVillagers.Count > 1 || job.Workers.Count < 2), "no workers got sick!!!");
 
             for (int i = 0; i < 16; i++)
             {

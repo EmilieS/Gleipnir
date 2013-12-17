@@ -52,7 +52,8 @@ namespace Game.GodSpell
                     {
                         if ((v.Health & Healths.SICK) == 0)
                         {
-                            v.SetVirus(_virus);
+                            if(Game.Rand.Next(15)==1)
+                                v.SetVirus(_virus);
                         }
                     }
                 }
@@ -67,6 +68,7 @@ namespace Game.GodSpell
                 {
                     if ((v.Health & Healths.SICK) == 0)
                     {
+                        if (Game.Rand.Next(7) == 1)
                         v.SetVirus(_virus);
                     }
                 }
