@@ -315,11 +315,12 @@ namespace Game
         {
             if ((_health.Current & Healths.SICK) != 0)
             {
+                int nbApothecaries = _parentFamily.OwnerVillage.Jobs.Apothecary.Workers.Count;
                 int maxtimer;
                 if (this._virus != null)//....
                 {
                     maxtimer = _virus.MaxTimer;
-                    ReduceLifeExpectancy(_virus.LifeExpectencyReduced);
+                    ReduceLifeExpectancy(_virus.LifeExpectencyReduced/1+(nbApothecaries/2));
                 }
                 else
                 {
@@ -336,7 +337,15 @@ namespace Game
                 }
                 else
                 {
-                    _sickTimer++;
+                  
+                   if (nbApothecaries > 0)
+                   {
+                       if (Game.Rand.Next(nbApothecaries) == 0)//The presence of apothecaries relieves the villagers
+                       {
+                           _sickTimer++;
+                       }
+                   }
+                   else { _sickTimer++; }
                 }
 
 
