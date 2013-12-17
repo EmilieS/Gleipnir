@@ -17,11 +17,14 @@ namespace Game.Buildings
         double _addedRobustness;
         bool _isBought;
         string _name;
+        int _hp;
+        int _maxHp;
+        int _destroyedTimer;
         //Game actualGame;
         //private Game g;
         // this a provisory solution : using a new "materials"  to implement robustness
 
-        Village _village;
+        internal Village _village;
         public Village Village { get { return _village; } }
 
         public BuildingsModel(Village v)
@@ -42,7 +45,47 @@ namespace Game.Buildings
         }
         abstract internal void AddToList();
 
+        public int Hp { get { return _hp; } internal set { _hp = value; } }
+        public int MaxHp { get{ return _maxHp; } internal set{_maxHp=value; }}
 
+        int _damageRepairTimer;
+        /// <summary>
+        /// must be positive.
+        /// </summary>
+        /// <param name="amount"></param>
+        internal void Damage(int amount)
+        {
+            if (amount < 0) { throw new ArgumentException(); }
+            if (amount == 0) { return; }
+            OnDamage();
+            if (_hp - amount < 0)
+            {
+                _hp = 0;
+            }
+            else
+            {
+                _hp -= amount;
+            }
+            _damageRepairTimer++;
+        }
+
+        internal virtual void OnDamage(){}
+
+
+        /// <summary>
+        /// Repair. amount must be positive.
+        /// </summary>
+        /// <param name="amount"></param>
+        internal void Repair(int amount)
+        {
+            if (amount < 0) { throw new ArgumentException(); }
+            if (amount == 0) { return; }
+            _hp += amount;
+            Game.DamagedBuildingsNotRepairedOrRepairedFaithImpact(5);
+            _damageRepairTimer = 0;
+        }
+        //TODO : Repair.
+        //TODO : Timer since Damage
         public int HorizontalPos
         {
             get { return _horizontalPos; }
@@ -87,9 +130,52 @@ namespace Game.Buildings
         }
         abstract internal void OnOnDestroy();
 
+
+        internal override void Evolution()
+        {
+            if (_damageRepairTimer == 36)
+            {
+                _damageRepairTimer = 0;
+                Game.DamagedBuildingsNotRepairedOrRepairedFaithImpact(-5);
+            }
+            else if (_damageRepairTimer >0 && _hp < _maxHp)
+            {
+                _damageRepairTimer++;
+            }
+        }
+        internal override void DieOrIsAlive(List<IEvent> eventList)
+        {            
+            if (_hp == 0)
+            {
+                if (_destroyedTimer == 3)
+                {
+                    eventList.Add(new BuildingDestroyedEvent(this));
+                    Destroy();
+                }
+                else
+                {
+                    if (_destroyedTimer == 1)
+                    {
+                        eventList.Add(new BuildingNoHpEvent(this));
+                        JustCollapsed();
+                    }
+                    _destroyedTimer++;
+                }
+            }
+            else
+            {
+                _destroyedTimer = 0;
+            }
+        }
+
+        virtual internal void JustCollapsed()
+        {
+
+        }
+
         internal override void CloseStep(List<IEvent> eventList)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
     }

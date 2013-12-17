@@ -41,6 +41,32 @@ namespace Game
             b.PushTrace(String.Format("Property {0} has changed...", ChangedProperty));
         }
     }
+    public class BuildingNoHpEvent : Event<Buildings.BuildingsModel>
+    {
+        internal BuildingNoHpEvent(Buildings.BuildingsModel building)
+            : base(building)
+        {
+        }
+
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushAlert(String.Format("{0} s'est écroulé", GameItem.Name), "Bâtiment");
+        }
+
+    }
+    public class BuildingDestroyedEvent : Event<Buildings.BuildingsModel>
+    {
+        internal BuildingDestroyedEvent(Buildings.BuildingsModel building)
+            : base(building)
+        {
+        }
+
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushTrace(String.Format("{0} is Destroyed", GameItem.Name));
+        }
+
+    }
     public class GameEventProperty: EventProperty<Game>
     {
         internal GameEventProperty(Game item, string propName)
@@ -81,11 +107,15 @@ namespace Game
             {
                 toPush = String.Format("{0} {1} s'est suicidé", GameItem.Name, _familyName);
             }
+            else if ((GameItem.Health & Healths.EARTHQUAKE_INJURED) != 0)
+            {
+                toPush = String.Format("{0} {1} est mort suite au tremblement de terre", GameItem.Name, _familyName);
+            }
             else if ((GameItem.Health & Healths.SICK) != 0)
             {
                 toPush = String.Format("{0} {1} est mort de sa maladie", GameItem.Name, _familyName);
             }
-            else if (GameItem.Age > 80)//80 à revoir !
+            else if (GameItem.Age > 60*12)
             {
                 toPush = String.Format("{0} {1} est mort de viellesse", GameItem.Name, _familyName);
             }
