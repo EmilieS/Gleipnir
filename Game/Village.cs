@@ -263,9 +263,10 @@ namespace Game
 
 
         /// <summary>
-        /// Gets player's offerings points
+        /// tax per villager per tick.
         /// /// </summary>
         public int OfferingsPointsPerTick { get { return _offeringsPoints; } }
+
 
         /// <summary>
         /// Modify number offering points generated

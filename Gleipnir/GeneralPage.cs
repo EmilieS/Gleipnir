@@ -30,7 +30,8 @@ namespace GamePages
         traceBox trace;
         private ActionState actionState;
         string traceMessages;
-        
+
+        internal Game.Game StartedGame { get { return _startedGame; } }
         public enum ActionState
         {
             None = 0,

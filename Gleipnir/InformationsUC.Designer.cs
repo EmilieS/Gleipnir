@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InformationsUC));
-            this.changeGoldOfferings = new System.Windows.Forms.Button();
             this.offeringsPoints = new System.Windows.Forms.Label();
             this.happinessVillage = new System.Windows.Forms.Label();
             this.faithVillage = new System.Windows.Forms.Label();
@@ -39,21 +39,11 @@
             this.Village = new System.Windows.Forms.Label();
             this.villageName = new System.Windows.Forms.Label();
             this.StepByStep = new System.Windows.Forms.Button();
+            this.TaxAmount = new System.Windows.Forms.TrackBar();
+            this.villageBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.TaxAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.villageBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // changeGoldOfferings
-            // 
-            this.changeGoldOfferings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.changeGoldOfferings.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("changeGoldOfferings.BackgroundImage")));
-            this.changeGoldOfferings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.changeGoldOfferings.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.changeGoldOfferings.Location = new System.Drawing.Point(934, 3);
-            this.changeGoldOfferings.Name = "changeGoldOfferings";
-            this.changeGoldOfferings.Size = new System.Drawing.Size(94, 28);
-            this.changeGoldOfferings.TabIndex = 20;
-            this.changeGoldOfferings.Text = "Echange Or/PO";
-            this.changeGoldOfferings.UseVisualStyleBackColor = true;
             // 
             // offeringsPoints
             // 
@@ -159,12 +149,32 @@
             this.StepByStep.Visible = false;
             this.StepByStep.Click += new System.EventHandler(this.StepByStep_Click);
             // 
+            // TaxAmount
+            // 
+            this.TaxAmount.AccessibleName = "Collection d\'offrandes";
+            this.TaxAmount.LargeChange = 20;
+            this.TaxAmount.Location = new System.Drawing.Point(764, 0);
+            this.TaxAmount.Maximum = 100;
+            this.TaxAmount.Minimum = 1;
+            this.TaxAmount.Name = "TaxAmount";
+            this.TaxAmount.Size = new System.Drawing.Size(250, 45);
+            this.TaxAmount.SmallChange = 5;
+            this.TaxAmount.TabIndex = 22;
+            this.TaxAmount.Tag = "Collection d\'offrandes";
+            this.TaxAmount.TickFrequency = 5;
+            this.TaxAmount.Value = 1;
+            this.TaxAmount.ValueChanged += new System.EventHandler(this.TaxAmount_ValueChanged);
+            // 
+            // villageBindingSource
+            // 
+            this.villageBindingSource.DataSource = typeof(Game.Village);
+            // 
             // InformationsUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.TaxAmount);
             this.Controls.Add(this.StepByStep);
-            this.Controls.Add(this.changeGoldOfferings);
             this.Controls.Add(this.offeringsPoints);
             this.Controls.Add(this.happinessVillage);
             this.Controls.Add(this.faithVillage);
@@ -175,6 +185,8 @@
             this.Controls.Add(this.villageName);
             this.Name = "InformationsUC";
             this.Size = new System.Drawing.Size(1140, 35);
+            ((System.ComponentModel.ISupportInitialize)(this.TaxAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.villageBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,7 +194,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button changeGoldOfferings;
         internal System.Windows.Forms.Label offeringsPoints;
         internal System.Windows.Forms.Label happinessVillage;
         internal System.Windows.Forms.Label faithVillage;
@@ -192,5 +203,7 @@
         private System.Windows.Forms.Label Village;
         internal System.Windows.Forms.Label villageName;
         internal System.Windows.Forms.Button StepByStep;
+        private System.Windows.Forms.TrackBar TaxAmount;
+        private System.Windows.Forms.BindingSource villageBindingSource;
     }
 }

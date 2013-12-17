@@ -171,8 +171,7 @@ namespace Game
             if (_age < _lifeExpectancy && _age + timeLeft < _lifeExpectancy)
             {
                 _lifeExpectancy = _age + timeLeft;
-            }
-
+            }           
         }
 
         /// <summary>

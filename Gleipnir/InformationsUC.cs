@@ -34,5 +34,15 @@ namespace GamePages
         {
             _page.Step();
         }
+
+        private void changeGoldOfferings_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void TaxAmount_ValueChanged(object sender, EventArgs e)
+        {          
+            _page.StartedGame.Villages[0].SetOfferingsPoints(TaxAmount.Value);
+        }
     }
 }
