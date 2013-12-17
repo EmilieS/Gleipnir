@@ -57,6 +57,7 @@ namespace Game.Buildings
         {
             if (amount < 0) { throw new ArgumentException(); }
             if (amount == 0) { return; }
+            OnDamage();
             if (_hp - amount < 0)
             {
                 _hp = 0;
@@ -67,6 +68,10 @@ namespace Game.Buildings
             }
             _damageRepairTimer++;
         }
+
+        internal virtual void OnDamage(){}
+
+
         /// <summary>
         /// Repair. amount must be positive.
         /// </summary>

@@ -21,5 +21,16 @@ namespace Game.Buildings
         {
             Village.Buildings.Remove(this);
         }
+        override internal void OnDamage()
+        {
+
+            foreach (Villager v in Village.Jobs.Miller.Workers)
+            {
+                if (Game.Rand.Next(100) == 1)
+                {
+                    v.EarthquakeInjure();
+                }
+            }
+        }
     }
 }

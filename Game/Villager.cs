@@ -152,7 +152,7 @@ namespace Game
         /// Sets the new life expectancy no matter what time was left.
         /// </summary>
         /// <param name="lifeExpectancy"></param>
-        public void SetLifeExpectancy(float lifeExpectancy)
+        public void SetLifeExpectancy(double lifeExpectancy)
         {
             if (lifeExpectancy < 0)
             {
@@ -179,7 +179,7 @@ namespace Game
         /// Reduces the life expectancy by 'time'.(minimum is 0)
         /// </summary>
         /// <param name="time"></param>
-        public void ReduceLifeExpectancy(float timeleft)
+        public void ReduceLifeExpectancy(double timeleft)
         {
             if (_lifeExpectancy > timeleft)
             {
@@ -199,6 +199,11 @@ namespace Game
             _lifeExpectancy = 0;
         }
 
+        internal void EarthquakeInjure()
+        {
+            _health.Current = _health.Current | Healths.EARTHQUAKE_INJURED;
+            SetLifeExpectancyLeft(3);
+        }
 
 
         /// <summary>
