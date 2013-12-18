@@ -71,6 +71,19 @@ namespace Game
         }
 
     }
+    public class BuildingCreatedEvent : Event<Buildings.BuildingsModel>
+    {
+        internal BuildingCreatedEvent(Buildings.BuildingsModel building)
+            : base(building)
+        {
+        }
+
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushTrace(String.Format("{0} is created", GameItem.Name));
+        }
+
+    }
     public class GameEventProperty: EventProperty<Game>
     {
         internal GameEventProperty(Game item, string propName)

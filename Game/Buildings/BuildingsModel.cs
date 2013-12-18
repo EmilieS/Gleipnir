@@ -21,6 +21,7 @@ namespace Game.Buildings
         int _hp;
         int _maxHp;
         int _destroyedTimer;
+        bool _justCreated;
         //Game actualGame;
         //private Game g;
         // this a provisory solution : using a new "materials"  to implement robustness
@@ -31,6 +32,7 @@ namespace Game.Buildings
         public BuildingsModel(Village v)
             :base(v.Game)
         {
+            _justCreated = true;
             _horizontalPos = 0;
             _verticalPos = 0;
             _addedHappiness = 0;
@@ -178,7 +180,11 @@ namespace Game.Buildings
 
         internal override void CloseStep(List<IEvent> eventList)
         {
-            //throw new NotImplementedException();
+            if (_justCreated)
+            {
+                eventList.Add(new BuildingCreatedEvent(this));
+                _justCreated = false;
+            }
         }
     }
 }
