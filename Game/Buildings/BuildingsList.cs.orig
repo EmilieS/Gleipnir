@@ -24,7 +24,7 @@ namespace Game.Buildings
         readonly List<Theater> _theaterList;
         readonly List<UnionOfCrafter> _unionOfCrafterList;
 
-        public IReadOnlyList<House> HouseList { get { return _houseList; } }
+<<<<<<< HEAD
         public IReadOnlyList<BuildingsModel> ApothecaryOfficeList { get { return _apothecaryOfficeList; } }
         public IReadOnlyList<BuildingsModel> BathsList { get { return _bathsList; } }
         public IReadOnlyList<BuildingsModel> BrothelList{ get { return _brothelList; } }
@@ -39,6 +39,25 @@ namespace Game.Buildings
         public IReadOnlyList<BuildingsModel> TavernList{ get { return _tavernList; } }
         public IReadOnlyList<BuildingsModel> TheaterList{ get { return _theaterList; } }
         public IReadOnlyList<BuildingsModel> UnionOfCrafterList { get { return _unionOfCrafterList; } }
+=======
+        public IReadOnlyList<House> HouseList { get { return _houseList; } }
+        public IReadOnlyList<ApothecaryOffice> ApothecaryOfficeList { get { return _apothecaryOfficeList; } }
+        public  IReadOnlyList<BuildingsModel> BathsList { get { return _bathsList; } }
+        public  IReadOnlyList<BuildingsModel> BrothelList{ get { return _brothelList; } }
+        public  IReadOnlyList<BuildingsModel> ChapelList{ get { return _chapelList; } }
+        public  IReadOnlyList<BuildingsModel> FarmList{ get { return _farmList; } }
+        public  IReadOnlyList<BuildingsModel> ForgeList{ get { return _forgeList; } }
+        public  IReadOnlyList<BuildingsModel> MillList{ get { return _millList; } }
+        public  IReadOnlyList<BuildingsModel> OfferingWarehouseList{ get { return _offeringWarehouseList; } }
+        public  IReadOnlyList<BuildingsModel> PartyRoomList{ get { return _partyRoomList; } }
+        public  IReadOnlyList<BuildingsModel> RestaurantList{ get { return _restaurantList; } }
+        public  IReadOnlyList<BuildingsModel> TablePlaceList{ get { return _tablePlaceList; } }
+        public  IReadOnlyList<BuildingsModel> TavernList{ get { return _tavernList; } }
+        public  IReadOnlyList<BuildingsModel> TheaterList{ get { return _theaterList; } }
+        public  IReadOnlyList<BuildingsModel> UnionOfCrafterList { get { return _unionOfCrafterList; } }
+
+       
+>>>>>>> origin/Earthquake
 
         readonly List<BuildingsModel> _buildingsList;
 
@@ -64,11 +83,14 @@ namespace Game.Buildings
             _unionOfCrafterList = new List<Buildings.UnionOfCrafter>();
 
         }
+<<<<<<< HEAD
+=======
         internal void Add(House house)
         {
             _houseList.Add(house);
             _buildingsList.Add(house);
         }
+>>>>>>> origin/Earthquake
 
         internal void Add(ApothecaryOffice apothecaryOffice)
         {
@@ -140,12 +162,15 @@ namespace Game.Buildings
             _unionOfCrafterList.Add(unionOfCrafter);
             _buildingsList.Add(unionOfCrafter);
         }
+<<<<<<< HEAD
+
+=======
         internal void Remove(House house)
         {
             _houseList.Remove(house);
             _buildingsList.Remove(house);
         }
-
+>>>>>>> origin/Earthquake
         internal void Remove(Baths baths)
         {
             _bathsList.Remove(baths);

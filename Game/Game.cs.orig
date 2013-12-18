@@ -24,6 +24,7 @@ namespace Game
             _nameGenerator = new NameGenerator(namesPath, 1, 1);
             var firstNamesPath = File.ReadAllLines(@"Extra\firstNameList.txt");
             _firstNameGenerator = new NameGenerator(namesPath, 1, 1);
+            _currentEpidemicList = new List<GodSpell.Epidemic>();
             _regularBirthDates= new double[5];
             //===to be changed
             //_ageTickTime = 0.0834;//time(years) between each tick.
@@ -43,46 +44,75 @@ namespace Game
                 j = j + 4*12;
             }
             //===
-            CreateVillage("default");
+            Village v=CreateVillage("default");
 
-            Family FamilyA = _villages[0].CreateFamilyFromScratch();
-            Family FamilyB = _villages[0].CreateFamilyFromScratch();
-            Family FamilyC = _villages[0].CreateFamilyFromScratch();
-            Family FamilyD = _villages[0].CreateFamilyFromScratch();
-            Family FamilyE = _villages[0].CreateFamilyFromScratch();
+            Family FamilyA = v.CreateFamilyFromScratch( v.Jobs.Farmer, v.Jobs.Blacksmith);
+            Family FamilyB = v.CreateFamilyFromScratch( v.Jobs.Farmer, v.Jobs.Construction_worker);
+            Family FamilyC = v.CreateFamilyFromScratch();
+            Family FamilyD = v.CreateFamilyFromScratch();
+            Family FamilyE = v.CreateFamilyFromScratch();
 
             _offerings.Current = 100;
-        }
 
-        readonly List<GameItem> _items;
+            #region Set Buildngs Prices
+            _buildingsPrices = new BuildingsPrices[14];
+            _buildingsPrices[0] = new BuildingsPrices("apothercaryOffice", 200);
+            _buildingsPrices[1] = new BuildingsPrices("baths", 500);
+            _buildingsPrices[2] = new BuildingsPrices("brothel", 300);
+            _buildingsPrices[3] = new BuildingsPrices("chapel", 450);
+            _buildingsPrices[4] = new BuildingsPrices("farm", 100);
+            _buildingsPrices[5] = new BuildingsPrices("forge", 100);
+            _buildingsPrices[6] = new BuildingsPrices("mill", 375);
+            _buildingsPrices[7] = new BuildingsPrices("offeringsWarehouse", 150);
+            _buildingsPrices[8] = new BuildingsPrices("partyRoom", 250);
+            _buildingsPrices[9] = new BuildingsPrices("restaurent", 400);
+            _buildingsPrices[10] = new BuildingsPrices("tablePlace", 0);
+            _buildingsPrices[11] = new BuildingsPrices("tavern", 200);
+            _buildingsPrices[12] = new BuildingsPrices("theater", 600);
+            _buildingsPrices[13] = new BuildingsPrices("unionOfCrafter", 50);
+            #endregion
+        }
+        readonly List<GodSpell.Epidemic> _currentEpidemicList;
+        internal readonly List<GameItem> _items;//internal for tests
         readonly List<Village> _villages; //a revoir!
         readonly List<Villager> _singleMen;
         NameGenerator _nameGenerator;
         NameGenerator _firstNameGenerator;
-        readonly HistorizedValue<double, Game> _totalGold;
+        readonly HistorizedValue<int, Game> _totalGold;
         readonly HistorizedValue<int, Game> _totalPop;
-        int _offerings;
+        readonly HistorizedValue<int, Game> _offerings;
+        private readonly BuildingsPrices[] _buildingsPrices;
+        readonly internal double[] _regularBirthDates;
+        readonly internal double _ageTickTime;
+        public Random Rand;
+        double _averageHappiness;
+        double _averageFaith;
 
         public NameGenerator NameList { get { return _nameGenerator; } }
         public NameGenerator FirstNameList { get { return _firstNameGenerator; } }
         public IReadOnlyList<Village> Villages { get { return _villages; } }
         public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
-        public double TotalGold { get { return _totalGold.Current; } }
-
-                public double LastTotalGold { get { return _totalGold.Historic.Last; } }//for tests, should get eliminated
-        public IReadOnlyList<Village> Villages { get { return _villages; } }
-        public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
-        readonly HistorizedValue<int, Game> _totalGold;
-        readonly HistorizedValue<int, Game> _totalPop;
-        readonly HistorizedValue<int, Game> _offerings;
-        public int TotalGold { get { return _totalGold.Current; } }
+	    public int TotalGold { get { return _totalGold.Current; } }
         public int LastTotalGold { get { return _totalGold.Historic.Last; } }//for tests, should get eliminated
->>>>>>> fx-Event
         public int TotalPop { get { return _totalPop.Current; } }
         public int Offerings { get { return _offerings.Current; } }
+<<<<<<< HEAD
+=======
         readonly internal double[] _regularBirthDates;
         readonly internal double _ageTickTime;
         public Random Rand;
+        double _faithToBeAddedOrRemovedForAllVillagersThisRound;
+        internal double FaithToBeAddedOrRemovedForAllVillagersThisRound { get { return _faithToBeAddedOrRemovedForAllVillagersThisRound; } }
+        double _averageHappiness;
+        double _averageFaith;
+>>>>>>> origin/develop
+        public double AverageHappiness { get { return _averageHappiness; } }
+        public double AverageFaith { get { return _averageFaith; } }
+
+        public BuildingsPrices GetBuilding(int index)
+        {
+            return _buildingsPrices[index];
+        }
 
         /*public double TotalGold { get 
         {
@@ -97,9 +127,29 @@ namespace Game
         {
             _items.Add(item);
         }
+        internal void EpidemicCreated(GodSpell.Epidemic epidemic)
+        {
+            _currentEpidemicList.Add(epidemic);
+        }
+        internal void EpidemicDestroyed(GodSpell.Epidemic epidemic)
+        {
+            Debug.Assert(epidemic != null, "( EpidemicDestroyed) item is null");
+            Debug.Assert(_currentEpidemicList.Contains(epidemic), "( EpidemicmDestroyed) the item was already removed from the gameitemlist");
+            if (epidemic.TimeSinceCreation < 15)
+            {
+                _faithToBeAddedOrRemovedForAllVillagersThisRound += 20;
+            }
+            _currentEpidemicList.Remove(epidemic);
+            Debug.Assert(!_currentEpidemicList.Contains(epidemic), "( EpidemicDestroyed) the item was not removed from the gameitemlist");
+
+        }
         internal void GameItemDestroyed(GameItem item)
         {
+            Debug.Assert(item != null, "(GameItemDestroyed) item is null");
+            Debug.Assert(_items.Contains(item), "(GameItemDestroyed) the item was already removed from the gameitemlist");
             _items.Remove(item);
+            Debug.Assert(!_items.Contains(item), "(GameItemDestroyed) the item was not removed from the gameitemlist");
+
         }
         internal void GoldAdded(int amount)
         {
@@ -141,16 +191,30 @@ namespace Game
         {
             //TODO
         }
-/*
+
+        /*
         public void AddOrRemoveFromTotalGold(double amount)
         {
             _totalGold.Current += amount; //curious to find out if TotalGold can be negative.
         }
-*/
+ * */
+        void EpidemicFaithImpact()
+        {
+            foreach (GodSpell.Epidemic e in _currentEpidemicList)
+            {
+                if (e.TimeSinceCreation == 15)
+                {
+                    _faithToBeAddedOrRemovedForAllVillagersThisRound += -15;
+
+                }
+            }
+        }
         List<string> _currentText;
         public void NextStep() //public for testing (again)
         {
             ImpactHappiness();
+            _faithToBeAddedOrRemovedForAllVillagersThisRound = 0;//has to be after ImpactHappiness(); !!
+            EpidemicFaithImpact();//has to be before DieOrIsAlive
             Evolution();
             Creation();
             DieOrIsAlive();
@@ -159,6 +223,7 @@ namespace Game
 
         List<IEvent> _eventList;
         public IReadOnlyList<IEvent> EventList{get{return _eventList;}}
+        
         private void ImpactHappiness()
         {
             foreach (GameItem item in _items)
@@ -175,7 +240,7 @@ namespace Game
         }
         private void Creation()
         {
-            //TODO : CLEAN _eventList
+            _eventList.RemoveRange(0, _eventList.Count);
             int i = 0;
             //int tmpCount = _items.Count;
             //GameItem tmpItem;
@@ -208,6 +273,11 @@ namespace Game
                     i++;
             }
             tmpItem = null;
+
+            foreach (Village v in Villages)
+            {
+                v.EmptyFamiliesCleaner(_eventList);
+            }
         }
         private void CloseStep()
         {
@@ -218,14 +288,25 @@ namespace Game
             if(_totalGold.Conclude()){ _eventList.Add(new GameEventProperty(this, "TotalGold")); }
             if(_totalPop.Conclude()){ _eventList.Add(new GameEventProperty(this, "TotalPop")); }
             if(_offerings.Conclude()){ _eventList.Add(new GameEventProperty(this, "Offerings")); }
-
+            double faith=0;
+            double happiness=0;
+            foreach (Village v in Villages)
+            {
+                  v.CalculateAverageVillageHappinessAndFaith();
+                  happiness += v.VillageHappiness;
+                  faith += v.VillageFaith;
+            }
+            _averageHappiness = happiness / Villages.Count;
+            _averageFaith = faith / Villages.Count;
+            _eventList.Add(new GameEventProperty(this, "AverageFaith"));
+            _eventList.Add(new GameEventProperty(this, "AverageHappiness"));
         }
 
         //variables à avoir: les coefficients des métiers
         //liste familles?
 
 
-        //le 'main' de la dll sera ici : TODO
+        //TODO : le 'main' de la dll sera ici
         /*
         -regarder si _lifexpectancy<age => morts.
         -actualiser le bonheur 
@@ -254,6 +335,29 @@ namespace Game
         internal void FamilyRemoved(Family family)
         {
             _totalGold.Current -= family.GoldStash;
+        }
+
+        // Buildings bought price
+        public struct BuildingsPrices
+        {
+            string name;
+            int costPrice;
+
+            public BuildingsPrices(string n, int c)
+            {
+                name = n;
+                costPrice = c;
+            }
+
+            public string GetName
+            {
+                get { return name; }
+            }
+
+            public int GetPrice
+            {
+                get { return costPrice; }
+            }
         }
     }
 }

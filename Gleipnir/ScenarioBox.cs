@@ -51,7 +51,5 @@ namespace GamePages
                 this.TextLabel.Text = sentence;
             }
         }
-
-
     }
 }

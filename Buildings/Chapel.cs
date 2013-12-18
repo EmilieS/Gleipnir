@@ -16,11 +16,11 @@ namespace Buildings.Believing
             AddHapiness = 0;
             EnterPrice = 0;
         }
+
         public void SetLocation(int HPosition, int VPosition)
         {
             HorizontalPos = HPosition;
             VerticalPos = VPosition;
         }
-       
     }
 }

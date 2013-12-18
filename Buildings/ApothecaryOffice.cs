@@ -12,10 +12,6 @@ namespace Buildings.JobsBuildings
         public ApothecaryOffice(Village ownerVillage)
             : base(ownerVillage)
         {
-
         }
-
-
-
     }
 }

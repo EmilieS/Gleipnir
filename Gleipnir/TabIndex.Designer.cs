@@ -30,17 +30,24 @@
         {
             this.actionsMenu = new System.Windows.Forms.TabControl();
             this.buildingsTab = new System.Windows.Forms.TabPage();
+            this.Restaurant = new System.Windows.Forms.Button();
+            this.Theater = new System.Windows.Forms.Button();
+            this.Brothel = new System.Windows.Forms.Button();
+            this.Baths = new System.Windows.Forms.Button();
+            this.PartyRoom = new System.Windows.Forms.Button();
+            this.Chapel = new System.Windows.Forms.Button();
+            this.ApothicaryOffice = new System.Windows.Forms.Button();
             this.Tavern = new System.Windows.Forms.Button();
             this.happinessTab = new System.Windows.Forms.TabPage();
             this.faithTab = new System.Windows.Forms.TabPage();
             this.godSpellsTab = new System.Windows.Forms.TabPage();
-            this.ApothicaryOffice = new System.Windows.Forms.Button();
-            this.Chapel = new System.Windows.Forms.Button();
-            this.PartyRoom = new System.Windows.Forms.Button();
-            this.Baths = new System.Windows.Forms.Button();
-            this.Brothel = new System.Windows.Forms.Button();
-            this.Theater = new System.Windows.Forms.Button();
-            this.Restaurant = new System.Windows.Forms.Button();
+            this.Forge = new System.Windows.Forms.Button();
+            this.UnionOfCrafter = new System.Windows.Forms.Button();
+            this.Farm = new System.Windows.Forms.Button();
+            this.Mill = new System.Windows.Forms.Button();
+            this.ClothesShop = new System.Windows.Forms.Button();
+            this.OfferingsWarehouse = new System.Windows.Forms.Button();
+            this.House = new System.Windows.Forms.Button();
             this.actionsMenu.SuspendLayout();
             this.buildingsTab.SuspendLayout();
             this.SuspendLayout();
@@ -67,6 +74,13 @@
             // 
             this.buildingsTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.buildingsTab.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.buildingsTab.Controls.Add(this.House);
+            this.buildingsTab.Controls.Add(this.OfferingsWarehouse);
+            this.buildingsTab.Controls.Add(this.ClothesShop);
+            this.buildingsTab.Controls.Add(this.Mill);
+            this.buildingsTab.Controls.Add(this.Farm);
+            this.buildingsTab.Controls.Add(this.UnionOfCrafter);
+            this.buildingsTab.Controls.Add(this.Forge);
             this.buildingsTab.Controls.Add(this.Restaurant);
             this.buildingsTab.Controls.Add(this.Theater);
             this.buildingsTab.Controls.Add(this.Brothel);
@@ -82,15 +96,77 @@
             this.buildingsTab.TabIndex = 0;
             this.buildingsTab.UseVisualStyleBackColor = true;
             // 
+            // Restaurant
+            // 
+            this.Restaurant.Location = new System.Drawing.Point(123, 35);
+            this.Restaurant.Name = "Restaurant";
+            this.Restaurant.Size = new System.Drawing.Size(75, 23);
+            this.Restaurant.TabIndex = 7;
+            this.Restaurant.Text = "Restaurant";
+            this.Restaurant.UseVisualStyleBackColor = true;
+            // 
+            // Theater
+            // 
+            this.Theater.Location = new System.Drawing.Point(6, 208);
+            this.Theater.Name = "Theater";
+            this.Theater.Size = new System.Drawing.Size(75, 23);
+            this.Theater.TabIndex = 6;
+            this.Theater.Text = "Théatre";
+            this.Theater.UseVisualStyleBackColor = true;
+            // 
+            // Brothel
+            // 
+            this.Brothel.Location = new System.Drawing.Point(105, 149);
+            this.Brothel.Name = "Brothel";
+            this.Brothel.Size = new System.Drawing.Size(93, 23);
+            this.Brothel.TabIndex = 5;
+            this.Brothel.Text = "Maison Close";
+            this.Brothel.UseVisualStyleBackColor = true;
+            // 
+            // Baths
+            // 
+            this.Baths.Location = new System.Drawing.Point(6, 149);
+            this.Baths.Name = "Baths";
+            this.Baths.Size = new System.Drawing.Size(68, 24);
+            this.Baths.TabIndex = 4;
+            this.Baths.Text = "Bains";
+            this.Baths.UseVisualStyleBackColor = true;
+            // 
+            // PartyRoom
+            // 
+            this.PartyRoom.Location = new System.Drawing.Point(6, 179);
+            this.PartyRoom.Name = "PartyRoom";
+            this.PartyRoom.Size = new System.Drawing.Size(93, 23);
+            this.PartyRoom.TabIndex = 3;
+            this.PartyRoom.Text = "Salle des Fêtes";
+            this.PartyRoom.UseVisualStyleBackColor = true;
+            // 
+            // Chapel
+            // 
+            this.Chapel.Location = new System.Drawing.Point(6, 270);
+            this.Chapel.Name = "Chapel";
+            this.Chapel.Size = new System.Drawing.Size(75, 23);
+            this.Chapel.TabIndex = 2;
+            this.Chapel.Text = "Chapelle";
+            this.Chapel.UseVisualStyleBackColor = true;
+            // 
+            // ApothicaryOffice
+            // 
+            this.ApothicaryOffice.Location = new System.Drawing.Point(6, 6);
+            this.ApothicaryOffice.Name = "ApothicaryOffice";
+            this.ApothicaryOffice.Size = new System.Drawing.Size(75, 23);
+            this.ApothicaryOffice.TabIndex = 1;
+            this.ApothicaryOffice.Text = "Pharmacie";
+            this.ApothicaryOffice.UseVisualStyleBackColor = true;
+            // 
             // Tavern
             // 
-            this.Tavern.Location = new System.Drawing.Point(16, 22);
+            this.Tavern.Location = new System.Drawing.Point(123, 178);
             this.Tavern.Name = "Tavern";
             this.Tavern.Size = new System.Drawing.Size(75, 23);
             this.Tavern.TabIndex = 0;
             this.Tavern.Text = "Taverne";
             this.Tavern.UseVisualStyleBackColor = true;
-            this.Tavern.Click += new System.EventHandler(this.Tavern_Click);
             // 
             // happinessTab
             // 
@@ -120,75 +196,68 @@
             this.godSpellsTab.TabIndex = 3;
             this.godSpellsTab.UseVisualStyleBackColor = true;
             // 
-            // ApothicaryOffice
+            // Forge
             // 
-            this.ApothicaryOffice.Location = new System.Drawing.Point(19, 76);
-            this.ApothicaryOffice.Name = "ApothicaryOffice";
-            this.ApothicaryOffice.Size = new System.Drawing.Size(75, 23);
-            this.ApothicaryOffice.TabIndex = 1;
-            this.ApothicaryOffice.Text = "Pharmacie";
-            this.ApothicaryOffice.UseVisualStyleBackColor = true;
-            this.ApothicaryOffice.Click += new System.EventHandler(this.ApothicaryOffice_Click);
+            this.Forge.Location = new System.Drawing.Point(123, 6);
+            this.Forge.Name = "Forge";
+            this.Forge.Size = new System.Drawing.Size(75, 23);
+            this.Forge.TabIndex = 8;
+            this.Forge.Text = "Forge";
+            this.Forge.UseVisualStyleBackColor = true;
             // 
-            // Chapel
+            // UnionOfCrafter
             // 
-            this.Chapel.Location = new System.Drawing.Point(26, 133);
-            this.Chapel.Name = "Chapel";
-            this.Chapel.Size = new System.Drawing.Size(75, 23);
-            this.Chapel.TabIndex = 2;
-            this.Chapel.Text = "Chapelle";
-            this.Chapel.UseVisualStyleBackColor = true;
-            this.Chapel.Click += new System.EventHandler(this.Chapel_Click);
+            this.UnionOfCrafter.Location = new System.Drawing.Point(6, 35);
+            this.UnionOfCrafter.Name = "UnionOfCrafter";
+            this.UnionOfCrafter.Size = new System.Drawing.Size(75, 23);
+            this.UnionOfCrafter.TabIndex = 9;
+            this.UnionOfCrafter.Text = "Entrepot";
+            this.UnionOfCrafter.UseVisualStyleBackColor = true;
             // 
-            // PartyRoom
+            // Farm
             // 
-            this.PartyRoom.Location = new System.Drawing.Point(36, 202);
-            this.PartyRoom.Name = "PartyRoom";
-            this.PartyRoom.Size = new System.Drawing.Size(93, 23);
-            this.PartyRoom.TabIndex = 3;
-            this.PartyRoom.Text = "Salle des Fêtes";
-            this.PartyRoom.UseVisualStyleBackColor = true;
-            this.PartyRoom.Click += new System.EventHandler(this.PartyRoom_Click);
+            this.Farm.Location = new System.Drawing.Point(6, 64);
+            this.Farm.Name = "Farm";
+            this.Farm.Size = new System.Drawing.Size(75, 23);
+            this.Farm.TabIndex = 10;
+            this.Farm.Text = "Ferme";
+            this.Farm.UseVisualStyleBackColor = true;
             // 
-            // Baths
+            // Mill
             // 
-            this.Baths.Location = new System.Drawing.Point(26, 266);
-            this.Baths.Name = "Baths";
-            this.Baths.Size = new System.Drawing.Size(68, 24);
-            this.Baths.TabIndex = 4;
-            this.Baths.Text = "Bains";
-            this.Baths.UseVisualStyleBackColor = true;
-            this.Baths.Click += new System.EventHandler(this.Baths_Click);
+            this.Mill.Location = new System.Drawing.Point(123, 64);
+            this.Mill.Name = "Mill";
+            this.Mill.Size = new System.Drawing.Size(75, 23);
+            this.Mill.TabIndex = 11;
+            this.Mill.Text = "Moulin";
+            this.Mill.UseVisualStyleBackColor = true;
             // 
-            // Brothel
+            // ClothesShop
             // 
-            this.Brothel.Location = new System.Drawing.Point(36, 323);
-            this.Brothel.Name = "Brothel";
-            this.Brothel.Size = new System.Drawing.Size(93, 23);
-            this.Brothel.TabIndex = 5;
-            this.Brothel.Text = "Maison Close";
-            this.Brothel.UseVisualStyleBackColor = true;
-            this.Brothel.Click += new System.EventHandler(this.Brothel_Click);
+            this.ClothesShop.Location = new System.Drawing.Point(6, 93);
+            this.ClothesShop.Name = "ClothesShop";
+            this.ClothesShop.Size = new System.Drawing.Size(75, 23);
+            this.ClothesShop.TabIndex = 12;
+            this.ClothesShop.Text = "Magasin";
+            this.ClothesShop.UseVisualStyleBackColor = true;
             // 
-            // Theater
+            // OfferingsWarehouse
             // 
-            this.Theater.Location = new System.Drawing.Point(45, 382);
-            this.Theater.Name = "Theater";
-            this.Theater.Size = new System.Drawing.Size(75, 23);
-            this.Theater.TabIndex = 6;
-            this.Theater.Text = "Théatre";
-            this.Theater.UseVisualStyleBackColor = true;
-            this.Theater.Click += new System.EventHandler(this.Theater_Click);
+            this.OfferingsWarehouse.Location = new System.Drawing.Point(6, 299);
+            this.OfferingsWarehouse.Name = "OfferingsWarehouse";
+            this.OfferingsWarehouse.Size = new System.Drawing.Size(75, 23);
+            this.OfferingsWarehouse.TabIndex = 13;
+            this.OfferingsWarehouse.Text = "Temple";
+            this.OfferingsWarehouse.UseVisualStyleBackColor = true;
             // 
-            // Restaurant
+            // House
             // 
-            this.Restaurant.Location = new System.Drawing.Point(36, 429);
-            this.Restaurant.Name = "Restaurant";
-            this.Restaurant.Size = new System.Drawing.Size(75, 23);
-            this.Restaurant.TabIndex = 7;
-            this.Restaurant.Text = "Restaurant";
-            this.Restaurant.UseVisualStyleBackColor = true;
-            this.Restaurant.Click += new System.EventHandler(this.Restaurant_Click);
+            this.House.Location = new System.Drawing.Point(123, 270);
+            this.House.Name = "House";
+            this.House.Size = new System.Drawing.Size(75, 23);
+            this.House.TabIndex = 14;
+            this.House.Text = "Maison";
+            this.House.UseVisualStyleBackColor = true;
             // 
             // TabIndex
             // 
@@ -219,6 +288,13 @@
         private System.Windows.Forms.Button Brothel;
         private System.Windows.Forms.Button Theater;
         private System.Windows.Forms.Button Restaurant;
+        private System.Windows.Forms.Button ClothesShop;
+        private System.Windows.Forms.Button Mill;
+        private System.Windows.Forms.Button Farm;
+        private System.Windows.Forms.Button UnionOfCrafter;
+        private System.Windows.Forms.Button Forge;
+        private System.Windows.Forms.Button House;
+        private System.Windows.Forms.Button OfferingsWarehouse;
 
     }
 }

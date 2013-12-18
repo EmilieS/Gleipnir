@@ -39,35 +39,12 @@ namespace Game
             //_jobs = CreateJobs();
             Jobs = new JobList(this);
             _offeringsPoints = 1;
-            #region Old code
-            /* _jobs = new List<Jobs>;
-            _family = families;
-
-            //TODO: Jobs List
-            /*foreach (Jobs job in _jobs)
-            {
-                _jobs.Add(job);
-            }
-
-            //TODO: Set village's Gold
-            CalculateVillageGold();
-
-            //TODO: Set village's faith
-            CalculateAverageVillageFaith();
-
-            //TODO: Set village's happiness
-            _villageHappiness = CalculateAverageVillageHappiness();
-
-            //TODO: Set village's offerings points
-            _offeringsPoints = 10;
-             */
-            #endregion
         }
+
         internal void VillagerAdded()
         {
             _villagePop.Current++;
         }
-
 
         public Family CreateFamily(Villager mother, Villager father)
         {
@@ -93,7 +70,6 @@ namespace Game
             newFamily.House = house;
             return newFamily;
         }
-
         public Family CreateFamilyFromScratch()
         {
             //Debug.Assert(_thisGame != null, "_thisGame est null!");
@@ -155,7 +131,6 @@ namespace Game
             if (result < 0) throw new IndexOutOfRangeException();
             else _familiesGold = result;
         }
-
 
         /// <summary>
         /// Gets average faith of all families in the village.
@@ -261,7 +236,6 @@ namespace Game
             _villageFaith = totalF / nbf;
         }
 
-
         /// <summary>
         /// tax per villager per tick.
         /// /// </summary>
@@ -361,10 +335,12 @@ namespace Game
                   Debug.Assert(jobName != null);
                   _jobs.Remove(jobName);
               }*/
+
         internal void VillagerRemoved(Villager villager)
         {
             _villagePop.Current--;
         }
+
         #region called by ImpactHappiness
         internal void JobHappiness(Villager villager)
         {
@@ -374,6 +350,7 @@ namespace Game
             }
         }
         #endregion
+
         internal override void OnDestroy()
         {
             Jobs.Destroy();

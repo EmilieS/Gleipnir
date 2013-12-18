@@ -8,15 +8,16 @@ namespace Buildings.Hobbies
 {
     public class Baths
     {
-
         public double SetHappiness
         {
             get { return 3; }
         }
+
         private int SetEnterPrice
         {
             get { return 200; }
         }
+
         public double SetNewGoldStash(double _goldStash)
         {
             //TODO : Define the formule of limit for spending

@@ -45,6 +45,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.villageBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
+<<<<<<< HEAD
+=======
+            // changeGoldOfferings
+            // 
+            this.changeGoldOfferings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.changeGoldOfferings.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("changeGoldOfferings.BackgroundImage")));
+            this.changeGoldOfferings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.changeGoldOfferings.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.changeGoldOfferings.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.changeGoldOfferings.Location = new System.Drawing.Point(934, 3);
+            this.changeGoldOfferings.Name = "changeGoldOfferings";
+            this.changeGoldOfferings.Size = new System.Drawing.Size(94, 28);
+            this.changeGoldOfferings.TabIndex = 20;
+            this.changeGoldOfferings.Text = "Echange Or/PO";
+            this.changeGoldOfferings.UseVisualStyleBackColor = true;
+            // 
+>>>>>>> fx-map_events
             // offeringsPoints
             // 
             this.offeringsPoints.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));

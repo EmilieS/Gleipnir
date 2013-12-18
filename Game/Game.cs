@@ -52,8 +52,32 @@ namespace Game
             Family FamilyD = v.CreateFamilyFromScratch();
             Family FamilyE = v.CreateFamilyFromScratch();
 
-            _offerings.Current = 100;
+            _offerings.Current = 1000;
+
+            _buildingsPrices = new BuildingsPrices[17];
+            #region Set Buildngs Prices
+            // Jobs
+            _buildingsPrices[0] = new BuildingsPrices("apothercaryOffice", 200);
+            _buildingsPrices[1] = new BuildingsPrices("forge", 100);
+            _buildingsPrices[2] = new BuildingsPrices("unionOfCrafter", 50);
+            _buildingsPrices[3] = new BuildingsPrices("restaurant", 400);
+            _buildingsPrices[4] = new BuildingsPrices("farm", 100);
+            _buildingsPrices[5] = new BuildingsPrices("mill", 375);
+            _buildingsPrices[6] = new BuildingsPrices("militaryCamp", 600);
+            _buildingsPrices[7] = new BuildingsPrices("clothesShop", 300);
+            // Hobbies
+            _buildingsPrices[8] = new BuildingsPrices("baths", 500);
+            _buildingsPrices[9] = new BuildingsPrices("brothel", 300);
+            _buildingsPrices[10] = new BuildingsPrices("partyRoom", 250);
+            _buildingsPrices[11] = new BuildingsPrices("tavern", 200);
+            _buildingsPrices[12] = new BuildingsPrices("theater", 600);
+            // Specials
+            _buildingsPrices[13] = new BuildingsPrices("chapel", 450);
+            _buildingsPrices[14] = new BuildingsPrices("offeringsWarehouse", 150);
+            _buildingsPrices[15] = new BuildingsPrices("house", 70);
+            #endregion
         }
+        
         readonly List<GodSpell.Epidemic> _currentEpidemicList;
         internal readonly List<GameItem> _items;//internal for tests
         readonly List<Village> _villages; //a revoir!
@@ -63,25 +87,30 @@ namespace Game
         readonly HistorizedValue<int, Game> _totalGold;
         readonly HistorizedValue<int, Game> _totalPop;
         readonly HistorizedValue<int, Game> _offerings;
+        private readonly BuildingsPrices[] _buildingsPrices;
+        readonly internal double[] _regularBirthDates;
+        readonly internal double _ageTickTime;
+        public Random Rand;
+        double _averageHappiness;
+        double _averageFaith;
 
         public NameGenerator NameList { get { return _nameGenerator; } }
         public NameGenerator FirstNameList { get { return _firstNameGenerator; } }
         public IReadOnlyList<Village> Villages { get { return _villages; } }
         public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
-	public int TotalGold { get { return _totalGold.Current; } }
+	    public int TotalGold { get { return _totalGold.Current; } }
         public int LastTotalGold { get { return _totalGold.Historic.Last; } }//for tests, should get eliminated
-
         public int TotalPop { get { return _totalPop.Current; } }
         public int Offerings { get { return _offerings.Current; } }
-        readonly internal double[] _regularBirthDates;
-        readonly internal double _ageTickTime;
-        public Random Rand;
         double _faithToBeAddedOrRemovedForAllVillagersThisRound;
         internal double FaithToBeAddedOrRemovedForAllVillagersThisRound { get { return _faithToBeAddedOrRemovedForAllVillagersThisRound; } }
-        double _averageHappiness;
-        double _averageFaith;
         public double AverageHappiness { get { return _averageHappiness; } }
         public double AverageFaith { get { return _averageFaith; } }
+
+        public BuildingsPrices GetBuildingPrices(int index)
+        {
+            return _buildingsPrices[index];
+        }
 
         /*public double TotalGold { get 
         {
@@ -130,7 +159,7 @@ namespace Game
             Debug.Assert(amount >= 0, "(GoldRemoved) negative amount.");
             _totalGold.Current -= amount;
         }
-        internal void AddOrTakeFromOfferings(int amount)
+        public void AddOrTakeFromOfferings(int amount)
         {
             int result = Offerings + amount;
             if (result < 0) _offerings.Current = 0;
@@ -308,6 +337,29 @@ namespace Game
         internal void FamilyRemoved(Family family)
         {
             _totalGold.Current -= family.GoldStash;
+        }
+
+        // Buildings bought price
+        public struct BuildingsPrices
+        {
+            string name;
+            int costPrice;
+
+            public BuildingsPrices(string n, int c)
+            {
+                name = n;
+                costPrice = c;
+            }
+
+            public string GetName
+            {
+                get { return name; }
+            }
+
+            public int GetPrice
+            {
+                get { return costPrice; }
+            }
         }
     }
 }

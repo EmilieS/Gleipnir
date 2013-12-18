@@ -16,6 +16,7 @@ namespace GamePages
         Game.Game _startedGame;
         public bool _isStarted;
         public event PropertyChangedEventHandler Launched;
+
         public HomepageUC()
         {
             InitializeComponent();

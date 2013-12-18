@@ -23,6 +23,7 @@ namespace GamePages
             Hobby = 1>>8,
             Special = 1>>9
         }
+
         public static readonly int Empty = 0;
         public static readonly int Forest = 1;
         public static readonly int Water = 2;
@@ -326,16 +327,6 @@ namespace GamePages
         public void UpdateSquares(int row, int col, int value)
         {
             squares[row, col] = value;
-        }
-
-        /// <summary>
-        /// Place a building on the grid
-        /// </summary>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
-        /// <param name="value"></param>
-        public void PlaceBuilding(int row, int col)
-        {
         }
     }
 }

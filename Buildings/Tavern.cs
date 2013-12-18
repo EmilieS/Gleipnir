@@ -8,8 +8,6 @@ namespace Buildings.Hobbies
 {
     public class Tavern
     {
-
-
         public double SetFaith
         {
             get { return 4; }
@@ -18,6 +16,11 @@ namespace Buildings.Hobbies
         public double SetHappiness
         {
             get { return 6; }
+        }
+
+        public int CostPrice
+        {
+            get { return 100; }
         }
 
         //public void SetEnterPrice()
