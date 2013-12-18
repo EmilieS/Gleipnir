@@ -51,7 +51,7 @@ namespace Game
         /// <param name="person"></param>
         public void AddPerson(Villager person)
         {
-            if (!AddPersonPrerequisites())//balancer exception??
+            if (!AddPersonPrerequisites())
                 return;
             if (person == null) throw new ArgumentNullException();
             if (!_workers.Contains(person))
@@ -95,12 +95,22 @@ namespace Game
         {
             if (_workers.Count == 0)
                 return;
+            if (!GenerateGoldPrerequisites())
+                return;
             _gold = ModifyGoldGeneration();
             foreach (Villager person in _workers)
             {
-                person.ParentFamily.addTOGoldStash(_gold);
+                if (person.GenerateGoldPrerequisitesFromVillager())
+                {
+                    person.ParentFamily.addTOGoldStash(_gold);
+                }
             }
         }
+        internal virtual bool GenerateGoldPrerequisites()
+        {
+            return true;
+        }
+
 
         /// <summary>
         /// Less Gold generation if many job workers

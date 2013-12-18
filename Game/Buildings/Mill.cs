@@ -8,10 +8,11 @@ namespace Game.Buildings
 {
      public class Mill : BuildingsModel
     {
-        public Mill(Village v,BuildingsList List, string name)
+        public Mill(Village v)
             : base(v)
         {
-
+            Name = "Moulin";
+            Hp = MaxHp = 50;
         }
         override internal void AddToList()
         {

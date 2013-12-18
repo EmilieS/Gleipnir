@@ -23,5 +23,20 @@ namespace Game
             else
                 return false;
         }
+        internal override bool GenerateGoldPrerequisites()
+        {
+            if (Owner.Owner.Buildings.ApothecaryOfficeList.Count < 0)
+                return false;
+            int i=0;
+            do
+            {
+                if (Owner.Owner.Buildings.ApothecaryOfficeList[i].Hp > 0)
+                {
+                    return true;
+                }
+                i++;
+            } while (i < Owner.Owner.Buildings.ApothecaryOfficeList.Count);
+            return false;
+        }
     }
 }

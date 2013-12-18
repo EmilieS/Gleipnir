@@ -208,7 +208,7 @@ namespace Game
         {
             b.PushTrace( String.Format("Un nouveau villageois est né ! Il a été nommé {0}.", GameItem.Name));
             if (GameItem.Job == null)
-                b.PushAlert(String.Format("Le nouveau villageois {0} ne sait pas quel métier prendre...", GameItem.Name), "Demande d'attribution de métier");
+                b.PushAlert(String.Format("Le nouveau villageois {0} {1} ne sait pas quel métier prendre...", GameItem.Name, GameItem.ParentFamily.Name), "Demande d'attribution de métier");
         }
     }
     public class FamilyBirthEvent : Event<Family>

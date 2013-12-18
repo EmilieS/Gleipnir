@@ -17,6 +17,16 @@ namespace Tests
             var MyGame = new Game.Game();
             var village = MyGame.Villages[0];
             Family family = MyGame.Villages[0].FamiliesList[0];
+            foreach (Family f in village.FamiliesList)
+            {
+                foreach (Villager v in f.FamilyMembers)
+                {
+                    if (v.Job != null)
+                    {
+                        v.Job.RemovePerson(v);
+                    }
+                }
+            }
             Villager mother = family.Mother;
             Villager father = family.Father;
 
@@ -44,9 +54,9 @@ namespace Tests
             Assert.That(family.FamilyMembers.Count == 2);
             for (int i = 0; i < family.FamilyMembers.Count; i++)
             {
-                Assert.That(family.FamilyMembers[i].Happiness == 75, "The happiness his not 75");
+                Assert.AreEqual(75, family.FamilyMembers[i].Happiness, "The happiness his not 75");
             }
-            Assert.That(family.HappinessAverage() == 75, "family average is not 75");
+            Assert.AreEqual(75, family.HappinessAverage(), "family average is not 75");
         }
         
         [Test]
@@ -75,7 +85,12 @@ namespace Tests
             foreach (Family f in village.FamiliesList)
             {
                 foreach (Villager v in f.FamilyMembers)
-                    v.Job.RemovePerson(v);
+                {
+                    if (v.Job != null)
+                    {
+                        v.Job.RemovePerson(v);
+                    }
+                }
             }
             MyGame.NextStep();//-1 gold per villager
             Assert.AreEqual(128, family.GoldStash);//2villagers in family128

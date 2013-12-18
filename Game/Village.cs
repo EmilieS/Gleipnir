@@ -94,8 +94,8 @@ namespace Game
             var name = Game.NameList.NextName;
             var newFamily = new Family(Game, VillagerAF, VillagerAM, name);
             _familiesList.Add(newFamily);
-            VillagerAF.Job.RemovePerson(VillagerAF);
-            VillagerAM.Job.RemovePerson(VillagerAM);
+            if (VillagerAF.Job != null) { VillagerAF.Job.RemovePerson(VillagerAF); }
+            if (VillagerAM.Job != null) { VillagerAM.Job.RemovePerson(VillagerAM); }
             mothersJob.AddPerson(VillagerAF);
             fathersJob.AddPerson(VillagerAM);
             return newFamily;
@@ -274,8 +274,8 @@ namespace Game
                 int offerings = 0;
                 foreach (Family fam in _familiesList)
                 {
-                    fam.takeFromGoldStash(amount);
-                    offerings += amount;
+                    offerings += fam.takeFromGoldStash(amount);
+                    //offerings += amount;
                 }
                 Game.AddOrTakeFromOfferings(offerings);
             }

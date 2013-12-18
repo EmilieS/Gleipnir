@@ -8,9 +8,11 @@ namespace Game.Buildings
 {
      public class Restaurant : BuildingsModel
     {
-        public Restaurant(Village v, BuildingsList List, string name)
+        public Restaurant(Village v)
             : base (v)
         {
+            Name = "Restaurant";
+            Hp = MaxHp = 50;
         }
         override internal void AddToList()
         {

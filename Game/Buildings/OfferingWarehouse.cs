@@ -8,10 +8,11 @@ namespace Game.Buildings
 {
      public class OfferingWarehouse : BuildingsModel
     {
-        public OfferingWarehouse(Village v, BuildingsList List, string name)
+        public OfferingWarehouse(Village v)
             : base(v)
         {
-
+            Name = "Sanctuaire";
+            Hp = MaxHp = 50;
         }
         override internal void AddToList()
         {

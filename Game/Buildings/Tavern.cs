@@ -12,6 +12,8 @@ namespace Game.Buildings
             : base(v)
         {
             CostPrice = 100;
+            Name = "Taverne";
+            Hp = MaxHp = 50;
         }
 
         public double SetFaith

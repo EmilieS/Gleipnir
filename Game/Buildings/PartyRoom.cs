@@ -8,10 +8,11 @@ namespace Game.Buildings
 {
      public class PartyRoom : BuildingsModel
     {
-        public PartyRoom(Village v,BuildingsList List, string name )
+        public PartyRoom(Village v)
             : base (v)
         {
-
+            Name = "Salle des fêtes";
+            Hp = MaxHp = 50;
         }
         override internal void AddToList()
         {
