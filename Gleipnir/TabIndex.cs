@@ -13,9 +13,15 @@ namespace GamePages
 {
     public partial class TabIndex : UserControl
     {
+        int positionX;
+        int positionY;
+        List<VillagerBannerUC> ListOfVillagersToShow;
+
         public TabIndex()
         {
             InitializeComponent();
+            positionX = 0;
+            positionY = 0;
         }
         internal void ShowUnboughtBuildings()
         {
@@ -71,6 +77,41 @@ namespace GamePages
         private void Restaurant_Click(object sender, EventArgs e)
         {
 
+        }
+        bool _passed;
+        internal void ShowVillagerListInFamily(Family fam)
+        {
+            if (_passed != true)
+            { 
+               _passed = true;
+                ListOfVillagersToShow = new List<VillagerBannerUC>();
+            }
+            DestroyVillagerListInFamily();
+
+            for (int i = 0; i < fam.FamilyMembers.Count; i++)
+            {
+                
+            //    int i = 0;
+                VillagerBannerUC tmp = new VillagerBannerUC();
+                ListOfVillagersToShow.Add(tmp);
+                tmp.VillagerName.Text = fam.FamilyMembers[i].Name;
+                this.VillagerList.Controls.Add(tmp);
+                tmp.Show();
+                tmp.Location = new System.Drawing.Point(positionX, positionY);
+                positionY += 65;
+            }
+        }
+
+        internal void DestroyVillagerListInFamily()
+        {
+            for (int i = 0; i < ListOfVillagersToShow.Count; i++)
+            {
+                ListOfVillagersToShow[i].Hide();
+                this.VillagerList.Controls.Remove(ListOfVillagersToShow[i]);
+
+            }
+            positionX = positionY = 0;
+            ListOfVillagersToShow.Clear();
         }
     }
 }

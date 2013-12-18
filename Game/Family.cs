@@ -116,7 +116,7 @@ namespace Game
                 return 0;
             }
         }
-        public void addTOGoldStash(int amount)
+        public void addToGoldStash(int amount)
         {
             if (amount < 0)
             {

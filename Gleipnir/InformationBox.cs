@@ -13,9 +13,21 @@ namespace GamePages
 {
     public partial class InformationBox : UserControl
     {
-        public InformationBox()
+        Meeting _meeting;
+        GeneralPage _page;
+        Family _family;
+        public InformationBox(GeneralPage Parent, Family family)
         {
             InitializeComponent();
+            _meeting = new Meeting(family);
+            _page = Parent;
+            _family = family;
+        }
+
+        private void GodMeeting_Click(object sender, EventArgs e)
+        {
+            _meeting.Convocate();
+            _page.ActionMenu.ShowVillagerListInFamily(_family);
         }
     }
 }

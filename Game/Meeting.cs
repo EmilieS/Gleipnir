@@ -11,7 +11,10 @@ namespace Game
 
         Family actualConvocated;
 
-        public Meeting() { }
+        public Meeting(Family f)
+        {
+            actualConvocated = f;
+        }
 
         public Family ActualConvocated
         {
@@ -20,21 +23,23 @@ namespace Game
 
         }
 
-        public void Convocate(Family family)
+        public void Convocate()
         {
             if (actualConvocated != null)
             {
-                foreach (Villager villager in actualConvocated.FamilyMembers)
+                foreach (Family f in actualConvocated.OwnerVillage.FamiliesList)
                 {
-                    villager.ActivityStatus = ActivityStatus.WORKING;
+                    foreach (Villager villager in f.FamilyMembers)
+                    {
+                        villager.ActivityStatus = ActivityStatus.WORKING;
+                    }
                 }
             }
-            foreach (Villager villager in family.FamilyMembers)
+            foreach (Villager villager in actualConvocated.FamilyMembers)
             {
                 villager.ActivityStatus = ActivityStatus.CONVOCATED;
 
             }
-            actualConvocated = family;
         }
 
         public void ReleaseConvocated(Family family)
@@ -50,7 +55,6 @@ namespace Game
             if (expectedMission != villager.Mission)
             {
                 villager.Mission = expectedMission;
-
             }
         }
     }

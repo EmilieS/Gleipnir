@@ -43,8 +43,8 @@ namespace GamePages
             _home = new HomepageUC();
             _gameMenu = new InGameMenu();
             _actionMenu = new TabIndex();
+
             _stats = new InformationsUC(this);
-            _infoBox = new InformationBox();
             _eventFlux = new EventFluxUC();
             _scenarioBox = new ScenarioBox(this);
             InitializeComponent();
@@ -53,26 +53,16 @@ namespace GamePages
             _home.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
             this.Controls.Add(_home);
             _home.Show();
-            PushAlert( "coucoudfghjkjhgfd","coucou1");
-            PushAlert( "coucou2546"    ,  "coucou2");
-            PushAlert( "coucou4543"  ,"coucou3" );
-            PushAlert( "coucou44545"   ,"coucou4" );
-            PushAlert( "coucou54545"   ,"coucou5" );
-            PushAlert( "coucou65454"   ,"coucou6" );
-            PushAlert( "coucou75454"   ,"coucou7" );
-            PushAlert( "coucou8888"   ,"coucou8" );
-            PushAlert("coucou9", "coucou");
-            PushAlert("coucou10", "coucou");
-            PushAlert("coucou11", "coucou");
-            //PushAlert("coucou12", "coucou");
-            //PushAlert("coucou", "coucou");
-            //PushAlert("coucou", "coucou");
-            //PushAlert("coucou", "coucou");
+
             _gameMenu.ExpectGoBackToMenu += GoBackToMenu;
         }
         
         public void IsStarted_Changed(object sender, PropertyChangedEventArgs e)
         {
+
+            Family _family = _startedGame.Villages[0].FamiliesList[0];
+            _infoBox = new InformationBox(this, _family);
+
             this.Controls.Remove(_home);
             _actionMenu.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top);
             //ActionMenu.Bottom = 3;
@@ -80,13 +70,11 @@ namespace GamePages
             _actionMenu.Show();
             this.Controls.Add(_scenarioBox);
             _scenarioBox.Show();
+            this.Controls.Add(_infoBox);
+            _infoBox.Show();
             _stats.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
             this.Controls.Add(_stats);
             _stats.Show();
-            //TODO : Create InfoBox
-            _infoBox.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
-            this.Controls.Add(_infoBox);
-            _infoBox.Show();
             _eventFlux.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             this.Controls.Add(_eventFlux);
             _eventFlux.Show();
@@ -124,23 +112,25 @@ namespace GamePages
             #endregion
 
         }
+        internal TabIndex ActionMenu
+        {
+            get { return _actionMenu; }
+        }
         internal void LockEverything()
         {
             _actionMenu.Enabled = false;
             _stats.Enabled = false;
-            _infoBox.Enabled = false;
             _eventFlux.Enabled = false;
         }
         internal void UnLockEverything()
         {
             _actionMenu.Enabled = true;
             _stats.Enabled = true;
-            _infoBox.Enabled = true;
             _eventFlux.Enabled = true;
         }
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
         {
-            _actionMenu.Visible = _infoBox.Visible = _stats.Visible = false;
+            _actionMenu.Visible = _stats.Visible = false;
 
             this.Controls.Add(_home);
             _home.Show();
@@ -291,6 +281,10 @@ namespace GamePages
                 squareControl.Cursor = Cursors.Hand;
             }
         }
+        internal void ShowListOfVillager(Family family)
+        {
+            
+        }
         private void SquareControl_MouseLeave(object sender, EventArgs e)
         {
             SquareControl squareControl = (SquareControl)sender;
@@ -350,7 +344,7 @@ namespace GamePages
                 events.PublishMessage(this);
             }
             //to go faster...
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 3; i++)
             {
                 _startedGame.NextStep();
                 foreach (IEvent events in _startedGame.EventList)
@@ -362,7 +356,7 @@ namespace GamePages
             }
             //-----------------
         }
-
+        
 
 
     }

@@ -98,7 +98,8 @@ namespace Game
             _gold = ModifyGoldGeneration();
             foreach (Villager person in _workers)
             {
-                person.ParentFamily.addTOGoldStash(_gold);
+                if(person.ActivityStatus == ActivityStatus.WORKING)
+                    person.ParentFamily.addToGoldStash(_gold);
             }
         }
 
@@ -121,21 +122,19 @@ namespace Game
             Debug.Assert(_owner != null, "(ModifyGoldGeneration) _owner is null");
             Debug.Assert(_owner.Owner != null, "(ModifyGoldGeneration) _owner._owner is null");
             Debug.Assert(_workers.Count != 0, "(ModifyGoldGeneration) there are no workers");
-
             result = (_owner.Owner._villagePop.Current / _workers.Count) * _coefficient;
-
             return result;
         }
         internal void addHereticWorker()
         {
-                Debug.Assert(_nbHeretics <= Workers.Count, "(addHereticWorker) there are more heretic workers than workers Oo");
-                _nbHeretics++;
+            Debug.Assert(_nbHeretics <= Workers.Count, "(addHereticWorker) there are more heretic workers than workers Oo");
+            _nbHeretics++;
         }
         internal void removeHereticWorker()
         {
-                Debug.Assert(_nbHeretics <= Workers.Count, "(removeHereticWorker) there are more heretic workers than workers Oo");
-                Debug.Assert(_nbHeretics >=0, "(removeHereticWorker) negative !");
-                _nbHeretics--;         
+            Debug.Assert(_nbHeretics <= Workers.Count, "(removeHereticWorker) there are more heretic workers than workers Oo");
+            Debug.Assert(_nbHeretics >= 0, "(removeHereticWorker) negative !");
+            _nbHeretics--;
         }
 
         /// <summary>
@@ -143,7 +142,7 @@ namespace Game
         /// </summary>
         /// <param name="person"></param>
         public virtual void AddHappiness(Villager villager) { }
-        
+
         internal void HereticFaithImpact()
         {
             if (_nbHeretics < 0)
@@ -161,7 +160,7 @@ namespace Game
         internal void WorkerDestroyed(Villager dead)
         {
             Debug.Assert(dead != null, "(JobsModel) villager is null");
-            Debug.Assert(dead.IsDead(),"(JobsModel) villager is not dead ?!");
+            Debug.Assert(dead.IsDead(), "(JobsModel) villager is not dead ?!");
             Debug.Assert(_workers.Contains(dead), "(JobModel) villager isn't even in the workerlist!");
             Debug.Assert((dead.Faith <= 15) == ((dead.Health & Healths.HERETIC) != 0), "(JobModel/villagerdestroyed) heretism is not right!");
             if ((dead.Health & Healths.HERETIC) != 0)
@@ -187,7 +186,7 @@ namespace Game
         }
         internal override void Evolution()
         {
-            
+
             GenerateGold();
         }
         internal override void CloseStep(List<IEvent> eventList)
@@ -200,8 +199,8 @@ namespace Game
         {
             Debug.Assert(_workers.Count == 0, "There is still someone in this Job!");
 
-           /* _owner = null; joblist & different jobs ONLY get destroyed with the village.
-            * so it only gets destroyed WITH its owner, so no need to separate them.*/
+            /* _owner = null; joblist & different jobs ONLY get destroyed with the village.
+             * so it only gets destroyed WITH its owner, so no need to separate them.*/
         }
     }
 }
