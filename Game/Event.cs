@@ -40,6 +40,10 @@ namespace Game
         {
             b.PushTrace(String.Format("Property {0} has changed...", ChangedProperty));
         }
+        public override void Do(IWindow b)
+        {
+            base.Do(b);
+        }
     }
     public class BuildingNoHpEvent : Event<Buildings.BuildingsModel>
     {
@@ -91,7 +95,22 @@ namespace Game
             b.PushTrace(String.Format("Property {0} has changed...", ChangedProperty));
         }
     }
+    public class VillageEventProperty : EventProperty<Village>
+    {
+        internal VillageEventProperty(Village item, string propName)
+            : base(item, propName)
+        {
+        }
+        public override void Do(IWindow b)
+        {
+            switch (ChangedProperty)
+            {
+                case "OfferingsPointsPerTick": b.PushOfferingsPointsPerTick(GameItem.OfferingsPointsPerTick); break;
+            }
 
+        }
+
+    }
     public class VillagerDyingEvent : Event<Villager>
     {
         internal VillagerDyingEvent(Villager v, string familyName)

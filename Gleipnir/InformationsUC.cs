@@ -43,5 +43,10 @@ namespace GamePages
         {          
             _page.StartedGame.Villages[0].SetOfferingsPoints(TaxAmount.Value);
         }
+
+        private void TaxAmountValue_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

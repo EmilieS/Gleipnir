@@ -14,7 +14,7 @@ namespace Game
         int _familiesGold;
         double _villageFaith;
         double _villageHappiness;
-        int _offeringsPoints;
+        internal readonly HistorizedValue<int, Village> _offeringsPointsPerTick;
         internal readonly HistorizedValue<int, Village> _villagePop;
         public Buildings.BuildingsList Buildings;
         internal List<Buildings.House> EmptyHouseList;
@@ -31,6 +31,7 @@ namespace Game
         {
             Buildings = new Buildings.BuildingsList(this);
             EmptyHouseList = new List<Buildings.House>();
+            _offeringsPointsPerTick = new HistorizedValue<int, Village>(this, "_offeringsPointsPerTick", 20);
             _villagePop = new HistorizedValue<int, Village>(this, "_villagePop", 20);
             Debug.Assert(!String.IsNullOrWhiteSpace(name));
             Debug.Assert(thisGame != null, "thisGame is null!");
@@ -38,7 +39,7 @@ namespace Game
             _familiesList = new FamilyInVillageList(this);
             //_jobs = CreateJobs();
             Jobs = new JobList(this);
-            _offeringsPoints = 1;
+            _offeringsPointsPerTick.Current = 1;
         }
 
         internal void VillagerAdded()
@@ -239,7 +240,7 @@ namespace Game
         /// <summary>
         /// tax per villager per tick.
         /// /// </summary>
-        public int OfferingsPointsPerTick { get { return _offeringsPoints; } }
+        public int OfferingsPointsPerTick { get { return _offeringsPointsPerTick.Current; } }
 
 
         /// <summary>
@@ -250,15 +251,15 @@ namespace Game
         {
             if (playerChoice <= 0)
             {
-                _offeringsPoints = 1;
+                _offeringsPointsPerTick.Current = 1;
             }
             else if (playerChoice >= 100)
             {
-                _offeringsPoints = 100;
+                _offeringsPointsPerTick.Current = 100;
             }
             else
             {
-                _offeringsPoints = playerChoice;
+                _offeringsPointsPerTick.Current = playerChoice;
             }
         }
 
@@ -360,8 +361,8 @@ namespace Game
         override internal void CloseStep(List<IEvent> eventList)
         {
             //TODO :  put current values in value history.
-            if (_familiesList.Conclude()) { eventList.Add(new EventProperty<Village>(this, "FamiliesList")); }
-
+            if (_familiesList.Conclude()) { eventList.Add(new VillageEventProperty(this, "FamiliesList")); }
+            if (_offeringsPointsPerTick.Conclude()) { eventList.Add(new VillageEventProperty(this, "OfferingsPointsPerTick")); }
             //JobList is invariant.
             //TODO : events!
         }

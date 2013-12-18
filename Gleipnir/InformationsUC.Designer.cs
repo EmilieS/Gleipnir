@@ -40,6 +40,7 @@
             this.villageName = new System.Windows.Forms.Label();
             this.StepByStep = new System.Windows.Forms.Button();
             this.TaxAmount = new System.Windows.Forms.TrackBar();
+            this.TaxAmountValue = new System.Windows.Forms.Label();
             this.villageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.TaxAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.villageBindingSource)).BeginInit();
@@ -49,7 +50,7 @@
             // 
             this.offeringsPoints.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.offeringsPoints.AutoSize = true;
-            this.offeringsPoints.Location = new System.Drawing.Point(546, 8);
+            this.offeringsPoints.Location = new System.Drawing.Point(466, 8);
             this.offeringsPoints.Name = "offeringsPoints";
             this.offeringsPoints.Size = new System.Drawing.Size(88, 13);
             this.offeringsPoints.TabIndex = 19;
@@ -59,7 +60,7 @@
             // 
             this.happinessVillage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.happinessVillage.AutoSize = true;
-            this.happinessVillage.Location = new System.Drawing.Point(479, 8);
+            this.happinessVillage.Location = new System.Drawing.Point(389, 8);
             this.happinessVillage.Name = "happinessVillage";
             this.happinessVillage.Size = new System.Drawing.Size(47, 13);
             this.happinessVillage.TabIndex = 18;
@@ -69,7 +70,7 @@
             // 
             this.faithVillage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.faithVillage.AutoSize = true;
-            this.faithVillage.Location = new System.Drawing.Point(433, 8);
+            this.faithVillage.Location = new System.Drawing.Point(334, 8);
             this.faithVillage.Name = "faithVillage";
             this.faithVillage.Size = new System.Drawing.Size(21, 13);
             this.faithVillage.TabIndex = 17;
@@ -79,7 +80,7 @@
             // 
             this.population.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.population.AutoSize = true;
-            this.population.Location = new System.Drawing.Point(350, 8);
+            this.population.Location = new System.Drawing.Point(245, 8);
             this.population.Name = "population";
             this.population.Size = new System.Drawing.Size(57, 13);
             this.population.TabIndex = 16;
@@ -89,7 +90,7 @@
             // 
             this.goldVillage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.goldVillage.AutoSize = true;
-            this.goldVillage.Location = new System.Drawing.Point(288, 7);
+            this.goldVillage.Location = new System.Drawing.Point(195, 8);
             this.goldVillage.Name = "goldVillage";
             this.goldVillage.Size = new System.Drawing.Size(18, 13);
             this.goldVillage.TabIndex = 15;
@@ -139,9 +140,9 @@
             // 
             // StepByStep
             // 
-            this.StepByStep.Location = new System.Drawing.Point(648, 3);
+            this.StepByStep.Location = new System.Drawing.Point(949, 6);
             this.StepByStep.Name = "StepByStep";
-            this.StepByStep.Size = new System.Drawing.Size(110, 21);
+            this.StepByStep.Size = new System.Drawing.Size(79, 21);
             this.StepByStep.TabIndex = 21;
             this.StepByStep.Text = "Step by Step";
             this.StepByStep.UseVisualStyleBackColor = true;
@@ -152,17 +153,26 @@
             // 
             this.TaxAmount.AccessibleName = "Collection d\'offrandes";
             this.TaxAmount.LargeChange = 20;
-            this.TaxAmount.Location = new System.Drawing.Point(764, 0);
+            this.TaxAmount.Location = new System.Drawing.Point(569, 3);
             this.TaxAmount.Maximum = 100;
             this.TaxAmount.Minimum = 1;
             this.TaxAmount.Name = "TaxAmount";
-            this.TaxAmount.Size = new System.Drawing.Size(250, 45);
+            this.TaxAmount.Size = new System.Drawing.Size(227, 45);
             this.TaxAmount.SmallChange = 5;
             this.TaxAmount.TabIndex = 22;
             this.TaxAmount.Tag = "Collection d\'offrandes";
-            this.TaxAmount.TickFrequency = 5;
+            this.TaxAmount.TickFrequency = 9;
             this.TaxAmount.Value = 1;
             this.TaxAmount.ValueChanged += new System.EventHandler(this.TaxAmount_ValueChanged);
+            // 
+            // TaxAmountValue
+            // 
+            this.TaxAmountValue.AutoSize = true;
+            this.TaxAmountValue.Location = new System.Drawing.Point(802, 8);
+            this.TaxAmountValue.Name = "TaxAmountValue";
+            this.TaxAmountValue.Size = new System.Drawing.Size(76, 13);
+            this.TaxAmountValue.TabIndex = 23;
+            this.TaxAmountValue.Text = "Qtité demandé";
             // 
             // villageBindingSource
             // 
@@ -172,6 +182,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.TaxAmountValue);
             this.Controls.Add(this.TaxAmount);
             this.Controls.Add(this.StepByStep);
             this.Controls.Add(this.offeringsPoints);
@@ -202,7 +213,8 @@
         private System.Windows.Forms.Label Village;
         internal System.Windows.Forms.Label villageName;
         internal System.Windows.Forms.Button StepByStep;
-        private System.Windows.Forms.TrackBar TaxAmount;
+        internal System.Windows.Forms.TrackBar TaxAmount;
         private System.Windows.Forms.BindingSource villageBindingSource;
+        internal System.Windows.Forms.Label TaxAmountValue;
     }
 }

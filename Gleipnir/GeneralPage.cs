@@ -216,6 +216,11 @@ namespace GamePages
         {
             _stats.goldVillage.Text = value.ToString();
         }
+        public void PushOfferingsPointsPerTick(int value)
+        {
+            _stats.TaxAmount.Value = value;
+            _stats.TaxAmountValue.Text = string.Concat("Qtité demandée : ", value.ToString());
+        }
         public void PushAlert(string message, string title)
         {
             _eventFlux.CreateNewEventAndShow(message, title);

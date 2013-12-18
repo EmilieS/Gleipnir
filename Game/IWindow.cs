@@ -16,6 +16,7 @@ namespace Game
         void PushGeneralCoins(int value);
         void PushGeneralFaith(double value);
         void PushGeneralHappiness(double value);
+        void PushOfferingsPointsPerTick(int value);
         void PushName(string name);
 
     }
