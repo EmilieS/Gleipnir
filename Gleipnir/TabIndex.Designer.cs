@@ -30,6 +30,13 @@
         {
             this.actionsMenu = new System.Windows.Forms.TabControl();
             this.buildingsTab = new System.Windows.Forms.TabPage();
+            this.House = new System.Windows.Forms.Button();
+            this.OfferingsWarehouse = new System.Windows.Forms.Button();
+            this.ClothesShop = new System.Windows.Forms.Button();
+            this.Mill = new System.Windows.Forms.Button();
+            this.Farm = new System.Windows.Forms.Button();
+            this.UnionOfCrafter = new System.Windows.Forms.Button();
+            this.Forge = new System.Windows.Forms.Button();
             this.Restaurant = new System.Windows.Forms.Button();
             this.Theater = new System.Windows.Forms.Button();
             this.Brothel = new System.Windows.Forms.Button();
@@ -41,13 +48,6 @@
             this.happinessTab = new System.Windows.Forms.TabPage();
             this.faithTab = new System.Windows.Forms.TabPage();
             this.godSpellsTab = new System.Windows.Forms.TabPage();
-            this.Forge = new System.Windows.Forms.Button();
-            this.UnionOfCrafter = new System.Windows.Forms.Button();
-            this.Farm = new System.Windows.Forms.Button();
-            this.Mill = new System.Windows.Forms.Button();
-            this.ClothesShop = new System.Windows.Forms.Button();
-            this.OfferingsWarehouse = new System.Windows.Forms.Button();
-            this.House = new System.Windows.Forms.Button();
             this.actionsMenu.SuspendLayout();
             this.buildingsTab.SuspendLayout();
             this.SuspendLayout();
@@ -95,6 +95,69 @@
             this.buildingsTab.Size = new System.Drawing.Size(208, 528);
             this.buildingsTab.TabIndex = 0;
             this.buildingsTab.UseVisualStyleBackColor = true;
+            // 
+            // House
+            // 
+            this.House.Location = new System.Drawing.Point(123, 270);
+            this.House.Name = "House";
+            this.House.Size = new System.Drawing.Size(75, 23);
+            this.House.TabIndex = 14;
+            this.House.Text = "Maison";
+            this.House.UseVisualStyleBackColor = true;
+            // 
+            // OfferingsWarehouse
+            // 
+            this.OfferingsWarehouse.Location = new System.Drawing.Point(6, 299);
+            this.OfferingsWarehouse.Name = "OfferingsWarehouse";
+            this.OfferingsWarehouse.Size = new System.Drawing.Size(75, 23);
+            this.OfferingsWarehouse.TabIndex = 13;
+            this.OfferingsWarehouse.Text = "Sanctuaire";
+            this.OfferingsWarehouse.UseVisualStyleBackColor = true;
+            // 
+            // ClothesShop
+            // 
+            this.ClothesShop.Location = new System.Drawing.Point(6, 93);
+            this.ClothesShop.Name = "ClothesShop";
+            this.ClothesShop.Size = new System.Drawing.Size(75, 23);
+            this.ClothesShop.TabIndex = 12;
+            this.ClothesShop.Text = "Magasin";
+            this.ClothesShop.UseVisualStyleBackColor = true;
+            // 
+            // Mill
+            // 
+            this.Mill.Location = new System.Drawing.Point(123, 64);
+            this.Mill.Name = "Mill";
+            this.Mill.Size = new System.Drawing.Size(75, 23);
+            this.Mill.TabIndex = 11;
+            this.Mill.Text = "Moulin";
+            this.Mill.UseVisualStyleBackColor = true;
+            // 
+            // Farm
+            // 
+            this.Farm.Location = new System.Drawing.Point(6, 64);
+            this.Farm.Name = "Farm";
+            this.Farm.Size = new System.Drawing.Size(75, 23);
+            this.Farm.TabIndex = 10;
+            this.Farm.Text = "Ferme";
+            this.Farm.UseVisualStyleBackColor = true;
+            // 
+            // UnionOfCrafter
+            // 
+            this.UnionOfCrafter.Location = new System.Drawing.Point(6, 35);
+            this.UnionOfCrafter.Name = "UnionOfCrafter";
+            this.UnionOfCrafter.Size = new System.Drawing.Size(75, 23);
+            this.UnionOfCrafter.TabIndex = 9;
+            this.UnionOfCrafter.Text = "Syndicat";
+            this.UnionOfCrafter.UseVisualStyleBackColor = true;
+            // 
+            // Forge
+            // 
+            this.Forge.Location = new System.Drawing.Point(123, 6);
+            this.Forge.Name = "Forge";
+            this.Forge.Size = new System.Drawing.Size(75, 23);
+            this.Forge.TabIndex = 8;
+            this.Forge.Text = "Forge";
+            this.Forge.UseVisualStyleBackColor = true;
             // 
             // Restaurant
             // 
@@ -195,69 +258,6 @@
             this.godSpellsTab.Size = new System.Drawing.Size(208, 528);
             this.godSpellsTab.TabIndex = 3;
             this.godSpellsTab.UseVisualStyleBackColor = true;
-            // 
-            // Forge
-            // 
-            this.Forge.Location = new System.Drawing.Point(123, 6);
-            this.Forge.Name = "Forge";
-            this.Forge.Size = new System.Drawing.Size(75, 23);
-            this.Forge.TabIndex = 8;
-            this.Forge.Text = "Forge";
-            this.Forge.UseVisualStyleBackColor = true;
-            // 
-            // UnionOfCrafter
-            // 
-            this.UnionOfCrafter.Location = new System.Drawing.Point(6, 35);
-            this.UnionOfCrafter.Name = "UnionOfCrafter";
-            this.UnionOfCrafter.Size = new System.Drawing.Size(75, 23);
-            this.UnionOfCrafter.TabIndex = 9;
-            this.UnionOfCrafter.Text = "Entrepot";
-            this.UnionOfCrafter.UseVisualStyleBackColor = true;
-            // 
-            // Farm
-            // 
-            this.Farm.Location = new System.Drawing.Point(6, 64);
-            this.Farm.Name = "Farm";
-            this.Farm.Size = new System.Drawing.Size(75, 23);
-            this.Farm.TabIndex = 10;
-            this.Farm.Text = "Ferme";
-            this.Farm.UseVisualStyleBackColor = true;
-            // 
-            // Mill
-            // 
-            this.Mill.Location = new System.Drawing.Point(123, 64);
-            this.Mill.Name = "Mill";
-            this.Mill.Size = new System.Drawing.Size(75, 23);
-            this.Mill.TabIndex = 11;
-            this.Mill.Text = "Moulin";
-            this.Mill.UseVisualStyleBackColor = true;
-            // 
-            // ClothesShop
-            // 
-            this.ClothesShop.Location = new System.Drawing.Point(6, 93);
-            this.ClothesShop.Name = "ClothesShop";
-            this.ClothesShop.Size = new System.Drawing.Size(75, 23);
-            this.ClothesShop.TabIndex = 12;
-            this.ClothesShop.Text = "Magasin";
-            this.ClothesShop.UseVisualStyleBackColor = true;
-            // 
-            // OfferingsWarehouse
-            // 
-            this.OfferingsWarehouse.Location = new System.Drawing.Point(6, 299);
-            this.OfferingsWarehouse.Name = "OfferingsWarehouse";
-            this.OfferingsWarehouse.Size = new System.Drawing.Size(75, 23);
-            this.OfferingsWarehouse.TabIndex = 13;
-            this.OfferingsWarehouse.Text = "Temple";
-            this.OfferingsWarehouse.UseVisualStyleBackColor = true;
-            // 
-            // House
-            // 
-            this.House.Location = new System.Drawing.Point(123, 270);
-            this.House.Name = "House";
-            this.House.Size = new System.Drawing.Size(75, 23);
-            this.House.TabIndex = 14;
-            this.House.Text = "Maison";
-            this.House.UseVisualStyleBackColor = true;
             // 
             // TabIndex
             // 

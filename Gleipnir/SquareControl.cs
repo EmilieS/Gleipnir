@@ -25,6 +25,7 @@ namespace GamePages
         public static readonly Color ForestBackColorDefault = Color.FromArgb(20, 130, 75);
         public static readonly Color WaterBackColorDefault = Color.FromArgb(30, 170, 200);
         public static readonly Color RoadBackColorDefault = Color.FromArgb(70, 70, 70);
+        public static readonly Color TableBackColorDefault = Color.FromArgb(175, 70, 0);
         public static readonly Color FarmFieldBackColorDefault = Color.FromArgb(255, 213, 20);
         public static readonly Color HouseBackColorDefault = Color.FromArgb(175, 0, 0);
         public static readonly Color JobsBackColorDefault = Color.FromArgb(200, 200, 200);
@@ -42,14 +43,15 @@ namespace GamePages
         public int PreviewContents;
 
         // These are used to set the right color
-        public readonly int IsForest = 1;
-        public readonly int IsWater = 2;
-        public readonly int IsRoad = 3;
-        public readonly int IsFarmField = 10;
-        public readonly int IsFamilyHouse = 20;
-        public readonly int IsJobBuilding = 30;
-        public readonly int IsHobbyPlace = 40;
-        public readonly int IsSpecialBuiding = 50;
+        internal readonly int IsForest = 1;
+        internal readonly int IsWater = 2;
+        internal readonly int IsRoad = 3;
+        internal readonly int IsTable = 4;
+        internal readonly int IsFarmField = 10;
+        internal readonly int IsFamilyHouse = 20;
+        internal readonly int IsJobBuilding = 30;
+        internal readonly int IsHobbyPlace = 40;
+        internal readonly int IsSpecialBuiding = 50;
 
         // These are used to set highlighting.
         public bool IsValid = false;
@@ -104,6 +106,8 @@ namespace GamePages
                 backColor = WaterBackColorDefault;
             if (Contents == IsRoad)
                 backColor = RoadBackColorDefault;
+            if (Contents == IsTable)
+                backColor = TableBackColorDefault;
             if (Contents == IsFarmField)
                 backColor = FarmFieldBackColorDefault;
             if (Contents == IsFamilyHouse)
@@ -118,6 +122,8 @@ namespace GamePages
                 backColor = ValidMoveBackColor;
             if (IsActive)
                 backColor = ActiveSquareBackColor;
+
+            ActiveSquareBackColor = Color.FromArgb(128, backColor.R, backColor.G, backColor.B);
 
             e.Graphics.Clear(backColor);
 

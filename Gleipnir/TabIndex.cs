@@ -56,7 +56,8 @@ namespace GamePages
 
         }
 
-        #region Jobs Buildings Buttons
+        #region OnClick Buildings Buttons
+        #region Jobs Buildings
         private void ApothicaryOffice_Click(object sender, EventArgs e)
         {
             _page.OnBoughtBuilding_Click(0);
@@ -125,6 +126,7 @@ namespace GamePages
         {
             _page.OnBoughtBuilding_Click(15);
         }
+        #endregion
         #endregion
     }
 }

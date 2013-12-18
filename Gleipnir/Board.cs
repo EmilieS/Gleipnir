@@ -10,24 +10,11 @@ namespace GamePages
     public class Board
     {
         // Differents value for the box
-        public enum Building
-        {
-            Empty = 0,
-            Map = 1>>0,
-            Forest = 1>>1,
-            Water = 1>>2,
-            Road = 1>>3,
-            Building = 1>>5,
-            FamilyHouse = 1>>6,
-            JobHouse = 1>>7,
-            Hobby = 1>>8,
-            Special = 1>>9
-        }
-
         public static readonly int Empty = 0;
         public static readonly int Forest = 1;
         public static readonly int Water = 2;
         public static readonly int Road = 3;
+        public static readonly int Table = 4;
         public static readonly int Farm = 10;
         public static readonly int FamilyHouse = 20;
         public static readonly int JobHouse = 30;
@@ -81,7 +68,6 @@ namespace GamePages
             }
 
             #region Place elements on map
-            // Set 5 family's house
             #region families houses
             squares[5, 20] = FamilyHouse;
             squares[7, 15] = FamilyHouse;
@@ -89,15 +75,11 @@ namespace GamePages
             squares[11, 19] = FamilyHouse;
             squares[12, 11] = FamilyHouse;
             #endregion
-
-            // Set jobs buildings
             #region jobs buildings
             squares[3, 13] = JobHouse;
             squares[6, 10] = JobHouse;
             squares[9, 31] = JobHouse;
             #endregion
-
-            // Set forest
             #region forest
             for (int i = 0; i < 20; i++)
             {
@@ -130,8 +112,9 @@ namespace GamePages
                         squares[i, j] = Forest;
             }
             #endregion
-
-            // Set farms
+            #region table
+            squares[4, 4] = Table;
+            #endregion
             #region farms fields
             for (int i = 19; i > 9; i--)
             {
@@ -158,8 +141,6 @@ namespace GamePages
                         squares[i, j] = Farm;
             }
             #endregion
-
-            // Set rivers
             #region river
             for (int i = 0; i < 20; i++)
             {
@@ -219,8 +200,6 @@ namespace GamePages
                         squares[i, j] = Water;
             }
             #endregion
-
-            // Set roads
             #region roads
             /*for (int i = 0; i < 20; i++)
                 if (i == 4)
@@ -311,7 +290,8 @@ namespace GamePages
             if (squares[row, col] == FamilyHouse ||
                 squares[row, col] == JobHouse ||
                 squares[row, col] == Hobby ||
-                squares[row, col] == Specials)
+                squares[row, col] == Specials ||
+                squares[row, col] == Table)
                 return true;
             else
                 return false;

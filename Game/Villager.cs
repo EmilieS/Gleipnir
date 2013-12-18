@@ -139,7 +139,6 @@ namespace Game
             }
         }
 
-
         /// <summary>
         /// Gets the villager's name
         /// </summary>
@@ -198,8 +197,6 @@ namespace Game
         {
             _lifeExpectancy = 0;
         }
-
-
 
         /// <summary>
         /// can be negative to take away happiness.
@@ -271,7 +268,6 @@ namespace Game
             }
             Debug.Assert((Faith <= 15) == ((Health & Healths.HERETIC) != 0), "(JobModel/villagerdestroyed) heretism is not right!");
         }
-
 
         //====================WORLD=TICK=STUFF============================
         #region called by ImpactHappiness
