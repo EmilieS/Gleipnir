@@ -34,7 +34,7 @@ namespace GamePages
         int buildingIndex;
         string traceMessages;
 
-        internal Game.Game StartedGame { get { return _startedGame; } }
+        internal Game.Game StartedGame { get { return _game; } }
         private enum ActionState
         {
             None = 0,
