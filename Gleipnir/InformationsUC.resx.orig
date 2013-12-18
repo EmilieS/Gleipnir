@@ -118,14 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+<<<<<<< HEAD
+=======
   <data name="changeGoldOfferings.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAN4AAAA9CAYAAADCt9ebAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-<<<<<<< HEAD
-        DQAACw0B7QfALAAAAAd0SU1FB90KFw0VLZ+4++QAACroSURBVHhe7Z3Jk5ZXlt61cbirqyLcLSkgvylT
-=======
-        DwAACw8BkvkDpQAAAAd0SU1FB90KFw0VLZ+4++QAACroSURBVHhe7Z3Jk5ZXlt61cbirqyLcLSkgvylT
->>>>>>> fx-map
+        DAAACwwBP0AiyAAAAAd0SU1FB90KFw0VLZ+4++QAACroSURBVHhe7Z3Jk5ZXlt61cbirqyLcLSkgvylT
         qi51V5eQgBzJgUGAUl0lpOrWLMSgREwJZEJCkpAgCoFGEE1JiKoKy7JK7lC0VR2ENkX1ok30wkF44WDJ
         wgs2jtDO/Sc4fPz8nnvvmx9qb7wTX3wZceK+wx3OOc+5z3vuO3x5n/7+WPKA5GHJSsmEZFLytOTZLD/v
         Sle68v8lzBvmEHOJOcXcYo4x15hz3nhEMj4/0oqZ4Wa8MdCIacmB1fXYO9iMPUOt2LmqFru0v0v7r69q
@@ -311,14 +309,11 @@
         fg/UP1ch4ecrPpLgwAsa44LSChita0fXju+KHcyxNNfue+D/Ao77edBDBADaAAAAAElFTkSuQmCC
 </value>
   </data>
+>>>>>>> fx-map_events
   <data name="menuButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAN4AAAA9CAYAAADCt9ebAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-<<<<<<< HEAD
-        DQAACw0B7QfALAAAAAd0SU1FB90KFw0VLZ+4++QAACroSURBVHhe7Z3Jk5ZXlt61cbirqyLcLSkgvylT
-=======
-        DwAACw8BkvkDpQAAAAd0SU1FB90KFw0VLZ+4++QAACroSURBVHhe7Z3Jk5ZXlt61cbirqyLcLSkgvylT
->>>>>>> fx-map
+        DAAACwwBP0AiyAAAAAd0SU1FB90KFw0VLZ+4++QAACroSURBVHhe7Z3Jk5ZXlt61cbirqyLcLSkgvylT
         qi51V5eQgBzJgUGAUl0lpOrWLMSgREwJZEJCkpAgCoFGEE1JiKoKy7JK7lC0VR2ENkX1ok30wkF44WDJ
         wgs2jtDO/Sc4fPz8nnvvmx9qb7wTX3wZceK+wx3OOc+5z3vuO3x5n/7+WPKA5GHJSsmEZFLytOTZLD/v
         Sle68v8lzBvmEHOJOcXcYo4x15hz3nhEMj4/0oqZ4Wa8MdCIacmB1fXYO9iMPUOt2LmqFru0v0v7r69q
@@ -504,4 +499,7 @@
         fg/UP1ch4ecrPpLgwAsa44LSChita0fXju+KHcyxNNfue+D/Ao77edBDBADaAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="villageBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

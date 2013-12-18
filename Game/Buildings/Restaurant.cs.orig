@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    public class Forge : BuildingsModel, IBuildingsJobs
+    public class Restaurant : BuildingsModel, IBuildingsJobs
     {
         readonly string _name;
 
-        public Forge(Village v, BuildingsList List, string name)
+        public Restaurant(Village v, BuildingsList List, string name)
             : base(v)
         {
             _name = name;
@@ -24,17 +24,7 @@ namespace Game.Buildings
         {
             Village.Buildings.Remove(this);
         }
-        override internal void OnDamage()
-        {
-
-            foreach (Villager v in Village.Jobs.Blacksmith.Workers)
-            {
-                if (Game.Rand.Next(100) == 1)
-                {
-                    v.EarthquakeInjure();
-                }
-            }
-        }
+<<<<<<< HEAD
 
         public void SetCoordinates(int x, int y)
         {
@@ -47,5 +37,18 @@ namespace Game.Buildings
         }
 
         public string BuildingName { get { return _name; } }
+=======
+        override internal void OnDamage()
+        {
+
+            foreach (Villager v in Village.Jobs.Cooker.Workers)
+            {
+                if (Game.Rand.Next(100) == 1)
+                {
+                    v.EarthquakeInjure();
+                }
+            }
+        }
+>>>>>>> origin/develop
     }
 }

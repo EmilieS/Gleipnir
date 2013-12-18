@@ -30,7 +30,17 @@ namespace Game.Buildings
         {
             Village.Buildings.Remove(this);
         }
-
+        override internal void OnDamage() 
+        {
+           
+           foreach(Villager v in Village.Jobs.Apothecary.Workers)
+           {
+               if (Game.Rand.Next(100) == 1)
+               {
+                   v.EarthquakeInjure();
+               }
+           }
+        }
         public void SetCoordinates(int x, int y)
         {
             if (x == null || y == null)

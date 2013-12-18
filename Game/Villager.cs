@@ -151,7 +151,7 @@ namespace Game
         /// Sets the new life expectancy no matter what time was left.
         /// </summary>
         /// <param name="lifeExpectancy"></param>
-        public void SetLifeExpectancy(float lifeExpectancy)
+        public void SetLifeExpectancy(double lifeExpectancy)
         {
             if (lifeExpectancy < 0)
             {
@@ -178,7 +178,7 @@ namespace Game
         /// Reduces the life expectancy by 'time'.(minimum is 0)
         /// </summary>
         /// <param name="time"></param>
-        public void ReduceLifeExpectancy(float timeleft)
+        public void ReduceLifeExpectancy(double timeleft)
         {
             if (_lifeExpectancy > timeleft)
             {
@@ -198,6 +198,11 @@ namespace Game
             _lifeExpectancy = 0;
         }
 
+        internal void EarthquakeInjure()
+        {
+            _health.Current = _health.Current | Healths.EARTHQUAKE_INJURED;
+            SetLifeExpectancyLeft(3);
+        }
         /// <summary>
         /// can be negative to take away happiness.
         /// </summary>
@@ -311,11 +316,12 @@ namespace Game
         {
             if ((_health.Current & Healths.SICK) != 0)
             {
+                int nbApothecaries = _parentFamily.OwnerVillage.Jobs.Apothecary.Workers.Count;
                 int maxtimer;
                 if (this._virus != null)//....
                 {
                     maxtimer = _virus.MaxTimer;
-                    ReduceLifeExpectancy(_virus.LifeExpectencyReduced);
+                    ReduceLifeExpectancy(_virus.LifeExpectencyReduced/1+(nbApothecaries/2));
                 }
                 else
                 {
@@ -332,7 +338,15 @@ namespace Game
                 }
                 else
                 {
-                    _sickTimer++;
+                  
+                   if (nbApothecaries > 0)
+                   {
+                       if (Game.Rand.Next(nbApothecaries) == 0)//The presence of apothecaries relieves the villagers
+                       {
+                           _sickTimer++;
+                       }
+                   }
+                   else { _sickTimer++; }
                 }
 
 

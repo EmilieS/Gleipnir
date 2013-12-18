@@ -93,11 +93,8 @@ namespace Game
         Villager _fiance;
         public Healths Health { get { return _health.Current; } }
         ActivityStatus _villagerActivity;
-<<<<<<< HEAD
         Missions _mission = Missions.NONE; 
-=======
         Virus _virus;
->>>>>>> fx-Epidemic
 
         readonly HistorizedValue<double, Villager> _faith; //scale from 0 to 100.
         readonly HistorizedValue<double, Villager> _happiness; //scale from 0 to 100.
@@ -142,7 +139,6 @@ namespace Game
             }
         }
 
-
         /// <summary>
         /// Gets the villager's name
         /// </summary>
@@ -155,7 +151,7 @@ namespace Game
         /// Sets the new life expectancy no matter what time was left.
         /// </summary>
         /// <param name="lifeExpectancy"></param>
-        public void SetLifeExpectancy(float lifeExpectancy)
+        public void SetLifeExpectancy(double lifeExpectancy)
         {
             if (lifeExpectancy < 0)
             {
@@ -174,15 +170,14 @@ namespace Game
             if (_age < _lifeExpectancy && _age + timeLeft < _lifeExpectancy)
             {
                 _lifeExpectancy = _age + timeLeft;
-            }
-
+            }           
         }
 
         /// <summary>
         /// Reduces the life expectancy by 'time'.(minimum is 0)
         /// </summary>
         /// <param name="time"></param>
-        public void ReduceLifeExpectancy(float timeleft)
+        public void ReduceLifeExpectancy(double timeleft)
         {
             if (_lifeExpectancy > timeleft)
             {
@@ -202,8 +197,16 @@ namespace Game
             _lifeExpectancy = 0;
         }
 
+<<<<<<< HEAD
+=======
+        internal void EarthquakeInjure()
+        {
+            _health.Current = _health.Current | Healths.EARTHQUAKE_INJURED;
+            SetLifeExpectancyLeft(3);
+        }
 
 
+>>>>>>> origin/develop
         /// <summary>
         /// can be negative to take away happiness.
         /// </summary>
@@ -275,7 +278,6 @@ namespace Game
             Debug.Assert((Faith <= 15) == ((Health & Healths.HERETIC) != 0), "(JobModel/villagerdestroyed) heretism is not right!");
         }
 
-
         //====================WORLD=TICK=STUFF============================
         #region called by ImpactHappiness
         private void SickHappinessImpact()
@@ -318,11 +320,12 @@ namespace Game
         {
             if ((_health.Current & Healths.SICK) != 0)
             {
+                int nbApothecaries = _parentFamily.OwnerVillage.Jobs.Apothecary.Workers.Count;
                 int maxtimer;
                 if (this._virus != null)//....
                 {
                     maxtimer = _virus.MaxTimer;
-                    ReduceLifeExpectancy(_virus.LifeExpectencyReduced);
+                    ReduceLifeExpectancy(_virus.LifeExpectencyReduced/1+(nbApothecaries/2));
                 }
                 else
                 {
@@ -339,7 +342,15 @@ namespace Game
                 }
                 else
                 {
-                    _sickTimer++;
+                  
+                   if (nbApothecaries > 0)
+                   {
+                       if (Game.Rand.Next(nbApothecaries) == 0)//The presence of apothecaries relieves the villagers
+                       {
+                           _sickTimer++;
+                       }
+                   }
+                   else { _sickTimer++; }
                 }
 
 
@@ -396,7 +407,7 @@ namespace Game
 
             }
         }
-        private void CallForHelpEnded()
+	private void CallForHelpEnded()
         {
             if (_happiness.Current > 27)
             {
@@ -534,9 +545,17 @@ namespace Game
             if (_faith.Conclude()) { eventList.Add(new EventProperty<Villager>(this, "Faith")); }
             if (_health.Conclude())
             {
-                if ((_health.Current & Healths.UNHAPPY) != 0 && (_health.Historic.Last & Healths.UNHAPPY) == 0)
+                if ((_health.Current & Healths.UNHAPPY) != 0)
                 {
-                    eventList.Add(new VillagerCallForHelp(this));
+                    if (_health.Historic.Count > 1)
+                    {
+                        if ((_health.Historic[1] & Healths.UNHAPPY) == 0)
+                            eventList.Add(new VillagerCallForHelp(this));
+                    }
+                    else
+                    {
+                        eventList.Add(new VillagerCallForHelp(this));
+                    }
                 }
                 else { eventList.Add(new EventProperty<Villager>(this, "Health")); }
             }
