@@ -64,154 +64,154 @@ namespace Game.Buildings
             _unionOfCrafterList = new List<Buildings.UnionOfCrafter>();
 
         }
-        public void Add(House house)
+        internal void Add(House house)
         {
             _houseList.Add(house);
             _buildingsList.Add(house);
         }
 
-        public void Add(ApothecaryOffice apothecaryOffice)
+        internal void Add(ApothecaryOffice apothecaryOffice)
         {
             _apothecaryOfficeList.Add(apothecaryOffice);
             _buildingsList.Add(apothecaryOffice);
         }
-        public void Add(Baths baths)
+        internal void Add(Baths baths)
         {
             _bathsList.Add(baths);
             _buildingsList.Add(baths);
         }
-        public void Add(Brothel brothel)
+        internal void Add(Brothel brothel)
         {
             _brothelList.Add(brothel);
             _buildingsList.Add(brothel);
         }
-        public void Add(Chapel chapel)
+        internal void Add(Chapel chapel)
         {
             _chapelList.Add(chapel);
             _buildingsList.Add(chapel);
         }
-        public void Add(Farm farm)
+        internal void Add(Farm farm)
         {
             _farmList.Add(farm);
             _buildingsList.Add(farm);
         }
-        public void Add(Forge forge)
+        internal void Add(Forge forge)
         {
             _forgeList.Add(forge);
             _buildingsList.Add(forge);
         }
-        public void Add(Mill mill)
+        internal void Add(Mill mill)
         {
             _millList.Add(mill);
             _buildingsList.Add(mill);
         }
-        public void Add(OfferingWarehouse offeringWarehouse)
+        internal void Add(OfferingWarehouse offeringWarehouse)
         {
             _offeringWarehouseList.Add(offeringWarehouse);
             _buildingsList.Add(offeringWarehouse);
         }
-        public void Add(PartyRoom partyRoom)
+        internal void Add(PartyRoom partyRoom)
         {
             _partyRoomList.Add(partyRoom);
             _buildingsList.Add(partyRoom);
         }
-        public void Add(Restaurant restaurant)
+        internal void Add(Restaurant restaurant)
         {
             _restaurantList.Add(restaurant);
             _buildingsList.Add(restaurant);
         }
-        public void Add(TablePlace tablePlace)
+        internal void Add(TablePlace tablePlace)
         {
             _tablePlaceList.Add(tablePlace);
             _buildingsList.Add(tablePlace);
         }
-        public void Add(Tavern tavern)
+        internal void Add(Tavern tavern)
         {
             _tavernList.Add(tavern);
             _buildingsList.Add(tavern);
         }
-        public void Add(Theater theater)
+        internal void Add(Theater theater)
         {
             _theaterList.Add(theater);
             _buildingsList.Add(theater);
         }
-        public void Add(UnionOfCrafter unionOfCrafter)
+        internal void Add(UnionOfCrafter unionOfCrafter)
         {
             _unionOfCrafterList.Add(unionOfCrafter);
             _buildingsList.Add(unionOfCrafter);
         }
-        public void Remove(House house)
+        internal void Remove(House house)
         {
             _houseList.Remove(house);
             _buildingsList.Remove(house);
         }
 
-        public void Remove(Baths baths)
+        internal void Remove(Baths baths)
         {
             _bathsList.Remove(baths);
             _buildingsList.Remove(baths);
         }
-        public void Remove(Brothel brothel)
+        internal void Remove(Brothel brothel)
         {
             _brothelList.Remove(brothel);
             _buildingsList.Remove(brothel);
         }
-        public void Remove(Chapel chapel)
+        internal void Remove(Chapel chapel)
         {
             _chapelList.Remove(chapel);
             _buildingsList.Remove(chapel);
         }
-        public void Remove(Farm farm)
+        internal void Remove(Farm farm)
         {
             _farmList.Remove(farm);
             _buildingsList.Remove(farm);
         }
-        public void Remove(Forge forge)
+        internal void Remove(Forge forge)
         {
             _forgeList.Remove(forge);
             _buildingsList.Remove(forge);
         }
-        public void Remove(Mill mill)
+        internal void Remove(Mill mill)
         {
             _millList.Remove(mill);
             _buildingsList.Remove(mill);
         }
-        public void Remove(OfferingWarehouse offeringWarehouse)
+        internal void Remove(OfferingWarehouse offeringWarehouse)
         {
             _offeringWarehouseList.Remove(offeringWarehouse);
             _buildingsList.Remove(offeringWarehouse);
         }
-        public void Remove(PartyRoom partyRoom)
+        internal void Remove(PartyRoom partyRoom)
         {
             _partyRoomList.Remove(partyRoom);
             _buildingsList.Remove(partyRoom);
         }
-        public void Remove(Restaurant restaurant)
+        internal void Remove(Restaurant restaurant)
         {
             _restaurantList.Remove(restaurant);
             _buildingsList.Remove(restaurant);
         }
-        public void Remove(TablePlace tablePlace)
+        internal void Remove(TablePlace tablePlace)
         {
             _tablePlaceList.Remove(tablePlace);
             _buildingsList.Remove(tablePlace);
         }
-        public void Remove(Tavern tavern)
+        internal void Remove(Tavern tavern)
         {
             _tavernList.Remove(tavern);
             _buildingsList.Remove(tavern);
         }
-        public void Remove(Theater theater)
+        internal void Remove(Theater theater)
         {
             _theaterList.Remove(theater);
             _buildingsList.Remove(theater);
         }
-        public void Remove(UnionOfCrafter unionOfCrafter)
+        internal void Remove(UnionOfCrafter unionOfCrafter)
         {
             _unionOfCrafterList.Remove(unionOfCrafter);
             _buildingsList.Remove(unionOfCrafter);
         }
-        public void Remove(ApothecaryOffice apothecaryOffice)
+        internal void Remove(ApothecaryOffice apothecaryOffice)
         {
             _apothecaryOfficeList.Remove(apothecaryOffice);
             _buildingsList.Remove(apothecaryOffice);

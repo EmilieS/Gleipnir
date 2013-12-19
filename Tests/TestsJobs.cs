@@ -18,8 +18,7 @@ namespace Tests
             Game.Game game = new Game.Game();
             var village = game.Villages[0];
             var farm = new Game.Buildings.Farm(village);
-            village.Buildings.Add(farm);
-            village.Buildings.Add(new Game.Buildings.Restaurant(village));
+            new Game.Buildings.Restaurant(village);
             foreach (Family f in village.FamiliesList)
             {
                 foreach (Villager v in f.FamilyMembers)
