@@ -100,9 +100,10 @@ namespace Game
             _gold = ModifyGoldGeneration();
             foreach (Villager person in _workers)
             {
+                Debug.Assert(person.ParentFamily != null, "Family = null");
                 if (person.GenerateGoldPrerequisitesFromVillager())
                 {
-                    person.ParentFamily.addTOGoldStash(_gold);
+                    person.ParentFamily.addToGoldStash(_gold);
                 }
             }
         }

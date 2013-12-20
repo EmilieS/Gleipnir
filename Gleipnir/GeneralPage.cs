@@ -147,6 +147,8 @@ namespace GamePages
             _eventFlux.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             _eventFlux.SendToBack();
             _eventFlux.Show();
+
+            LockEverything();
             #endregion
             #endregion
 
@@ -190,7 +192,6 @@ namespace GamePages
             _actionMenu.Enabled = false;
             _stats.Enabled = false;
             _eventFlux.Enabled = false;
-            _scenarioBox.Enabled = false;
         }
         internal void UnLockEverything()
         {
