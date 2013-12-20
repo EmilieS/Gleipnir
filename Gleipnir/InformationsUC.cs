@@ -29,6 +29,11 @@ namespace GamePages
             _page.Step();
         }
 
+        private void StepX50_Click(object sender, EventArgs e)
+        {
+            _page.StepX50();
+        }
+
         private void menuButton_Click(object sender, EventArgs e)
         {
             _page.OnClickMenu();

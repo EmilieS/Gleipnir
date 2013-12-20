@@ -42,6 +42,7 @@
             this.TaxAmount = new System.Windows.Forms.TrackBar();
             this.TaxAmountValue = new System.Windows.Forms.Label();
             this.villageBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.StepBy50 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.TaxAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.villageBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -140,7 +141,7 @@
             // 
             // StepByStep
             // 
-            this.StepByStep.Location = new System.Drawing.Point(949, 6);
+            this.StepByStep.Location = new System.Drawing.Point(905, 6);
             this.StepByStep.Name = "StepByStep";
             this.StepByStep.Size = new System.Drawing.Size(79, 21);
             this.StepByStep.TabIndex = 21;
@@ -178,10 +179,21 @@
             // 
             this.villageBindingSource.DataSource = typeof(Game.Village);
             // 
+            // StepBy50
+            // 
+            this.StepBy50.Location = new System.Drawing.Point(993, 6);
+            this.StepBy50.Name = "StepBy50";
+            this.StepBy50.Size = new System.Drawing.Size(32, 21);
+            this.StepBy50.TabIndex = 24;
+            this.StepBy50.Text = "x50";
+            this.StepBy50.UseVisualStyleBackColor = true;
+            this.StepBy50.Click += new System.EventHandler(this.StepX50_Click);
+            // 
             // InformationsUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.StepBy50);
             this.Controls.Add(this.TaxAmountValue);
             this.Controls.Add(this.TaxAmount);
             this.Controls.Add(this.StepByStep);
@@ -216,5 +228,6 @@
         internal System.Windows.Forms.TrackBar TaxAmount;
         private System.Windows.Forms.BindingSource villageBindingSource;
         internal System.Windows.Forms.Label TaxAmountValue;
+        internal System.Windows.Forms.Button StepBy50;
     }
 }

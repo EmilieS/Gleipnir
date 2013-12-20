@@ -76,6 +76,7 @@ namespace GamePages
             _stats = new InformationsUC(this);
             _eventFlux = new EventFluxUC();
             _scenarioBox = new ScenarioBox(this);
+
             _infoBox = new InformationBox(this, family);
 
             #region grid generation
@@ -147,8 +148,6 @@ namespace GamePages
             _eventFlux.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             _eventFlux.SendToBack();
             _eventFlux.Show();
-
-            LockEverything();
             #endregion
             #endregion
 
@@ -175,6 +174,9 @@ namespace GamePages
             trace.Show();
             #endregion
             
+            // Wait the scenario's end
+            // LockEverything();
+
             Step();
         }
         
@@ -561,9 +563,18 @@ namespace GamePages
                 events.Do(this);
                 events.PublishMessage(this);
             }
+        }
 
-            #region Go FASTER
-            /*for (int i = 0; i < 50; i++)
+        internal void StepX50()
+        {
+            _game.NextStep();
+            foreach (IEvent events in _game.EventList)
+            {
+                events.Do(this);
+                events.PublishMessage(this);
+            }
+
+            for (int i = 0; i < 50; i++)
             {
                 _game.NextStep();
                 foreach (IEvent events in _game.EventList)
@@ -572,8 +583,7 @@ namespace GamePages
                     events.PublishMessage(this);
                 }
 
-            }*/
-            #endregion
+            }
         }
     }
 }
