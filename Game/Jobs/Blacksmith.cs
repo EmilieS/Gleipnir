@@ -13,7 +13,7 @@ namespace Game
         public Blacksmith(Game game, JobList list, string name)
             : base(game,list, name)
         {
-            _job = Jobs.CONSTRUCTION_WORKER;
+            _job = Jobs.BLACKSMITH;
             _coefficient = 10;
         }
         internal override bool AddPersonPrerequisites()
@@ -25,7 +25,7 @@ namespace Game
         }
         internal override bool GenerateGoldPrerequisites()
         {
-            if (Owner.Owner.Buildings.ForgeList.Count < 0)
+            if (Owner.Owner.Buildings.ForgeList.Count <= 0)
                 return false;
             int i = 0;
             do

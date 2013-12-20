@@ -45,6 +45,8 @@ namespace Game
             }
             //===
             Village v=CreateVillage("default");
+            new Buildings.Farm(v);
+            new Buildings.Forge(v);
 
             Family FamilyA = v.CreateFamilyFromScratch( v.Jobs.Farmer, v.Jobs.Blacksmith);
             Family FamilyB = v.CreateFamilyFromScratch( v.Jobs.Farmer, v.Jobs.Construction_worker);

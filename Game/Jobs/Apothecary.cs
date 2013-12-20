@@ -25,7 +25,7 @@ namespace Game
         }
         internal override bool GenerateGoldPrerequisites()
         {
-            if (Owner.Owner.Buildings.ApothecaryOfficeList.Count < 0)
+            if (Owner.Owner.Buildings.ApothecaryOfficeList.Count <= 0)
                 return false;
             int i=0;
             do
