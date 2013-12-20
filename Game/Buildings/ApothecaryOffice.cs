@@ -9,10 +9,11 @@ namespace Game.Buildings
 {
      public class ApothecaryOffice : BuildingsModel
     {
-        public ApothecaryOffice(Village v ,BuildingsList List, string name)
+        public ApothecaryOffice(Village v)
             : base(v)
         {
-
+            Name = "Clinique";
+            Hp = MaxHp = 50;
         }
         public void SetGoodHealth(Villager sickVillager)
         {

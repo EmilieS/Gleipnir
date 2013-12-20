@@ -45,6 +45,8 @@ namespace Game
             }
             //===
             Village v=CreateVillage("default");
+            new Buildings.Farm(v);
+            new Buildings.Forge(v);
 
             Family FamilyA = v.CreateFamilyFromScratch( v.Jobs.Farmer, v.Jobs.Blacksmith);
             Family FamilyB = v.CreateFamilyFromScratch( v.Jobs.Farmer, v.Jobs.Construction_worker);
@@ -161,9 +163,9 @@ namespace Game
         }
         public void AddOrTakeFromOfferings(int amount)
         {
-            int result = Offerings + amount;
-            if (result < 0) _offerings.Current = 0;
-            else _offerings.Current += amount;
+            int result = _offerings.Current + amount;
+            if (result < 0) {throw new InvalidOperationException();}
+            else _offerings.Current = result;
         }
 
         internal void VillagerAdded()

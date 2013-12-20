@@ -8,10 +8,11 @@ namespace Game.Buildings
 {
      public class TablePlace : BuildingsModel
     {
-        public TablePlace(Village v, BuildingsList List, string name)
+        public TablePlace(Village v)
             : base(v)
         {
-
+            Name = "Autel sacré";
+            Hp = MaxHp = 100000;
         }
         //public void SetTablePosition()
         //{

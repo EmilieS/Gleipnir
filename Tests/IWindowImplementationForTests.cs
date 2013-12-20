@@ -24,6 +24,7 @@ namespace Tests
         public void PushGeneralGold(int value) { goldtouched++; }
         public void PushGeneralHappiness(double value) { }
         public void PushGeneralFaith(double value) { }
+        public void PushOfferingsPointsPerTick(int value) { }
         public void PushName(string name) { }
         public int nb_pushTrace;
         public int nb_pushAlert;

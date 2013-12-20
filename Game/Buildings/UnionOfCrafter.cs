@@ -8,10 +8,11 @@ namespace Game.Buildings
 {
      public class UnionOfCrafter : BuildingsModel
     {
-        public UnionOfCrafter(Village v, BuildingsList List, string name)
+        public UnionOfCrafter(Village v)
             : base(v)
         {
-
+            Name = "Syndicat";
+            Hp = MaxHp = 50;
         }
         // Syndicat des ouvriers 
         override internal void AddToList()

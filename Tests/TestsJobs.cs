@@ -17,11 +17,19 @@ namespace Tests
             // Create game
             Game.Game game = new Game.Game();
             var village = game.Villages[0];
+            var farm = new Game.Buildings.Farm(village);
+            new Game.Buildings.Restaurant(village);
             foreach (Family f in village.FamiliesList)
             {
                 foreach (Villager v in f.FamilyMembers)
+                {
+                    if (v.Job!=null)
+                    {
                     v.Job.RemovePerson(v);
+                    }
+                }
             }
+            
 
             var v0 = village.FamiliesList[0].FamilyMembers[0];
             var v1 = village.FamiliesList[0].FamilyMembers[1];

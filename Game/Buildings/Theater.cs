@@ -8,10 +8,11 @@ namespace Game.Buildings
 {
     public class Theater : BuildingsModel
     {
-        public Theater(Village v, BuildingsList List, string name)
+        public Theater(Village v)
             : base(v)
         {
-
+            Name = "Théâtre";
+            Hp = MaxHp = 50;
         }
         public double SetHappiness
         {

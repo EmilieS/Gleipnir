@@ -18,7 +18,25 @@ namespace Game
         }
         internal override bool AddPersonPrerequisites()
         {
-            return true;
+            if (Owner.Owner.Buildings.FarmList.Count > 0)
+                return true;
+            else
+                return false;
+        }
+        internal override bool GenerateGoldPrerequisites()
+        {
+            if (Owner.Owner.Buildings.FarmList.Count <= 0)
+                return false;
+            int i = 0;
+            do
+            {
+                if (Owner.Owner.Buildings.FarmList[i].Hp > 0)
+                {
+                    return true;
+                }
+                i++;
+            } while (i < Owner.Owner.Buildings.FarmList.Count);
+            return false;
         }
     }
 }

@@ -100,10 +100,15 @@ namespace Game
             _gold = ModifyGoldGeneration();
             foreach (Villager person in _workers)
             {
+<<<<<<< HEAD
+                if(person.ActivityStatus == ActivityStatus.WORKING)
+                    person.ParentFamily.addToGoldStash(_gold);
+=======
                 if (person.GenerateGoldPrerequisitesFromVillager())
                 {
                     person.ParentFamily.addTOGoldStash(_gold);
                 }
+>>>>>>> origin/fx-buildingCreation
             }
         }
         internal virtual bool GenerateGoldPrerequisites()

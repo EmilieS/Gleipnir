@@ -19,10 +19,11 @@ namespace Tests
             
             //int rand = g.Rand.Next();
             Village selectedVillage = g.Villages[0];
-            Family family = selectedVillage.FamiliesList[0];
+            Family family = selectedVillage.FamiliesList[1];
             Villager villager = family.FamilyMembers[0];
             double lifeExpectancyIni = villager.LifeExpectancy;
             epidemic = new Game.GodSpell.Epidemic(g, villager);
+            selectedVillage.Jobs.Tailor.AddPerson(villager);
             JobsModel job = villager.Job;
             epidemic.LaunchEpidemic();
             g.NextStep();

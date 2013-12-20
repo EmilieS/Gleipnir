@@ -276,6 +276,11 @@ namespace Game
             Debug.Assert((Faith <= 15) == ((Health & Healths.HERETIC) != 0), "(JobModel/villagerdestroyed) heretism is not right!");
         }
 
+        public bool GenerateGoldPrerequisitesFromVillager()
+        {
+            return true; //TODO
+        }
+
 
         //====================WORLD=TICK=STUFF============================
         #region called by ImpactHappiness

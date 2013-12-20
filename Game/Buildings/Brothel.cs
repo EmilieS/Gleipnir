@@ -9,10 +9,11 @@ namespace Game.Buildings
     public class Brothel : BuildingsModel
     {
 
-        public Brothel(Village v,BuildingsList List, string name)
+        public Brothel(Village v)
             : base(v)
         {
-
+            Name = "Maison Close";
+            Hp = MaxHp = 50;
         }
         public double SetHappiness
         {

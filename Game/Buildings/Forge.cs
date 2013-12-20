@@ -8,10 +8,11 @@ namespace Game.Buildings
 {
      public class Forge : BuildingsModel
     {
-        public Forge(Village v, BuildingsList List, string name)
+        public Forge(Village v)
             : base(v)
         {
-
+            Name = "Forge";
+            Hp = MaxHp = 50;
         }
         override internal void AddToList()
         {

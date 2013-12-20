@@ -8,10 +8,11 @@ namespace Game.Buildings
 {
     public class Baths : BuildingsModel
     {
-        public Baths(Village v, BuildingsList List, string name)
+        public Baths(Village v)
             : base(v)
         {
-
+            Name = "Thermes";
+            Hp = MaxHp = 50;
         }
         public double SetHappiness
         {
