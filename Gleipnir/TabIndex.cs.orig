@@ -13,30 +13,19 @@ namespace GamePages
 {
     public partial class TabIndex : UserControl
     {
-<<<<<<< HEAD
         readonly GeneralPage _page;
         bool _isOnBought;
-
-        public TabIndex(GeneralPage p)
-=======
+        List<VillagerBannerUC> ListOfVillagersToShow;
         int positionX;
         int positionY;
-        List<VillagerBannerUC> ListOfVillagersToShow;
 
-        public TabIndex()
->>>>>>> origin/fx-meeting
+        public TabIndex(GeneralPage p)
         {
             _page = p;
             _isOnBought = false;
             InitializeComponent();
-<<<<<<< HEAD
-=======
             positionX = 0;
             positionY = 0;
-        }
-        internal void ShowUnboughtBuildings()
-        {
->>>>>>> origin/fx-meeting
 
             #region Jobs
             ApothicaryOffice.Click += ApothicaryOffice_Click;
@@ -69,7 +58,6 @@ namespace GamePages
 
         internal void ShowUnboughtBuildings()
         {
-
         }
 
         #region Jobs Buildings Buttons
@@ -136,18 +124,18 @@ namespace GamePages
         private void OfferingsWarehouse_Click(object sender, EventArgs e)
         {
             _page.OnBoughtBuilding_Click(14);
-        }
+        }        
         private void House_Click(object sender, EventArgs e)
         {
             _page.OnBoughtBuilding_Click(15);
         }
-<<<<<<< HEAD
         #endregion
-=======
+<<<<<<< HEAD
+        
         bool _passed;
         internal void ShowVillagerListInFamily(Family fam)
         {
-            if (_passed != true)
+            if (_passed == false)
             { 
                _passed = true;
                 ListOfVillagersToShow = new List<VillagerBannerUC>();
@@ -156,8 +144,6 @@ namespace GamePages
 
             for (int i = 0; i < fam.FamilyMembers.Count; i++)
             {
-                
-            //    int i = 0;
                 VillagerBannerUC tmp = new VillagerBannerUC();
                 ListOfVillagersToShow.Add(tmp);
                 tmp.VillagerName.Text = fam.FamilyMembers[i].Name;
@@ -167,18 +153,22 @@ namespace GamePages
                 positionY += 65;
             }
         }
-
+        
         internal void DestroyVillagerListInFamily()
         {
             for (int i = 0; i < ListOfVillagersToShow.Count; i++)
             {
                 ListOfVillagersToShow[i].Hide();
                 this.VillagerList.Controls.Remove(ListOfVillagersToShow[i]);
-
             }
             positionX = positionY = 0;
             ListOfVillagersToShow.Clear();
+=======
+
+        private void StartEpidemic_Click(object sender, EventArgs e)
+        {
+            Game.GodSpell.Epidemic epidemic = new Game.GodSpell.Epidemic(_page.StartedGame,_page.StartedGame.Villages[0].FamiliesList[0].FamilyMembers[0]);
+>>>>>>> origin/fx-Epidemic
         }
->>>>>>> origin/fx-meeting
     }
 }
