@@ -55,6 +55,7 @@ namespace GamePages
             _home = new HomepageUC();
             _gameMenu = new InGameMenu();
             _actionMenu = new TabIndex(this);
+
             _stats = new InformationsUC(this);
             _infoBox = new InformationBox();
             _eventFlux = new EventFluxUC();
@@ -66,6 +67,7 @@ namespace GamePages
             _home.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
             this.Controls.Add(_home);
             _home.Show();
+
         }
         
         public void IsStarted_Changed(object sender, PropertyChangedEventArgs e)
@@ -73,6 +75,12 @@ namespace GamePages
             // Hide home page
             _home.Hide();
             //this.Controls.Remove(_home);
+
+            Family _family = _game.Villages[0].FamiliesList[0];
+            _infoBox = new InformationBox(this, _family);
+
+            this.Controls.Add(_infoBox);
+            _infoBox.Show();
 
             // Create the game
             _game = new Game.Game();
@@ -174,12 +182,14 @@ namespace GamePages
             
             Step();
         }
-
+        internal TabIndex ActionMenu
+        {
+            get { return _actionMenu; }
+        }
         internal void LockEverything()
         {
             _actionMenu.Enabled = false;
             _stats.Enabled = false;
-            _infoBox.Enabled = false;
             _eventFlux.Enabled = false;
             _scenarioBox.Enabled = false;
         }
@@ -193,6 +203,7 @@ namespace GamePages
         }
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
         {
+            _actionMenu.Visible = _stats.Visible = false;
             LockEverything();
             _actionMenu.Hide();
             this.Controls.Remove(_actionMenu);
@@ -400,6 +411,10 @@ namespace GamePages
                 squareControl.Cursor = Cursors.Hand;
             }
             #endregion
+        }
+        internal void ShowListOfVillager(Family family)
+        {
+            
         }
         private void SquareControl_MouseLeave(object sender, EventArgs e)
         {

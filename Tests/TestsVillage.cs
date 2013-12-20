@@ -48,7 +48,7 @@ namespace Tests
             Assert.That(village.Gold, Is.EqualTo(90));
 
             // More gold
-            family1.addTOGoldStash(10);
+            family1.addToGoldStash(10);
             village.CalculateVillageGold();
             Assert.That(village.Gold, Is.EqualTo(100));
 

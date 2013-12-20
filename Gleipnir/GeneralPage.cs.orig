@@ -33,19 +33,14 @@ namespace GamePages
         private BuildingTypeSelected buildingSelected;
         int buildingIndex;
         string traceMessages;
-<<<<<<< HEAD
 
-        internal Game.Game StartedGame { get { return _startedGame; } }
-        public enum ActionState
-=======
-        
+        internal Game.Game StartedGame { get { return _game; } }
         private enum ActionState
         {
             None = 0,
             InPlace = 1
         }
         private enum BuildingTypeSelected
->>>>>>> fx-map_events
         {
             None = 0,
             Job = 1,
@@ -59,9 +54,13 @@ namespace GamePages
             // Create windows objects
             _home = new HomepageUC();
             _gameMenu = new InGameMenu();
+<<<<<<< HEAD
             _actionMenu = new TabIndex(this);
+=======
+            _actionMenu = new TabIndex();
+
+>>>>>>> origin/fx-meeting
             _stats = new InformationsUC(this);
-            _infoBox = new InformationBox();
             _eventFlux = new EventFluxUC();
             _scenarioBox = new ScenarioBox(this);
             InitializeComponent();
@@ -71,13 +70,41 @@ namespace GamePages
             _home.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
             this.Controls.Add(_home);
             _home.Show();
+<<<<<<< HEAD
+=======
+
+            _gameMenu.ExpectGoBackToMenu += GoBackToMenu;
+>>>>>>> origin/fx-meeting
         }
         
         public void IsStarted_Changed(object sender, PropertyChangedEventArgs e)
         {
+<<<<<<< HEAD
             // Hide home page
             _home.Hide();
             //this.Controls.Remove(_home);
+=======
+
+            Family _family = _startedGame.Villages[0].FamiliesList[0];
+            _infoBox = new InformationBox(this, _family);
+
+            this.Controls.Remove(_home);
+            _actionMenu.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top);
+            //ActionMenu.Bottom = 3;
+            this.Controls.Add(_actionMenu);
+            _actionMenu.Show();
+            this.Controls.Add(_scenarioBox);
+            _scenarioBox.Show();
+            this.Controls.Add(_infoBox);
+            _infoBox.Show();
+            _stats.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+            this.Controls.Add(_stats);
+            _stats.Show();
+            _eventFlux.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            this.Controls.Add(_eventFlux);
+            _eventFlux.Show();
+            _stats.StepByStep.Visible = true;
+>>>>>>> origin/fx-meeting
 
             // Create the game
             _game = new Game.Game();
@@ -179,12 +206,18 @@ namespace GamePages
             
             Step();
         }
+<<<<<<< HEAD
 
+=======
+        internal TabIndex ActionMenu
+        {
+            get { return _actionMenu; }
+        }
+>>>>>>> origin/fx-meeting
         internal void LockEverything()
         {
             _actionMenu.Enabled = false;
             _stats.Enabled = false;
-            _infoBox.Enabled = false;
             _eventFlux.Enabled = false;
             _scenarioBox.Enabled = false;
         }
@@ -192,12 +225,12 @@ namespace GamePages
         {
             _actionMenu.Enabled = true;
             _stats.Enabled = true;
-            _infoBox.Enabled = true;
             _eventFlux.Enabled = true;
             _scenarioBox.Enabled = true;
         }
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
         {
+<<<<<<< HEAD
             LockEverything();
             _actionMenu.Hide();
             this.Controls.Remove(_actionMenu);
@@ -209,6 +242,9 @@ namespace GamePages
             this.Controls.Remove(_stats);
             _eventFlux.Hide();
             this.Controls.Remove(_eventFlux);
+=======
+            _actionMenu.Visible = _stats.Visible = false;
+>>>>>>> origin/fx-meeting
 
             this.Controls.Add(_home);
             _home.Show();
@@ -220,6 +256,11 @@ namespace GamePages
         public void PushGeneralGold(int value)
         {
             _stats.goldVillage.Text = value.ToString();
+        }
+        public void PushOfferingsPointsPerTick(int value)
+        {
+            _stats.TaxAmount.Value = value;
+            _stats.TaxAmountValue.Text = string.Concat("Qtité demandée : ", value.ToString());
         }
         public void PushAlert(string message, string title)
         {
@@ -401,6 +442,10 @@ namespace GamePages
             }
             #endregion
         }
+        internal void ShowListOfVillager(Family family)
+        {
+            
+        }
         private void SquareControl_MouseLeave(object sender, EventArgs e)
         {
             SquareControl squareControl = (SquareControl)sender;
@@ -540,9 +585,14 @@ namespace GamePages
                 events.Do(this);
                 events.PublishMessage(this);
             }
+<<<<<<< HEAD
 
             #region Go FASTER
             /*for (int i = 0; i < 50; i++)
+=======
+            //to go faster...
+            for (int i = 0; i < 3; i++)
+>>>>>>> origin/fx-meeting
             {
                 _game.NextStep();
                 foreach (IEvent events in _game.EventList)
@@ -554,5 +604,11 @@ namespace GamePages
             }*/
             #endregion
         }
+<<<<<<< HEAD
+=======
+        
+
+
+>>>>>>> origin/fx-meeting
     }
 }

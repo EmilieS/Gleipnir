@@ -114,11 +114,11 @@ namespace Tests
 
             family1.takeFromGoldStash(100);
             Assert.That(family1.GoldStash, Is.EqualTo(0));
-            family1.addTOGoldStash(100);
+            family1.addToGoldStash(100);
             Assert.That(family1.GoldStash, Is.EqualTo(100));
             family2.takeFromGoldStash(100);
             Assert.That(family2.GoldStash, Is.EqualTo(0));
-            family2.addTOGoldStash(100);
+            family2.addToGoldStash(100);
             Assert.That(family2.GoldStash, Is.EqualTo(100));
 
             Villager girlf1;

@@ -126,6 +126,12 @@
     <Compile Include="Trace.Designer.cs">
       <DependentUpon>Trace.cs</DependentUpon>
     </Compile>
+    <Compile Include="VillagerBannerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VillagerBannerUC.Designer.cs">
+      <DependentUpon>VillagerBannerUC.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="BuildingButton.resx">
       <DependentUpon>BuildingButton.cs</DependentUpon>
     </EmbeddedResource>
@@ -171,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Trace.resx">
       <DependentUpon>Trace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VillagerBannerUC.resx">
+      <DependentUpon>VillagerBannerUC.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\Game.Apothecary.datasource" />
     <None Include="Properties\DataSources\Game.Blacksmith.datasource" />

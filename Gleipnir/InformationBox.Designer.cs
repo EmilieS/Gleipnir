@@ -113,12 +113,13 @@
             // 
             // GodMeeting
             // 
-            this.GodMeeting.Location = new System.Drawing.Point(128, 92);
+            this.GodMeeting.Location = new System.Drawing.Point(25, 110);
             this.GodMeeting.Name = "GodMeeting";
             this.GodMeeting.Size = new System.Drawing.Size(75, 23);
             this.GodMeeting.TabIndex = 8;
             this.GodMeeting.Text = "Meeting";
             this.GodMeeting.UseVisualStyleBackColor = true;
+            this.GodMeeting.Click += new System.EventHandler(this.GodMeeting_Click);
             // 
             // InformationBox
             // 

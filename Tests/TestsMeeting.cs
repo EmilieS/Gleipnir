@@ -23,14 +23,14 @@ namespace Tests
             Family family2 = village.FamiliesList[1];
             Villager mother2 = family2.Mother;
             Villager father2 = family2.Father;
-            var meeting = new Meeting();
+            var meeting = new Meeting(family2);
 
-            meeting.Convocate(family2);
+            meeting.Convocate();
 
             Assert.That(mother2.ActivityStatus == ActivityStatus.CONVOCATED);
-            Assert.That(father2.ActivityStatus == ActivityStatus.CONVOCATED);  
-         
-            meeting.Convocate(family);
+            Assert.That(father2.ActivityStatus == ActivityStatus.CONVOCATED);
+            var meeting2 = new Meeting(family);
+            meeting2.Convocate();
 
             Assert.That(mother2.ActivityStatus  == ActivityStatus.WORKING);
             Assert.That(father2.ActivityStatus == ActivityStatus.WORKING);
@@ -49,9 +49,9 @@ namespace Tests
             Villager mother = family.Mother;
             Villager father = family.Father;
 
-            var meeting = new Meeting();
+            var meeting = new Meeting(family);
 
-            meeting.Convocate(family);
+            meeting.Convocate();
 
             Assert.That(mother.ActivityStatus == ActivityStatus.CONVOCATED);
             Assert.That(father.ActivityStatus == ActivityStatus.CONVOCATED);

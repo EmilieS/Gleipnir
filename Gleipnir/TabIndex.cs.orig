@@ -13,19 +13,30 @@ namespace GamePages
 {
     public partial class TabIndex : UserControl
     {
+<<<<<<< HEAD
         readonly GeneralPage _page;
         bool _isOnBought;
-        List<VillagerBannerUC> ListOfVillagersToShow;
-        int positionX;
-        int positionY;
 
         public TabIndex(GeneralPage p)
+=======
+        int positionX;
+        int positionY;
+        List<VillagerBannerUC> ListOfVillagersToShow;
+
+        public TabIndex()
+>>>>>>> origin/fx-meeting
         {
             _page = p;
             _isOnBought = false;
             InitializeComponent();
+<<<<<<< HEAD
+=======
             positionX = 0;
             positionY = 0;
+        }
+        internal void ShowUnboughtBuildings()
+        {
+>>>>>>> origin/fx-meeting
 
             #region Jobs
             ApothicaryOffice.Click += ApothicaryOffice_Click;
@@ -125,13 +136,14 @@ namespace GamePages
         private void OfferingsWarehouse_Click(object sender, EventArgs e)
         {
             _page.OnBoughtBuilding_Click(14);
-        }        
+        }
         private void House_Click(object sender, EventArgs e)
         {
             _page.OnBoughtBuilding_Click(15);
         }
+<<<<<<< HEAD
         #endregion
-        
+=======
         bool _passed;
         internal void ShowVillagerListInFamily(Family fam)
         {
@@ -155,7 +167,7 @@ namespace GamePages
                 positionY += 65;
             }
         }
-        
+
         internal void DestroyVillagerListInFamily()
         {
             for (int i = 0; i < ListOfVillagersToShow.Count; i++)
@@ -167,5 +179,6 @@ namespace GamePages
             positionX = positionY = 0;
             ListOfVillagersToShow.Clear();
         }
+>>>>>>> origin/fx-meeting
     }
 }
