@@ -53,13 +53,6 @@ namespace GamePages
         {
             // Create windows objects
             _home = new HomepageUC();
-            _gameMenu = new InGameMenu();
-            _actionMenu = new TabIndex(this);
-
-            _stats = new InformationsUC(this);
-            _infoBox = new InformationBox();
-            _eventFlux = new EventFluxUC();
-            _scenarioBox = new ScenarioBox(this);
             InitializeComponent();
 
             // Show home page
@@ -67,23 +60,23 @@ namespace GamePages
             _home.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
             this.Controls.Add(_home);
             _home.Show();
-
         }
-        
         public void IsStarted_Changed(object sender, PropertyChangedEventArgs e)
         {
             // Hide home page
             _home.Hide();
-            //this.Controls.Remove(_home);
-
-            Family _family = _game.Villages[0].FamiliesList[0];
-            _infoBox = new InformationBox(this, _family);
-
-            this.Controls.Add(_infoBox);
-            _infoBox.Show();
 
             // Create the game
             _game = new Game.Game();
+            Family family = _game.Villages[0].FamiliesList[0];
+
+            // Create objects
+            _gameMenu = new InGameMenu();
+            _actionMenu = new TabIndex(this);
+            _stats = new InformationsUC(this);
+            _eventFlux = new EventFluxUC();
+            _scenarioBox = new ScenarioBox(this);
+            _infoBox = new InformationBox(this, family);
 
             #region grid generation
             options = new Options();
@@ -182,10 +175,16 @@ namespace GamePages
             
             Step();
         }
+        
         internal TabIndex ActionMenu
         {
             get { return _actionMenu; }
         }
+        internal void ShowListOfVillager(Family family)
+        {
+
+        }
+        
         internal void LockEverything()
         {
             _actionMenu.Enabled = false;
@@ -215,6 +214,16 @@ namespace GamePages
             this.Controls.Remove(_stats);
             _eventFlux.Hide();
             this.Controls.Remove(_eventFlux);
+            for (int i = 0; i < 20; i++)
+            {
+                for (int j = 0; j < 32; j++)
+                {
+                    _grid[i, j].Hide();
+                    this.Controls.Remove(_grid[i, j]);
+                }
+            }
+            _gameMenu.Hide();
+            this.Controls.Remove(_gameMenu);
 
             this.Controls.Add(_home);
             _home.Show();
@@ -412,10 +421,6 @@ namespace GamePages
             }
             #endregion
         }
-        internal void ShowListOfVillager(Family family)
-        {
-            
-        }
         private void SquareControl_MouseLeave(object sender, EventArgs e)
         {
             SquareControl squareControl = (SquareControl)sender;
@@ -475,7 +480,7 @@ namespace GamePages
                         PlaceSpecial(squareControl.Row, squareControl.Col);
 
                     // Take Offerings Points
-                    //_game.AddOrTakeFromOfferings(-(_game.GetBuilding(buildingIndex).GetPrice));
+                    _game.AddOrTakeFromOfferings(-(_game.GetBuildingPrices(buildingIndex).GetPrice));
 
                     // End Placement
                     actionState = ActionState.None;

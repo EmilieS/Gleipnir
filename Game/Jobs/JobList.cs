@@ -35,7 +35,6 @@ namespace Game
         Village _owner;
         internal Village Owner { get { return _owner; } }
 
-
         public JobList(Village village)
         {
             Game game = village.Game;

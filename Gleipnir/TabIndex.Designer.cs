@@ -60,7 +60,6 @@
             this.actionsMenu.Controls.Add(this.buildingsTab);
             this.actionsMenu.Controls.Add(this.happinessTab);
             this.actionsMenu.Controls.Add(this.VillagerList);
-            this.actionsMenu.Controls.Add(this.faithTab);
             this.actionsMenu.Controls.Add(this.godSpellsTab);
             this.actionsMenu.Cursor = System.Windows.Forms.Cursors.Default;
             this.actionsMenu.ItemSize = new System.Drawing.Size(30, 30);
@@ -189,15 +188,6 @@
             this.VillagerList.TabIndex = 2;
             this.VillagerList.UseVisualStyleBackColor = true;
             // 
-            // faithTab
-            // 
-            this.faithTab.Location = new System.Drawing.Point(4, 4);
-            this.faithTab.Name = "faithTab";
-            this.faithTab.Padding = new System.Windows.Forms.Padding(3);
-            this.faithTab.Size = new System.Drawing.Size(208, 528);
-            this.faithTab.TabIndex = 2;
-            this.faithTab.UseVisualStyleBackColor = true;
-            // 
             // godSpellsTab
             // 
             this.godSpellsTab.Location = new System.Drawing.Point(4, 4);
@@ -290,7 +280,6 @@
         private System.Windows.Forms.TabPage buildingsTab;
         private System.Windows.Forms.TabPage happinessTab;
         private System.Windows.Forms.TabPage VillagerList;
-        private System.Windows.Forms.TabPage faithTab;
         private System.Windows.Forms.TabPage godSpellsTab;
         private System.Windows.Forms.Button Tavern;
         private System.Windows.Forms.Button ApothicaryOffice;

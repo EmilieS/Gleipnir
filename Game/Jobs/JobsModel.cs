@@ -29,11 +29,11 @@ namespace Game
             goldBase = 5;
             _jobName = name;
             _workers = new List<Villager>();
-            //_gold = ModifyGoldGeneration();
+            // _gold = ModifyGoldGeneration();
             _owner = list;
         }
 
-        public int GoldGenerated { get { return _gold; } }//do we really want to communicate this everchanging value??
+        public int GoldGenerated { get { return _gold; } } //do we really want to communicate this everchanging value??
         public string Name { get { return _jobName; } }
         public double Coefficient { get { return _coefficient; } }
 

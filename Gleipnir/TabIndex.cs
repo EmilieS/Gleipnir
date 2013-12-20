@@ -58,7 +58,6 @@ namespace GamePages
 
         internal void ShowUnboughtBuildings()
         {
-
         }
 
         #region Jobs Buildings Buttons
@@ -135,7 +134,7 @@ namespace GamePages
         bool _passed;
         internal void ShowVillagerListInFamily(Family fam)
         {
-            if (_passed != true)
+            if (_passed == false)
             { 
                _passed = true;
                 ListOfVillagersToShow = new List<VillagerBannerUC>();
@@ -144,8 +143,6 @@ namespace GamePages
 
             for (int i = 0; i < fam.FamilyMembers.Count; i++)
             {
-                
-            //    int i = 0;
                 VillagerBannerUC tmp = new VillagerBannerUC();
                 ListOfVillagersToShow.Add(tmp);
                 tmp.VillagerName.Text = fam.FamilyMembers[i].Name;
@@ -162,7 +159,6 @@ namespace GamePages
             {
                 ListOfVillagersToShow[i].Hide();
                 this.VillagerList.Controls.Remove(ListOfVillagersToShow[i]);
-
             }
             positionX = positionY = 0;
             ListOfVillagersToShow.Clear();
