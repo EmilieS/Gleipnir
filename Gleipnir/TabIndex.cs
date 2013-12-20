@@ -126,5 +126,10 @@ namespace GamePages
             _page.OnBoughtBuilding_Click(15);
         }
         #endregion
+
+        private void StartEpidemic_Click(object sender, EventArgs e)
+        {
+            Game.GodSpell.Epidemic epidemic = new Game.GodSpell.Epidemic(_page.StartedGame,_page.StartedGame.Villages[0].FamiliesList[0].FamilyMembers[0]);
+        }
     }
 }

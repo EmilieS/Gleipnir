@@ -28,6 +28,7 @@ namespace Game.GodSpell
             _virus = new Virus();
             _virus.Epidemic = this;
             v.SetVirus(_virus);
+            _timeBeforeThePlayerIsWarned = 5;
         }
         public void LaunchEpidemic()
         {
