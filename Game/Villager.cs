@@ -486,6 +486,14 @@ namespace Game
                 Debug.Assert(Game.SingleMen.Contains(this));
                 Game.SingleManDestroyed(this);
             }
+            if (_virus != null)
+            {
+                if (_virus.Epidemic != null)
+                {
+                    _virus.Epidemic.SickVillagerList.Remove(this);
+                }
+                _virus = null;
+            }
 
             if (_fiance != null)
             {
@@ -537,7 +545,6 @@ namespace Game
                 {
                     ParentFamily.FamilyMemberDied(this);
                 }
-
             }
             Debug.Assert(((StatusInFamily == Status.ENGAGED || StatusInFamily == Status.MARRIED) && _fiance != null) || ((StatusInFamily == Status.SINGLE || StatusInFamily == Status.MOURNING) && _fiance == null), "Dans DieOrIsAlive");
             if (IsDead()) { eventList.Add(new VillagerDyingEvent(this, _parentFamily.Name)); Destroy(); }
