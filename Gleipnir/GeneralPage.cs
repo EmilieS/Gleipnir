@@ -278,6 +278,11 @@ namespace GamePages
         // Grid Methods
         private void UpdateGrid(Board board, SquareControl[,] grid)
         {
+            // Check if new family is created
+            foreach (House house in _game.Villages[0].Buildings.HouseList)
+                if(CheckIfFamilyHouseIsPlaced(house))
+                    board.PlaceHouse(house);
+
             // Map the current game board to the square controls.
             for (int i = 0; i < 20; i++)
             {
@@ -288,6 +293,18 @@ namespace GamePages
                 }
             }
         }
+        #region Check if buildings exists
+        private bool CheckIfFamilyHouseIsPlaced(House house)
+        {
+            int hPos = house.HorizontalPos;
+            int vPos = house.VerticalPos;
+            if (hPos >= 0 && hPos <= 20 && vPos >= 0 && vPos <= 32 && house.IsBought == false)
+                return true;
+            else
+                return false;
+        }
+        #endregion
+        #region Place buildings
         private void PlaceJobHouse(int row, int col)
         {
             _board.UpdateSquares(row, col, Board.JobHouse);
@@ -307,6 +324,7 @@ namespace GamePages
             int buildingValue = Board.Specials;
             _board.UpdateSquares(row, col, buildingValue);
         }
+        #endregion
         private void ShowValidPlaces()
         {
             for (int i = 0; i < 20; i++)
@@ -512,6 +530,7 @@ namespace GamePages
             {
                 SquareControl squareControl = (SquareControl)sender;
 
+                // If it's FamilyHouse
                 if (_grid[squareControl.Row, squareControl.Col].Contents == 20)
                 {
                     foreach (House house in _game.Villages[0].Buildings.HouseList)
@@ -589,26 +608,14 @@ namespace GamePages
                 events.Do(this);
                 events.PublishMessage(this);
             }
+            UpdateGrid(_board, _grid);
         }
 
         internal void StepX50()
         {
-            _game.NextStep();
-            foreach (IEvent events in _game.EventList)
-            {
-                events.Do(this);
-                events.PublishMessage(this);
-            }
-
             for (int i = 0; i < 50; i++)
             {
-                _game.NextStep();
-                foreach (IEvent events in _game.EventList)
-                {
-                   events.Do(this);
-                    events.PublishMessage(this);
-                }
-
+                Step();
             }
         }
     }

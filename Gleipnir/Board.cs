@@ -1,4 +1,5 @@
 ﻿using Game;
+using Game.Buildings;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -223,18 +224,9 @@ namespace GamePages
                         squares[i, j] = Road;*/
             #endregion
             #region families houses
-            foreach (Game.Buildings.House house in game.Villages[0].Buildings.HouseList)
-            {
-                int hPos;
-                int vPos;
-                do
-                {
-                    hPos = RandomPos(20);
-                    vPos = RandomPos(32);
-                } while (!IsValidSquare(hPos, vPos));
-                house.SetCoordinates(hPos, vPos);
-                squares[hPos, vPos] = FamilyHouse;
-            }
+            foreach (House house in game.Villages[0].Buildings.HouseList)
+                if(!house.IsBought)
+                    PlaceHouse(house);
             #endregion
             #region jobs buildings
             squares[3, 13] = JobHouse;
@@ -317,7 +309,12 @@ namespace GamePages
             squares[row, col] = value;
         }
 
-        public int RandomPos(int maxValue)
+        /// <summary>
+        /// Get a number between 0 and the maxValue
+        /// </summary>
+        /// <param name="maxValue"></param>
+        /// <returns></returns>
+        private int RandomPos(int maxValue)
         {
             var randomNumber = new Random();
             int pos;
@@ -328,6 +325,29 @@ namespace GamePages
             else
                 throw new IndexOutOfRangeException("RandomPos Error");
             return pos;
+        }
+
+        /// <summary>
+        /// Place randomly a buidling with buildingNumber
+        /// </summary>
+        /// <param name="buldingNumber"></param>
+        public void PlaceHouse(House house)
+        {
+            if (!house.IsBought)
+            {
+                int hPos;
+                int vPos;
+                do
+                {
+                    hPos = RandomPos(20);
+                    vPos = RandomPos(32);
+                } while (!IsValidSquare(hPos, vPos));
+                house.SetCoordinates(hPos, vPos);
+                squares[hPos, vPos] = FamilyHouse;
+                house.IsBought = true;
+            }
+            else
+                throw new InvalidOperationException();
         }
     }
 }

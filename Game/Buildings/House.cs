@@ -9,8 +9,6 @@ namespace Game.Buildings
     public class House: BuildingsModel
     {
         Family _family;
-        int _x;
-        int _y;
 
         public House(Village v, bool IsAProperHouse=true)
             : base(v)
@@ -34,6 +32,7 @@ namespace Game.Buildings
         {
             _village.Buildings.Add(this);
         }
+
         internal override void OnOnDestroy()
         {
             Village.Buildings.Remove(this);

@@ -73,7 +73,6 @@ namespace Game.Buildings
 
         internal virtual void OnDamage(){}
 
-
         /// <summary>
         /// Repair. amount must be positive.
         /// </summary>
