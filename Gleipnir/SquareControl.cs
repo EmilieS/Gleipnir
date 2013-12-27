@@ -67,13 +67,13 @@ namespace GamePages
         private static SolidBrush solidBrush = new SolidBrush(Color.Black);
         private static GraphicsPath path = new GraphicsPath();
 
-        public SquareControl(int row, int col)
+        public SquareControl(int squareRow, int squareCol)
         {
             InitializeComponent();
 
             this.Contents = Board.Empty;
-            this.row = row;
-            this.col = col;
+            row = squareRow;
+            col = squareCol;
 
             // Prevent TAB control
             this.TabStop = false;
@@ -97,27 +97,60 @@ namespace GamePages
         private void Grid_paint(object sender, PaintEventArgs e)
         {
             // Clear the square, filling with the appropriate background color.
-            Color backColor = NormalBackColor;
-            if (Contents == IsForest)
-                backColor = ForestBackColorDefault;
-            if (Contents == IsWater)
-                backColor = WaterBackColorDefault;
-            if (Contents == IsRoad)
-                backColor = RoadBackColorDefault;
-            if (Contents == IsFarmField)
-                backColor = FarmFieldBackColorDefault;
-            if (Contents == IsFamilyHouse)
-                backColor = HouseBackColorDefault;
-            if (Contents == IsJobBuilding)
-                backColor = JobsBackColorDefault;
-            if (Contents == IsHobbyPlace)
-                backColor = HobbyBackColorDefault;
-            if (Contents == IsSpecialBuiding)
-                backColor = SpecialsBackColorDefault;
+            Color backColor;
             if (IsValid)
                 backColor = ValidMoveBackColor;
-            if (IsActive)
+            else if (IsActive)
                 backColor = ActiveSquareBackColor;
+            else
+                switch (Contents)
+                {
+                    case 1:
+                        {
+                            backColor = ForestBackColorDefault;
+                            break;
+                        }
+                    case 2:
+                        {
+                            backColor = WaterBackColorDefault;
+                            break;
+                        }
+                    case 3:
+                        {
+                            backColor = RoadBackColorDefault;
+                            break;
+                        }
+                    case 10:
+                        {
+                            backColor = FarmFieldBackColorDefault;
+                            break;
+                        }
+                    case 20:
+                        {
+                            backColor = HouseBackColorDefault;
+                            break;
+                        }
+                    case 30:
+                        {
+                            backColor = JobsBackColorDefault;
+                            break;
+                        }
+                    case 40:
+                        {
+                            backColor = HobbyBackColorDefault;
+                            break;
+                        }
+                    case 50:
+                        {
+                            backColor = SpecialsBackColorDefault;
+                            break;
+                        }
+                    default:
+                        {
+                            backColor = NormalBackColor;
+                            break;
+                        }
+                }
 
             e.Graphics.Clear(backColor);
 
