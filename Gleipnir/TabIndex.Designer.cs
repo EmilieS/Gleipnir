@@ -113,7 +113,7 @@
             this.OfferingsWarehouse.Name = "OfferingsWarehouse";
             this.OfferingsWarehouse.Size = new System.Drawing.Size(75, 23);
             this.OfferingsWarehouse.TabIndex = 13;
-            this.OfferingsWarehouse.Text = "Temple";
+            this.OfferingsWarehouse.Text = "Sanctuaire";
             this.OfferingsWarehouse.UseVisualStyleBackColor = true;
             // 
             // ClothesShop
@@ -149,7 +149,7 @@
             this.UnionOfCrafter.Name = "UnionOfCrafter";
             this.UnionOfCrafter.Size = new System.Drawing.Size(75, 23);
             this.UnionOfCrafter.TabIndex = 9;
-            this.UnionOfCrafter.Text = "Entrepot";
+            this.UnionOfCrafter.Text = "Syndicat";
             this.UnionOfCrafter.UseVisualStyleBackColor = true;
             // 
             // Forge
@@ -311,6 +311,5 @@
         private System.Windows.Forms.Button House;
         private System.Windows.Forms.Button OfferingsWarehouse;
         private System.Windows.Forms.Button StartEpidemic;
-
     }
 }

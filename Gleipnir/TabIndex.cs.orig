@@ -60,7 +60,8 @@ namespace GamePages
         {
         }
 
-        #region Jobs Buildings Buttons
+        #region OnClick Buildings Buttons
+        #region Jobs Buildings
         private void ApothicaryOffice_Click(object sender, EventArgs e)
         {
             _page.OnBoughtBuilding_Click(0);
@@ -131,6 +132,11 @@ namespace GamePages
         }
         #endregion
 <<<<<<< HEAD
+
+        private void StartEpidemic_Click(object sender, EventArgs e)
+        {
+            Game.GodSpell.Epidemic epidemic = new Game.GodSpell.Epidemic(_page.StartedGame,_page.StartedGame.Villages[0].FamiliesList[0].FamilyMembers[0]);
+        }
         
         bool _passed;
         internal void ShowVillagerListInFamily(Family fam)
@@ -163,12 +169,9 @@ namespace GamePages
             }
             positionX = positionY = 0;
             ListOfVillagersToShow.Clear();
-=======
-
-        private void StartEpidemic_Click(object sender, EventArgs e)
-        {
-            Game.GodSpell.Epidemic epidemic = new Game.GodSpell.Epidemic(_page.StartedGame,_page.StartedGame.Villages[0].FamiliesList[0].FamilyMembers[0]);
->>>>>>> origin/fx-Epidemic
         }
+=======
+        #endregion
+>>>>>>> fx-map_events
     }
 }

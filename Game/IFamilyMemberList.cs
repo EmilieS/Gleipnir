@@ -11,6 +11,5 @@ namespace Game
         void Add( Villager villager );
         
         void Remove( Villager villager );
-
     }
 }

@@ -99,7 +99,29 @@ namespace GamePages
         private void Grid_paint(object sender, PaintEventArgs e)
         {
             // Clear the square, filling with the appropriate background color.
+<<<<<<< HEAD
             Color backColor;
+=======
+            Color backColor = NormalBackColor;
+            if (Contents == IsForest)
+                backColor = ForestBackColorDefault;
+            if (Contents == IsWater)
+                backColor = WaterBackColorDefault;
+            if (Contents == IsRoad)
+                backColor = RoadBackColorDefault;
+            if (Contents == IsTable)
+                backColor = TableBackColorDefault;
+            if (Contents == IsFarmField)
+                backColor = FarmFieldBackColorDefault;
+            if (Contents == IsFamilyHouse)
+                backColor = HouseBackColorDefault;
+            if (Contents == IsJobBuilding)
+                backColor = JobsBackColorDefault;
+            if (Contents == IsHobbyPlace)
+                backColor = HobbyBackColorDefault;
+            if (Contents == IsSpecialBuiding)
+                backColor = SpecialsBackColorDefault;
+>>>>>>> fx-map_events
             if (IsValid)
                 backColor = ValidMoveBackColor;
             else if (IsActive)
@@ -122,11 +144,6 @@ namespace GamePages
                             backColor = RoadBackColorDefault;
                             break;
                         }
-                    case 4:
-                    	{
-                    	backColor = TableBackColorDefault;
-                    	break;
-                    	}
                     case 10:
                         {
                             backColor = FarmFieldBackColorDefault;
@@ -158,7 +175,7 @@ namespace GamePages
                             break;
                         }
                 }
-                
+
             ActiveSquareBackColor = Color.FromArgb(128, backColor.R, backColor.G, backColor.B);
 
             e.Graphics.Clear(backColor);

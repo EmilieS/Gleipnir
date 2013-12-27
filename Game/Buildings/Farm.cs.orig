@@ -6,14 +6,24 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-     public class Restaurant : BuildingsModel
+    public class Farm : BuildingsModel, IBuildingsJobs
     {
-        public Restaurant(Village v)
-            : base (v)
+<<<<<<< HEAD
+        public Farm(Village v)
+            : base(v)
         {
-            Name = "Restaurant";
+            Name = "Ferme";
             Hp = MaxHp = 50;
+=======
+        readonly string _name;
+
+        public Farm(Village v, BuildingsList List, string name)
+            : base(v)
+        {
+            _name = name;
+>>>>>>> fx-map_events
         }
+
         override internal void AddToList()
         {
             Village.Buildings.Add(this);
@@ -25,7 +35,7 @@ namespace Game.Buildings
         override internal void OnDamage()
         {
 
-            foreach (Villager v in Village.Jobs.Cooker.Workers)
+            foreach (Villager v in Village.Jobs.Farmer.Workers)
             {
                 if (Game.Rand.Next(100) == 1)
                 {

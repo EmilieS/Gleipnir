@@ -124,7 +124,7 @@ namespace GamePages
         private void OfferingsWarehouse_Click(object sender, EventArgs e)
         {
             _page.OnBoughtBuilding_Click(14);
-        }        
+        }
         private void House_Click(object sender, EventArgs e)
         {
             _page.OnBoughtBuilding_Click(15);

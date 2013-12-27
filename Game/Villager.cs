@@ -139,7 +139,6 @@ namespace Game
             }
         }
 
-
         /// <summary>
         /// Gets the villager's name
         /// </summary>
@@ -171,7 +170,8 @@ namespace Game
             if (_age < _lifeExpectancy && _age + timeLeft < _lifeExpectancy)
             {
                 _lifeExpectancy = _age + timeLeft;
-            }           
+            }
+
         }
 
         /// <summary>
@@ -203,8 +203,6 @@ namespace Game
             _health.Current = _health.Current | Healths.EARTHQUAKE_INJURED;
             SetLifeExpectancyLeft(3);
         }
-
-
         /// <summary>
         /// can be negative to take away happiness.
         /// </summary>
@@ -280,7 +278,6 @@ namespace Game
         {
             return true; //TODO
         }
-
 
         //====================WORLD=TICK=STUFF============================
         #region called by ImpactHappiness
