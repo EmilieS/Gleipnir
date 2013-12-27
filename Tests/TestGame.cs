@@ -35,6 +35,10 @@ namespace Tests
         {
             var myGame = new Game.Game();
             var MyWindow = new Tests.IWindowImplementationForTests();
+            Village selectedVillage = myGame.Villages[0];
+            Family family = selectedVillage.FamiliesList[1];
+            Villager villager = family.FamilyMembers[0];
+            new Game.GodSpell.Epidemic(myGame, villager);
             do
             {
                 myGame.NextStep();

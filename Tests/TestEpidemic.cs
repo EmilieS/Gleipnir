@@ -25,7 +25,7 @@ namespace Tests
             epidemic = new Game.GodSpell.Epidemic(g, villager);
             selectedVillage.Jobs.Tailor.AddPerson(villager);
             JobsModel job = villager.Job;
-            epidemic.LaunchEpidemic();
+            epidemic.LaunchEpidemic();//TODO
             g.NextStep();
             Assert.That(villager.LifeExpectancy < lifeExpectancyIni);
             g.NextStep();
