@@ -1,4 +1,5 @@
 ﻿using Game;
+using Game.Buildings;
 using System;
 using System.Collections;
 using System.ComponentModel;
@@ -68,6 +69,8 @@ namespace GamePages
 
             // Create the game
             _game = new Game.Game();
+
+            // Will be deleted
             Family family = _game.Villages[0].FamiliesList[0];
 
             // Create objects
@@ -77,7 +80,7 @@ namespace GamePages
             _eventFlux = new EventFluxUC();
             _scenarioBox = new ScenarioBox(this);
 
-            _infoBox = new InformationBox(this, family);
+            _infoBox = new InformationBox(this);
 
             #region grid generation
             options = new Options();
@@ -103,7 +106,7 @@ namespace GamePages
                 }
             }
             // Set the grid
-            _board.SetForNewGame();
+            _board.SetForNewGame(_game);
             UpdateGrid(_board, _grid);
             #endregion
 
@@ -457,6 +460,7 @@ namespace GamePages
         }
         private void SquareControl_Click(object sender, EventArgs e)
         {
+            #region Building placement
             // Check the game state to ensure it's the user's turn
             if (actionState == ActionState.InPlace)
             {
@@ -470,17 +474,25 @@ namespace GamePages
                 if (_board.IsValidSquare(squareControl.Row, squareControl.Col))
                 {
                     // Restore the cursor
-                    squareControl.Cursor = System.Windows.Forms.Cursors.Default;
+                    squareControl.Cursor = Cursors.Default;
 
                     // Place Building
                     if (buildingSelected == BuildingTypeSelected.Job)
+                    {
                         PlaceJobHouse(squareControl.Row, squareControl.Col);
+                    }
                     else if (buildingSelected == BuildingTypeSelected.Family)
+                    {
                         PlaceFamilyHouse(squareControl.Row, squareControl.Col);
+                    }
                     else if (buildingSelected == BuildingTypeSelected.Hobby)
+                    {
                         PlaceHobby(squareControl.Row, squareControl.Col);
+                    }
                     else if (buildingSelected == BuildingTypeSelected.Specials)
+                    {
                         PlaceSpecial(squareControl.Row, squareControl.Col);
+                    }
 
                     // Take Offerings Points
                     _game.AddOrTakeFromOfferings(-(_game.GetBuildingPrices(buildingIndex).GetPrice));
@@ -494,10 +506,24 @@ namespace GamePages
                     UpdateGrid(_board, _grid);
                 }
             }
+            #endregion
+            #region Building Click
             else
             {
-                return;
+                SquareControl squareControl = (SquareControl)sender;
+
+                if (_grid[squareControl.Row, squareControl.Col].Contents == 20)
+                {
+                    foreach (House house in _game.Villages[0].Buildings.HouseList)
+                    {
+                        if (house.HorizontalPos == squareControl.Row && house.VerticalPos == squareControl.Col)
+                        {
+                            _infoBox.SetInfoBoxForFamily(house.Family);
+                        }
+                    }
+                }
             }
+            #endregion
         }
 
         // ActionTab Buildings Methods

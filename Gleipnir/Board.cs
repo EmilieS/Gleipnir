@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -56,7 +57,7 @@ namespace GamePages
         /// <summary>
         /// Set the differents box with basics buildings and map objects
         /// </summary>
-        public void SetForNewGame()
+        public void SetForNewGame(Game.Game game)
         {
             // Fill all the grid with Empty color
             for (int i = 0; i < 20; i++)
@@ -68,18 +69,6 @@ namespace GamePages
             }
 
             #region Place elements on map
-            #region families houses
-            squares[5, 20] = FamilyHouse;
-            squares[7, 15] = FamilyHouse;
-            squares[8, 10] = FamilyHouse;
-            squares[11, 19] = FamilyHouse;
-            squares[12, 11] = FamilyHouse;
-            #endregion
-            #region jobs buildings
-            squares[3, 13] = JobHouse;
-            squares[6, 10] = JobHouse;
-            squares[9, 31] = JobHouse;
-            #endregion
             #region forest
             for (int i = 0; i < 20; i++)
             {
@@ -111,9 +100,6 @@ namespace GamePages
                     for (int j = 0; j < 15; j++)
                         squares[i, j] = Forest;
             }
-            #endregion
-            #region table
-            squares[4, 4] = Table;
             #endregion
             #region farms fields
             for (int i = 19; i > 9; i--)
@@ -236,6 +222,28 @@ namespace GamePages
                     for (int j = 12; j < 14; j++)
                         squares[i, j] = Road;*/
             #endregion
+            #region families houses
+            foreach (Game.Buildings.House house in game.Villages[0].Buildings.HouseList)
+            {
+                int hPos;
+                int vPos;
+                do
+                {
+                    hPos = RandomPos(20);
+                    vPos = RandomPos(32);
+                } while (!IsValidSquare(hPos, vPos));
+                house.SetCoordinates(hPos, vPos);
+                squares[hPos, vPos] = FamilyHouse;
+            }
+            #endregion
+            #region jobs buildings
+            squares[3, 13] = JobHouse;
+            squares[6, 10] = JobHouse;
+            squares[9, 31] = JobHouse;
+            #endregion
+            #region table
+            squares[4, 4] = Table;
+            #endregion
             #endregion
         }
 
@@ -307,6 +315,19 @@ namespace GamePages
         public void UpdateSquares(int row, int col, int value)
         {
             squares[row, col] = value;
+        }
+
+        public int RandomPos(int maxValue)
+        {
+            var randomNumber = new Random();
+            int pos;
+            if (maxValue == 20 || maxValue == 32)
+            {
+                pos = randomNumber.Next(0, maxValue);
+            }
+            else
+                throw new IndexOutOfRangeException("RandomPos Error");
+            return pos;
         }
     }
 }

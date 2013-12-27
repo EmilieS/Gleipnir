@@ -37,12 +37,13 @@
             this.MemberView = new System.Windows.Forms.Label();
             this.NbMembers = new System.Windows.Forms.Label();
             this.GodMeeting = new System.Windows.Forms.Button();
+            this.Title = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // NameView
             // 
             this.NameView.AutoSize = true;
-            this.NameView.Location = new System.Drawing.Point(20, 37);
+            this.NameView.Location = new System.Drawing.Point(94, 37);
             this.NameView.Name = "NameView";
             this.NameView.Size = new System.Drawing.Size(41, 13);
             this.NameView.TabIndex = 0;
@@ -51,7 +52,7 @@
             // ElementName
             // 
             this.ElementName.AutoSize = true;
-            this.ElementName.Location = new System.Drawing.Point(113, 37);
+            this.ElementName.Location = new System.Drawing.Point(136, 37);
             this.ElementName.Name = "ElementName";
             this.ElementName.Size = new System.Drawing.Size(34, 13);
             this.ElementName.TabIndex = 1;
@@ -60,16 +61,16 @@
             // GoldView
             // 
             this.GoldView.AutoSize = true;
-            this.GoldView.Location = new System.Drawing.Point(22, 50);
+            this.GoldView.Location = new System.Drawing.Point(108, 50);
             this.GoldView.Name = "GoldView";
-            this.GoldView.Size = new System.Drawing.Size(35, 13);
+            this.GoldView.Size = new System.Drawing.Size(24, 13);
             this.GoldView.TabIndex = 2;
-            this.GoldView.Text = "Gold :";
+            this.GoldView.Text = "Or :";
             // 
             // Gold
             // 
             this.Gold.AutoSize = true;
-            this.Gold.Location = new System.Drawing.Point(113, 50);
+            this.Gold.Location = new System.Drawing.Point(136, 50);
             this.Gold.Name = "Gold";
             this.Gold.Size = new System.Drawing.Size(34, 13);
             this.Gold.TabIndex = 3;
@@ -78,16 +79,16 @@
             // FaithView
             // 
             this.FaithView.AutoSize = true;
-            this.FaithView.Location = new System.Drawing.Point(22, 63);
+            this.FaithView.Location = new System.Drawing.Point(106, 63);
             this.FaithView.Name = "FaithView";
-            this.FaithView.Size = new System.Drawing.Size(39, 13);
+            this.FaithView.Size = new System.Drawing.Size(30, 13);
             this.FaithView.TabIndex = 4;
-            this.FaithView.Text = "Faith : ";
+            this.FaithView.Text = "Foi : ";
             // 
             // Faith
             // 
             this.Faith.AutoSize = true;
-            this.Faith.Location = new System.Drawing.Point(113, 63);
+            this.Faith.Location = new System.Drawing.Point(136, 63);
             this.Faith.Name = "Faith";
             this.Faith.Size = new System.Drawing.Size(34, 13);
             this.Faith.TabIndex = 5;
@@ -98,14 +99,14 @@
             this.MemberView.AutoSize = true;
             this.MemberView.Location = new System.Drawing.Point(22, 76);
             this.MemberView.Name = "MemberView";
-            this.MemberView.Size = new System.Drawing.Size(56, 13);
+            this.MemberView.Size = new System.Drawing.Size(111, 13);
             this.MemberView.TabIndex = 6;
-            this.MemberView.Text = "Members :";
+            this.MemberView.Text = "Nombre de Membres :";
             // 
             // NbMembers
             // 
             this.NbMembers.AutoSize = true;
-            this.NbMembers.Location = new System.Drawing.Point(113, 76);
+            this.NbMembers.Location = new System.Drawing.Point(136, 76);
             this.NbMembers.Name = "NbMembers";
             this.NbMembers.Size = new System.Drawing.Size(34, 13);
             this.NbMembers.TabIndex = 7;
@@ -113,19 +114,29 @@
             // 
             // GodMeeting
             // 
-            this.GodMeeting.Location = new System.Drawing.Point(25, 110);
+            this.GodMeeting.Location = new System.Drawing.Point(165, 112);
             this.GodMeeting.Name = "GodMeeting";
             this.GodMeeting.Size = new System.Drawing.Size(75, 23);
             this.GodMeeting.TabIndex = 8;
-            this.GodMeeting.Text = "Meeting";
+            this.GodMeeting.Text = "Convocation";
             this.GodMeeting.UseVisualStyleBackColor = true;
             this.GodMeeting.Click += new System.EventHandler(this.GodMeeting_Click);
+            // 
+            // Title
+            // 
+            this.Title.AutoSize = true;
+            this.Title.Location = new System.Drawing.Point(64, 13);
+            this.Title.Name = "Title";
+            this.Title.Size = new System.Drawing.Size(28, 13);
+            this.Title.TabIndex = 9;
+            this.Title.Text = "Titre";
             // 
             // InformationBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Info;
+            this.Controls.Add(this.Title);
             this.Controls.Add(this.GodMeeting);
             this.Controls.Add(this.NbMembers);
             this.Controls.Add(this.MemberView);
@@ -154,5 +165,6 @@
         private System.Windows.Forms.Label MemberView;
         private System.Windows.Forms.Label NbMembers;
         private System.Windows.Forms.Button GodMeeting;
+        private System.Windows.Forms.Label Title;
     }
 }

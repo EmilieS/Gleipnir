@@ -41,6 +41,7 @@ namespace Game.Buildings
                 }
             }
         }
+
         public void SetCoordinates(int x, int y)
         {
             if (x == null || y == null)

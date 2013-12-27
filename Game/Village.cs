@@ -73,7 +73,6 @@ namespace Game
         }
         public Family CreateFamilyFromScratch()
         {
-            //Debug.Assert(_thisGame != null, "_thisGame est null!");
             Debug.Assert(Game != null, "Game est null!");
             Villager VillagerAM = new Villager(Game, Genders.MALE, Game.FirstNameList.NextName);
             Villager VillagerAF = new Villager(Game, Genders.FEMALE, Game.FirstNameList.NextName);
@@ -98,6 +97,9 @@ namespace Game
             if (VillagerAM.Job != null) { VillagerAM.Job.RemovePerson(VillagerAM); }
             mothersJob.AddPerson(VillagerAF);
             fathersJob.AddPerson(VillagerAM);
+            Buildings.House house = new Buildings.House(this);
+            house.Family = newFamily;
+            newFamily.House = house;
             return newFamily;
         }
         internal void AddEmptyHouse(Buildings.House house)

@@ -9,6 +9,9 @@ namespace Game.Buildings
     public class House: BuildingsModel
     {
         Family _family;
+        int _x;
+        int _y;
+
         public House(Village v, bool IsAProperHouse=true)
             : base(v)
         {
@@ -24,7 +27,9 @@ namespace Game.Buildings
                 MaxHp = 15;
             }
         }
+
         public Family Family { get; set; }
+
         override internal void AddToList()
         {
             _village.Buildings.Add(this);
@@ -33,7 +38,6 @@ namespace Game.Buildings
         {
             Village.Buildings.Remove(this);
         }
-
 
         internal override void JustCollapsed()
         {
@@ -60,6 +64,15 @@ namespace Game.Buildings
                 Village.AddEmptyHouse(this);
             }
         }
+
+        public void SetCoordinates(int x, int y)
+        {
+            if (x == null || y == null)
+                throw new ArgumentNullException("X or Y doesn't exist");
+            if ((x < 0 || x > 20) || (y < 0 || y > 32))
+                throw new IndexOutOfRangeException("Must be in tab");
+            this.HorizontalPos = x;
+            this.VerticalPos = y;
+        }
     }
-    
 }

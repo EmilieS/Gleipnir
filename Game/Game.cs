@@ -20,12 +20,15 @@ namespace Game
             _singleMen = new List<Villager>();
             _villages = new List<Village>();
             _eventList = new List<IEvent>();
+
             var namesPath = File.ReadAllLines(@"Extra\nameList.txt");
             _nameGenerator = new NameGenerator(namesPath, 1, 1);
             var firstNamesPath = File.ReadAllLines(@"Extra\firstNameList.txt");
             _firstNameGenerator = new NameGenerator(namesPath, 1, 1);
+
             _currentEpidemicList = new List<GodSpell.Epidemic>();
-            _regularBirthDates= new double[5];
+            _regularBirthDates = new double[5];
+
             //===to be changed
             //_ageTickTime = 0.0834;//time(years) between each tick.
             _ageTickTime = 1;
@@ -41,15 +44,16 @@ namespace Game
             for (int i = 0; i < 5; i++)//must be kept orderly
             {
                 _regularBirthDates[i] = j;
-                j = j + 4*12;
+                j = j + 4 * 12;
             }
             //===
-            Village v=CreateVillage("default");
+
+            Village v = CreateVillage("default");
             new Buildings.Farm(v);
             new Buildings.Forge(v);
 
-            Family FamilyA = v.CreateFamilyFromScratch( v.Jobs.Farmer, v.Jobs.Blacksmith);
-            Family FamilyB = v.CreateFamilyFromScratch( v.Jobs.Farmer, v.Jobs.Construction_worker);
+            Family FamilyA = v.CreateFamilyFromScratch(v.Jobs.Farmer, v.Jobs.Blacksmith);
+            Family FamilyB = v.CreateFamilyFromScratch(v.Jobs.Farmer, v.Jobs.Construction_worker);
             Family FamilyC = v.CreateFamilyFromScratch();
             Family FamilyD = v.CreateFamilyFromScratch();
             Family FamilyE = v.CreateFamilyFromScratch();
@@ -79,7 +83,7 @@ namespace Game
             _buildingsPrices[15] = new BuildingsPrices("house", 70);
             #endregion
         }
-        
+
         readonly List<GodSpell.Epidemic> _currentEpidemicList;
         internal readonly List<GameItem> _items;//internal for tests
         readonly List<Village> _villages; //a revoir!
@@ -100,7 +104,7 @@ namespace Game
         public NameGenerator FirstNameList { get { return _firstNameGenerator; } }
         public IReadOnlyList<Village> Villages { get { return _villages; } }
         public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
-	    public int TotalGold { get { return _totalGold.Current; } }
+        public int TotalGold { get { return _totalGold.Current; } }
         public int LastTotalGold { get { return _totalGold.Historic.Last; } }//for tests, should get eliminated
         public int TotalPop { get { return _totalPop.Current; } }
         public int Offerings { get { return _offerings.Current; } }
@@ -164,7 +168,7 @@ namespace Game
         public void AddOrTakeFromOfferings(int amount)
         {
             int result = _offerings.Current + amount;
-            if (result < 0) {throw new InvalidOperationException();}
+            if (result < 0) { throw new InvalidOperationException(); }
             else _offerings.Current = result;
         }
 
@@ -226,8 +230,8 @@ namespace Game
         }
 
         List<IEvent> _eventList;
-        public IReadOnlyList<IEvent> EventList{get{return _eventList;}}
-        
+        public IReadOnlyList<IEvent> EventList { get { return _eventList; } }
+
         private void ImpactHappiness()
         {
             foreach (GameItem item in _items)
@@ -289,16 +293,16 @@ namespace Game
             {
                 item.CloseStep(_eventList);
             }
-            if(_totalGold.Conclude()){ _eventList.Add(new GameEventProperty(this, "TotalGold")); }
-            if(_totalPop.Conclude()){ _eventList.Add(new GameEventProperty(this, "TotalPop")); }
-            if(_offerings.Conclude()){ _eventList.Add(new GameEventProperty(this, "Offerings")); }
-            double faith=0;
-            double happiness=0;
+            if (_totalGold.Conclude()) { _eventList.Add(new GameEventProperty(this, "TotalGold")); }
+            if (_totalPop.Conclude()) { _eventList.Add(new GameEventProperty(this, "TotalPop")); }
+            if (_offerings.Conclude()) { _eventList.Add(new GameEventProperty(this, "Offerings")); }
+            double faith = 0;
+            double happiness = 0;
             foreach (Village v in Villages)
             {
-                  v.CalculateAverageVillageHappinessAndFaith();
-                  happiness += v.VillageHappiness;
-                  faith += v.VillageFaith;
+                v.CalculateAverageVillageHappinessAndFaith();
+                happiness += v.VillageHappiness;
+                faith += v.VillageFaith;
             }
             _averageHappiness = happiness / Villages.Count;
             _averageFaith = faith / Villages.Count;
