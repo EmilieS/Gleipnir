@@ -7,12 +7,15 @@ using Game;
 
 namespace Game.Buildings
 {
-     public class ApothecaryOffice : BuildingsModel
+    public class ApothecaryOffice : BuildingsModel
     {
+        internal string _name;
+
         public ApothecaryOffice(Village v)
             : base(v)
         {
             Name = "Clinique";
+            _name = Name;
             Hp = MaxHp = 50;
         }
         public void SetGoodHealth(Villager sickVillager)
@@ -28,16 +31,15 @@ namespace Game.Buildings
         {
             Village.Buildings.Remove(this);
         }
-        override internal void OnDamage() 
+        override internal void OnDamage()
         {
-           
-           foreach(Villager v in Village.Jobs.Apothecary.Workers)
-           {
-               if (Game.Rand.Next(100) == 1)
-               {
-                   v.EarthquakeInjure();
-               }
-           }
+            foreach (Villager v in Village.Jobs.Apothecary.Workers)
+            {
+                if (Game.Rand.Next(100) == 1)
+                {
+                    v.EarthquakeInjure();
+                }
+            }
         }
         public void SetCoordinates(int x, int y)
         {

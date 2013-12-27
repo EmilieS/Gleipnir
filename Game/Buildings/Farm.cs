@@ -8,10 +8,13 @@ namespace Game.Buildings
 {
     public class Farm : BuildingsModel
     {
+        internal string _name;
+
         public Farm(Village v)
             : base(v)
         {
             Name = "Ferme";
+            _name = Name;
             Hp = MaxHp = 50;
         }
         override internal void AddToList()

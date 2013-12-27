@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-     public class Restaurant : BuildingsModel
+    public class Restaurant : BuildingsModel
     {
+        internal string _name;
+
         public Restaurant(Village v)
-            : base (v)
+            : base(v)
         {
             Name = "Restaurant";
+            _name = Name;
             Hp = MaxHp = 50;
         }
         override internal void AddToList()

@@ -8,8 +8,6 @@ namespace Game.Buildings
 {
     public interface IBuildingsJobs
     {
-        JobsModel Job;
-
         void SetCoordinates(int x, int y);
 
         string BuildingName();

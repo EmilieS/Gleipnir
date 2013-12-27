@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-     public class UnionOfCrafter : BuildingsModel
+    public class UnionOfCrafter : BuildingsModel
     {
+        internal string _name;
+
         public UnionOfCrafter(Village v)
             : base(v)
         {
             Name = "Syndicat";
+            _name = Name;
             Hp = MaxHp = 50;
         }
         // Syndicat des ouvriers 

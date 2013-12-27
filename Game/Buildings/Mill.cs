@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-     public class Mill : BuildingsModel
+    public class Mill : BuildingsModel
     {
+        internal string _name;
+
         public Mill(Village v)
             : base(v)
         {
             Name = "Moulin";
+            _name = Name;
             Hp = MaxHp = 50;
         }
         override internal void AddToList()

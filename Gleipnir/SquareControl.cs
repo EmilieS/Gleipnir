@@ -14,11 +14,9 @@ namespace GamePages
     public partial class SquareControl : UserControl
     {
         #region Background Colors
-        // Background when cursor is on a right place
-        public static readonly Color ActiveSquareBackColorDefault = Color.FromArgb(65, 175, 25);
-
         // Background for right zone to place a building
         public static readonly Color ValidPlaceBackColorDefault = Color.FromArgb(75, 200, 30);
+        public static readonly Color ActivePlaceBackColorDefault = Color.FromArgb(50, 130, 20);
 
         // Default backgrounds
         public static readonly Color EmptyBackColorDefault = Color.FromArgb(50, 130, 20);
@@ -33,9 +31,7 @@ namespace GamePages
         public static readonly Color SpecialsBackColorDefault = Color.FromArgb(140, 90, 30);
 
         // Colors used in rendering the control.
-        public static Color ActiveSquareBackColor = ActiveSquareBackColorDefault;
-        public static Color ValidMoveBackColor = ValidPlaceBackColorDefault;
-        public static Color NormalBackColor = EmptyBackColorDefault;
+        public static Color ActiveSquareBackColor;
         #endregion
 
         // This represents the contents of the square, see the values defined in the Grid class
@@ -81,7 +77,7 @@ namespace GamePages
             this.TabStop = false;
 
             // Color all the grid with "Empty" color
-            this.BackColor = NormalBackColor;
+            this.BackColor = EmptyBackColorDefault;
 
             // If resized -> Redraw
             this.ResizeRedraw = true;
@@ -100,66 +96,64 @@ namespace GamePages
         {
             // Clear the square, filling with the appropriate background color.
             Color backColor;
-            if (IsValid)
-                backColor = ValidMoveBackColor;
-            else if (IsActive)
-                backColor = ActiveSquareBackColor;
-            else
-                switch (Contents)
-                {
-                    case 1:
-                        {
-                            backColor = ForestBackColorDefault;
-                            break;
-                        }
-                    case 2:
-                        {
-                            backColor = WaterBackColorDefault;
-                            break;
-                        }
-                    case 3:
-                        {
-                            backColor = RoadBackColorDefault;
-                            break;
-                        }
-                    case 4:
-                    	{
-                    	backColor = TableBackColorDefault;
-                    	break;
-                    	}
-                    case 10:
-                        {
-                            backColor = FarmFieldBackColorDefault;
-                            break;
-                        }
-                    case 20:
-                        {
-                            backColor = HouseBackColorDefault;
-                            break;
-                        }
-                    case 30:
-                        {
-                            backColor = JobsBackColorDefault;
-                            break;
-                        }
-                    case 40:
-                        {
-                            backColor = HobbyBackColorDefault;
-                            break;
-                        }
-                    case 50:
-                        {
-                            backColor = SpecialsBackColorDefault;
-                            break;
-                        }
-                    default:
-                        {
-                            backColor = NormalBackColor;
-                            break;
-                        }
-                }
-                
+            switch (Contents)
+            {
+                case 1:
+                    {
+                        backColor = ForestBackColorDefault;
+                        break;
+                    }
+                case 2:
+                    {
+                        backColor = WaterBackColorDefault;
+                        break;
+                    }
+                case 3:
+                    {
+                        backColor = RoadBackColorDefault;
+                        break;
+                    }
+                case 4:
+                    {
+                        backColor = TableBackColorDefault;
+                        break;
+                    }
+                case 10:
+                    {
+                        backColor = FarmFieldBackColorDefault;
+                        break;
+                    }
+                case 20:
+                    {
+                        backColor = HouseBackColorDefault;
+                        break;
+                    }
+                case 30:
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                case 40:
+                    {
+                        backColor = HobbyBackColorDefault;
+                        break;
+                    }
+                case 50:
+                    {
+                        backColor = SpecialsBackColorDefault;
+                        break;
+                    }
+                default:
+                    {
+                        backColor = EmptyBackColorDefault;
+                        break;
+                    }
+            }
             ActiveSquareBackColor = Color.FromArgb(128, backColor.R, backColor.G, backColor.B);
+            if (IsValid)
+                backColor = ValidPlaceBackColorDefault;
+            if (IsActive)
+                backColor = ActiveSquareBackColor;
 
             e.Graphics.Clear(backColor);
 
