@@ -133,15 +133,15 @@ namespace GamePages
 
         private void StartEpidemic_Click(object sender, EventArgs e)
         {
-            Game.GodSpell.Epidemic epidemic = new Game.GodSpell.Epidemic(_page.StartedGame,_page.StartedGame.Villages[0].FamiliesList[0].FamilyMembers[0]);
+            Game.GodSpell.Epidemic epidemic = new Game.GodSpell.Epidemic(_page.StartedGame, _page.StartedGame.Villages[0].FamiliesList[0].FamilyMembers[0]);
         }
-        
+
         bool _passed;
         internal void ShowVillagerListInFamily(Family fam)
         {
             if (_passed == false)
-            { 
-               _passed = true;
+            {
+                _passed = true;
                 ListOfVillagersToShow = new List<VillagerBannerUC>();
             }
             DestroyVillagerListInFamily();
@@ -157,7 +157,7 @@ namespace GamePages
                 positionY += 65;
             }
         }
-        
+
         internal void DestroyVillagerListInFamily()
         {
             for (int i = 0; i < ListOfVillagersToShow.Count; i++)
@@ -168,5 +168,6 @@ namespace GamePages
             positionX = positionY = 0;
             ListOfVillagersToShow.Clear();
         }
+
     }
 }

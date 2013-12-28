@@ -278,7 +278,10 @@ namespace Game
 
         public bool GenerateGoldPrerequisitesFromVillager()
         {
-            return true; //TODO
+            if (this.ActivityStatus == ActivityStatus.WORKING)
+                return true;
+            else
+                return false;
         }
 
 
