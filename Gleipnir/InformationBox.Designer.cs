@@ -38,6 +38,8 @@
             this.NbMembers = new System.Windows.Forms.Label();
             this.GodMeeting = new System.Windows.Forms.Button();
             this.Title = new System.Windows.Forms.Label();
+            this.buildingLife = new System.Windows.Forms.Label();
+            this.buildingHP = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // NameView
@@ -131,11 +133,31 @@
             this.Title.TabIndex = 9;
             this.Title.Text = "Titre";
             // 
+            // buildingLife
+            // 
+            this.buildingLife.AutoSize = true;
+            this.buildingLife.Location = new System.Drawing.Point(136, 89);
+            this.buildingLife.Name = "buildingLife";
+            this.buildingLife.Size = new System.Drawing.Size(34, 13);
+            this.buildingLife.TabIndex = 11;
+            this.buildingLife.Text = "Value";
+            // 
+            // buildingHP
+            // 
+            this.buildingHP.AutoSize = true;
+            this.buildingHP.Location = new System.Drawing.Point(46, 89);
+            this.buildingHP.Name = "buildingHP";
+            this.buildingHP.Size = new System.Drawing.Size(87, 13);
+            this.buildingHP.TabIndex = 10;
+            this.buildingHP.Text = "Vie du Bâtiment :";
+            // 
             // InformationBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Info;
+            this.Controls.Add(this.buildingLife);
+            this.Controls.Add(this.buildingHP);
             this.Controls.Add(this.Title);
             this.Controls.Add(this.GodMeeting);
             this.Controls.Add(this.NbMembers);
@@ -166,5 +188,7 @@
         private System.Windows.Forms.Label NbMembers;
         private System.Windows.Forms.Button GodMeeting;
         private System.Windows.Forms.Label Title;
+        private System.Windows.Forms.Label buildingLife;
+        private System.Windows.Forms.Label buildingHP;
     }
 }

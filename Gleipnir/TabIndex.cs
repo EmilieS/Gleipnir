@@ -15,6 +15,8 @@ namespace GamePages
     {
         readonly GeneralPage _page;
         bool _isOnBought;
+        bool _passed;
+        bool _isEpidemicLaunched;
         List<VillagerBannerUC> ListOfVillagersToShow;
         int positionX;
         int positionY;
@@ -133,10 +135,13 @@ namespace GamePages
 
         private void StartEpidemic_Click(object sender, EventArgs e)
         {
-            Game.GodSpell.Epidemic epidemic = new Game.GodSpell.Epidemic(_page.StartedGame,_page.StartedGame.Villages[0].FamiliesList[0].FamilyMembers[0]);
+            if (!_isEpidemicLaunched)
+            {
+                Game.GodSpell.Epidemic epidemic = new Game.GodSpell.Epidemic(_page.StartedGame, _page.StartedGame.Villages[0].FamiliesList[0].FamilyMembers[0]);
+                _isEpidemicLaunched = true;
+            }
         }
         
-        bool _passed;
         internal void ShowVillagerListInFamily(Family fam)
         {
             if (_passed == false)

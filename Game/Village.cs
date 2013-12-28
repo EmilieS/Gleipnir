@@ -102,10 +102,12 @@ namespace Game
             newFamily.House = house;
             return newFamily;
         }
-        internal void AddEmptyHouse(Buildings.House house)
+        
+        public void AddEmptyHouse(Buildings.House house)
         {
             Debug.Assert(!EmptyHouseList.Contains(house));
-            EmptyHouseList.Add(house);
+            if(!EmptyHouseList.Contains(house))
+                EmptyHouseList.Add(house);
         }
         internal void RemoveEmptyHouse(Buildings.House house)
         {
@@ -243,7 +245,6 @@ namespace Game
         /// tax per villager per tick.
         /// /// </summary>
         public int OfferingsPointsPerTick { get { return _offeringsPointsPerTick.Current; } }
-
 
         /// <summary>
         /// Modify number offering points generated

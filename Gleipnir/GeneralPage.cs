@@ -280,7 +280,7 @@ namespace GamePages
         {
             // Check if new family is created
             foreach (House house in _game.Villages[0].Buildings.HouseList)
-                if(CheckIfFamilyHouseIsPlaced(house))
+                if(!CheckIfFamilyHouseIsPlaced(house))
                     board.PlaceHouse(house);
 
             // Map the current game board to the square controls.
@@ -296,9 +296,7 @@ namespace GamePages
         #region Check if buildings exists
         private bool CheckIfFamilyHouseIsPlaced(House house)
         {
-            int hPos = house.HorizontalPos;
-            int vPos = house.VerticalPos;
-            if (hPos >= 0 && hPos <= 20 && vPos >= 0 && vPos <= 32 && house.IsBought == false)
+            if (house.IsBought == true)
                 return true;
             else
                 return false;
@@ -311,8 +309,12 @@ namespace GamePages
         }
         private void PlaceFamilyHouse(int row, int col)
         {
-            int buildingValue = Board.FamilyHouse;
-            _board.UpdateSquares(row, col, buildingValue);
+            House house = new House(_game.Villages[0]);
+            house.SetCoordinates(row, col);
+            house.IsBought = true;
+            house.Family = null;
+            _game.Villages[0].AddEmptyHouse(house);
+            _board.UpdateSquares(row, col, Board.FamilyHouse);
         }
         private void PlaceHobby(int row, int col)
         {
@@ -535,9 +537,14 @@ namespace GamePages
                 {
                     foreach (House house in _game.Villages[0].Buildings.HouseList)
                     {
-                        if (house.HorizontalPos == squareControl.Row && house.VerticalPos == squareControl.Col)
+                        int hPos = house.HorizontalPos;
+                        int vPos = house.VerticalPos;
+                        if (hPos == squareControl.Row && vPos == squareControl.Col)
                         {
-                            _infoBox.SetInfoBoxForFamily(house.Family);
+                            if (house.Family != null)
+                                _infoBox.SetFamilyHouseInfo(house.Family);
+                            else
+                                _infoBox.SetEmptyHouseInfo(house);
                         }
                     }
                 }
@@ -610,7 +617,6 @@ namespace GamePages
             }
             UpdateGrid(_board, _grid);
         }
-
         internal void StepX50()
         {
             for (int i = 0; i < 50; i++)

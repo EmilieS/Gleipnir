@@ -64,12 +64,12 @@ namespace Game.Buildings
             _unionOfCrafterList = new List<Buildings.UnionOfCrafter>();
 
         }
+
         internal void Add(House house)
         {
             _houseList.Add(house);
             _buildingsList.Add(house);
         }
-
         internal void Add(ApothecaryOffice apothecaryOffice)
         {
             _apothecaryOfficeList.Add(apothecaryOffice);
@@ -140,12 +140,12 @@ namespace Game.Buildings
             _unionOfCrafterList.Add(unionOfCrafter);
             _buildingsList.Add(unionOfCrafter);
         }
+
         internal void Remove(House house)
         {
             _houseList.Remove(house);
             _buildingsList.Remove(house);
         }
-
         internal void Remove(Baths baths)
         {
             _bathsList.Remove(baths);
