@@ -23,12 +23,12 @@ namespace Game
                 removeFromFamily(mother, mother.ParentFamily);
                 removeFromFamily(father, father.ParentFamily);
             }
-            else { _goldStash.Current = 20; }
+            else
+                _goldStash.Current = 20;
             game.GoldAdded(_goldStash.Current);
+
             if (mother.StatusInFamily == Status.SINGLE && father.StatusInFamily == Status.SINGLE)
-            {
                 mother.Engage(father);
-            }
 
             var firstNamesPath = File.ReadAllLines(@"Extra\nameList.txt");
             _firstNameGenerator = new NameGenerator(firstNamesPath, 1, 1);
@@ -44,8 +44,8 @@ namespace Game
             _familyMembers.Add(_father);
             _mother.ParentFamily = this;
             _father.ParentFamily = this;
-
         }
+
         public Buildings.House House { get; internal set; }
         Village _ownerVillage;
         readonly HistorizedValue<int, Family> _goldStash;

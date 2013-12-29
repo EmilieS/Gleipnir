@@ -13,15 +13,18 @@ namespace Game.Buildings
         {
             Name = "Théâtre";
             Hp = MaxHp = 50;
+            this.CostPrice = 650;
         }
+
         public double SetHappiness
         {
             get { return 5; }
         }
-        //public void SetEnterPrice()
-        //{
-        //    EnterPrice = 50;
-        //}
+        /*public void SetEnterPrice()
+        {
+            EnterPrice = 50;
+        }*/
+
         override internal void AddToList()
         {
             Village.Buildings.Add(this);

@@ -10,14 +10,18 @@ namespace Game.Buildings
     public class ApothecaryOffice : BuildingsModel
     {
         internal string _name;
+        internal JobsModel _job;
 
-        public ApothecaryOffice(Village v)
+        public ApothecaryOffice(Village v, JobsModel job)
             : base(v)
         {
-            Name = "Clinique";
+            Name = "Pharmacie";
             _name = Name;
             Hp = MaxHp = 50;
+            _job = job;
+            this.CostPrice = 200;
         }
+
         public void SetGoodHealth(Villager sickVillager)
         {
             sickVillager.Heal();
@@ -42,16 +46,7 @@ namespace Game.Buildings
             }
         }
 
-        public void SetCoordinates(int x, int y)
-        {
-            if (x == null || y == null)
-                throw new ArgumentNullException("X or Y doesn't exist");
-            if ((x < 0 || x > 20) || (y < 0 || y > 32))
-                throw new IndexOutOfRangeException("Must be in tab");
-            this.HorizontalPos = x;
-            this.VerticalPos = y;
-        }
-
         public string BuildingName { get { return _name; } }
+        public JobsModel Job { get { return _job; } }
     }
 }

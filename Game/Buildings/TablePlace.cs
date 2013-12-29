@@ -6,24 +6,16 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-     public class TablePlace : BuildingsModel
+    public class TablePlace : BuildingsModel
     {
         public TablePlace(Village v)
             : base(v)
         {
             Name = "Autel sacré";
             Hp = MaxHp = 100000;
+            this.CostPrice = 0;
         }
-        //public void SetTablePosition()
-        //{
-        //    //TODO : Define the Table position 
-        //    prop.HorizontalPos = 3;
-        //    prop.VerticalPos = 4;
-        //}
-        //public void SetFaith()
-        //{
-        //    prop.AddFaith = 4;
-        //}
+
         override internal void AddToList()
         {
             Village.Buildings.Add(this);

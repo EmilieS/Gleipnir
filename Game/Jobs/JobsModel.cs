@@ -1,4 +1,5 @@
 ﻿using Game;
+using Game.Buildings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +22,7 @@ namespace Game
         JobList _owner;
         bool _workerListChanged;
         internal int _nbHeretics;
+        protected BuildingsModel _building;
         internal JobList Owner { get { return _owner; } }
 
         internal JobsModel(Game game, JobList list, string name)
@@ -111,8 +113,6 @@ namespace Game
         {
             return true;
         }
-
-
         /// <summary>
         /// Less Gold generation if many job workers
         /// </summary>
@@ -135,6 +135,13 @@ namespace Game
             result = (_owner.Owner._villagePop.Current / _workers.Count) * _coefficient;
             return result;
         }
+
+        public BuildingsModel Building
+        {
+            get { return _building; }
+            set { _building = value; }
+        }
+
         internal void addHereticWorker()
         {
             Debug.Assert(_nbHeretics <= Workers.Count, "(addHereticWorker) there are more heretic workers than workers Oo");
@@ -164,7 +171,6 @@ namespace Game
                 }
             }
         }
-
 
         #region called by DieOrIsAlive
         internal void WorkerDestroyed(Villager dead)

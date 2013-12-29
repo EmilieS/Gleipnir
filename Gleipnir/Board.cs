@@ -12,16 +12,24 @@ namespace GamePages
     public class Board
     {
         // Differents value for the box
-        public static readonly int Empty = 0;
-        public static readonly int Forest = 1;
-        public static readonly int Water = 2;
-        public static readonly int Road = 3;
-        public static readonly int Table = 4;
-        public static readonly int Farm = 10;
-        public static readonly int FamilyHouse = 20;
-        public static readonly int JobHouse = 30;
-        public static readonly int Hobby = 40;
-        public static readonly int Specials = 50;
+        public static readonly int EmptyInt = 0;
+        public static readonly int ForestInt = 1;
+        public static readonly int WaterInt = 2;
+        public static readonly int RoadInt = 3;
+        public static readonly int FarmFieldInt = 4;
+        public static readonly int JobHouseInt = 100;
+        public static readonly int ApothecaryOfficeInt = 101;
+        public static readonly int ForgeInt = 102;
+        public static readonly int UnionOfCrafterInt = 103;
+        public static readonly int RestaurantInt = 104;
+        public static readonly int FarmInt = 105;
+        public static readonly int MilitaryCampInt = 106;
+        public static readonly int MillInt = 107;
+        public static readonly int ClothesShopsInt = 108;
+        public static readonly int HobbyInt = 200;
+        public static readonly int SpecialsInt = 300;
+        public static readonly int TableInt = 301;
+        public static readonly int FamilyHouseInt = 302;
 
         // This two-dimensional array represents the squares on the grid.
         private int[,] squares;
@@ -36,7 +44,7 @@ namespace GamePages
             {
                 for (int j = 0; j < 32; j++)
                 {
-                    squares[i, j] = Empty;
+                    squares[i, j] = EmptyInt;
                 }
             }
         }
@@ -65,7 +73,7 @@ namespace GamePages
             {
                 for (int j = 0; j < 32; j++)
                 {
-                    squares[i, j] = Empty;
+                    squares[i, j] = EmptyInt;
                 }
             }
 
@@ -75,31 +83,31 @@ namespace GamePages
             {
                 if (i == 0 || i == 1)
                     for (int j = 0; j < 11; j++)
-                        squares[i, j] = Forest;
+                        squares[i, j] = ForestInt;
                 else if (i == 2)
                     for (int j = 0; j < 10; j++)
-                        squares[i, j] = Forest;
+                        squares[i, j] = ForestInt;
                 else if (i == 3 || i == 17)
                     for (int j = 0; j < 9; j++)
-                        squares[i, j] = Forest;
+                        squares[i, j] = ForestInt;
                 else if (i == 4)
                     for (int j = 0; j < 7; j++)
-                        squares[i, j] = Forest;
+                        squares[i, j] = ForestInt;
                 else if (i == 10 || i == 11 || i == 16)
                     for (int j = 0; j < 6; j++)
-                        squares[i, j] = Forest;
+                        squares[i, j] = ForestInt;
                 else if (i == 5 || i == 9 || i == 12 || i == 13 || i == 14)
                     for (int j = 0; j < 5; j++)
-                        squares[i, j] = Forest;
+                        squares[i, j] = ForestInt;
                 else if (i == 6 || i == 7 || i == 8 || i == 15)
                     for (int j = 0; j < 4; j++)
-                        squares[i, j] = Forest;
+                        squares[i, j] = ForestInt;
                 else if (i == 18)
                     for (int j = 0; j < 12; j++)
-                        squares[i, j] = Forest;
+                        squares[i, j] = ForestInt;
                 else if (i == 19)
                     for (int j = 0; j < 15; j++)
-                        squares[i, j] = Forest;
+                        squares[i, j] = ForestInt;
             }
             #endregion
             #region farms fields
@@ -107,25 +115,25 @@ namespace GamePages
             {
                 if (i == 19)
                     for (int j = 31; j > 17; j--)
-                        squares[i, j] = Farm;
+                        squares[i, j] = FarmFieldInt;
                 else if (i == 18)
                     for (int j = 31; j > 19; j--)
-                        squares[i, j] = Farm;
+                        squares[i, j] = FarmFieldInt;
                 else if (i == 17 || i == 16)
                     for (int j = 31; j > 20; j--)
-                        squares[i, j] = Farm;
+                        squares[i, j] = FarmFieldInt;
                 else if (i == 15)
                     for (int j = 31; j > 21; j--)
-                        squares[i, j] = Farm;
+                        squares[i, j] = FarmFieldInt;
                 else if (i == 14)
                     for (int j = 31; j > 23; j--)
-                        squares[i, j] = Farm;
+                        squares[i, j] = FarmFieldInt;
                 else if (i == 13 || i == 12)
                     for (int j = 31; j > 24; j--)
-                        squares[i, j] = Farm;
+                        squares[i, j] = FarmFieldInt;
                 else if (i == 11 || i == 10)
                     for (int j = 31; j > 25; j--)
-                        squares[i, j] = Farm;
+                        squares[i, j] = FarmFieldInt;
             }
             #endregion
             #region river
@@ -133,58 +141,58 @@ namespace GamePages
             {
                 if (i == 0)
                     for (int j = 31; j > 29; j--)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
                 else if (i == 1)
                     for (int j = 31; j > 28; j--)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
                 else if (i == 2)
                     for (int j = 28; j < 31; j++)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
                 else if (i == 3)
                     for (int j = 28; j < 30; j++)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
                 else if (i == 4)
                     for (int j = 27; j < 30; j++)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
                 else if (i == 5 || i == 6)
                     for (int j = 27; j < 29; j++)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
                 else if (i == 7)
                     for (int j = 26; j < 28; j++)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
                 else if (i == 9)
                     for (int j = 24; j < 27; j++)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
                 else if (i == 10)
                     for (int j = 24; j < 26; j++)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
                 else if (i == 11)
                     for (int j = 23; j < 26; j++)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
                 else if (i == 12)
                     for (int j = 21; j < 25; j++)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
                 else if (i == 13)
                     for (int j = 20; j < 25; j++)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
                 else if (i == 14)
                     for (int j = 19; j < 24; j++)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
                 else if (i == 15)
                     for (int j = 18; j < 22; j++)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
                 else if (i == 16)
                     for (int j = 17; j < 21; j++)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
                 else if (i == 17)
                     for (int j = 15; j < 21; j++)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
                 else if (i == 18)
                     for (int j = 14; j < 20; j++)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
                 else if (i == 19)
                     for (int j = 15; j < 18; j++)
-                        squares[i, j] = Water;
+                        squares[i, j] = WaterInt;
             }
             #endregion
             #region roads
@@ -226,15 +234,23 @@ namespace GamePages
             #region families houses
             foreach (House house in game.Villages[0].Buildings.HouseList)
                 if(!house.IsBought)
-                    PlaceHouse(house);
+                    PlaceBuilding(house, FamilyHouseInt);
             #endregion
             #region jobs buildings
-            squares[3, 13] = JobHouse;
-            squares[6, 10] = JobHouse;
-            squares[9, 31] = JobHouse;
+            foreach (Forge forge in game.Villages[0].Buildings.ForgeList)
+                if (forge != null && !forge.IsBought)
+                    PlaceBuilding(forge, ForgeInt);
+            foreach (Farm farm in game.Villages[0].Buildings.FarmList)
+                if (farm != null && !farm.IsBought)
+                    PlaceBuilding(farm, FarmInt);
+            foreach (UnionOfCrafter uoc in game.Villages[0].Buildings.UnionOfCrafterList)
+                if (uoc != null && !uoc.IsBought)
+                    PlaceBuilding(uoc, UnionOfCrafterInt);
             #endregion
             #region table
-            squares[4, 4] = Table;
+            game.Villages[0].Buildings.TablePlaceList[0].SetCoordinates(4, 4);
+            squares[4, 4] = TableInt;
+            game.Villages[0].Buildings.TablePlaceList[0].IsBought = true;
             #endregion
             #endregion
         }
@@ -273,7 +289,7 @@ namespace GamePages
         /// <returns></returns>
         public bool IsValidSquare(int row, int col)
         {
-            if (squares[row, col] == Empty)
+            if (squares[row, col] == EmptyInt)
                 return true;
             else
                 return false;
@@ -287,11 +303,7 @@ namespace GamePages
         /// <returns></returns>
         public bool IsBuilding(int row, int col)
         {
-            if (squares[row, col] == FamilyHouse ||
-                squares[row, col] == JobHouse ||
-                squares[row, col] == Hobby ||
-                squares[row, col] == Specials ||
-                squares[row, col] == Table)
+            if (squares[row, col] >= 100)
                 return true;
             else
                 return false;
@@ -328,12 +340,12 @@ namespace GamePages
         }
 
         /// <summary>
-        /// Place randomly a buidling with buildingNumber
+        /// Place randomly a buidling
         /// </summary>
-        /// <param name="buldingNumber"></param>
-        public void PlaceHouse(House house)
+        /// <param name="building"></param>
+        public void PlaceBuilding(BuildingsModel building, int value)
         {
-            if (!house.IsBought)
+            if (!building.IsBought)
             {
                 int hPos;
                 int vPos;
@@ -342,9 +354,9 @@ namespace GamePages
                     hPos = RandomPos(20);
                     vPos = RandomPos(32);
                 } while (!IsValidSquare(hPos, vPos));
-                house.SetCoordinates(hPos, vPos);
-                squares[hPos, vPos] = FamilyHouse;
-                house.IsBought = true;
+                building.SetCoordinates(hPos, vPos);
+                squares[hPos, vPos] = value;
+                building.IsBought = true;
             }
             else
                 throw new InvalidOperationException();

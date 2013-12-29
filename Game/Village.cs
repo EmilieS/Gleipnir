@@ -60,7 +60,7 @@ namespace Game
             Buildings.House house;
             if (EmptyHouseList.Count == 0)
             {
-                house = new Buildings.House(this, Jobs.Construction_worker.Workers.Count > 0);
+                house = new Buildings.House(this, Jobs.Construction_Worker.Workers.Count > 0);
             }
             else
             {

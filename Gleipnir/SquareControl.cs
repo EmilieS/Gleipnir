@@ -38,17 +38,6 @@ namespace GamePages
         public int Contents;
         public int PreviewContents;
 
-        // These are used to set the right color
-        internal readonly int IsForest = 1;
-        internal readonly int IsWater = 2;
-        internal readonly int IsRoad = 3;
-        internal readonly int IsTable = 4;
-        internal readonly int IsFarmField = 10;
-        internal readonly int IsFamilyHouse = 20;
-        internal readonly int IsJobBuilding = 30;
-        internal readonly int IsHobbyPlace = 40;
-        internal readonly int IsSpecialBuiding = 50;
-
         // These are used to set highlighting.
         public bool IsValid = false;
         public bool IsActive = false;
@@ -69,7 +58,7 @@ namespace GamePages
         {
             InitializeComponent();
 
-            this.Contents = Board.Empty;
+            this.Contents = Board.EmptyInt;
             row = squareRow;
             col = squareCol;
 
@@ -98,6 +87,7 @@ namespace GamePages
             Color backColor;
             switch (Contents)
             {
+                #region No-Building Colors
                 case 1:
                     {
                         backColor = ForestBackColorDefault;
@@ -115,34 +105,81 @@ namespace GamePages
                     }
                 case 4:
                     {
-                        backColor = TableBackColorDefault;
-                        break;
-                    }
-                case 10:
-                    {
                         backColor = FarmFieldBackColorDefault;
                         break;
                     }
-                case 20:
-                    {
-                        backColor = HouseBackColorDefault;
-                        break;
-                    }
-                case 30:
+                #endregion
+                #region Jobs Buildings Colors
+                case 100:
                     {
                         backColor = JobsBackColorDefault;
                         break;
                     }
-                case 40:
+                case 101:
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                case 102:
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                case 103:
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                case 104:
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                case 105:
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                case 106:
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                case 107:
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                case 108:
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                #endregion
+                #region Hobbies Buildings Colors
+                case 200:
                     {
                         backColor = HobbyBackColorDefault;
                         break;
                     }
-                case 50:
+                #endregion
+                #region Specials Buildings Colors
+                case 300:
                     {
                         backColor = SpecialsBackColorDefault;
                         break;
                     }
+                case 301:
+                    {
+                        backColor = TableBackColorDefault;
+                        break;
+                    }
+                case 302:
+                    {
+                        backColor = HouseBackColorDefault;
+                        break;
+                    }
+                #endregion
                 default:
                     {
                         backColor = EmptyBackColorDefault;

@@ -8,13 +8,16 @@ namespace Game.Buildings
 {
     public class BuildingsList : IReadOnlyList<BuildingsModel>
     {
+        readonly List<BuildingsModel> _buildingsList;
         readonly List<House> _houseList;
         readonly List<ApothecaryOffice> _apothecaryOfficeList;
         readonly List<Baths> _bathsList;
         readonly List<Brothel> _brothelList;
         readonly List<Chapel> _chapelList;
+        readonly List<ClothesShop> _clothesShopList;
         readonly List<Farm> _farmList;
         readonly List<Forge> _forgeList;
+        readonly List<MilitaryCamp> _militaryCampList;
         readonly List<Mill> _millList;
         readonly List<OfferingWarehouse> _offeringWarehouseList;
         readonly List<PartyRoom> _partyRoomList;
@@ -27,20 +30,20 @@ namespace Game.Buildings
         public IReadOnlyList<House> HouseList { get { return _houseList; } }
         public IReadOnlyList<BuildingsModel> ApothecaryOfficeList { get { return _apothecaryOfficeList; } }
         public IReadOnlyList<BuildingsModel> BathsList { get { return _bathsList; } }
-        public IReadOnlyList<BuildingsModel> BrothelList{ get { return _brothelList; } }
-        public IReadOnlyList<BuildingsModel> ChapelList{ get { return _chapelList; } }
-        public IReadOnlyList<BuildingsModel> FarmList{ get { return _farmList; } }
-        public IReadOnlyList<BuildingsModel> ForgeList{ get { return _forgeList; } }
-        public IReadOnlyList<BuildingsModel> MillList{ get { return _millList; } }
-        public IReadOnlyList<BuildingsModel> OfferingWarehouseList{ get { return _offeringWarehouseList; } }
-        public IReadOnlyList<BuildingsModel> PartyRoomList{ get { return _partyRoomList; } }
-        public IReadOnlyList<BuildingsModel> RestaurantList{ get { return _restaurantList; } }
-        public IReadOnlyList<BuildingsModel> TablePlaceList{ get { return _tablePlaceList; } }
-        public IReadOnlyList<BuildingsModel> TavernList{ get { return _tavernList; } }
-        public IReadOnlyList<BuildingsModel> TheaterList{ get { return _theaterList; } }
+        public IReadOnlyList<BuildingsModel> BrothelList { get { return _brothelList; } }
+        public IReadOnlyList<BuildingsModel> ChapelList { get { return _chapelList; } }
+        public IReadOnlyList<BuildingsModel> ClothesShopList { get { return _clothesShopList; } }
+        public IReadOnlyList<BuildingsModel> FarmList { get { return _farmList; } }
+        public IReadOnlyList<BuildingsModel> ForgeList { get { return _forgeList; } }
+        public IReadOnlyList<BuildingsModel> MilitaryCampList { get { return _militaryCampList; } }
+        public IReadOnlyList<BuildingsModel> MillList { get { return _millList; } }
+        public IReadOnlyList<BuildingsModel> OfferingWarehouseList { get { return _offeringWarehouseList; } }
+        public IReadOnlyList<BuildingsModel> PartyRoomList { get { return _partyRoomList; } }
+        public IReadOnlyList<BuildingsModel> RestaurantList { get { return _restaurantList; } }
+        public IReadOnlyList<BuildingsModel> TablePlaceList { get { return _tablePlaceList; } }
+        public IReadOnlyList<BuildingsModel> TavernList { get { return _tavernList; } }
+        public IReadOnlyList<BuildingsModel> TheaterList { get { return _theaterList; } }
         public IReadOnlyList<BuildingsModel> UnionOfCrafterList { get { return _unionOfCrafterList; } }
-
-        readonly List<BuildingsModel> _buildingsList;
 
         public BuildingsList(Village village)
         {
@@ -49,12 +52,14 @@ namespace Game.Buildings
 
             _houseList = new List<House>();
             _apothecaryOfficeList = new List<ApothecaryOffice>();
-            _bathsList=new List<Buildings.Baths>();
-            _brothelList=new List<Buildings.Brothel>();
-            _chapelList=new List<Buildings.Chapel>();
-            _farmList=new List<Buildings.Farm>();
-            _forgeList=new List<Buildings.Forge>();
-            _millList=new List<Buildings.Mill>();
+            _bathsList = new List<Buildings.Baths>();
+            _brothelList = new List<Buildings.Brothel>();
+            _chapelList = new List<Buildings.Chapel>();
+            _clothesShopList = new List<Buildings.ClothesShop>();
+            _farmList = new List<Buildings.Farm>();
+            _forgeList = new List<Buildings.Forge>();
+            _militaryCampList = new List<Buildings.MilitaryCamp>();
+            _millList = new List<Buildings.Mill>();
             _offeringWarehouseList = new List<Buildings.OfferingWarehouse>();
             _partyRoomList = new List<Buildings.PartyRoom>();
             _restaurantList = new List<Buildings.Restaurant>();
@@ -62,80 +67,89 @@ namespace Game.Buildings
             _tavernList = new List<Buildings.Tavern>();
             _theaterList = new List<Buildings.Theater>();
             _unionOfCrafterList = new List<Buildings.UnionOfCrafter>();
-
         }
 
-        internal void Add(House house)
+        public void Add(House house)
         {
             _houseList.Add(house);
             _buildingsList.Add(house);
         }
-        internal void Add(ApothecaryOffice apothecaryOffice)
+        public void Add(ApothecaryOffice apothecaryOffice)
         {
             _apothecaryOfficeList.Add(apothecaryOffice);
             _buildingsList.Add(apothecaryOffice);
         }
-        internal void Add(Baths baths)
+        public void Add(Baths baths)
         {
             _bathsList.Add(baths);
             _buildingsList.Add(baths);
         }
-        internal void Add(Brothel brothel)
+        public void Add(Brothel brothel)
         {
             _brothelList.Add(brothel);
             _buildingsList.Add(brothel);
         }
-        internal void Add(Chapel chapel)
+        public void Add(Chapel chapel)
         {
             _chapelList.Add(chapel);
             _buildingsList.Add(chapel);
         }
-        internal void Add(Farm farm)
+        public void Add(ClothesShop clothesShop)
+        {
+            _clothesShopList.Add(clothesShop);
+            _buildingsList.Add(clothesShop);
+        }
+        public void Add(Farm farm)
         {
             _farmList.Add(farm);
             _buildingsList.Add(farm);
         }
-        internal void Add(Forge forge)
+        public void Add(Forge forge)
         {
             _forgeList.Add(forge);
             _buildingsList.Add(forge);
         }
-        internal void Add(Mill mill)
+        public void Add(MilitaryCamp militaryCamp)
+        {
+            _militaryCampList.Add(militaryCamp);
+            _buildingsList.Add(militaryCamp);
+        }
+        public void Add(Mill mill)
         {
             _millList.Add(mill);
             _buildingsList.Add(mill);
         }
-        internal void Add(OfferingWarehouse offeringWarehouse)
+        public void Add(OfferingWarehouse offeringWarehouse)
         {
             _offeringWarehouseList.Add(offeringWarehouse);
             _buildingsList.Add(offeringWarehouse);
         }
-        internal void Add(PartyRoom partyRoom)
+        public void Add(PartyRoom partyRoom)
         {
             _partyRoomList.Add(partyRoom);
             _buildingsList.Add(partyRoom);
         }
-        internal void Add(Restaurant restaurant)
+        public void Add(Restaurant restaurant)
         {
             _restaurantList.Add(restaurant);
             _buildingsList.Add(restaurant);
         }
-        internal void Add(TablePlace tablePlace)
+        public void Add(TablePlace tablePlace)
         {
             _tablePlaceList.Add(tablePlace);
             _buildingsList.Add(tablePlace);
         }
-        internal void Add(Tavern tavern)
+        public void Add(Tavern tavern)
         {
             _tavernList.Add(tavern);
             _buildingsList.Add(tavern);
         }
-        internal void Add(Theater theater)
+        public void Add(Theater theater)
         {
             _theaterList.Add(theater);
             _buildingsList.Add(theater);
         }
-        internal void Add(UnionOfCrafter unionOfCrafter)
+        public void Add(UnionOfCrafter unionOfCrafter)
         {
             _unionOfCrafterList.Add(unionOfCrafter);
             _buildingsList.Add(unionOfCrafter);
@@ -161,6 +175,11 @@ namespace Game.Buildings
             _chapelList.Remove(chapel);
             _buildingsList.Remove(chapel);
         }
+        internal void Remove(ClothesShop clothesShop)
+        {
+            _clothesShopList.Add(clothesShop);
+            _buildingsList.Add(clothesShop);
+        }
         internal void Remove(Farm farm)
         {
             _farmList.Remove(farm);
@@ -170,6 +189,11 @@ namespace Game.Buildings
         {
             _forgeList.Remove(forge);
             _buildingsList.Remove(forge);
+        }
+        internal void Remove(MilitaryCamp militaryCamp)
+        {
+            _militaryCampList.Add(militaryCamp);
+            _buildingsList.Add(militaryCamp);
         }
         internal void Remove(Mill mill)
         {

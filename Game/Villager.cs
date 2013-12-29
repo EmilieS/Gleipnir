@@ -142,10 +142,11 @@ namespace Game
         /// <summary>
         /// Gets the villager's name
         /// </summary>
-        public string Name
-        {
-            get { return _name; }
-        }
+        public string FirstName { get { return _name; } }
+        /// <summary>
+        /// Gets the family name
+        /// </summary>
+        public string Name { get { return _parentFamily.Name; } }
 
         /// <summary>
         /// Sets the new life expectancy no matter what time was left.

@@ -14,28 +14,26 @@ namespace Game.Buildings
             CostPrice = 100;
             Name = "Taverne";
             Hp = MaxHp = 50;
+            this.CostPrice = 250;
         }
 
         public double SetFaith
         {
             get { return 4; }
         }
-
         public double SetHappiness
         {
             get { return 6; }
         }
-
-        //public void SetEnterPrice()
-        //{
-        //    prop.EnterPrice = 2;
-        //}
+        /*public void SetEnterPrice()
+        {
+            prop.EnterPrice = 2;
+        }*/
 
         override internal void AddToList()
         {
             Village.Buildings.Add(this);
         }
-
         internal override void OnOnDestroy()
         {
             Village.Buildings.Remove(this);

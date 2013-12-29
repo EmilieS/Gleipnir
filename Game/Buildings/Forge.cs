@@ -9,14 +9,18 @@ namespace Game.Buildings
     public class Forge : BuildingsModel
     {
         internal string _name;
+        internal JobsModel _job;
 
-        public Forge(Village v)
+        public Forge(Village v, JobsModel job)
             : base(v)
         {
             Name = "Forge";
             _name = Name;
             Hp = MaxHp = 50;
+            _job = job;
+            this.CostPrice = 100;
         }
+
         override internal void AddToList()
         {
             Village.Buildings.Add(this);
@@ -37,16 +41,7 @@ namespace Game.Buildings
             }
         }
 
-        public void SetCoordinates(int x, int y)
-        {
-            if (x == null || y == null)
-                throw new ArgumentNullException("X or Y doesn't exist");
-            if ((x < 0 || x > 20) || (y < 0 || y > 32))
-                throw new IndexOutOfRangeException("Must be in tab");
-            this.HorizontalPos = x;
-            this.VerticalPos = y;
-        }
-
         public string BuildingName { get { return _name; } }
+        public JobsModel Job { get { return _job; } }
     }
 }

@@ -29,25 +29,22 @@ namespace GamePages
         Options options;
         Game.Game _game;
         traceBox trace;
-
+        private BuildingsModel buildingSelected;
         private ActionState actionState;
-        private BuildingTypeSelected buildingSelected;
-        int buildingIndex;
         string traceMessages;
 
-        internal Game.Game StartedGame { get { return _game; } }
+        /// <summary>
+        /// Gets the game object
+        /// </summary>
+        internal Game.Game Game { get { return _game; } }
+
+        /// <summary>
+        /// Player state
+        /// </summary>
         private enum ActionState
         {
             None = 0,
             InPlace = 1
-        }
-        private enum BuildingTypeSelected
-        {
-            None = 0,
-            Job = 1,
-            Family = 2,
-            Hobby = 3,
-            Specials = 4
         }
 
         public GeneralPage()
@@ -70,16 +67,12 @@ namespace GamePages
             // Create the game
             _game = new Game.Game();
 
-            // Will be deleted
-            Family family = _game.Villages[0].FamiliesList[0];
-
             // Create objects
             _gameMenu = new InGameMenu();
             _actionMenu = new TabIndex(this);
             _stats = new InformationsUC(this);
             _eventFlux = new EventFluxUC();
             _scenarioBox = new ScenarioBox(this);
-
             _infoBox = new InformationBox(this);
 
             #region grid generation
@@ -138,6 +131,7 @@ namespace GamePages
 
             // InfoBox
             _infoBox.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            _infoBox.SetNothingSelected();
             _infoBox.SendToBack();
             _infoBox.Show();
 
@@ -154,8 +148,8 @@ namespace GamePages
             #endregion
             #endregion
 
-            #region Infobox tests
-            PushAlert("coucoudfghjkjhgfd", "coucou1");
+            #region EventBox tests
+            /*PushAlert("coucoudfghjkjhgfd", "coucou1");
             PushAlert("coucou2546", "coucou2");
             PushAlert("coucou4543", "coucou3");
             PushAlert("coucou44545", "coucou4");
@@ -166,23 +160,24 @@ namespace GamePages
             PushAlert("coucou9", "coucou");
             PushAlert("coucou10", "coucou");
             PushAlert("coucou11", "coucou");
-            //PushAlert("coucou12", "coucou");
-            //PushAlert("coucou", "coucou");
-            //PushAlert("coucou", "coucou");
-            //PushAlert("coucou", "coucou");
+            PushAlert("coucou12", "coucou");
+            PushAlert("coucou", "coucou");
+            PushAlert("coucou", "coucou");
+            PushAlert("coucou", "coucou");*/
             #endregion
 
             #region Trace Window
             trace = new traceBox();
             trace.Show();
             #endregion
-            
+
             // Wait the scenario's end
             // LockEverything();
 
+            // Do 1 step
             Step();
         }
-        
+
         internal TabIndex ActionMenu
         {
             get { return _actionMenu; }
@@ -191,7 +186,8 @@ namespace GamePages
         {
 
         }
-        
+
+        // Window Methods
         internal void LockEverything()
         {
             _actionMenu.Enabled = false;
@@ -206,6 +202,8 @@ namespace GamePages
             _eventFlux.Enabled = true;
             _scenarioBox.Enabled = true;
         }
+
+        // InGameMenu Events
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
         {
             _actionMenu.Visible = _stats.Visible = false;
@@ -234,6 +232,8 @@ namespace GamePages
             this.Controls.Add(_home);
             _home.Show();
         }
+
+        // TraceWindow Methods
         public void PushGeneralCoins(int value)
         {
             _stats.offeringsPoints.Text = value.ToString();
@@ -280,8 +280,8 @@ namespace GamePages
         {
             // Check if new family is created
             foreach (House house in _game.Villages[0].Buildings.HouseList)
-                if(!CheckIfFamilyHouseIsPlaced(house))
-                    board.PlaceHouse(house);
+                if (!CheckIfFamilyHouseIsPlaced(house))
+                    board.PlaceBuilding(house, Board.FamilyHouseInt);
 
             // Map the current game board to the square controls.
             for (int i = 0; i < 20; i++)
@@ -293,40 +293,13 @@ namespace GamePages
                 }
             }
         }
-        #region Check if buildings exists
         private bool CheckIfFamilyHouseIsPlaced(House house)
         {
-            if (house.IsBought == true)
+            if (house.IsBought == true && house.HorizontalPos >= 0 && house.VerticalPos >= 0)
                 return true;
             else
                 return false;
         }
-        #endregion
-        #region Place buildings
-        private void PlaceJobHouse(int row, int col)
-        {
-            _board.UpdateSquares(row, col, Board.JobHouse);
-        }
-        private void PlaceFamilyHouse(int row, int col)
-        {
-            House house = new House(_game.Villages[0]);
-            house.SetCoordinates(row, col);
-            house.IsBought = true;
-            house.Family = null;
-            _game.Villages[0].AddEmptyHouse(house);
-            _board.UpdateSquares(row, col, Board.FamilyHouse);
-        }
-        private void PlaceHobby(int row, int col)
-        {
-            int buildingValue = Board.Hobby;
-            _board.UpdateSquares(row, col, buildingValue);
-        }
-        private void PlaceSpecial(int row, int col)
-        {
-            int buildingValue = Board.Specials;
-            _board.UpdateSquares(row, col, buildingValue);
-        }
-        #endregion
         private void ShowValidPlaces()
         {
             for (int i = 0; i < 20; i++)
@@ -351,6 +324,127 @@ namespace GamePages
                 }
             }
         }
+        #region Place buildings
+        #region Jobs Buildings
+        private void PlaceApothecaryOffice(int row, int col, ApothecaryOffice apo)
+        {
+            var village = _game.Villages[0];
+            var job = village.Jobs.Apothecary;
+
+            // Setting the building
+            apo.SetCoordinates(row, col);
+            apo.IsBought = true;
+            village.Buildings.Add(apo);
+            job.Building = (ApothecaryOffice)apo;
+            _board.UpdateSquares(row, col, Board.ApothecaryOfficeInt);
+        }
+        private void PlaceForge(int row, int col, Forge forge)
+        {
+            var village = _game.Villages[0];
+            var job = village.Jobs.Blacksmith;
+
+            // Setting the building
+            forge.SetCoordinates(row, col);
+            forge.IsBought = true;
+            village.Buildings.Add(forge);
+            job.Building = (Forge)forge;
+            _board.UpdateSquares(row, col, Board.ForgeInt);
+        }
+        private void PlaceUnionOfCrafter(int row, int col, UnionOfCrafter uoc)
+        {
+            var village = _game.Villages[0];
+            var job = village.Jobs.Construction_Worker;
+
+            // Setting the building
+            uoc.SetCoordinates(row, col);
+            uoc.IsBought = true;
+            village.Buildings.Add(uoc);
+            job.Building = (UnionOfCrafter)uoc;
+            _board.UpdateSquares(row, col, Board.UnionOfCrafterInt);
+        }
+        private void PlaceFarm(int row, int col, Farm farm)
+        {
+            var village = _game.Villages[0];
+            var job = village.Jobs.Farmer;
+
+            // Setting the building
+            farm.SetCoordinates(row, col);
+            farm.IsBought = true;
+            village.Buildings.Add(farm);
+            job.Building = (Farm)farm;
+            _board.UpdateSquares(row, col, Board.FarmInt);
+        }
+        private void PlaceRestaurant(int row, int col, Restaurant resto)
+        {
+            var village = _game.Villages[0];
+            var job = village.Jobs.Cooker;
+
+            // Setting the building
+            resto.SetCoordinates(row, col);
+            resto.IsBought = true;
+            village.Buildings.Add(resto);
+            job.Building = (Restaurant)resto;
+            _board.UpdateSquares(row, col, Board.RestaurantInt);
+        }
+        private void PlaceGQ(int row, int col, MilitaryCamp gq)
+        {
+            var village = _game.Villages[0];
+            var job = village.Jobs.Militia;
+
+            // Setting the building
+            gq.SetCoordinates(row, col);
+            gq.IsBought = true;
+            village.Buildings.Add(gq);
+            job.Building = (MilitaryCamp)gq;
+            _board.UpdateSquares(row, col, Board.MilitaryCampInt);
+        }
+        private void PlaceMill(int row, int col, Mill mill)
+        {
+            var village = _game.Villages[0];
+            var job = village.Jobs.Miller;
+
+            // Setting the building
+            mill.SetCoordinates(row, col);
+            mill.IsBought = true;
+            village.Buildings.Add(mill);
+            job.Building = (Mill)mill;
+            _board.UpdateSquares(row, col, Board.MillInt);
+        }
+        private void PlaceClothesShop(int row, int col, ClothesShop shop)
+        {
+            var village = _game.Villages[0];
+            var job = village.Jobs.Tailor;
+
+            // Setting the building
+            shop.SetCoordinates(row, col);
+            shop.IsBought = true;
+            village.Buildings.Add(shop);
+            job.Building = (ClothesShop)shop;
+            _board.UpdateSquares(row, col, Board.ClothesShopsInt);
+        }
+        #endregion
+        #region Hobby Buildings
+        private void PlaceHobby(int row, int col)
+        {
+            int buildingValue = Board.HobbyInt;
+            _board.UpdateSquares(row, col, buildingValue);
+        }
+        #endregion
+        #region Specials Buildings
+        private void PlaceSpecial(int row, int col)
+        {
+            int buildingValue = Board.SpecialsInt;
+            _board.UpdateSquares(row, col, buildingValue);
+        }
+        #endregion
+        private void PlaceFamilyHouse(int row, int col, House house)
+        {
+            house.SetCoordinates(row, col);
+            house.IsBought = true;
+            _game.Villages[0].AddEmptyHouse(house);
+            _board.UpdateSquares(row, col, Board.FamilyHouseInt);
+        }
+        #endregion
 
         // Grid Events
         private void SquareControl_MouseMove(object sender, MouseEventArgs e)
@@ -359,11 +453,11 @@ namespace GamePages
 
             // If the square is Empty and the player wants place a building
             #region Select Empty
-            if (_board.IsValidSquare(squareControl.Row, squareControl.Col) 
+            if (_board.IsValidSquare(squareControl.Row, squareControl.Col)
                 && actionState == ActionState.InPlace)
             {
                 // If the square is selected and his last content is empty
-                if (!squareControl.IsActive && squareControl.PreviewContents == Board.Empty)
+                if (!squareControl.IsActive && squareControl.PreviewContents == Board.EmptyInt)
                 {
                     // If the show valid place option is active, mark the square
                     if (options.showValidPlaces)
@@ -404,7 +498,7 @@ namespace GamePages
 
             // If the square is a building
             #region Select Building
-            else if(_board.IsBuilding(squareControl.Row, squareControl.Col) 
+            else if (_board.IsBuilding(squareControl.Row, squareControl.Col)
                 && actionState == ActionState.None)
             {
                 // If the square is selected
@@ -459,16 +553,16 @@ namespace GamePages
             }
 
             // If the place is being previewed, clear all affected squares
-            if (squareControl.PreviewContents != Board.Empty)
+            if (squareControl.PreviewContents != Board.EmptyInt)
             {
                 // Clear the move preview
                 for (int i = 0; i < 20; i++)
                 {
                     for (int j = 0; j < 32; j++)
                     {
-                        if (_grid[i, j].PreviewContents != Board.Empty)
+                        if (_grid[i, j].PreviewContents != Board.EmptyInt)
                         {
-                            _grid[i, j].PreviewContents = Board.Empty;
+                            _grid[i, j].PreviewContents = Board.EmptyInt;
                             _grid[i, j].Refresh();
                         }
                     }
@@ -489,7 +583,7 @@ namespace GamePages
                 // Hide Valid places and refresh grid
                 HideValidPlaces();
                 UpdateGrid(_board, _grid);
-                
+
                 // If the place is valid, make it
                 if (_board.IsValidSquare(squareControl.Row, squareControl.Col))
                 {
@@ -497,29 +591,45 @@ namespace GamePages
                     squareControl.Cursor = Cursors.Default;
 
                     // Place Building
-                    if (buildingSelected == BuildingTypeSelected.Job)
+                    if (buildingSelected != null)
                     {
-                        PlaceJobHouse(squareControl.Row, squareControl.Col);
-                    }
-                    else if (buildingSelected == BuildingTypeSelected.Family)
-                    {
-                        PlaceFamilyHouse(squareControl.Row, squareControl.Col);
-                    }
-                    else if (buildingSelected == BuildingTypeSelected.Hobby)
-                    {
-                        PlaceHobby(squareControl.Row, squareControl.Col);
-                    }
-                    else if (buildingSelected == BuildingTypeSelected.Specials)
-                    {
-                        PlaceSpecial(squareControl.Row, squareControl.Col);
+                        // Jobs Buildings
+                        if (buildingSelected.GetType() == typeof(ApothecaryOffice))
+                            PlaceApothecaryOffice(squareControl.Row, squareControl.Col, (ApothecaryOffice)buildingSelected);
+                        else if (buildingSelected.GetType() == typeof(Forge))
+                            PlaceForge(squareControl.Row, squareControl.Col, (Forge)buildingSelected);
+                        else if (buildingSelected.GetType() == typeof(UnionOfCrafter))
+                            PlaceUnionOfCrafter(squareControl.Row, squareControl.Col, (UnionOfCrafter)buildingSelected);
+                        else if (buildingSelected.GetType() == typeof(Restaurant))
+                            PlaceRestaurant(squareControl.Row, squareControl.Col, (Restaurant)buildingSelected);
+                        else if (buildingSelected.GetType() == typeof(Farm))
+                            PlaceFarm(squareControl.Row, squareControl.Col, (Farm)buildingSelected);
+                        else if (buildingSelected.GetType() == typeof(MilitaryCamp))
+                            PlaceGQ(squareControl.Row, squareControl.Col, (MilitaryCamp)buildingSelected);
+                        else if (buildingSelected.GetType() == typeof(Mill))
+                            PlaceMill(squareControl.Row, squareControl.Col, (Mill)buildingSelected);
+                        else if (buildingSelected.GetType() == typeof(ClothesShop))
+                            PlaceClothesShop(squareControl.Row, squareControl.Col, (ClothesShop)buildingSelected);
+
+                        // Family House
+                        else if (buildingSelected.GetType() == typeof(House))
+                            PlaceFamilyHouse(squareControl.Row, squareControl.Col, (House)buildingSelected);
+
+                        // Hobby Buildings
+                        /*else if (buildingSelected == BuildingTypeSelected.Hobby)
+                            PlaceHobby(squareControl.Row, squareControl.Col);*/
+
+                        // Specials Buildings
+                        /*else if (buildingSelected == BuildingTypeSelected.Specials)
+                            PlaceSpecial(squareControl.Row, squareControl.Col);*/
                     }
 
                     // Take Offerings Points
-                    _game.AddOrTakeFromOfferings(-(_game.GetBuildingPrices(buildingIndex).GetPrice));
+                    _game.AddOrTakeFromOfferings(-buildingSelected.CostPrice);
 
                     // End Placement
                     actionState = ActionState.None;
-                    buildingSelected = BuildingTypeSelected.None;
+                    buildingSelected = null;
                     _actionMenu.IsOnBought = false;
 
                     // Update grid
@@ -532,55 +642,214 @@ namespace GamePages
             {
                 SquareControl squareControl = (SquareControl)sender;
 
-                // If it's FamilyHouse
-                if (_grid[squareControl.Row, squareControl.Col].Contents == 20)
+                switch (_grid[squareControl.Row, squareControl.Col].Contents)
                 {
-                    foreach (House house in _game.Villages[0].Buildings.HouseList)
-                    {
-                        int hPos = house.HorizontalPos;
-                        int vPos = house.VerticalPos;
-                        if (hPos == squareControl.Row && vPos == squareControl.Col)
+                    #region ApothecaryOffices 101
+                    case 101: // ApothecaryOffices
                         {
-                            if (house.Family != null)
-                                _infoBox.SetFamilyHouseInfo(house.Family);
-                            else
-                                _infoBox.SetEmptyHouseInfo(house);
+                            foreach (ApothecaryOffice apo in _game.Villages[0].Buildings.ApothecaryOfficeList)
+                            {
+                                int hPos = apo.HorizontalPos;
+                                int vPos = apo.VerticalPos;
+                                if (hPos == squareControl.Row && vPos == squareControl.Col)
+                                {
+                                    if (apo.Job != null)
+                                        _infoBox.SetJobInfo((Apothecary)apo.Job);
+                                    else
+                                        _infoBox.SetDestroyedBuilding(apo);
+                                }
+                            }
+                            break;
                         }
-                    }
+                    #endregion
+                    #region Forges 102
+                    case 102: // Forges
+                        {
+                            foreach (Forge forge in _game.Villages[0].Buildings.ForgeList)
+                            {
+                                int hPos = forge.HorizontalPos;
+                                int vPos = forge.VerticalPos;
+                                if (hPos == squareControl.Row && vPos == squareControl.Col)
+                                {
+                                    if (forge.Job != null)
+                                        _infoBox.SetJobInfo((Blacksmith)forge.Job);
+                                    else
+                                        _infoBox.SetDestroyedBuilding(forge);
+                                }
+                            }
+                            break;
+                        }
+                    #endregion
+                    #region UnionOfCrafters 103
+                    case 103: // Union of Crafter
+                        {
+                            foreach (UnionOfCrafter uoc in _game.Villages[0].Buildings.UnionOfCrafterList)
+                            {
+                                int hPos = uoc.HorizontalPos;
+                                int vPos = uoc.VerticalPos;
+                                if (hPos == squareControl.Row && vPos == squareControl.Col)
+                                {
+                                    if (uoc.Job != null)
+                                        _infoBox.SetJobInfo((Construction_Worker)uoc.Job);
+                                    else
+                                        _infoBox.SetDestroyedBuilding(uoc);
+                                }
+                            }
+                            break;
+                        }
+                    #endregion
+                    #region Restaurents 104
+                    case 104: // Restaurent
+                        {
+                            foreach (Restaurant resto in _game.Villages[0].Buildings.RestaurantList)
+                            {
+                                int hPos = resto.HorizontalPos;
+                                int vPos = resto.VerticalPos;
+                                if (hPos == squareControl.Row && vPos == squareControl.Col)
+                                {
+                                    if (resto.Job != null)
+                                        _infoBox.SetJobInfo((Cooker)resto.Job);
+                                    else
+                                        _infoBox.SetDestroyedBuilding(resto);
+                                }
+                            }
+                            break;
+                        }
+                    #endregion
+                    #region Farms 105
+                    case 105: // Farms
+                        {
+                            foreach (Farm farm in _game.Villages[0].Buildings.FarmList)
+                            {
+                                int hPos = farm.HorizontalPos;
+                                int vPos = farm.VerticalPos;
+                                if (hPos == squareControl.Row && vPos == squareControl.Col)
+                                {
+                                    if (farm.Job != null)
+                                        _infoBox.SetJobInfo((Farmer)farm.Job);
+                                    else
+                                        _infoBox.SetDestroyedBuilding(farm);
+                                }
+                            }
+                            break;
+                        }
+                    #endregion
+                    #region MilitaryCamps 106
+                    case 106: // MilitaryCamps
+                        {
+                            foreach (MilitaryCamp gq in _game.Villages[0].Buildings.MilitaryCampList)
+                            {
+                                int hPos = gq.HorizontalPos;
+                                int vPos = gq.VerticalPos;
+                                if (hPos == squareControl.Row && vPos == squareControl.Col)
+                                {
+                                    if (gq.Job != null)
+                                        _infoBox.SetJobInfo((Militia)gq.Job);
+                                    else
+                                        _infoBox.SetDestroyedBuilding(gq);
+                                }
+                            }
+                            break;
+                        }
+                    #endregion
+                    #region Mills 107
+                    case 107: // Mills
+                        {
+                            foreach (Mill mill in _game.Villages[0].Buildings.MillList)
+                            {
+                                int hPos = mill.HorizontalPos;
+                                int vPos = mill.VerticalPos;
+                                if (hPos == squareControl.Row && vPos == squareControl.Col)
+                                {
+                                    if (mill.Job != null)
+                                        _infoBox.SetJobInfo((Miller)mill.Job);
+                                    else
+                                        _infoBox.SetDestroyedBuilding(mill);
+                                }
+                            }
+                            break;
+                        }
+                    #endregion
+                    #region ClothesShops 108
+                    case 108: // Forges
+                        {
+                            foreach (ClothesShop shop in _game.Villages[0].Buildings.ClothesShopList)
+                            {
+                                int hPos = shop.HorizontalPos;
+                                int vPos = shop.VerticalPos;
+                                if (hPos == squareControl.Row && vPos == squareControl.Col)
+                                {
+                                    if (shop.Job != null)
+                                        _infoBox.SetJobInfo((Tailor)shop.Job);
+                                    else
+                                        _infoBox.SetDestroyedBuilding(shop);
+                                }
+                            }
+                            break;
+                        }
+                    #endregion
+                    #region Table 301
+                    case 301:
+                        {
+                            foreach (TablePlace table in _game.Villages[0].Buildings.TablePlaceList)
+                            {
+                                int hPos = table.HorizontalPos;
+                                int vPos = table.VerticalPos;
+                                if (hPos == squareControl.Row && vPos == squareControl.Col)
+                                {
+                                    if (table != null)
+                                        _infoBox.SetTableInfo(table);
+                                    else
+                                        _infoBox.SetDestroyedBuilding(table);
+                                }
+                            }
+                            break;
+                        }
+                    #endregion
+                    #region Houses 302
+                    case 302:
+                        {
+                            foreach (House house in _game.Villages[0].Buildings.HouseList)
+                            {
+                                int hPos = house.HorizontalPos;
+                                int vPos = house.VerticalPos;
+                                if (hPos == squareControl.Row && vPos == squareControl.Col)
+                                {
+                                    if (house.Family != null)
+                                        _infoBox.SetFamilyHouseInfo(house.Family);
+                                    else
+                                        _infoBox.SetEmptyHouseInfo(house);
+                                }
+                            }
+                            break;
+                        }
+                    #endregion
+                    default:
+                        {
+                            _infoBox.SetNothingSelected();
+                            break;
+                        }
                 }
             }
             #endregion
         }
 
         // ActionTab Buildings Methods
-        private void FindBuildingSelected(int i)
+        public void OnBoughtBuilding_Click(BuildingsModel building)
         {
-            if (i >= 0 & i <= 7)
-                buildingSelected = BuildingTypeSelected.Job;
-            else if (i >= 8 && i <= 12)
-                buildingSelected = BuildingTypeSelected.Hobby;
-            else if (i == 13 || i == 14)
-                buildingSelected = BuildingTypeSelected.Specials;
-            else if (i == 15)
-                buildingSelected = BuildingTypeSelected.Family;
-            else
-                buildingSelected = BuildingTypeSelected.None;
-        }
-        public void OnBoughtBuilding_Click(int index)
-        {
-            buildingIndex = index;
+            // buildingIndex = index;
             int playerOfferings = _game.Offerings;
-            var buildng = _game.GetBuildingPrices(index);
+            int buildingPrice = building.CostPrice;
 
-            if (!_actionMenu.IsOnBought 
-                && buildng.GetPrice <= playerOfferings 
+            if (!_actionMenu.IsOnBought
+                && buildingPrice <= playerOfferings
                 && actionState == ActionState.None)
             {
                 _actionMenu.IsOnBought = true;
                 actionState = ActionState.InPlace;
                 ShowValidPlaces();
                 UpdateGrid(_board, _grid);
-                FindBuildingSelected(index);
+                buildingSelected = building;
             }
             else
             {

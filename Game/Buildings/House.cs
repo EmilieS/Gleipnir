@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    public class House: BuildingsModel
+    public class House : BuildingsModel
     {
         Family _family;
 
-        public House(Village v, bool IsAProperHouse=true)
+        public House(Village v, bool IsAProperHouse = true)
             : base(v)
         {
             Name = "Maison";
@@ -24,25 +24,28 @@ namespace Game.Buildings
                 Hp = 5;
                 MaxHp = 15;
             }
+            this.CostPrice = 70;
         }
 
-        public Family Family { get; set; }
+        public Family Family
+        {
+            get { return _family; }
+            set { _family = value; }
+        }
 
         override internal void AddToList()
         {
             _village.Buildings.Add(this);
         }
-
         internal override void OnOnDestroy()
         {
             Village.Buildings.Remove(this);
         }
-
         internal override void JustCollapsed()
         {
             if (Hp == 0 && _family != null)
             {
-                
+
                 foreach (Villager v in _family.FamilyMembers)
                 {
                     v.Kill();
@@ -62,16 +65,6 @@ namespace Game.Buildings
             {
                 Village.AddEmptyHouse(this);
             }
-        }
-
-        public void SetCoordinates(int x, int y)
-        {
-            if (x == null || y == null)
-                throw new ArgumentNullException("X or Y doesn't exist");
-            if ((x < 0 || x > 20) || (y < 0 || y > 32))
-                throw new IndexOutOfRangeException("Must be in tab");
-            this.HorizontalPos = x;
-            this.VerticalPos = y;
         }
     }
 }

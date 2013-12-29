@@ -1,4 +1,5 @@
 ﻿using Game;
+using Game.Buildings;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,8 @@ namespace Tests
             // Create game
             Game.Game game = new Game.Game();
             var village = game.Villages[0];
-            var farm = new Game.Buildings.Farm(village);
-            new Game.Buildings.Restaurant(village);
+            var farm = new Farm(village, village.Jobs.Farmer);
+            new Restaurant(village, village.Jobs.Cooker);
             foreach (Family f in village.FamiliesList)
             {
                 foreach (Villager v in f.FamilyMembers)
