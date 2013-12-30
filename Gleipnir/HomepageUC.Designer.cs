@@ -97,11 +97,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::GamePages.Properties.Resources.GeneralPage_background;
             this.Controls.Add(this.Exit);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Location = new System.Drawing.Point(400, 200);
+            this.Location = new System.Drawing.Point(470, 250);
             this.Name = "HomepageUC";
             this.Size = new System.Drawing.Size(219, 232);
             this.ResumeLayout(false);

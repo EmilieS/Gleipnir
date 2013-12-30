@@ -221,13 +221,19 @@
     <None Include="Resources\button_homepage1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Error.png" />
     <Content Include="Resources\Extra\firstNameList.txt" />
     <Content Include="Resources\Extra\nameList.txt" />
     <Content Include="Resources\Extra\scenario.txt" />
     <Content Include="Resources\firstNameList.txt" />
+    <None Include="Resources\Gold.png" />
+    <None Include="Resources\InformationUC_background.png" />
+    <None Include="Resources\GeneralPage_background.png" />
+    <None Include="Resources\logo_lava_salpha.png" />
     <Content Include="Resources\nameList.txt" />
     <Content Include="Resources\carte.png" />
     <Content Include="Resources\emptyPic.png" />
+    <None Include="Resources\Population.png" />
     <Content Include="Resources\testPic.png" />
     <Content Include="Resources\scenario.txt" />
   </ItemGroup>

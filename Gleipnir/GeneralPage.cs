@@ -233,7 +233,7 @@ namespace GamePages
             _home.Show();
         }
 
-        // TraceWindow Methods
+        // Stats Methods
         public void PushGeneralCoins(int value)
         {
             _stats.offeringsPoints.Text = value.ToString();
@@ -245,18 +245,7 @@ namespace GamePages
         public void PushOfferingsPointsPerTick(int value)
         {
             _stats.TaxAmount.Value = value;
-            _stats.TaxAmountValue.Text = string.Concat("Qtité demandée : ", value.ToString());
-        }
-        public void PushAlert(string message, string title)
-        {
-            _eventFlux.CreateNewEventAndShow(message, title);
-        }
-        public void PushTrace(string message)
-        {
-            traceMessages = traceMessages + message + @"
-";
-            trace.traceBoxViewer.Text = traceMessages;
-            //PushAlert(message, "PUSHTRACE");//MARCHE
+            _stats.TaxAmountValue.Text = string.Concat("Quantité : ", value.ToString());
         }
         public void PushGeneralHappiness(double value)
         {
@@ -273,6 +262,19 @@ namespace GamePages
         public void PushPopulation(int pop)
         {
             _stats.population.Text = pop.ToString();
+        }
+
+        // TraceWindow Methods
+        public void PushAlert(string message, string title)
+        {
+            _eventFlux.CreateNewEventAndShow(message, title);
+        }
+        public void PushTrace(string message)
+        {
+            traceMessages = traceMessages + message + @"
+";
+            trace.traceBoxViewer.Text = traceMessages;
+            //PushAlert(message, "PUSHTRACE");//MARCHE
         }
 
         // Grid Methods
