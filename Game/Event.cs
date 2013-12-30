@@ -137,23 +137,23 @@ namespace Game
             string toPush;
             if ((GameItem.Health & Healths.DEPRESSED) != 0)
             {
-                toPush = String.Format("{0} {1} s'est suicidé", GameItem.Name, _familyName);
+                toPush = String.Format("{0} {1} s'est suicidé", GameItem.FirstName, _familyName);
             }
             else if ((GameItem.Health & Healths.EARTHQUAKE_INJURED) != 0)
             {
-                toPush = String.Format("{0} {1} est mort suite au tremblement de terre", GameItem.Name, _familyName);
+                toPush = String.Format("{0} {1} est mort suite au tremblement de terre", GameItem.FirstName, _familyName);
             }
             else if ((GameItem.Health & Healths.SICK) != 0)
             {
-                toPush = String.Format("{0} {1} est mort de sa maladie", GameItem.Name, _familyName);
+                toPush = String.Format("{0} {1} est mort de sa maladie", GameItem.FirstName, _familyName);
             }
             else if (GameItem.Age > 60*12)
             {
-                toPush = String.Format("{0} {1} est mort de viellesse", GameItem.Name, _familyName);
+                toPush = String.Format("{0} {1} est mort de viellesse", GameItem.FirstName, _familyName);
             }
             else
             {
-                toPush = String.Format("{0} {1} est mort mystèrieusement", GameItem.Name, _familyName);
+                toPush = String.Format("{0} {1} est mort mystèrieusement", GameItem.FirstName, _familyName);
             }
             //Debug.Assert(toPush == "i");//va bien dedans!
             b.PushAlert(toPush,"Mort");
@@ -167,7 +167,7 @@ namespace Game
         }
         override public void PublishMessage(IWindow b)
         {
-            b.PushAlert(String.Format("{0} {1} prie que son malheur soit bientot terminé.", GameItem.Name, GameItem.ParentFamily.Name), "Prière");
+            b.PushAlert(String.Format("{0} {1} prie que son malheur soit bientot terminé.", GameItem.FirstName, GameItem.ParentFamily.Name), "Prière");
         }
     }
     public class EpidemicDeclaredEvent : Event<GodSpell.Epidemic>
@@ -206,9 +206,9 @@ namespace Game
 
         override public void PublishMessage(IWindow b)
         {
-            b.PushTrace( String.Format("Un nouveau villageois est né ! Il a été nommé {0}.", GameItem.Name));
+            b.PushTrace( String.Format("Un nouveau villageois est né ! Il a été nommé {0}.", GameItem.FirstName));
             if (GameItem.Job == null)
-                b.PushAlert(String.Format("Le nouveau villageois {0} {1} ne sait pas quel métier prendre...", GameItem.Name, GameItem.ParentFamily.Name), "Demande d'attribution de métier");
+                b.PushAlert(String.Format("Le nouveau villageois {0} {1} ne sait pas quel métier prendre...", GameItem.FirstName, GameItem.ParentFamily.Name), "Demande d'attribution de métier");
         }
     }
     public class FamilyBirthEvent : Event<Family>

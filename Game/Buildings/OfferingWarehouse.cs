@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-     public class OfferingWarehouse : BuildingsModel
+    public class OfferingWarehouse : BuildingsModel
     {
         public OfferingWarehouse(Village v)
             : base(v)
         {
             Name = "Sanctuaire";
             Hp = MaxHp = 50;
+            this.CostPrice = 150;
         }
+
         override internal void AddToList()
         {
             Village.Buildings.Add(this);

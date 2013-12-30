@@ -20,7 +20,7 @@ namespace Game
 
         public JobsModel Apothecary { get { return _apothecary; } }
         public JobsModel Blacksmith { get { return _blacksmith; } }
-        public JobsModel Construction_worker { get { return _construction_worker; } }
+        public JobsModel Construction_Worker { get { return _construction_worker; } }
         public JobsModel Cooker { get { return _cooker; } }
         public JobsModel Farmer { get { return _farmer; } }
         public JobsModel Militia { get { return _militia; } }

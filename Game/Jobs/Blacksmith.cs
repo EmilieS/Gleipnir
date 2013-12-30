@@ -11,11 +11,12 @@ namespace Game
     public class Blacksmith : JobsModel
     {
         public Blacksmith(Game game, JobList list, string name)
-            : base(game,list, name)
+            : base(game, list, name)
         {
             _job = Jobs.BLACKSMITH;
             _coefficient = 10;
         }
+
         internal override bool AddPersonPrerequisites()
         {
             if (Owner.Owner.Buildings.ForgeList.Count > 0)

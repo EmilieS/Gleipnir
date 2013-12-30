@@ -43,7 +43,7 @@
             this.Baths = new System.Windows.Forms.Button();
             this.PartyRoom = new System.Windows.Forms.Button();
             this.Chapel = new System.Windows.Forms.Button();
-            this.ApothicaryOffice = new System.Windows.Forms.Button();
+            this.ApothecaryOffice = new System.Windows.Forms.Button();
             this.Tavern = new System.Windows.Forms.Button();
             this.happinessTab = new System.Windows.Forms.TabPage();
             this.VillagerList = new System.Windows.Forms.TabPage();
@@ -89,7 +89,7 @@
             this.buildingsTab.Controls.Add(this.Baths);
             this.buildingsTab.Controls.Add(this.PartyRoom);
             this.buildingsTab.Controls.Add(this.Chapel);
-            this.buildingsTab.Controls.Add(this.ApothicaryOffice);
+            this.buildingsTab.Controls.Add(this.ApothecaryOffice);
             this.buildingsTab.Controls.Add(this.Tavern);
             this.buildingsTab.Location = new System.Drawing.Point(4, 4);
             this.buildingsTab.Name = "buildingsTab";
@@ -113,7 +113,7 @@
             this.OfferingsWarehouse.Name = "OfferingsWarehouse";
             this.OfferingsWarehouse.Size = new System.Drawing.Size(75, 23);
             this.OfferingsWarehouse.TabIndex = 13;
-            this.OfferingsWarehouse.Text = "Temple";
+            this.OfferingsWarehouse.Text = "Sanctuaire";
             this.OfferingsWarehouse.UseVisualStyleBackColor = true;
             // 
             // ClothesShop
@@ -149,7 +149,7 @@
             this.UnionOfCrafter.Name = "UnionOfCrafter";
             this.UnionOfCrafter.Size = new System.Drawing.Size(75, 23);
             this.UnionOfCrafter.TabIndex = 9;
-            this.UnionOfCrafter.Text = "Entrepot";
+            this.UnionOfCrafter.Text = "Syndicat";
             this.UnionOfCrafter.UseVisualStyleBackColor = true;
             // 
             // Forge
@@ -215,14 +215,14 @@
             this.Chapel.Text = "Chapelle";
             this.Chapel.UseVisualStyleBackColor = true;
             // 
-            // ApothicaryOffice
+            // ApothecaryOffice
             // 
-            this.ApothicaryOffice.Location = new System.Drawing.Point(6, 6);
-            this.ApothicaryOffice.Name = "ApothicaryOffice";
-            this.ApothicaryOffice.Size = new System.Drawing.Size(75, 23);
-            this.ApothicaryOffice.TabIndex = 1;
-            this.ApothicaryOffice.Text = "Pharmacie";
-            this.ApothicaryOffice.UseVisualStyleBackColor = true;
+            this.ApothecaryOffice.Location = new System.Drawing.Point(6, 6);
+            this.ApothecaryOffice.Name = "ApothecaryOffice";
+            this.ApothecaryOffice.Size = new System.Drawing.Size(75, 23);
+            this.ApothecaryOffice.TabIndex = 1;
+            this.ApothecaryOffice.Text = "Pharmacie";
+            this.ApothecaryOffice.UseVisualStyleBackColor = true;
             // 
             // Tavern
             // 
@@ -296,7 +296,7 @@
         private System.Windows.Forms.TabPage VillagerList;
         private System.Windows.Forms.TabPage godSpellsTab;
         private System.Windows.Forms.Button Tavern;
-        private System.Windows.Forms.Button ApothicaryOffice;
+        private System.Windows.Forms.Button ApothecaryOffice;
         private System.Windows.Forms.Button Chapel;
         private System.Windows.Forms.Button PartyRoom;
         private System.Windows.Forms.Button Baths;
@@ -311,6 +311,5 @@
         private System.Windows.Forms.Button House;
         private System.Windows.Forms.Button OfferingsWarehouse;
         private System.Windows.Forms.Button StartEpidemic;
-
     }
 }

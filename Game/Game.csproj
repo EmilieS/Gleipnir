@@ -40,7 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buildings\BuildingsList.cs" />
+    <Compile Include="Buildings\ClothesShop.cs" />
     <Compile Include="Buildings\House.cs" />
+    <Compile Include="Buildings\IBuildingsJobs.cs" />
+    <Compile Include="Buildings\MilitaryCamp.cs" />
     <Compile Include="GodSpell\Deluge.cs" />
     <Compile Include="GodSpell\Earthquake.cs" />
     <Compile Include="GodSpell\Epidemic.cs" />

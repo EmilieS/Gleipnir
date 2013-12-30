@@ -6,15 +6,21 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-     public class UnionOfCrafter : BuildingsModel
+    public class UnionOfCrafter : BuildingsModel
     {
-        public UnionOfCrafter(Village v)
+        internal string _name;
+        internal JobsModel _job;
+
+        public UnionOfCrafter(Village v, JobsModel job)
             : base(v)
         {
             Name = "Syndicat";
+            _name = Name;
             Hp = MaxHp = 50;
+            _job = job;
+            this.CostPrice = 50;
         }
-        // Syndicat des ouvriers 
+
         override internal void AddToList()
         {
             Village.Buildings.Add(this);
@@ -26,7 +32,7 @@ namespace Game.Buildings
         override internal void OnDamage()
         {
 
-            foreach (Villager v in Village.Jobs.Construction_worker.Workers)
+            foreach (Villager v in Village.Jobs.Construction_Worker.Workers)
             {
                 if (Game.Rand.Next(100) == 1)
                 {
@@ -34,5 +40,8 @@ namespace Game.Buildings
                 }
             }
         }
+
+        public string BuildingName { get { return _name; } }
+        public JobsModel Job { get { return _job; } }
     }
 }

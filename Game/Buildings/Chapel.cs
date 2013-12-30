@@ -16,12 +16,9 @@ namespace Game.Buildings
             EnterPrice = 0;
             Name = "Chapelle";
             Hp = MaxHp = 50;
+            this.CostPrice = 450;
         }
-        public void SetLocation(int HPosition, int VPosition)
-        {
-            HorizontalPos = HPosition;
-            VerticalPos = VPosition;
-        }
+
         override internal void AddToList()
         {
             Village.Buildings.Add(this);
@@ -30,6 +27,5 @@ namespace Game.Buildings
         {
             Village.Buildings.Remove(this);
         }
-       
     }
 }

@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    public class Restaurant : BuildingsModel
+    public class MilitaryCamp : BuildingsModel
     {
         internal string _name;
         internal JobsModel _job;
 
-        public Restaurant(Village v, JobsModel job)
+        public MilitaryCamp(Village v, JobsModel job)
             : base(v)
         {
-            Name = "Restaurant";
+            Name = "QG";
             _name = Name;
             Hp = MaxHp = 50;
             _job = job;
-            this.CostPrice = 400;
+            this.CostPrice = 800;
         }
 
         override internal void AddToList()
@@ -31,8 +31,7 @@ namespace Game.Buildings
         }
         override internal void OnDamage()
         {
-
-            foreach (Villager v in Village.Jobs.Cooker.Workers)
+            foreach (Villager v in Village.Jobs.Militia.Workers)
             {
                 if (Game.Rand.Next(100) == 1)
                 {

@@ -36,7 +36,7 @@ namespace GamePages
             previewSquares = false;
             boardColor = SquareControl.EmptyBackColorDefault;
             validPlaceColor = SquareControl.ValidPlaceBackColorDefault;
-            activeSquareColor = SquareControl.ActiveSquareBackColorDefault;
+            activeSquareColor = SquareControl.ActivePlaceBackColorDefault;
         }
     }
 }
