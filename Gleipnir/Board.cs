@@ -12,11 +12,13 @@ namespace GamePages
     public class Board
     {
         // Differents value for the box
+        // Landscape
         public static readonly int EmptyInt = 0;
         public static readonly int ForestInt = 1;
         public static readonly int WaterInt = 2;
         public static readonly int RoadInt = 3;
         public static readonly int FarmFieldInt = 4;
+        // Jobs Buildings
         public static readonly int JobHouseInt = 100;
         public static readonly int ApothecaryOfficeInt = 101;
         public static readonly int ForgeInt = 102;
@@ -26,10 +28,19 @@ namespace GamePages
         public static readonly int MilitaryCampInt = 106;
         public static readonly int MillInt = 107;
         public static readonly int ClothesShopsInt = 108;
+        // Hobbies Buildings
         public static readonly int HobbyInt = 200;
+        public static readonly int BathsInt = 201;
+        public static readonly int BrothelInt = 202;
+        public static readonly int PartyRoomInt = 203;
+        public static readonly int TavernInt = 204;
+        public static readonly int TheaterInt = 205;
+        // Specials Buildings
         public static readonly int SpecialsInt = 300;
         public static readonly int TableInt = 301;
         public static readonly int FamilyHouseInt = 302;
+        public static readonly int ChapelInt = 303;
+        public static readonly int OfferginsWarehouseInt = 304;
 
         // This two-dimensional array represents the squares on the grid.
         private int[,] squares;

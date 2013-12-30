@@ -324,7 +324,6 @@ namespace GamePages
                 }
             }
         }
-        #region Place buildings
         #region Jobs Buildings
         private void PlaceApothecaryOffice(int row, int col, ApothecaryOffice apo)
         {
@@ -424,10 +423,55 @@ namespace GamePages
         }
         #endregion
         #region Hobby Buildings
-        private void PlaceHobby(int row, int col)
+        private void PlaceBaths(int row, int col, Baths baths)
         {
-            int buildingValue = Board.HobbyInt;
-            _board.UpdateSquares(row, col, buildingValue);
+            var village = _game.Villages[0];
+
+            // Setting the building
+            baths.SetCoordinates(row, col);
+            baths.IsBought = true;
+            village.Buildings.Add(baths);
+            _board.UpdateSquares(row, col, Board.BathsInt);
+        }
+        private void PlaceBrothel(int row, int col, Brothel brothel)
+        {
+            var village = _game.Villages[0];
+
+            // Setting the building
+            brothel.SetCoordinates(row, col);
+            brothel.IsBought = true;
+            village.Buildings.Add(brothel);
+            _board.UpdateSquares(row, col, Board.BrothelInt);
+        }
+        private void PlacePartyRoom(int row, int col, PartyRoom party)
+        {
+            var village = _game.Villages[0];
+
+            // Setting the building
+            party.SetCoordinates(row, col);
+            party.IsBought = true;
+            village.Buildings.Add(party);
+            _board.UpdateSquares(row, col, Board.PartyRoomInt);
+        }
+        private void PlaceTavern(int row, int col, Tavern tavern)
+        {
+            var village = _game.Villages[0];
+
+            // Setting the building
+            tavern.SetCoordinates(row, col);
+            tavern.IsBought = true;
+            village.Buildings.Add(tavern);
+            _board.UpdateSquares(row, col, Board.TavernInt);
+        }
+        private void PlaceTheater(int row, int col, Theater theater)
+        {
+            var village = _game.Villages[0];
+
+            // Setting the building
+            theater.SetCoordinates(row, col);
+            theater.IsBought = true;
+            village.Buildings.Add(theater);
+            _board.UpdateSquares(row, col, Board.TheaterInt);
         }
         #endregion
         #region Specials Buildings
@@ -436,13 +480,35 @@ namespace GamePages
             int buildingValue = Board.SpecialsInt;
             _board.UpdateSquares(row, col, buildingValue);
         }
-        #endregion
         private void PlaceFamilyHouse(int row, int col, House house)
         {
+            var village = _game.Villages[0];
+
+            // Setting the building
             house.SetCoordinates(row, col);
             house.IsBought = true;
-            _game.Villages[0].AddEmptyHouse(house);
+            village.AddEmptyHouse(house);
             _board.UpdateSquares(row, col, Board.FamilyHouseInt);
+        }
+        private void PlaceChapel(int row, int col, Chapel chapel)
+        {
+            var village = _game.Villages[0];
+
+            // Setting the building
+            chapel.SetCoordinates(row, col);
+            chapel.IsBought = true;
+            village.Buildings.Add(chapel);
+            _board.UpdateSquares(row, col, Board.ChapelInt);
+        }
+        private void PlaceOfferingsWarehouse(int row, int col, OfferingWarehouse warehouse)
+        {
+            var village = _game.Villages[0];
+
+            // Setting the building
+            warehouse.SetCoordinates(row, col);
+            warehouse.IsBought = true;
+            village.Buildings.Add(warehouse);
+            _board.UpdateSquares(row, col, Board.OfferginsWarehouseInt);
         }
         #endregion
 
@@ -610,18 +676,24 @@ namespace GamePages
                             PlaceMill(squareControl.Row, squareControl.Col, (Mill)buildingSelected);
                         else if (buildingSelected.GetType() == typeof(ClothesShop))
                             PlaceClothesShop(squareControl.Row, squareControl.Col, (ClothesShop)buildingSelected);
-
-                        // Family House
+                        // Hobby Buildings
+                        else if (buildingSelected.GetType() == typeof(Baths))
+                            PlaceBaths(squareControl.Row, squareControl.Col, (Baths)buildingSelected);
+                        else if (buildingSelected.GetType() == typeof(Brothel))
+                            PlaceBrothel(squareControl.Row, squareControl.Col, (Brothel)buildingSelected);
+                        else if (buildingSelected.GetType() == typeof(PartyRoom))
+                            PlacePartyRoom(squareControl.Row, squareControl.Col, (PartyRoom)buildingSelected);
+                        else if (buildingSelected.GetType() == typeof(Tavern))
+                            PlaceTavern(squareControl.Row, squareControl.Col, (Tavern)buildingSelected);
+                        else if (buildingSelected.GetType() == typeof(Theater))
+                            PlaceTheater(squareControl.Row, squareControl.Col, (Theater)buildingSelected);
+                        // Specials Buildings
                         else if (buildingSelected.GetType() == typeof(House))
                             PlaceFamilyHouse(squareControl.Row, squareControl.Col, (House)buildingSelected);
-
-                        // Hobby Buildings
-                        /*else if (buildingSelected == BuildingTypeSelected.Hobby)
-                            PlaceHobby(squareControl.Row, squareControl.Col);*/
-
-                        // Specials Buildings
-                        /*else if (buildingSelected == BuildingTypeSelected.Specials)
-                            PlaceSpecial(squareControl.Row, squareControl.Col);*/
+                        else if (buildingSelected.GetType() == typeof(Chapel))
+                            PlaceChapel(squareControl.Row, squareControl.Col, (Chapel)buildingSelected);
+                        else if (buildingSelected.GetType() == typeof(OfferingWarehouse))
+                            PlaceOfferingsWarehouse(squareControl.Row, squareControl.Col, (OfferingWarehouse)buildingSelected);
                     }
 
                     // Take Offerings Points
@@ -788,6 +860,71 @@ namespace GamePages
                             break;
                         }
                     #endregion
+                    #region Baths 201
+                    case 201:
+                        {
+                            foreach (Baths bath in _game.Villages[0].Buildings.BathsList)
+                            {
+                                int hPos = bath.HorizontalPos;
+                                int vPos = bath.VerticalPos;
+                                if (hPos == squareControl.Row && vPos == squareControl.Col)
+                                    _infoBox.SetOtherBuildingsInfo(bath);
+                            }
+                            break;
+                        }
+                    #endregion
+                    #region Brothel 202
+                    case 202:
+                        {
+                            foreach (Brothel brothel in _game.Villages[0].Buildings.BrothelList)
+                            {
+                                int hPos = brothel.HorizontalPos;
+                                int vPos = brothel.VerticalPos;
+                                if (hPos == squareControl.Row && vPos == squareControl.Col)
+                                    _infoBox.SetOtherBuildingsInfo(brothel);
+                            }
+                            break;
+                        }
+                    #endregion
+                    #region PartyRoom 203
+                    case 203:
+                        {
+                            foreach (PartyRoom party in _game.Villages[0].Buildings.PartyRoomList)
+                            {
+                                int hPos = party.HorizontalPos;
+                                int vPos = party.VerticalPos;
+                                if (hPos == squareControl.Row && vPos == squareControl.Col)
+                                    _infoBox.SetOtherBuildingsInfo(party);
+                            }
+                            break;
+                        }
+                    #endregion
+                    #region Tavern 204
+                    case 204:
+                        {
+                            foreach (Tavern tavern in _game.Villages[0].Buildings.TavernList)
+                            {
+                                int hPos = tavern.HorizontalPos;
+                                int vPos = tavern.VerticalPos;
+                                if (hPos == squareControl.Row && vPos == squareControl.Col)
+                                    _infoBox.SetOtherBuildingsInfo(tavern);
+                            }
+                            break;
+                        }
+                    #endregion
+                    #region Theater 205
+                    case 205:
+                        {
+                            foreach (Theater theater in _game.Villages[0].Buildings.TheaterList)
+                            {
+                                int hPos = theater.HorizontalPos;
+                                int vPos = theater.VerticalPos;
+                                if (hPos == squareControl.Row && vPos == squareControl.Col)
+                                    _infoBox.SetOtherBuildingsInfo(theater);
+                            }
+                            break;
+                        }
+                    #endregion
                     #region Table 301
                     case 301:
                         {
@@ -820,6 +957,32 @@ namespace GamePages
                                     else
                                         _infoBox.SetEmptyHouseInfo(house);
                                 }
+                            }
+                            break;
+                        }
+                    #endregion
+                    #region Chapel 303
+                    case 303:
+                        {
+                            foreach (Chapel chapel in _game.Villages[0].Buildings.ChapelList)
+                            {
+                                int hPos = chapel.HorizontalPos;
+                                int vPos = chapel.VerticalPos;
+                                if (hPos == squareControl.Row && vPos == squareControl.Col)
+                                    _infoBox.SetOtherBuildingsInfo(chapel);
+                            }
+                            break;
+                        }
+                    #endregion
+                    #region OfferingWarehouse 304
+                    case 304:
+                        {
+                            foreach (OfferingWarehouse warehouse in _game.Villages[0].Buildings.OfferingWarehouseList)
+                            {
+                                int hPos = warehouse.HorizontalPos;
+                                int vPos = warehouse.VerticalPos;
+                                if (hPos == squareControl.Row && vPos == squareControl.Col)
+                                    _infoBox.SetOtherBuildingsInfo(warehouse);
                             }
                             break;
                         }

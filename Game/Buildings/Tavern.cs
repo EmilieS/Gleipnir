@@ -8,7 +8,7 @@ namespace Game.Buildings
 {
     public class Tavern : BuildingsModel
     {
-        public Tavern(Village v, BuildingsList List, string name)
+        public Tavern(Village v)
             : base(v)
         {
             CostPrice = 100;

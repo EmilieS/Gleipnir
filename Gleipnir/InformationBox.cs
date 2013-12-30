@@ -35,34 +35,37 @@ namespace GamePages
         // Hide or Show elements in InfoBox
         internal void SetFamilyHouseInfo(Family family)
         {
-            // InfoBox Texts
-            Title.Visible = true;
-            Title.Text = "Famille";
-            NameView.Visible = true;
-            NameView.Text = "Nom :";
-            ElementName.Visible = true;
-            ElementName.Text = family.Name;
-            GoldView.Visible = true;
-            Gold.Visible = true;
-            Gold.Text = family.GoldStash.ToString();
-            FaithView.Visible = true;
-            Faith.Visible = true;
-            Faith.Text = family.FaithAverageValue.ToString();
-            MemberView.Visible = true;
-            NbMembers.Visible = true;
-            NbMembers.Text = family.FamilyMembers.Count.ToString();
-            buildingHP.Visible = true;
-            buildingLife.Visible = true;
-            buildingLife.Text = family.House.Hp.ToString();
+            if (family != null)
+            {
+                // InfoBox Texts
+                Title.Visible = true;
+                Title.Text = "Famille";
+                NameView.Visible = true;
+                NameView.Text = "Nom :";
+                ElementName.Visible = true;
+                ElementName.Text = family.Name;
+                GoldView.Visible = true;
+                Gold.Visible = true;
+                Gold.Text = family.GoldStash.ToString();
+                FaithView.Visible = true;
+                Faith.Visible = true;
+                Faith.Text = family.FaithAverageValue.ToString();
+                MemberView.Visible = true;
+                NbMembers.Visible = true;
+                NbMembers.Text = family.FamilyMembers.Count.ToString();
+                buildingHP.Visible = true;
+                buildingLife.Visible = true;
+                buildingLife.Text = family.House.Hp.ToString();
 
-            // Action Tab infos
-            _page.ActionMenu.ShowVillagerListInFamily(family);
+                // Action Tab infos
+                _page.ActionMenu.ShowVillagerListInFamily(family);
 
-            // Meetings Details
-            _meeting = new Meeting(family);
-            _family = family;
-            GodMeeting.Visible = true;
-            GodMeeting.Enabled = true;
+                // Meetings Details
+                _meeting = new Meeting(family);
+                _family = family;
+                GodMeeting.Visible = true;
+                GodMeeting.Enabled = true;
+            }
         }
         internal void SetEmptyHouseInfo(House house)
         {
@@ -146,6 +149,30 @@ namespace GamePages
             _page.ActionMenu.DestroyVillagerList();
 
             // Meeting Info
+            GodMeeting.Visible = false;
+            GodMeeting.Enabled = false;
+        }
+        internal void SetOtherBuildingsInfo(BuildingsModel building)
+        {
+            // InfoBox Texts
+            Title.Visible = true;
+            Title.Text = building.Name;
+            NameView.Visible = false;
+            ElementName.Visible = false;
+            GoldView.Visible = false;
+            Gold.Visible = false;
+            FaithView.Visible = false;
+            Faith.Visible = false;
+            MemberView.Visible = false;
+            NbMembers.Visible = false;
+            buildingHP.Visible = true;
+            buildingLife.Visible = true;
+            buildingLife.Text = building.Hp.ToString();
+
+            // Action Tab infos
+            _page.ActionMenu.DestroyVillagerList();
+
+            // Meetings Details
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
         }

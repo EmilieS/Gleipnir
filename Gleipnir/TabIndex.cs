@@ -108,33 +108,40 @@ namespace GamePages
         #region Hobbies Buildings
         private void Baths_Click(object sender, EventArgs e)
         {
-            //_page.OnBoughtBuilding_Click(8);
+            Baths baths = new Baths(_page.Game.Villages[0]);
+            _page.OnBoughtBuilding_Click(baths);
         }
         private void Brothel_Click(object sender, EventArgs e)
         {
-            //_page.OnBoughtBuilding_Click(9);
+            Brothel brothel = new Brothel(_page.Game.Villages[0]);
+            _page.OnBoughtBuilding_Click(brothel);
         }
         private void PartyRoom_Click(object sender, EventArgs e)
         {
-            //_page.OnBoughtBuilding_Click(10);
+            PartyRoom party = new PartyRoom(_page.Game.Villages[0]);
+            _page.OnBoughtBuilding_Click(party);
         }
         private void TavernButton_Click(object sender, EventArgs e)
         {
-            //_page.OnBoughtBuilding_Click(11);
+            Tavern tavern = new Tavern(_page.Game.Villages[0]);
+            _page.OnBoughtBuilding_Click(tavern);
         }
         private void Theater_Click(object sender, EventArgs e)
         {
-            //_page.OnBoughtBuilding_Click(12);
+            Theater theater = new Theater(_page.Game.Villages[0]);
+            _page.OnBoughtBuilding_Click(theater);
         }
         #endregion
         #region Specials Buildings
         private void Chapel_Click(object sender, EventArgs e)
         {
-            //_page.OnBoughtBuilding_Click(13);
+            Chapel chapel = new Chapel(_page.Game.Villages[0]);
+            _page.OnBoughtBuilding_Click(chapel);
         }
         private void OfferingsWarehouse_Click(object sender, EventArgs e)
         {
-            //_page.OnBoughtBuilding_Click(14);
+            OfferingWarehouse offeringsWarehouse = new OfferingWarehouse(_page.Game.Villages[0]);
+            _page.OnBoughtBuilding_Click(offeringsWarehouse);
         }
         private void House_Click(object sender, EventArgs e)
         {

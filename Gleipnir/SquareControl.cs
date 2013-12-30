@@ -87,23 +87,23 @@ namespace GamePages
             Color backColor;
             switch (Contents)
             {
-                #region No-Building Colors
-                case 1:
+                #region LandScape Colors
+                case 1:     // Forest
                     {
                         backColor = ForestBackColorDefault;
                         break;
                     }
-                case 2:
+                case 2:     // Water
                     {
                         backColor = WaterBackColorDefault;
                         break;
                     }
-                case 3:
+                case 3:     // Roads
                     {
                         backColor = RoadBackColorDefault;
                         break;
                     }
-                case 4:
+                case 4:     // FarmField
                     {
                         backColor = FarmFieldBackColorDefault;
                         break;
@@ -115,42 +115,42 @@ namespace GamePages
                         backColor = JobsBackColorDefault;
                         break;
                     }
-                case 101:
+                case 101:   // ApothecaryOffice
                     {
                         backColor = JobsBackColorDefault;
                         break;
                     }
-                case 102:
+                case 102:   // Forge
                     {
                         backColor = JobsBackColorDefault;
                         break;
                     }
-                case 103:
+                case 103:   // UnionOfCrafter
                     {
                         backColor = JobsBackColorDefault;
                         break;
                     }
-                case 104:
+                case 104:   // Restaurant
                     {
                         backColor = JobsBackColorDefault;
                         break;
                     }
-                case 105:
+                case 105:   // Farm
                     {
                         backColor = JobsBackColorDefault;
                         break;
                     }
-                case 106:
+                case 106:   // MiliratyCamp
                     {
                         backColor = JobsBackColorDefault;
                         break;
                     }
-                case 107:
+                case 107:   // Mill
                     {
                         backColor = JobsBackColorDefault;
                         break;
                     }
-                case 108:
+                case 108:   // ClothesShop
                     {
                         backColor = JobsBackColorDefault;
                         break;
@@ -162,6 +162,31 @@ namespace GamePages
                         backColor = HobbyBackColorDefault;
                         break;
                     }
+                case 201:   // Baths
+                    {
+                        backColor = HobbyBackColorDefault;
+                        break;
+                    }
+                case 202:   // Brothel
+                    {
+                        backColor = HobbyBackColorDefault;
+                        break;
+                    }
+                case 203:   // PartyRoom
+                    {
+                        backColor = HobbyBackColorDefault;
+                        break;
+                    }
+                case 204:   // Tarvern
+                    {
+                        backColor = HobbyBackColorDefault;
+                        break;
+                    }
+                case 205:   // Theater
+                    {
+                        backColor = HobbyBackColorDefault;
+                        break;
+                    }
                 #endregion
                 #region Specials Buildings Colors
                 case 300:
@@ -169,14 +194,24 @@ namespace GamePages
                         backColor = SpecialsBackColorDefault;
                         break;
                     }
-                case 301:
+                case 301:   // Table
                     {
                         backColor = TableBackColorDefault;
                         break;
                     }
-                case 302:
+                case 302:   // House
                     {
                         backColor = HouseBackColorDefault;
+                        break;
+                    }
+                case 303:   // Chapel
+                    {
+                        backColor = SpecialsBackColorDefault;
+                        break;
+                    }
+                case 304:   // OfferingsWarehouse
+                    {
+                        backColor = SpecialsBackColorDefault;
                         break;
                     }
                 #endregion
