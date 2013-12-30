@@ -240,7 +240,7 @@ namespace Game
         public void AddOrTakeFromOfferings(int amount)
         {
             int result = _offerings.Current + amount;
-            if (result < 0) { throw new InvalidOperationException(); }
+            if (result < 0) { throw new InvalidOperationException("Negative Offerings"); }
             else _offerings.Current = result;
         }
 

@@ -365,12 +365,14 @@ namespace GamePages
                     hPos = RandomPos(20);
                     vPos = RandomPos(32);
                 } while (!IsValidSquare(hPos, vPos));
+
                 building.SetCoordinates(hPos, vPos);
                 squares[hPos, vPos] = value;
                 building.IsBought = true;
             }
             else
-                throw new InvalidOperationException();
+            {
+            }
         }
     }
 }

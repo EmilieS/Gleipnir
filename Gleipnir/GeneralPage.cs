@@ -278,11 +278,6 @@ namespace GamePages
         // Grid Methods
         private void UpdateGrid(Board board, SquareControl[,] grid)
         {
-            // Check if new family is created
-            foreach (House house in _game.Villages[0].Buildings.HouseList)
-                if (!CheckIfFamilyHouseIsPlaced(house))
-                    board.PlaceBuilding(house, Board.FamilyHouseInt);
-
             // Map the current game board to the square controls.
             for (int i = 0; i < 20; i++)
             {
@@ -295,10 +290,22 @@ namespace GamePages
         }
         private bool CheckIfFamilyHouseIsPlaced(House house)
         {
-            if (house.IsBought == true && house.HorizontalPos >= 0 && house.VerticalPos >= 0)
+            if (house.IsBought == true && house.HorizontalPos >= 0 && house.VerticalPos >= 0 && house.Family != null)
                 return true;
             else
                 return false;
+        }
+        private void AddNewFamilyHouse(Board board)
+        {
+            // Check if new family is created
+            foreach (House house in _game.Villages[0].Buildings.HouseList)
+                if (!CheckIfFamilyHouseIsPlaced(house))
+                    board.PlaceBuilding(house, Board.FamilyHouseInt);
+        }
+        private void BigGridUpdate(Board board, SquareControl[,] grid)
+        {
+            AddNewFamilyHouse(board);
+            UpdateGrid(board, grid);
         }
         private void ShowValidPlaces()
         {
@@ -324,7 +331,7 @@ namespace GamePages
                 }
             }
         }
-        #region Jobs Buildings
+        #region Jobs Buildings Placement
         private void PlaceApothecaryOffice(int row, int col, ApothecaryOffice apo)
         {
             var village = _game.Villages[0];
@@ -422,7 +429,7 @@ namespace GamePages
             _board.UpdateSquares(row, col, Board.ClothesShopsInt);
         }
         #endregion
-        #region Hobby Buildings
+        #region Hobby Buildings Placement
         private void PlaceBaths(int row, int col, Baths baths)
         {
             var village = _game.Villages[0];
@@ -474,7 +481,7 @@ namespace GamePages
             _board.UpdateSquares(row, col, Board.TheaterInt);
         }
         #endregion
-        #region Specials Buildings
+        #region Specials Buildings Placement
         private void PlaceSpecial(int row, int col)
         {
             int buildingValue = Board.SpecialsInt;
@@ -699,13 +706,13 @@ namespace GamePages
                     // Take Offerings Points
                     _game.AddOrTakeFromOfferings(-buildingSelected.CostPrice);
 
-                    // End Placement
-                    actionState = ActionState.None;
-                    buildingSelected = null;
-                    _actionMenu.IsOnBought = false;
-
                     // Update grid
                     UpdateGrid(_board, _grid);
+
+                    // End Placement
+                    actionState = ActionState.None;
+                    _actionMenu.IsOnBought = false;
+                    buildingSelected = null;
                 }
             }
             #endregion
@@ -1000,13 +1007,10 @@ namespace GamePages
         // ActionTab Buildings Methods
         public void OnBoughtBuilding_Click(BuildingsModel building)
         {
-            // buildingIndex = index;
             int playerOfferings = _game.Offerings;
             int buildingPrice = building.CostPrice;
 
-            if (!_actionMenu.IsOnBought
-                && buildingPrice <= playerOfferings
-                && actionState == ActionState.None)
+            if (!_actionMenu.IsOnBought && buildingPrice <= playerOfferings && actionState == ActionState.None)
             {
                 _actionMenu.IsOnBought = true;
                 actionState = ActionState.InPlace;
@@ -1022,6 +1026,23 @@ namespace GamePages
                 actionState = ActionState.None;
             }
         }
+        /*public void OnBoughtHouse_Click()
+        {
+            if (!_actionMenu.IsOnBought && actionState == ActionState.None)
+            {
+                _actionMenu.IsOnBought = true;
+                actionState = ActionState.InPlace;
+                ShowValidPlaces();
+                UpdateGrid(_board, _grid);
+            }
+            else
+            {
+                HideValidPlaces();
+                UpdateGrid(_board, _grid);
+                _actionMenu.IsOnBought = false;
+                actionState = ActionState.None;
+            }
+        }*/
 
         // InGameButton Method
         public void OnClickMenu()
@@ -1047,14 +1068,24 @@ namespace GamePages
                 events.Do(this);
                 events.PublishMessage(this);
             }
-            UpdateGrid(_board, _grid);
+            BigGridUpdate(_board, _grid);
+        }
+        private void StepWithoutGridUpdate()
+        {
+            _game.NextStep();
+            foreach (IEvent events in _game.EventList)
+            {
+                events.Do(this);
+                events.PublishMessage(this);
+            }
         }
         internal void StepX50()
         {
             for (int i = 0; i < 50; i++)
             {
-                Step();
+                StepWithoutGridUpdate();
             }
+            BigGridUpdate(_board, _grid);
         }
     }
 }

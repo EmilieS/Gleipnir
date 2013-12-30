@@ -145,7 +145,7 @@ namespace GamePages
         }
         private void House_Click(object sender, EventArgs e)
         {
-            Game.Buildings.House house = new Game.Buildings.House(_page.Game.Villages[0]);
+            House house = new House(_page.Game.Villages[0]);
             _page.OnBoughtBuilding_Click(house);
         }
         #endregion
