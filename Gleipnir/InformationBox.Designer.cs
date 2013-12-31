@@ -45,6 +45,7 @@
             // NameView
             // 
             this.NameView.AutoSize = true;
+            this.NameView.BackColor = System.Drawing.Color.Transparent;
             this.NameView.Location = new System.Drawing.Point(94, 37);
             this.NameView.Name = "NameView";
             this.NameView.Size = new System.Drawing.Size(41, 13);
@@ -63,6 +64,7 @@
             // GoldView
             // 
             this.GoldView.AutoSize = true;
+            this.GoldView.BackColor = System.Drawing.Color.Transparent;
             this.GoldView.Location = new System.Drawing.Point(108, 50);
             this.GoldView.Name = "GoldView";
             this.GoldView.Size = new System.Drawing.Size(24, 13);
@@ -81,6 +83,7 @@
             // FaithView
             // 
             this.FaithView.AutoSize = true;
+            this.FaithView.BackColor = System.Drawing.Color.Transparent;
             this.FaithView.Location = new System.Drawing.Point(106, 63);
             this.FaithView.Name = "FaithView";
             this.FaithView.Size = new System.Drawing.Size(30, 13);
@@ -99,6 +102,7 @@
             // MemberView
             // 
             this.MemberView.AutoSize = true;
+            this.MemberView.BackColor = System.Drawing.Color.Transparent;
             this.MemberView.Location = new System.Drawing.Point(22, 76);
             this.MemberView.Name = "MemberView";
             this.MemberView.Size = new System.Drawing.Size(111, 13);
@@ -145,6 +149,7 @@
             // buildingHP
             // 
             this.buildingHP.AutoSize = true;
+            this.buildingHP.BackColor = System.Drawing.Color.Transparent;
             this.buildingHP.Location = new System.Drawing.Point(46, 89);
             this.buildingHP.Name = "buildingHP";
             this.buildingHP.Size = new System.Drawing.Size(87, 13);

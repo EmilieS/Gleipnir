@@ -118,76 +118,63 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Marteau" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Marteau.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="loading_text.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="button_homepage1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\button_homepage1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="loading_text.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Malgun Gothic, 20pt</value>
   </data>
-  <data name="ActionTab_building_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ActionTab_building_background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="loading_text.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
-  <data name="InformationUC_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\InformationUC_background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="loading_text.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="Tailleur" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Tailleur.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="loading_text.Size" type="System.Drawing.Size, System.Drawing">
+    <value>310, 45</value>
   </data>
-  <data name="testPic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\testPic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="loading_text.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="Sablier2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Sablier2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="loading_text.Text" xml:space="preserve">
+    <value>Chargement en cours...</value>
   </data>
-  <data name="ActionTab_building_background1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ActionTab_building_background1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="loading_text.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
-  <data name="Caducee" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Caducee.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="&gt;&gt;loading_text.Name" xml:space="preserve">
+    <value>loading_text</value>
   </data>
-  <data name="button_homepage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\button_homepage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="&gt;&gt;loading_text.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Gold" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Gold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="&gt;&gt;loading_text.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="Index_Buildings" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Index_Buildings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="&gt;&gt;loading_text.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="Population" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Population.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
-  <data name="GeneralPage_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GeneralPage_background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="Error" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="$this.Location" type="System.Drawing.Point, System.Drawing">
+    <value>425, 350</value>
   </data>
-  <data name="emptyPic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\emptyPic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>310, 45</value>
   </data>
-  <data name="carte" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\carte.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>LoadingUC</value>
   </data>
-  <data name="logo_lava_salpha" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\logo_lava_salpha.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Moulin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Moulin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Enclume" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Enclume.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Loading_Text" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Loading_Text.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Sablier" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Sablier.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LoadingUC" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LoadingUC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Tailleur1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Tailleur1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

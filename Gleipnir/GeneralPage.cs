@@ -18,6 +18,7 @@ namespace GamePages
     public partial class GeneralPage : Form, IWindow
     {
         HomepageUC _home;
+        LoadingUC _loading;
         InGameMenu _gameMenu;
         TabIndex _actionMenu;
         InformationsUC _stats;
@@ -50,8 +51,18 @@ namespace GamePages
         public GeneralPage()
         {
             // Create windows objects
+            _loading = new LoadingUC();
             _home = new HomepageUC();
             InitializeComponent();
+
+            // Show Logo
+            this.Controls.Add(gleipnir_logo);
+            gleipnir_logo.SendToBack();
+            gleipnir_logo.Show();
+
+            // Hide loading
+            this.Controls.Add(_loading);
+            _loading.Hide();
 
             // Show home page
             _home.Launched += IsStarted_Changed;
@@ -64,11 +75,15 @@ namespace GamePages
             // Hide home page
             _home.Hide();
 
+            // Show loading effects
+            _loading.BringToFront();
+            _loading.Show();
+
             // Create the game
             _game = new Game.Game();
 
             // Create objects
-            _gameMenu = new InGameMenu();
+            _gameMenu = new InGameMenu(this);
             _actionMenu = new TabIndex(this);
             _stats = new InformationsUC(this);
             _eventFlux = new EventFluxUC();
@@ -83,16 +98,17 @@ namespace GamePages
             {
                 for (int j = 0; j < 32; j++)
                 {
-                    // Create it
+                    // Create
                     _grid[i, j] = new SquareControl(i, j);
-                    // Position it
+                    // Locate
                     _grid[i, j].Left = 220 + (j * _grid[i, j].Width);
                     _grid[i, j].Top = 40 + (i * _grid[i, j].Height);
-                    // Add it
+                    // Add
                     this.Controls.Add(_grid[i, j]);
                     _grid[i, j].SendToBack();
+                    _grid[i, j].Show();
 
-                    // Set up event handling for it.
+                    // Add events
                     _grid[i, j].MouseMove += new MouseEventHandler(SquareControl_MouseMove);
                     _grid[i, j].MouseLeave += new EventHandler(SquareControl_MouseLeave);
                     _grid[i, j].Click += new EventHandler(SquareControl_Click);
@@ -168,14 +184,20 @@ namespace GamePages
 
             #region Trace Window
             trace = new traceBox();
-            trace.Show();
+            //trace.Show();
             #endregion
+
+            // Hide loading effects
+            gleipnir_logo.Hide();
+            _loading.SendToBack();
+            _loading.Hide();
 
             // Wait the scenario's end
             // LockEverything();
 
             // Do 1 step
             Step();
+
         }
 
         internal TabIndex ActionMenu
@@ -193,6 +215,7 @@ namespace GamePages
             _actionMenu.Enabled = false;
             _stats.Enabled = false;
             _eventFlux.Enabled = false;
+            _infoBox.Enabled = false;
         }
         internal void UnLockEverything()
         {
@@ -200,37 +223,36 @@ namespace GamePages
             _stats.Enabled = true;
             _infoBox.Enabled = true;
             _eventFlux.Enabled = true;
-            _scenarioBox.Enabled = true;
         }
 
         // InGameMenu Events
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
         {
-            _actionMenu.Visible = _stats.Visible = false;
             LockEverything();
-            _actionMenu.Hide();
-            this.Controls.Remove(_actionMenu);
-            _infoBox.Hide();
-            this.Controls.Remove(_infoBox);
-            _scenarioBox.Hide();
-            this.Controls.Remove(_scenarioBox);
-            _stats.Hide();
-            this.Controls.Remove(_stats);
-            _eventFlux.Hide();
-            this.Controls.Remove(_eventFlux);
-            for (int i = 0; i < 20; i++)
-            {
-                for (int j = 0; j < 32; j++)
-                {
-                    _grid[i, j].Hide();
-                    this.Controls.Remove(_grid[i, j]);
-                }
-            }
-            _gameMenu.Hide();
+
+            // Set double-buffering
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
+
+            // Remove gameMenu
             this.Controls.Remove(_gameMenu);
 
-            this.Controls.Add(_home);
+            // Remove grid
+            for (int i = 0; i < 20; i++)
+                for (int j = 0; j < 32; j++)
+                    this.Controls.Remove(_grid[i, j]);
+
+            // Remove window elements
+            this.Controls.Remove(_actionMenu);
+            this.Controls.Remove(_infoBox);
+            this.Controls.Remove(_scenarioBox);
+            this.Controls.Remove(_stats);
+            this.Controls.Remove(_eventFlux);
+
+            // Show HomePage
             _home.Show();
+            gleipnir_logo.Show();
         }
 
         // Stats Methods
@@ -1028,23 +1050,6 @@ namespace GamePages
                 actionState = ActionState.None;
             }
         }
-        /*public void OnBoughtHouse_Click()
-        {
-            if (!_actionMenu.IsOnBought && actionState == ActionState.None)
-            {
-                _actionMenu.IsOnBought = true;
-                actionState = ActionState.InPlace;
-                ShowValidPlaces();
-                UpdateGrid(_board, _grid);
-            }
-            else
-            {
-                HideValidPlaces();
-                UpdateGrid(_board, _grid);
-                _actionMenu.IsOnBought = false;
-                actionState = ActionState.None;
-            }
-        }*/
 
         // InGameButton Method
         public void OnClickMenu()
@@ -1052,11 +1057,13 @@ namespace GamePages
             if (_gameMenu.IsOpen)
             {
                 _gameMenu.Hide();
+                UnLockEverything();
                 _gameMenu.IsOpen = false;
             }
             else
             {
                 _gameMenu.Show();
+                LockEverything();
                 _gameMenu.IsOpen = true;
             }
         }

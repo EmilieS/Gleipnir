@@ -17,14 +17,16 @@ namespace GamePages
         public event PropertyChangedEventHandler ExpectGoBackToMenu;
         bool _goBack;
         bool _isMenuOpen;
+        GeneralPage _page;
 
-        public InGameMenu()
+        public InGameMenu(GeneralPage page)
         {
             _goBack = false;
+            _page = page;
             InitializeComponent();
         }
 
-        // Back to main menu event
+        // Back to main menu
         public void GoBack_Click(object sender, EventArgs e)
         {
             GoBackExpected = true;
@@ -34,6 +36,12 @@ namespace GamePages
         {
             var h = ExpectGoBackToMenu;
             if (h != null) h(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        // Back to game
+        public void InGameQuit_Click(object sender, EventArgs e)
+        {
+            _page.OnClickMenu();
         }
 
         /// <summary>
