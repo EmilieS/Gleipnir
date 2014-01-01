@@ -136,11 +136,17 @@
   <data name="testPic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\testPic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Tailleur1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tailleur1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Sablier2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sablier2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ActionTab_building_background1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ActionTab_building_background1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Moulin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Moulin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Caducee" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Caducee.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,20 +157,17 @@
   <data name="Gold" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Gold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Index_Buildings" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Index_Buildings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Population" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Population.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="GeneralPage_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GeneralPage_background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Error" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Index_Buildings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Index_Buildings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="emptyPic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\emptyPic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Enclume" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Enclume.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="carte" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\carte.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,11 +175,11 @@
   <data name="logo_lava_salpha" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo_lava_salpha.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Moulin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Moulin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="emptyPic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\emptyPic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Enclume" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Enclume.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Error" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Loading_Text" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Loading_Text.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -187,7 +190,7 @@
   <data name="LoadingUC" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LoadingUC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Tailleur1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Tailleur1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Faith" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Faith.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

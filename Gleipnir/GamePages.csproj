@@ -238,6 +238,7 @@
     <Content Include="Resources\Extra\firstNameList.txt" />
     <Content Include="Resources\Extra\nameList.txt" />
     <Content Include="Resources\Extra\scenario.txt" />
+    <None Include="Resources\Faith.png" />
     <Content Include="Resources\firstNameList.txt" />
     <None Include="Resources\Gold.png" />
     <None Include="Resources\InformationUC_background.png" />
