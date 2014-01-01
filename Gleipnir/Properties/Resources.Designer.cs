@@ -163,6 +163,16 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Ferme {
+            get {
+                object obj = ResourceManager.GetObject("Ferme", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GeneralPage_background {
             get {
                 object obj = ResourceManager.GetObject("GeneralPage_background", resourceCulture);
@@ -256,6 +266,36 @@ namespace GamePages.Properties {
         internal static System.Drawing.Bitmap Population {
             get {
                 object obj = ResourceManager.GetObject("Population", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Restaurant {
+            get {
+                object obj = ResourceManager.GetObject("Restaurant", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Restaurant2 {
+            get {
+                object obj = ResourceManager.GetObject("Restaurant2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Restaurant21 {
+            get {
+                object obj = ResourceManager.GetObject("Restaurant21", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

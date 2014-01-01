@@ -221,13 +221,13 @@
             // 
             // Farm
             // 
+            this.Farm.BackgroundImage = global::GamePages.Properties.Resources.Ferme;
             this.Farm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Farm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Farm.Location = new System.Drawing.Point(131, 43);
             this.Farm.Name = "Farm";
             this.Farm.Size = new System.Drawing.Size(45, 40);
             this.Farm.TabIndex = 10;
-            this.Farm.Text = "Ferme";
             this.Farm.UseVisualStyleBackColor = true;
             // 
             // UnionOfCrafter
@@ -254,13 +254,13 @@
             // 
             // Restaurant
             // 
-            this.Restaurant.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Restaurant.BackgroundImage = global::GamePages.Properties.Resources.Restaurant21;
+            this.Restaurant.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Restaurant.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Restaurant.Location = new System.Drawing.Point(80, 89);
             this.Restaurant.Name = "Restaurant";
             this.Restaurant.Size = new System.Drawing.Size(45, 40);
             this.Restaurant.TabIndex = 7;
-            this.Restaurant.Text = "Restaurant";
             this.Restaurant.UseVisualStyleBackColor = true;
             // 
             // Theater

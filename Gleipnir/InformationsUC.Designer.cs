@@ -57,11 +57,11 @@
             this.offeringsPoints.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.offeringsPoints.AutoSize = true;
             this.offeringsPoints.BackColor = System.Drawing.Color.Transparent;
-            this.offeringsPoints.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.offeringsPoints.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.offeringsPoints.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.offeringsPoints.Location = new System.Drawing.Point(485, 6);
             this.offeringsPoints.Name = "offeringsPoints";
-            this.offeringsPoints.Size = new System.Drawing.Size(118, 19);
+            this.offeringsPoints.Size = new System.Drawing.Size(130, 19);
             this.offeringsPoints.TabIndex = 19;
             this.offeringsPoints.Text = "Points d\'Offrande";
             // 
@@ -70,11 +70,11 @@
             this.happinessVillage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.happinessVillage.AutoSize = true;
             this.happinessVillage.BackColor = System.Drawing.Color.Transparent;
-            this.happinessVillage.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.happinessVillage.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.happinessVillage.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.happinessVillage.Location = new System.Drawing.Point(395, 6);
             this.happinessVillage.Name = "happinessVillage";
-            this.happinessVillage.Size = new System.Drawing.Size(62, 19);
+            this.happinessVillage.Size = new System.Drawing.Size(68, 19);
             this.happinessVillage.TabIndex = 18;
             this.happinessVillage.Text = "Bonheur";
             // 
@@ -83,11 +83,11 @@
             this.faithVillage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.faithVillage.AutoSize = true;
             this.faithVillage.BackColor = System.Drawing.Color.Transparent;
-            this.faithVillage.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.faithVillage.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.faithVillage.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.faithVillage.Location = new System.Drawing.Point(305, 7);
             this.faithVillage.Name = "faithVillage";
-            this.faithVillage.Size = new System.Drawing.Size(27, 19);
+            this.faithVillage.Size = new System.Drawing.Size(29, 19);
             this.faithVillage.TabIndex = 17;
             this.faithVillage.Text = "Foi";
             // 
@@ -96,11 +96,11 @@
             this.population.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.population.AutoSize = true;
             this.population.BackColor = System.Drawing.Color.Transparent;
-            this.population.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.population.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.population.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.population.Location = new System.Drawing.Point(215, 7);
             this.population.Name = "population";
-            this.population.Size = new System.Drawing.Size(75, 19);
+            this.population.Size = new System.Drawing.Size(84, 19);
             this.population.TabIndex = 16;
             this.population.Text = "Population";
             // 
@@ -110,11 +110,11 @@
             this.goldVillage.AutoSize = true;
             this.goldVillage.BackColor = System.Drawing.Color.Transparent;
             this.goldVillage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.goldVillage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.goldVillage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.goldVillage.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.goldVillage.Location = new System.Drawing.Point(126, 7);
             this.goldVillage.Name = "goldVillage";
-            this.goldVillage.Size = new System.Drawing.Size(24, 17);
+            this.goldVillage.Size = new System.Drawing.Size(26, 17);
             this.goldVillage.TabIndex = 15;
             this.goldVillage.Text = "Or";
             // 
@@ -124,22 +124,22 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.villageName.AutoSize = true;
             this.villageName.BackColor = System.Drawing.Color.Transparent;
-            this.villageName.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.villageName.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.villageName.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.villageName.Location = new System.Drawing.Point(18, 3);
             this.villageName.Name = "villageName";
-            this.villageName.Size = new System.Drawing.Size(61, 21);
+            this.villageName.Size = new System.Drawing.Size(64, 21);
             this.villageName.TabIndex = 12;
             this.villageName.Text = "Ragnar";
             this.villageName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // StepByStep
             // 
-            this.StepByStep.Location = new System.Drawing.Point(913, 6);
+            this.StepByStep.Location = new System.Drawing.Point(952, 6);
             this.StepByStep.Name = "StepByStep";
-            this.StepByStep.Size = new System.Drawing.Size(79, 21);
+            this.StepByStep.Size = new System.Drawing.Size(40, 21);
             this.StepByStep.TabIndex = 21;
-            this.StepByStep.Text = "Step by Step";
+            this.StepByStep.Text = "Step";
             this.StepByStep.UseVisualStyleBackColor = true;
             this.StepByStep.Visible = false;
             this.StepByStep.Click += new System.EventHandler(this.StepByStep_Click);
@@ -166,11 +166,11 @@
             // 
             this.TaxAmountValue.AutoSize = true;
             this.TaxAmountValue.BackColor = System.Drawing.Color.Transparent;
-            this.TaxAmountValue.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TaxAmountValue.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TaxAmountValue.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.TaxAmountValue.Location = new System.Drawing.Point(791, 7);
             this.TaxAmountValue.Name = "TaxAmountValue";
-            this.TaxAmountValue.Size = new System.Drawing.Size(77, 19);
+            this.TaxAmountValue.Size = new System.Drawing.Size(82, 19);
             this.TaxAmountValue.TabIndex = 23;
             this.TaxAmountValue.Text = "Quantité : ";
             // 
@@ -210,11 +210,9 @@
             // 
             // menuButton
             // 
-            this.menuButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.menuButton.BackColor = System.Drawing.Color.Transparent;
             this.menuButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("menuButton.BackgroundImage")));
-            this.menuButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuButton.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.menuButton.Location = new System.Drawing.Point(1032, 3);
             this.menuButton.Name = "menuButton";

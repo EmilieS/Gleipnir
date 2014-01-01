@@ -239,6 +239,7 @@
     <Content Include="Resources\Extra\nameList.txt" />
     <Content Include="Resources\Extra\scenario.txt" />
     <None Include="Resources\Faith.png" />
+    <None Include="Resources\Ferme.png" />
     <Content Include="Resources\firstNameList.txt" />
     <None Include="Resources\Gold.png" />
     <None Include="Resources\InformationUC_background.png" />
@@ -257,6 +258,8 @@
     <None Include="Resources\Sablier2.png" />
     <None Include="Resources\Tailleur.png" />
     <None Include="Resources\Tailleur1.png" />
+    <None Include="Resources\Restaurant.png" />
+    <None Include="Resources\Restaurant2.png" />
     <Content Include="Resources\testPic.png" />
     <Content Include="Resources\scenario.txt" />
   </ItemGroup>
