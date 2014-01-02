@@ -41,13 +41,13 @@
             this.goldIcon = new System.Windows.Forms.PictureBox();
             this.happinessIcon = new System.Windows.Forms.PictureBox();
             this.buildingIcon = new System.Windows.Forms.PictureBox();
-            this.familyMembers = new System.Windows.Forms.PictureBox();
+            this.membersIcon = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.buildingHealthIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.faithIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.goldIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.happinessIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buildingIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.familyMembers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.membersIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // ElementName
@@ -186,14 +186,14 @@
             this.buildingIcon.TabIndex = 17;
             this.buildingIcon.TabStop = false;
             // 
-            // familyMembers
+            // membersIcon
             // 
-            this.familyMembers.BackgroundImage = global::GamePages.Properties.Resources.HumanMembers;
-            this.familyMembers.Location = new System.Drawing.Point(96, 71);
-            this.familyMembers.Name = "familyMembers";
-            this.familyMembers.Size = new System.Drawing.Size(20, 20);
-            this.familyMembers.TabIndex = 18;
-            this.familyMembers.TabStop = false;
+            this.membersIcon.BackgroundImage = global::GamePages.Properties.Resources.HumanMembers;
+            this.membersIcon.Location = new System.Drawing.Point(96, 71);
+            this.membersIcon.Name = "membersIcon";
+            this.membersIcon.Size = new System.Drawing.Size(20, 20);
+            this.membersIcon.TabIndex = 18;
+            this.membersIcon.TabStop = false;
             // 
             // InformationBox
             // 
@@ -201,7 +201,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = global::GamePages.Properties.Resources.InformationBox_house_background;
-            this.Controls.Add(this.familyMembers);
+            this.Controls.Add(this.membersIcon);
             this.Controls.Add(this.buildingIcon);
             this.Controls.Add(this.happinessIcon);
             this.Controls.Add(this.goldIcon);
@@ -224,7 +224,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.goldIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.happinessIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buildingIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.familyMembers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.membersIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,6 +245,6 @@
         private System.Windows.Forms.PictureBox goldIcon;
         private System.Windows.Forms.PictureBox happinessIcon;
         private System.Windows.Forms.PictureBox buildingIcon;
-        private System.Windows.Forms.PictureBox familyMembers;
+        private System.Windows.Forms.PictureBox membersIcon;
     }
 }

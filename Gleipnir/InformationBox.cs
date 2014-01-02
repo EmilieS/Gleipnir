@@ -40,20 +40,21 @@ namespace GamePages
                 // InfoBox Texts
                 Title.Visible = true;
                 Title.Text = "Famille";
-                NameView.Visible = true;
-                NameView.Text = "Nom :";
                 ElementName.Visible = true;
                 ElementName.Text = family.Name;
-                GoldView.Visible = true;
+                goldIcon.Visible = true;
                 Gold.Visible = true;
                 Gold.Text = family.GoldStash.ToString();
-                FaithView.Visible = true;
+                faithIcon.Visible = true;
                 Faith.Visible = true;
                 Faith.Text = family.FaithAverageValue.ToString();
-                MemberView.Visible = true;
+                membersIcon.Visible = true;
                 NbMembers.Visible = true;
                 NbMembers.Text = family.FamilyMembers.Count.ToString();
-                buildingHP.Visible = true;
+                happinessIcon.Visible = true;
+                Happiness.Visible = true;
+                Happiness.Text = family.HappinessAverageValue.ToString();
+                buildingHealthIcon.Visible = true;
                 buildingLife.Visible = true;
                 buildingLife.Text = family.House.Hp.ToString();
 
@@ -72,15 +73,16 @@ namespace GamePages
             // InfoBox Texts
             Title.Visible = true;
             Title.Text = "Maison Vide";
-            NameView.Visible = false;
             ElementName.Visible = false;
-            GoldView.Visible = false;
+            goldIcon.Visible = false;
             Gold.Visible = false;
-            FaithView.Visible = false;
+            faithIcon.Visible = false;
             Faith.Visible = false;
-            MemberView.Visible = false;
+            happinessIcon.Visible = false;
+            Happiness.Visible = false;
+            membersIcon.Visible = false;
             NbMembers.Visible = false;
-            buildingHP.Visible = true;
+            buildingHealthIcon.Visible = true;
             buildingLife.Visible = true;
             buildingLife.Text = house.Hp.ToString();
 
@@ -98,18 +100,18 @@ namespace GamePages
                 // InfoBox Texts
                 Title.Visible = true;
                 Title.Text = job.Building.Name;
-                NameView.Visible = true;
-                NameView.Text = "Métier :";
                 ElementName.Visible = true;
                 ElementName.Text = job.Name;
-                GoldView.Visible = false;
+                goldIcon.Visible = false;
                 Gold.Visible = false;
-                FaithView.Visible = false;
+                faithIcon.Visible = false;
                 Faith.Visible = false;
-                MemberView.Visible = true;
+                happinessIcon.Visible = false;
+                Happiness.Visible = false;
+                membersIcon.Visible = true;
                 NbMembers.Visible = true;
                 NbMembers.Text = job.Workers.Count.ToString();
-                buildingHP.Visible = true;
+                buildingHealthIcon.Visible = true;
                 buildingLife.Visible = true;
                 buildingLife.Text = job.Building.Hp.ToString();
 
@@ -132,15 +134,16 @@ namespace GamePages
             // InfoBox Texts
             Title.Visible = true;
             Title.Text = table.Name;
-            NameView.Visible = false;
             ElementName.Visible = false;
-            GoldView.Visible = false;
+            goldIcon.Visible = false;
             Gold.Visible = false;
-            FaithView.Visible = false;
+            faithIcon.Visible = false;
             Faith.Visible = false;
-            MemberView.Visible = false;
+            happinessIcon.Visible = false;
+            Happiness.Visible = false;
+            membersIcon.Visible = false;
             NbMembers.Visible = false;
-            buildingHP.Visible = true;
+            buildingHealthIcon.Visible = true;
             buildingLife.Visible = true;
             buildingLife.Text = table.Hp.ToString();
 
@@ -157,15 +160,16 @@ namespace GamePages
             // InfoBox Texts
             Title.Visible = true;
             Title.Text = building.Name;
-            NameView.Visible = false;
             ElementName.Visible = false;
-            GoldView.Visible = false;
+            goldIcon.Visible = false;
             Gold.Visible = false;
-            FaithView.Visible = false;
+            faithIcon.Visible = false;
             Faith.Visible = false;
-            MemberView.Visible = false;
+            happinessIcon.Visible = false;
+            Happiness.Visible = false;
+            membersIcon.Visible = false;
             NbMembers.Visible = false;
-            buildingHP.Visible = true;
+            buildingHealthIcon.Visible = true;
             buildingLife.Visible = true;
             buildingLife.Text = building.Hp.ToString();
 
@@ -181,16 +185,17 @@ namespace GamePages
             // InfoBox Texts
             Title.Visible = true;
             Title.Text = "Bâtiment détruit";
-            NameView.Visible = false;
             ElementName.Visible = true;
             ElementName.Text = building.Name;
-            GoldView.Visible = false;
+            goldIcon.Visible = false;
             Gold.Visible = false;
-            FaithView.Visible = false;
+            faithIcon.Visible = false;
             Faith.Visible = false;
-            MemberView.Visible = false;
+            happinessIcon.Visible = false;
+            Happiness.Visible = false;
+            membersIcon.Visible = false;
             NbMembers.Visible = false;
-            buildingHP.Visible = false;
+            buildingHealthIcon.Visible = false;
             buildingLife.Visible = false;
 
             // Action Tab infos
@@ -204,15 +209,16 @@ namespace GamePages
         {
             // InfoBox Texts
             Title.Visible = false;
-            NameView.Visible = false;
             ElementName.Visible = false;
-            GoldView.Visible = false;
+            goldIcon.Visible = false;
             Gold.Visible = false;
-            FaithView.Visible = false;
+            faithIcon.Visible = false;
             Faith.Visible = false;
-            MemberView.Visible = false;
+            happinessIcon.Visible = false;
+            Happiness.Visible = false;
+            membersIcon.Visible = false;
             NbMembers.Visible = false;
-            buildingHP.Visible = false;
+            buildingHealthIcon.Visible = false;
             buildingLife.Visible = false;
 
             // Action Tab infos
