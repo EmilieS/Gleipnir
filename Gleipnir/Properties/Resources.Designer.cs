@@ -153,6 +153,16 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EventFlux_background {
+            get {
+                object obj = ResourceManager.GetObject("EventFlux_background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Faith {
             get {
                 object obj = ResourceManager.GetObject("Faith", resourceCulture);
@@ -166,6 +176,16 @@ namespace GamePages.Properties {
         internal static System.Drawing.Bitmap Ferme {
             get {
                 object obj = ResourceManager.GetObject("Ferme", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GameEventUC_backgroung {
+            get {
+                object obj = ResourceManager.GetObject("GameEventUC_backgroung", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,9 +213,49 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Happiness {
+            get {
+                object obj = ResourceManager.GetObject("Happiness", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HealthPoints {
+            get {
+                object obj = ResourceManager.GetObject("HealthPoints", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HumanMembers {
+            get {
+                object obj = ResourceManager.GetObject("HumanMembers", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Index_Buildings {
             get {
                 object obj = ResourceManager.GetObject("Index_Buildings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap InformationBox_house_background {
+            get {
+                object obj = ResourceManager.GetObject("InformationBox_house_background", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

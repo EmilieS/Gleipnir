@@ -40,16 +40,18 @@
             this.TaxAmount = new System.Windows.Forms.TrackBar();
             this.TaxAmountValue = new System.Windows.Forms.Label();
             this.StepBy50 = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.populationIcon = new System.Windows.Forms.PictureBox();
+            this.goldIcon = new System.Windows.Forms.PictureBox();
             this.menuButton = new System.Windows.Forms.Button();
             this.villageBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.faithIcon = new System.Windows.Forms.PictureBox();
+            this.happinessIcon = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.TaxAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.populationIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.goldIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.villageBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.faithIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.happinessIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // offeringsPoints
@@ -112,7 +114,7 @@
             this.goldVillage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.goldVillage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.goldVillage.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.goldVillage.Location = new System.Drawing.Point(126, 7);
+            this.goldVillage.Location = new System.Drawing.Point(126, 8);
             this.goldVillage.Name = "goldVillage";
             this.goldVillage.Size = new System.Drawing.Size(26, 17);
             this.goldVillage.TabIndex = 15;
@@ -126,7 +128,7 @@
             this.villageName.BackColor = System.Drawing.Color.Transparent;
             this.villageName.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.villageName.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.villageName.Location = new System.Drawing.Point(18, 3);
+            this.villageName.Location = new System.Drawing.Point(18, 5);
             this.villageName.Name = "villageName";
             this.villageName.Size = new System.Drawing.Size(64, 21);
             this.villageName.TabIndex = 12;
@@ -184,29 +186,29 @@
             this.StepBy50.UseVisualStyleBackColor = true;
             this.StepBy50.Click += new System.EventHandler(this.StepX50_Click);
             // 
-            // pictureBox2
+            // populationIcon
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.BackgroundImage = global::GamePages.Properties.Resources.emptyPic;
-            this.pictureBox2.ErrorImage = global::GamePages.Properties.Resources.Error;
-            this.pictureBox2.Image = global::GamePages.Properties.Resources.Population;
-            this.pictureBox2.Location = new System.Drawing.Point(192, 7);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox2.TabIndex = 26;
-            this.pictureBox2.TabStop = false;
+            this.populationIcon.BackColor = System.Drawing.Color.Transparent;
+            this.populationIcon.BackgroundImage = global::GamePages.Properties.Resources.emptyPic;
+            this.populationIcon.ErrorImage = global::GamePages.Properties.Resources.Error;
+            this.populationIcon.Image = global::GamePages.Properties.Resources.Population;
+            this.populationIcon.Location = new System.Drawing.Point(192, 7);
+            this.populationIcon.Name = "populationIcon";
+            this.populationIcon.Size = new System.Drawing.Size(20, 20);
+            this.populationIcon.TabIndex = 26;
+            this.populationIcon.TabStop = false;
             // 
-            // pictureBox1
+            // goldIcon
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImage = global::GamePages.Properties.Resources.emptyPic;
-            this.pictureBox1.ErrorImage = global::GamePages.Properties.Resources.Error;
-            this.pictureBox1.Image = global::GamePages.Properties.Resources.Gold;
-            this.pictureBox1.Location = new System.Drawing.Point(102, 7);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox1.TabIndex = 25;
-            this.pictureBox1.TabStop = false;
+            this.goldIcon.BackColor = System.Drawing.Color.Transparent;
+            this.goldIcon.BackgroundImage = global::GamePages.Properties.Resources.emptyPic;
+            this.goldIcon.ErrorImage = global::GamePages.Properties.Resources.Error;
+            this.goldIcon.Image = global::GamePages.Properties.Resources.Gold;
+            this.goldIcon.Location = new System.Drawing.Point(102, 7);
+            this.goldIcon.Name = "goldIcon";
+            this.goldIcon.Size = new System.Drawing.Size(20, 20);
+            this.goldIcon.TabIndex = 25;
+            this.goldIcon.TabStop = false;
             // 
             // menuButton
             // 
@@ -225,24 +227,35 @@
             // 
             this.villageBindingSource.DataSource = typeof(Game.Village);
             // 
-            // pictureBox3
+            // faithIcon
             // 
-            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox3.BackgroundImage = global::GamePages.Properties.Resources.Faith;
-            this.pictureBox3.Location = new System.Drawing.Point(282, 7);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox3.TabIndex = 27;
-            this.pictureBox3.TabStop = false;
+            this.faithIcon.BackColor = System.Drawing.Color.Transparent;
+            this.faithIcon.BackgroundImage = global::GamePages.Properties.Resources.Faith;
+            this.faithIcon.Location = new System.Drawing.Point(282, 7);
+            this.faithIcon.Name = "faithIcon";
+            this.faithIcon.Size = new System.Drawing.Size(20, 20);
+            this.faithIcon.TabIndex = 27;
+            this.faithIcon.TabStop = false;
+            // 
+            // happinessIcon
+            // 
+            this.happinessIcon.BackColor = System.Drawing.Color.Transparent;
+            this.happinessIcon.BackgroundImage = global::GamePages.Properties.Resources.Happiness;
+            this.happinessIcon.Location = new System.Drawing.Point(371, 7);
+            this.happinessIcon.Name = "happinessIcon";
+            this.happinessIcon.Size = new System.Drawing.Size(20, 20);
+            this.happinessIcon.TabIndex = 28;
+            this.happinessIcon.TabStop = false;
             // 
             // InformationsUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::GamePages.Properties.Resources.InformationUC_background;
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.happinessIcon);
+            this.Controls.Add(this.faithIcon);
+            this.Controls.Add(this.populationIcon);
+            this.Controls.Add(this.goldIcon);
             this.Controls.Add(this.StepBy50);
             this.Controls.Add(this.TaxAmountValue);
             this.Controls.Add(this.TaxAmount);
@@ -257,10 +270,11 @@
             this.Name = "InformationsUC";
             this.Size = new System.Drawing.Size(1140, 35);
             ((System.ComponentModel.ISupportInitialize)(this.TaxAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.populationIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.goldIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.villageBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.faithIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.happinessIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,8 +294,9 @@
         private System.Windows.Forms.BindingSource villageBindingSource;
         internal System.Windows.Forms.Label TaxAmountValue;
         internal System.Windows.Forms.Button StepBy50;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox goldIcon;
+        private System.Windows.Forms.PictureBox populationIcon;
+        private System.Windows.Forms.PictureBox faithIcon;
+        private System.Windows.Forms.PictureBox happinessIcon;
     }
 }

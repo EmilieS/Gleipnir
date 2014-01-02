@@ -30,34 +30,57 @@
         {
             this.EventTitle = new System.Windows.Forms.Label();
             this.EventContain = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // EventTitle
             // 
             this.EventTitle.AutoSize = true;
-            this.EventTitle.Location = new System.Drawing.Point(4, 4);
+            this.EventTitle.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EventTitle.ForeColor = System.Drawing.Color.Maroon;
+            this.EventTitle.Location = new System.Drawing.Point(76, 5);
             this.EventTitle.Name = "EventTitle";
-            this.EventTitle.Size = new System.Drawing.Size(61, 13);
+            this.EventTitle.Size = new System.Drawing.Size(85, 19);
             this.EventTitle.TabIndex = 0;
             this.EventTitle.Text = "Evenement";
             // 
             // EventContain
             // 
             this.EventContain.AutoSize = true;
-            this.EventContain.Location = new System.Drawing.Point(4, 27);
+            this.EventContain.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EventContain.ForeColor = System.Drawing.Color.Navy;
+            this.EventContain.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.EventContain.Location = new System.Drawing.Point(14, 26);
             this.EventContain.Name = "EventContain";
-            this.EventContain.Size = new System.Drawing.Size(74, 13);
+            this.EventContain.Size = new System.Drawing.Size(84, 15);
             this.EventContain.TabIndex = 1;
             this.EventContain.Text = "Blah blah blah";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Navy;
+            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label1.Location = new System.Drawing.Point(14, 43);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 15);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Blah blah blah";
             // 
             // GameEventUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
+            this.BackgroundImage = global::GamePages.Properties.Resources.GameEventUC_backgroung;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.EventTitle);
             this.Controls.Add(this.EventContain);
+            this.DoubleBuffered = true;
             this.Name = "GameEventUC";
-            this.Size = new System.Drawing.Size(250, 80);
+            this.Size = new System.Drawing.Size(240, 65);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -67,5 +90,6 @@
 
         internal System.Windows.Forms.Label EventTitle;
         internal System.Windows.Forms.Label EventContain;
+        internal System.Windows.Forms.Label label1;
     }
 }

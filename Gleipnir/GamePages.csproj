@@ -235,6 +235,7 @@
     <None Include="Resources\Caducee.png" />
     <None Include="Resources\Enclume.png" />
     <None Include="Resources\ActionTab_building_background1.png" />
+    <None Include="Resources\EventFlux_background.png" />
     <Content Include="Resources\Extra\firstNameList.txt" />
     <Content Include="Resources\Extra\nameList.txt" />
     <Content Include="Resources\Extra\scenario.txt" />
@@ -250,6 +251,11 @@
     <None Include="Resources\Marteau.png" />
     <None Include="Resources\Moulin.png" />
     <None Include="Resources\Index_Buildings.png" />
+    <None Include="Resources\GameEventUC_backgroung.png" />
+    <None Include="Resources\InformationBox_house_background.png" />
+    <None Include="Resources\HealthPoints.png" />
+    <None Include="Resources\Happiness.png" />
+    <None Include="Resources\HumanMembers.png" />
     <Content Include="Resources\nameList.txt" />
     <Content Include="Resources\carte.png" />
     <Content Include="Resources\emptyPic.png" />

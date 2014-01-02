@@ -165,7 +165,7 @@ namespace GamePages
             #endregion
 
             #region EventBox tests
-            /*PushAlert("coucoudfghjkjhgfd", "coucou1");
+            PushAlert("coucoudfghjkjhgfd", "coucou1");
             PushAlert("coucou2546", "coucou2");
             PushAlert("coucou4543", "coucou3");
             PushAlert("coucou44545", "coucou4");
@@ -177,7 +177,7 @@ namespace GamePages
             PushAlert("coucou10", "coucou");
             PushAlert("coucou11", "coucou");
             PushAlert("coucou12", "coucou");
-            PushAlert("coucou", "coucou");
+            /*PushAlert("coucou", "coucou");
             PushAlert("coucou", "coucou");
             PushAlert("coucou", "coucou");*/
             #endregion
