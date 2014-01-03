@@ -24,11 +24,21 @@ namespace GamePages
 
         public TabIndex(GeneralPage p)
         {
+            InitializeComponent();
+
             _page = p;
             _isOnBought = false;
-            InitializeComponent();
+
             positionX = 0;
             positionY = 0;
+            
+            // Create imageList
+            ImageList imageList = new ImageList();
+            imageList.Images.Add(GamePages.Properties.Resources.Building_House);
+            
+            // Add images to tabs
+            actionsMenu.ImageList = imageList;
+            actionsMenu.TabPages[0].ImageIndex = 0;
 
             #region Jobs
             ApothecaryOffice.Click += ApothicaryOffice_Click;

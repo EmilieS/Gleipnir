@@ -24,7 +24,9 @@ namespace GamePages
         public static readonly Color WaterBackColorDefault = Color.FromArgb(30, 170, 200);
         public static readonly Color RoadBackColorDefault = Color.FromArgb(70, 70, 70);
         public static readonly Color TableBackColorDefault = Color.FromArgb(175, 70, 0);
-        public static readonly Color FarmFieldBackColorDefault = Color.FromArgb(255, 213, 20);
+        public static readonly Color FarmFieldBackColorDefault = Color.FromArgb(240, 210, 20);
+        //public static readonly Color FarmFieldBackColorDefault = Color.FromArgb(180, 100, 25); // Marron
+        //public static readonly Color FarmFieldBackColorDefault = Color.FromArgb(255, 240, 120); // Jaune Pale
         public static readonly Color HouseBackColorDefault = Color.FromArgb(175, 0, 0);
         public static readonly Color JobsBackColorDefault = Color.FromArgb(200, 200, 200);
         public static readonly Color HobbyBackColorDefault = Color.FromArgb(255, 150, 150);

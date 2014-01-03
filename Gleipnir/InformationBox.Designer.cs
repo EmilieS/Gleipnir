@@ -28,97 +28,83 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.NameView = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InformationBox));
             this.ElementName = new System.Windows.Forms.Label();
-            this.GoldView = new System.Windows.Forms.Label();
             this.Gold = new System.Windows.Forms.Label();
-            this.FaithView = new System.Windows.Forms.Label();
             this.Faith = new System.Windows.Forms.Label();
-            this.MemberView = new System.Windows.Forms.Label();
             this.NbMembers = new System.Windows.Forms.Label();
             this.GodMeeting = new System.Windows.Forms.Button();
             this.Title = new System.Windows.Forms.Label();
             this.buildingLife = new System.Windows.Forms.Label();
-            this.buildingHP = new System.Windows.Forms.Label();
+            this.Happiness = new System.Windows.Forms.Label();
+            this.buildingHealthIcon = new System.Windows.Forms.PictureBox();
+            this.faithIcon = new System.Windows.Forms.PictureBox();
+            this.goldIcon = new System.Windows.Forms.PictureBox();
+            this.happinessIcon = new System.Windows.Forms.PictureBox();
+            this.buildingIcon = new System.Windows.Forms.PictureBox();
+            this.membersIcon = new System.Windows.Forms.PictureBox();
+            this.objectName = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.buildingHealthIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.faithIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.goldIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.happinessIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buildingIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.membersIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectName)).BeginInit();
             this.SuspendLayout();
-            // 
-            // NameView
-            // 
-            this.NameView.AutoSize = true;
-            this.NameView.Location = new System.Drawing.Point(94, 37);
-            this.NameView.Name = "NameView";
-            this.NameView.Size = new System.Drawing.Size(41, 13);
-            this.NameView.TabIndex = 0;
-            this.NameView.Text = "Nom  : ";
             // 
             // ElementName
             // 
             this.ElementName.AutoSize = true;
-            this.ElementName.Location = new System.Drawing.Point(136, 37);
+            this.ElementName.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ElementName.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ElementName.Location = new System.Drawing.Point(95, 43);
             this.ElementName.Name = "ElementName";
-            this.ElementName.Size = new System.Drawing.Size(34, 13);
+            this.ElementName.Size = new System.Drawing.Size(78, 15);
             this.ElementName.TabIndex = 1;
-            this.ElementName.Text = "Value";
-            // 
-            // GoldView
-            // 
-            this.GoldView.AutoSize = true;
-            this.GoldView.Location = new System.Drawing.Point(108, 50);
-            this.GoldView.Name = "GoldView";
-            this.GoldView.Size = new System.Drawing.Size(24, 13);
-            this.GoldView.TabIndex = 2;
-            this.GoldView.Text = "Or :";
+            this.ElementName.Text = "FamilyName";
             // 
             // Gold
             // 
             this.Gold.AutoSize = true;
-            this.Gold.Location = new System.Drawing.Point(136, 50);
+            this.Gold.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Gold.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Gold.Location = new System.Drawing.Point(35, 74);
             this.Gold.Name = "Gold";
-            this.Gold.Size = new System.Drawing.Size(34, 13);
+            this.Gold.Size = new System.Drawing.Size(34, 15);
             this.Gold.TabIndex = 3;
-            this.Gold.Text = "Value";
-            // 
-            // FaithView
-            // 
-            this.FaithView.AutoSize = true;
-            this.FaithView.Location = new System.Drawing.Point(106, 63);
-            this.FaithView.Name = "FaithView";
-            this.FaithView.Size = new System.Drawing.Size(30, 13);
-            this.FaithView.TabIndex = 4;
-            this.FaithView.Text = "Foi : ";
+            this.Gold.Text = "Gold";
             // 
             // Faith
             // 
             this.Faith.AutoSize = true;
-            this.Faith.Location = new System.Drawing.Point(136, 63);
+            this.Faith.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Faith.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Faith.Location = new System.Drawing.Point(35, 105);
             this.Faith.Name = "Faith";
-            this.Faith.Size = new System.Drawing.Size(34, 13);
+            this.Faith.Size = new System.Drawing.Size(35, 15);
             this.Faith.TabIndex = 5;
-            this.Faith.Text = "Value";
-            // 
-            // MemberView
-            // 
-            this.MemberView.AutoSize = true;
-            this.MemberView.Location = new System.Drawing.Point(22, 76);
-            this.MemberView.Name = "MemberView";
-            this.MemberView.Size = new System.Drawing.Size(111, 13);
-            this.MemberView.TabIndex = 6;
-            this.MemberView.Text = "Nombre de Membres :";
+            this.Faith.Text = "Faith";
             // 
             // NbMembers
             // 
             this.NbMembers.AutoSize = true;
-            this.NbMembers.Location = new System.Drawing.Point(136, 76);
+            this.NbMembers.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NbMembers.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.NbMembers.Location = new System.Drawing.Point(120, 74);
             this.NbMembers.Name = "NbMembers";
-            this.NbMembers.Size = new System.Drawing.Size(34, 13);
+            this.NbMembers.Size = new System.Drawing.Size(81, 15);
             this.NbMembers.TabIndex = 7;
-            this.NbMembers.Text = "Value";
+            this.NbMembers.Text = "NbMembers";
             // 
             // GodMeeting
             // 
-            this.GodMeeting.Location = new System.Drawing.Point(165, 112);
+            this.GodMeeting.BackgroundImage = global::GamePages.Properties.Resources.button_homepage;
+            this.GodMeeting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.GodMeeting.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.GodMeeting.Location = new System.Drawing.Point(177, 71);
             this.GodMeeting.Name = "GodMeeting";
-            this.GodMeeting.Size = new System.Drawing.Size(75, 23);
+            this.GodMeeting.Size = new System.Drawing.Size(86, 47);
             this.GodMeeting.TabIndex = 8;
             this.GodMeeting.Text = "Convocation";
             this.GodMeeting.UseVisualStyleBackColor = true;
@@ -127,50 +113,131 @@
             // Title
             // 
             this.Title.AutoSize = true;
-            this.Title.Location = new System.Drawing.Point(64, 13);
+            this.Title.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Title.ForeColor = System.Drawing.Color.Maroon;
+            this.Title.Location = new System.Drawing.Point(125, 10);
             this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(28, 13);
+            this.Title.Size = new System.Drawing.Size(65, 21);
             this.Title.TabIndex = 9;
-            this.Title.Text = "Titre";
+            this.Title.Text = "Maison";
             // 
             // buildingLife
             // 
             this.buildingLife.AutoSize = true;
-            this.buildingLife.Location = new System.Drawing.Point(136, 89);
+            this.buildingLife.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buildingLife.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buildingLife.Location = new System.Drawing.Point(213, 128);
             this.buildingLife.Name = "buildingLife";
-            this.buildingLife.Size = new System.Drawing.Size(34, 13);
+            this.buildingLife.Size = new System.Drawing.Size(67, 15);
             this.buildingLife.TabIndex = 11;
-            this.buildingLife.Text = "Value";
+            this.buildingLife.Text = "BuidingHP";
             // 
-            // buildingHP
+            // Happiness
             // 
-            this.buildingHP.AutoSize = true;
-            this.buildingHP.Location = new System.Drawing.Point(46, 89);
-            this.buildingHP.Name = "buildingHP";
-            this.buildingHP.Size = new System.Drawing.Size(87, 13);
-            this.buildingHP.TabIndex = 10;
-            this.buildingHP.Text = "Vie du Bâtiment :";
+            this.Happiness.AutoSize = true;
+            this.Happiness.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Happiness.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Happiness.Location = new System.Drawing.Point(120, 105);
+            this.Happiness.Name = "Happiness";
+            this.Happiness.Size = new System.Drawing.Size(68, 15);
+            this.Happiness.TabIndex = 12;
+            this.Happiness.Text = "Happiness";
+            // 
+            // buildingHealthIcon
+            // 
+            this.buildingHealthIcon.Image = global::GamePages.Properties.Resources.Building_HealthPoints;
+            this.buildingHealthIcon.Location = new System.Drawing.Point(189, 126);
+            this.buildingHealthIcon.Name = "buildingHealthIcon";
+            this.buildingHealthIcon.Size = new System.Drawing.Size(20, 20);
+            this.buildingHealthIcon.TabIndex = 13;
+            this.buildingHealthIcon.TabStop = false;
+            // 
+            // faithIcon
+            // 
+            this.faithIcon.Image = global::GamePages.Properties.Resources.Stats_Faith;
+            this.faithIcon.Location = new System.Drawing.Point(12, 102);
+            this.faithIcon.Name = "faithIcon";
+            this.faithIcon.Size = new System.Drawing.Size(20, 20);
+            this.faithIcon.TabIndex = 14;
+            this.faithIcon.TabStop = false;
+            // 
+            // goldIcon
+            // 
+            this.goldIcon.Image = global::GamePages.Properties.Resources.Stats_Gold;
+            this.goldIcon.Location = new System.Drawing.Point(11, 71);
+            this.goldIcon.Name = "goldIcon";
+            this.goldIcon.Size = new System.Drawing.Size(20, 20);
+            this.goldIcon.TabIndex = 15;
+            this.goldIcon.TabStop = false;
+            // 
+            // happinessIcon
+            // 
+            this.happinessIcon.Image = global::GamePages.Properties.Resources.Stats_Happiness;
+            this.happinessIcon.Location = new System.Drawing.Point(96, 102);
+            this.happinessIcon.Name = "happinessIcon";
+            this.happinessIcon.Size = new System.Drawing.Size(20, 20);
+            this.happinessIcon.TabIndex = 16;
+            this.happinessIcon.TabStop = false;
+            // 
+            // buildingIcon
+            // 
+            this.buildingIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buildingIcon.Location = new System.Drawing.Point(12, 10);
+            this.buildingIcon.Name = "buildingIcon";
+            this.buildingIcon.Size = new System.Drawing.Size(50, 50);
+            this.buildingIcon.TabIndex = 17;
+            this.buildingIcon.TabStop = false;
+            // 
+            // membersIcon
+            // 
+            this.membersIcon.Image = global::GamePages.Properties.Resources.Stats_Members;
+            this.membersIcon.Location = new System.Drawing.Point(96, 71);
+            this.membersIcon.Name = "membersIcon";
+            this.membersIcon.Size = new System.Drawing.Size(20, 20);
+            this.membersIcon.TabIndex = 18;
+            this.membersIcon.TabStop = false;
+            // 
+            // objectName
+            // 
+            this.objectName.Image = global::GamePages.Properties.Resources.Stats_ObjectName;
+            this.objectName.Location = new System.Drawing.Point(72, 40);
+            this.objectName.Name = "objectName";
+            this.objectName.Size = new System.Drawing.Size(20, 20);
+            this.objectName.TabIndex = 19;
+            this.objectName.TabStop = false;
             // 
             // InformationBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Info;
-            this.Controls.Add(this.buildingLife);
-            this.Controls.Add(this.buildingHP);
-            this.Controls.Add(this.Title);
+            this.BackColor = System.Drawing.Color.Transparent;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.Controls.Add(this.objectName);
+            this.Controls.Add(this.membersIcon);
+            this.Controls.Add(this.buildingIcon);
+            this.Controls.Add(this.happinessIcon);
+            this.Controls.Add(this.goldIcon);
+            this.Controls.Add(this.faithIcon);
+            this.Controls.Add(this.buildingHealthIcon);
             this.Controls.Add(this.GodMeeting);
+            this.Controls.Add(this.Happiness);
+            this.Controls.Add(this.buildingLife);
+            this.Controls.Add(this.Title);
             this.Controls.Add(this.NbMembers);
-            this.Controls.Add(this.MemberView);
             this.Controls.Add(this.Faith);
-            this.Controls.Add(this.FaithView);
             this.Controls.Add(this.Gold);
-            this.Controls.Add(this.GoldView);
             this.Controls.Add(this.ElementName);
-            this.Controls.Add(this.NameView);
+            this.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Location = new System.Drawing.Point(870, 450);
             this.Name = "InformationBox";
             this.Size = new System.Drawing.Size(270, 150);
+            ((System.ComponentModel.ISupportInitialize)(this.buildingHealthIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.faithIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.goldIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.happinessIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buildingIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.membersIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectName)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,17 +245,20 @@
 
         #endregion
 
-        private System.Windows.Forms.Label NameView;
         private System.Windows.Forms.Label ElementName;
-        private System.Windows.Forms.Label GoldView;
         private System.Windows.Forms.Label Gold;
-        private System.Windows.Forms.Label FaithView;
         private System.Windows.Forms.Label Faith;
-        private System.Windows.Forms.Label MemberView;
         private System.Windows.Forms.Label NbMembers;
         private System.Windows.Forms.Button GodMeeting;
         private System.Windows.Forms.Label Title;
         private System.Windows.Forms.Label buildingLife;
-        private System.Windows.Forms.Label buildingHP;
+        private System.Windows.Forms.Label Happiness;
+        private System.Windows.Forms.PictureBox buildingHealthIcon;
+        private System.Windows.Forms.PictureBox faithIcon;
+        private System.Windows.Forms.PictureBox goldIcon;
+        private System.Windows.Forms.PictureBox happinessIcon;
+        private System.Windows.Forms.PictureBox buildingIcon;
+        private System.Windows.Forms.PictureBox membersIcon;
+        private System.Windows.Forms.PictureBox objectName;
     }
 }

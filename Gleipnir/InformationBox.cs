@@ -17,12 +17,16 @@ namespace GamePages
         Meeting _meeting;
         GeneralPage _page;
         Family _family;
+        int positionX;
+        int positionY;
 
         public InformationBox(GeneralPage page)
         {
             InitializeComponent();
             _page = page;
             GodMeeting.Visible = false;
+            positionX = 125;
+            positionY = 10;
         }
 
         // Meeting Button Event
@@ -37,23 +41,33 @@ namespace GamePages
         {
             if (family != null)
             {
+                // Background
+                this.BackgroundImage = GamePages.Properties.Resources.InformationBox_house_background;
+
+                // BuildingImage
+                buildingIcon.Visible = true;
+                buildingIcon.BackgroundImage = GamePages.Properties.Resources.Building_House;
+
                 // InfoBox Texts
                 Title.Visible = true;
+                Title.Location = new Point(positionX, positionY);
                 Title.Text = "Famille";
-                NameView.Visible = true;
-                NameView.Text = "Nom :";
+                objectName.Visible = true;
                 ElementName.Visible = true;
                 ElementName.Text = family.Name;
-                GoldView.Visible = true;
+                goldIcon.Visible = true;
                 Gold.Visible = true;
                 Gold.Text = family.GoldStash.ToString();
-                FaithView.Visible = true;
+                faithIcon.Visible = true;
                 Faith.Visible = true;
                 Faith.Text = family.FaithAverageValue.ToString();
-                MemberView.Visible = true;
+                membersIcon.Visible = true;
                 NbMembers.Visible = true;
                 NbMembers.Text = family.FamilyMembers.Count.ToString();
-                buildingHP.Visible = true;
+                happinessIcon.Visible = true;
+                Happiness.Visible = true;
+                Happiness.Text = family.HappinessAverageValue.ToString();
+                buildingHealthIcon.Visible = true;
                 buildingLife.Visible = true;
                 buildingLife.Text = family.House.Hp.ToString();
 
@@ -66,21 +80,37 @@ namespace GamePages
                 GodMeeting.Visible = true;
                 GodMeeting.Enabled = true;
             }
+            else
+            {
+                SetNothingSelected();
+                Title.Visible = true;
+                Title.Text = "Failed Open Family";
+            }
         }
         internal void SetEmptyHouseInfo(House house)
         {
+            // Background
+            this.BackgroundImage = GamePages.Properties.Resources.InformationBox_others_background;
+
+            // BuildingImage
+            buildingIcon.Visible = true;
+            buildingIcon.BackgroundImage = GamePages.Properties.Resources.Building_House;
+
             // InfoBox Texts
+            objectName.Visible = false;
             Title.Visible = true;
+            Title.Location = new Point(positionX - 20, positionY);
             Title.Text = "Maison Vide";
-            NameView.Visible = false;
             ElementName.Visible = false;
-            GoldView.Visible = false;
+            goldIcon.Visible = false;
             Gold.Visible = false;
-            FaithView.Visible = false;
+            faithIcon.Visible = false;
             Faith.Visible = false;
-            MemberView.Visible = false;
+            happinessIcon.Visible = false;
+            Happiness.Visible = false;
+            membersIcon.Visible = false;
             NbMembers.Visible = false;
-            buildingHP.Visible = true;
+            buildingHealthIcon.Visible = true;
             buildingLife.Visible = true;
             buildingLife.Text = house.Hp.ToString();
 
@@ -91,25 +121,34 @@ namespace GamePages
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
         }
-        internal void SetJobInfo(JobsModel job)
+        internal void SetJobInfo(JobsModel job, Image buildingImage)
         {
             if (job != null)
             {
+                // Background
+                this.BackgroundImage = GamePages.Properties.Resources.InformationBox_job_background;
+
+                // BuildingImage
+                buildingIcon.Visible = true;
+                buildingIcon.BackgroundImage = buildingImage;
+
                 // InfoBox Texts
+                objectName.Visible = true;
                 Title.Visible = true;
+                Title.Location = new Point(positionX, positionY);
                 Title.Text = job.Building.Name;
-                NameView.Visible = true;
-                NameView.Text = "Métier :";
                 ElementName.Visible = true;
                 ElementName.Text = job.Name;
-                GoldView.Visible = false;
+                goldIcon.Visible = false;
                 Gold.Visible = false;
-                FaithView.Visible = false;
+                faithIcon.Visible = false;
                 Faith.Visible = false;
-                MemberView.Visible = true;
+                happinessIcon.Visible = false;
+                Happiness.Visible = false;
+                membersIcon.Visible = true;
                 NbMembers.Visible = true;
                 NbMembers.Text = job.Workers.Count.ToString();
-                buildingHP.Visible = true;
+                buildingHealthIcon.Visible = true;
                 buildingLife.Visible = true;
                 buildingLife.Text = job.Building.Hp.ToString();
 
@@ -129,18 +168,28 @@ namespace GamePages
         }
         internal void SetTableInfo(TablePlace table)
         {
+            // Background
+            this.BackgroundImage = GamePages.Properties.Resources.InformationBox_table_background;
+
+            // BuildingImage
+            buildingIcon.Visible = true;
+            buildingIcon.BackgroundImage = GamePages.Properties.Resources.Building_Table;
+
             // InfoBox Texts
+            objectName.Visible = false;
             Title.Visible = true;
+            Title.Location = new Point(positionX - 20, positionY);
             Title.Text = table.Name;
-            NameView.Visible = false;
             ElementName.Visible = false;
-            GoldView.Visible = false;
+            goldIcon.Visible = false;
             Gold.Visible = false;
-            FaithView.Visible = false;
+            faithIcon.Visible = false;
             Faith.Visible = false;
-            MemberView.Visible = false;
+            happinessIcon.Visible = false;
+            Happiness.Visible = false;
+            membersIcon.Visible = false;
             NbMembers.Visible = false;
-            buildingHP.Visible = true;
+            buildingHealthIcon.Visible = true;
             buildingLife.Visible = true;
             buildingLife.Text = table.Hp.ToString();
 
@@ -152,20 +201,30 @@ namespace GamePages
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
         }
-        internal void SetOtherBuildingsInfo(BuildingsModel building)
+        internal void SetOtherBuildingsInfo(BuildingsModel building, Image buildingImage)
         {
+            // Background
+            this.BackgroundImage = GamePages.Properties.Resources.InformationBox_others_background;
+
+            // BuildingImage
+            buildingIcon.Visible = true;
+            buildingIcon.BackgroundImage = buildingImage;
+
             // InfoBox Texts
             Title.Visible = true;
+            Title.Location = new Point(positionX, positionY);
             Title.Text = building.Name;
-            NameView.Visible = false;
+            objectName.Visible = false;
             ElementName.Visible = false;
-            GoldView.Visible = false;
+            goldIcon.Visible = false;
             Gold.Visible = false;
-            FaithView.Visible = false;
+            faithIcon.Visible = false;
             Faith.Visible = false;
-            MemberView.Visible = false;
+            happinessIcon.Visible = false;
+            Happiness.Visible = false;
+            membersIcon.Visible = false;
             NbMembers.Visible = false;
-            buildingHP.Visible = true;
+            buildingHealthIcon.Visible = true;
             buildingLife.Visible = true;
             buildingLife.Text = building.Hp.ToString();
 
@@ -178,19 +237,29 @@ namespace GamePages
         }
         internal void SetDestroyedBuilding(BuildingsModel building)
         {
+            // Background
+            this.BackgroundImage = GamePages.Properties.Resources.InformationBox_destroyed_background;
+
+            // BuildingImage
+            buildingIcon.Visible = true;
+            buildingIcon.BackgroundImage = GamePages.Properties.Resources.Building_Destroyed;
+
             // InfoBox Texts
             Title.Visible = true;
+            Title.Location = new Point(positionX - 20, positionY);
             Title.Text = "Bâtiment détruit";
-            NameView.Visible = false;
+            objectName.Visible = true;
             ElementName.Visible = true;
             ElementName.Text = building.Name;
-            GoldView.Visible = false;
+            goldIcon.Visible = false;
             Gold.Visible = false;
-            FaithView.Visible = false;
+            faithIcon.Visible = false;
             Faith.Visible = false;
-            MemberView.Visible = false;
+            happinessIcon.Visible = false;
+            Happiness.Visible = false;
+            membersIcon.Visible = false;
             NbMembers.Visible = false;
-            buildingHP.Visible = false;
+            buildingHealthIcon.Visible = false;
             buildingLife.Visible = false;
 
             // Action Tab infos
@@ -202,17 +271,25 @@ namespace GamePages
         }
         internal void SetNothingSelected()
         {
+            // Background
+            this.BackgroundImage = GamePages.Properties.Resources.InformationBox_background;
+
+            // BuildingImage
+            buildingIcon.Visible = false;
+
             // InfoBox Texts
+            objectName.Visible = false;
             Title.Visible = false;
-            NameView.Visible = false;
             ElementName.Visible = false;
-            GoldView.Visible = false;
+            goldIcon.Visible = false;
             Gold.Visible = false;
-            FaithView.Visible = false;
+            faithIcon.Visible = false;
             Faith.Visible = false;
-            MemberView.Visible = false;
+            happinessIcon.Visible = false;
+            Happiness.Visible = false;
+            membersIcon.Visible = false;
             NbMembers.Visible = false;
-            buildingHP.Visible = false;
+            buildingHealthIcon.Visible = false;
             buildingLife.Visible = false;
 
             // Action Tab infos

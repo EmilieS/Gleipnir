@@ -18,6 +18,7 @@ namespace GamePages
 
         int positionX;
         int positionY;
+
         public EventFluxUC()
         {
             InitializeComponent();
@@ -25,16 +26,16 @@ namespace GamePages
             positionX = 0;
             positionY = 0;
         }
+
         public void CreateNewEventAndShow(string message, string title)
         {
-            positionY = 0;
+            positionY = 3;
             GameEventUC newMessage = new GameEventUC();
             newMessage.EventTitle.Text = title;
             newMessage.EventContain.Text = message;
 
             if (_eventList.Count == 10)
             {
-                //_eventList[9].Hide();
                 this.Controls.Remove(_eventList[9]);
             }
             _eventList.Push(newMessage);
@@ -43,8 +44,8 @@ namespace GamePages
 
             for (int i = 0; i < _eventList.Count; i++)
             {
-                _eventList[i].Location = new System.Drawing.Point(positionX, positionY);
-                positionY += 65;
+                _eventList[i].Location = new System.Drawing.Point(positionX+3, positionY);
+                positionY += 68;
             }
         }
     }

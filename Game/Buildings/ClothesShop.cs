@@ -14,7 +14,7 @@ namespace Game.Buildings
         public ClothesShop(Village v, JobsModel job)
             : base(v)
         {
-            Name = "Magasin de Vêtements";
+            Name = "Magasin";
             _name = Name;
             Hp = MaxHp = 50;
             _job = job;
