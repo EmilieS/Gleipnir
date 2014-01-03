@@ -22,6 +22,7 @@ namespace Game.Buildings
         int _maxHp;
         int _destroyedTimer;
         bool _justCreated;
+        
         //Game actualGame;
         //private Game g;
         // this a provisory solution : using a new "materials"  to implement robustness

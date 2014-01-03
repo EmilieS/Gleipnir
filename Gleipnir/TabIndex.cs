@@ -34,7 +34,7 @@ namespace GamePages
             
             // Create imageList
             ImageList imageList = new ImageList();
-            imageList.Images.Add(GamePages.Properties.Resources.Index_Buildings);
+            imageList.Images.Add(GamePages.Properties.Resources.Building_House);
             
             // Add images to tabs
             actionsMenu.ImageList = imageList;

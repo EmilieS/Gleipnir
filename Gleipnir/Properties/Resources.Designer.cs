@@ -63,6 +63,16 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ActionTab_action_background {
+            get {
+                object obj = ResourceManager.GetObject("ActionTab_action_background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ActionTab_building_background {
             get {
                 object obj = ResourceManager.GetObject("ActionTab_building_background", resourceCulture);
@@ -73,9 +83,139 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ActionTab_building_background1 {
+        internal static System.Drawing.Bitmap ActionTab_happiness_background {
             get {
-                object obj = ResourceManager.GetObject("ActionTab_building_background1", resourceCulture);
+                object obj = ResourceManager.GetObject("ActionTab_happiness_background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ActionTab_villagerList_background {
+            get {
+                object obj = ResourceManager.GetObject("ActionTab_villagerList_background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Building_ApothecaryOffice {
+            get {
+                object obj = ResourceManager.GetObject("Building_ApothecaryOffice", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Building_ClothesShop {
+            get {
+                object obj = ResourceManager.GetObject("Building_ClothesShop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Building_Destroyed {
+            get {
+                object obj = ResourceManager.GetObject("Building_Destroyed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Building_Farm {
+            get {
+                object obj = ResourceManager.GetObject("Building_Farm", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Building_Forge {
+            get {
+                object obj = ResourceManager.GetObject("Building_Forge", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Building_HealthPoints {
+            get {
+                object obj = ResourceManager.GetObject("Building_HealthPoints", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Building_House {
+            get {
+                object obj = ResourceManager.GetObject("Building_House", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Building_Mill {
+            get {
+                object obj = ResourceManager.GetObject("Building_Mill", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Building_Restaurant {
+            get {
+                object obj = ResourceManager.GetObject("Building_Restaurant", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Building_RestaurantBlue {
+            get {
+                object obj = ResourceManager.GetObject("Building_RestaurantBlue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Building_Table {
+            get {
+                object obj = ResourceManager.GetObject("Building_Table", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Building_UnionOfCrafter {
+            get {
+                object obj = ResourceManager.GetObject("Building_UnionOfCrafter", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,39 +243,9 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Caducee {
+        internal static System.Drawing.Bitmap ButtonIcon_epidemic {
             get {
-                object obj = ResourceManager.GetObject("Caducee", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap carte {
-            get {
-                object obj = ResourceManager.GetObject("carte", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap emptyPic {
-            get {
-                object obj = ResourceManager.GetObject("emptyPic", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Enclume {
-            get {
-                object obj = ResourceManager.GetObject("Enclume", resourceCulture);
+                object obj = ResourceManager.GetObject("ButtonIcon_epidemic", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,26 +273,6 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Faith {
-            get {
-                object obj = ResourceManager.GetObject("Faith", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Ferme {
-            get {
-                object obj = ResourceManager.GetObject("Ferme", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap GameEventUC_backgroung {
             get {
                 object obj = ResourceManager.GetObject("GameEventUC_backgroung", resourceCulture);
@@ -203,9 +293,9 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Gold {
+        internal static System.Drawing.Bitmap InformationBox_background {
             get {
-                object obj = ResourceManager.GetObject("Gold", resourceCulture);
+                object obj = ResourceManager.GetObject("InformationBox_background", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -213,39 +303,9 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Happiness {
+        internal static System.Drawing.Bitmap InformationBox_destroyed_background {
             get {
-                object obj = ResourceManager.GetObject("Happiness", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap HealthPoints {
-            get {
-                object obj = ResourceManager.GetObject("HealthPoints", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap HumanMembers {
-            get {
-                object obj = ResourceManager.GetObject("HumanMembers", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Index_Buildings {
-            get {
-                object obj = ResourceManager.GetObject("Index_Buildings", resourceCulture);
+                object obj = ResourceManager.GetObject("InformationBox_destroyed_background", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -256,6 +316,36 @@ namespace GamePages.Properties {
         internal static System.Drawing.Bitmap InformationBox_house_background {
             get {
                 object obj = ResourceManager.GetObject("InformationBox_house_background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap InformationBox_job_background {
+            get {
+                object obj = ResourceManager.GetObject("InformationBox_job_background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap InformationBox_others_background {
+            get {
+                object obj = ResourceManager.GetObject("InformationBox_others_background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap InformationBox_table_background {
+            get {
+                object obj = ResourceManager.GetObject("InformationBox_table_background", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -303,66 +393,6 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Marteau {
-            get {
-                object obj = ResourceManager.GetObject("Marteau", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Moulin {
-            get {
-                object obj = ResourceManager.GetObject("Moulin", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Population {
-            get {
-                object obj = ResourceManager.GetObject("Population", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Restaurant {
-            get {
-                object obj = ResourceManager.GetObject("Restaurant", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Restaurant2 {
-            get {
-                object obj = ResourceManager.GetObject("Restaurant2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Restaurant21 {
-            get {
-                object obj = ResourceManager.GetObject("Restaurant21", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Sablier {
             get {
                 object obj = ResourceManager.GetObject("Sablier", resourceCulture);
@@ -383,9 +413,9 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Tailleur {
+        internal static System.Drawing.Bitmap ScenarioBox_background {
             get {
-                object obj = ResourceManager.GetObject("Tailleur", resourceCulture);
+                object obj = ResourceManager.GetObject("ScenarioBox_background", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -393,9 +423,9 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Tailleur1 {
+        internal static System.Drawing.Bitmap Stats_Faith {
             get {
-                object obj = ResourceManager.GetObject("Tailleur1", resourceCulture);
+                object obj = ResourceManager.GetObject("Stats_Faith", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -403,9 +433,49 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap testPic {
+        internal static System.Drawing.Bitmap Stats_Gold {
             get {
-                object obj = ResourceManager.GetObject("testPic", resourceCulture);
+                object obj = ResourceManager.GetObject("Stats_Gold", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Stats_Happiness {
+            get {
+                object obj = ResourceManager.GetObject("Stats_Happiness", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Stats_Members {
+            get {
+                object obj = ResourceManager.GetObject("Stats_Members", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Stats_ObjectName {
+            get {
+                object obj = ResourceManager.GetObject("Stats_ObjectName", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Stats_Population {
+            get {
+                object obj = ResourceManager.GetObject("Stats_Population", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

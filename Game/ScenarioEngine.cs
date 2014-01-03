@@ -27,11 +27,7 @@ namespace Game
                 return toPush;
             }
             else
-            {
                 return null;
-            }
         }
-
-
     }
 }

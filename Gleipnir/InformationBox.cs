@@ -17,12 +17,16 @@ namespace GamePages
         Meeting _meeting;
         GeneralPage _page;
         Family _family;
+        int positionX;
+        int positionY;
 
         public InformationBox(GeneralPage page)
         {
             InitializeComponent();
             _page = page;
             GodMeeting.Visible = false;
+            positionX = 125;
+            positionY = 10;
         }
 
         // Meeting Button Event
@@ -37,9 +41,18 @@ namespace GamePages
         {
             if (family != null)
             {
+                // Background
+                this.BackgroundImage = GamePages.Properties.Resources.InformationBox_house_background;
+
+                // BuildingImage
+                buildingIcon.Visible = true;
+                buildingIcon.BackgroundImage = GamePages.Properties.Resources.Building_House;
+
                 // InfoBox Texts
                 Title.Visible = true;
+                Title.Location = new Point(positionX, positionY);
                 Title.Text = "Famille";
+                objectName.Visible = true;
                 ElementName.Visible = true;
                 ElementName.Text = family.Name;
                 goldIcon.Visible = true;
@@ -67,11 +80,26 @@ namespace GamePages
                 GodMeeting.Visible = true;
                 GodMeeting.Enabled = true;
             }
+            else
+            {
+                SetNothingSelected();
+                Title.Visible = true;
+                Title.Text = "Failed Open Family";
+            }
         }
         internal void SetEmptyHouseInfo(House house)
         {
+            // Background
+            this.BackgroundImage = GamePages.Properties.Resources.InformationBox_others_background;
+
+            // BuildingImage
+            buildingIcon.Visible = true;
+            buildingIcon.BackgroundImage = GamePages.Properties.Resources.Building_House;
+
             // InfoBox Texts
+            objectName.Visible = false;
             Title.Visible = true;
+            Title.Location = new Point(positionX - 20, positionY);
             Title.Text = "Maison Vide";
             ElementName.Visible = false;
             goldIcon.Visible = false;
@@ -93,12 +121,21 @@ namespace GamePages
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
         }
-        internal void SetJobInfo(JobsModel job)
+        internal void SetJobInfo(JobsModel job, Image buildingImage)
         {
             if (job != null)
             {
+                // Background
+                this.BackgroundImage = GamePages.Properties.Resources.InformationBox_job_background;
+
+                // BuildingImage
+                buildingIcon.Visible = true;
+                buildingIcon.BackgroundImage = buildingImage;
+
                 // InfoBox Texts
+                objectName.Visible = true;
                 Title.Visible = true;
+                Title.Location = new Point(positionX, positionY);
                 Title.Text = job.Building.Name;
                 ElementName.Visible = true;
                 ElementName.Text = job.Name;
@@ -131,8 +168,17 @@ namespace GamePages
         }
         internal void SetTableInfo(TablePlace table)
         {
+            // Background
+            this.BackgroundImage = GamePages.Properties.Resources.InformationBox_table_background;
+
+            // BuildingImage
+            buildingIcon.Visible = true;
+            buildingIcon.BackgroundImage = GamePages.Properties.Resources.Building_Table;
+
             // InfoBox Texts
+            objectName.Visible = false;
             Title.Visible = true;
+            Title.Location = new Point(positionX - 20, positionY);
             Title.Text = table.Name;
             ElementName.Visible = false;
             goldIcon.Visible = false;
@@ -155,11 +201,20 @@ namespace GamePages
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
         }
-        internal void SetOtherBuildingsInfo(BuildingsModel building)
+        internal void SetOtherBuildingsInfo(BuildingsModel building, Image buildingImage)
         {
+            // Background
+            this.BackgroundImage = GamePages.Properties.Resources.InformationBox_others_background;
+
+            // BuildingImage
+            buildingIcon.Visible = true;
+            buildingIcon.BackgroundImage = buildingImage;
+
             // InfoBox Texts
             Title.Visible = true;
+            Title.Location = new Point(positionX, positionY);
             Title.Text = building.Name;
+            objectName.Visible = false;
             ElementName.Visible = false;
             goldIcon.Visible = false;
             Gold.Visible = false;
@@ -182,9 +237,18 @@ namespace GamePages
         }
         internal void SetDestroyedBuilding(BuildingsModel building)
         {
+            // Background
+            this.BackgroundImage = GamePages.Properties.Resources.InformationBox_destroyed_background;
+
+            // BuildingImage
+            buildingIcon.Visible = true;
+            buildingIcon.BackgroundImage = GamePages.Properties.Resources.Building_Destroyed;
+
             // InfoBox Texts
             Title.Visible = true;
+            Title.Location = new Point(positionX - 20, positionY);
             Title.Text = "Bâtiment détruit";
+            objectName.Visible = true;
             ElementName.Visible = true;
             ElementName.Text = building.Name;
             goldIcon.Visible = false;
@@ -207,7 +271,14 @@ namespace GamePages
         }
         internal void SetNothingSelected()
         {
+            // Background
+            this.BackgroundImage = GamePages.Properties.Resources.InformationBox_background;
+
+            // BuildingImage
+            buildingIcon.Visible = false;
+
             // InfoBox Texts
+            objectName.Visible = false;
             Title.Visible = false;
             ElementName.Visible = false;
             goldIcon.Visible = false;

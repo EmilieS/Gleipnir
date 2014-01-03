@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InformationBox));
             this.ElementName = new System.Windows.Forms.Label();
             this.Gold = new System.Windows.Forms.Label();
             this.Faith = new System.Windows.Forms.Label();
@@ -42,12 +43,14 @@
             this.happinessIcon = new System.Windows.Forms.PictureBox();
             this.buildingIcon = new System.Windows.Forms.PictureBox();
             this.membersIcon = new System.Windows.Forms.PictureBox();
+            this.objectName = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.buildingHealthIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.faithIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.goldIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.happinessIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buildingIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.membersIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectName)).BeginInit();
             this.SuspendLayout();
             // 
             // ElementName
@@ -142,7 +145,7 @@
             // 
             // buildingHealthIcon
             // 
-            this.buildingHealthIcon.BackgroundImage = global::GamePages.Properties.Resources.HealthPoints;
+            this.buildingHealthIcon.Image = global::GamePages.Properties.Resources.Building_HealthPoints;
             this.buildingHealthIcon.Location = new System.Drawing.Point(189, 126);
             this.buildingHealthIcon.Name = "buildingHealthIcon";
             this.buildingHealthIcon.Size = new System.Drawing.Size(20, 20);
@@ -151,7 +154,7 @@
             // 
             // faithIcon
             // 
-            this.faithIcon.BackgroundImage = global::GamePages.Properties.Resources.Faith;
+            this.faithIcon.Image = global::GamePages.Properties.Resources.Stats_Faith;
             this.faithIcon.Location = new System.Drawing.Point(12, 102);
             this.faithIcon.Name = "faithIcon";
             this.faithIcon.Size = new System.Drawing.Size(20, 20);
@@ -160,7 +163,7 @@
             // 
             // goldIcon
             // 
-            this.goldIcon.BackgroundImage = global::GamePages.Properties.Resources.Gold;
+            this.goldIcon.Image = global::GamePages.Properties.Resources.Stats_Gold;
             this.goldIcon.Location = new System.Drawing.Point(11, 71);
             this.goldIcon.Name = "goldIcon";
             this.goldIcon.Size = new System.Drawing.Size(20, 20);
@@ -169,7 +172,7 @@
             // 
             // happinessIcon
             // 
-            this.happinessIcon.BackgroundImage = global::GamePages.Properties.Resources.Happiness;
+            this.happinessIcon.Image = global::GamePages.Properties.Resources.Stats_Happiness;
             this.happinessIcon.Location = new System.Drawing.Point(96, 102);
             this.happinessIcon.Name = "happinessIcon";
             this.happinessIcon.Size = new System.Drawing.Size(20, 20);
@@ -178,7 +181,6 @@
             // 
             // buildingIcon
             // 
-            this.buildingIcon.BackgroundImage = global::GamePages.Properties.Resources.Index_Buildings;
             this.buildingIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buildingIcon.Location = new System.Drawing.Point(12, 10);
             this.buildingIcon.Name = "buildingIcon";
@@ -188,19 +190,29 @@
             // 
             // membersIcon
             // 
-            this.membersIcon.BackgroundImage = global::GamePages.Properties.Resources.HumanMembers;
+            this.membersIcon.Image = global::GamePages.Properties.Resources.Stats_Members;
             this.membersIcon.Location = new System.Drawing.Point(96, 71);
             this.membersIcon.Name = "membersIcon";
             this.membersIcon.Size = new System.Drawing.Size(20, 20);
             this.membersIcon.TabIndex = 18;
             this.membersIcon.TabStop = false;
             // 
+            // objectName
+            // 
+            this.objectName.Image = global::GamePages.Properties.Resources.Stats_ObjectName;
+            this.objectName.Location = new System.Drawing.Point(72, 40);
+            this.objectName.Name = "objectName";
+            this.objectName.Size = new System.Drawing.Size(20, 20);
+            this.objectName.TabIndex = 19;
+            this.objectName.TabStop = false;
+            // 
             // InformationBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.BackgroundImage = global::GamePages.Properties.Resources.InformationBox_house_background;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.Controls.Add(this.objectName);
             this.Controls.Add(this.membersIcon);
             this.Controls.Add(this.buildingIcon);
             this.Controls.Add(this.happinessIcon);
@@ -225,6 +237,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.happinessIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buildingIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.membersIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectName)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,5 +259,6 @@
         private System.Windows.Forms.PictureBox happinessIcon;
         private System.Windows.Forms.PictureBox buildingIcon;
         private System.Windows.Forms.PictureBox membersIcon;
+        private System.Windows.Forms.PictureBox objectName;
     }
 }

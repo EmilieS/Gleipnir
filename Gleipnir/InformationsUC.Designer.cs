@@ -189,9 +189,8 @@
             // populationIcon
             // 
             this.populationIcon.BackColor = System.Drawing.Color.Transparent;
-            this.populationIcon.BackgroundImage = global::GamePages.Properties.Resources.emptyPic;
-            this.populationIcon.ErrorImage = global::GamePages.Properties.Resources.Error;
-            this.populationIcon.Image = global::GamePages.Properties.Resources.Population;
+            this.populationIcon.BackgroundImage = global::GamePages.Properties.Resources.Stats_Population;
+            this.populationIcon.ErrorImage = ((System.Drawing.Image)(resources.GetObject("populationIcon.ErrorImage")));
             this.populationIcon.Location = new System.Drawing.Point(192, 7);
             this.populationIcon.Name = "populationIcon";
             this.populationIcon.Size = new System.Drawing.Size(20, 20);
@@ -201,9 +200,8 @@
             // goldIcon
             // 
             this.goldIcon.BackColor = System.Drawing.Color.Transparent;
-            this.goldIcon.BackgroundImage = global::GamePages.Properties.Resources.emptyPic;
-            this.goldIcon.ErrorImage = global::GamePages.Properties.Resources.Error;
-            this.goldIcon.Image = global::GamePages.Properties.Resources.Gold;
+            this.goldIcon.BackgroundImage = global::GamePages.Properties.Resources.Stats_Gold;
+            this.goldIcon.ErrorImage = ((System.Drawing.Image)(resources.GetObject("goldIcon.ErrorImage")));
             this.goldIcon.Location = new System.Drawing.Point(102, 7);
             this.goldIcon.Name = "goldIcon";
             this.goldIcon.Size = new System.Drawing.Size(20, 20);
@@ -230,7 +228,7 @@
             // faithIcon
             // 
             this.faithIcon.BackColor = System.Drawing.Color.Transparent;
-            this.faithIcon.BackgroundImage = global::GamePages.Properties.Resources.Faith;
+            this.faithIcon.BackgroundImage = global::GamePages.Properties.Resources.Stats_Faith;
             this.faithIcon.Location = new System.Drawing.Point(282, 7);
             this.faithIcon.Name = "faithIcon";
             this.faithIcon.Size = new System.Drawing.Size(20, 20);
@@ -240,7 +238,7 @@
             // happinessIcon
             // 
             this.happinessIcon.BackColor = System.Drawing.Color.Transparent;
-            this.happinessIcon.BackgroundImage = global::GamePages.Properties.Resources.Happiness;
+            this.happinessIcon.BackgroundImage = global::GamePages.Properties.Resources.Stats_Happiness;
             this.happinessIcon.Location = new System.Drawing.Point(371, 7);
             this.happinessIcon.Name = "happinessIcon";
             this.happinessIcon.Size = new System.Drawing.Size(20, 20);
@@ -251,7 +249,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::GamePages.Properties.Resources.InformationUC_background;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.Controls.Add(this.happinessIcon);
             this.Controls.Add(this.faithIcon);
             this.Controls.Add(this.populationIcon);

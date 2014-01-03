@@ -14,42 +14,36 @@ namespace GamePages
     public partial class ScenarioBox : UserControl
     {
         ScenarioEngine engine = new ScenarioEngine();
-        GeneralPage actualPage;
+        GeneralPage gameWindow;
+
         public ScenarioBox(GeneralPage actualGame)
         {
-            actualPage = actualGame;
+            gameWindow = actualGame;
             InitializeComponent();
         }
 
-        private void ScenarioBox_Click(object sender, EventArgs e)
+        private void SetScenarionText()
         {
-            actualPage.LockEverything();
+            gameWindow.LockEverything();
             string sentence;
             sentence = engine.ReadScenario();
             if (sentence == null)
             {
-                actualPage.UnLockEverything(); // doesn't work
-                this.TextLabel.Text = "Vous êtes à Ragnar";
+                gameWindow.UnLockEverything();
+                TextLabel.Text = "Vous êtes à Ragnar";
             }
             else
-            {
-                this.TextLabel.Text = sentence;
-            }
+                TextLabel.Text = sentence;
+        }
+
+        private void ScenarioBox_Click(object sender, EventArgs e)
+        {
+            SetScenarionText();
         }
 
         private void TextLabel_Click(object sender, EventArgs e)
         {
-            string sentence ;
-            sentence = engine.ReadScenario();
-            if (sentence == null)
-            {
-                actualPage.UnLockEverything(); // doesn't work
-                this.TextLabel.Text = "Vous êtes à Ragnar";
-            }
-            else
-            {
-                this.TextLabel.Text = sentence;
-            }
+            SetScenarionText();
         }
     }
 }

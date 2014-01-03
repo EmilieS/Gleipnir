@@ -28,11 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabIndex));
             this.actionsMenu = new System.Windows.Forms.TabControl();
-            this.happinessTab = new System.Windows.Forms.TabPage();
-            this.VillagerList = new System.Windows.Forms.TabPage();
-            this.godSpellsTab = new System.Windows.Forms.TabPage();
-            this.StartEpidemic = new System.Windows.Forms.Button();
             this.buildingsTab = new System.Windows.Forms.TabPage();
             this.specialBuilding_title = new System.Windows.Forms.Label();
             this.hobbyBuilding_title = new System.Windows.Forms.Label();
@@ -52,9 +49,13 @@
             this.Chapel = new System.Windows.Forms.Button();
             this.ApothecaryOffice = new System.Windows.Forms.Button();
             this.Tavern = new System.Windows.Forms.Button();
+            this.happinessTab = new System.Windows.Forms.TabPage();
+            this.VillagerList = new System.Windows.Forms.TabPage();
+            this.godSpellsTab = new System.Windows.Forms.TabPage();
+            this.StartEpidemic = new System.Windows.Forms.Button();
             this.actionsMenu.SuspendLayout();
-            this.godSpellsTab.SuspendLayout();
             this.buildingsTab.SuspendLayout();
+            this.godSpellsTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // actionsMenu
@@ -76,50 +77,10 @@
             this.actionsMenu.TabIndex = 3;
             this.actionsMenu.TabStop = false;
             // 
-            // happinessTab
-            // 
-            this.happinessTab.ImageKey = "(aucun)";
-            this.happinessTab.Location = new System.Drawing.Point(4, 4);
-            this.happinessTab.Name = "happinessTab";
-            this.happinessTab.Padding = new System.Windows.Forms.Padding(3);
-            this.happinessTab.Size = new System.Drawing.Size(208, 528);
-            this.happinessTab.TabIndex = 1;
-            this.happinessTab.UseVisualStyleBackColor = true;
-            // 
-            // VillagerList
-            // 
-            this.VillagerList.AutoScroll = true;
-            this.VillagerList.Location = new System.Drawing.Point(4, 4);
-            this.VillagerList.Name = "VillagerList";
-            this.VillagerList.Padding = new System.Windows.Forms.Padding(3);
-            this.VillagerList.Size = new System.Drawing.Size(208, 528);
-            this.VillagerList.TabIndex = 2;
-            this.VillagerList.UseVisualStyleBackColor = true;
-            // 
-            // godSpellsTab
-            // 
-            this.godSpellsTab.Controls.Add(this.StartEpidemic);
-            this.godSpellsTab.Location = new System.Drawing.Point(4, 4);
-            this.godSpellsTab.Name = "godSpellsTab";
-            this.godSpellsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.godSpellsTab.Size = new System.Drawing.Size(208, 528);
-            this.godSpellsTab.TabIndex = 3;
-            this.godSpellsTab.UseVisualStyleBackColor = true;
-            // 
-            // StartEpidemic
-            // 
-            this.StartEpidemic.Location = new System.Drawing.Point(34, 31);
-            this.StartEpidemic.Name = "StartEpidemic";
-            this.StartEpidemic.Size = new System.Drawing.Size(103, 30);
-            this.StartEpidemic.TabIndex = 0;
-            this.StartEpidemic.Text = "Lancer épidémie";
-            this.StartEpidemic.UseVisualStyleBackColor = true;
-            this.StartEpidemic.Click += new System.EventHandler(this.StartEpidemic_Click);
-            // 
             // buildingsTab
             // 
             this.buildingsTab.BackColor = System.Drawing.Color.Transparent;
-            this.buildingsTab.BackgroundImage = global::GamePages.Properties.Resources.ActionTab_building_background1;
+            this.buildingsTab.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buildingsTab.BackgroundImage")));
             this.buildingsTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buildingsTab.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.buildingsTab.Controls.Add(this.specialBuilding_title);
@@ -180,7 +141,7 @@
             // 
             // House
             // 
-            this.House.BackgroundImage = global::GamePages.Properties.Resources.Index_Buildings;
+            this.House.BackgroundImage = global::GamePages.Properties.Resources.Building_House;
             this.House.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.House.Location = new System.Drawing.Point(29, 405);
             this.House.Name = "House";
@@ -199,7 +160,7 @@
             // 
             // ClothesShop
             // 
-            this.ClothesShop.BackgroundImage = global::GamePages.Properties.Resources.Tailleur1;
+            this.ClothesShop.BackgroundImage = global::GamePages.Properties.Resources.Building_ClothesShop;
             this.ClothesShop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClothesShop.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.ClothesShop.Location = new System.Drawing.Point(131, 89);
@@ -210,7 +171,7 @@
             // 
             // Mill
             // 
-            this.Mill.BackgroundImage = global::GamePages.Properties.Resources.Moulin;
+            this.Mill.BackgroundImage = global::GamePages.Properties.Resources.Building_Mill;
             this.Mill.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Mill.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Mill.Location = new System.Drawing.Point(29, 135);
@@ -221,7 +182,7 @@
             // 
             // Farm
             // 
-            this.Farm.BackgroundImage = global::GamePages.Properties.Resources.Ferme;
+            this.Farm.BackgroundImage = global::GamePages.Properties.Resources.Building_Farm;
             this.Farm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Farm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Farm.Location = new System.Drawing.Point(131, 43);
@@ -232,7 +193,7 @@
             // 
             // UnionOfCrafter
             // 
-            this.UnionOfCrafter.BackgroundImage = global::GamePages.Properties.Resources.Marteau;
+            this.UnionOfCrafter.BackgroundImage = global::GamePages.Properties.Resources.Building_UnionOfCrafter;
             this.UnionOfCrafter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.UnionOfCrafter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.UnionOfCrafter.Location = new System.Drawing.Point(29, 43);
@@ -243,7 +204,7 @@
             // 
             // Forge
             // 
-            this.Forge.BackgroundImage = global::GamePages.Properties.Resources.Enclume;
+            this.Forge.BackgroundImage = global::GamePages.Properties.Resources.Building_Forge;
             this.Forge.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Forge.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Forge.Location = new System.Drawing.Point(80, 43);
@@ -254,7 +215,7 @@
             // 
             // Restaurant
             // 
-            this.Restaurant.BackgroundImage = global::GamePages.Properties.Resources.Restaurant21;
+            this.Restaurant.BackgroundImage = global::GamePages.Properties.Resources.Building_RestaurantBlue;
             this.Restaurant.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Restaurant.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Restaurant.Location = new System.Drawing.Point(80, 89);
@@ -311,7 +272,7 @@
             // ApothecaryOffice
             // 
             this.ApothecaryOffice.BackColor = System.Drawing.Color.Transparent;
-            this.ApothecaryOffice.BackgroundImage = global::GamePages.Properties.Resources.Caducee;
+            this.ApothecaryOffice.BackgroundImage = global::GamePages.Properties.Resources.Building_ApothecaryOffice;
             this.ApothecaryOffice.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ApothecaryOffice.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ApothecaryOffice.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -330,6 +291,52 @@
             this.Tavern.Text = "Taverne";
             this.Tavern.UseVisualStyleBackColor = true;
             // 
+            // happinessTab
+            // 
+            this.happinessTab.BackgroundImage = global::GamePages.Properties.Resources.ActionTab_happiness_background;
+            this.happinessTab.ImageKey = "(aucun)";
+            this.happinessTab.Location = new System.Drawing.Point(4, 4);
+            this.happinessTab.Name = "happinessTab";
+            this.happinessTab.Padding = new System.Windows.Forms.Padding(3);
+            this.happinessTab.Size = new System.Drawing.Size(208, 528);
+            this.happinessTab.TabIndex = 1;
+            this.happinessTab.UseVisualStyleBackColor = true;
+            // 
+            // VillagerList
+            // 
+            this.VillagerList.AutoScroll = true;
+            this.VillagerList.BackgroundImage = global::GamePages.Properties.Resources.ActionTab_villagerList_background;
+            this.VillagerList.Location = new System.Drawing.Point(4, 4);
+            this.VillagerList.Name = "VillagerList";
+            this.VillagerList.Padding = new System.Windows.Forms.Padding(3);
+            this.VillagerList.Size = new System.Drawing.Size(208, 528);
+            this.VillagerList.TabIndex = 2;
+            this.VillagerList.UseVisualStyleBackColor = true;
+            // 
+            // godSpellsTab
+            // 
+            this.godSpellsTab.BackgroundImage = global::GamePages.Properties.Resources.ActionTab_action_background;
+            this.godSpellsTab.Controls.Add(this.StartEpidemic);
+            this.godSpellsTab.Location = new System.Drawing.Point(4, 4);
+            this.godSpellsTab.Name = "godSpellsTab";
+            this.godSpellsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.godSpellsTab.Size = new System.Drawing.Size(208, 528);
+            this.godSpellsTab.TabIndex = 3;
+            this.godSpellsTab.UseVisualStyleBackColor = true;
+            // 
+            // StartEpidemic
+            // 
+            this.StartEpidemic.Image = global::GamePages.Properties.Resources.ButtonIcon_epidemic;
+            this.StartEpidemic.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.StartEpidemic.Location = new System.Drawing.Point(24, 19);
+            this.StartEpidemic.Name = "StartEpidemic";
+            this.StartEpidemic.Size = new System.Drawing.Size(153, 30);
+            this.StartEpidemic.TabIndex = 0;
+            this.StartEpidemic.Text = "Lance une Épidémie";
+            this.StartEpidemic.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.StartEpidemic.UseVisualStyleBackColor = true;
+            this.StartEpidemic.Click += new System.EventHandler(this.StartEpidemic_Click);
+            // 
             // TabIndex
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -339,8 +346,8 @@
             this.Name = "TabIndex";
             this.Size = new System.Drawing.Size(216, 570);
             this.actionsMenu.ResumeLayout(false);
-            this.godSpellsTab.ResumeLayout(false);
             this.buildingsTab.ResumeLayout(false);
+            this.godSpellsTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
