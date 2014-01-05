@@ -39,8 +39,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Upgrades\Apothecary\Drugs.cs" />
+    <Compile Include="Upgrades\Apothecary\Surgery.cs" />
+    <Compile Include="Upgrades\Blacksmith\Furnace.cs" />
+    <Compile Include="Upgrades\Blacksmith\Plow.cs" />
+    <Compile Include="Upgrades\Blacksmith\Saw.cs" />
     <Compile Include="Buildings\BuildingsList.cs" />
     <Compile Include="Buildings\House.cs" />
+    <Compile Include="Upgrades\Cooker\Level1.cs" />
+    <Compile Include="Upgrades\Cooker\Level2.cs" />
+    <Compile Include="Upgrades\Cooker\Level3.cs" />
+    <Compile Include="Upgrades\Cooker\Level4.cs" />
+    <Compile Include="Upgrades\Crafter\CrafterTools\Hoist.cs" />
+    <Compile Include="Upgrades\Crafter\CrafterTools\Pulley.cs" />
+    <Compile Include="Upgrades\Crafter\CrafterTools\Scaffolding.cs" />
+    <Compile Include="Upgrades\Crafter\Materials\Cement.cs" />
+    <Compile Include="Upgrades\Crafter\Materials\Materials.cs" />
+    <Compile Include="Upgrades\Crafter\Materials\Reinforced.cs" />
+    <Compile Include="Upgrades\Crafter\Materials\Whitewash.cs" />
+    <Compile Include="Upgrades\Farmer\Fertilizer.cs" />
+    <Compile Include="Upgrades\Farmer\Fields_expansion.cs" />
+    <Compile Include="Upgrades\Farmer\Irrigation.cs" />
+    <Compile Include="Upgrades\Farmer\Scarecrow.cs" />
+    <Compile Include="UpgradesList.cs" />
+    <Compile Include="UpgradesModel.cs" />
     <Compile Include="GodSpell\Deluge.cs" />
     <Compile Include="GodSpell\Earthquake.cs" />
     <Compile Include="GodSpell\Epidemic.cs" />
@@ -96,9 +118,7 @@
     <Content Include="Extra\nameList.txt" />
     <Content Include="Extra\scenario.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Sicknesses\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

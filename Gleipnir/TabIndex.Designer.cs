@@ -45,7 +45,7 @@
             this.Chapel = new System.Windows.Forms.Button();
             this.ApothicaryOffice = new System.Windows.Forms.Button();
             this.Tavern = new System.Windows.Forms.Button();
-            this.happinessTab = new System.Windows.Forms.TabPage();
+            this.UpgradesTab = new System.Windows.Forms.TabPage();
             this.VillagerList = new System.Windows.Forms.TabPage();
             this.godSpellsTab = new System.Windows.Forms.TabPage();
             this.StartEpidemic = new System.Windows.Forms.Button();
@@ -60,7 +60,7 @@
             this.actionsMenu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.actionsMenu.Controls.Add(this.buildingsTab);
-            this.actionsMenu.Controls.Add(this.happinessTab);
+            this.actionsMenu.Controls.Add(this.UpgradesTab);
             this.actionsMenu.Controls.Add(this.VillagerList);
             this.actionsMenu.Controls.Add(this.godSpellsTab);
             this.actionsMenu.Cursor = System.Windows.Forms.Cursors.Default;
@@ -233,15 +233,15 @@
             this.Tavern.Text = "Taverne";
             this.Tavern.UseVisualStyleBackColor = true;
             // 
-            // happinessTab
+            // UpgradesTab
             // 
-            this.happinessTab.ImageKey = "(aucun)";
-            this.happinessTab.Location = new System.Drawing.Point(4, 4);
-            this.happinessTab.Name = "happinessTab";
-            this.happinessTab.Padding = new System.Windows.Forms.Padding(3);
-            this.happinessTab.Size = new System.Drawing.Size(208, 528);
-            this.happinessTab.TabIndex = 1;
-            this.happinessTab.UseVisualStyleBackColor = true;
+            this.UpgradesTab.ImageKey = "(aucun)";
+            this.UpgradesTab.Location = new System.Drawing.Point(4, 4);
+            this.UpgradesTab.Name = "UpgradesTab";
+            this.UpgradesTab.Padding = new System.Windows.Forms.Padding(3);
+            this.UpgradesTab.Size = new System.Drawing.Size(208, 528);
+            this.UpgradesTab.TabIndex = 1;
+            this.UpgradesTab.UseVisualStyleBackColor = true;
             // 
             // VillagerList
             // 
@@ -292,7 +292,7 @@
 
         private System.Windows.Forms.TabControl actionsMenu;
         private System.Windows.Forms.TabPage buildingsTab;
-        private System.Windows.Forms.TabPage happinessTab;
+        private System.Windows.Forms.TabPage UpgradesTab;
         private System.Windows.Forms.TabPage VillagerList;
         private System.Windows.Forms.TabPage godSpellsTab;
         private System.Windows.Forms.Button Tavern;

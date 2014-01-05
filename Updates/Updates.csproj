@@ -57,7 +57,6 @@
     <Compile Include="Farmer\fields_expansion.cs" />
     <Compile Include="Farmer\irrigation.cs" />
     <Compile Include="Farmer\scarecrow.cs" />
-    <Compile Include="UpdatesLists.cs" />
     <Compile Include="Crafter\CrafterTools\Hoist.cs" />
     <Compile Include="Crafter\Materials\Materials.cs" />
     <Compile Include="Crafter\CrafterTools\Pulley.cs" />

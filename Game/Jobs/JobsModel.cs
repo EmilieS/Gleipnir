@@ -35,7 +35,7 @@ namespace Game
 
         public int GoldGenerated { get { return _gold; } } //do we really want to communicate this everchanging value??
         public string Name { get { return _jobName; } }
-        public double Coefficient { get { return _coefficient; } }
+        public int  Coefficient { get { return _coefficient; } internal set { _coefficient = value; } }
 
         /// <summary>
         /// Gets the Workers list

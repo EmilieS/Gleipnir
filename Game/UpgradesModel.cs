@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Game
+{
+    public abstract class UpgradesModel : GameItem
+    {
+        string _name;
+        int _costPrice;
+        bool _isActivated;
+
+        internal UpgradesModel(Game g)
+            : base(g)
+        {
+
+        }
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+        public int CostPrice
+        {
+            get { return _costPrice; }
+            set { _costPrice = value; }
+        }
+
+        public bool IsActivated { get { return _isActivated; } internal set { _isActivated = value; } }
+       
+        internal virtual void AffectUpgrade() {}
+
+        internal override void OnDestroy()
+        {
+
+        }
+        internal override void CloseStep(List<IEvent> eventList)
+        {
+
+        }
+    }
+}

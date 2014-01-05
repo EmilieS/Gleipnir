@@ -18,6 +18,11 @@ namespace Game
             _happinessAddition = 1.3;
         }
         double _happinessAddition;
+        public double HappinessToAdd
+        {
+            get { return _happinessAddition; }
+            set { _happinessAddition = value; }
+        }
         /// <summary>
         /// Add amount of happiness for all others villagers
         /// </summary>
@@ -32,7 +37,7 @@ namespace Game
                     return;
             }
             double happinessToAdd;
-            happinessToAdd = _happinessAddition + _workers.Count * 0.5;
+            happinessToAdd = HappinessToAdd + _workers.Count * 0.5;
             villager.AddOrRemoveHappiness(happinessToAdd);
         }
         internal override bool AddPersonPrerequisites()

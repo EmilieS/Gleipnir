@@ -209,10 +209,6 @@
       <Project>{2b78158a-b99c-4116-98f4-c4786d93faaf}</Project>
       <Name>Game</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Updates\Updates.csproj">
-      <Project>{014adb5a-45d5-48ca-a386-cfbb01a556ef}</Project>
-      <Name>Updates</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\button_homepage.png" />
