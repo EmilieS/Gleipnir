@@ -149,14 +149,17 @@
             // TaxAmount
             // 
             this.TaxAmount.AccessibleName = "Collection d\'offrandes";
-            this.TaxAmount.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.TaxAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.TaxAmount.AutoSize = false;
+            this.TaxAmount.BackColor = System.Drawing.Color.Peru;
             this.TaxAmount.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.TaxAmount.LargeChange = 20;
             this.TaxAmount.Location = new System.Drawing.Point(553, 7);
             this.TaxAmount.Maximum = 100;
             this.TaxAmount.Minimum = 1;
             this.TaxAmount.Name = "TaxAmount";
-            this.TaxAmount.Size = new System.Drawing.Size(227, 45);
+            this.TaxAmount.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.TaxAmount.Size = new System.Drawing.Size(227, 19);
             this.TaxAmount.SmallChange = 5;
             this.TaxAmount.TabIndex = 22;
             this.TaxAmount.Tag = "Collection d\'offrandes";

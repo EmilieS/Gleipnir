@@ -39,19 +39,10 @@ namespace GamePages
             _page.OnClickMenu();
         }
 
-        private void changeGoldOfferings_Click(object sender, EventArgs e)
-        {
-           
-        }
-
         private void TaxAmount_ValueChanged(object sender, EventArgs e)
         {          
             _page.Game.Villages[0].SetOfferingsPoints(TaxAmount.Value);
-        }
-
-        private void TaxAmountValue_TextChanged(object sender, EventArgs e)
-        {
-
+            TaxAmountValue.Text = "Quantité : " + TaxAmount.Value.ToString();
         }
     }
 }
