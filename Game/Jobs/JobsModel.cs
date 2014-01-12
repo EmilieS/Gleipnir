@@ -22,7 +22,7 @@ namespace Game
         bool _workerListChanged;
         internal int _nbHeretics;
         internal JobList Owner { get { return _owner; } }
-
+        double _happinessAddition;
         internal JobsModel(Game game, JobList list, string name)
             : base(game)
         {
@@ -33,9 +33,10 @@ namespace Game
             _owner = list;
         }
 
-        public int GoldGenerated { get { return _gold; } } //do we really want to communicate this everchanging value??
+        public int GoldGenerated { get { return _gold; } internal set { _gold = value; } } //do we really want to communicate this everchanging value??
         public string Name { get { return _jobName; } }
-        public int  Coefficient { get { return _coefficient; } internal set { _coefficient = value; } }
+        public int Coefficient { get { return _coefficient; } internal set { _coefficient = value; } }
+        public double HappinessToAdd { get { return _happinessAddition; } set { _happinessAddition = value; } }
 
         /// <summary>
         /// Gets the Workers list

@@ -46,11 +46,13 @@
             this.ApothicaryOffice = new System.Windows.Forms.Button();
             this.Tavern = new System.Windows.Forms.Button();
             this.UpgradesTab = new System.Windows.Forms.TabPage();
+            this.Level1_butt = new System.Windows.Forms.Button();
             this.VillagerList = new System.Windows.Forms.TabPage();
             this.godSpellsTab = new System.Windows.Forms.TabPage();
             this.StartEpidemic = new System.Windows.Forms.Button();
             this.actionsMenu.SuspendLayout();
             this.buildingsTab.SuspendLayout();
+            this.UpgradesTab.SuspendLayout();
             this.godSpellsTab.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -235,6 +237,7 @@
             // 
             // UpgradesTab
             // 
+            this.UpgradesTab.Controls.Add(this.Level1_butt);
             this.UpgradesTab.ImageKey = "(aucun)";
             this.UpgradesTab.Location = new System.Drawing.Point(4, 4);
             this.UpgradesTab.Name = "UpgradesTab";
@@ -242,6 +245,16 @@
             this.UpgradesTab.Size = new System.Drawing.Size(208, 528);
             this.UpgradesTab.TabIndex = 1;
             this.UpgradesTab.UseVisualStyleBackColor = true;
+            // 
+            // Level1_butt
+            // 
+            this.Level1_butt.Location = new System.Drawing.Point(6, 18);
+            this.Level1_butt.Name = "Level1_butt";
+            this.Level1_butt.Size = new System.Drawing.Size(47, 23);
+            this.Level1_butt.TabIndex = 0;
+            this.Level1_butt.Text = "Level1";
+            this.Level1_butt.UseVisualStyleBackColor = true;
+            this.Level1_butt.Click += new System.EventHandler(this.Level1_butt_Click);
             // 
             // VillagerList
             // 
@@ -283,6 +296,7 @@
             this.Size = new System.Drawing.Size(216, 570);
             this.actionsMenu.ResumeLayout(false);
             this.buildingsTab.ResumeLayout(false);
+            this.UpgradesTab.ResumeLayout(false);
             this.godSpellsTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -311,6 +325,7 @@
         private System.Windows.Forms.Button House;
         private System.Windows.Forms.Button OfferingsWarehouse;
         private System.Windows.Forms.Button StartEpidemic;
+        private System.Windows.Forms.Button Level1_butt;
 
     }
 }

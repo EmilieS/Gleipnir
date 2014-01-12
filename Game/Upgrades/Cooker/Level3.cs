@@ -7,14 +7,13 @@ namespace Game
 {
     public class Level3 : UpgradesModel
     {
-        public Level3(Game g, UpgradesList _listOfUpgrades)
-            : base(g)
+
+        public Level3(Game g, Village v, UpgradesList _listOfUpgrades)
+            :base(g,v)
         {
             CostPrice = 800;
             IsActivated = false;
         }
-        internal override void AffectUpgrade()
-        {
-        }
+        
     }
 }

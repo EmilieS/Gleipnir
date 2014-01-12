@@ -11,6 +11,7 @@ namespace Game
     {
         //List<JobsModel> _jobs;// needs to be cleansed
         public JobList Jobs;
+        public UpgradesList _upgrades;
         int _familiesGold;
         double _villageFaith;
         double _villageHappiness;
@@ -39,6 +40,7 @@ namespace Game
             _familiesList = new FamilyInVillageList(this);
             //_jobs = CreateJobs();
             Jobs = new JobList(this);
+            _upgrades = new UpgradesList(this);
             _offeringsPointsPerTick.Current = 1;
         }
 
@@ -111,6 +113,7 @@ namespace Game
             EmptyHouseList.Remove(house);
         }
 
+        public UpgradesList Upgrades { get { return _upgrades; } }
         /// <summary>
         /// Gets the total gold for the village.
         /// Addition of all families' gold

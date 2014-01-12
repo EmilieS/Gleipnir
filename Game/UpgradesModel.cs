@@ -11,12 +11,15 @@ namespace Game
         string _name;
         int _costPrice;
         bool _isActivated;
+        Village _owner;
 
-        internal UpgradesModel(Game g)
+        internal UpgradesModel(Game g, Village v)
             : base(g)
         {
-
+            _owner = v;
+            IsActivated = false;
         }
+
         public string Name
         {
             get { return _name; }
@@ -28,9 +31,26 @@ namespace Game
             set { _costPrice = value; }
         }
 
-        public bool IsActivated { get { return _isActivated; } internal set { _isActivated = value; } }
-       
-        internal virtual void AffectUpgrade() {}
+        public bool IsActivated
+        {
+            get { return _isActivated; }
+            internal set { _isActivated = value; }
+        }
+        public void Buy()
+        {
+            if (VerififyPrerequisites())
+            {
+                _owner.Game.AddOrTakeFromOfferings(-CostPrice);
+                AffectUpgrade();
+                IsActivated = true;
+            }
+            else
+            {
+                IsActivated = false;
+            }
+        }
+        internal virtual bool VerififyPrerequisites() { return false; }
+        internal virtual void AffectUpgrade() { }
 
         internal override void OnDestroy()
         {
@@ -38,7 +58,8 @@ namespace Game
         }
         internal override void CloseStep(List<IEvent> eventList)
         {
-
+            if (_isActivated)
+                eventList.Add(new EventProperty<UpgradesModel>(this, "Upgrade"));
         }
     }
 }

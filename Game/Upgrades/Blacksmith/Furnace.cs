@@ -7,8 +7,8 @@ namespace Game
 {
     public class Furnace : UpgradesModel
     {
-        public Furnace(Game g, UpgradesList _listOfUpgrades)
-            :base(g)
+        public Furnace(Game g,Village v, UpgradesList _listOfUpgrades)
+            :base(g,v)
         {
         }
 
