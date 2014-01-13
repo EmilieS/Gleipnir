@@ -102,7 +102,6 @@ namespace Game
             _gold = ModifyGoldGeneration();
             foreach (Villager person in _workers)
             {
-                Debug.Assert(person.ParentFamily != null, "Family = null");
                 if (person.GenerateGoldPrerequisitesFromVillager())
                 {
                     person.ParentFamily.addToGoldStash(_gold);
@@ -202,7 +201,7 @@ namespace Game
         }
         internal override void Evolution()
         {
-
+            
             GenerateGold();
         }
         internal override void CloseStep(List<IEvent> eventList)

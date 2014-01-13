@@ -35,6 +35,7 @@ namespace Tests
             {
                 g.NextStep();
             }
+            Assert.That(family != null, "family is already dead");
             foreach (Villager v in family.FamilyMembers)
             {
                 if((v.Health & Healths.SICK)!=0)

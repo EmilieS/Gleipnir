@@ -277,6 +277,9 @@ namespace Game
 
         public bool GenerateGoldPrerequisitesFromVillager()
         {
+            if (IsDead())
+                return false;
+
             return true; //TODO
         }
 
@@ -360,9 +363,11 @@ namespace Game
             else { _sickTimer = 0; }
         }
 
-        public void Heal()
+         void Heal()//sert à rien
         {
+            
             _health.Current = Healths.NONE;
+
         }
         public void SetVirus(Virus virus)
         {
@@ -373,14 +378,16 @@ namespace Game
             virus.Epidemic.SickVillagerList.Add(this);
             _health.Current = _health.Current | Healths.SICK;
         }
-        public void SetHealed()
+        public void SetHealed( int amount=0)
         {
+            Debug.Assert(amount >= 0, "SetHealed, amount was negative");
             if (_virus != null)
             {
-
+                _virus.Epidemic.SickVillagerList.Remove(this);
                 _virus = null;
             }
             _health.Current = _health.Current & ~Healths.SICK;
+            _lifeExpectancy += amount;
         }
 
         int _callForHelpTickTimer;
