@@ -52,6 +52,7 @@
             this.happinessTab = new System.Windows.Forms.TabPage();
             this.VillagerList = new System.Windows.Forms.TabPage();
             this.godSpellsTab = new System.Windows.Forms.TabPage();
+            this.StartEarthquake = new System.Windows.Forms.Button();
             this.StartEpidemic = new System.Windows.Forms.Button();
             this.actionsMenu.SuspendLayout();
             this.buildingsTab.SuspendLayout();
@@ -316,6 +317,7 @@
             // godSpellsTab
             // 
             this.godSpellsTab.BackgroundImage = global::GamePages.Properties.Resources.ActionTab_action_background;
+            this.godSpellsTab.Controls.Add(this.StartEarthquake);
             this.godSpellsTab.Controls.Add(this.StartEpidemic);
             this.godSpellsTab.Location = new System.Drawing.Point(4, 4);
             this.godSpellsTab.Name = "godSpellsTab";
@@ -324,15 +326,28 @@
             this.godSpellsTab.TabIndex = 3;
             this.godSpellsTab.UseVisualStyleBackColor = true;
             // 
+            // StartEarthquake
+            // 
+            this.StartEarthquake.Image = global::GamePages.Properties.Resources.ButtonIcon_Earthquake;
+            this.StartEarthquake.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.StartEarthquake.Location = new System.Drawing.Point(24, 55);
+            this.StartEarthquake.Name = "StartEarthquake";
+            this.StartEarthquake.Size = new System.Drawing.Size(161, 30);
+            this.StartEarthquake.TabIndex = 1;
+            this.StartEarthquake.Text = "Tremblement de Terre";
+            this.StartEarthquake.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.StartEarthquake.UseVisualStyleBackColor = true;
+            this.StartEarthquake.Click += new System.EventHandler(this.StartEarthquake_Click);
+            // 
             // StartEpidemic
             // 
             this.StartEpidemic.Image = global::GamePages.Properties.Resources.ButtonIcon_epidemic;
             this.StartEpidemic.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.StartEpidemic.Location = new System.Drawing.Point(24, 19);
             this.StartEpidemic.Name = "StartEpidemic";
-            this.StartEpidemic.Size = new System.Drawing.Size(153, 30);
+            this.StartEpidemic.Size = new System.Drawing.Size(161, 30);
             this.StartEpidemic.TabIndex = 0;
-            this.StartEpidemic.Text = "Lance une Épidémie";
+            this.StartEpidemic.Text = "Épidémie Mortelle";
             this.StartEpidemic.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.StartEpidemic.UseVisualStyleBackColor = true;
             this.StartEpidemic.Click += new System.EventHandler(this.StartEpidemic_Click);
@@ -378,5 +393,6 @@
         private System.Windows.Forms.Label specialBuilding_title;
         private System.Windows.Forms.Label hobbyBuilding_title;
         public System.Windows.Forms.TabControl actionsMenu;
+        private System.Windows.Forms.Button StartEarthquake;
     }
 }

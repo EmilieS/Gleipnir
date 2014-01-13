@@ -243,6 +243,16 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ButtonIcon_Earthquake {
+            get {
+                object obj = ResourceManager.GetObject("ButtonIcon_Earthquake", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ButtonIcon_epidemic {
             get {
                 object obj = ResourceManager.GetObject("ButtonIcon_epidemic", resourceCulture);

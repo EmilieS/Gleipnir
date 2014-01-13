@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game.GodSpell
 {
-    class Earthquake : GameItem
+    public class Earthquake : GameItem
     {
         Village _village;
         int _force;

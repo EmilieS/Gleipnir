@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,23 +40,24 @@ namespace Game.Buildings
         }
         internal override void OnOnDestroy()
         {
+            Village.RemoveEmptyHouse(this);
             Village.Buildings.Remove(this);
         }
         internal override void JustCollapsed()
         {
-            if (Hp == 0 && _family != null)
+            if (Hp == 0 && Family != null)
             {
-
-                foreach (Villager v in _family.FamilyMembers)
+                foreach (Villager v in Family.FamilyMembers)
                 {
                     v.Kill();
                 }
-                _family = null;
+                Family = null;
             }
-            if (Hp == 0 && Family == null)
-            {
-                Village.RemoveEmptyHouse(this);
-            }
+            //Debug.Assert(Village.EmptyHouseList.Contains(this), "JustCollapsed - emptyHouseList");
+            //if (Hp == 0 && Family == null)
+            //{
+            //    Village.RemoveEmptyHouse(this);
+            //}
         }
 
         internal void FamilyDestroyed()

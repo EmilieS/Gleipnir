@@ -175,8 +175,8 @@ namespace Game.Buildings
                         eventList.Add(new BuildingNoHpEvent(this));
                         JustCollapsed();
                     }
-                    _destroyedTimer++;
                 }
+                _destroyedTimer++;
             }
             else
             {

@@ -542,6 +542,11 @@ namespace GamePages
             _board.UpdateSquares(row, col, Board.OfferginsWarehouseInt);
         }
         #endregion
+        public void SetEmptySquare(int row, int col)
+        {
+            _grid[row, col].Contents = Board.EmptyInt;
+            _board.UpdateSquares(row, col, Board.EmptyInt);
+        }
 
         // Grid Events
         private void SquareControl_MouseMove(object sender, MouseEventArgs e)
@@ -756,7 +761,7 @@ namespace GamePages
                                 int vPos = apo.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                 {
-                                    if (apo.Job != null)
+                                    if (apo.Job != null && apo.Hp > 0)
                                         _infoBox.SetJobInfo((Apothecary)apo.Job, GamePages.Properties.Resources.Building_ApothecaryOffice);
                                     else
                                         _infoBox.SetDestroyedBuilding(apo);
@@ -774,7 +779,7 @@ namespace GamePages
                                 int vPos = forge.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                 {
-                                    if (forge.Job != null)
+                                    if (forge.Job != null && forge.Hp > 0)
                                         _infoBox.SetJobInfo((Blacksmith)forge.Job, GamePages.Properties.Resources.Building_Forge);
                                     else
                                         _infoBox.SetDestroyedBuilding(forge);
@@ -792,7 +797,7 @@ namespace GamePages
                                 int vPos = uoc.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                 {
-                                    if (uoc.Job != null)
+                                    if (uoc.Job != null && uoc.Hp > 0)
                                         _infoBox.SetJobInfo((Construction_Worker)uoc.Job, GamePages.Properties.Resources.Building_UnionOfCrafter);
                                     else
                                         _infoBox.SetDestroyedBuilding(uoc);
@@ -810,7 +815,7 @@ namespace GamePages
                                 int vPos = resto.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                 {
-                                    if (resto.Job != null)
+                                    if (resto.Job != null && resto.Hp > 0)
                                         _infoBox.SetJobInfo((Cooker)resto.Job, GamePages.Properties.Resources.Building_Restaurant);
                                     else
                                         _infoBox.SetDestroyedBuilding(resto);
@@ -828,7 +833,7 @@ namespace GamePages
                                 int vPos = farm.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                 {
-                                    if (farm.Job != null)
+                                    if (farm.Job != null && farm.Hp > 0)
                                         _infoBox.SetJobInfo((Farmer)farm.Job, GamePages.Properties.Resources.Building_Farm);
                                     else
                                         _infoBox.SetDestroyedBuilding(farm);
@@ -846,7 +851,7 @@ namespace GamePages
                                 int vPos = gq.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                 {
-                                    if (gq.Job != null)
+                                    if (gq.Job != null && gq.Hp > 0)
                                         _infoBox.SetJobInfo((Militia)gq.Job, GamePages.Properties.Resources.Error);
                                     else
                                         _infoBox.SetDestroyedBuilding(gq);
@@ -864,7 +869,7 @@ namespace GamePages
                                 int vPos = mill.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                 {
-                                    if (mill.Job != null)
+                                    if (mill.Job != null && mill.Hp > 0)
                                         _infoBox.SetJobInfo((Miller)mill.Job, GamePages.Properties.Resources.Building_Mill);
                                     else
                                         _infoBox.SetDestroyedBuilding(mill);
@@ -882,7 +887,7 @@ namespace GamePages
                                 int vPos = shop.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                 {
-                                    if (shop.Job != null)
+                                    if (shop.Job != null && shop.Hp > 0)
                                         _infoBox.SetJobInfo((Tailor)shop.Job, GamePages.Properties.Resources.Building_ClothesShop);
                                     else
                                         _infoBox.SetDestroyedBuilding(shop);
@@ -899,7 +904,10 @@ namespace GamePages
                                 int hPos = bath.HorizontalPos;
                                 int vPos = bath.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
-                                    _infoBox.SetOtherBuildingsInfo(bath, GamePages.Properties.Resources.Error);
+                                    if (bath.Hp > 0)
+                                        _infoBox.SetOtherBuildingsInfo(bath, GamePages.Properties.Resources.Error);
+                                    else
+                                        _infoBox.SetDestroyedBuilding(bath);
                             }
                             break;
                         }
@@ -912,7 +920,10 @@ namespace GamePages
                                 int hPos = brothel.HorizontalPos;
                                 int vPos = brothel.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
-                                    _infoBox.SetOtherBuildingsInfo(brothel, GamePages.Properties.Resources.Error);
+                                    if (brothel.Hp > 0)
+                                        _infoBox.SetOtherBuildingsInfo(brothel, GamePages.Properties.Resources.Error);
+                                    else
+                                        _infoBox.SetDestroyedBuilding(brothel);
                             }
                             break;
                         }
@@ -925,7 +936,10 @@ namespace GamePages
                                 int hPos = party.HorizontalPos;
                                 int vPos = party.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
-                                    _infoBox.SetOtherBuildingsInfo(party, GamePages.Properties.Resources.Error);
+                                    if (party.Hp > 0)
+                                        _infoBox.SetOtherBuildingsInfo(party, GamePages.Properties.Resources.Error);
+                                    else
+                                        _infoBox.SetDestroyedBuilding(party);
                             }
                             break;
                         }
@@ -938,7 +952,10 @@ namespace GamePages
                                 int hPos = tavern.HorizontalPos;
                                 int vPos = tavern.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
-                                    _infoBox.SetOtherBuildingsInfo(tavern, GamePages.Properties.Resources.Error);
+                                    if (tavern.Hp > 0)
+                                        _infoBox.SetOtherBuildingsInfo(tavern, GamePages.Properties.Resources.Error);
+                                    else
+                                        _infoBox.SetDestroyedBuilding(tavern);
                             }
                             break;
                         }
@@ -951,7 +968,10 @@ namespace GamePages
                                 int hPos = theater.HorizontalPos;
                                 int vPos = theater.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
-                                    _infoBox.SetOtherBuildingsInfo(theater, GamePages.Properties.Resources.Error);
+                                    if (theater.Hp > 0)
+                                        _infoBox.SetOtherBuildingsInfo(theater, GamePages.Properties.Resources.Error);
+                                    else
+                                        _infoBox.SetDestroyedBuilding(theater);
                             }
                             break;
                         }
@@ -965,7 +985,7 @@ namespace GamePages
                                 int vPos = table.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                 {
-                                    if (table != null)
+                                    if (table != null && table.Hp > 0)
                                         _infoBox.SetTableInfo(table);
                                     else
                                         _infoBox.SetDestroyedBuilding(table);
@@ -983,10 +1003,15 @@ namespace GamePages
                                 int vPos = house.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                 {
-                                    if (house.Family != null)
-                                        _infoBox.SetFamilyHouseInfo(house.Family);
+                                    if (house.Hp > 0)
+                                    {
+                                        if (house.Family != null)
+                                            _infoBox.SetFamilyHouseInfo(house.Family);
+                                        else
+                                            _infoBox.SetEmptyHouseInfo(house);
+                                    }
                                     else
-                                        _infoBox.SetEmptyHouseInfo(house);
+                                        _infoBox.SetDestroyedBuilding(house);
                                 }
                             }
                             break;
@@ -1000,7 +1025,10 @@ namespace GamePages
                                 int hPos = chapel.HorizontalPos;
                                 int vPos = chapel.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
-                                    _infoBox.SetOtherBuildingsInfo(chapel, GamePages.Properties.Resources.Error);
+                                    if (chapel.Hp > 0)
+                                        _infoBox.SetOtherBuildingsInfo(chapel, GamePages.Properties.Resources.Error);
+                                    else
+                                        _infoBox.SetDestroyedBuilding(chapel);
                             }
                             break;
                         }
@@ -1013,7 +1041,10 @@ namespace GamePages
                                 int hPos = warehouse.HorizontalPos;
                                 int vPos = warehouse.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
-                                    _infoBox.SetOtherBuildingsInfo(warehouse, GamePages.Properties.Resources.Error);
+                                    if (warehouse.Hp > 0)
+                                        _infoBox.SetOtherBuildingsInfo(warehouse, GamePages.Properties.Resources.Error);
+                                    else
+                                        _infoBox.SetDestroyedBuilding(warehouse);
                             }
                             break;
                         }

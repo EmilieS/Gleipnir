@@ -73,6 +73,7 @@ namespace GamePages
         {
         }
 
+        // Buildings Click
         #region Jobs Buildings Buttons
         private void ApothicaryOffice_Click(object sender, EventArgs e)
         {
@@ -160,6 +161,7 @@ namespace GamePages
         }
         #endregion
 
+        // God Spells Click
         private void StartEpidemic_Click(object sender, EventArgs e)
         {
             if (!isEpidemicLaunched)
@@ -167,6 +169,10 @@ namespace GamePages
                 Game.GodSpell.Epidemic epidemic = new Game.GodSpell.Epidemic(_page.Game, _page.Game.Villages[0].FamiliesList[0].FamilyMembers[0]);
                 isEpidemicLaunched = true;
             }
+        }
+        private void StartEarthquake_Click(object sender, EventArgs e)
+        {
+            Game.GodSpell.Earthquake earthquake = new Game.GodSpell.Earthquake(_page.Game, _page.Game.Villages[0]);
         }
         
         internal void ShowVillagerListInFamily(Family fam)

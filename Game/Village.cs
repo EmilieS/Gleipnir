@@ -57,15 +57,21 @@ namespace Game
             var name = Game.NameList.NextName;
             var newFamily = new Family(Game, mother, father, name);
             _familiesList.Add(newFamily);
-            Buildings.House house;
-            if (EmptyHouseList.Count == 0)
+            Buildings.House house = null;
+
+            int i = 0;
+            while (i < EmptyHouseList.Count && house == null)
+            {
+                if (EmptyHouseList[i].Hp > 0)
+                {
+                    house = EmptyHouseList[0];
+                    RemoveEmptyHouse(house);
+                }
+                i++;
+            }
+            if (house == null)
             {
                 house = new Buildings.House(this, Jobs.Construction_Worker.Workers.Count > 0);
-            }
-            else
-            {
-                house = EmptyHouseList[0];
-                EmptyHouseList.Remove(house);
             }
             house.Family = newFamily;
             newFamily.House = house;
@@ -111,7 +117,7 @@ namespace Game
         }
         internal void RemoveEmptyHouse(Buildings.House house)
         {
-            Debug.Assert(EmptyHouseList.Contains(house));
+            Debug.Assert(EmptyHouseList.Contains(house), "EmptyHouseList not have this house");
             EmptyHouseList.Remove(house);
         }
 
@@ -284,32 +290,6 @@ namespace Game
             }
             else throw new ArgumentOutOfRangeException();
         }
-
-        //public List<JobsModel> JobsList { get { return _jobs; } }
-
-        /*private List<JobsModel> CreateJobs()
-        {
-            Debug.Assert(Game != null, "Game doesn't exist!");
-            List<JobsModel> jobList = new List<JobsModel>();
-            var apothecary = new Apothecary(Game, "Apoticaire");
-            var blacksmith = new Blacksmith(Game, "Forgeron");
-            var construction_worker = new Construction_Worker(Game, "Ouvrier");
-            var cooker = new Cooker(Game, "Cuisinier");
-            var farmer = new Farmer(Game, "Fermier");
-            var militia = new Militia(Game, "Milice");
-            var miller = new Miller(Game, "Meunier");
-            var tailor = new Tailor(Game, "Tailleur");
-            jobList.Add(apothecary);
-            jobList.Add(blacksmith);
-            jobList.Add(construction_worker);
-            jobList.Add(cooker);
-            jobList.Add(farmer);
-            jobList.Add(militia);
-            jobList.Add(miller);
-            jobList.Add(tailor);
-            return jobList;
-        }
-*/
 
         internal void EmptyFamiliesCleaner(List<IEvent> eventList)
         {

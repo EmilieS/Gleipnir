@@ -259,6 +259,7 @@
     <None Include="Resources\ActionTab_happiness_background.png" />
     <None Include="Resources\ActionTab_villagerList_background.png" />
     <None Include="Resources\ButtonIcon_epidemic.png" />
+    <None Include="Resources\ButtonIcon_Earthquake.png" />
     <Content Include="Resources\Extra\firstNameList.txt" />
     <Content Include="Resources\Extra\nameList.txt" />
     <Content Include="Resources\Extra\scenario.txt" />

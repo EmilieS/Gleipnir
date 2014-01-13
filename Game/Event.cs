@@ -60,9 +60,12 @@ namespace Game
     }
     public class BuildingDestroyedEvent : Event<Buildings.BuildingsModel>
     {
+        Buildings.BuildingsModel _building;
+
         internal BuildingDestroyedEvent(Buildings.BuildingsModel building)
             : base(building)
         {
+            _building = building;
         }
 
         override public void PublishMessage(IWindow b)
@@ -70,6 +73,11 @@ namespace Game
             b.PushTrace(String.Format("{0} is Destroyed", GameItem.Name));
         }
 
+        public override void Do(IWindow b)
+        {
+            base.Do(b);
+            b.SetEmptySquare(_building.HorizontalPos, _building.VerticalPos);
+        }
     }
     public class BuildingCreatedEvent : Event<Buildings.BuildingsModel>
     {

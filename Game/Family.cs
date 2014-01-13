@@ -278,7 +278,9 @@ namespace Game
             Debug.Assert(_ownerVillage != null, "(DieOrIsAlive) ownerVillage == null !!!!!!");
             if (FamilyMembers.Count == 0)
             {
-                eventList.Add(new FamilyEndEvent(this)); Destroy();
+                OwnerVillage.AddEmptyHouse(House);
+                eventList.Add(new FamilyEndEvent(this));
+                Destroy();
                 Debug.Assert(Game == null, "(DieOrIsAlive) game is not null !!!!!!");//ici en premier.
             }
         }
