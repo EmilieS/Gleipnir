@@ -8,7 +8,7 @@ namespace Game.GodSpell
 {
     public class Heal : GameItem
     {
-        Heal(Game g)
+        public Heal(Game g)
             : base(g)
         {   
         
