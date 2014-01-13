@@ -283,6 +283,26 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Gender_Female {
+            get {
+                object obj = ResourceManager.GetObject("Gender_Female", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Gender_Male {
+            get {
+                object obj = ResourceManager.GetObject("Gender_Male", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GeneralPage_background {
             get {
                 object obj = ResourceManager.GetObject("GeneralPage_background", resourceCulture);
@@ -466,6 +486,16 @@ namespace GamePages.Properties {
         internal static System.Drawing.Bitmap Stats_ObjectName {
             get {
                 object obj = ResourceManager.GetObject("Stats_ObjectName", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Stats_Offerings {
+            get {
+                object obj = ResourceManager.GetObject("Stats_Offerings", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

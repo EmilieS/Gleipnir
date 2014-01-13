@@ -15,9 +15,9 @@ namespace GamePages
     public partial class TabIndex : UserControl
     {
         readonly GeneralPage _page;
-        bool _isOnBought;
-        bool _passed;
-        bool _isEpidemicLaunched;
+        bool isOnBought;
+        bool passed;
+        bool isEpidemicLaunched;
         List<VillagerBannerUC> ListOfVillagersToShow;
         int positionX;
         int positionY;
@@ -27,10 +27,10 @@ namespace GamePages
             InitializeComponent();
 
             _page = p;
-            _isOnBought = false;
+            isOnBought = false;
 
             positionX = 0;
-            positionY = 0;
+            positionY = 10;
             
             // Create imageList
             ImageList imageList = new ImageList();
@@ -65,8 +65,8 @@ namespace GamePages
 
         public bool IsOnBought
         {
-            get { return _isOnBought; }
-            set { _isOnBought = value; }
+            get { return isOnBought; }
+            set { isOnBought = value; }
         }
 
         internal void ShowUnboughtBuildings()
@@ -162,18 +162,18 @@ namespace GamePages
 
         private void StartEpidemic_Click(object sender, EventArgs e)
         {
-            if (!_isEpidemicLaunched)
+            if (!isEpidemicLaunched)
             {
                 Game.GodSpell.Epidemic epidemic = new Game.GodSpell.Epidemic(_page.Game, _page.Game.Villages[0].FamiliesList[0].FamilyMembers[0]);
-                _isEpidemicLaunched = true;
+                isEpidemicLaunched = true;
             }
         }
         
         internal void ShowVillagerListInFamily(Family fam)
         {
-            if (_passed == false)
+            if (passed == false)
             {
-                _passed = true;
+                passed = true;
                 ListOfVillagersToShow = new List<VillagerBannerUC>();
             }
             DestroyVillagerList();
@@ -182,18 +182,22 @@ namespace GamePages
             {
                 VillagerBannerUC tmp = new VillagerBannerUC();
                 ListOfVillagersToShow.Add(tmp);
+                if(fam.FamilyMembers[i].Gender == Genders.FEMALE)
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
+                else
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
                 tmp.VillagerName.Text = fam.FamilyMembers[i].FirstName + " " + fam.FamilyMembers[i].Name;
                 this.VillagerList.Controls.Add(tmp);
                 tmp.Show();
                 tmp.Location = new System.Drawing.Point(positionX, positionY);
-                positionY += 65;
+                positionY += 62;
             }
         }
         internal void ShowWorkersInJob(JobsModel job)
         {
-            if (_passed == false)
+            if (passed == false)
             {
-                _passed = true;
+                passed = true;
                 ListOfVillagersToShow = new List<VillagerBannerUC>();
             }
             DestroyVillagerList();
@@ -202,11 +206,15 @@ namespace GamePages
             {
                 VillagerBannerUC tmp = new VillagerBannerUC();
                 ListOfVillagersToShow.Add(tmp);
+                if (job.Workers[i].Gender == Genders.FEMALE)
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
+                else
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
                 tmp.VillagerName.Text = job.Workers[i].FirstName + " " + job.Workers[i].Name;
                 this.VillagerList.Controls.Add(tmp);
                 tmp.Show();
                 tmp.Location = new System.Drawing.Point(positionX, positionY);
-                positionY += 65;
+                positionY += 62;
             }
         }
         internal void DestroyVillagerList()
