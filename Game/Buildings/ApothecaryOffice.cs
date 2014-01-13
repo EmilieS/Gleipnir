@@ -24,7 +24,7 @@ namespace Game.Buildings
 
         public void SetGoodHealth(Villager sickVillager)
         {
-            sickVillager.Heal();
+            sickVillager.SetHealed();
         }
 
         override internal void AddToList()

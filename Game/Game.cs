@@ -16,7 +16,7 @@ namespace Game
         NameGenerator _firstNameGenerator;
 
         // GodSpell variables
-        readonly List<GodSpell.Epidemic> _currentEpidemicList;
+        internal readonly List<GodSpell.Epidemic> _currentEpidemicList;
 
         // Historized values
         readonly HistorizedValue<int, Game> _totalGold;
