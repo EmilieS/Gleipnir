@@ -8,7 +8,7 @@ namespace Game.GodSpell
 {
     public class Epidemic : GameItem
     {
-        Game game = new Game();
+        //Game game = new Game();
         //Villager affectedVillager;
         //Family ParentFamily;
         Virus _virus;

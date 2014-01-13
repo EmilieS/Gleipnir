@@ -8,12 +8,19 @@ namespace Game.Buildings
 {
     public class Farm : BuildingsModel
     {
-        public Farm(Village v)
+        internal string _name;
+        internal JobsModel _job;
+
+        public Farm(Village v, JobsModel job)
             : base(v)
         {
             Name = "Ferme";
+            _name = Name;
             Hp = MaxHp = 50;
+            _job = job;
+            this.CostPrice = 100;
         }
+
         override internal void AddToList()
         {
             Village.Buildings.Add(this);
@@ -33,5 +40,8 @@ namespace Game.Buildings
                 }
             }
         }
+
+        public string BuildingName { get { return _name; } }
+        public JobsModel Job { get { return _job; } }
     }
 }

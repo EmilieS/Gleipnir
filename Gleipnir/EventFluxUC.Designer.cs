@@ -35,11 +35,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.AutoScrollMinSize = new System.Drawing.Size(0, 600);
+            this.BackColor = System.Drawing.Color.Transparent;
+            this.BackgroundImage = global::GamePages.Properties.Resources.EventFlux_background;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Location = new System.Drawing.Point(870, 40);
             this.Name = "EventFluxUC";
-            this.Size = new System.Drawing.Size(270, 400);
+            this.Size = new System.Drawing.Size(264, 400);
             this.ResumeLayout(false);
 
         }

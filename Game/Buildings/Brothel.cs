@@ -14,16 +14,18 @@ namespace Game.Buildings
         {
             Name = "Maison Close";
             Hp = MaxHp = 50;
+            this.CostPrice = 300;
         }
+
         public double SetHappiness
         {
             get { return 8; }
         }
-
         public int SetEnterPrice
         {
             get { return 12; }
         }
+
         override internal void AddToList()
         {
             Village.Buildings.Add(this);

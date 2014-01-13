@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    public class House: BuildingsModel
+    public class House : BuildingsModel
     {
         Family _family;
-        public House(Village v, bool IsAProperHouse=true)
+
+        public House(Village v, bool IsAProperHouse = true)
             : base(v)
         {
             Name = "Maison";
@@ -23,8 +24,15 @@ namespace Game.Buildings
                 Hp = 5;
                 MaxHp = 15;
             }
+            this.CostPrice = 70;
         }
-        public Family Family { get; set; }
+
+        public Family Family
+        {
+            get { return _family; }
+            set { _family = value; }
+        }
+
         override internal void AddToList()
         {
             _village.Buildings.Add(this);
@@ -33,13 +41,11 @@ namespace Game.Buildings
         {
             Village.Buildings.Remove(this);
         }
-
-
         internal override void JustCollapsed()
         {
             if (Hp == 0 && _family != null)
             {
-                
+
                 foreach (Villager v in _family.FamilyMembers)
                 {
                     v.Kill();
@@ -61,5 +67,4 @@ namespace Game.Buildings
             }
         }
     }
-    
 }

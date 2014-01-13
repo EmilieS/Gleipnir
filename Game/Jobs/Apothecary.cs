@@ -1,4 +1,5 @@
 ﻿using Game;
+using Game.Buildings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ namespace Game
             _job = Jobs.APOTHECARY;
             _coefficient = 15;
         }
+
         internal override bool AddPersonPrerequisites()
         {
             if (Owner.Owner.Buildings.ApothecaryOfficeList.Count > 0)
@@ -31,9 +33,7 @@ namespace Game
             do
             {
                 if (Owner.Owner.Buildings.ApothecaryOfficeList[i].Hp > 0)
-                {
                     return true;
-                }
                 i++;
             } while (i < Owner.Owner.Buildings.ApothecaryOfficeList.Count);
             return false;

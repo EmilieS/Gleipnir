@@ -45,7 +45,10 @@
     <Compile Include="Upgrades\Blacksmith\Plow.cs" />
     <Compile Include="Upgrades\Blacksmith\Saw.cs" />
     <Compile Include="Buildings\BuildingsList.cs" />
+    <Compile Include="Buildings\ClothesShop.cs" />
     <Compile Include="Buildings\House.cs" />
+    <Compile Include="Buildings\IBuildingsJobs.cs" />
+    <Compile Include="Buildings\MilitaryCamp.cs" />
     <Compile Include="Upgrades\Cooker\Level1.cs" />
     <Compile Include="Upgrades\Cooker\Level2.cs" />
     <Compile Include="Upgrades\Cooker\Level3.cs" />
@@ -66,6 +69,7 @@
     <Compile Include="GodSpell\Deluge.cs" />
     <Compile Include="GodSpell\Earthquake.cs" />
     <Compile Include="GodSpell\Epidemic.cs" />
+    <Compile Include="GodSpell\Heal.cs" />
     <Compile Include="Virus.cs" />
     <Compile Include="Jobs\Apothecary.cs" />
     <Compile Include="Buildings\ApothecaryOffice.cs" />

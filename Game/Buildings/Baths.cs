@@ -13,7 +13,9 @@ namespace Game.Buildings
         {
             Name = "Thermes";
             Hp = MaxHp = 50;
+            this.CostPrice = 500;
         }
+
         public double SetHappiness
         {
             get { return 3; }
@@ -22,6 +24,7 @@ namespace Game.Buildings
         {
             get { return 200; }
         }
+
         override internal void AddToList()
         {
             Village.Buildings.Add(this);

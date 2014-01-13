@@ -139,14 +139,14 @@ namespace Game
             }
         }
 
-
         /// <summary>
         /// Gets the villager's name
         /// </summary>
-        public string Name
-        {
-            get { return _name; }
-        }
+        public string FirstName { get { return _name; } }
+        /// <summary>
+        /// Gets the family name
+        /// </summary>
+        public string Name { get { return _parentFamily.Name; } }
 
         /// <summary>
         /// Sets the new life expectancy no matter what time was left.
@@ -171,7 +171,8 @@ namespace Game
             if (_age < _lifeExpectancy && _age + timeLeft < _lifeExpectancy)
             {
                 _lifeExpectancy = _age + timeLeft;
-            }           
+            }
+
         }
 
         /// <summary>
@@ -203,8 +204,6 @@ namespace Game
             _health.Current = _health.Current | Healths.EARTHQUAKE_INJURED;
             SetLifeExpectancyLeft(3);
         }
-
-
         /// <summary>
         /// can be negative to take away happiness.
         /// </summary>
@@ -278,12 +277,11 @@ namespace Game
 
         public bool GenerateGoldPrerequisitesFromVillager()
         {
-            if (this.ActivityStatus == ActivityStatus.WORKING)
+            if (this.ActivityStatus == ActivityStatus.WORKING && !IsDead())
                 return true;
             else
                 return false;
         }
-
 
         //====================WORLD=TICK=STUFF============================
         #region called by ImpactHappiness
@@ -365,7 +363,7 @@ namespace Game
             else { _sickTimer = 0; }
         }
 
-        public void Heal()
+         void Heal()//sert à rien
         {
             _health.Current = Healths.NONE;
         }
@@ -378,14 +376,16 @@ namespace Game
             virus.Epidemic.SickVillagerList.Add(this);
             _health.Current = _health.Current | Healths.SICK;
         }
-        public void SetHealed()
+        public void SetHealed( int amount=0)
         {
+            Debug.Assert(amount >= 0, "SetHealed, amount was negative");
             if (_virus != null)
             {
-
+                _virus.Epidemic.SickVillagerList.Remove(this);
                 _virus = null;
             }
             _health.Current = _health.Current & ~Healths.SICK;
+            _lifeExpectancy += amount;
         }
 
         int _callForHelpTickTimer;

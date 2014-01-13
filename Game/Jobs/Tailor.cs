@@ -10,6 +10,8 @@ namespace Game
 {
     public class Tailor : JobsModel
     {
+        double _happinessAddition;
+
         public Tailor(Game game, JobList list, string name)
             : base(game, list, name)
         {
@@ -17,7 +19,7 @@ namespace Game
             _coefficient = 15;
             _happinessAddition = 1.4;
         }
-        double _happinessAddition;
+
         /// <summary>
         /// Add amount of happiness for all others villagers
         /// </summary>

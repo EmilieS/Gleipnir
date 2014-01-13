@@ -29,79 +29,87 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomepageUC));
-            this.Exit = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.exit = new System.Windows.Forms.Button();
+            this.loadGame = new System.Windows.Forms.Button();
+            this.settings = new System.Windows.Forms.Button();
+            this.newGame = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // Exit
+            // exit
             // 
-            this.Exit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.Exit.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Exit.BackgroundImage")));
-            this.Exit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Exit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Exit.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Exit.Location = new System.Drawing.Point(3, 182);
-            this.Exit.Name = "Exit";
-            this.Exit.Size = new System.Drawing.Size(214, 50);
-            this.Exit.TabIndex = 7;
-            this.Exit.Text = "Quitter";
-            this.Exit.UseVisualStyleBackColor = false;
-            this.Exit.Click += new System.EventHandler(this.Exit_Click);
+            this.exit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.exit.BackColor = System.Drawing.Color.Transparent;
+            this.exit.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("exit.BackgroundImage")));
+            this.exit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.exit.Font = new System.Drawing.Font("Malgun Gothic", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exit.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.exit.Location = new System.Drawing.Point(3, 182);
+            this.exit.Name = "exit";
+            this.exit.Size = new System.Drawing.Size(214, 50);
+            this.exit.TabIndex = 7;
+            this.exit.Text = "Quitter";
+            this.exit.UseVisualStyleBackColor = false;
+            this.exit.Click += new System.EventHandler(this.Exit_Click);
             // 
-            // button3
+            // loadGame
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.Gainsboro;
-            this.button3.Location = new System.Drawing.Point(3, 62);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(214, 54);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Charger";
-            this.button3.UseVisualStyleBackColor = false;
+            this.loadGame.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.loadGame.BackColor = System.Drawing.Color.Transparent;
+            this.loadGame.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("loadGame.BackgroundImage")));
+            this.loadGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.loadGame.Font = new System.Drawing.Font("Malgun Gothic", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadGame.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.loadGame.Location = new System.Drawing.Point(3, 62);
+            this.loadGame.Name = "loadGame";
+            this.loadGame.Size = new System.Drawing.Size(214, 54);
+            this.loadGame.TabIndex = 6;
+            this.loadGame.Text = "Charger";
+            this.loadGame.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // settings
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.button2.Location = new System.Drawing.Point(3, 122);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(214, 54);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Paramètres";
-            this.button2.UseVisualStyleBackColor = false;
+            this.settings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.settings.BackColor = System.Drawing.Color.Transparent;
+            this.settings.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("settings.BackgroundImage")));
+            this.settings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.settings.Font = new System.Drawing.Font("Malgun Gothic", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settings.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.settings.Location = new System.Drawing.Point(3, 122);
+            this.settings.Name = "settings";
+            this.settings.Size = new System.Drawing.Size(214, 54);
+            this.settings.TabIndex = 5;
+            this.settings.Text = "Paramètres";
+            this.settings.UseVisualStyleBackColor = false;
             // 
-            // button1
+            // newGame
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.button1.Location = new System.Drawing.Point(3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(214, 54);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Créer une partie";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.new_game);
+            this.newGame.AccessibleName = "";
+            this.newGame.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.newGame.BackColor = System.Drawing.Color.Transparent;
+            this.newGame.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("newGame.BackgroundImage")));
+            this.newGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.newGame.Font = new System.Drawing.Font("Malgun Gothic", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newGame.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.newGame.Location = new System.Drawing.Point(3, 2);
+            this.newGame.Name = "newGame";
+            this.newGame.Size = new System.Drawing.Size(214, 54);
+            this.newGame.TabIndex = 4;
+            this.newGame.Text = "Créer une partie";
+            this.newGame.UseVisualStyleBackColor = false;
+            this.newGame.Click += new System.EventHandler(this.new_game);
             // 
             // HomepageUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.Exit);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Location = new System.Drawing.Point(400, 200);
+            this.BackgroundImage = global::GamePages.Properties.Resources.GeneralPage_background;
+            this.Controls.Add(this.exit);
+            this.Controls.Add(this.loadGame);
+            this.Controls.Add(this.settings);
+            this.Controls.Add(this.newGame);
+            this.Location = new System.Drawing.Point(470, 250);
             this.Name = "HomepageUC";
             this.Size = new System.Drawing.Size(219, 232);
             this.ResumeLayout(false);
@@ -110,9 +118,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button Exit;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button exit;
+        private System.Windows.Forms.Button loadGame;
+        private System.Windows.Forms.Button settings;
+        private System.Windows.Forms.Button newGame;
     }
 }

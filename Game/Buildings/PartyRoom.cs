@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-     public class PartyRoom : BuildingsModel
+    public class PartyRoom : BuildingsModel
     {
         public PartyRoom(Village v)
-            : base (v)
+            : base(v)
         {
-            Name = "Salle des fêtes";
+            Name = "Salle des Fêtes";
             Hp = MaxHp = 50;
+            this.CostPrice = 250;
         }
+
         override internal void AddToList()
         {
             Village.Buildings.Add(this);

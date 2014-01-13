@@ -34,9 +34,13 @@
             // TextLabel
             // 
             this.TextLabel.AutoSize = true;
-            this.TextLabel.Location = new System.Drawing.Point(3, 61);
+            this.TextLabel.BackColor = System.Drawing.Color.Peru;
+            this.TextLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.TextLabel.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextLabel.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.TextLabel.Location = new System.Drawing.Point(5, 43);
             this.TextLabel.Name = "TextLabel";
-            this.TextLabel.Size = new System.Drawing.Size(105, 13);
+            this.TextLabel.Size = new System.Drawing.Size(125, 17);
             this.TextLabel.TabIndex = 0;
             this.TextLabel.Text = "Bienvenue à Ragnar";
             this.TextLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -46,8 +50,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackColor = System.Drawing.Color.Transparent;
+            this.BackgroundImage = global::GamePages.Properties.Resources.ScenarioBox_background;
             this.Controls.Add(this.TextLabel);
+            this.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Location = new System.Drawing.Point(220, 450);
             this.Name = "ScenarioBox";
             this.Size = new System.Drawing.Size(640, 150);

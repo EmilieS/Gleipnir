@@ -87,6 +87,12 @@
     <Compile Include="InGameMenu.Designer.cs">
       <DependentUpon>InGameMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoadingUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LoadingUC.Designer.cs">
+      <DependentUpon>LoadingUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="ScenarioBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -149,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InGameMenu.resx">
       <DependentUpon>InGameMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadingUC.resx">
+      <DependentUpon>LoadingUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ScenarioBox.resx">
       <DependentUpon>ScenarioBox.cs</DependentUpon>
@@ -217,14 +226,59 @@
     <None Include="Resources\button_homepage1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\ScenarioBox_background.png" />
+    <None Include="Resources\Stats_ObjectName.png" />
+    <None Include="Resources\Stats_Population.png" />
+    <None Include="Resources\Stats_Members.png" />
+    <None Include="Resources\Stats_Happiness.png" />
+    <None Include="Resources\Stats_Gold.png" />
+    <None Include="Resources\Stats_Faith.png" />
+    <None Include="Resources\Error.png" />
+    <None Include="Resources\ActionTab_building_background.png" />
+    <None Include="Resources\EventFlux_background.png" />
+    <None Include="Resources\Building_ApothecaryOffice.png" />
+    <None Include="Resources\Building_ClothesShop.png" />
+    <None Include="Resources\Building_Farm.png" />
+    <None Include="Resources\Building_Forge.png" />
+    <None Include="Resources\Building_HealthPoints.png" />
+    <None Include="Resources\Building_House.png" />
+    <None Include="Resources\Building_Mill.png" />
+    <None Include="Resources\Building_Restaurant.png" />
+    <None Include="Resources\Building_RestaurantBlue.png" />
+    <None Include="Resources\Building_UnionOfCrafter.png" />
+    <None Include="Resources\Error1.png" />
+    <None Include="Resources\EventFlux_background1.png" />
+    <None Include="Resources\Building_Table.png" />
+    <None Include="Resources\Building_Destroyed.png" />
+    <None Include="Resources\ActionTab_action_background.png" />
+    <None Include="Resources\ActionTab_happiness_background.png" />
+    <None Include="Resources\ActionTab_villagerList_background.png" />
+    <None Include="Resources\ButtonIcon_epidemic.png" />
     <Content Include="Resources\Extra\firstNameList.txt" />
     <Content Include="Resources\Extra\nameList.txt" />
     <Content Include="Resources\Extra\scenario.txt" />
     <Content Include="Resources\firstNameList.txt" />
+    <None Include="Resources\InformationUC_background.png" />
+    <None Include="Resources\GeneralPage_background.png" />
+    <None Include="Resources\logo_lava_salpha.png" />
+    <None Include="Resources\LoadingUC.png" />
+    <None Include="Resources\GameEventUC_backgroung.png" />
+    <None Include="Resources\InformationBox_house_background.png" />
+    <None Include="Resources\InformationBox_background.png" />
+    <None Include="Resources\GameEventUC_backgroung1.png" />
+    <None Include="Resources\GeneralPage_background1.png" />
+    <None Include="Resources\InformationBox_background1.png" />
+    <None Include="Resources\InformationBox_house_background1.png" />
+    <None Include="Resources\InformationBox_job_background.png" />
+    <None Include="Resources\InformationBox_others_background.png" />
+    <None Include="Resources\InformationBox_table_background.png" />
+    <None Include="Resources\InformationUC_background1.png" />
+    <None Include="Resources\Loading_Text.png" />
+    <None Include="Resources\LoadingUC1.png" />
+    <None Include="Resources\InformationBox_destroyed_background.png" />
     <Content Include="Resources\nameList.txt" />
-    <Content Include="Resources\carte.png" />
-    <Content Include="Resources\emptyPic.png" />
-    <Content Include="Resources\testPic.png" />
+    <None Include="Resources\Sablier.png" />
+    <None Include="Resources\Sablier2.png" />
     <Content Include="Resources\scenario.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

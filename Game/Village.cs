@@ -62,7 +62,7 @@ namespace Game
             Buildings.House house;
             if (EmptyHouseList.Count == 0)
             {
-                house = new Buildings.House(this, Jobs.Construction_worker.Workers.Count > 0);
+                house = new Buildings.House(this, Jobs.Construction_Worker.Workers.Count > 0);
             }
             else
             {
@@ -75,7 +75,6 @@ namespace Game
         }
         public Family CreateFamilyFromScratch()
         {
-            //Debug.Assert(_thisGame != null, "_thisGame est null!");
             Debug.Assert(Game != null, "Game est null!");
             Villager VillagerAM = new Villager(Game, Genders.MALE, Game.FirstNameList.NextName);
             Villager VillagerAF = new Villager(Game, Genders.FEMALE, Game.FirstNameList.NextName);
@@ -100,12 +99,17 @@ namespace Game
             if (VillagerAM.Job != null) { VillagerAM.Job.RemovePerson(VillagerAM); }
             mothersJob.AddPerson(VillagerAF);
             fathersJob.AddPerson(VillagerAM);
+            Buildings.House house = new Buildings.House(this);
+            house.Family = newFamily;
+            newFamily.House = house;
             return newFamily;
         }
-        internal void AddEmptyHouse(Buildings.House house)
+        
+        public void AddEmptyHouse(Buildings.House house)
         {
             Debug.Assert(!EmptyHouseList.Contains(house));
-            EmptyHouseList.Add(house);
+            if(!EmptyHouseList.Contains(house))
+                EmptyHouseList.Add(house);
         }
         internal void RemoveEmptyHouse(Buildings.House house)
         {
@@ -244,7 +248,6 @@ namespace Game
         /// tax per villager per tick.
         /// /// </summary>
         public int OfferingsPointsPerTick { get { return _offeringsPointsPerTick.Current; } }
-
 
         /// <summary>
         /// Modify number offering points generated

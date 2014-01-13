@@ -6,14 +6,21 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-     public class Mill : BuildingsModel
+    public class Mill : BuildingsModel
     {
-        public Mill(Village v)
+        internal string _name;
+        internal JobsModel _job;
+
+        public Mill(Village v, JobsModel job)
             : base(v)
         {
             Name = "Moulin";
+            _name = Name;
             Hp = MaxHp = 50;
+            _job = job;
+            this.CostPrice = 375;
         }
+
         override internal void AddToList()
         {
             Village.Buildings.Add(this);
@@ -33,5 +40,8 @@ namespace Game.Buildings
                 }
             }
         }
+
+        public string BuildingName { get { return _name; } }
+        public JobsModel Job { get { return _job; } }
     }
 }
