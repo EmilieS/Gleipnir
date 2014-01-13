@@ -11,6 +11,7 @@ namespace Game
         string _name;
         int _costPrice;
         bool _isActivated;
+        internal bool IsPossible;
         Village _owner;
 
         internal UpgradesModel(Game g, Village v)
@@ -38,7 +39,7 @@ namespace Game
         }
         public void Buy()
         {
-            if (VerififyPrerequisites())
+            if (IsPossible)
             {
                 _owner.Game.AddOrTakeFromOfferings(-CostPrice);
                 AffectUpgrade();
@@ -49,7 +50,7 @@ namespace Game
                 IsActivated = false;
             }
         }
-        internal virtual bool VerififyPrerequisites() { return false; }
+        internal virtual void VerififyPrerequisites() { }
         internal virtual void AffectUpgrade() { }
 
         internal override void OnDestroy()

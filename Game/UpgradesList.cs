@@ -63,6 +63,7 @@ namespace Game
         {
             Game game = village.Game;
             _upgradesList = new List<UpgradesModel>();
+            _owner = village;
             //_cement = new Cement(game);
             //_drugs = new Drugs(game);
             //_fertilizer = new Fertilizer(game);

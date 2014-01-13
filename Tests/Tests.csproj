@@ -53,6 +53,7 @@
     <Compile Include="TestsHappiness.cs" />
     <Compile Include="TestsJobs.cs" />
     <Compile Include="TestsMeeting.cs" />
+    <Compile Include="TestsUpgrades.cs" />
     <Compile Include="TestsVillage.cs" />
   </ItemGroup>
   <ItemGroup>

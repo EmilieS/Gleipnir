@@ -18,17 +18,18 @@ namespace Game
             _selected = _jobs.Cooker;
             _owner = v;
         }
-        internal override bool VerififyPrerequisites()
+        internal override void  VerififyPrerequisites()
         {
             if (_owner.Buildings.RestaurantList.Count > 0 && _owner._offeringsPointsPerTick.Current >= CostPrice)
             {
-                return true;
+                IsPossible = true ;
             }
             else
             {
-                return false;
+               IsPossible = false;
             }
         }
+        
         internal override void AffectUpgrade()
         {
             _selected.Coefficient += 5;
