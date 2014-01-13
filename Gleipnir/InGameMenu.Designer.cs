@@ -76,6 +76,7 @@
             this.Save.TabIndex = 2;
             this.Save.Text = "Sauvegarder";
             this.Save.UseVisualStyleBackColor = false;
+            this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // InGameQuit
             // 

@@ -20,12 +20,13 @@ namespace GamePages
         public HomepageUC()
         {
             InitializeComponent();
-            _startedGame = new Game.Game();
+            //_startedGame = new Game.Game();
             _isStarted = false;
         }
 
         public void new_game(object sender, EventArgs e)
         {
+            _startedGame = new Game.Game();//
             this.Visible = false;
             IsStarted = true;
             RaisePropertyChanged();
@@ -43,6 +44,14 @@ namespace GamePages
         private void Exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void loadGame_Click(object sender, EventArgs e)
+        {
+            _startedGame = Game.serialize.load();
+            this.Visible = false;
+            IsStarted = true;
+            RaisePropertyChanged();
         }
     }
 }

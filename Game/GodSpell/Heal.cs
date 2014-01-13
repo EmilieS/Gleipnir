@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game.GodSpell
 {
+    [Serializable]
     public class Heal : GameItem
     {
         public Heal(Game g)

@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IWindowImplementationForTests.cs" />
+    <Compile Include="save.cs" />
     <Compile Include="TestAgingAndBirth.cs" />
     <Compile Include="TestBuildings.cs" />
     <Compile Include="TestEpidemic.cs" />

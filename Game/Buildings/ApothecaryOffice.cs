@@ -7,6 +7,7 @@ using Game;
 
 namespace Game.Buildings
 {
+    [Serializable]
     public class ApothecaryOffice : BuildingsModel
     {
         internal string _name;
