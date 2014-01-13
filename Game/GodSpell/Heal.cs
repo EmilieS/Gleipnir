@@ -31,6 +31,10 @@ namespace Game.GodSpell
         }
         internal override void OnDestroy()
         {        }
+        internal override void DieOrIsAlive(List<IEvent> eventList)
+        {
+            Destroy();
+        }
         internal override void CloseStep(List<IEvent> eventList) { }
 
     }
