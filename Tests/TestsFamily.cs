@@ -54,7 +54,7 @@ namespace Tests
 
             do
             {
-                girlf1 = family1.newFamilyMember();
+                girlf1 = family1.NewFamilyMember();
             } while (girlf1.Gender != Genders.FEMALE);
 
             Assert.That(girlf1.StatusInFamily == Status.SINGLE);
@@ -62,14 +62,14 @@ namespace Tests
 
             do
             {
-                guy1f2 = family1.newFamilyMember();
+                guy1f2 = family1.NewFamilyMember();
             } while (guy1f2.Gender != Genders.MALE);
 
             Villager guy2f2;
 
             do
             {
-                guy2f2 = family1.newFamilyMember();
+                guy2f2 = family1.NewFamilyMember();
             } while (guy2f2.Gender != Genders.MALE);
 
             Assert.That(girlf1.StatusInFamily == Status.SINGLE);
@@ -112,19 +112,19 @@ namespace Tests
             Family family1 = MyGame.Villages[0].CreateFamilyFromScratch();
             Family family2 = MyGame.Villages[0].CreateFamilyFromScratch();
 
-            family1.takeFromGoldStash(100);
+            family1.TakeFromGoldStash(100);
             Assert.That(family1.GoldStash, Is.EqualTo(0));
-            family1.addToGoldStash(100);
+            family1.AddToGoldStash(100);
             Assert.That(family1.GoldStash, Is.EqualTo(100));
-            family2.takeFromGoldStash(100);
+            family2.TakeFromGoldStash(100);
             Assert.That(family2.GoldStash, Is.EqualTo(0));
-            family2.addToGoldStash(100);
+            family2.AddToGoldStash(100);
             Assert.That(family2.GoldStash, Is.EqualTo(100));
 
             Villager girlf1;
             do
             {
-                girlf1 = family1.newFamilyMember();
+                girlf1 = family1.NewFamilyMember();
             } while (girlf1.Gender != Genders.FEMALE);
 
             Assert.That(girlf1.StatusInFamily == Status.SINGLE);
@@ -132,7 +132,7 @@ namespace Tests
 
             do
             {
-                boyf2 = family2.newFamilyMember();
+                boyf2 = family2.NewFamilyMember();
             } while (boyf2.Gender != Genders.MALE);
 
             Assert.That(family2.FamilyMembers.Contains(boyf2));
@@ -149,13 +149,13 @@ namespace Tests
             Villager girl2f1;
             do
             {
-                girl2f1 = family1.newFamilyMember();
+                girl2f1 = family1.NewFamilyMember();
             } while (girl2f1.Gender != Genders.FEMALE);
 
             Villager girl2f2;
             do
             {
-                girl2f2 = family2.newFamilyMember();
+                girl2f2 = family2.NewFamilyMember();
             } while (girl2f2.Gender != Genders.FEMALE);
                 MyGame.NextStep();
 
@@ -168,7 +168,7 @@ namespace Tests
             Villager boy2f1;
             do
             {
-                boy2f1 = family1.newFamilyMember();
+                boy2f1 = family1.NewFamilyMember();
             } while (boy2f1.Gender != Genders.MALE);
 
             Assert.Throws<InvalidOperationException>(() => MyGame.Villages[0].CreateFamily(girl2f1, boy2f1), "same family!");
@@ -177,7 +177,7 @@ namespace Tests
                 //family1.Mother.DieOrIsAlive();
                 MyGame.NextStep();
 
-            Assert.Throws<InvalidOperationException>(() => family1.newFamilyMember(), "missing parent");
+            Assert.Throws<InvalidOperationException>(() => family1.NewFamilyMember(), "missing parent");
         }
 
         [Test]
@@ -199,13 +199,13 @@ namespace Tests
             Villager kidf1;
             do
             {
-                kidf1 = family1.newFamilyMember();
+                kidf1 = family1.NewFamilyMember();
             } while (kidf1.Gender != Genders.MALE);
 
             Villager kidf2;
             do
             {
-                kidf2 = family2.newFamilyMember();
+                kidf2 = family2.NewFamilyMember();
             } while (kidf1.Gender == kidf2.Gender);
 
             Assert.That(kidf1.StatusInFamily == Status.ENGAGED);

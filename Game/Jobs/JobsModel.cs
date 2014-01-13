@@ -104,7 +104,7 @@ namespace Game
             {
                 if (person.GenerateGoldPrerequisitesFromVillager())
                 {
-                    person.ParentFamily.addToGoldStash(_gold);
+                    person.ParentFamily.AddToGoldStash(_gold);
                 }
             }
         }

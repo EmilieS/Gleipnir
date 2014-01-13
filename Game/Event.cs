@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-
-
     public class Event<T> : IEvent
-        //where T : GameItem
+    //where T : GameItem
     {
         public readonly T GameItem;
 
@@ -36,7 +34,7 @@ namespace Game
             ChangedProperty = propName;
         }
 
-        override public  void PublishMessage(IWindow b)
+        override public void PublishMessage(IWindow b)
         {
             b.PushTrace(String.Format("Property {0} has changed...", ChangedProperty));
         }
@@ -92,25 +90,24 @@ namespace Game
         }
 
     }
-    public class GameEventProperty: EventProperty<Game>
+    public class GameEventProperty : EventProperty<Game>
     {
         internal GameEventProperty(Game item, string propName)
             : base(item, propName)
         {
         }
+
         public override void Do(IWindow b)
         {
             switch (ChangedProperty)
             {
                 case "Offerings": b.PushGeneralCoins(GameItem.Offerings); break;
-                case "TotalPop": b.PushPopulation(GameItem.TotalPop) ; break;
+                case "TotalPop": b.PushPopulation(GameItem.TotalPop); break;
                 case "TotalGold": b.PushGeneralGold(GameItem.TotalGold); break;
                 case "AverageFaith": b.PushGeneralFaith(GameItem.AverageFaith); break;
                 case "AverageHappiness": b.PushGeneralHappiness(GameItem.AverageHappiness); break;
             }
-            //GameItem.GetType().GetProperty(ChangedProperty, typeof(string));
         }
-
         override public void PublishMessage(IWindow b)
         {
             b.PushTrace(String.Format("Property {0} has changed...", ChangedProperty));
@@ -155,7 +152,7 @@ namespace Game
             {
                 toPush = String.Format("{0} {1} est mort de sa maladie", GameItem.FirstName, _familyName);
             }
-            else if (GameItem.Age > 60*12)
+            else if (GameItem.Age > 60 * 12)
             {
                 toPush = String.Format("{0} {1} est mort de viellesse", GameItem.FirstName, _familyName);
             }
@@ -164,7 +161,7 @@ namespace Game
                 toPush = String.Format("{0} {1} est mort mystèrieusement", GameItem.FirstName, _familyName);
             }
             //Debug.Assert(toPush == "i");//va bien dedans!
-            b.PushAlert(toPush,"Mort");
+            b.PushAlert(toPush, "Mort");
         }
     }
     public class VillagerCallForHelp : Event<Villager>
@@ -190,8 +187,6 @@ namespace Game
         }
 
     }
-
-
     public class FamilyEndEvent : Event<Family>
     {
         internal FamilyEndEvent(Family v)
@@ -204,7 +199,6 @@ namespace Game
             b.PushTrace(String.Format("La famille {0} est terminée.", GameItem.Name));
         }
     }
-
     public class VillagerBirthEvent : Event<Villager>
     {
         internal VillagerBirthEvent(Villager v)
@@ -214,21 +208,29 @@ namespace Game
 
         override public void PublishMessage(IWindow b)
         {
-            b.PushTrace( String.Format("Un nouveau villageois est né ! Il a été nommé {0}.", GameItem.FirstName));
+            b.PushTrace(String.Format("Un nouveau villageois est né ! Il a été nommé {0}.", GameItem.FirstName));
             if (GameItem.Job == null)
                 b.PushAlert(String.Format("Le nouveau villageois {0} {1} ne sait pas quel métier prendre...", GameItem.FirstName, GameItem.ParentFamily.Name), "Demande d'attribution de métier");
         }
     }
     public class FamilyBirthEvent : Event<Family>
     {
-        internal FamilyBirthEvent(Family v)
-            : base(v)
+        Family _family;
+        internal FamilyBirthEvent(Family f)
+            : base(f)
         {
+            _family = f;
         }
 
         override public void PublishMessage(IWindow b)
         {
             b.PushTrace(String.Format("Une nouvelle famille s'est consituée {0}.", GameItem.Name));
+        }
+
+        public override void Do(IWindow b)
+        {
+            base.Do(b);
+            b.AddNewFamilyHouse(_family.House);
         }
     }
 }

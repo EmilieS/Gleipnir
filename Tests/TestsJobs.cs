@@ -18,8 +18,8 @@ namespace Tests
             // Create game
             Game.Game game = new Game.Game();
             var village = game.Villages[0];
-            var farm = new Farm(village, village.Jobs.Farmer);
-            new Restaurant(village, village.Jobs.Cooker);
+            var farm = new Farm(village, village.JobsList.Farmer);
+            new Restaurant(village, village.JobsList.Cooker);
             foreach (Family f in village.FamiliesList)
             {
                 foreach (Villager v in f.FamilyMembers)
@@ -38,12 +38,12 @@ namespace Tests
             var v3 = village.FamiliesList[1].FamilyMembers[1];
             var v4 = village.FamiliesList[2].FamilyMembers[0];
             var v5 = village.FamiliesList[2].FamilyMembers[1];
-            var cooker = village.Jobs.Cooker;
+            var cooker = village.JobsList.Cooker;
 
             // Jobs are created
             int i;
             for(i=0; i<8; i++)
-                Assert.That(village.Jobs[i], Is.Not.Null);
+                Assert.That(village.JobsList[i], Is.Not.Null);
 
             // Add new worker to job
             Assert.That(cooker.Workers.Count, Is.EqualTo(0));

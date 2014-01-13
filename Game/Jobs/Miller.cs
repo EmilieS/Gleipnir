@@ -37,24 +37,24 @@ namespace Game
         }
         internal override bool AddPersonPrerequisites()
         {
-            if (Owner.Owner.Buildings.MillList.Count > 0)
+            if (Owner.Owner.BuildingsList.MillList.Count > 0)
                 return true;
             else
                 return false;
         }
         internal override bool GenerateGoldPrerequisites()
         {
-            if (Owner.Owner.Buildings.MillList.Count <= 0)
+            if (Owner.Owner.BuildingsList.MillList.Count <= 0)
                 return false;
             int i = 0;
             do
             {
-                if (Owner.Owner.Buildings.MillList[i].Hp > 0)
+                if (Owner.Owner.BuildingsList.MillList[i].Hp > 0)
                 {
                     return true;
                 }
                 i++;
-            } while (i < Owner.Owner.Buildings.MillList.Count);
+            } while (i < Owner.Owner.BuildingsList.MillList.Count);
             return false;
         }
     }

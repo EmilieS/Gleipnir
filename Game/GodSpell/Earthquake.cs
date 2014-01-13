@@ -20,7 +20,7 @@ namespace Game.GodSpell
         internal override void OnDestroy(){}
         internal override void Evolution()
         {
-            foreach (Buildings.BuildingsModel b in  _village.Buildings)
+            foreach (Buildings.BuildingsModel b in  _village.BuildingsList)
             {
                 b.Damage(_force);
             }

@@ -23,5 +23,6 @@ namespace Game
 
         // Grid Update
         void SetEmptySquare(int row, int col);
+        void AddNewFamilyHouse(Buildings.House house);
     }
 }

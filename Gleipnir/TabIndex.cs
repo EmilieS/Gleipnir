@@ -77,42 +77,42 @@ namespace GamePages
         #region Jobs Buildings Buttons
         private void ApothicaryOffice_Click(object sender, EventArgs e)
         {
-            ApothecaryOffice apo = new ApothecaryOffice(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Apothecary);
+            ApothecaryOffice apo = new ApothecaryOffice(_page.Game.Villages[0], _page.Game.Villages[0].JobsList.Apothecary);
             _page.OnBoughtBuilding_Click(apo);
         }
         private void Forge_Click(object sender, EventArgs e)
         {
-            Game.Buildings.Forge forge = new Forge(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Blacksmith);
+            Game.Buildings.Forge forge = new Forge(_page.Game.Villages[0], _page.Game.Villages[0].JobsList.Blacksmith);
             _page.OnBoughtBuilding_Click(forge);
         }
         private void UnionOfCrafter_Click(object sender, EventArgs e)
         {
-            Game.Buildings.UnionOfCrafter uoc = new UnionOfCrafter(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Construction_Worker);
+            Game.Buildings.UnionOfCrafter uoc = new UnionOfCrafter(_page.Game.Villages[0], _page.Game.Villages[0].JobsList.Construction_Worker);
             _page.OnBoughtBuilding_Click(uoc);
         }
         private void Restaurant_Click(object sender, EventArgs e)
         {
-            Game.Buildings.Restaurant resto = new Restaurant(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Cooker);
+            Game.Buildings.Restaurant resto = new Restaurant(_page.Game.Villages[0], _page.Game.Villages[0].JobsList.Cooker);
             _page.OnBoughtBuilding_Click(resto);
         }
         private void Farm_Click(object sender, EventArgs e)
         {
-            Game.Buildings.Farm farm = new Farm(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Farmer);
+            Game.Buildings.Farm farm = new Farm(_page.Game.Villages[0], _page.Game.Villages[0].JobsList.Farmer);
             _page.OnBoughtBuilding_Click(farm);
         }
         private void Mill_Click(object sender, EventArgs e)
         {
-            Game.Buildings.Mill mill = new Mill(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Miller);
+            Game.Buildings.Mill mill = new Mill(_page.Game.Villages[0], _page.Game.Villages[0].JobsList.Miller);
             _page.OnBoughtBuilding_Click(mill);
         }
         private void MilitaryCamp_Click(object sender, EventArgs e)
         {
-            Game.Buildings.MilitaryCamp gq = new MilitaryCamp(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Militia);
+            Game.Buildings.MilitaryCamp gq = new MilitaryCamp(_page.Game.Villages[0], _page.Game.Villages[0].JobsList.Militia);
             _page.OnBoughtBuilding_Click(gq);
         }
         private void ClothesShop_Click(object sender, EventArgs e)
         {
-            Game.Buildings.ClothesShop shop = new ClothesShop(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Tailor);
+            Game.Buildings.ClothesShop shop = new ClothesShop(_page.Game.Villages[0], _page.Game.Villages[0].JobsList.Tailor);
             _page.OnBoughtBuilding_Click(shop);
         }
         #endregion

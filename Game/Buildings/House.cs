@@ -36,12 +36,12 @@ namespace Game.Buildings
 
         override internal void AddToList()
         {
-            _village.Buildings.Add(this);
+            _village.BuildingsList.Add(this);
         }
         internal override void OnOnDestroy()
         {
             Village.RemoveEmptyHouse(this);
-            Village.Buildings.Remove(this);
+            Village.BuildingsList.Remove(this);
         }
         internal override void JustCollapsed()
         {
