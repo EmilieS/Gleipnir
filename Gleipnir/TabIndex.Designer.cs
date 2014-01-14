@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabIndex));
             this.actionsMenu = new System.Windows.Forms.TabControl();
             this.buildingsTab = new System.Windows.Forms.TabPage();
@@ -52,11 +53,13 @@
             this.happinessTab = new System.Windows.Forms.TabPage();
             this.VillagerList = new System.Windows.Forms.TabPage();
             this.godSpellsTab = new System.Windows.Forms.TabPage();
+            this.familyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.StartEarthquake = new System.Windows.Forms.Button();
             this.StartEpidemic = new System.Windows.Forms.Button();
             this.actionsMenu.SuspendLayout();
             this.buildingsTab.SuspendLayout();
             this.godSpellsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.familyBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // actionsMenu
@@ -326,11 +329,15 @@
             this.godSpellsTab.TabIndex = 3;
             this.godSpellsTab.UseVisualStyleBackColor = true;
             // 
+            // familyBindingSource
+            // 
+            this.familyBindingSource.DataSource = typeof(Game.Family);
+            // 
             // StartEarthquake
             // 
             this.StartEarthquake.Image = global::GamePages.Properties.Resources.ButtonIcon_Earthquake;
             this.StartEarthquake.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.StartEarthquake.Location = new System.Drawing.Point(24, 55);
+            this.StartEarthquake.Location = new System.Drawing.Point(24, 53);
             this.StartEarthquake.Name = "StartEarthquake";
             this.StartEarthquake.Size = new System.Drawing.Size(161, 30);
             this.StartEarthquake.TabIndex = 1;
@@ -343,7 +350,7 @@
             // 
             this.StartEpidemic.Image = global::GamePages.Properties.Resources.ButtonIcon_epidemic;
             this.StartEpidemic.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.StartEpidemic.Location = new System.Drawing.Point(24, 19);
+            this.StartEpidemic.Location = new System.Drawing.Point(24, 17);
             this.StartEpidemic.Name = "StartEpidemic";
             this.StartEpidemic.Size = new System.Drawing.Size(161, 30);
             this.StartEpidemic.TabIndex = 0;
@@ -363,6 +370,7 @@
             this.actionsMenu.ResumeLayout(false);
             this.buildingsTab.ResumeLayout(false);
             this.godSpellsTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.familyBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -394,5 +402,6 @@
         private System.Windows.Forms.Label hobbyBuilding_title;
         public System.Windows.Forms.TabControl actionsMenu;
         private System.Windows.Forms.Button StartEarthquake;
+        private System.Windows.Forms.BindingSource familyBindingSource;
     }
 }

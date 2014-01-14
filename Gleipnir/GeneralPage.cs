@@ -165,7 +165,7 @@ namespace GamePages
             #endregion
 
             #region EventBox tests
-            PushAlert("coucoudfghjkjhgfd", "coucou1");
+            /*PushAlert("coucoudfghjkjhgfd", "coucou1");
             PushAlert("coucou2546", "coucou2");
             PushAlert("coucou4543", "coucou3");
             PushAlert("coucou44545", "coucou4");
@@ -177,7 +177,7 @@ namespace GamePages
             PushAlert("coucou10", "coucou");
             PushAlert("coucou11", "coucou");
             PushAlert("coucou12", "coucou");
-            /*PushAlert("coucou", "coucou");
+            PushAlert("coucou", "coucou");
             PushAlert("coucou", "coucou");
             PushAlert("coucou", "coucou");*/
             #endregion
@@ -203,10 +203,6 @@ namespace GamePages
         internal TabIndex ActionMenu
         {
             get { return _actionMenu; }
-        }
-        internal void ShowListOfVillager(Family family)
-        {
-
         }
 
         // Window Methods
@@ -258,11 +254,11 @@ namespace GamePages
         // Stats Methods
         public void PushGeneralCoins(int value)
         {
-            _stats.offeringsPoints.Text = value.ToString();
+            _stats.offeringsPoints.Text = TransformHighNumberToKnumbers(value);
         }
         public void PushGeneralGold(int value)
         {
-            _stats.goldVillage.Text = value.ToString();
+            _stats.goldVillage.Text = TransformHighNumberToKnumbers(value);
         }
         public void PushOfferingsPointsPerTick(int value)
         {
@@ -283,7 +279,30 @@ namespace GamePages
         }
         public void PushPopulation(int pop)
         {
-            _stats.population.Text = pop.ToString();
+            _stats.population.Text = TransformHighNumberToKnumbers(pop);
+        }
+        public string TransformHighNumberToKnumbers(int value)
+        {
+            string text = "";
+            string nb = value.ToString();
+
+            if (value < 1000)
+                text = nb;
+            else if (value > 999 && value <= 999999)
+            {
+                for (int i = 0; i < nb.Count<char>() - 3; i++)
+                    text += nb[i];
+                text += "K";
+            }
+            else if (value > 999999 && value <= 999999999)
+            {
+                for (int i = 0; i < nb.Count<char>() - 6; i++)
+                    text += nb[i];
+                text += "M";
+            }
+            else
+                text += "+999M";
+            return text;
         }
 
         // TraceWindow Methods

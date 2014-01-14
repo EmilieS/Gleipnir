@@ -76,7 +76,7 @@
             this.happinessVillage.BackColor = System.Drawing.Color.Transparent;
             this.happinessVillage.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.happinessVillage.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.happinessVillage.Location = new System.Drawing.Point(395, 6);
+            this.happinessVillage.Location = new System.Drawing.Point(392, 6);
             this.happinessVillage.Name = "happinessVillage";
             this.happinessVillage.Size = new System.Drawing.Size(62, 19);
             this.happinessVillage.TabIndex = 18;
@@ -89,7 +89,7 @@
             this.faithVillage.BackColor = System.Drawing.Color.Transparent;
             this.faithVillage.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.faithVillage.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.faithVillage.Location = new System.Drawing.Point(305, 7);
+            this.faithVillage.Location = new System.Drawing.Point(302, 7);
             this.faithVillage.Name = "faithVillage";
             this.faithVillage.Size = new System.Drawing.Size(27, 19);
             this.faithVillage.TabIndex = 17;
@@ -102,7 +102,7 @@
             this.population.BackColor = System.Drawing.Color.Transparent;
             this.population.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.population.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.population.Location = new System.Drawing.Point(215, 7);
+            this.population.Location = new System.Drawing.Point(213, 7);
             this.population.Name = "population";
             this.population.Size = new System.Drawing.Size(75, 19);
             this.population.TabIndex = 16;

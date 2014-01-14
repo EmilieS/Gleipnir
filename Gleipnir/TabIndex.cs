@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Game;
 using Game.Buildings;
+using System.Diagnostics;
 
 namespace GamePages
 {
     public partial class TabIndex : UserControl
     {
+        List<VillagerBannerUC> ListOfVillagersToShow;
         readonly GeneralPage _page;
         bool isOnBought;
         bool passed;
         bool isEpidemicLaunched;
-        List<VillagerBannerUC> ListOfVillagersToShow;
         int positionX;
         int positionY;
 
@@ -67,10 +68,6 @@ namespace GamePages
         {
             get { return isOnBought; }
             set { isOnBought = value; }
-        }
-
-        internal void ShowUnboughtBuildings()
-        {
         }
 
         // Buildings Click
@@ -175,27 +172,36 @@ namespace GamePages
             Game.GodSpell.Earthquake earthquake = new Game.GodSpell.Earthquake(_page.Game, _page.Game.Villages[0]);
         }
         
+        // Villagers list
         internal void ShowVillagerListInFamily(Family fam)
         {
-            if (passed == false)
+            if (!passed)
             {
-                passed = true;
                 ListOfVillagersToShow = new List<VillagerBannerUC>();
+                passed = true;
             }
             DestroyVillagerList();
 
             for (int i = 0; i < fam.FamilyMembers.Count; i++)
             {
                 VillagerBannerUC tmp = new VillagerBannerUC();
-                ListOfVillagersToShow.Add(tmp);
+                
+                // Add gender icon
                 if(fam.FamilyMembers[i].Gender == Genders.FEMALE)
                     tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
                 else
                     tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
+
+                // Set VillagerBannerUC
                 tmp.VillagerName.Text = fam.FamilyMembers[i].FirstName + " " + fam.FamilyMembers[i].Name;
-                this.VillagerList.Controls.Add(tmp);
-                tmp.Show();
                 tmp.Location = new System.Drawing.Point(positionX, positionY);
+
+                // Add VillagerBannerUC to lists and show it
+                this.VillagerList.Controls.Add(tmp);
+                ListOfVillagersToShow.Add(tmp);
+                tmp.Show();
+
+                // Set position for next VillagerBannerUC
                 positionY += 62;
             }
         }

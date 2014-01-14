@@ -197,7 +197,7 @@ namespace Game
         /// <param name="house"></param>
         public void AddEmptyHouse(Buildings.House house)
         {
-            Debug.Assert(!EmptyHouseList.Contains(house), @"(village, AddEmptyHouse) This house is in EmptyHouseList");
+            // Debug.Assert(!EmptyHouseList.Contains(house), @"(village, AddEmptyHouse) This house is in EmptyHouseList");
             if(!EmptyHouseList.Contains(house))
                 EmptyHouseList.Add(house);
         }

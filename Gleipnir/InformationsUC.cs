@@ -42,7 +42,7 @@ namespace GamePages
         private void TaxAmount_ValueChanged(object sender, EventArgs e)
         {          
             _page.Game.Villages[0].SetOfferingsPoints(TaxAmount.Value);
-            TaxAmountValue.Text = "Quantité : " + TaxAmount.Value.ToString();
+            TaxAmountValue.Text = "Quantité : " + _page.TransformHighNumberToKnumbers(TaxAmount.Value);
         }
     }
 }
