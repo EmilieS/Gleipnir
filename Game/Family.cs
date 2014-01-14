@@ -59,10 +59,11 @@ namespace Game
             _father.ParentFamily = this;
         }
 
+        // Properties
         /// <summary>
         /// Gets family's house
         /// </summary>
-        public Buildings.House House { get { return _house; } internal set; }
+        public Buildings.House House { get { return _house; } internal set { _house = value; } }
         /// <summary>
         /// Gets family name
         /// </summary>
@@ -137,6 +138,9 @@ namespace Game
         /// <param name="villager"></param>
         /// <param name="parentFamily"></param>
         private void RemoveFromFamily(Villager villager, Family parentFamily)
+        {
+            parentFamily.FamilyMembers.Remove(villager);
+        }
 
         // Gold Methods
         /// <summary>
