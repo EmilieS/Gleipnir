@@ -49,12 +49,12 @@ namespace Game
             }
         }
 
-        [NonSerialized]private Dictionary<string, List<char>> _chains = new Dictionary<string, List<char>>();
-        [NonSerialized]private List<string> _samples = new List<string>();
+        /*[NonSerialized]*/private Dictionary<string, List<char>> _chains = new Dictionary<string, List<char>>();
+        private List<string> _samples = new List<string>();
         private List<string> _used = new List<string>();
-        [NonSerialized]private Random _rnd = new Random();
-        [NonSerialized]private int _order;
-        [NonSerialized]private int _minLength;
+        private Random _rnd = new Random();
+        private int _order;
+        private int _minLength;
 
         // Get the next random name
         public string NextName
