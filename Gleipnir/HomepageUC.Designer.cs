@@ -50,7 +50,7 @@
             this.exit.TabIndex = 7;
             this.exit.Text = "Quitter";
             this.exit.UseVisualStyleBackColor = false;
-            this.exit.Click += new System.EventHandler(this.Exit_Click);
+            this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
             // loadGame
             // 
