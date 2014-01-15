@@ -279,6 +279,8 @@ namespace Game
         {
             if (IsDead())
                 return false;
+            if (_villagerActivity != ActivityStatus.WORKING)
+                return false;
 
             return true; //TODO
         }
@@ -466,7 +468,7 @@ namespace Game
         {
             if (_statusInFamily.Current != Status.ENGAGED)
                 return;
-            if (_engagedTickTimer == 10)
+            if (_engagedTickTimer == 45)
             {
                 if (_gender == Genders.FEMALE)
                 {
