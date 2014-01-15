@@ -12,7 +12,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace Game
 {
     [Serializable]
-    public class Game : ISerializable
+    public class Game/* : ISerializable*/
     {
         // Name Generator variables
         NameGenerator _nameGenerator;
@@ -108,8 +108,8 @@ namespace Game
             _offerings.Current = 100;
         }
 
-           public Game(SerializationInfo info, StreamingContext ctxt)
-         {
+           //public Game(SerializationInfo info, StreamingContext ctxt)
+         //{
       /*this.make = (string)info.GetValue("Make", typeof(string));
       this.model = (string)info.GetValue("Model",typeof(string));
       this.year = (string)info.GetValue("Year", typeof(int));
@@ -131,19 +131,15 @@ namespace Game
         _currentText = (List<string>)info.GetValue("_currentText", typeof(List<string>));
         _eventList = (List<IEvent>)info.GetValue("_eventList", typeof(List<IEvent>));*/
 
-/*
         // Average variables
-        double _averageHappiness;
-        double _averageFaith;
- */
-         }
+        //double _averageHappiness;
+        //double _averageFaith;
+ 
+         //}
 
-   public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
+  /* public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
    {
-      /*info.AddValue("Make", this.make);
-      info.AddValue("Model", this.model);
-      info.AddValue("Make", this.year);
-      info.AddValue("Owner", this.owner);*/
+
 
        info.AddValue("_nameGenerator", _nameGenerator);
        info.AddValue("_firstNameGenerator", _firstNameGenerator);
@@ -160,7 +156,7 @@ namespace Game
 
        info.AddValue("_currentText", _currentText);
        info.AddValue("_eventList", _eventList);
-   }
+   }*/
         // NameGenerator Properties
         /// <summary>
         /// Gets the family names list

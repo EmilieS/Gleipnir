@@ -13,20 +13,20 @@ namespace GamePages
 {
     public partial class HomepageUC : UserControl  
     {
-        Game.Game _startedGame;
+        public Game.Game _startedGame;
         public bool _isStarted;
         public event PropertyChangedEventHandler Launched;
 
         public HomepageUC()
         {
             InitializeComponent();
-            //_startedGame = new Game.Game();
+            _startedGame = new Game.Game();
             _isStarted = false;
         }
 
         public void new_game(object sender, EventArgs e)
         {
-            _startedGame = new Game.Game();//
+            //_startedGame = new Game.Game();//
             this.Visible = false;
             IsStarted = true;
             RaisePropertyChanged();
