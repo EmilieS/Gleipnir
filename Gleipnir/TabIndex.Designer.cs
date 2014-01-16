@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabIndex));
             this.actionsMenu = new System.Windows.Forms.TabControl();
             this.buildingsTab = new System.Windows.Forms.TabPage();
@@ -53,13 +52,13 @@
             this.happinessTab = new System.Windows.Forms.TabPage();
             this.VillagerList = new System.Windows.Forms.TabPage();
             this.godSpellsTab = new System.Windows.Forms.TabPage();
-            this.familyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.StartEarthquake = new System.Windows.Forms.Button();
             this.StartEpidemic = new System.Windows.Forms.Button();
+            this.StartHeal = new System.Windows.Forms.Button();
+            this.StartFest = new System.Windows.Forms.Button();
             this.actionsMenu.SuspendLayout();
             this.buildingsTab.SuspendLayout();
             this.godSpellsTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.familyBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // actionsMenu
@@ -320,6 +319,8 @@
             // godSpellsTab
             // 
             this.godSpellsTab.BackgroundImage = global::GamePages.Properties.Resources.ActionTab_action_background;
+            this.godSpellsTab.Controls.Add(this.StartFest);
+            this.godSpellsTab.Controls.Add(this.StartHeal);
             this.godSpellsTab.Controls.Add(this.StartEarthquake);
             this.godSpellsTab.Controls.Add(this.StartEpidemic);
             this.godSpellsTab.Location = new System.Drawing.Point(4, 4);
@@ -328,10 +329,6 @@
             this.godSpellsTab.Size = new System.Drawing.Size(208, 528);
             this.godSpellsTab.TabIndex = 3;
             this.godSpellsTab.UseVisualStyleBackColor = true;
-            // 
-            // familyBindingSource
-            // 
-            this.familyBindingSource.DataSource = typeof(Game.Family);
             // 
             // StartEarthquake
             // 
@@ -359,6 +356,31 @@
             this.StartEpidemic.UseVisualStyleBackColor = true;
             this.StartEpidemic.Click += new System.EventHandler(this.StartEpidemic_Click);
             // 
+            // StartHeal
+            // 
+            this.StartHeal.Image = global::GamePages.Properties.Resources.Building_HealthPoints;
+            this.StartHeal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.StartHeal.Location = new System.Drawing.Point(24, 89);
+            this.StartHeal.Name = "StartHeal";
+            this.StartHeal.Size = new System.Drawing.Size(161, 30);
+            this.StartHeal.TabIndex = 2;
+            this.StartHeal.Text = "Vague de Soin";
+            this.StartHeal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.StartHeal.UseVisualStyleBackColor = true;
+            this.StartHeal.Click += new System.EventHandler(this.StartHeal_Click);
+            // 
+            // StartFest
+            // 
+            this.StartFest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.StartFest.Location = new System.Drawing.Point(24, 125);
+            this.StartFest.Name = "StartFest";
+            this.StartFest.Size = new System.Drawing.Size(161, 30);
+            this.StartFest.TabIndex = 3;
+            this.StartFest.Text = "Fête du Village";
+            this.StartFest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.StartFest.UseVisualStyleBackColor = true;
+            this.StartFest.Click += new System.EventHandler(this.StartFest_Click);
+            // 
             // TabIndex
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -370,7 +392,6 @@
             this.actionsMenu.ResumeLayout(false);
             this.buildingsTab.ResumeLayout(false);
             this.godSpellsTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.familyBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -402,6 +423,7 @@
         private System.Windows.Forms.Label hobbyBuilding_title;
         public System.Windows.Forms.TabControl actionsMenu;
         private System.Windows.Forms.Button StartEarthquake;
-        private System.Windows.Forms.BindingSource familyBindingSource;
+        private System.Windows.Forms.Button StartHeal;
+        private System.Windows.Forms.Button StartFest;
     }
 }

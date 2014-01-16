@@ -7,7 +7,6 @@ using System.Diagnostics;
 
 namespace Game
 {
-    [Serializable]
     public class Village : GameItem
     {
         internal readonly HistorizedValue<int, Village> _offeringsPointsPerTick;
@@ -311,7 +310,7 @@ namespace Game
         /// Take gold from families and add offerings points
         /// </summary>
         /// <param name="amount"></param>
-        public void TransformGoldToOfferingsPoints(int amount)// WTF NOT USED a part from village test.
+        public void TransformGoldToOfferingsPoints(int amount)
         {
             if (amount >= 1 && amount <= 100)
             {

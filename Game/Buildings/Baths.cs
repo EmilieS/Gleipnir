@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    [Serializable]
     public class Baths : BuildingsModel
     {
         public Baths(Village v)

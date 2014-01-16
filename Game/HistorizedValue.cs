@@ -7,7 +7,6 @@ using System.Diagnostics;
 
 namespace Game
 {
-    [Serializable]
     class HistorizedValue<T, TOwner>
     {
         readonly FIFOBuffer<T> _histo;

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    [Serializable]
     class FamilyMemberList : IFamilyMemberList
     {
         public FamilyMemberList(Family owner)

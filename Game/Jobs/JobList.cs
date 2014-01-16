@@ -7,7 +7,6 @@ using System.Diagnostics;
 
 namespace Game
 {
-    [Serializable]
     public class JobList : IReadOnlyList<JobsModel>
     {
         readonly Apothecary _apothecary;

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    [Serializable]
     public class Event<T> : IEvent
     //where T : GameItem
     {
@@ -24,7 +23,7 @@ namespace Game
         {
         }
     }
-    [Serializable]
+
     public class EventProperty<T> : Event<T>
     {
         public readonly string ChangedProperty;
@@ -44,7 +43,6 @@ namespace Game
             base.Do(b);
         }
     }
-    [Serializable]
     public class BuildingNoHpEvent : Event<Buildings.BuildingsModel>
     {
         internal BuildingNoHpEvent(Buildings.BuildingsModel building)
@@ -58,7 +56,6 @@ namespace Game
         }
 
     }
-    [Serializable]
     public class BuildingDestroyedEvent : Event<Buildings.BuildingsModel>
     {
         Buildings.BuildingsModel _building;
@@ -80,7 +77,6 @@ namespace Game
             b.SetEmptySquare(_building.HorizontalPos, _building.VerticalPos);
         }
     }
-    [Serializable]
     public class BuildingCreatedEvent : Event<Buildings.BuildingsModel>
     {
         internal BuildingCreatedEvent(Buildings.BuildingsModel building)
@@ -94,7 +90,6 @@ namespace Game
         }
 
     }
-    [Serializable]
     public class GameEventProperty : EventProperty<Game>
     {
         internal GameEventProperty(Game item, string propName)
@@ -118,7 +113,6 @@ namespace Game
             b.PushTrace(String.Format("Property {0} has changed...", ChangedProperty));
         }
     }
-    [Serializable]
     public class VillageEventProperty : EventProperty<Village>
     {
         internal VillageEventProperty(Village item, string propName)
@@ -135,7 +129,6 @@ namespace Game
         }
 
     }
-    [Serializable]
     public class VillagerDyingEvent : Event<Villager>
     {
         internal VillagerDyingEvent(Villager v, string familyName)
@@ -171,7 +164,6 @@ namespace Game
             b.PushAlert(toPush, "Mort");
         }
     }
-    [Serializable]
     public class VillagerCallForHelp : Event<Villager>
     {
         internal VillagerCallForHelp(Villager v)
@@ -183,7 +175,6 @@ namespace Game
             b.PushAlert(String.Format("{0} {1} prie que son malheur soit bientot terminé.", GameItem.FirstName, GameItem.ParentFamily.Name), "Prière");
         }
     }
-    [Serializable]
     public class EpidemicDeclaredEvent : Event<GodSpell.Epidemic>
     {
         internal EpidemicDeclaredEvent(GodSpell.Epidemic e)
@@ -196,7 +187,6 @@ namespace Game
         }
 
     }
-    [Serializable]
     public class FamilyEndEvent : Event<Family>
     {
         internal FamilyEndEvent(Family v)
@@ -209,7 +199,6 @@ namespace Game
             b.PushTrace(String.Format("La famille {0} est terminée.", GameItem.Name));
         }
     }
-    [Serializable]
     public class VillagerBirthEvent : Event<Villager>
     {
         internal VillagerBirthEvent(Villager v)
@@ -224,7 +213,6 @@ namespace Game
                 b.PushAlert(String.Format("Le nouveau villageois {0} {1} ne sait pas quel métier prendre...", GameItem.FirstName, GameItem.ParentFamily.Name), "Demande d'attribution de métier");
         }
     }
-    [Serializable]
     public class FamilyBirthEvent : Event<Family>
     {
         Family _family;
@@ -243,28 +231,6 @@ namespace Game
         {
             base.Do(b);
             b.AddNewFamilyHouse(_family.House);
-        }
-    }
-
-    public class EpidimicEradicatedEvent : Event<GodSpell.Epidemic>
-    {
-        Game _game;
-        internal EpidimicEradicatedEvent(GodSpell.Epidemic v, Game g)
-            : base(v)
-        {
-            _game = g;
-        }
-        override public void PublishMessage(IWindow b)
-        {
-            string toPush = "L'épidémie a été éradiquée.";
-            if (_game.TotalPop > 0)
-            {
-                b.PushAlert(toPush, "Epidémie");
-            }
-            else
-            {
-                b.PushTrace(toPush);
-            }
         }
     }
 }

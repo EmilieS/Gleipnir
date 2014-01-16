@@ -9,7 +9,6 @@ using System.Timers;
 
 namespace Game
 {
-    [Serializable]
     public class Family : GameItem
     {
         readonly HistorizedValue<int, Family> _goldStash;

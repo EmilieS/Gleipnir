@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    [Serializable]
     public class UnionOfCrafter : BuildingsModel
     {
         internal string _name;

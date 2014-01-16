@@ -52,13 +52,11 @@ namespace Tests
             MyGame.NextStep();
             MyGame.NextStep();
             Assert.That(family.FamilyMembers.Count == 2);
-            /*double tmp;
             for (int i = 0; i < family.FamilyMembers.Count; i++)
             {
-                tmp = family.FamilyMembers[i].Happiness;
-                Assert.AreEqual(75, tmp, "The happiness his not 75");
-            }*/
-            //Assert.AreEqual(75, family.HappinessAverage(), "family average is not 75");
+                Assert.AreEqual(75, family.FamilyMembers[i].Happiness, "The happiness his not 75");
+            }
+            Assert.AreEqual(75, family.HappinessAverage(), "family average is not 75");
         }
         
         [Test]

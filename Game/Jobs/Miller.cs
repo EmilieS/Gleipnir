@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    [Serializable]
     public class Miller : JobsModel
     {
         public Miller(Game game, JobList list, string name)

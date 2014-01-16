@@ -57,16 +57,34 @@ namespace GamePages
                 ElementName.Text = family.Name;
                 goldIcon.Visible = true;
                 Gold.Visible = true;
-                Gold.Text = family.GoldStash.ToString();
+                Gold.Text = _page.TransformHighNumberToKnumbers(family.GoldStash);
                 faithIcon.Visible = true;
                 Faith.Visible = true;
-                Faith.Text = family.FaithAverageValue.ToString();
+                if (family.FaithAverageValue.ToString().Count<char>() > 5)
+                {
+                    string txt = family.FaithAverageValue.ToString();
+                    string tmp = "";
+                    for (int i = 0; i < 5; i++)
+                        tmp += txt[i];
+                    Faith.Text = tmp;
+                }
+                else
+                    Faith.Text = family.FaithAverageValue.ToString();
                 membersIcon.Visible = true;
                 NbMembers.Visible = true;
                 NbMembers.Text = family.FamilyMembers.Count.ToString();
                 happinessIcon.Visible = true;
                 Happiness.Visible = true;
-                Happiness.Text = family.HappinessAverageValue.ToString();
+                if (family.HappinessAverageValue.ToString().Count<char>() > 5)
+                {
+                    string txt = family.HappinessAverageValue.ToString();
+                    string tmp = "";
+                    for (int i = 0; i < 5; i++)
+                        tmp += txt[i];
+                    Happiness.Text = tmp;
+                }
+                else
+                    Happiness.Text = family.HappinessAverageValue.ToString();
                 buildingHealthIcon.Visible = true;
                 buildingLife.Visible = true;
                 buildingLife.Text = family.House.Hp.ToString();
