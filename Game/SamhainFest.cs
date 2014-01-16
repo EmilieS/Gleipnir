@@ -58,7 +58,7 @@ namespace Game
                     {
                         if (Game.Rand.Next(3) == 2)
                         {
-                            eventList.Add(new VillagerBirthEvent(family.newFamilyMember()));
+                            eventList.Add(new VillagerBirthEvent(family.NewFamilyMember()));
                         }
                     }
 

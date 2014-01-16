@@ -436,7 +436,7 @@ namespace GamePages
                         squares[i, j] = Road;*/
             #endregion
 
-            var buildings = game.Villages[0].Buildings;
+            var buildings = game.Villages[0].BuildingsList;
 
             // Place building
             foreach (ApothecaryOffice build in buildings.ApothecaryOfficeList)

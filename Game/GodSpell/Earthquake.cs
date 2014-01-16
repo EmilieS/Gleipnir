@@ -11,6 +11,7 @@ namespace Game.GodSpell
     {
         Village _village;
         int _force;
+
         public Earthquake(Game g, Village v)
             : base (g)
         {

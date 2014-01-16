@@ -268,8 +268,6 @@ namespace Game
         }
     }
 }
-
-
 /*
 // Two good ways to challenge types!
 if (GameItem is Villager)
