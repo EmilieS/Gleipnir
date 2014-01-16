@@ -50,7 +50,7 @@
             this.exit.TabIndex = 7;
             this.exit.Text = "Quitter";
             this.exit.UseVisualStyleBackColor = false;
-            this.exit.Click += new System.EventHandler(this.Exit_Click);
+            this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
             // loadGame
             // 
@@ -66,6 +66,7 @@
             this.loadGame.TabIndex = 6;
             this.loadGame.Text = "Charger";
             this.loadGame.UseVisualStyleBackColor = false;
+            this.loadGame.Click += new System.EventHandler(this.loadGame_Click);
             // 
             // settings
             // 

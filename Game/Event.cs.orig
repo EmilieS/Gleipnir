@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+<<<<<<< HEAD
+=======
+
     [Serializable]
+>>>>>>> SAVE
     public class Event<T> : IEvent
     //where T : GameItem
     {
@@ -94,8 +98,12 @@ namespace Game
         }
 
     }
-    [Serializable]
+<<<<<<< HEAD
     public class GameEventProperty : EventProperty<Game>
+=======
+    [Serializable]
+    public class GameEventProperty: EventProperty<Game>
+>>>>>>> SAVE
     {
         internal GameEventProperty(Game item, string propName)
             : base(item, propName)
@@ -196,7 +204,11 @@ namespace Game
         }
 
     }
+<<<<<<< HEAD
+=======
+
     [Serializable]
+>>>>>>> SAVE
     public class FamilyEndEvent : Event<Family>
     {
         internal FamilyEndEvent(Family v)
@@ -209,7 +221,10 @@ namespace Game
             b.PushTrace(String.Format("La famille {0} est terminée.", GameItem.Name));
         }
     }
+<<<<<<< HEAD
+=======
     [Serializable]
+>>>>>>> SAVE
     public class VillagerBirthEvent : Event<Villager>
     {
         internal VillagerBirthEvent(Villager v)

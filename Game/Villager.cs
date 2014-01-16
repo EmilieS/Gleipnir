@@ -9,6 +9,7 @@ using System.Diagnostics;
 
 namespace Game
 {
+    [Serializable]
     public partial class Villager : GameItem
     {
         internal Villager(Game g, Family parentFamily, string name)    //TODO: autre constructeur pour le début...

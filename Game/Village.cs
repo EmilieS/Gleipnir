@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 namespace Game
 {
+    [Serializable]
     public class Village : GameItem
     {
         internal readonly HistorizedValue<int, Village> _offeringsPointsPerTick;
