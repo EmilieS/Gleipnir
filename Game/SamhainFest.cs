@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    class SamhainFest : GameItem
+    public class SamhainFest : GameItem
     {
         int _duration;
         int _timer;
         Village _village;
 
         // TODO : define the duration of  the villageFest, implement duration
-        SamhainFest(Village v)
+        public SamhainFest(Village v)
             : base(v.Game)
         {
             _duration = 15;
             _timer = _duration;
             _village = v;
+            ActOnvillagers(v);
         }
 
         public int Duration
@@ -38,8 +39,8 @@ namespace Game
                     {
                         villager.ActivityStatus = ActivityStatus.PARTYING;
                     }
-                    villager.AddOrRemoveHappiness(15);
-                    villager.AddOrRemoveFaith(15);
+                    villager.AddOrRemoveHappiness(3);
+                    villager.AddOrRemoveFaith(2);
                 }
             }
         }
@@ -80,7 +81,7 @@ namespace Game
                     {
                         if (!villager.IsHeretic())
                         {
-                            villager.ActivityStatus = ActivityStatus.WORKING;
+                            villager.ActivityStatus = ActivityStatus.NONE;
                         }
                     }
                 }

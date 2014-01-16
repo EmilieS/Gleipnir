@@ -20,6 +20,7 @@ namespace Game
             _statusInFamily = new HistorizedValue<Status, Villager>(this, "_statusInFamily", 20);
             _statusInFamily.Current = Status.SINGLE;
             
+            
             g.VillagerAdded();
             parentFamily.OwnerVillage.VillagerAdded();
             Debug.Assert(g != null);
@@ -279,7 +280,7 @@ namespace Game
         {
             if (IsDead())
                 return false;
-            if (_villagerActivity != ActivityStatus.WORKING)
+            if (_villagerActivity == ActivityStatus.PARTYING)
                 return false;
 
             return true; //TODO
