@@ -64,7 +64,7 @@ namespace GamePages
 
         private void Save_Click(object sender, EventArgs e)
         {
-             Game.serialize.save(_page.Game);
+             Game.serialize.save(_page.TheGame);
 
         }
     }

@@ -16,9 +16,11 @@ namespace GamePages
         public bool _isStarted;
         public bool _isLoaded;
         public event PropertyChangedEventHandler Launched;
+        GeneralPage _page;
 
-        public HomepageUC()
+        public HomepageUC(GeneralPage page)
         {
+            _page = page;
             InitializeComponent();
             _isStarted = false;
             _isLoaded = false;
@@ -45,10 +47,10 @@ namespace GamePages
         {
             if (Game.serialize.load() != null)
             {
-                Game.Game game = Game.serialize.load();
                 this.Visible = false;
                 _isLoaded = true;
-                RaisePropertyChanged();
+                _isStarted = false;
+                _page.LoadGame();
             }
         }
         private void exit_Click(object sender, EventArgs e)

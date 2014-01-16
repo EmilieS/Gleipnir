@@ -36,7 +36,7 @@ namespace GamePages
         /// <summary>
         /// Gets the game object
         /// </summary>
-        internal Game.Game Game { get { return _game; } }
+        internal Game.Game TheGame { get { return _game; } }
 
         /// <summary>
         /// Player state
@@ -51,7 +51,7 @@ namespace GamePages
         {
             // Create windows objects
             _loading = new LoadingUC();
-            _home = new HomepageUC();
+            _home = new HomepageUC(this);
             InitializeComponent();
 
             // Show Logo
@@ -199,10 +199,8 @@ namespace GamePages
             Step();
         }
         // LoadGame
-        public void IsLoaded_Changed(object sender, PropertyChangedEventArgs e)
+        public void LoadGame()
         {
-            _game = Game;
-
             // Hide home page
             _home.Hide();
 
@@ -210,8 +208,8 @@ namespace GamePages
             _loading.BringToFront();
             _loading.Show();
 
-            // Create the game
-            _game = new Game.Game();
+            // Load the game
+            _game = Game.serialize.load();
 
             // Create objects
             _gameMenu = new InGameMenu(this);
