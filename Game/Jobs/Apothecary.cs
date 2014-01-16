@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    [Serializable]
     public class Apothecary : JobsModel
     {
         public Apothecary(Game game, JobList list, string name)

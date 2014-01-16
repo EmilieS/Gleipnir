@@ -9,7 +9,6 @@ using System.Diagnostics;
 
 namespace Game
 {
-    [Serializable]
     public partial class Villager : GameItem
     {
         internal Villager(Game g, Family parentFamily, string name)    //TODO: autre constructeur pour le début...
@@ -20,7 +19,6 @@ namespace Game
             _health = new HistorizedValue<Healths, Villager>(this, "_health", 20);
             _statusInFamily = new HistorizedValue<Status, Villager>(this, "_statusInFamily", 20);
             _statusInFamily.Current = Status.SINGLE;
-            
             
             g.VillagerAdded();
             parentFamily.OwnerVillage.VillagerAdded();
@@ -281,8 +279,6 @@ namespace Game
         {
             if (IsDead())
                 return false;
-            if (_villagerActivity == ActivityStatus.PARTYING)
-                return false;
 
             return true; //TODO
         }
@@ -470,7 +466,7 @@ namespace Game
         {
             if (_statusInFamily.Current != Status.ENGAGED)
                 return;
-            if (_engagedTickTimer == 45)
+            if (_engagedTickTimer == 10)
             {
                 if (_gender == Genders.FEMALE)
                 {

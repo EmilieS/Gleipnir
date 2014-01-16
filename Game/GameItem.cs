@@ -7,7 +7,6 @@ using System.Diagnostics;
 
 namespace Game
 {
-    [Serializable]
     public abstract class GameItem
     {
         Game _game;

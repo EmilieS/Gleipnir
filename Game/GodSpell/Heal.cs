@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Game.GodSpell
 {
-    [Serializable]
     public class Heal : GameItem
     {
-        public Heal(Game g)
+        Heal(Game g)
             : base(g)
         {   
         
@@ -32,10 +31,6 @@ namespace Game.GodSpell
         }
         internal override void OnDestroy()
         {        }
-        internal override void DieOrIsAlive(List<IEvent> eventList)
-        {
-            Destroy();
-        }
         internal override void CloseStep(List<IEvent> eventList) { }
 
     }

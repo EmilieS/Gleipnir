@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    [Serializable]
     public abstract class JobsModel : GameItem
     {
         //protected Village _ownerVillage;

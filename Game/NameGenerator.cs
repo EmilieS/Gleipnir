@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    [Serializable]
     public class NameGenerator
     {
         public NameGenerator(IEnumerable<string> sampleNames, int order, int minLength)
@@ -49,7 +48,7 @@ namespace Game
             }
         }
 
-        /*[NonSerialized]*/private Dictionary<string, List<char>> _chains = new Dictionary<string, List<char>>();
+        private Dictionary<string, List<char>> _chains = new Dictionary<string, List<char>>();
         private List<string> _samples = new List<string>();
         private List<string> _used = new List<string>();
         private Random _rnd = new Random();
