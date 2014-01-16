@@ -223,7 +223,31 @@ namespace Game
             b.PushTrace(String.Format("Une nouvelle famille s'est consituée {0}.", GameItem.Name));
         }
     }
+
+    public class EpidimicEradicatedEvent : Event<GodSpell.Epidemic>
+    {
+        Game _game;
+        internal EpidimicEradicatedEvent(GodSpell.Epidemic v, Game g)
+            : base(v)
+        {
+            _game = g;
+        }
+        override public void PublishMessage(IWindow b)
+        {
+            string toPush = "L'épidémie a été éradiquée.";
+            if (_game.TotalPop > 0)
+            {
+                b.PushAlert(toPush, "Epidémie");
+            }
+            else
+            {
+                b.PushTrace(toPush);
+            }
+        }
+    }
 }
+
+
 /*
 // Two good ways to challenge types!
 if (GameItem is Villager)

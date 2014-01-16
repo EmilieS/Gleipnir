@@ -93,6 +93,7 @@ namespace Game.GodSpell
         {
             if (SickVillagerList.Count == 0)
             {
+                eventList.Add(new EpidimicEradicatedEvent(this, Game));
                 Destroy();
             }
         }
