@@ -29,7 +29,6 @@ namespace Game
         // Games lists
         readonly List<Village> _villagesList; // TODO: Upgrade Village list
         readonly List<Villager> _singleMenList;
-        List<string> _currentText;
         List<IEvent> _eventList;
 
         // Average variables
