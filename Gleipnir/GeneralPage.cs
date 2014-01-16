@@ -37,7 +37,7 @@ namespace GamePages
         /// <summary>
         /// Gets the game object
         /// </summary>
-        internal Game.Game Game { get { return _game; } }
+        internal Game.Game TheGame { get { return _game; } }
 
         /// <summary>
         /// Player state
