@@ -20,6 +20,7 @@ namespace Game
             _statusInFamily = new HistorizedValue<Status, Villager>(this, "_statusInFamily", 20);
             _statusInFamily.Current = Status.SINGLE;
             
+            
             g.VillagerAdded();
             parentFamily.OwnerVillage.VillagerAdded();
             Debug.Assert(g != null);
@@ -279,6 +280,8 @@ namespace Game
         {
             if (IsDead())
                 return false;
+            if (_villagerActivity == ActivityStatus.PARTYING)
+                return false;
 
             return true; //TODO
         }
@@ -466,7 +469,7 @@ namespace Game
         {
             if (_statusInFamily.Current != Status.ENGAGED)
                 return;
-            if (_engagedTickTimer == 10)
+            if (_engagedTickTimer == 45)
             {
                 if (_gender == Genders.FEMALE)
                 {

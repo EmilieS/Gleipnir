@@ -50,7 +50,7 @@ namespace Game
             HOBBY = 10,
             WORKING = 20,
             CONVOCATED = 30,
-            PUSHINGOUT = 40    //Make the fest 
+            PARTYING = 40    //Make the fest 
         }
         public enum Missions
         {
