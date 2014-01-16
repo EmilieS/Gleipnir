@@ -246,7 +246,7 @@ namespace GamePages
 
             // InfoBox Texts
             Title.Visible = true;
-            Title.Location = new Point(positionX - 20, positionY);
+            Title.Location = new Point(positionX - 35, positionY);
             Title.Text = "Bâtiment détruit";
             objectName.Visible = true;
             ElementName.Visible = true;

@@ -36,17 +36,20 @@
             // VillagerName
             // 
             this.VillagerName.AutoSize = true;
-            this.VillagerName.Location = new System.Drawing.Point(68, 23);
+            this.VillagerName.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.VillagerName.ForeColor = System.Drawing.Color.Navy;
+            this.VillagerName.Location = new System.Drawing.Point(50, 7);
             this.VillagerName.Name = "VillagerName";
-            this.VillagerName.Size = new System.Drawing.Size(35, 13);
+            this.VillagerName.Size = new System.Drawing.Size(42, 15);
             this.VillagerName.TabIndex = 0;
             this.VillagerName.Text = "Name";
             // 
             // VillagerFace
             // 
-            this.VillagerFace.Location = new System.Drawing.Point(3, 14);
+            this.VillagerFace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.VillagerFace.Location = new System.Drawing.Point(6, 5);
             this.VillagerFace.Name = "VillagerFace";
-            this.VillagerFace.Size = new System.Drawing.Size(37, 38);
+            this.VillagerFace.Size = new System.Drawing.Size(40, 40);
             this.VillagerFace.TabIndex = 1;
             this.VillagerFace.TabStop = false;
             // 
@@ -54,10 +57,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
+            this.BackgroundImage = global::GamePages.Properties.Resources.GameEventUC_backgroung;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.VillagerFace);
             this.Controls.Add(this.VillagerName);
+            this.DoubleBuffered = true;
             this.Name = "VillagerBannerUC";
-            this.Size = new System.Drawing.Size(210, 76);
+            this.Size = new System.Drawing.Size(178, 50);
             ((System.ComponentModel.ISupportInitialize)(this.VillagerFace)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -67,6 +74,6 @@
         #endregion
 
         internal System.Windows.Forms.Label VillagerName;
-        private System.Windows.Forms.PictureBox VillagerFace;
+        internal System.Windows.Forms.PictureBox VillagerFace;
     }
 }

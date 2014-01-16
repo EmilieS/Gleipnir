@@ -27,8 +27,8 @@ namespace Game
         internal readonly List<GameItem> _items;
 
         // Games lists
-        readonly List<Village> _villages; // TODO: Upgrade Village list
-        readonly List<Villager> _singleMen;
+        readonly List<Village> _villagesList; // TODO: Upgrade Village list
+        readonly List<Villager> _singleMenList;
         List<string> _currentText;
         List<IEvent> _eventList;
 
@@ -46,14 +46,14 @@ namespace Game
         public Game()
         {
             // Created "windows values"
-            _totalGold = new HistorizedValue<int, Game>(this, "_totalGold", 20);
-            _totalPop = new HistorizedValue<int, Game>(this, "_totalPop", 20);
-            _offerings = new HistorizedValue<int, Game>(this, "_offerings", 20);
+            _totalGold = new HistorizedValue<int, Game>(this, @"_totalGold", 20);
+            _totalPop = new HistorizedValue<int, Game>(this, @"_totalPop", 20);
+            _offerings = new HistorizedValue<int, Game>(this, @"_offerings", 20);
 
             // Created lists
             _items = new List<GameItem>();
-            _singleMen = new List<Villager>();
-            _villages = new List<Village>();
+            _singleMenList = new List<Villager>();
+            _villagesList = new List<Village>();
             _eventList = new List<IEvent>();
 
             // FamilyNames Generator
@@ -81,22 +81,22 @@ namespace Game
             #endregion
 
             // Create Village
-            Village village = CreateVillage("Ragnar");
+            Village village = CreateVillage(@"Ragnar");
 
             // Create Table
             new TablePlace(village);
 
             // Create default jobs buildings
-            Farm farm = new Farm(village, village.Jobs.Farmer);
-            village.Jobs.Farmer.Building = farm;
-            Forge forge = new Forge(village, village.Jobs.Blacksmith);
-            village.Jobs.Blacksmith.Building = forge;
-            UnionOfCrafter uoc = new UnionOfCrafter(village, village.Jobs.Construction_Worker);
-            village.Jobs.Construction_Worker.Building = uoc;
+            Farm farm = new Farm(village, village.JobsList.Farmer);
+            village.JobsList.Farmer.Building = farm;
+            Forge forge = new Forge(village, village.JobsList.Blacksmith);
+            village.JobsList.Blacksmith.Building = forge;
+            UnionOfCrafter uoc = new UnionOfCrafter(village, village.JobsList.Construction_Worker);
+            village.JobsList.Construction_Worker.Building = uoc;
 
             // Create 5 families
-            Family FamilyA = village.CreateFamilyFromScratch(village.Jobs.Farmer, village.Jobs.Blacksmith);
-            Family FamilyB = village.CreateFamilyFromScratch(village.Jobs.Farmer, village.Jobs.Construction_Worker);
+            Family FamilyA = village.CreateFamilyFromScratch(village.JobsList.Farmer, village.JobsList.Blacksmith);
+            Family FamilyB = village.CreateFamilyFromScratch(village.JobsList.Farmer, village.JobsList.Construction_Worker);
             Family FamilyC = village.CreateFamilyFromScratch();
             Family FamilyD = village.CreateFamilyFromScratch();
             Family FamilyE = village.CreateFamilyFromScratch();
@@ -149,11 +149,11 @@ namespace Game
         /// <summary>
         /// Gets villages list
         /// </summary>
-        public IReadOnlyList<Village> Villages { get { return _villages; } }
+        public IReadOnlyList<Village> Villages { get { return _villagesList; } }
         /// <summary>
         /// Gets single men list
         /// </summary>
-        public IReadOnlyList<Villager> SingleMen { get { return _singleMen; } }
+        public IReadOnlyList<Villager> SingleMen { get { return _singleMenList; } }
         /// <summary>
         /// Gets events list
         /// </summary>
@@ -174,12 +174,12 @@ namespace Game
         /// <param name="epidemic"></param>
         internal void EpidemicDestroyed(GodSpell.Epidemic epidemic)
         {
-            Debug.Assert(epidemic != null, "( EpidemicDestroyed) item is null");
-            Debug.Assert(_currentEpidemicList.Contains(epidemic), "( EpidemicmDestroyed) the item was already removed from the gameitemlist");
+            Debug.Assert(epidemic != null, @"(game, EpidemicDestroyed) Item is null");
+            Debug.Assert(_currentEpidemicList.Contains(epidemic), @"(game, EpidemicmDestroyed) Item not in gameitemlist");
             if (epidemic.TimeSinceCreation < 15)
                 _faithToBeAddedOrRemovedForAllVillagersThisRound += 20;
             _currentEpidemicList.Remove(epidemic);
-            Debug.Assert(!_currentEpidemicList.Contains(epidemic), "( EpidemicDestroyed) the item was not removed from the gameitemlist");
+            Debug.Assert(!_currentEpidemicList.Contains(epidemic), @"(game, EpidemicDestroyed) Item still in gameitemlist");
 
         }
 
@@ -198,10 +198,10 @@ namespace Game
         /// <param name="item"></param>
         internal void GameItemDestroyed(GameItem item)
         {
-            Debug.Assert(item != null, "(GameItemDestroyed) item is null");
-            Debug.Assert(_items.Contains(item), "(GameItemDestroyed) the item was already removed from the gameitemlist");
+            Debug.Assert(item != null, @"(game, GameItemDestroyed) Item is null");
+            Debug.Assert(_items.Contains(item), @"(game, GameItemDestroyed) Item not in gameitemlist");
             _items.Remove(item);
-            Debug.Assert(!_items.Contains(item), "(GameItemDestroyed) the item was not removed from the gameitemlist");
+            Debug.Assert(!_items.Contains(item), @"(game, GameItemDestroyed) Item still in gameitemlist");
         }
 
         // Gold Methods
@@ -211,7 +211,7 @@ namespace Game
         /// <param name="amount"></param>
         internal void GoldAdded(int amount)
         {
-            Debug.Assert(amount >= 0, "(GoldAdded) negative amount");
+            Debug.Assert(amount >= 0, @"(game, GoldAdded) Negative amount");
             _totalGold.Current += amount;
         }
         /// <summary>
@@ -220,14 +220,14 @@ namespace Game
         /// <param name="amount"></param>
         internal void GoldRemoved(int amount)
         {
-            Debug.Assert(amount >= 0, "(GoldRemoved) negative amount.");
+            Debug.Assert(amount >= 0, "(game, GoldRemoved) Negative amount.");
             _totalGold.Current -= amount;
         }
         /// <summary>
         /// Take gold from total gold when family is destroyed
         /// </summary>
         /// <param name="family"></param>
-        internal void FamilyRemoved(Family family)
+        internal void TakeGoldWhenFamilyRemoved(Family family)
         {
             _totalGold.Current -= family.GoldStash;
         }
@@ -240,7 +240,8 @@ namespace Game
         public void AddOrTakeFromOfferings(int amount)
         {
             int result = _offerings.Current + amount;
-            if (result < 0) { throw new InvalidOperationException("Negative Offerings"); }
+            if (result < 0)
+                throw new InvalidOperationException(@"(game, AddOrTakeFromOfferings) Negative Offerings");
             else _offerings.Current = result;
         }
 
@@ -266,10 +267,10 @@ namespace Game
         /// <param name="man"></param>
         internal void AddSingleMan(Villager man)
         {
-            Debug.Assert(man != null, "man is null! (AddSingleMan)");
-            Debug.Assert(man.Gender == Genders.MALE, "is a woman! (AddSingleMan)");
-            Debug.Assert(man.StatusInFamily == Status.SINGLE, "is not single! (AddSingleMan)");
-            _singleMen.Add(man);
+            Debug.Assert(man != null, @"(game, AddSingleMan) Man is null");
+            Debug.Assert(man.Gender == Genders.MALE, @"(game, AddSingleMan) Is a woman");
+            Debug.Assert(man.StatusInFamily == Status.SINGLE, @"(game, AddSingleMan) Is not single");
+            _singleMenList.Add(man);
         }
         /// <summary>
         /// Remove single man villager from single men list
@@ -277,9 +278,9 @@ namespace Game
         /// <param name="villager"></param>
         internal void RemoveSingleMan(Villager villager)
         {
-            Debug.Assert(villager.StatusInFamily != Status.SINGLE);
-            Debug.Assert(_singleMen.Contains(villager));
-            _singleMen.Remove(villager);
+            Debug.Assert(villager.StatusInFamily != Status.SINGLE, @"(game, RemoveSingleMen) Man not single");
+            Debug.Assert(_singleMenList.Contains(villager), @"(game, RemoveSingleMen) Man not in singleMenList");
+            _singleMenList.Remove(villager);
         }
         /// <summary>
         /// Remove single man villager from single men list
@@ -288,7 +289,7 @@ namespace Game
         /// <param name="dead"></param>
         internal void SingleManDestroyed(Villager dead)
         {
-            _singleMen.Remove(dead);
+            _singleMenList.Remove(dead);
         }
 
         // Happiness Methods
@@ -328,9 +329,10 @@ namespace Game
         /// <returns></returns>
         public Village CreateVillage(string name)
         {
-            if (String.IsNullOrWhiteSpace(name)) throw new ArgumentNullException("name");
+            if (String.IsNullOrWhiteSpace(name))
+                throw new ArgumentNullException(@"(game, CreateVillage) Invalid name");
             var v = new Village(this, name);
-            _villages.Add(v);
+            _villagesList.Add(v);
             return v;
         }
 
@@ -417,24 +419,24 @@ namespace Game
             foreach (GameItem item in _items)
                 item.CloseStep(_eventList);
             if (_totalGold.Conclude())
-                _eventList.Add(new GameEventProperty(this, "TotalGold"));
+                _eventList.Add(new GameEventProperty(this, @"TotalGold"));
             if (_totalPop.Conclude())
-                _eventList.Add(new GameEventProperty(this, "TotalPop"));
+                _eventList.Add(new GameEventProperty(this, @"TotalPop"));
             if (_offerings.Conclude())
-                _eventList.Add(new GameEventProperty(this, "Offerings"));
+                _eventList.Add(new GameEventProperty(this, @"Offerings"));
 
             double faith = 0;
             double happiness = 0;
             foreach (Village v in Villages)
             {
                 v.CalculateAverageVillageHappinessAndFaith();
-                happiness += v.VillageHappiness;
-                faith += v.VillageFaith;
+                happiness += v.Happiness;
+                faith += v.Faith;
             }
             _averageHappiness = happiness / Villages.Count;
             _averageFaith = faith / Villages.Count;
-            _eventList.Add(new GameEventProperty(this, "AverageFaith"));
-            _eventList.Add(new GameEventProperty(this, "AverageHappiness"));
+            _eventList.Add(new GameEventProperty(this, @"AverageFaith"));
+            _eventList.Add(new GameEventProperty(this, @"AverageHappiness"));
         }
 
         //variables à avoir: les coefficients des métiers

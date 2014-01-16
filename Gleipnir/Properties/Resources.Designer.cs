@@ -243,6 +243,16 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ButtonIcon_Earthquake {
+            get {
+                object obj = ResourceManager.GetObject("ButtonIcon_Earthquake", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ButtonIcon_epidemic {
             get {
                 object obj = ResourceManager.GetObject("ButtonIcon_epidemic", resourceCulture);
@@ -276,6 +286,26 @@ namespace GamePages.Properties {
         internal static System.Drawing.Bitmap GameEventUC_backgroung {
             get {
                 object obj = ResourceManager.GetObject("GameEventUC_backgroung", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Gender_Female {
+            get {
+                object obj = ResourceManager.GetObject("Gender_Female", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Gender_Male {
+            get {
+                object obj = ResourceManager.GetObject("Gender_Male", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -466,6 +496,16 @@ namespace GamePages.Properties {
         internal static System.Drawing.Bitmap Stats_ObjectName {
             get {
                 object obj = ResourceManager.GetObject("Stats_ObjectName", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Stats_Offerings {
+            get {
+                object obj = ResourceManager.GetObject("Stats_Offerings", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

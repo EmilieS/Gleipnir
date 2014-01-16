@@ -43,24 +43,24 @@ namespace Tests
             Assert.That(village.Gold, Is.EqualTo(100));
 
             // Less gold
-            family1.takeFromGoldStash(10);
+            family1.TakeFromGoldStash(10);
             village.CalculateVillageGold();
             Assert.That(village.Gold, Is.EqualTo(90));
 
             // More gold
-            family1.addToGoldStash(10);
+            family1.AddToGoldStash(10);
             village.CalculateVillageGold();
             Assert.That(village.Gold, Is.EqualTo(100));
 
             // No gold
             int i;
-            for(i=0; i<families.Count; i++) families[i].takeFromGoldStash(20);
+            for(i=0; i<families.Count; i++) families[i].TakeFromGoldStash(20);
 
             village.CalculateVillageGold();
             Assert.That(village.Gold, Is.EqualTo(0));
 
             // Negative gold -> 0
-            family1.takeFromGoldStash(1);
+            family1.TakeFromGoldStash(1);
             Assert.That(family1.GoldStash, Is.EqualTo(0));
             village.CalculateVillageGold();
             Assert.That(village.Gold, Is.EqualTo(0));

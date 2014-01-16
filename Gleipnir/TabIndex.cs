@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Game;
 using Game.Buildings;
+using System.Diagnostics;
 
 namespace GamePages
 {
     public partial class TabIndex : UserControl
     {
-        readonly GeneralPage _page;
-        bool _isOnBought;
-        bool _passed;
-        bool _isEpidemicLaunched;
         List<VillagerBannerUC> ListOfVillagersToShow;
+        readonly GeneralPage _page;
+        bool isOnBought;
+        bool passed;
+        bool isEpidemicLaunched;
         int positionX;
         int positionY;
 
@@ -27,10 +28,10 @@ namespace GamePages
             InitializeComponent();
 
             _page = p;
-            _isOnBought = false;
+            isOnBought = false;
 
             positionX = 0;
-            positionY = 0;
+            positionY = 10;
             
             // Create imageList
             ImageList imageList = new ImageList();
@@ -65,53 +66,50 @@ namespace GamePages
 
         public bool IsOnBought
         {
-            get { return _isOnBought; }
-            set { _isOnBought = value; }
+            get { return isOnBought; }
+            set { isOnBought = value; }
         }
 
-        internal void ShowUnboughtBuildings()
-        {
-        }
-
+        // Buildings Click
         #region Jobs Buildings Buttons
         private void ApothicaryOffice_Click(object sender, EventArgs e)
         {
-            ApothecaryOffice apo = new ApothecaryOffice(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Apothecary);
+            ApothecaryOffice apo = new ApothecaryOffice(_page.Game.Villages[0], _page.Game.Villages[0].JobsList.Apothecary);
             _page.OnBoughtBuilding_Click(apo);
         }
         private void Forge_Click(object sender, EventArgs e)
         {
-            Game.Buildings.Forge forge = new Forge(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Blacksmith);
+            Game.Buildings.Forge forge = new Forge(_page.Game.Villages[0], _page.Game.Villages[0].JobsList.Blacksmith);
             _page.OnBoughtBuilding_Click(forge);
         }
         private void UnionOfCrafter_Click(object sender, EventArgs e)
         {
-            Game.Buildings.UnionOfCrafter uoc = new UnionOfCrafter(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Construction_Worker);
+            Game.Buildings.UnionOfCrafter uoc = new UnionOfCrafter(_page.Game.Villages[0], _page.Game.Villages[0].JobsList.Construction_Worker);
             _page.OnBoughtBuilding_Click(uoc);
         }
         private void Restaurant_Click(object sender, EventArgs e)
         {
-            Game.Buildings.Restaurant resto = new Restaurant(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Cooker);
+            Game.Buildings.Restaurant resto = new Restaurant(_page.Game.Villages[0], _page.Game.Villages[0].JobsList.Cooker);
             _page.OnBoughtBuilding_Click(resto);
         }
         private void Farm_Click(object sender, EventArgs e)
         {
-            Game.Buildings.Farm farm = new Farm(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Farmer);
+            Game.Buildings.Farm farm = new Farm(_page.Game.Villages[0], _page.Game.Villages[0].JobsList.Farmer);
             _page.OnBoughtBuilding_Click(farm);
         }
         private void Mill_Click(object sender, EventArgs e)
         {
-            Game.Buildings.Mill mill = new Mill(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Miller);
+            Game.Buildings.Mill mill = new Mill(_page.Game.Villages[0], _page.Game.Villages[0].JobsList.Miller);
             _page.OnBoughtBuilding_Click(mill);
         }
         private void MilitaryCamp_Click(object sender, EventArgs e)
         {
-            Game.Buildings.MilitaryCamp gq = new MilitaryCamp(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Militia);
+            Game.Buildings.MilitaryCamp gq = new MilitaryCamp(_page.Game.Villages[0], _page.Game.Villages[0].JobsList.Militia);
             _page.OnBoughtBuilding_Click(gq);
         }
         private void ClothesShop_Click(object sender, EventArgs e)
         {
-            Game.Buildings.ClothesShop shop = new ClothesShop(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Tailor);
+            Game.Buildings.ClothesShop shop = new ClothesShop(_page.Game.Villages[0], _page.Game.Villages[0].JobsList.Tailor);
             _page.OnBoughtBuilding_Click(shop);
         }
         #endregion
@@ -160,40 +158,58 @@ namespace GamePages
         }
         #endregion
 
+        // God Spells Click
         private void StartEpidemic_Click(object sender, EventArgs e)
         {
-            if (!_isEpidemicLaunched)
+            if (!isEpidemicLaunched)
             {
                 Game.GodSpell.Epidemic epidemic = new Game.GodSpell.Epidemic(_page.Game, _page.Game.Villages[0].FamiliesList[0].FamilyMembers[0]);
-                _isEpidemicLaunched = true;
+                isEpidemicLaunched = true;
             }
         }
+        private void StartEarthquake_Click(object sender, EventArgs e)
+        {
+            Game.GodSpell.Earthquake earthquake = new Game.GodSpell.Earthquake(_page.Game, _page.Game.Villages[0]);
+        }
         
+        // Villagers list
         internal void ShowVillagerListInFamily(Family fam)
         {
-            if (_passed == false)
+            if (!passed)
             {
-                _passed = true;
                 ListOfVillagersToShow = new List<VillagerBannerUC>();
+                passed = true;
             }
             DestroyVillagerList();
 
             for (int i = 0; i < fam.FamilyMembers.Count; i++)
             {
                 VillagerBannerUC tmp = new VillagerBannerUC();
-                ListOfVillagersToShow.Add(tmp);
+                
+                // Add gender icon
+                if(fam.FamilyMembers[i].Gender == Genders.FEMALE)
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
+                else
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
+
+                // Set VillagerBannerUC
                 tmp.VillagerName.Text = fam.FamilyMembers[i].FirstName + " " + fam.FamilyMembers[i].Name;
-                this.VillagerList.Controls.Add(tmp);
-                tmp.Show();
                 tmp.Location = new System.Drawing.Point(positionX, positionY);
-                positionY += 65;
+
+                // Add VillagerBannerUC to lists and show it
+                this.VillagerList.Controls.Add(tmp);
+                ListOfVillagersToShow.Add(tmp);
+                tmp.Show();
+
+                // Set position for next VillagerBannerUC
+                positionY += 62;
             }
         }
         internal void ShowWorkersInJob(JobsModel job)
         {
-            if (_passed == false)
+            if (passed == false)
             {
-                _passed = true;
+                passed = true;
                 ListOfVillagersToShow = new List<VillagerBannerUC>();
             }
             DestroyVillagerList();
@@ -202,11 +218,15 @@ namespace GamePages
             {
                 VillagerBannerUC tmp = new VillagerBannerUC();
                 ListOfVillagersToShow.Add(tmp);
+                if (job.Workers[i].Gender == Genders.FEMALE)
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
+                else
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
                 tmp.VillagerName.Text = job.Workers[i].FirstName + " " + job.Workers[i].Name;
                 this.VillagerList.Controls.Add(tmp);
                 tmp.Show();
                 tmp.Location = new System.Drawing.Point(positionX, positionY);
-                positionY += 65;
+                positionY += 62;
             }
         }
         internal void DestroyVillagerList()

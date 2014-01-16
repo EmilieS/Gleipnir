@@ -23,7 +23,7 @@ namespace Tests
             Villager villager = family.FamilyMembers[0];
             double lifeExpectancyIni = villager.LifeExpectancy;
             epidemic = new Game.GodSpell.Epidemic(g, villager);
-            selectedVillage.Jobs.Tailor.AddPerson(villager);
+            selectedVillage.JobsList.Tailor.AddPerson(villager);
             JobsModel job = villager.Job;
             epidemic.LaunchEpidemic();//TODO
             g.NextStep();
