@@ -57,7 +57,7 @@ namespace Tests
             Assert.That(f.FamilyMembers[1].FirstName, Is.Not.EqualTo(f.FamilyMembers[0]));
 
             // Add new villager in family
-            f.newFamilyMember();
+            f.NewFamilyMember();
             Assert.That(f.FamilyMembers[2].FirstName, Is.Not.Empty);
             Assert.That(f.FamilyMembers[2].FirstName, Is.Not.EqualTo(f.FamilyMembers[0]));
             Assert.That(f.FamilyMembers[2].FirstName, Is.Not.EqualTo(f.FamilyMembers[1]));

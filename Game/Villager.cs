@@ -20,7 +20,6 @@ namespace Game
             _statusInFamily = new HistorizedValue<Status, Villager>(this, "_statusInFamily", 20);
             _statusInFamily.Current = Status.SINGLE;
             
-            
             g.VillagerAdded();
             parentFamily.OwnerVillage.VillagerAdded();
             Debug.Assert(g != null);
@@ -81,7 +80,7 @@ namespace Game
             _statusInFamily.Current = Status.SINGLE;
             _name = name;//_health.Conclude();
             Game.Villages[0].VillagerAdded();//hmmmmm
-            Game.Villages[0].Jobs.Farmer.AddPerson(this);
+            Game.Villages[0].JobsList.Farmer.AddPerson(this);
         }
 
         //TODO : generate name.
@@ -280,8 +279,6 @@ namespace Game
         {
             if (IsDead())
                 return false;
-            if (_villagerActivity == ActivityStatus.PARTYING)
-                return false;
 
             return true; //TODO
         }
@@ -315,7 +312,7 @@ namespace Game
             int amount = _parentFamily.OwnerVillage.OfferingsPointsPerTick;
             if ((_health.Current & Healths.HERETIC) == 0)
             {
-                Game.AddOrTakeFromOfferings(ParentFamily.takeFromGoldStash(amount));
+                Game.AddOrTakeFromOfferings(ParentFamily.TakeFromGoldStash(amount));
             }
 
         }
@@ -328,7 +325,7 @@ namespace Game
         {
             if ((_health.Current & Healths.SICK) != 0)
             {
-                int nbApothecaries = _parentFamily.OwnerVillage.Jobs.Apothecary.Workers.Count;
+                int nbApothecaries = _parentFamily.OwnerVillage.JobsList.Apothecary.Workers.Count;
                 int maxtimer;
                 if (this._virus != null)//....
                 {
@@ -459,7 +456,7 @@ namespace Game
             {
                 if (_age - time < Game._regularBirthDates[i])
                 {
-                    eventList.Add(new VillagerBirthEvent(_parentFamily.newFamilyMember()));
+                    eventList.Add(new VillagerBirthEvent(_parentFamily.NewFamilyMember()));
                 }
                 i++;
             }
@@ -469,7 +466,7 @@ namespace Game
         {
             if (_statusInFamily.Current != Status.ENGAGED)
                 return;
-            if (_engagedTickTimer == 45)
+            if (_engagedTickTimer == 10)
             {
                 if (_gender == Genders.FEMALE)
                 {

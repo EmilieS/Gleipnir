@@ -13,8 +13,7 @@ namespace Game.GodSpell
         //Family ParentFamily;
         Virus _virus;
         int _timeSinceCreation;
-        public int TimeSinceCreation { get { return _timeSinceCreation; } }
-        int _timeBeforeThePlayerIsWarned;//=1 => Event; =0 =>Already warned
+        int _timeBeforeThePlayerIsWarned; //=1 => Event; =0 =>Already warned
         public readonly List<Villager> SickVillagerList;
 
         public Epidemic(Game g, Villager v)
@@ -30,6 +29,9 @@ namespace Game.GodSpell
             v.SetVirus(_virus);
             _timeBeforeThePlayerIsWarned = 5;
         }
+
+        public int TimeSinceCreation { get { return _timeSinceCreation; } }
+
         public void LaunchEpidemic()
         {
             //affectedVillager.SetVirus();
@@ -75,6 +77,7 @@ namespace Game.GodSpell
                 }
             }
         }
+
         override internal void ImpactHappiness()
         {
             _timeSinceCreation++;
@@ -93,7 +96,6 @@ namespace Game.GodSpell
         {
             if (SickVillagerList.Count == 0)
             {
-                eventList.Add(new EpidimicEradicatedEvent(this, Game));
                 Destroy();
             }
         }
