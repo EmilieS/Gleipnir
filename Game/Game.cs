@@ -14,6 +14,8 @@ namespace Game
         // Name Generator variables
         NameGenerator _nameGenerator;
         NameGenerator _firstNameGenerator;
+        //time
+        System.Timers.Timer _timer;
 
         // GodSpell variables
         internal readonly List<GodSpell.Epidemic> _currentEpidemicList;
@@ -43,8 +45,19 @@ namespace Game
         public Random Rand;
 
         // NEW GAME
-        public Game()
+        public Game(double timeStep=0)
         {
+            
+            if (timeStep != 0)
+            {
+                _timer = new System.Timers.Timer();
+                _timer.Interval = timeStep;
+
+                _timer.Elapsed += new System.Timers.ElapsedEventHandler(NextStepLauncher);
+
+            }
+
+
             // Created "windows values"
             _totalGold = new HistorizedValue<int, Game>(this, "_totalGold", 20);
             _totalPop = new HistorizedValue<int, Game>(this, "_totalPop", 20);
@@ -103,6 +116,24 @@ namespace Game
 
             // Set player's offerings
             _offerings.Current = 100;
+        }
+        public void StartTime()
+        {
+            if (_timer != null)
+            {
+                _timer.Start();
+            }
+        }
+        public void StopTime()
+        {
+            if (_timer != null)
+            {
+                _timer.Stop();
+            }
+        }
+        private void NextStepLauncher(object source, System.Timers.ElapsedEventArgs e)
+        {
+            NextStep();
         }
 
         // NameGenerator Properties
