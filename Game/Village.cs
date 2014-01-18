@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 namespace Game
 {
+    [Serializable]
     public class Village : GameItem
     {
         //List<JobsModel> _jobs;// needs to be cleansed

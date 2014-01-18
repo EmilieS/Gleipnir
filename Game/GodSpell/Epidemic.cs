@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game.GodSpell
 {
+    [Serializable]
     public class Epidemic : GameItem
     {
         //Game game = new Game();

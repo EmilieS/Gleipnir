@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
+    [Serializable]
     public abstract class BuildingsModel : GameItem
     {
         int _verticalPos;

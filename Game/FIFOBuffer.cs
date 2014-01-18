@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+    [Serializable]
     class FIFOBuffer<T>
     {
         readonly List<T> _items;

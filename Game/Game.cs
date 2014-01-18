@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
 using Game.Buildings;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Game
 {
-    public class Game
+    [Serializable]
+    public class Game/* : ISerializable*/
     {
         // Name Generator variables
         NameGenerator _nameGenerator;
@@ -105,6 +108,55 @@ namespace Game
             _offerings.Current = 100;
         }
 
+           //public Game(SerializationInfo info, StreamingContext ctxt)
+         //{
+      /*this.make = (string)info.GetValue("Make", typeof(string));
+      this.model = (string)info.GetValue("Model",typeof(string));
+      this.year = (string)info.GetValue("Year", typeof(int));
+      this.owner = (Owner)info.GetValue("Owner", typeof(Owner));*/
+/*
+        _nameGenerator = (NameGenerator)info.GetValue("_nameGenerator", typeof(NameGenerator));
+        _firstNameGenerator= (NameGenerator)info.GetValue("_firstnameGenerator", typeof(NameGenerator));
+
+        _currentEpidemicList=(List<GodSpell.Epidemic>) info.GetValue("_currentEpidemicList", typeof(List<GodSpell.Epidemic>));
+
+        _offerings=(HistorizedValue<int, Game>) info.GetValue("_offerings", typeof(HistorizedValue<int, Game>));
+        _totalGold=(HistorizedValue<int, Game>) info.GetValue("_totalGold", typeof(HistorizedValue<int, Game>));
+        _totalPop=(HistorizedValue<int, Game>) info.GetValue("_totalPop", typeof(HistorizedValue<int, Game>));
+                              
+        _items=(List<GameItem>) info.GetValue("_items", typeof(List<GameItem>));
+        _villages=(List<Village>) info.GetValue("_villages", typeof(List<Village>));
+        _singleMen=(List<Villager>) info.GetValue("_singleMen", typeof(List<Villager>));
+
+        _currentText = (List<string>)info.GetValue("_currentText", typeof(List<string>));
+        _eventList = (List<IEvent>)info.GetValue("_eventList", typeof(List<IEvent>));*/
+
+        // Average variables
+        //double _averageHappiness;
+        //double _averageFaith;
+ 
+         //}
+
+  /* public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
+   {
+
+
+       info.AddValue("_nameGenerator", _nameGenerator);
+       info.AddValue("_firstNameGenerator", _firstNameGenerator);
+
+       info.AddValue("_currentEpidemicList", _currentEpidemicList);
+
+       info.AddValue("_offerings", _offerings);
+       info.AddValue("_totalGold", _totalGold);
+       info.AddValue("_totalPop", _totalPop);
+
+       info.AddValue("_items", _items);
+       info.AddValue("_villages", _villages);
+       info.AddValue("_singleMen", _singleMen);
+
+       info.AddValue("_currentText", _currentText);
+       info.AddValue("_eventList", _eventList);
+   }*/
         // NameGenerator Properties
         /// <summary>
         /// Gets the family names list

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Game.GodSpell
 {
+    [Serializable]
     public class Heal : GameItem
     {
-        Heal(Game g)
+        public Heal(Game g)
             : base(g)
         {   
         
