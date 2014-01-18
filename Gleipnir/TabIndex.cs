@@ -20,7 +20,6 @@ namespace GamePages
         readonly GeneralPage _page;
         bool isOnBought;
         bool passed;
-        bool isEpidemicLaunched;
         int positionX;
         int positionY;
 
@@ -180,7 +179,7 @@ namespace GamePages
         }
         private void StartFest_Click(object sender, EventArgs e)
         {
-            SamhainFest fest = new SamhainFest();
+            SamhainFest fest = new SamhainFest(_page.TheGame.Villages[0]);
         }
         
         // Villagers list

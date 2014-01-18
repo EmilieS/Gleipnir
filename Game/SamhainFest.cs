@@ -36,11 +36,9 @@ namespace Game
                 {
                     if (!villager.IsHeretic())
                         villager.ActivityStatus = ActivityStatus.PARTYING;
-                    }
                     villager.AddOrRemoveHappiness(3);
                     villager.AddOrRemoveFaith(2);
                 }
-            }
         }
         internal override void ImpactHappiness()
         {

@@ -272,11 +272,12 @@ namespace GamePages
             _stats.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
             _stats.SendToBack();
             _stats.Show();
-            _stats.goldVillage.Text = _game.Villages[0].Gold.ToString();
-            _stats.population.Text = _game.TotalPop.ToString();
-            _stats.faithVillage.Text = _game.Villages[0].Faith.ToString();
-            _stats.happinessVillage.Text = _game.Villages[0].Happiness.ToString();
-            _stats.offeringsPoints.Text = _game.Offerings.ToString();
+            PushGeneralGold(_game.Villages[0].Gold);
+            PushPopulation(_game.TotalPop);
+            PushGeneralFaith(_game.Villages[0].Faith);
+            PushGeneralHappiness(_game.Villages[0].Happiness);
+            PushGeneralCoins(_game.Offerings);
+            PushOfferingsPointsPerTick(_game.Villages[0].OfferingsPointsPerTick);
             _stats.StepByStep.Visible = true;
 
             // InfoBox
