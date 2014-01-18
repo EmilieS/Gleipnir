@@ -11,7 +11,7 @@ namespace Game
         string _name;
         int _costPrice;
         bool _isActivated;
-        internal bool IsPossible;
+        public bool IsPossible = false;
         Village _owner;
 
         internal UpgradesModel(Game g, Village v)
@@ -39,8 +39,10 @@ namespace Game
         }
         public void Buy()
         {
+            VerififyPrerequisites();
             if (IsPossible)
             {
+                
                 _owner.Game.AddOrTakeFromOfferings(-CostPrice);
                 AffectUpgrade();
                 IsActivated = true;

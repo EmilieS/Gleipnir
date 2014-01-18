@@ -20,14 +20,10 @@ namespace Game
         }
         internal override void  VerififyPrerequisites()
         {
-            if (_owner.Buildings.RestaurantList.Count > 0 && _owner._offeringsPointsPerTick.Current >= CostPrice)
-            {
+            if (_owner.Buildings.RestaurantList.Count > 0 && _owner.Game.Offerings >= CostPrice)
                 IsPossible = true ;
-            }
             else
-            {
                IsPossible = false;
-            }
         }
         
         internal override void AffectUpgrade()

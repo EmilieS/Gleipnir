@@ -14,13 +14,17 @@ namespace Tests
         public void TestUpgradesWithCookers()
         {
             Game.Game g = new Game.Game();
-            Game.Buildings.Restaurant resto = new Game.Buildings.Restaurant(g.Villages[0]);
+            Game.Buildings.Restaurant resto = new Game.Buildings.Restaurant(g.Villages[0], g.Villages[0].Jobs.Cooker);
             int _initialCoeff = g.Villages[0].Jobs.Cooker.Coefficient;
            
             g.AddOrTakeFromOfferings(200);
+
             Assert.That(g.Offerings > 200);
+            Assert.That(g.Villages[0].Buildings.RestaurantList.Count > 0);
+
             g.Villages[0].Upgrades.Level1.Buy();
-            g.Villages[0].BuildingsList.Add(resto);
+
+            Assert.That(g.Villages[0].Upgrades.Level1.IsPossible);
             Assert.That(g.Villages[0].Upgrades.Level1.IsActivated);
             Assert.That(_initialCoeff != g.Villages[0].Jobs.Cooker.Coefficient);
 
