@@ -72,7 +72,6 @@ namespace GamePages
 
         // Buildings Click
         #region Jobs Buildings Buttons
-        #region Jobs Buildings Buttons
         private void ApothicaryOffice_Click(object sender, EventArgs e)
         {
             ApothecaryOffice apo = new ApothecaryOffice(_page.TheGame.Villages[0], _page.TheGame.Villages[0].JobsList.Apothecary);
@@ -170,6 +169,7 @@ namespace GamePages
                 Epidemic epidemic = new Epidemic(_page.TheGame, _page.TheGame.Villages[0].FamiliesList[familyChoosen].FamilyMembers[villagerChoosen]);
             }
         }
+<<<<<<< HEAD
         private void StartEarthquake_Click(object sender, EventArgs e)
         {
             Earthquake earthquake = new Earthquake(_page.TheGame, _page.TheGame.Villages[0]);
@@ -180,10 +180,13 @@ namespace GamePages
         }
         private void StartFest_Click(object sender, EventArgs e)
         {
-            SamhainFest fest = new SamhainFest();
+            SamhainFest fest = new SamhainFest(_page.TheGame.Villages[0]);
         }
         
         // Villagers list
+=======
+
+>>>>>>> origin/fx-Upgrades
         internal void ShowVillagerListInFamily(Family fam)
         {
             if (!passed)
@@ -253,5 +256,16 @@ namespace GamePages
                 ListOfVillagersToShow.Clear();
             }
         }
+
+        #region Cooker's Upgrades
+        private void Level1_butt_Click(object sender, EventArgs e)
+        {
+            _page.Game.Villages[0].Upgrades.Level1.Buy();
+            Level1_butt.Visible = false;
+            Controls.Remove(Level1_butt);
+        }
+
+        #endregion
+
     }
 }

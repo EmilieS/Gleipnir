@@ -10,6 +10,7 @@ namespace Game
     [Serializable]
     public class Village : GameItem
     {
+        public UpgradesList _upgrades;
         internal readonly HistorizedValue<int, Village> _offeringsPointsPerTick;
         internal readonly HistorizedValue<int, Village> _villagePop;
         internal List<Buildings.House> EmptyHouseList;
@@ -34,6 +35,7 @@ namespace Game
             _familiesList = new FamilyInVillageList(this);
 
             // Initialize historized values
+            _upgrades = new UpgradesList(this);
             _offeringsPointsPerTick = new HistorizedValue<int, Village>(this, @"_offeringsPointsPerTick", 20);
             _villagePop = new HistorizedValue<int, Village>(this, @"_villagePop", 20);
 
@@ -212,6 +214,7 @@ namespace Game
             EmptyHouseList.Remove(house);
         }
 
+        public UpgradesList Upgrades { get { return _upgrades; } }
         /// <summary>
         /// Addition of all gold of all families
         /// </summary>

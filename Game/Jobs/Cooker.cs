@@ -16,9 +16,13 @@ namespace Game
         {
             _job = Jobs.COOKER;
             _coefficient = 13;
-            _happinessAddition = 1.3;
+            HappinessToAdd = 1.3;
         }
-        double _happinessAddition;
+        //public double HappinessToAdd
+        //{
+        //    get { return _happinessAddition; }
+        //    set { _happinessAddition = value; }
+        //}
         /// <summary>
         /// Add amount of happiness for all others villagers
         /// </summary>
@@ -32,8 +36,8 @@ namespace Game
                 if (villager.Job == this)
                     return;
             }
-            double happinessToAdd;
-            happinessToAdd = _happinessAddition + _workers.Count * 0.5;
+            double happinessToAdd;  
+            happinessToAdd = HappinessToAdd + _workers.Count * 0.5;
             villager.AddOrRemoveHappiness(happinessToAdd);
         }
         internal override bool AddPersonPrerequisites()
@@ -57,6 +61,6 @@ namespace Game
                 i++;
             } while (i < Owner.Owner.BuildingsList.RestaurantList.Count);
             return false;
-        } 
+        }
     }
 }

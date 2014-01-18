@@ -279,12 +279,10 @@ namespace Game
 
         public bool GenerateGoldPrerequisitesFromVillager()
         {
-            if (IsDead())
+            if (this.ActivityStatus != ActivityStatus.WORKING || IsDead() || this.ActivityStatus == ActivityStatus.PARTYING)
+                return true;
+            else
                 return false;
-            if (_villagerActivity == ActivityStatus.PARTYING)
-                return false;
-
-            return true; //TODO
         }
 
         //====================WORLD=TICK=STUFF============================
@@ -369,9 +367,7 @@ namespace Game
 
          void Heal()//sert à rien
         {
-            
             _health.Current = Healths.NONE;
-
         }
         public void SetVirus(Virus virus)
         {

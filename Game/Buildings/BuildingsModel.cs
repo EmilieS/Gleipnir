@@ -16,7 +16,6 @@ namespace Game.Buildings
         double _addedFaith;
         double _enterPrice;
         //double _robustness;
-        double _addedRobustness;
         bool _isBought;
         string _name;
         int _hp;

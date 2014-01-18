@@ -49,7 +49,8 @@
             this.Chapel = new System.Windows.Forms.Button();
             this.ApothecaryOffice = new System.Windows.Forms.Button();
             this.Tavern = new System.Windows.Forms.Button();
-            this.happinessTab = new System.Windows.Forms.TabPage();
+            this.UpgradesTab = new System.Windows.Forms.TabPage();
+            this.Level1_butt = new System.Windows.Forms.Button();
             this.VillagerList = new System.Windows.Forms.TabPage();
             this.godSpellsTab = new System.Windows.Forms.TabPage();
             this.StartEarthquake = new System.Windows.Forms.Button();
@@ -58,6 +59,7 @@
             this.StartFest = new System.Windows.Forms.Button();
             this.actionsMenu.SuspendLayout();
             this.buildingsTab.SuspendLayout();
+            this.UpgradesTab.SuspendLayout();
             this.godSpellsTab.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,7 +69,7 @@
             this.actionsMenu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.actionsMenu.Controls.Add(this.buildingsTab);
-            this.actionsMenu.Controls.Add(this.happinessTab);
+            this.actionsMenu.Controls.Add(this.UpgradesTab);
             this.actionsMenu.Controls.Add(this.VillagerList);
             this.actionsMenu.Controls.Add(this.godSpellsTab);
             this.actionsMenu.Cursor = System.Windows.Forms.Cursors.Default;
@@ -294,6 +296,27 @@
             this.Tavern.Text = "Taverne";
             this.Tavern.UseVisualStyleBackColor = true;
             // 
+            // UpgradesTab
+            // 
+            this.UpgradesTab.Controls.Add(this.Level1_butt);
+            this.UpgradesTab.ImageKey = "(aucun)";
+            this.UpgradesTab.Location = new System.Drawing.Point(4, 4);
+            this.UpgradesTab.Name = "UpgradesTab";
+            this.UpgradesTab.Padding = new System.Windows.Forms.Padding(3);
+            this.UpgradesTab.Size = new System.Drawing.Size(208, 528);
+            this.UpgradesTab.TabIndex = 1;
+            this.UpgradesTab.UseVisualStyleBackColor = true;
+            // 
+            // Level1_butt
+            // 
+            this.Level1_butt.Location = new System.Drawing.Point(6, 18);
+            this.Level1_butt.Name = "Level1_butt";
+            this.Level1_butt.Size = new System.Drawing.Size(47, 23);
+            this.Level1_butt.TabIndex = 0;
+            this.Level1_butt.Text = "Level1";
+            this.Level1_butt.UseVisualStyleBackColor = true;
+            this.Level1_butt.Click += new System.EventHandler(this.Level1_butt_Click);
+            // 
             // happinessTab
             // 
             this.happinessTab.BackgroundImage = global::GamePages.Properties.Resources.ActionTab_happiness_background;
@@ -304,6 +327,7 @@
             this.happinessTab.Size = new System.Drawing.Size(208, 528);
             this.happinessTab.TabIndex = 1;
             this.happinessTab.UseVisualStyleBackColor = true;
+
             // 
             // VillagerList
             // 
@@ -391,6 +415,7 @@
             this.Size = new System.Drawing.Size(216, 570);
             this.actionsMenu.ResumeLayout(false);
             this.buildingsTab.ResumeLayout(false);
+            this.UpgradesTab.ResumeLayout(false);
             this.godSpellsTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -399,6 +424,7 @@
         #endregion
 
         private System.Windows.Forms.TabPage buildingsTab;
+        private System.Windows.Forms.TabPage UpgradesTab;
         private System.Windows.Forms.TabPage happinessTab;
         private System.Windows.Forms.TabPage VillagerList;
         private System.Windows.Forms.TabPage godSpellsTab;
@@ -418,6 +444,7 @@
         private System.Windows.Forms.Button House;
         private System.Windows.Forms.Button OfferingsWarehouse;
         private System.Windows.Forms.Button StartEpidemic;
+        private System.Windows.Forms.Button Level1_butt;
         private System.Windows.Forms.Label jobBuilding_title;
         private System.Windows.Forms.Label specialBuilding_title;
         private System.Windows.Forms.Label hobbyBuilding_title;

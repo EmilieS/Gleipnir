@@ -39,8 +39,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
+    <Compile Include="Upgrades\Apothecary\Drugs.cs" />
+    <Compile Include="Upgrades\Apothecary\Surgery.cs" />
+    <Compile Include="Upgrades\Blacksmith\Furnace.cs" />
+    <Compile Include="Upgrades\Blacksmith\Plow.cs" />
+    <Compile Include="Upgrades\Blacksmith\Saw.cs" />
     <Compile Include="Buildings\BuildingsList.cs" />
+    <Compile Include="Buildings\ClothesShop.cs" />
+    <Compile Include="Buildings\House.cs" />
+<<<<<<< HEAD
+    <Compile Include="Upgrades\Cooker\Level1.cs" />
+    <Compile Include="Upgrades\Cooker\Level2.cs" />
+    <Compile Include="Upgrades\Cooker\Level3.cs" />
+    <Compile Include="Upgrades\Cooker\Level4.cs" />
+    <Compile Include="Upgrades\Crafter\CrafterTools\Hoist.cs" />
+    <Compile Include="Upgrades\Crafter\CrafterTools\Pulley.cs" />
+    <Compile Include="Upgrades\Crafter\CrafterTools\Scaffolding.cs" />
+    <Compile Include="Upgrades\Crafter\Materials\Cement.cs" />
+    <Compile Include="Upgrades\Crafter\Materials\Materials.cs" />
+    <Compile Include="Upgrades\Crafter\Materials\Reinforced.cs" />
+    <Compile Include="Upgrades\Crafter\Materials\Whitewash.cs" />
+    <Compile Include="Upgrades\Farmer\Fertilizer.cs" />
+    <Compile Include="Upgrades\Farmer\Fields_expansion.cs" />
+    <Compile Include="Upgrades\Farmer\Irrigation.cs" />
+    <Compile Include="Upgrades\Farmer\Scarecrow.cs" />
+    <Compile Include="UpgradesList.cs" />
+    <Compile Include="UpgradesModel.cs" />
+=======
+    <Compile Include="Buildings\IBuildingsJobs.cs" />
+    <Compile Include="Buildings\MilitaryCamp.cs" />
+>>>>>>> origin/develop
+    <Compile Include="GodSpell\Deluge.cs" />
+    <Compile Include="GodSpell\Earthquake.cs" />
+    <Compile Include="GodSpell\Epidemic.cs" />
+    <Compile Include="GodSpell\Heal.cs" />
+    <Compile Include="Virus.cs" />
     <Compile Include="Jobs\Apothecary.cs" />
     <Compile Include="Buildings\ApothecaryOffice.cs" />
     <Compile Include="Buildings\Baths.cs" />
@@ -50,13 +83,6 @@
     <Compile Include="Buildings\Chapel.cs" />
     <Compile Include="Jobs\Construction_Worker.cs" />
     <Compile Include="Jobs\Cooker.cs" />
-=======
-    <Compile Include="Meeting.cs" />
-    <Compile Include="Apothecary.cs" />
-    <Compile Include="Blacksmith.cs" />
-    <Compile Include="Construction_Worker.cs" />
-    <Compile Include="Cooker.cs" />
->>>>>>> develop
     <Compile Include="Event.cs" />
     <Compile Include="Family.cs" />
     <Compile Include="FamilyInVillageList.cs" />
@@ -67,10 +93,12 @@
     <Compile Include="IWindow.cs" />
     <Compile Include="Jobs\JobList.cs" />
     <Compile Include="Buildings\Mill.cs" />
+    <Compile Include="Meeting.cs" />
     <Compile Include="NameGenerator.cs" />
     <Compile Include="Buildings\OfferingWarehouse.cs" />
     <Compile Include="Buildings\PartyRoom.cs" />
     <Compile Include="Buildings\Restaurant.cs" />
+    <Compile Include="SamhainFest.cs" />
     <Compile Include="ScenarioEngine.cs" />
     <Compile Include="Buildings\TablePlace.cs" />
     <Compile Include="Buildings\Tavern.cs" />
@@ -87,12 +115,7 @@
     <Compile Include="Jobs\Militia.cs" />
     <Compile Include="Jobs\Miller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-<<<<<<< HEAD
     <Compile Include="Jobs\Tailor.cs" />
-=======
-    <Compile Include="SamhainFest.cs" />
-    <Compile Include="Tailor.cs" />
->>>>>>> develop
     <Compile Include="Village.cs" />
     <Compile Include="Villager.cs" />
     <Compile Include="VillagerProperties.cs" />
@@ -102,6 +125,7 @@
     <Content Include="Extra\nameList.txt" />
     <Content Include="Extra\scenario.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
