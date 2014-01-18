@@ -26,8 +26,8 @@ namespace Game
         }
         internal override void AffectUpgrade()
         {
-            _selected.Coefficient += 1;
-            _selected.HappinessToAdd += 2;
+            _selected.Coefficient += 5;
+            _selected.HappinessToAdd += 4;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Game
         internal Hoist(Game g, Village v, UpgradesList _listOfUpgrades, JobList _jobs)
             : base(g, v)
         {
-            CostPrice = 10000;
+            CostPrice = 5000;
             IsActivated = false;
             _selected = _jobs.Cooker;
             _owner = v;
