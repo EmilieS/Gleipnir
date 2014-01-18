@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Game
 {
+    [Serializable]
     public class Scaffolding
     {
         bool _isBought;

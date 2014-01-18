@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Game
 {
+    [Serializable]
     // Materials get the power added to origin buildings
     public class Materials
     {

@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Game
 {
+    [Serializable]
     public class Level2  : UpgradesModel
     {
         JobsModel _selected;
@@ -20,7 +21,7 @@ namespace Game
         }
         internal override void VerififyPrerequisites()
         {
-            if (_owner.Buildings.RestaurantList.Count > 0 && _owner.Game.Offerings >= CostPrice)
+            if (_owner.BuildingsList.RestaurantList.Count > 0 && _owner.Game.Offerings >= CostPrice)
             {
                 IsPossible = true;
             }

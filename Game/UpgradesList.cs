@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+    [Serializable]
     public class UpgradesList : IReadOnlyList<UpgradesModel>
     {
         Village _owner;
@@ -69,14 +70,14 @@ namespace Game
             //_fertilizer = new Fertilizer(game);
             //_fields_expansion = new Fields_expansion(game);
             //_furnace = new Furnace(game);
-            _hoist = new Hoist(game, village, this, Owner.Jobs);
+            _hoist = new Hoist(game, village, this, Owner.JobsList);
             //_irrigation = new Irrigation(game);
-            _level1 = new Level1(game, village, this, Owner.Jobs);
-            _level2 = new Level2(game, village, this, Owner.Jobs);
-            _level3 = new Level3(game, village, this, Owner.Jobs);
-            _level4 = new Level4(game, village, this, Owner.Jobs);
+            _level1 = new Level1(game, village, this, Owner.JobsList);
+            _level2 = new Level2(game, village, this, Owner.JobsList);
+            _level3 = new Level3(game, village, this, Owner.JobsList);
+            _level4 = new Level4(game, village, this, Owner.JobsList);
             //_plow = new Plow(game);
-            _pulley = new Pulley(game, village, this, Owner.Jobs);
+            _pulley = new Pulley(game, village, this, Owner.JobsList);
             //_reinforced = new Reinforced(game);
             //_saw = new Saw(game);
             //_scaffolding = new Scaffolding(game);

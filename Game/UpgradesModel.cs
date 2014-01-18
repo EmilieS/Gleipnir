@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+    [Serializable]
     public abstract class UpgradesModel : GameItem
     {
         string _name;

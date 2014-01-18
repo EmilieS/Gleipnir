@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Game
 {
+    [Serializable]
     public class Pulley : UpgradesModel
     {
        JobsModel _selected;
@@ -19,7 +20,7 @@ namespace Game
         }
         internal override void VerififyPrerequisites()
         {
-            if (_owner.Buildings.UnionOfCrafterList.Count > 0 && _owner.Game.Offerings >= CostPrice)
+            if (_owner.BuildingsList.UnionOfCrafterList.Count > 0 && _owner.Game.Offerings >= CostPrice)
                 IsPossible = true;
             else
                 IsPossible = false;

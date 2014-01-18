@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Game
 {
+    [Serializable]
     public class Fields_expansion
     {
         public Fields_expansion()
