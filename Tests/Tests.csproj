@@ -43,9 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IWindowImplementationForTests.cs" />
+    <Compile Include="save.cs" />
     <Compile Include="TestAgingAndBirth.cs" />
     <Compile Include="TestBuildings.cs" />
     <Compile Include="TestEpidemic.cs" />
+    <Compile Include="TestFest.cs" />
     <Compile Include="TestGame.cs" />
     <Compile Include="TestMaterials.cs" />
     <Compile Include="TestNameGenerator.cs" />

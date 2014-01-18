@@ -20,6 +20,7 @@ namespace GamePages
         readonly GeneralPage _page;
         bool isOnBought;
         bool passed;
+        bool isEpidemicLaunched;
         int positionX;
         int positionY;
 

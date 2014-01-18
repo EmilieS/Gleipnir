@@ -9,9 +9,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Runtime.CompilerServices;
 
 namespace GamePages
 {
@@ -52,7 +51,7 @@ namespace GamePages
         {
             // Create windows objects
             _loading = new LoadingUC();
-            _home = new HomepageUC();
+            _home = new HomepageUC(this);
             InitializeComponent();
 
             // Show Logo
@@ -70,6 +69,7 @@ namespace GamePages
             this.Controls.Add(_home);
             _home.Show();
         }
+        // NewGame
         public void IsStarted_Changed(object sender, PropertyChangedEventArgs e)
         {
             // Hide home page
@@ -197,7 +197,111 @@ namespace GamePages
 
             // Do 1 step
             Step();
+        }
+        // LoadGame
+        public void LoadGame()
+        {
+            // Hide home page
+            _home.Hide();
 
+            // Show loading effects
+            _loading.BringToFront();
+            _loading.Show();
+
+            // Load the game
+            _game = Game.serialize.load();
+
+            // Create objects
+            _gameMenu = new InGameMenu(this);
+            _actionMenu = new TabIndex(this);
+            _stats = new InformationsUC(this);
+            _eventFlux = new EventFluxUC();
+            _scenarioBox = new ScenarioBox(this);
+            _infoBox = new InformationBox(this);
+
+            #region grid generation
+            options = new Options();
+            _board = new Board();
+            _grid = new SquareControl[20, 32];
+            for (int i = 0; i < 20; i++)
+            {
+                for (int j = 0; j < 32; j++)
+                {
+                    // Create
+                    _grid[i, j] = new SquareControl(i, j);
+                    // Locate
+                    _grid[i, j].Left = 220 + (j * _grid[i, j].Width);
+                    _grid[i, j].Top = 40 + (i * _grid[i, j].Height);
+                    // Add
+                    this.Controls.Add(_grid[i, j]);
+                    _grid[i, j].SendToBack();
+                    _grid[i, j].Show();
+
+                    // Add events
+                    _grid[i, j].MouseMove += new MouseEventHandler(SquareControl_MouseMove);
+                    _grid[i, j].MouseLeave += new EventHandler(SquareControl_MouseLeave);
+                    _grid[i, j].Click += new EventHandler(SquareControl_Click);
+                }
+            }
+            // Set the grid
+            _board.SetLoadGame(_game);
+            UpdateGrid(_board, _grid);
+            #endregion
+
+            #region Window elements
+            #region Add all elements
+            this.Controls.Add(_actionMenu);
+            this.Controls.Add(_scenarioBox);
+            this.Controls.Add(_stats);
+            this.Controls.Add(_infoBox);
+            this.Controls.Add(_eventFlux);
+            this.Controls.Add(_gameMenu);
+            #endregion
+            #region Configure all elements
+            // ActionMenu
+            _actionMenu.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top);
+            _actionMenu.SendToBack();
+            _actionMenu.Show();
+
+            // ScenarioBox
+            _scenarioBox.Anchor = AnchorStyles.Bottom;
+            _scenarioBox.SendToBack();
+            _scenarioBox.Show();
+
+            // Stats
+            _stats.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+            _stats.SendToBack();
+            _stats.Show();
+            _stats.goldVillage.Text = _game.Villages[0].Gold.ToString();
+            _stats.population.Text = _game.TotalPop.ToString();
+            _stats.faithVillage.Text = _game.Villages[0].Faith.ToString();
+            _stats.happinessVillage.Text = _game.Villages[0].Happiness.ToString();
+            _stats.offeringsPoints.Text = _game.Offerings.ToString();
+            _stats.StepByStep.Visible = true;
+
+            // InfoBox
+            _infoBox.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            _infoBox.SetNothingSelected();
+            _infoBox.SendToBack();
+            _infoBox.Show();
+
+            // GameMenu
+            _gameMenu.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            _gameMenu.BringToFront();
+            _gameMenu.Hide();
+            _gameMenu.ExpectGoBackToMenu += GoBackToMenu;
+
+            // EventFluw
+            _eventFlux.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            _eventFlux.SendToBack();
+            _eventFlux.Show();
+            #endregion
+            #endregion
+
+            // Hide loading effects
+            gleipnir_logo.Hide();
+            _loading.SendToBack();
+            _loading.Hide();
         }
 
         internal TabIndex ActionMenu

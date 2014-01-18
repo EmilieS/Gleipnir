@@ -6,15 +6,23 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+<<<<<<< HEAD
+    public class SamhainFest
+=======
     public class SamhainFest : GameItem
+>>>>>>> parent of 36348af... Rebase
     {
         int _duration;
         int _timer;
         Village _village;
 
         // TODO : define the duration of  the villageFest, implement duration
+<<<<<<< HEAD
+        public SamhainFest()
+=======
         public SamhainFest(Village v)
             : base(v.Game)
+>>>>>>> parent of 36348af... Rebase
         {
             _duration = 15;
             _timer = _duration;
@@ -22,6 +30,10 @@ namespace Game
             ActOnvillagers(v);
         }
 
+<<<<<<< HEAD
+        public double Duration { get { return _duration; } }
+
+=======
         public int Duration
         {
             get
@@ -29,19 +41,28 @@ namespace Game
                 return _duration;
             }
         }
+>>>>>>> parent of 36348af... Rebase
         public void ActOnvillagers(Village village)
         {
             foreach (Family family in village.FamiliesList)
                 foreach (Villager villager in family.FamilyMembers)
                 {
                     if (!villager.IsHeretic())
+<<<<<<< HEAD
+                        villager.ActivityStatus = ActivityStatus.PUSHINGOUT;
+                    villager.AddOrRemoveHappiness(15);
+                    villager.AddOrRemoveFaith(15);
+=======
+                    {
                         villager.ActivityStatus = ActivityStatus.PARTYING;
                     }
                     villager.AddOrRemoveHappiness(3);
                     villager.AddOrRemoveFaith(2);
+>>>>>>> parent of 36348af... Rebase
                 }
-            }
         }
+<<<<<<< HEAD
+=======
         internal override void ImpactHappiness()
         {
             _timer--;
@@ -90,5 +111,6 @@ namespace Game
         {
             //TODO : create event : samham fest has started.
         }
+>>>>>>> parent of 36348af... Rebase
     }
 }

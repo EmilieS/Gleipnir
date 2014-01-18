@@ -13,36 +13,55 @@ namespace GamePages
 {
     public partial class HomepageUC : UserControl  
     {
-        Game.Game _startedGame;
         public bool _isStarted;
+        public bool _isLoaded;
         public event PropertyChangedEventHandler Launched;
+        GeneralPage _page;
 
-        public HomepageUC()
+        public HomepageUC(GeneralPage page)
         {
+            _page = page;
             InitializeComponent();
-            _startedGame = new Game.Game();
             _isStarted = false;
+            _isLoaded = false;
         }
 
-        public void new_game(object sender, EventArgs e)
-        {
-            this.Visible = false;
-            IsStarted = true;
-            RaisePropertyChanged();
-        }
-        private void RaisePropertyChanged([CallerMemberName]string propertyName = null)
-        {
-            var h = Launched;
-            if (h != null) h(this, new PropertyChangedEventArgs(propertyName));
-        }
         public bool IsStarted
         {
             get { return _isStarted; }
             set { _isStarted = value; }
         }
-        private void Exit_Click(object sender, EventArgs e)
+        public bool IsLoaded
+        {
+            get { return _isLoaded; }
+            set { _isLoaded = value; }
+        }
+
+        public void new_game(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            _isStarted = true;
+            RaisePropertyChanged();
+        }
+        private void loadGame_Click(object sender, EventArgs e)
+        {
+            if (Game.serialize.load() != null)
+            {
+                this.Visible = false;
+                _isLoaded = true;
+                _isStarted = false;
+                _page.LoadGame();
+            }
+        }
+        private void exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void RaisePropertyChanged([CallerMemberName]string propertyName = null)
+        {
+            var h = Launched;
+            if (h != null) h(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

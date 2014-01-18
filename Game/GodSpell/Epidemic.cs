@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game.GodSpell
 {
+    [Serializable]
     public class Epidemic : GameItem
     {
         //Game game = new Game();
@@ -96,6 +97,7 @@ namespace Game.GodSpell
         {
             if (SickVillagerList.Count == 0)
             {
+                eventList.Add(new EpidimicEradicatedEvent(this, Game));
                 Destroy();
             }
         }

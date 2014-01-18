@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace Game.GodSpell
 {
-    [Serializable]
+<<<<<<< HEAD
     public class Earthquake : GameItem
+=======
+    [Serializable]
+    class Earthquake : GameItem
+>>>>>>> SAVE
     {
         Village _village;
         int _force;
-
         public Earthquake(Game g, Village v)
             : base (g)
         {
