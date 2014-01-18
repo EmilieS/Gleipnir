@@ -162,15 +162,25 @@ namespace GamePages
         // God Spells Click
         private void StartEpidemic_Click(object sender, EventArgs e)
         {
-            if (!isEpidemicLaunched)
+            if(_page.TheGame.Villages[0].FamiliesList.Count > 0)
             {
-                Game.GodSpell.Epidemic epidemic = new Game.GodSpell.Epidemic(_page.TheGame, _page.TheGame.Villages[0].FamiliesList[0].FamilyMembers[0]);
-                isEpidemicLaunched = true;
+                Random rnd = new Random();
+                int familyChoosen = rnd.Next(0, _page.TheGame.Villages[0].FamiliesList.Count);
+                int villagerChoosen = rnd.Next(0, _page.TheGame.Villages[0].FamiliesList[familyChoosen].FamilyMembers.Count);
+                Epidemic epidemic = new Epidemic(_page.TheGame, _page.TheGame.Villages[0].FamiliesList[familyChoosen].FamilyMembers[villagerChoosen]);
             }
         }
         private void StartEarthquake_Click(object sender, EventArgs e)
         {
-            Game.GodSpell.Earthquake earthquake = new Earthquake(_page.TheGame, _page.TheGame.Villages[0]);
+            Earthquake earthquake = new Earthquake(_page.TheGame, _page.TheGame.Villages[0]);
+        }
+        private void StartHeal_Click(object sender, EventArgs e)
+        {
+            Heal heal = new Heal(_page.TheGame);
+        }
+        private void StartFest_Click(object sender, EventArgs e)
+        {
+            SamhainFest fest = new SamhainFest();
         }
         
         // Villagers list

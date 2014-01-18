@@ -27,11 +27,16 @@ namespace Game.GodSpell
                     v.SetHealed(10);
             }
         }
+<<<<<<< HEAD
         internal override void OnDestroy() { }
+=======
+        internal override void OnDestroy()
+        {        }
         internal override void DieOrIsAlive(List<IEvent> eventList)
         {
             Destroy();
         }
+>>>>>>> parent of 36348af... Rebase
         internal override void CloseStep(List<IEvent> eventList) { }
 
     }
