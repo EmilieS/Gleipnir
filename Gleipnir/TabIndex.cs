@@ -227,11 +227,28 @@ namespace GamePages
         private void Level1_butt_Click(object sender, EventArgs e)
         {
             _page.Game.Villages[0].Upgrades.Level1.Buy();
-            Level1_butt.Visible = false;
-            Controls.Remove(Level1_butt);
+            Level1_butt.Enabled = false;
         }
 
-        #endregion
+        
 
+        private void Level2_butt_Click(object sender, EventArgs e)
+        {
+            _page.Game.Villages[0].Upgrades.Level2.Buy();
+            Level2_butt.Enabled = false;
+        }
+
+        private void Level3_butt_Click(object sender, EventArgs e)
+        {
+            _page.Game.Villages[0].Upgrades.Level3.Buy();
+            Level3_butt.Enabled = false;
+        }
+
+        private void Level4_butt_Click(object sender, EventArgs e)
+        {
+            _page.Game.Villages[0].Upgrades.Level4.Buy();
+            Level3_butt.Enabled = false;
+        }
+        #endregion
     }
 }
