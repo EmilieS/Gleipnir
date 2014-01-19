@@ -82,6 +82,7 @@
             this.settings.TabIndex = 5;
             this.settings.Text = "Paramètres";
             this.settings.UseVisualStyleBackColor = false;
+            this.settings.Click += new System.EventHandler(this.settings_Click);
             // 
             // newGame
             // 

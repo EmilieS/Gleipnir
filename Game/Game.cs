@@ -45,8 +45,9 @@ namespace Game
         public Random Rand;
 
         // NEW GAME
-        public Game()
+        public Game(double timeStep=0)
         {
+
             // Created "windows values"
             _totalGold = new HistorizedValue<int, Game>(this, @"_totalGold", 20);
             _totalPop = new HistorizedValue<int, Game>(this, @"_totalPop", 20);

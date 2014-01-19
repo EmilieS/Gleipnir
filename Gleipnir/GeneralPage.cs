@@ -24,6 +24,7 @@ namespace GamePages
         InformationBox _infoBox;
         EventFluxUC _eventFlux;
         ScenarioBox _scenarioBox;
+        Parameters _parametersBox;
         Board _board;
         SquareControl[,] _grid;
         Options options;
@@ -31,12 +32,35 @@ namespace GamePages
         traceBox trace;
         private BuildingsModel buildingSelected;
         private ActionState actionState;
-        string traceMessages;
+        string traceMessages; 
+        public System.Windows.Forms.Timer _timer;
+        int _interval;
+
+        public int Interval
+        {
+            get { return _interval; }
+            set
+            {
+                if (value != _interval)
+                {
+                    _interval = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var h = PropertyChanged;
+            if (h != null) h(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Gets the game object
         /// </summary>
         internal Game.Game TheGame { get { return _game; } }
+        internal TabIndex ActionMenu { get { return _actionMenu; } }
+        internal Parameters ParametersBox { get { return _parametersBox; } }
 
         /// <summary>
         /// Player state
@@ -52,7 +76,13 @@ namespace GamePages
             // Create windows objects
             _loading = new LoadingUC();
             _home = new HomepageUC(this);
+            _parametersBox = new Parameters(this);
             InitializeComponent();
+
+            // Hide ParametersBox
+            this.Controls.Add(_parametersBox);
+            _parametersBox.SendToBack();
+            _parametersBox.Hide();
 
             // Show Logo
             this.Controls.Add(gleipnir_logo);
@@ -68,6 +98,8 @@ namespace GamePages
             _home.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
             this.Controls.Add(_home);
             _home.Show();
+            _interval = 0;
+            _timer = null;
         }
         // NewGame
         public void IsStarted_Changed(object sender, PropertyChangedEventArgs e)
@@ -197,6 +229,18 @@ namespace GamePages
 
             // Do 1 step
             Step();
+
+            if (_interval == 0)
+            {
+                _timer = null;
+            }
+            else
+            {
+                _timer = new System.Windows.Forms.Timer();
+                _timer.Tick += (source, eventArgs) => { Step(); };
+                _timer.Interval = _interval;
+                _timer.Start();
+            }
         }
         // LoadGame
         public void LoadGame()
@@ -306,11 +350,18 @@ namespace GamePages
             gleipnir_logo.Hide();
             _loading.SendToBack();
             _loading.Hide();
-        }
 
-        internal TabIndex ActionMenu
-        {
-            get { return _actionMenu; }
+            if (_interval == 0)
+            {
+                _timer = null;
+            }
+            else
+            {
+                _timer = new System.Windows.Forms.Timer();
+                _timer.Tick += (source, eventArgs) => { Step(); };
+                _timer.Interval = _interval;
+                _timer.Start();
+            }
         }
 
         // Window Methods
@@ -357,6 +408,12 @@ namespace GamePages
             // Show HomePage
             _home.Show();
             gleipnir_logo.Show();
+        }
+        public void ShowParametersBox()
+        {
+            LockEverything();
+            _parametersBox.BringToFront();
+            _parametersBox.Show();
         }
 
         // Stats Methods

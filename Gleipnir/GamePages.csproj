@@ -93,6 +93,12 @@
     <Compile Include="LoadingUC.Designer.cs">
       <DependentUpon>LoadingUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Parameters.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Parameters.Designer.cs">
+      <DependentUpon>Parameters.cs</DependentUpon>
+    </Compile>
     <Compile Include="ScenarioBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -158,6 +164,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoadingUC.resx">
       <DependentUpon>LoadingUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Parameters.resx">
+      <DependentUpon>Parameters.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ScenarioBox.resx">
       <DependentUpon>ScenarioBox.cs</DependentUpon>
