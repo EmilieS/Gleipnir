@@ -13,32 +13,40 @@ namespace GamePages
     public partial class Parameters : UserControl
     {
         GeneralPage _generalPage;
+        bool _isOpen;
+
         public Parameters(GeneralPage generalPage)
         {
             _generalPage = generalPage;
-            _generalPage.PropertyChanged += label2_value;
+            _generalPage.PropertyChanged += timerValue_value;
             InitializeComponent();
-            label2.Text = _generalPage.Interval.ToString();
+            timerValue.Text = _generalPage.Interval.ToString();
         }
-        private void label2_value(object sender, EventArgs e)
-        {
-            label2.Text = _generalPage.Interval.ToString();
-         }
 
-        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        public bool IsOpen { get { return _isOpen; } set { _isOpen = value; } }
+
+        private void timerValue_value(object sender, EventArgs e)
+        {
+            timerValue.Text = _generalPage.Interval.ToString();
+         }
+        private void timerTrackBar_ValueChanged(object sender, EventArgs e)
         {
             //label2.Text = trackBar1.Value.ToString();
-            _generalPage.Interval = trackBar1.Value;
+            _generalPage.Interval = timerTrackBar.Value;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void noTimerButton_Click(object sender, EventArgs e)
         {
             _generalPage.Interval = 0;
         }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void quitButton_Click(object sender, EventArgs e)
         {
-            //quitter!
+            if (_isOpen)
+            {
+                this.SendToBack();
+                this.Hide();
+                _isOpen = false;
+            }
         }
     }
 }

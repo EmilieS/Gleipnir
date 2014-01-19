@@ -24,6 +24,7 @@ namespace GamePages
         InformationBox _infoBox;
         EventFluxUC _eventFlux;
         ScenarioBox _scenarioBox;
+        Parameters _parametersBox;
         Board _board;
         SquareControl[,] _grid;
         Options options;
@@ -58,6 +59,8 @@ namespace GamePages
         /// Gets the game object
         /// </summary>
         internal Game.Game TheGame { get { return _game; } }
+        internal TabIndex ActionMenu { get { return _actionMenu; } }
+        internal Parameters ParametersBox { get { return _parametersBox; } }
 
         /// <summary>
         /// Player state
@@ -73,7 +76,13 @@ namespace GamePages
             // Create windows objects
             _loading = new LoadingUC();
             _home = new HomepageUC(this);
+            _parametersBox = new Parameters(this);
             InitializeComponent();
+
+            // Hide ParametersBox
+            this.Controls.Add(_parametersBox);
+            _parametersBox.SendToBack();
+            _parametersBox.Hide();
 
             // Show Logo
             this.Controls.Add(gleipnir_logo);
@@ -352,11 +361,6 @@ namespace GamePages
             }
         }
 
-        internal TabIndex ActionMenu
-        {
-            get { return _actionMenu; }
-        }
-
         // Window Methods
         internal void LockEverything()
         {
@@ -401,6 +405,12 @@ namespace GamePages
             // Show HomePage
             _home.Show();
             gleipnir_logo.Show();
+        }
+        public void ShowParametersBox()
+        {
+            LockEverything();
+            _parametersBox.BringToFront();
+            _parametersBox.Show();
         }
 
         // Stats Methods

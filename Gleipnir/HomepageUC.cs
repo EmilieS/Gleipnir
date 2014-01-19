@@ -37,7 +37,7 @@ namespace GamePages
             set { _isLoaded = value; }
         }
 
-        public void new_game(object sender, EventArgs e)
+        private void new_game(object sender, EventArgs e)
         {
             this.Visible = false;
             _isStarted = true;
@@ -57,19 +57,20 @@ namespace GamePages
         {
             Application.Exit();
         }
+        private void settings_Click(object sender, EventArgs e)
+        {
+            if (!_page.ParametersBox.IsOpen)
+            {
+                _page.ParametersBox.BringToFront();
+                _page.ParametersBox.Show();
+                _page.ParametersBox.IsOpen = true;
+            }
+        }
 
         private void RaisePropertyChanged([CallerMemberName]string propertyName = null)
         {
             var h = Launched;
             if (h != null) h(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void settings_Click(object sender, EventArgs e)
-        {
-
-          Parameters para=  new Parameters(_page);
-          _page.Hide();
-          para.Show();
         }
     }
 }
