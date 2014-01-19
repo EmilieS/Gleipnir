@@ -50,7 +50,7 @@ namespace Game.Buildings
             {
                 foreach (Villager v in Family.FamilyMembers)
                 {
-                    v.Kill();
+                    v.HouseCollapsed();
                 }
                 Family = null;
             }

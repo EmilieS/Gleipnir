@@ -200,7 +200,11 @@ namespace Game
         {
             _lifeExpectancy = 0;
         }
-
+        internal void HouseCollapsed()
+        {
+            _health.Current = _health.Current | Healths.EARTHQUAKE_INJURED;
+            SetLifeExpectancyLeft(0);
+        }
         internal void EarthquakeInjure()
         {
             _health.Current = _health.Current | Healths.EARTHQUAKE_INJURED;
