@@ -20,18 +20,31 @@ namespace GamePages
             _generalPage = generalPage;
             _generalPage.PropertyChanged += timerValue_value;
             InitializeComponent();
-            timerValue.Text = _generalPage.Interval.ToString();
+            if (_generalPage.Interval == 0)
+            {
+                timerValue.Text = "Aucun.";
+            }
+            else
+            {
+                timerValue.Text = _generalPage.Interval.ToString() + " ms";
+            }
         }
 
         public bool IsOpen { get { return _isOpen; } set { _isOpen = value; } }
 
         private void timerValue_value(object sender, EventArgs e)
         {
-            timerValue.Text = _generalPage.Interval.ToString();
+            if (_generalPage.Interval == 0)
+            {
+                timerValue.Text = "Aucun.";
+            }
+            else
+            {
+                timerValue.Text = _generalPage.Interval.ToString()+" ms";
+            }
          }
         private void timerTrackBar_ValueChanged(object sender, EventArgs e)
         {
-            //label2.Text = trackBar1.Value.ToString();
             _generalPage.Interval = timerTrackBar.Value;
         }
 
