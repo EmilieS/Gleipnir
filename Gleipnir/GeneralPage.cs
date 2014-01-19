@@ -197,7 +197,18 @@ namespace GamePages
 
             // Do 1 step
             Step();
+            _timer = new System.Timers.Timer(1000);
+            //_timer.Interval = timeStep;
 
+            _timer.Elapsed += new System.Timers.ElapsedEventHandler(NextStepLauncher);
+            _timer.AutoReset = true;
+            _timer.Start();
+
+        }
+        public System.Timers.Timer _timer;
+        private void NextStepLauncher(object source, System.Timers.ElapsedEventArgs e)
+        {
+            Step();
         }
 
         internal TabIndex ActionMenu

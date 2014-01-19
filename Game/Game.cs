@@ -15,7 +15,7 @@ namespace Game
         NameGenerator _nameGenerator;
         NameGenerator _firstNameGenerator;
         //time
-        System.Timers.Timer _timer;
+        public System.Timers.Timer _timer;
 
         // GodSpell variables
         internal readonly List<GodSpell.Epidemic> _currentEpidemicList;
@@ -49,10 +49,11 @@ namespace Game
             
             if (timeStep != 0)
             {
-                _timer = new System.Timers.Timer();
-                _timer.Interval = timeStep;
+                _timer = new System.Timers.Timer(timeStep);
+                //_timer.Interval = timeStep;
 
                 _timer.Elapsed += new System.Timers.ElapsedEventHandler(NextStepLauncher);
+                _timer.AutoReset = true;
 
             }
 
