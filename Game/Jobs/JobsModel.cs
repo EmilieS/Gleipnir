@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    [Serializable]
     public abstract class JobsModel : GameItem
     {
         //protected Village _ownerVillage;
@@ -106,7 +105,7 @@ namespace Game
             {
                 if (person.GenerateGoldPrerequisitesFromVillager())
                 {
-                    person.ParentFamily.addToGoldStash(_gold);
+                    person.ParentFamily.AddToGoldStash(_gold);
                 }
             }
         }

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    [Serializable]
     public class Virus
     {
-        Villager selectedVillager;
         internal GodSpell.Epidemic Epidemic { get; set; }
         int _maxTimeBeforeDeath;
         int _lifeExpectencyReduced;

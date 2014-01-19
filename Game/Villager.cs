@@ -9,7 +9,6 @@ using System.Diagnostics;
 
 namespace Game
 {
-    [Serializable]
     public partial class Villager : GameItem
     {
         internal Villager(Game g, Family parentFamily, string name)    //TODO: autre constructeur pour le début...
@@ -81,7 +80,7 @@ namespace Game
             _statusInFamily.Current = Status.SINGLE;
             _name = name;//_health.Conclude();
             Game.Villages[0].VillagerAdded();//hmmmmm
-            Game.Villages[0].Jobs.Farmer.AddPerson(this);
+            Game.Villages[0].JobsList.Farmer.AddPerson(this);
         }
 
         //TODO : generate name.
@@ -313,7 +312,7 @@ namespace Game
             int amount = _parentFamily.OwnerVillage.OfferingsPointsPerTick;
             if ((_health.Current & Healths.HERETIC) == 0)
             {
-                Game.AddOrTakeFromOfferings(ParentFamily.takeFromGoldStash(amount));
+                Game.AddOrTakeFromOfferings(ParentFamily.TakeFromGoldStash(amount));
             }
 
         }
@@ -326,7 +325,7 @@ namespace Game
         {
             if ((_health.Current & Healths.SICK) != 0)
             {
-                int nbApothecaries = _parentFamily.OwnerVillage.Jobs.Apothecary.Workers.Count;
+                int nbApothecaries = _parentFamily.OwnerVillage.JobsList.Apothecary.Workers.Count;
                 int maxtimer;
                 if (this._virus != null)//....
                 {
@@ -455,7 +454,7 @@ namespace Game
             {
                 if (_age - time < Game._regularBirthDates[i])
                 {
-                    eventList.Add(new VillagerBirthEvent(_parentFamily.newFamilyMember()));
+                    eventList.Add(new VillagerBirthEvent(_parentFamily.NewFamilyMember()));
                 }
                 i++;
             }

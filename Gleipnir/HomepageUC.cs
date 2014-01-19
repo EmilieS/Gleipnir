@@ -13,7 +13,7 @@ namespace GamePages
 {
     public partial class HomepageUC : UserControl  
     {
-        public Game.Game _startedGame;
+        Game.Game _startedGame;
         public bool _isStarted;
         public event PropertyChangedEventHandler Launched;
 
@@ -26,7 +26,6 @@ namespace GamePages
 
         public void new_game(object sender, EventArgs e)
         {
-            //_startedGame = new Game.Game();//
             this.Visible = false;
             IsStarted = true;
             RaisePropertyChanged();
@@ -44,14 +43,6 @@ namespace GamePages
         private void Exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void loadGame_Click(object sender, EventArgs e)
-        {
-            _startedGame = Game.serialize.load();
-            this.Visible = false;
-            IsStarted = true;
-            RaisePropertyChanged();
         }
     }
 }

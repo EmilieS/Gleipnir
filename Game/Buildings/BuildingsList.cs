@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    [Serializable]
     public class BuildingsList : IReadOnlyList<BuildingsModel>
     {
         readonly List<BuildingsModel> _buildingsList;

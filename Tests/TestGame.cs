@@ -39,10 +39,6 @@ namespace Tests
             Family family = selectedVillage.FamiliesList[1];
             Villager villager = family.FamilyMembers[0];
             new Game.GodSpell.Epidemic(myGame, villager);
-            myGame.NextStep();
-            myGame.NextStep();
-            myGame.NextStep();
-            new Game.GodSpell.Heal(myGame);
             do
             {
                 myGame.NextStep();
@@ -51,7 +47,7 @@ namespace Tests
                     e.PublishMessage(MyWindow);
                     e.Do(MyWindow);
                 }
-            } while (myGame.TotalPop < 3000 && myGame.TotalPop>1);
+            } while (myGame.TotalPop < 3000 && myGame.TotalPop>0);
             //Assert.That(MyWindow.nb_pushAlert, Is.EqualTo(1));
         }
        /* [Test]

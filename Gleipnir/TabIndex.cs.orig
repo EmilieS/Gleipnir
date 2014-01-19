@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Game;
 using Game.Buildings;
+using Game.GodSpell;
+using System.Diagnostics;
 
 namespace GamePages
 {
     public partial class TabIndex : UserControl
     {
-        readonly GeneralPage _page;
-        bool _isOnBought;
-        bool _passed;
-        bool _isEpidemicLaunched;
         List<VillagerBannerUC> ListOfVillagersToShow;
+        readonly GeneralPage _page;
+        bool isOnBought;
+        bool passed;
         int positionX;
         int positionY;
 
@@ -27,10 +28,10 @@ namespace GamePages
             InitializeComponent();
 
             _page = p;
-            _isOnBought = false;
+            isOnBought = false;
 
             positionX = 0;
-            positionY = 0;
+            positionY = 10;
             
             // Create imageList
             ImageList imageList = new ImageList();
@@ -65,146 +66,164 @@ namespace GamePages
 
         public bool IsOnBought
         {
-            get { return _isOnBought; }
-            set { _isOnBought = value; }
+            get { return isOnBought; }
+            set { isOnBought = value; }
         }
 
-        internal void ShowUnboughtBuildings()
-        {
-        }
-
+        // Buildings Click
         #region Jobs Buildings Buttons
         private void ApothicaryOffice_Click(object sender, EventArgs e)
         {
-            ApothecaryOffice apo = new ApothecaryOffice(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Apothecary);
+            ApothecaryOffice apo = new ApothecaryOffice(_page.TheGame.Villages[0], _page.TheGame.Villages[0].JobsList.Apothecary);
             _page.OnBoughtBuilding_Click(apo);
         }
         private void Forge_Click(object sender, EventArgs e)
         {
-            Game.Buildings.Forge forge = new Forge(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Blacksmith);
+            Game.Buildings.Forge forge = new Forge(_page.TheGame.Villages[0], _page.TheGame.Villages[0].JobsList.Blacksmith);
             _page.OnBoughtBuilding_Click(forge);
         }
         private void UnionOfCrafter_Click(object sender, EventArgs e)
         {
-            Game.Buildings.UnionOfCrafter uoc = new UnionOfCrafter(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Construction_Worker);
+            Game.Buildings.UnionOfCrafter uoc = new UnionOfCrafter(_page.TheGame.Villages[0], _page.TheGame.Villages[0].JobsList.Construction_Worker);
             _page.OnBoughtBuilding_Click(uoc);
         }
         private void Restaurant_Click(object sender, EventArgs e)
         {
-            Game.Buildings.Restaurant resto = new Restaurant(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Cooker);
+            Game.Buildings.Restaurant resto = new Restaurant(_page.TheGame.Villages[0], _page.TheGame.Villages[0].JobsList.Cooker);
             _page.OnBoughtBuilding_Click(resto);
         }
         private void Farm_Click(object sender, EventArgs e)
         {
-            Game.Buildings.Farm farm = new Farm(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Farmer);
+            Game.Buildings.Farm farm = new Farm(_page.TheGame.Villages[0], _page.TheGame.Villages[0].JobsList.Farmer);
             _page.OnBoughtBuilding_Click(farm);
         }
         private void Mill_Click(object sender, EventArgs e)
         {
-            Game.Buildings.Mill mill = new Mill(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Miller);
+            Game.Buildings.Mill mill = new Mill(_page.TheGame.Villages[0], _page.TheGame.Villages[0].JobsList.Miller);
             _page.OnBoughtBuilding_Click(mill);
         }
         private void MilitaryCamp_Click(object sender, EventArgs e)
         {
-            Game.Buildings.MilitaryCamp gq = new MilitaryCamp(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Militia);
+            Game.Buildings.MilitaryCamp gq = new MilitaryCamp(_page.TheGame.Villages[0], _page.TheGame.Villages[0].JobsList.Militia);
             _page.OnBoughtBuilding_Click(gq);
         }
         private void ClothesShop_Click(object sender, EventArgs e)
         {
-            Game.Buildings.ClothesShop shop = new ClothesShop(_page.Game.Villages[0], _page.Game.Villages[0].Jobs.Tailor);
+            Game.Buildings.ClothesShop shop = new ClothesShop(_page.TheGame.Villages[0], _page.TheGame.Villages[0].JobsList.Tailor);
             _page.OnBoughtBuilding_Click(shop);
         }
         #endregion
         #region Hobbies Buildings
         private void Baths_Click(object sender, EventArgs e)
         {
-            Baths baths = new Baths(_page.Game.Villages[0]);
+            Baths baths = new Baths(_page.TheGame.Villages[0]);
             _page.OnBoughtBuilding_Click(baths);
         }
         private void Brothel_Click(object sender, EventArgs e)
         {
-            Brothel brothel = new Brothel(_page.Game.Villages[0]);
+            Brothel brothel = new Brothel(_page.TheGame.Villages[0]);
             _page.OnBoughtBuilding_Click(brothel);
         }
         private void PartyRoom_Click(object sender, EventArgs e)
         {
-            PartyRoom party = new PartyRoom(_page.Game.Villages[0]);
+            PartyRoom party = new PartyRoom(_page.TheGame.Villages[0]);
             _page.OnBoughtBuilding_Click(party);
         }
         private void TavernButton_Click(object sender, EventArgs e)
         {
-            Tavern tavern = new Tavern(_page.Game.Villages[0]);
+            Tavern tavern = new Tavern(_page.TheGame.Villages[0]);
             _page.OnBoughtBuilding_Click(tavern);
         }
         private void Theater_Click(object sender, EventArgs e)
         {
-            Theater theater = new Theater(_page.Game.Villages[0]);
+            Theater theater = new Theater(_page.TheGame.Villages[0]);
             _page.OnBoughtBuilding_Click(theater);
         }
         #endregion
         #region Specials Buildings
         private void Chapel_Click(object sender, EventArgs e)
         {
-            Chapel chapel = new Chapel(_page.Game.Villages[0]);
+            Chapel chapel = new Chapel(_page.TheGame.Villages[0]);
             _page.OnBoughtBuilding_Click(chapel);
         }
         private void OfferingsWarehouse_Click(object sender, EventArgs e)
         {
-            OfferingWarehouse offeringsWarehouse = new OfferingWarehouse(_page.Game.Villages[0]);
+            OfferingWarehouse offeringsWarehouse = new OfferingWarehouse(_page.TheGame.Villages[0]);
             _page.OnBoughtBuilding_Click(offeringsWarehouse);
         }
         private void House_Click(object sender, EventArgs e)
         {
-            House house = new House(_page.Game.Villages[0]);
+            House house = new House(_page.TheGame.Villages[0]);
             _page.OnBoughtBuilding_Click(house);
         }
         #endregion
 
+        // God Spells Click
         private void StartEpidemic_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-            Game.GodSpell.Epidemic epidemic = new Game.GodSpell.Epidemic(_page.StartedGame, _page.StartedGame.Villages[0].FamiliesList[0].FamilyMembers[0]);
-        }
-
-        bool _passed;
-=======
-            if (!_isEpidemicLaunched)
+            if(_page.TheGame.Villages[0].FamiliesList.Count > 0)
             {
-                Game.GodSpell.Epidemic epidemic = new Game.GodSpell.Epidemic(_page.Game, _page.Game.Villages[0].FamiliesList[0].FamilyMembers[0]);
-                _isEpidemicLaunched = true;
+                Random rnd = new Random();
+                int familyChoosen = rnd.Next(0, _page.TheGame.Villages[0].FamiliesList.Count);
+                int villagerChoosen = rnd.Next(0, _page.TheGame.Villages[0].FamiliesList[familyChoosen].FamilyMembers.Count);
+                Epidemic epidemic = new Epidemic(_page.TheGame, _page.TheGame.Villages[0].FamiliesList[familyChoosen].FamilyMembers[villagerChoosen]);
             }
         }
+<<<<<<< HEAD
+
+=======
+        private void StartEarthquake_Click(object sender, EventArgs e)
+        {
+            Earthquake earthquake = new Earthquake(_page.TheGame, _page.TheGame.Villages[0]);
+        }
+        private void StartHeal_Click(object sender, EventArgs e)
+        {
+            Heal heal = new Heal(_page.TheGame);
+        }
+        private void StartFest_Click(object sender, EventArgs e)
+        {
+            SamhainFest fest = new SamhainFest();
+        }
         
->>>>>>> origin/develop
+        // Villagers list
+>>>>>>> develop
         internal void ShowVillagerListInFamily(Family fam)
         {
-            if (_passed == false)
+            if (!passed)
             {
-                _passed = true;
                 ListOfVillagersToShow = new List<VillagerBannerUC>();
+                passed = true;
             }
             DestroyVillagerList();
 
             for (int i = 0; i < fam.FamilyMembers.Count; i++)
             {
                 VillagerBannerUC tmp = new VillagerBannerUC();
-                ListOfVillagersToShow.Add(tmp);
+                
+                // Add gender icon
+                if(fam.FamilyMembers[i].Gender == Genders.FEMALE)
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
+                else
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
+
+                // Set VillagerBannerUC
                 tmp.VillagerName.Text = fam.FamilyMembers[i].FirstName + " " + fam.FamilyMembers[i].Name;
-                this.VillagerList.Controls.Add(tmp);
-                tmp.Show();
                 tmp.Location = new System.Drawing.Point(positionX, positionY);
-                positionY += 65;
+
+                // Add VillagerBannerUC to lists and show it
+                this.VillagerList.Controls.Add(tmp);
+                ListOfVillagersToShow.Add(tmp);
+                tmp.Show();
+
+                // Set position for next VillagerBannerUC
+                positionY += 62;
             }
         }
-<<<<<<< HEAD
-
-        internal void DestroyVillagerListInFamily()
-=======
         internal void ShowWorkersInJob(JobsModel job)
         {
-            if (_passed == false)
+            if (passed == false)
             {
-                _passed = true;
+                passed = true;
                 ListOfVillagersToShow = new List<VillagerBannerUC>();
             }
             DestroyVillagerList();
@@ -213,15 +232,18 @@ namespace GamePages
             {
                 VillagerBannerUC tmp = new VillagerBannerUC();
                 ListOfVillagersToShow.Add(tmp);
+                if (job.Workers[i].Gender == Genders.FEMALE)
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
+                else
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
                 tmp.VillagerName.Text = job.Workers[i].FirstName + " " + job.Workers[i].Name;
                 this.VillagerList.Controls.Add(tmp);
                 tmp.Show();
                 tmp.Location = new System.Drawing.Point(positionX, positionY);
-                positionY += 65;
+                positionY += 62;
             }
         }
         internal void DestroyVillagerList()
->>>>>>> origin/develop
         {
             if (ListOfVillagersToShow != null)
             {
@@ -238,12 +260,29 @@ namespace GamePages
         #region Cooker's Upgrades
         private void Level1_butt_Click(object sender, EventArgs e)
         {
-            _page.StartedGame.Villages[0].Upgrades.Level1.Buy();
-            Level1_butt.Visible = false;
-            Controls.Remove(Level1_butt);
+            _page.Game.Villages[0].Upgrades.Level1.Buy();
+            Level1_butt.Enabled = false;
         }
 
-        #endregion
+        
 
+        private void Level2_butt_Click(object sender, EventArgs e)
+        {
+            _page.Game.Villages[0].Upgrades.Level2.Buy();
+            Level2_butt.Enabled = false;
+        }
+
+        private void Level3_butt_Click(object sender, EventArgs e)
+        {
+            _page.Game.Villages[0].Upgrades.Level3.Buy();
+            Level3_butt.Enabled = false;
+        }
+
+        private void Level4_butt_Click(object sender, EventArgs e)
+        {
+            _page.Game.Villages[0].Upgrades.Level4.Buy();
+            Level3_butt.Enabled = false;
+        }
+        #endregion
     }
 }

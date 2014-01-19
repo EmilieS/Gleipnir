@@ -7,7 +7,6 @@ using Game;
 
 namespace Game.Buildings
 {
-    [Serializable]
     public class ApothecaryOffice : BuildingsModel
     {
         internal string _name;
@@ -30,15 +29,15 @@ namespace Game.Buildings
 
         override internal void AddToList()
         {
-            Village.Buildings.Add(this);
+            Village.BuildingsList.Add(this);
         }
         internal override void OnOnDestroy()
         {
-            Village.Buildings.Remove(this);
+            Village.BuildingsList.Remove(this);
         }
         override internal void OnDamage()
         {
-            foreach (Villager v in Village.Jobs.Apothecary.Workers)
+            foreach (Villager v in Village.JobsList.Apothecary.Workers)
             {
                 if (Game.Rand.Next(100) == 1)
                 {

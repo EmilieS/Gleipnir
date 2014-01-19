@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
-    [Serializable]
     public class Brothel : BuildingsModel
     {
 
@@ -29,11 +28,11 @@ namespace Game.Buildings
 
         override internal void AddToList()
         {
-            Village.Buildings.Add(this);
+            Village.BuildingsList.Add(this);
         }
         internal override void OnOnDestroy()
         {
-            Village.Buildings.Remove(this);
+            Village.BuildingsList.Remove(this);
         }
     }
 }
