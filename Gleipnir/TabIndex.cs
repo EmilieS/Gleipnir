@@ -236,6 +236,10 @@ namespace GamePages
             {
                 _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
             }
+            else if (_page.Game.Villages[0].Buildings.RestaurantList.Count == 0)
+            {
+                _page.PushAlert("Vous devez avoir déja au moins un restaurant !", "Pas de restaurant, pas d'argent");
+            }
             else
             {
                 _page.PushAlert("Vous n'avez pas put acheter l'amelioration", "Echec d'achat !");
