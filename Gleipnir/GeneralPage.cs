@@ -31,7 +31,28 @@ namespace GamePages
         traceBox trace;
         private BuildingsModel buildingSelected;
         private ActionState actionState;
-        string traceMessages;
+        string traceMessages; 
+        public System.Windows.Forms.Timer _timer;
+        int _interval;
+
+        public int Interval
+        {
+            get { return _interval; }
+            set
+            {
+                if (value != _interval)
+                {
+                    _interval = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var h = PropertyChanged;
+            if (h != null) h(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Gets the game object
@@ -68,6 +89,8 @@ namespace GamePages
             _home.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
             this.Controls.Add(_home);
             _home.Show();
+            _interval = 0;
+            _timer = null;
         }
         // NewGame
         public void IsStarted_Changed(object sender, PropertyChangedEventArgs e)
@@ -197,6 +220,18 @@ namespace GamePages
 
             // Do 1 step
             Step();
+
+            if (_interval == 0)
+            {
+                _timer = null;
+            }
+            else
+            {
+                _timer = new System.Windows.Forms.Timer();
+                _timer.Tick += (source, eventArgs) => { Step(); };
+                _timer.Interval = _interval;
+                _timer.Start();
+            }
         }
         // LoadGame
         public void LoadGame()
@@ -303,6 +338,18 @@ namespace GamePages
             gleipnir_logo.Hide();
             _loading.SendToBack();
             _loading.Hide();
+
+            if (_interval == 0)
+            {
+                _timer = null;
+            }
+            else
+            {
+                _timer = new System.Windows.Forms.Timer();
+                _timer.Tick += (source, eventArgs) => { Step(); };
+                _timer.Interval = _interval;
+                _timer.Start();
+            }
         }
 
         internal TabIndex ActionMenu

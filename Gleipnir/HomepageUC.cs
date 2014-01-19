@@ -63,5 +63,13 @@ namespace GamePages
             var h = Launched;
             if (h != null) h(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        private void settings_Click(object sender, EventArgs e)
+        {
+
+          Parameters para=  new Parameters(_page);
+          _page.Hide();
+          para.Show();
+        }
     }
 }
