@@ -299,6 +299,9 @@ namespace GamePages
             #endregion
             #endregion
 
+
+            trace = new traceBox();
+
             // Hide loading effects
             gleipnir_logo.Hide();
             _loading.SendToBack();
@@ -419,6 +422,9 @@ namespace GamePages
         {
             traceMessages = traceMessages + message + @"
 ";
+            Debug.Assert(trace != null, "trace est null (PushTrace[GeneralPage])");
+            Debug.Assert(trace.traceBoxViewer != null, "trace.traceBoxViewer est null (PushTrace[GeneralPage])");
+            Debug.Assert(trace.traceBoxViewer.Text != null, "trace.traceBoxViewer.Text est null (PushTrace[GeneralPage])");
             trace.traceBoxViewer.Text = traceMessages;
             //PushAlert(message, "PUSHTRACE");//MARCHE
         }

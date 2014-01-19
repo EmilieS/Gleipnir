@@ -37,6 +37,8 @@ namespace Game
 
         override public void PublishMessage(IWindow b)
         {
+            Debug.Assert(ChangedProperty != null, "public class EventProperty<T> : Event<T>, PublishMessage [Event] ChangedProperty is null !");
+            Debug.Assert(b != null, "public class EventProperty<T> : Event<T>, PublishMessage [Event] IWindow b is null !");
             b.PushTrace(String.Format("Property {0} has changed...", ChangedProperty));
         }
         public override void Do(IWindow b)
