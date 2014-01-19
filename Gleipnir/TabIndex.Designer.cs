@@ -539,7 +539,6 @@
 
         private System.Windows.Forms.TabPage buildingsTab;
         private System.Windows.Forms.TabPage UpgradesTab;
-        private System.Windows.Forms.TabPage happinessTab;
         private System.Windows.Forms.TabPage VillagerList;
         private System.Windows.Forms.TabPage godSpellsTab;
         private System.Windows.Forms.Button Tavern;
