@@ -20,6 +20,7 @@ namespace Game
         void PushGeneralHappiness(double value);
         void PushOfferingsPointsPerTick(int value);
         void PushName(string name);
+        void GameLost();
 
         // Grid Update
         void SetEmptySquare(int row, int col);

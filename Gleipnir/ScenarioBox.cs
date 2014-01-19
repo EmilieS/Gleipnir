@@ -45,5 +45,11 @@ namespace GamePages
         {
             SetScenarionText();
         }
+
+        public void GameLostText()
+        {
+            TextLabel.Text = "Vous avez perdu !";
+            this.Enabled = false;
+        }
     }
 }
