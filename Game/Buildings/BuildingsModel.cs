@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
+    [Serializable]
     public abstract class BuildingsModel : GameItem
     {
         int _verticalPos;
@@ -15,7 +16,6 @@ namespace Game.Buildings
         double _addedFaith;
         double _enterPrice;
         //double _robustness;
-        double _addedRobustness;
         bool _isBought;
         string _name;
         int _hp;
@@ -132,9 +132,9 @@ namespace Game.Buildings
         public void SetCoordinates(int x, int y)
         {
             /*if (x == null || y == null)
-                throw new ArgumentNullException("X or Y doesn't exist");*/
+                throw new ArgumentNullException("(buildingModel, SetCoordinates) X or Y doesn't exist");*/
             if ((x < 0 || x > 20) || (y < 0 || y > 32))
-                throw new IndexOutOfRangeException("Must be in tab");
+                throw new IndexOutOfRangeException("(buildingModel, SetCoordinates) Must be in tab");
             this.HorizontalPos = x;
             this.VerticalPos = y;
         }

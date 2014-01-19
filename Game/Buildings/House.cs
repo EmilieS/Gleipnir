@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
+    [Serializable]
     public class House : BuildingsModel
     {
         Family _family;

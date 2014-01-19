@@ -179,9 +179,9 @@ namespace GamePages
         }
         private void StartFest_Click(object sender, EventArgs e)
         {
-            SamhainFest fest = new SamhainFest();
+            SamhainFest fest = new SamhainFest(_page.TheGame.Villages[0]);
         }
-        
+
         // Villagers list
         internal void ShowVillagerListInFamily(Family fam)
         {
@@ -252,5 +252,16 @@ namespace GamePages
                 ListOfVillagersToShow.Clear();
             }
         }
+
+        #region Cooker's Upgrades
+        private void Level1_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Level1.Buy();
+            Level1_butt.Visible = false;
+            Controls.Remove(Level1_butt);
+        }
+
+        #endregion
+
     }
 }

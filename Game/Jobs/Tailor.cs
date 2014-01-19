@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+    [Serializable]
     public class Tailor : JobsModel
     {
         double _happinessAddition;

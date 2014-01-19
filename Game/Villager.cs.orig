@@ -9,6 +9,7 @@ using System.Diagnostics;
 
 namespace Game
 {
+    [Serializable]
     public partial class Villager : GameItem
     {
         internal Villager(Game g, Family parentFamily, string name)    //TODO: autre constructeur pour le début...
@@ -19,6 +20,7 @@ namespace Game
             _health = new HistorizedValue<Healths, Villager>(this, "_health", 20);
             _statusInFamily = new HistorizedValue<Status, Villager>(this, "_statusInFamily", 20);
             _statusInFamily.Current = Status.SINGLE;
+            
             
             g.VillagerAdded();
             parentFamily.OwnerVillage.VillagerAdded();
@@ -80,7 +82,7 @@ namespace Game
             _statusInFamily.Current = Status.SINGLE;
             _name = name;//_health.Conclude();
             Game.Villages[0].VillagerAdded();//hmmmmm
-            Game.Villages[0].Jobs.Farmer.AddPerson(this);
+            Game.Villages[0].JobsList.Farmer.AddPerson(this);
         }
 
         //TODO : generate name.
@@ -142,10 +144,11 @@ namespace Game
         /// <summary>
         /// Gets the villager's name
         /// </summary>
-        public string Name
-        {
-            get { return _name; }
-        }
+        public string FirstName { get { return _name; } }
+        /// <summary>
+        /// Gets the family name
+        /// </summary>
+        public string Name { get { return _parentFamily.Name; } }
 
         /// <summary>
         /// Sets the new life expectancy no matter what time was left.
@@ -274,15 +277,21 @@ namespace Game
             Debug.Assert((Faith <= 15) == ((Health & Healths.HERETIC) != 0), "(JobModel/villagerdestroyed) heretism is not right!");
         }
 
-<<<<<<< HEAD
         public bool GenerateGoldPrerequisitesFromVillager()
         {
+            if (this.ActivityStatus == ActivityStatus.WORKING && !IsDead())
+                return true;
+            else
+                return false;
+<<<<<<< HEAD
+            if (_villagerActivity == ActivityStatus.PARTYING)
+                return false;
+
             return true; //TODO
+=======
+>>>>>>> origin/fx-Upgrades
         }
 
-
-=======
->>>>>>> fx-map_events
         //====================WORLD=TICK=STUFF============================
         #region called by ImpactHappiness
         private void SickHappinessImpact()
@@ -312,7 +321,7 @@ namespace Game
             int amount = _parentFamily.OwnerVillage.OfferingsPointsPerTick;
             if ((_health.Current & Healths.HERETIC) == 0)
             {
-                Game.AddOrTakeFromOfferings(ParentFamily.takeFromGoldStash(amount));
+                Game.AddOrTakeFromOfferings(ParentFamily.TakeFromGoldStash(amount));
             }
 
         }
@@ -325,7 +334,7 @@ namespace Game
         {
             if ((_health.Current & Healths.SICK) != 0)
             {
-                int nbApothecaries = _parentFamily.OwnerVillage.Jobs.Apothecary.Workers.Count;
+                int nbApothecaries = _parentFamily.OwnerVillage.JobsList.Apothecary.Workers.Count;
                 int maxtimer;
                 if (this._virus != null)//....
                 {
@@ -363,7 +372,7 @@ namespace Game
             else { _sickTimer = 0; }
         }
 
-        public void Heal()
+         void Heal()//sert à rien
         {
             _health.Current = Healths.NONE;
         }
@@ -376,14 +385,16 @@ namespace Game
             virus.Epidemic.SickVillagerList.Add(this);
             _health.Current = _health.Current | Healths.SICK;
         }
-        public void SetHealed()
+        public void SetHealed( int amount=0)
         {
+            Debug.Assert(amount >= 0, "SetHealed, amount was negative");
             if (_virus != null)
             {
-
+                _virus.Epidemic.SickVillagerList.Remove(this);
                 _virus = null;
             }
             _health.Current = _health.Current & ~Healths.SICK;
+            _lifeExpectancy += amount;
         }
 
         int _callForHelpTickTimer;
@@ -452,7 +463,7 @@ namespace Game
             {
                 if (_age - time < Game._regularBirthDates[i])
                 {
-                    eventList.Add(new VillagerBirthEvent(_parentFamily.newFamilyMember()));
+                    eventList.Add(new VillagerBirthEvent(_parentFamily.NewFamilyMember()));
                 }
                 i++;
             }
@@ -462,7 +473,7 @@ namespace Game
         {
             if (_statusInFamily.Current != Status.ENGAGED)
                 return;
-            if (_engagedTickTimer == 10)
+            if (_engagedTickTimer == 45)
             {
                 if (_gender == Genders.FEMALE)
                 {

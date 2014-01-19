@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+    [Serializable]
     public class Virus
     {
         internal GodSpell.Epidemic Epidemic { get; set; }

@@ -9,6 +9,7 @@ using System.Diagnostics;
 
 namespace Game
 {
+    [Serializable]
     public partial class Villager : GameItem
     {
         internal Villager(Game g, Family parentFamily, string name)    //TODO: autre constructeur pour le début...
@@ -19,6 +20,7 @@ namespace Game
             _health = new HistorizedValue<Healths, Villager>(this, "_health", 20);
             _statusInFamily = new HistorizedValue<Status, Villager>(this, "_statusInFamily", 20);
             _statusInFamily.Current = Status.SINGLE;
+            
             
             g.VillagerAdded();
             parentFamily.OwnerVillage.VillagerAdded();
@@ -277,10 +279,10 @@ namespace Game
 
         public bool GenerateGoldPrerequisitesFromVillager()
         {
-            if (IsDead())
+            if (this.ActivityStatus != ActivityStatus.WORKING || IsDead() || this.ActivityStatus == ActivityStatus.PARTYING)
+                return true;
+            else
                 return false;
-
-            return true; //TODO
         }
 
         //====================WORLD=TICK=STUFF============================
@@ -365,9 +367,7 @@ namespace Game
 
          void Heal()//sert à rien
         {
-            
             _health.Current = Healths.NONE;
-
         }
         public void SetVirus(Virus virus)
         {
@@ -466,7 +466,7 @@ namespace Game
         {
             if (_statusInFamily.Current != Status.ENGAGED)
                 return;
-            if (_engagedTickTimer == 10)
+            if (_engagedTickTimer == 45)
             {
                 if (_gender == Genders.FEMALE)
                 {
