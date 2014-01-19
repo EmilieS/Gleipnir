@@ -226,7 +226,6 @@
     <None Include="Resources\button_homepage1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Stats_Offerings.png" />
     <None Include="Resources\ScenarioBox_background.png" />
     <None Include="Resources\Stats_ObjectName.png" />
     <None Include="Resources\Stats_Population.png" />
@@ -255,7 +254,6 @@
     <None Include="Resources\ActionTab_happiness_background.png" />
     <None Include="Resources\ActionTab_villagerList_background.png" />
     <None Include="Resources\ButtonIcon_epidemic.png" />
-    <None Include="Resources\ButtonIcon_Earthquake.png" />
     <Content Include="Resources\Extra\firstNameList.txt" />
     <Content Include="Resources\Extra\nameList.txt" />
     <Content Include="Resources\Extra\scenario.txt" />
@@ -278,8 +276,6 @@
     <None Include="Resources\Loading_Text.png" />
     <None Include="Resources\LoadingUC1.png" />
     <None Include="Resources\InformationBox_destroyed_background.png" />
-    <None Include="Resources\Gender_Female.png" />
-    <None Include="Resources\Gender_Male.png" />
     <Content Include="Resources\nameList.txt" />
     <None Include="Resources\Sablier.png" />
     <None Include="Resources\Sablier2.png" />

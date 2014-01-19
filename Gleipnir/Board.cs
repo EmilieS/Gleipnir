@@ -243,25 +243,25 @@ namespace GamePages
                         squares[i, j] = Road;*/
             #endregion
             #region families houses
-            foreach (House house in game.Villages[0].BuildingsList.HouseList)
+            foreach (House house in game.Villages[0].Buildings.HouseList)
                 if(!house.IsBought)
-                    PlaceRandomlyBuilding(house, FamilyHouseInt);
+                    PlaceBuilding(house, FamilyHouseInt);
             #endregion
             #region jobs buildings
-            foreach (Forge forge in game.Villages[0].BuildingsList.ForgeList)
+            foreach (Forge forge in game.Villages[0].Buildings.ForgeList)
                 if (forge != null && !forge.IsBought)
-                    PlaceRandomlyBuilding(forge, ForgeInt);
-            foreach (Farm farm in game.Villages[0].BuildingsList.FarmList)
+                    PlaceBuilding(forge, ForgeInt);
+            foreach (Farm farm in game.Villages[0].Buildings.FarmList)
                 if (farm != null && !farm.IsBought)
-                    PlaceRandomlyBuilding(farm, FarmInt);
-            foreach (UnionOfCrafter uoc in game.Villages[0].BuildingsList.UnionOfCrafterList)
+                    PlaceBuilding(farm, FarmInt);
+            foreach (UnionOfCrafter uoc in game.Villages[0].Buildings.UnionOfCrafterList)
                 if (uoc != null && !uoc.IsBought)
-                    PlaceRandomlyBuilding(uoc, UnionOfCrafterInt);
+                    PlaceBuilding(uoc, UnionOfCrafterInt);
             #endregion
             #region table
-            game.Villages[0].BuildingsList.TablePlaceList[0].SetCoordinates(4, 4);
+            game.Villages[0].Buildings.TablePlaceList[0].SetCoordinates(4, 4);
             squares[4, 4] = TableInt;
-            game.Villages[0].BuildingsList.TablePlaceList[0].IsBought = true;
+            game.Villages[0].Buildings.TablePlaceList[0].IsBought = true;
             #endregion
             #endregion
         }
@@ -354,7 +354,7 @@ namespace GamePages
         /// Place randomly a buidling
         /// </summary>
         /// <param name="building"></param>
-        public void PlaceRandomlyBuilding(BuildingsModel building, int value)
+        public void PlaceBuilding(BuildingsModel building, int value)
         {
             if (!building.IsBought)
             {

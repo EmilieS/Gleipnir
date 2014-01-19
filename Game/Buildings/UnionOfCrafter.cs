@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
+    [Serializable]
     public class UnionOfCrafter : BuildingsModel
     {
         internal string _name;
@@ -23,16 +24,16 @@ namespace Game.Buildings
 
         override internal void AddToList()
         {
-            Village.BuildingsList.Add(this);
+            Village.Buildings.Add(this);
         }
         internal override void OnOnDestroy()
         {
-            Village.BuildingsList.Remove(this);
+            Village.Buildings.Remove(this);
         }
         override internal void OnDamage()
         {
 
-            foreach (Villager v in Village.JobsList.Construction_Worker.Workers)
+            foreach (Villager v in Village.Jobs.Construction_Worker.Workers)
             {
                 if (Game.Rand.Next(100) == 1)
                 {

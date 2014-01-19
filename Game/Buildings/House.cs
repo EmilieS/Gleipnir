@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
+    [Serializable]
     public class House : BuildingsModel
     {
         Family _family;
@@ -36,28 +36,27 @@ namespace Game.Buildings
 
         override internal void AddToList()
         {
-            _village.BuildingsList.Add(this);
+            _village.Buildings.Add(this);
         }
         internal override void OnOnDestroy()
         {
-            Village.RemoveEmptyHouse(this);
-            Village.BuildingsList.Remove(this);
+            Village.Buildings.Remove(this);
         }
         internal override void JustCollapsed()
         {
-            if (Hp == 0 && Family != null)
+            if (Hp == 0 && _family != null)
             {
-                foreach (Villager v in Family.FamilyMembers)
+
+                foreach (Villager v in _family.FamilyMembers)
                 {
                     v.Kill();
                 }
-                Family = null;
+                _family = null;
             }
-            //Debug.Assert(Village.EmptyHouseList.Contains(this), "JustCollapsed - emptyHouseList");
-            //if (Hp == 0 && Family == null)
-            //{
-            //    Village.RemoveEmptyHouse(this);
-            //}
+            if (Hp == 0 && Family == null)
+            {
+                Village.RemoveEmptyHouse(this);
+            }
         }
 
         internal void FamilyDestroyed()

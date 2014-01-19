@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+    [Serializable]
     public class Construction_Worker : JobsModel
     {
         public Construction_Worker(Game game, JobList list, string name)
@@ -22,17 +23,17 @@ namespace Game
         }
         internal override bool GenerateGoldPrerequisites()
         {
-            if (Owner.Owner.BuildingsList.UnionOfCrafterList.Count <= 0)
+            if (Owner.Owner.Buildings.UnionOfCrafterList.Count <= 0)
                 return false;
             int i = 0;
             do
             {
-                if (Owner.Owner.BuildingsList.UnionOfCrafterList[i].Hp > 0)
+                if (Owner.Owner.Buildings.UnionOfCrafterList[i].Hp > 0)
                 {
                     return true;
                 }
                 i++;
-            } while (i < Owner.Owner.BuildingsList.UnionOfCrafterList.Count);
+            } while (i < Owner.Owner.Buildings.UnionOfCrafterList.Count);
             return false;
         }
     }

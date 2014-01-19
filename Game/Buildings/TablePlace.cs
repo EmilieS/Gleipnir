@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game.Buildings
 {
+    [Serializable]
     public class TablePlace : BuildingsModel
     {
         public TablePlace(Village v)
@@ -18,11 +19,11 @@ namespace Game.Buildings
 
         override internal void AddToList()
         {
-            Village.BuildingsList.Add(this);
+            Village.Buildings.Add(this);
         }
         internal override void OnOnDestroy()
         {
-            Village.BuildingsList.Remove(this);
+            Village.Buildings.Remove(this);
         }
     }
 }

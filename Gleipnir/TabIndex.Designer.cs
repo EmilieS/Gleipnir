@@ -68,10 +68,7 @@
             this.Level1_butt = new System.Windows.Forms.Button();
             this.VillagerList = new System.Windows.Forms.TabPage();
             this.godSpellsTab = new System.Windows.Forms.TabPage();
-            this.StartEarthquake = new System.Windows.Forms.Button();
             this.StartEpidemic = new System.Windows.Forms.Button();
-            this.StartHeal = new System.Windows.Forms.Button();
-            this.StartFest = new System.Windows.Forms.Button();
             this.actionsMenu.SuspendLayout();
             this.buildingsTab.SuspendLayout();
             this.UpgradesTab.SuspendLayout();
@@ -497,9 +494,6 @@
             // godSpellsTab
             // 
             this.godSpellsTab.BackgroundImage = global::GamePages.Properties.Resources.ActionTab_action_background;
-            this.godSpellsTab.Controls.Add(this.StartFest);
-            this.godSpellsTab.Controls.Add(this.StartHeal);
-            this.godSpellsTab.Controls.Add(this.StartEarthquake);
             this.godSpellsTab.Controls.Add(this.StartEpidemic);
             this.godSpellsTab.Location = new System.Drawing.Point(4, 4);
             this.godSpellsTab.Name = "godSpellsTab";
@@ -508,56 +502,18 @@
             this.godSpellsTab.TabIndex = 3;
             this.godSpellsTab.UseVisualStyleBackColor = true;
             // 
-            // StartEarthquake
-            // 
-            this.StartEarthquake.Image = global::GamePages.Properties.Resources.ButtonIcon_Earthquake;
-            this.StartEarthquake.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.StartEarthquake.Location = new System.Drawing.Point(24, 53);
-            this.StartEarthquake.Name = "StartEarthquake";
-            this.StartEarthquake.Size = new System.Drawing.Size(161, 30);
-            this.StartEarthquake.TabIndex = 1;
-            this.StartEarthquake.Text = "Tremblement de Terre";
-            this.StartEarthquake.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.StartEarthquake.UseVisualStyleBackColor = true;
-            this.StartEarthquake.Click += new System.EventHandler(this.StartEarthquake_Click);
-            // 
             // StartEpidemic
             // 
             this.StartEpidemic.Image = global::GamePages.Properties.Resources.ButtonIcon_epidemic;
             this.StartEpidemic.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.StartEpidemic.Location = new System.Drawing.Point(24, 17);
+            this.StartEpidemic.Location = new System.Drawing.Point(24, 19);
             this.StartEpidemic.Name = "StartEpidemic";
-            this.StartEpidemic.Size = new System.Drawing.Size(161, 30);
+            this.StartEpidemic.Size = new System.Drawing.Size(153, 30);
             this.StartEpidemic.TabIndex = 0;
-            this.StartEpidemic.Text = "Épidémie Mortelle";
+            this.StartEpidemic.Text = "Lance une Épidémie";
             this.StartEpidemic.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.StartEpidemic.UseVisualStyleBackColor = true;
             this.StartEpidemic.Click += new System.EventHandler(this.StartEpidemic_Click);
-            // 
-            // StartHeal
-            // 
-            this.StartHeal.Image = global::GamePages.Properties.Resources.Building_HealthPoints;
-            this.StartHeal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.StartHeal.Location = new System.Drawing.Point(24, 89);
-            this.StartHeal.Name = "StartHeal";
-            this.StartHeal.Size = new System.Drawing.Size(161, 30);
-            this.StartHeal.TabIndex = 2;
-            this.StartHeal.Text = "Vague de Soin";
-            this.StartHeal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.StartHeal.UseVisualStyleBackColor = true;
-            this.StartHeal.Click += new System.EventHandler(this.StartHeal_Click);
-            // 
-            // StartFest
-            // 
-            this.StartFest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.StartFest.Location = new System.Drawing.Point(24, 125);
-            this.StartFest.Name = "StartFest";
-            this.StartFest.Size = new System.Drawing.Size(161, 30);
-            this.StartFest.TabIndex = 3;
-            this.StartFest.Text = "Fête du Village";
-            this.StartFest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.StartFest.UseVisualStyleBackColor = true;
-            this.StartFest.Click += new System.EventHandler(this.StartFest_Click);
             // 
             // TabIndex
             // 
@@ -610,9 +566,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button Level3_butt;
         private System.Windows.Forms.Button Level2_butt;
-        private System.Windows.Forms.Button StartEarthquake;
-        private System.Windows.Forms.Button StartHeal;
-        private System.Windows.Forms.Button StartFest;
         private System.Windows.Forms.Button Level4_butt;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button Pulley_butt;

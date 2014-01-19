@@ -31,7 +31,6 @@ namespace GamePages
         public static readonly Color JobsBackColorDefault = Color.FromArgb(200, 200, 200);
         public static readonly Color HobbyBackColorDefault = Color.FromArgb(255, 150, 150);
         public static readonly Color SpecialsBackColorDefault = Color.FromArgb(140, 90, 30);
-        public static readonly Color DestroyedBackColorDefault = Color.FromArgb(100, 25, 0);
 
         // Colors used in rendering the control.
         public static Color ActiveSquareBackColor;

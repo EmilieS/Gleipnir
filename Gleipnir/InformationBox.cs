@@ -57,34 +57,16 @@ namespace GamePages
                 ElementName.Text = family.Name;
                 goldIcon.Visible = true;
                 Gold.Visible = true;
-                Gold.Text = _page.TransformHighNumberToKnumbers(family.GoldStash);
+                Gold.Text = family.GoldStash.ToString();
                 faithIcon.Visible = true;
                 Faith.Visible = true;
-                if (family.FaithAverageValue.ToString().Count<char>() > 5)
-                {
-                    string txt = family.FaithAverageValue.ToString();
-                    string tmp = "";
-                    for (int i = 0; i < 5; i++)
-                        tmp += txt[i];
-                    Faith.Text = tmp;
-                }
-                else
-                    Faith.Text = family.FaithAverageValue.ToString();
+                Faith.Text = family.FaithAverageValue.ToString();
                 membersIcon.Visible = true;
                 NbMembers.Visible = true;
                 NbMembers.Text = family.FamilyMembers.Count.ToString();
                 happinessIcon.Visible = true;
                 Happiness.Visible = true;
-                if (family.HappinessAverageValue.ToString().Count<char>() > 5)
-                {
-                    string txt = family.HappinessAverageValue.ToString();
-                    string tmp = "";
-                    for (int i = 0; i < 5; i++)
-                        tmp += txt[i];
-                    Happiness.Text = tmp;
-                }
-                else
-                    Happiness.Text = family.HappinessAverageValue.ToString();
+                Happiness.Text = family.HappinessAverageValue.ToString();
                 buildingHealthIcon.Visible = true;
                 buildingLife.Visible = true;
                 buildingLife.Text = family.House.Hp.ToString();
@@ -264,7 +246,7 @@ namespace GamePages
 
             // InfoBox Texts
             Title.Visible = true;
-            Title.Location = new Point(positionX - 35, positionY);
+            Title.Location = new Point(positionX - 20, positionY);
             Title.Text = "Bâtiment détruit";
             objectName.Visible = true;
             ElementName.Visible = true;

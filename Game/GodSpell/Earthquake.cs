@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Game.GodSpell
 {
-    public class Earthquake : GameItem
+    [Serializable]
+    class Earthquake : GameItem
     {
         Village _village;
         int _force;
@@ -20,7 +21,7 @@ namespace Game.GodSpell
         internal override void OnDestroy(){}
         internal override void Evolution()
         {
-            foreach (Buildings.BuildingsModel b in  _village.BuildingsList)
+            foreach (Buildings.BuildingsModel b in  _village.Buildings)
             {
                 b.Damage(_force);
             }

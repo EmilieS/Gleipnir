@@ -66,6 +66,7 @@
             this.loadGame.TabIndex = 6;
             this.loadGame.Text = "Charger";
             this.loadGame.UseVisualStyleBackColor = false;
+            this.loadGame.Click += new System.EventHandler(this.loadGame_Click);
             // 
             // settings
             // 

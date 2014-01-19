@@ -69,6 +69,7 @@
     <Compile Include="GodSpell\Earthquake.cs" />
     <Compile Include="GodSpell\Epidemic.cs" />
     <Compile Include="GodSpell\Heal.cs" />
+    <Compile Include="serialize.cs" />
     <Compile Include="Virus.cs" />
     <Compile Include="Jobs\Apothecary.cs" />
     <Compile Include="Buildings\ApothecaryOffice.cs" />

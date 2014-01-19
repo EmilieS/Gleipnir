@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+
+    [Serializable]
     public class Event<T> : IEvent
-    //where T : GameItem
+        //where T : GameItem
     {
         public readonly T GameItem;
 
@@ -23,7 +25,7 @@ namespace Game
         {
         }
     }
-
+    [Serializable]
     public class EventProperty<T> : Event<T>
     {
         public readonly string ChangedProperty;
@@ -34,7 +36,7 @@ namespace Game
             ChangedProperty = propName;
         }
 
-        override public void PublishMessage(IWindow b)
+        override public  void PublishMessage(IWindow b)
         {
             b.PushTrace(String.Format("Property {0} has changed...", ChangedProperty));
         }
@@ -43,6 +45,7 @@ namespace Game
             base.Do(b);
         }
     }
+    [Serializable]
     public class BuildingNoHpEvent : Event<Buildings.BuildingsModel>
     {
         internal BuildingNoHpEvent(Buildings.BuildingsModel building)
@@ -56,14 +59,12 @@ namespace Game
         }
 
     }
+    [Serializable]
     public class BuildingDestroyedEvent : Event<Buildings.BuildingsModel>
     {
-        Buildings.BuildingsModel _building;
-
         internal BuildingDestroyedEvent(Buildings.BuildingsModel building)
             : base(building)
         {
-            _building = building;
         }
 
         override public void PublishMessage(IWindow b)
@@ -71,12 +72,8 @@ namespace Game
             b.PushTrace(String.Format("{0} is Destroyed", GameItem.Name));
         }
 
-        public override void Do(IWindow b)
-        {
-            base.Do(b);
-            b.SetEmptySquare(_building.HorizontalPos, _building.VerticalPos);
-        }
     }
+    [Serializable]
     public class BuildingCreatedEvent : Event<Buildings.BuildingsModel>
     {
         internal BuildingCreatedEvent(Buildings.BuildingsModel building)
@@ -90,29 +87,32 @@ namespace Game
         }
 
     }
-    public class GameEventProperty : EventProperty<Game>
+    [Serializable]
+    public class GameEventProperty: EventProperty<Game>
     {
         internal GameEventProperty(Game item, string propName)
             : base(item, propName)
         {
         }
-
         public override void Do(IWindow b)
         {
             switch (ChangedProperty)
             {
                 case "Offerings": b.PushGeneralCoins(GameItem.Offerings); break;
-                case "TotalPop": b.PushPopulation(GameItem.TotalPop); break;
+                case "TotalPop": b.PushPopulation(GameItem.TotalPop) ; break;
                 case "TotalGold": b.PushGeneralGold(GameItem.TotalGold); break;
                 case "AverageFaith": b.PushGeneralFaith(GameItem.AverageFaith); break;
                 case "AverageHappiness": b.PushGeneralHappiness(GameItem.AverageHappiness); break;
             }
+            //GameItem.GetType().GetProperty(ChangedProperty, typeof(string));
         }
+
         override public void PublishMessage(IWindow b)
         {
             b.PushTrace(String.Format("Property {0} has changed...", ChangedProperty));
         }
     }
+    [Serializable]
     public class VillageEventProperty : EventProperty<Village>
     {
         internal VillageEventProperty(Village item, string propName)
@@ -129,6 +129,7 @@ namespace Game
         }
 
     }
+    [Serializable]
     public class VillagerDyingEvent : Event<Villager>
     {
         internal VillagerDyingEvent(Villager v, string familyName)
@@ -152,7 +153,7 @@ namespace Game
             {
                 toPush = String.Format("{0} {1} est mort de sa maladie", GameItem.FirstName, _familyName);
             }
-            else if (GameItem.Age > 60 * 12)
+            else if (GameItem.Age > 60*12)
             {
                 toPush = String.Format("{0} {1} est mort de viellesse", GameItem.FirstName, _familyName);
             }
@@ -161,9 +162,10 @@ namespace Game
                 toPush = String.Format("{0} {1} est mort mystèrieusement", GameItem.FirstName, _familyName);
             }
             //Debug.Assert(toPush == "i");//va bien dedans!
-            b.PushAlert(toPush, "Mort");
+            b.PushAlert(toPush,"Mort");
         }
     }
+    [Serializable]
     public class VillagerCallForHelp : Event<Villager>
     {
         internal VillagerCallForHelp(Villager v)
@@ -175,6 +177,7 @@ namespace Game
             b.PushAlert(String.Format("{0} {1} prie que son malheur soit bientot terminé.", GameItem.FirstName, GameItem.ParentFamily.Name), "Prière");
         }
     }
+    [Serializable]
     public class EpidemicDeclaredEvent : Event<GodSpell.Epidemic>
     {
         internal EpidemicDeclaredEvent(GodSpell.Epidemic e)
@@ -187,6 +190,8 @@ namespace Game
         }
 
     }
+
+    [Serializable]
     public class FamilyEndEvent : Event<Family>
     {
         internal FamilyEndEvent(Family v)
@@ -199,6 +204,7 @@ namespace Game
             b.PushTrace(String.Format("La famille {0} est terminée.", GameItem.Name));
         }
     }
+    [Serializable]
     public class VillagerBirthEvent : Event<Villager>
     {
         internal VillagerBirthEvent(Villager v)
@@ -208,29 +214,22 @@ namespace Game
 
         override public void PublishMessage(IWindow b)
         {
-            b.PushTrace(String.Format("Un nouveau villageois est né ! Il a été nommé {0}.", GameItem.FirstName));
+            b.PushTrace( String.Format("Un nouveau villageois est né ! Il a été nommé {0}.", GameItem.FirstName));
             if (GameItem.Job == null)
                 b.PushAlert(String.Format("Le nouveau villageois {0} {1} ne sait pas quel métier prendre...", GameItem.FirstName, GameItem.ParentFamily.Name), "Demande d'attribution de métier");
         }
     }
+    [Serializable]
     public class FamilyBirthEvent : Event<Family>
     {
-        Family _family;
-        internal FamilyBirthEvent(Family f)
-            : base(f)
+        internal FamilyBirthEvent(Family v)
+            : base(v)
         {
-            _family = f;
         }
 
         override public void PublishMessage(IWindow b)
         {
             b.PushTrace(String.Format("Une nouvelle famille s'est consituée {0}.", GameItem.Name));
-        }
-
-        public override void Do(IWindow b)
-        {
-            base.Do(b);
-            b.AddNewFamilyHouse(_family.House);
         }
     }
 }

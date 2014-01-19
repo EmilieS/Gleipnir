@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Game.GodSpell
 {
+    [Serializable]
     public class Heal : GameItem
     {
         public Heal(Game g)
             : base(g)
         {   
+        
         }
 
         internal override void ImpactHappiness()
@@ -23,10 +25,13 @@ namespace Game.GodSpell
                 tmpVLIst.Clear();
                 tmpVLIst.AddRange(e.SickVillagerList);
                 foreach (Villager v in tmpVLIst)
+                {      
                     v.SetHealed(10);
+                }
             }
         }
-        internal override void OnDestroy() { }
+        internal override void OnDestroy()
+        {        }
         internal override void CloseStep(List<IEvent> eventList) { }
 
     }

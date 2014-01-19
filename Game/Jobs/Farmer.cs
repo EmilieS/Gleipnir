@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+    [Serializable]
     public class Farmer : JobsModel
     {
         public Farmer(Game game, JobList list, string name)
@@ -18,24 +19,24 @@ namespace Game
         }
         internal override bool AddPersonPrerequisites()
         {
-            if (Owner.Owner.BuildingsList.FarmList.Count > 0)
+            if (Owner.Owner.Buildings.FarmList.Count > 0)
                 return true;
             else
                 return false;
         }
         internal override bool GenerateGoldPrerequisites()
         {
-            if (Owner.Owner.BuildingsList.FarmList.Count <= 0)
+            if (Owner.Owner.Buildings.FarmList.Count <= 0)
                 return false;
             int i = 0;
             do
             {
-                if (Owner.Owner.BuildingsList.FarmList[i].Hp > 0)
+                if (Owner.Owner.Buildings.FarmList[i].Hp > 0)
                 {
                     return true;
                 }
                 i++;
-            } while (i < Owner.Owner.BuildingsList.FarmList.Count);
+            } while (i < Owner.Owner.Buildings.FarmList.Count);
             return false;
         }
     }

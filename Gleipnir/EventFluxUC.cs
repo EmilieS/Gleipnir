@@ -32,29 +32,19 @@ namespace GamePages
             positionY = 3;
             GameEventUC newMessage = new GameEventUC();
             newMessage.EventTitle.Text = title;
-            newMessage.EventContain.Text = "";
-            newMessage.EventContain2.Text = "";
-
-            // Cut message if too long
-            if (message.Count<char>() > 38)
-            {
-                for (int i = 0; i < 38; i++)
-                    newMessage.EventContain.Text += message[i];
-                for (int i = 38; i < message.Count<char>(); i++)
-                    newMessage.EventContain2.Text += message[i];
-            }
-            else
-                newMessage.EventContain.Text = message;
+            newMessage.EventContain.Text = message;
 
             if (_eventList.Count == 10)
+            {
                 this.Controls.Remove(_eventList[9]);
+            }
             _eventList.Push(newMessage);
             this.Controls.Add(_eventList[0]);
             _eventList[0].Show();
 
             for (int i = 0; i < _eventList.Count; i++)
             {
-                _eventList[i].Location = new System.Drawing.Point(positionX + 3, positionY);
+                _eventList[i].Location = new System.Drawing.Point(positionX+3, positionY);
                 positionY += 68;
             }
         }

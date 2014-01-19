@@ -19,6 +19,7 @@ namespace Tests
         {
             nb_pushAlert++;
         }
+
         public void PushGeneralCoins(int value) { }
         public void PushGeneralGold(int value) { goldtouched++; }
         public void PushGeneralHappiness(double value) { }
@@ -31,7 +32,5 @@ namespace Tests
         public int populationtouched;
         public int goldtouched;
         public void PushPopulation(int pop) { populationtouched++; }
-        public void SetEmptySquare(int row, int col) { }
-        public void AddNewFamilyHouse(Game.Buildings.House house) { }
     }
 }
