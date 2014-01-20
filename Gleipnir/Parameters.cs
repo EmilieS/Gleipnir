@@ -54,6 +54,23 @@ namespace GamePages
         }
         private void quitButton_Click(object sender, EventArgs e)
         {
+            if (_generalPage.GameStarted == true)
+            {
+                if (_generalPage.Interval != 0)
+                {
+                    if (_generalPage._timer == null)
+                    {
+                        _generalPage._timer = new System.Windows.Forms.Timer();
+                        _generalPage._timer.Tick += (source, eventArgs) => { _generalPage.Step(); };
+                    }
+                    _generalPage._timer.Interval = _generalPage.Interval;
+                }
+                if (_generalPage.Interval == 0 && _generalPage._timer != null)
+                {
+                    _generalPage._timer.Tick -= (source, eventArgs) => { _generalPage.Step(); };
+                    _generalPage._timer = null;
+                }
+            }
             if (_isOpen)
             {
                 this.SendToBack();

@@ -35,6 +35,7 @@ namespace GamePages
         string traceMessages; 
         public System.Windows.Forms.Timer _timer;
         int _interval;
+        public bool GameStarted;
 
         public int Interval
         {
@@ -241,6 +242,7 @@ namespace GamePages
                 _timer.Interval = _interval;
                 _timer.Start();
             }
+            GameStarted = true;
         }
         // LoadGame
         public void LoadGame()
@@ -362,6 +364,7 @@ namespace GamePages
                 _timer.Interval = _interval;
                 _timer.Start();
             }
+            GameStarted = true;
         }
 
         // Window Methods

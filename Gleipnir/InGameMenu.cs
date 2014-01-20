@@ -31,6 +31,7 @@ namespace GamePages
         {
             GoBackExpected = true;
             RaisePropertyChanged();
+            _page.GameStarted = false;
         }
         private void RaisePropertyChanged([CallerMemberName]string propertyName = null)
         {
