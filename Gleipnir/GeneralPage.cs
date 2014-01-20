@@ -371,6 +371,10 @@ namespace GamePages
             _stats.Enabled = false;
             _eventFlux.Enabled = false;
             _infoBox.Enabled = false;
+            if (_timer != null)
+            {
+                _timer.Stop();
+            }
         }
         internal void UnLockEverything()
         {
@@ -378,6 +382,10 @@ namespace GamePages
             _stats.Enabled = true;
             _infoBox.Enabled = true;
             _eventFlux.Enabled = true;
+            if (_timer != null)
+            {
+                _timer.Start();
+            }
         }
 
         // InGameMenu Events
@@ -491,10 +499,7 @@ namespace GamePages
             _gameMenu.Show();
             LockEverything();
             _gameMenu.IsOpen = true;
-            if(_timer!=null)
-            {
-                _timer.Stop();
-            }
+            _gameMenu.InGameQuit.Enabled = false;
         }
         // Grid Methods
         private void UpdateGrid(Board board, SquareControl[,] grid)
