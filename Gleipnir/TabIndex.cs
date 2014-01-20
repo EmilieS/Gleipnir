@@ -22,6 +22,7 @@ namespace GamePages
         bool passed;
         int positionX;
         int positionY;
+        Random rnd;
 
         public TabIndex(GeneralPage p)
         {
@@ -29,17 +30,22 @@ namespace GamePages
 
             _page = p;
             isOnBought = false;
+            rnd = new Random();
 
             positionX = 0;
             positionY = 10;
 
             // Create imageList
             ImageList imageList = new ImageList();
-            imageList.Images.Add(GamePages.Properties.Resources.Building_House);
+            imageList.Images.Add(GamePages.Properties.Resources.ActionTab_building_TabIcon);
+            imageList.Images.Add(GamePages.Properties.Resources.ActionTab_happiness_TabIcon);
+            imageList.Images.Add(GamePages.Properties.Resources.ActionTab_VillagerList_TabIcon);
+            imageList.Images.Add(GamePages.Properties.Resources.ActionTab_action_TabIcon);
 
             // Add images to tabs
             actionsMenu.ImageList = imageList;
-            actionsMenu.TabPages[0].ImageIndex = 0;
+            for (int i = 0; i < 4; i++)
+                actionsMenu.TabPages[i].ImageIndex = i;
 
             #region Jobs
             ApothecaryOffice.Click += ApothicaryOffice_Click;
@@ -163,7 +169,6 @@ namespace GamePages
         {
             if (_page.TheGame.Villages[0].FamiliesList.Count > 0)
             {
-                Random rnd = new Random();
                 int familyChoosen = rnd.Next(0, _page.TheGame.Villages[0].FamiliesList.Count);
                 int villagerChoosen = rnd.Next(0, _page.TheGame.Villages[0].FamiliesList[familyChoosen].FamilyMembers.Count);
                 Epidemic epidemic = new Epidemic(_page.TheGame, _page.TheGame.Villages[0].FamiliesList[familyChoosen].FamilyMembers[villagerChoosen]);
