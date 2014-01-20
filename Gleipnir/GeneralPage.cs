@@ -1130,7 +1130,7 @@ namespace GamePages
                                 int vPos = bath.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                     if (bath.Hp > 0)
-                                        _infoBox.SetOtherBuildingsInfo(bath, GamePages.Properties.Resources.Error);
+                                        _infoBox.SetOtherBuildingsInfo(bath, GamePages.Properties.Resources.Building_Baths);
                                     else
                                         _infoBox.SetDestroyedBuilding(bath);
                             }
@@ -1146,7 +1146,7 @@ namespace GamePages
                                 int vPos = brothel.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                     if (brothel.Hp > 0)
-                                        _infoBox.SetOtherBuildingsInfo(brothel, GamePages.Properties.Resources.Error);
+                                        _infoBox.SetOtherBuildingsInfo(brothel, GamePages.Properties.Resources.Building_Brothel);
                                     else
                                         _infoBox.SetDestroyedBuilding(brothel);
                             }
@@ -1267,7 +1267,7 @@ namespace GamePages
                                 int vPos = warehouse.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                     if (warehouse.Hp > 0)
-                                        _infoBox.SetOtherBuildingsInfo(warehouse, GamePages.Properties.Resources.Error);
+                                        _infoBox.SetOtherBuildingsInfo(warehouse, GamePages.Properties.Resources.Building_OfferingsWarehouse);
                                     else
                                         _infoBox.SetDestroyedBuilding(warehouse);
                             }

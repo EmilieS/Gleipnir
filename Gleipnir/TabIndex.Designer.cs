@@ -173,11 +173,12 @@
             // 
             // OfferingsWarehouse
             // 
+            this.OfferingsWarehouse.BackgroundImage = global::GamePages.Properties.Resources.Building_OfferingsWarehouse;
+            this.OfferingsWarehouse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.OfferingsWarehouse.Location = new System.Drawing.Point(80, 405);
             this.OfferingsWarehouse.Name = "OfferingsWarehouse";
             this.OfferingsWarehouse.Size = new System.Drawing.Size(45, 40);
             this.OfferingsWarehouse.TabIndex = 13;
-            this.OfferingsWarehouse.Text = "Sanctuaire";
             this.OfferingsWarehouse.UseVisualStyleBackColor = true;
             // 
             // ClothesShop
@@ -258,20 +259,22 @@
             // 
             // Brothel
             // 
+            this.Brothel.BackgroundImage = global::GamePages.Properties.Resources.Building_Brothel;
+            this.Brothel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Brothel.Location = new System.Drawing.Point(80, 227);
             this.Brothel.Name = "Brothel";
             this.Brothel.Size = new System.Drawing.Size(45, 40);
             this.Brothel.TabIndex = 5;
-            this.Brothel.Text = "Maison Close";
             this.Brothel.UseVisualStyleBackColor = true;
             // 
             // Baths
             // 
+            this.Baths.BackgroundImage = global::GamePages.Properties.Resources.Building_Baths;
+            this.Baths.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Baths.Location = new System.Drawing.Point(29, 227);
             this.Baths.Name = "Baths";
             this.Baths.Size = new System.Drawing.Size(45, 40);
             this.Baths.TabIndex = 4;
-            this.Baths.Text = "Bains";
             this.Baths.UseVisualStyleBackColor = true;
             // 
             // PartyRoom

@@ -153,6 +153,26 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Building_Baths {
+            get {
+                object obj = ResourceManager.GetObject("Building_Baths", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Building_Brothel {
+            get {
+                object obj = ResourceManager.GetObject("Building_Brothel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Building_Chapel {
             get {
                 object obj = ResourceManager.GetObject("Building_Chapel", resourceCulture);
@@ -226,6 +246,16 @@ namespace GamePages.Properties {
         internal static System.Drawing.Bitmap Building_Mill {
             get {
                 object obj = ResourceManager.GetObject("Building_Mill", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Building_OfferingsWarehouse {
+            get {
+                object obj = ResourceManager.GetObject("Building_OfferingsWarehouse", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

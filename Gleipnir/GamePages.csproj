@@ -278,6 +278,9 @@
     <None Include="Resources\Building_PartyRoom.png" />
     <None Include="Resources\ButtonIcon_VillageFest.png" />
     <None Include="Resources\Building_Chapel.png" />
+    <None Include="Resources\Building_Baths.png" />
+    <None Include="Resources\Building_OfferingsWarehouse.png" />
+    <None Include="Resources\Building_Brothel.png" />
     <Content Include="Resources\Extra\firstNameList.txt" />
     <Content Include="Resources\Extra\nameList.txt" />
     <Content Include="Resources\Extra\scenario.txt" />
