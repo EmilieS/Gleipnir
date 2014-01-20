@@ -103,6 +103,16 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ActionTab_VillagerList_TabIcon {
+            get {
+                object obj = ResourceManager.GetObject("ActionTab_VillagerList_TabIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Building_ApothecaryOffice {
             get {
                 object obj = ResourceManager.GetObject("Building_ApothecaryOffice", resourceCulture);
@@ -516,6 +526,46 @@ namespace GamePages.Properties {
         internal static System.Drawing.Bitmap Stats_Population {
             get {
                 object obj = ResourceManager.GetObject("Stats_Population", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Upgrade_RestaurantBlue1 {
+            get {
+                object obj = ResourceManager.GetObject("Upgrade_RestaurantBlue1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Upgrade_RestaurantBlue2 {
+            get {
+                object obj = ResourceManager.GetObject("Upgrade_RestaurantBlue2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Upgrade_RestaurantBlue3 {
+            get {
+                object obj = ResourceManager.GetObject("Upgrade_RestaurantBlue3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Upgrade_RestaurantBlue4 {
+            get {
+                object obj = ResourceManager.GetObject("Upgrade_RestaurantBlue4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

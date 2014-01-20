@@ -235,6 +235,10 @@
     <None Include="Resources\button_homepage1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Upgrade_RestaurantBlue4.png" />
+    <None Include="Resources\Upgrade_RestaurantBlue3.png" />
+    <None Include="Resources\Upgrade_RestaurantBlue2.png" />
+    <None Include="Resources\Upgrade_RestaurantBlue1.png" />
     <None Include="Resources\Stats_Offerings.png" />
     <None Include="Resources\ScenarioBox_background.png" />
     <None Include="Resources\Stats_ObjectName.png" />
@@ -265,6 +269,7 @@
     <None Include="Resources\ActionTab_villagerList_background.png" />
     <None Include="Resources\ButtonIcon_epidemic.png" />
     <None Include="Resources\ButtonIcon_Earthquake.png" />
+    <None Include="Resources\ActionTab_VillagerList_TabIcon.png" />
     <Content Include="Resources\Extra\firstNameList.txt" />
     <Content Include="Resources\Extra\nameList.txt" />
     <Content Include="Resources\Extra\scenario.txt" />

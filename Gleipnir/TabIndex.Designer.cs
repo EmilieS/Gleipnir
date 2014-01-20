@@ -68,10 +68,10 @@
             this.Level1_butt = new System.Windows.Forms.Button();
             this.VillagerList = new System.Windows.Forms.TabPage();
             this.godSpellsTab = new System.Windows.Forms.TabPage();
+            this.StartFest = new System.Windows.Forms.Button();
+            this.StartHeal = new System.Windows.Forms.Button();
             this.StartEarthquake = new System.Windows.Forms.Button();
             this.StartEpidemic = new System.Windows.Forms.Button();
-            this.StartHeal = new System.Windows.Forms.Button();
-            this.StartFest = new System.Windows.Forms.Button();
             this.actionsMenu.SuspendLayout();
             this.buildingsTab.SuspendLayout();
             this.UpgradesTab.SuspendLayout();
@@ -314,8 +314,9 @@
             this.Tavern.UseVisualStyleBackColor = true;
             // 
             // UpgradesTab
-            //
+            // 
             this.UpgradesTab.BackgroundImage = global::GamePages.Properties.Resources.ActionTab_happiness_background;
+            this.UpgradesTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.UpgradesTab.Controls.Add(this.panel2);
             this.UpgradesTab.Controls.Add(this.panel1);
             this.UpgradesTab.ImageKey = "(aucun)";
@@ -339,12 +340,12 @@
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(0, 78);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(208, 141);
+            this.panel2.Size = new System.Drawing.Size(208, 190);
             this.panel2.TabIndex = 2;
             // 
             // Cement_butt
             // 
-            this.Cement_butt.Location = new System.Drawing.Point(80, 98);
+            this.Cement_butt.Location = new System.Drawing.Point(77, 131);
             this.Cement_butt.Name = "Cement_butt";
             this.Cement_butt.Size = new System.Drawing.Size(45, 40);
             this.Cement_butt.TabIndex = 9;
@@ -353,7 +354,7 @@
             // 
             // Reinforced_butt
             // 
-            this.Reinforced_butt.Location = new System.Drawing.Point(152, 98);
+            this.Reinforced_butt.Location = new System.Drawing.Point(128, 131);
             this.Reinforced_butt.Name = "Reinforced_butt";
             this.Reinforced_butt.Size = new System.Drawing.Size(45, 40);
             this.Reinforced_butt.TabIndex = 7;
@@ -362,7 +363,7 @@
             // 
             // Whitewash_butt
             // 
-            this.Whitewash_butt.Location = new System.Drawing.Point(10, 98);
+            this.Whitewash_butt.Location = new System.Drawing.Point(29, 131);
             this.Whitewash_butt.Name = "Whitewash_butt";
             this.Whitewash_butt.Size = new System.Drawing.Size(45, 40);
             this.Whitewash_butt.TabIndex = 6;
@@ -372,24 +373,28 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(137, 76);
+            this.label3.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Navy;
+            this.label3.Location = new System.Drawing.Point(26, 113);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 15);
+            this.label3.Size = new System.Drawing.Size(72, 19);
             this.label3.TabIndex = 5;
             this.label3.Text = "Matériaux";
             // 
             // Tools
             // 
             this.Tools.AutoSize = true;
-            this.Tools.Location = new System.Drawing.Point(159, 15);
+            this.Tools.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Tools.ForeColor = System.Drawing.Color.Navy;
+            this.Tools.Location = new System.Drawing.Point(25, 30);
             this.Tools.Name = "Tools";
-            this.Tools.Size = new System.Drawing.Size(38, 15);
+            this.Tools.Size = new System.Drawing.Size(45, 19);
             this.Tools.TabIndex = 4;
             this.Tools.Text = "Outils";
             // 
             // Scaffholding_butt
             // 
-            this.Scaffholding_butt.Location = new System.Drawing.Point(152, 33);
+            this.Scaffholding_butt.Location = new System.Drawing.Point(128, 51);
             this.Scaffholding_butt.Name = "Scaffholding_butt";
             this.Scaffholding_butt.Size = new System.Drawing.Size(45, 40);
             this.Scaffholding_butt.TabIndex = 3;
@@ -398,7 +403,7 @@
             // 
             // Hoist_butt
             // 
-            this.Hoist_butt.Location = new System.Drawing.Point(80, 33);
+            this.Hoist_butt.Location = new System.Drawing.Point(80, 51);
             this.Hoist_butt.Name = "Hoist_butt";
             this.Hoist_butt.Size = new System.Drawing.Size(45, 40);
             this.Hoist_butt.TabIndex = 2;
@@ -407,7 +412,7 @@
             // 
             // Pulley_butt
             // 
-            this.Pulley_butt.Location = new System.Drawing.Point(10, 33);
+            this.Pulley_butt.Location = new System.Drawing.Point(29, 52);
             this.Pulley_butt.Name = "Pulley_butt";
             this.Pulley_butt.Size = new System.Drawing.Size(45, 40);
             this.Pulley_butt.TabIndex = 1;
@@ -417,9 +422,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 4);
+            this.label2.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Navy;
+            this.label2.Location = new System.Drawing.Point(73, 6);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 15);
+            this.label2.Size = new System.Drawing.Size(73, 21);
             this.label2.TabIndex = 0;
             this.label2.Text = "Ouvriers";
             // 
@@ -438,49 +445,55 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 5);
+            this.label1.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Navy;
+            this.label1.Location = new System.Drawing.Point(63, 1);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 15);
+            this.label1.Size = new System.Drawing.Size(81, 21);
             this.label1.TabIndex = 4;
             this.label1.Text = "Cuisiniers";
             // 
             // Level3_butt
             // 
+            this.Level3_butt.BackgroundImage = global::GamePages.Properties.Resources.Upgrade_RestaurantBlue3;
+            this.Level3_butt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Level3_butt.Location = new System.Drawing.Point(105, 23);
             this.Level3_butt.Name = "Level3_butt";
             this.Level3_butt.Size = new System.Drawing.Size(45, 40);
             this.Level3_butt.TabIndex = 3;
-            this.Level3_butt.Text = "Level3";
             this.Level3_butt.UseVisualStyleBackColor = true;
             this.Level3_butt.Click += new System.EventHandler(this.Level3_butt_Click);
             // 
             // Level2_butt
             // 
+            this.Level2_butt.BackgroundImage = global::GamePages.Properties.Resources.Upgrade_RestaurantBlue2;
+            this.Level2_butt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Level2_butt.Location = new System.Drawing.Point(54, 23);
             this.Level2_butt.Name = "Level2_butt";
             this.Level2_butt.Size = new System.Drawing.Size(45, 40);
             this.Level2_butt.TabIndex = 2;
-            this.Level2_butt.Text = "Level 2";
             this.Level2_butt.UseVisualStyleBackColor = true;
             this.Level2_butt.Click += new System.EventHandler(this.Level2_butt_Click);
             // 
             // Level4_butt
             // 
+            this.Level4_butt.BackgroundImage = global::GamePages.Properties.Resources.Upgrade_RestaurantBlue4;
+            this.Level4_butt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Level4_butt.Location = new System.Drawing.Point(156, 23);
             this.Level4_butt.Name = "Level4_butt";
             this.Level4_butt.Size = new System.Drawing.Size(45, 40);
             this.Level4_butt.TabIndex = 1;
-            this.Level4_butt.Text = "Level4";
             this.Level4_butt.UseVisualStyleBackColor = true;
             this.Level4_butt.Click += new System.EventHandler(this.Level4_butt_Click);
             // 
             // Level1_butt
             // 
+            this.Level1_butt.BackgroundImage = global::GamePages.Properties.Resources.Upgrade_RestaurantBlue1;
+            this.Level1_butt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Level1_butt.Location = new System.Drawing.Point(3, 23);
             this.Level1_butt.Name = "Level1_butt";
             this.Level1_butt.Size = new System.Drawing.Size(45, 40);
             this.Level1_butt.TabIndex = 0;
-            this.Level1_butt.Text = "Level1";
             this.Level1_butt.UseVisualStyleBackColor = true;
             this.Level1_butt.Click += new System.EventHandler(this.Level1_butt_Click);
             // 
@@ -488,6 +501,7 @@
             // 
             this.VillagerList.AutoScroll = true;
             this.VillagerList.BackgroundImage = global::GamePages.Properties.Resources.ActionTab_villagerList_background;
+            this.VillagerList.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.VillagerList.Location = new System.Drawing.Point(4, 4);
             this.VillagerList.Name = "VillagerList";
             this.VillagerList.Padding = new System.Windows.Forms.Padding(3);
@@ -508,6 +522,31 @@
             this.godSpellsTab.Size = new System.Drawing.Size(208, 528);
             this.godSpellsTab.TabIndex = 3;
             this.godSpellsTab.UseVisualStyleBackColor = true;
+            // 
+            // StartFest
+            // 
+            this.StartFest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.StartFest.Location = new System.Drawing.Point(24, 125);
+            this.StartFest.Name = "StartFest";
+            this.StartFest.Size = new System.Drawing.Size(161, 30);
+            this.StartFest.TabIndex = 3;
+            this.StartFest.Text = "Fête du Village";
+            this.StartFest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.StartFest.UseVisualStyleBackColor = true;
+            this.StartFest.Click += new System.EventHandler(this.StartFest_Click);
+            // 
+            // StartHeal
+            // 
+            this.StartHeal.Image = global::GamePages.Properties.Resources.Building_HealthPoints;
+            this.StartHeal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.StartHeal.Location = new System.Drawing.Point(24, 89);
+            this.StartHeal.Name = "StartHeal";
+            this.StartHeal.Size = new System.Drawing.Size(161, 30);
+            this.StartHeal.TabIndex = 2;
+            this.StartHeal.Text = "Vague de Soin";
+            this.StartHeal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.StartHeal.UseVisualStyleBackColor = true;
+            this.StartHeal.Click += new System.EventHandler(this.StartHeal_Click);
             // 
             // StartEarthquake
             // 
@@ -534,31 +573,6 @@
             this.StartEpidemic.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.StartEpidemic.UseVisualStyleBackColor = true;
             this.StartEpidemic.Click += new System.EventHandler(this.StartEpidemic_Click);
-            // 
-            // StartHeal
-            // 
-            this.StartHeal.Image = global::GamePages.Properties.Resources.Building_HealthPoints;
-            this.StartHeal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.StartHeal.Location = new System.Drawing.Point(24, 89);
-            this.StartHeal.Name = "StartHeal";
-            this.StartHeal.Size = new System.Drawing.Size(161, 30);
-            this.StartHeal.TabIndex = 2;
-            this.StartHeal.Text = "Vague de Soin";
-            this.StartHeal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.StartHeal.UseVisualStyleBackColor = true;
-            this.StartHeal.Click += new System.EventHandler(this.StartHeal_Click);
-            // 
-            // StartFest
-            // 
-            this.StartFest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.StartFest.Location = new System.Drawing.Point(24, 125);
-            this.StartFest.Name = "StartFest";
-            this.StartFest.Size = new System.Drawing.Size(161, 30);
-            this.StartFest.TabIndex = 3;
-            this.StartFest.Text = "Fête du Village";
-            this.StartFest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.StartFest.UseVisualStyleBackColor = true;
-            this.StartFest.Click += new System.EventHandler(this.StartFest_Click);
             // 
             // TabIndex
             // 

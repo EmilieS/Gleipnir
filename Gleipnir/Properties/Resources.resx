@@ -157,6 +157,9 @@
   <data name="Building_Restaurant" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Building_Restaurant.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Upgrade_RestaurantBlue2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Upgrade_RestaurantBlue2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="InformationBox_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\InformationBox_background1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -174,6 +177,9 @@
   </data>
   <data name="ActionTab_happiness_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ActionTab_happiness_background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Upgrade_RestaurantBlue4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Upgrade_RestaurantBlue4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="InformationBox_destroyed_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\InformationBox_destroyed_background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -202,11 +208,17 @@
   <data name="LoadingUC" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LoadingUC1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Upgrade_RestaurantBlue1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Upgrade_RestaurantBlue1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="EventFlux_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EventFlux_background1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="InformationBox_job_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\InformationBox_job_background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Upgrade_RestaurantBlue3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Upgrade_RestaurantBlue3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Stats_ObjectName" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Stats_ObjectName.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -238,6 +250,9 @@
   <data name="Building_ClothesShop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Building_ClothesShop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ButtonIcon_Earthquake" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ButtonIcon_Earthquake.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Gender_Female" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Gender_Female.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -253,7 +268,7 @@
   <data name="Stats_Members" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Stats_Members.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ButtonIcon_Earthquake" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ButtonIcon_Earthquake.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ActionTab_VillagerList_TabIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ActionTab_VillagerList_TabIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

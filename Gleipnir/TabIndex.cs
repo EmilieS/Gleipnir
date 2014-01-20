@@ -36,10 +36,12 @@ namespace GamePages
             // Create imageList
             ImageList imageList = new ImageList();
             imageList.Images.Add(GamePages.Properties.Resources.Building_House);
+            imageList.Images.Add(GamePages.Properties.Resources.ActionTab_VillagerList_TabIcon);
 
             // Add images to tabs
             actionsMenu.ImageList = imageList;
             actionsMenu.TabPages[0].ImageIndex = 0;
+            actionsMenu.TabPages[2].ImageIndex = 1;
 
             #region Jobs
             ApothecaryOffice.Click += ApothicaryOffice_Click;
