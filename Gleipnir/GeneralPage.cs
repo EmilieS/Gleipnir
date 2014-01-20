@@ -491,6 +491,10 @@ namespace GamePages
             _gameMenu.Show();
             LockEverything();
             _gameMenu.IsOpen = true;
+            if(_timer!=null)
+            {
+                _timer.Stop();
+            }
         }
         // Grid Methods
         private void UpdateGrid(Board board, SquareControl[,] grid)
