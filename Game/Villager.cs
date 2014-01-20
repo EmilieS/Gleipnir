@@ -12,7 +12,7 @@ namespace Game
     [Serializable]
     public partial class Villager : GameItem
     {
-        internal Villager(Game g, Family parentFamily, string name)    //TODO: autre constructeur pour le début...
+        internal Villager(Game g, Family parentFamily, string name)
             : base(g)
         {
             _faith = new HistorizedValue<double, Villager>(this, "_faith", 20);
@@ -85,7 +85,6 @@ namespace Game
             Game.Villages[0].JobsList.Farmer.AddPerson(this);
         }
 
-        //TODO : generate name.
         readonly string _name;
         Family _parentFamily;
         Genders _gender;

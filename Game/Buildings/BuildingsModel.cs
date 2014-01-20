@@ -15,7 +15,6 @@ namespace Game.Buildings
         double _addedHappiness;
         double _addedFaith;
         double _enterPrice;
-        //double _robustness;
         bool _isBought;
         string _name;
         int _hp;
@@ -23,9 +22,6 @@ namespace Game.Buildings
         int _destroyedTimer;
         bool _justCreated;
         
-        //Game actualGame;
-        //private Game g;
-        // this a provisory solution : using a new "materials"  to implement robustness
 
         internal Village _village;
         public Village Village { get { return _village; } }
@@ -39,11 +35,7 @@ namespace Game.Buildings
             _addedHappiness = 0;
             _addedFaith = 0;
             _enterPrice = 0;
-            //_robustness = 0;
             _isBought = false;//old code
-            //actualGame = g;            
-            //TODO: Complete member initialization
-            //this.g = g;
             _village = v;
             AddToList();
         }

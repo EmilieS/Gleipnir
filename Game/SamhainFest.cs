@@ -13,7 +13,6 @@ namespace Game
         int _timer;
         Village _village;
 
-        // TODO : define the duration of  the villageFest, implement duration
         internal SamhainFest(Village v)
             : base(v.Game)
         {

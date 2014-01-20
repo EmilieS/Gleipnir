@@ -212,7 +212,7 @@ namespace GamePages
             buildingLife.Text = table.Hp.ToString();
 
             // Action Tab infos
-            // TODO: Change list for families convocated
+            // TODO: Change list for families convocated//table nom famille convoquée
             _page.ActionMenu.DestroyVillagerList();
 
             // Meeting Info
