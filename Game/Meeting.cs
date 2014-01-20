@@ -31,13 +31,13 @@ namespace Game
                 {
                     foreach (Villager villager in f.FamilyMembers)
                     {
-                        villager.ActivityStatus = ActivityStatus.WORKING;
+                        villager.MeetingEnded();
                     }
                 }
             }
             foreach (Villager villager in actualConvocated.FamilyMembers)
             {
-                villager.ActivityStatus = ActivityStatus.CONVOCATED;
+                villager.MeetingStarted();
 
             }
         }
@@ -46,7 +46,7 @@ namespace Game
         {
             foreach (Villager villager in family.FamilyMembers)
             {
-                villager.ActivityStatus = ActivityStatus.WORKING;
+                villager.MeetingEnded();
             }
         }
 

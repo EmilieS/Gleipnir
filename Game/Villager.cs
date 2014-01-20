@@ -140,6 +140,13 @@ namespace Game
                 _villagerActivity = value;
             }
         }
+        public bool IsWorking
+        {
+            get
+            {
+                return (!((_villagerActivity & ActivityStatus.CONVOCATED) !=0 || (_villagerActivity & ActivityStatus.PARTYING) != 0));
+            }
+        }
 
         /// <summary>
         /// Gets the villager's name
@@ -281,9 +288,10 @@ namespace Game
             Debug.Assert((Faith <= 15) == ((Health & Healths.HERETIC) != 0), "(JobModel/villagerdestroyed) heretism is not right!");
         }
 
-        public bool GenerateGoldPrerequisitesFromVillager()
+        public bool GenerateGoldPrerequisitesFromVillager()//VERY sensitive
         {
-            if (this.ActivityStatus != ActivityStatus.WORKING || IsDead() || this.ActivityStatus == ActivityStatus.PARTYING)
+            //if (this.ActivityStatus != ActivityStatus.WORKING || IsDead() || this.ActivityStatus == ActivityStatus.PARTYING)
+            if (IsWorking && !IsDead()) 
                 return true;
             else
                 return false;
@@ -392,6 +400,23 @@ namespace Game
             }
             _health.Current = _health.Current & ~Healths.SICK;
             _lifeExpectancy += amount;
+        }
+        internal void FestStarted()
+        {
+            _villagerActivity = _villagerActivity | ActivityStatus.PARTYING;
+        }
+        internal void FestEnded()
+        {
+            _villagerActivity = _villagerActivity & ~ActivityStatus.PARTYING;
+        }
+        internal void MeetingStarted()
+        {
+            _villagerActivity = _villagerActivity | ActivityStatus.CONVOCATED;
+        }
+
+        internal void MeetingEnded()
+        {
+            _villagerActivity = _villagerActivity & ~ActivityStatus.CONVOCATED;
         }
 
         int _callForHelpTickTimer;

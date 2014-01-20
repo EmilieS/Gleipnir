@@ -110,9 +110,9 @@ namespace Game
             switch (ChangedProperty)
             {
                 case "Offerings": b.PushGeneralCoins(GameItem.Offerings); break;
-                case "TotalPop": b.PushPopulation(GameItem.TotalPop); break;
+                case "TotalPop": b.PushPopulation(GameItem.TotalPop); if (GameItem.TotalPop == 0) { b.GameLost(); } break;
                 case "TotalGold": b.PushGeneralGold(GameItem.TotalGold); break;
-                case "AverageFaith": b.PushGeneralFaith(GameItem.AverageFaith); break;
+                case "AverageFaith": b.PushGeneralFaith(GameItem.AverageFaith); if(GameItem.AverageFaith==0){b.GameLost();}  break;
                 case "AverageHappiness": b.PushGeneralHappiness(GameItem.AverageHappiness); break;
             }
         }

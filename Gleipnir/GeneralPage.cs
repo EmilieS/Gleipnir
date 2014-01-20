@@ -485,7 +485,17 @@ namespace GamePages
             trace.traceBoxViewer.Text = traceMessages;
             //PushAlert(message, "PUSHTRACE");//MARCHE
         }
-
+        public void GameLost()
+        {
+            _scenarioBox.GameLostText();
+            _gameMenu.Show();
+            LockEverything();
+            _gameMenu.IsOpen = true;
+            if(_timer!=null)
+            {
+                _timer.Stop();
+            }
+        }
         // Grid Methods
         private void UpdateGrid(Board board, SquareControl[,] grid)
         {

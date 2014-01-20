@@ -105,7 +105,7 @@ namespace Game
 
             // Add family to families list
             _familiesList.Add(newFamily);
-            
+
             // Try add empty house to family
             if (EmptyHouseList.Count > 0)
             {
@@ -164,7 +164,7 @@ namespace Game
         public Family CreateFamilyFromScratch(JobsModel mothersJob, JobsModel fathersJob)
         {
             Debug.Assert(Game != null, @"(village, CreateFamilyFromScratch2) Game is null");
-            
+
             // Create family
             var name = Game.NameList.NextName;
             Villager VillagerAM = new Villager(Game, Genders.MALE, Game.FirstNameList.NextName);
@@ -193,7 +193,7 @@ namespace Game
 
             return newFamily;
         }
-        
+
         /// <summary>
         /// Add new empty house in empty houses list
         /// </summary>
@@ -201,7 +201,7 @@ namespace Game
         public void AddEmptyHouse(Buildings.House house)
         {
             // Debug.Assert(!EmptyHouseList.Contains(house), @"(village, AddEmptyHouse) This house is in EmptyHouseList");
-            if(!EmptyHouseList.Contains(house))
+            if (!EmptyHouseList.Contains(house))
                 EmptyHouseList.Add(house);
         }
         /// <summary>
@@ -226,9 +226,9 @@ namespace Game
             foreach (Family fam in _familiesList)
                 result += fam.GoldStash;
 
-            if (result < 0) 
+            if (result < 0)
                 throw new IndexOutOfRangeException(@"(village, CalculateVillageGold) Negative gold!");
-            else 
+            else
                 _familiesGold = result;
         }
         /// <summary>
@@ -296,6 +296,26 @@ namespace Game
             _villageHappiness = totalH / nbf;
             _villageFaith = totalF / nbf;
         }
+        SamhainFest _samhainFest;
+        SamhainFest SamhainFest { get; set; }
+
+        public bool FestStart()
+        {
+            if (_samhainFest != null)
+                return false;
+            if (BuildingsList.PartyRoomList.Count == 0)
+                return false;
+
+            _samhainFest = new SamhainFest(this);
+            return true;
+        }
+        internal void FestEnded()
+        {
+            if (_samhainFest == null) { throw new InvalidOperationException(); }
+            _samhainFest = null;
+        }
+
+
 
         /// <summary>
         /// Modify number offering points generated
@@ -324,7 +344,7 @@ namespace Game
 
                 Game.AddOrTakeFromOfferings(offerings);
             }
-            else 
+            else
                 throw new ArgumentOutOfRangeException(@"(village, TransformGoldToOfferingsPoints) Take 0 or more than 100");
         }
 

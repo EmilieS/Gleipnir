@@ -32,8 +32,8 @@ namespace Tests
             var meeting2 = new Meeting(family);
             meeting2.Convocate();
 
-            Assert.That(mother2.ActivityStatus  == ActivityStatus.WORKING);
-            Assert.That(father2.ActivityStatus == ActivityStatus.WORKING);
+            Assert.That((mother2.ActivityStatus & ActivityStatus.CONVOCATED) == 0);
+            Assert.That((father2.ActivityStatus & ActivityStatus.CONVOCATED) == 0);
 
             Assert.That(mother.ActivityStatus == ActivityStatus.CONVOCATED);
             Assert.That(father.ActivityStatus == ActivityStatus.CONVOCATED);
@@ -58,8 +58,8 @@ namespace Tests
 
             meeting.ReleaseConvocated(meeting.ActualConvocated);
 
-            Assert.That(mother.ActivityStatus == ActivityStatus.WORKING);
-            Assert.That(father.ActivityStatus == ActivityStatus.WORKING);
+            Assert.That((mother.ActivityStatus & ActivityStatus.CONVOCATED) == 0);
+            Assert.That((father.ActivityStatus & ActivityStatus.CONVOCATED) == 0);
         }
     }
 }

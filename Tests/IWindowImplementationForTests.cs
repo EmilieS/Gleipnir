@@ -33,5 +33,6 @@ namespace Tests
         public void PushPopulation(int pop) { populationtouched++; }
         public void SetEmptySquare(int row, int col) { }
         public void AddNewFamilyHouse(Game.Buildings.House house) { }
+        public void GameLost() { }
     }
 }

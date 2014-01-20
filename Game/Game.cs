@@ -45,7 +45,7 @@ namespace Game
         public Random Rand;
 
         // NEW GAME
-        public Game(double timeStep=0)
+        public Game(double timeStep = 0)
         {
 
             // Created "windows values"
@@ -154,6 +154,7 @@ namespace Game
             info.AddValue("_currentText", _currentText);
             info.AddValue("_eventList", _eventList);
         }*/
+
 
         // NameGenerator Properties
         /// <summary>

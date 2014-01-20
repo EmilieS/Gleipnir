@@ -8,7 +8,7 @@ using Game;
 
 namespace Tests
 {
-    [TestFixture]
+    //[TestFixture]
     class TestTime
     {
         [Test]
