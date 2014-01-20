@@ -77,11 +77,5 @@ namespace GamePages
             get { return _isMenuOpen; }
             set { _isMenuOpen = value; }
         }
-
-        private void Save_Click(object sender, EventArgs e)
-        {
-             Game.serialize.save(_page.Game);
-
-        }
     }
 }

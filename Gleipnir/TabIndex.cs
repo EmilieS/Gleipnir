@@ -257,16 +257,16 @@ namespace GamePages
         private void Level1_butt_Click(object sender, EventArgs e)
         {
             _page.TheGame.Villages[0].Upgrades.Level1.Buy();
-            if (_page.Game.Villages[0].Upgrades.Level1.IsActivated)
+            if (_page.TheGame.Villages[0].Upgrades.Level1.IsActivated)
             {
                 Level1_butt.Enabled = false;
                 _page.PushAlert("Votre niveau de restauration a augmenté", "Level1 acheté");
             }
-            else if (_page.Game.Villages[0].Upgrades.Level1.CostPrice > _page.Game.Offerings)
+            else if (_page.TheGame.Villages[0].Upgrades.Level1.CostPrice > _page.TheGame.Offerings)
             {
                 _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
             }
-            else if (_page.Game.Villages[0].Buildings.RestaurantList.Count == 0)
+            else if (_page.TheGame.Villages[0].BuildingsList.RestaurantList.Count == 0)
             {
                 _page.PushAlert("Vous devez avoir déja au moins un restaurant !", "Pas de restaurant, pas d'argent");
             }
@@ -278,13 +278,13 @@ namespace GamePages
 
         private void Level2_butt_Click(object sender, EventArgs e)
         {
-            _page.Game.Villages[0].Upgrades.Level2.Buy();
-            if (_page.Game.Villages[0].Upgrades.Level2.IsActivated)
+            _page.TheGame.Villages[0].Upgrades.Level2.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Level2.IsActivated)
             {
                 Level2_butt.Enabled = false;
                 _page.PushAlert("Votre niveau de restauration a augmenté", "Level2 acheté");
             }
-            else if (_page.Game.Villages[0].Upgrades.Level2.CostPrice > _page.Game.Offerings)
+            else if (_page.TheGame.Villages[0].Upgrades.Level2.CostPrice > _page.TheGame.Offerings)
             {
                 _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
             }
@@ -296,13 +296,13 @@ namespace GamePages
 
         private void Level3_butt_Click(object sender, EventArgs e)
         {
-            _page.Game.Villages[0].Upgrades.Level3.Buy();
-            if (_page.Game.Villages[0].Upgrades.Level3.IsActivated)
+            _page.TheGame.Villages[0].Upgrades.Level3.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Level3.IsActivated)
             {
                 Level3_butt.Enabled = false;
                 _page.PushAlert("Votre niveau de restauration a augmenté", "Level3 acheté");
             }
-            else if (_page.Game.Villages[0].Upgrades.Level3.CostPrice > _page.Game.Offerings)
+            else if (_page.TheGame.Villages[0].Upgrades.Level3.CostPrice > _page.TheGame.Offerings)
             {
                 _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
             }
@@ -314,13 +314,13 @@ namespace GamePages
 
         private void Level4_butt_Click(object sender, EventArgs e)
         {
-            _page.Game.Villages[0].Upgrades.Level4.Buy();
-            if (_page.Game.Villages[0].Upgrades.Level4.IsActivated)
+            _page.TheGame.Villages[0].Upgrades.Level4.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Level4.IsActivated)
             {
                 Level4_butt.Enabled = false;
                 _page.PushAlert("Votre niveau de restauration a augmenté", "Level4 acheté");
             }
-            else if (_page.Game.Villages[0].Upgrades.Level4.CostPrice > _page.Game.Offerings)
+            else if (_page.TheGame.Villages[0].Upgrades.Level4.CostPrice > _page.TheGame.Offerings)
             {
                 _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
             }
