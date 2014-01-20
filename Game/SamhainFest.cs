@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    public class SamhainFest : GameItem
+    internal class SamhainFest : GameItem
     {
         int _duration;
         int _timer;
         Village _village;
 
         // TODO : define the duration of  the villageFest, implement duration
-        public SamhainFest(Village v)
+        internal SamhainFest(Village v)
             : base(v.Game)
         {
             _duration = 15;
@@ -64,7 +64,7 @@ namespace Game
         }
         internal override void OnDestroy()
         {
-          
+            _village.FestEnded();
         }
         internal override void DieOrIsAlive(List<IEvent> eventList)
         {

@@ -32,11 +32,11 @@ namespace GamePages
 
             positionX = 0;
             positionY = 10;
-            
+
             // Create imageList
             ImageList imageList = new ImageList();
             imageList.Images.Add(GamePages.Properties.Resources.Building_House);
-            
+
             // Add images to tabs
             actionsMenu.ImageList = imageList;
             actionsMenu.TabPages[0].ImageIndex = 0;
@@ -161,7 +161,7 @@ namespace GamePages
         // God Spells Click
         private void StartEpidemic_Click(object sender, EventArgs e)
         {
-            if(_page.TheGame.Villages[0].FamiliesList.Count > 0)
+            if (_page.TheGame.Villages[0].FamiliesList.Count > 0)
             {
                 Random rnd = new Random();
                 int familyChoosen = rnd.Next(0, _page.TheGame.Villages[0].FamiliesList.Count);
@@ -179,7 +179,7 @@ namespace GamePages
         }
         private void StartFest_Click(object sender, EventArgs e)
         {
-            SamhainFest fest = new SamhainFest(_page.TheGame.Villages[0]);
+            _page.TheGame.Villages[0].FestStart();
         }
 
         // Villagers list
@@ -195,9 +195,9 @@ namespace GamePages
             for (int i = 0; i < fam.FamilyMembers.Count; i++)
             {
                 VillagerBannerUC tmp = new VillagerBannerUC();
-                
+
                 // Add gender icon
-                if(fam.FamilyMembers[i].Gender == Genders.FEMALE)
+                if (fam.FamilyMembers[i].Gender == Genders.FEMALE)
                     tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
                 else
                     tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
