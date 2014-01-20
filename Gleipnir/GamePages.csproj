@@ -270,6 +270,14 @@
     <None Include="Resources\ButtonIcon_epidemic.png" />
     <None Include="Resources\ButtonIcon_Earthquake.png" />
     <None Include="Resources\ActionTab_VillagerList_TabIcon.png" />
+    <None Include="Resources\ActionTab_happiness_TabIcon.png" />
+    <None Include="Resources\ActionTab_action_TabIcon.png" />
+    <None Include="Resources\ActionTab_building_TabIcon.png" />
+    <None Include="Resources\Building_Tavern.png" />
+    <None Include="Resources\Building_Theater.png" />
+    <None Include="Resources\Building_PartyRoom.png" />
+    <None Include="Resources\ButtonIcon_VillageFest.png" />
+    <None Include="Resources\Building_Chapel.png" />
     <Content Include="Resources\Extra\firstNameList.txt" />
     <Content Include="Resources\Extra\nameList.txt" />
     <Content Include="Resources\Extra\scenario.txt" />

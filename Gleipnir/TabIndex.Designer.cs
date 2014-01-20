@@ -248,11 +248,12 @@
             // 
             // Theater
             // 
+            this.Theater.BackgroundImage = global::GamePages.Properties.Resources.Building_Theater;
+            this.Theater.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Theater.Location = new System.Drawing.Point(29, 273);
             this.Theater.Name = "Theater";
             this.Theater.Size = new System.Drawing.Size(45, 40);
             this.Theater.TabIndex = 6;
-            this.Theater.Text = "Théatre";
             this.Theater.UseVisualStyleBackColor = true;
             // 
             // Brothel
@@ -275,20 +276,22 @@
             // 
             // PartyRoom
             // 
+            this.PartyRoom.BackgroundImage = global::GamePages.Properties.Resources.Building_PartyRoom;
+            this.PartyRoom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PartyRoom.Location = new System.Drawing.Point(80, 273);
             this.PartyRoom.Name = "PartyRoom";
             this.PartyRoom.Size = new System.Drawing.Size(45, 40);
             this.PartyRoom.TabIndex = 3;
-            this.PartyRoom.Text = "Salle des Fêtes";
             this.PartyRoom.UseVisualStyleBackColor = true;
             // 
             // Chapel
             // 
+            this.Chapel.BackgroundImage = global::GamePages.Properties.Resources.Building_Chapel;
+            this.Chapel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Chapel.Location = new System.Drawing.Point(131, 405);
             this.Chapel.Name = "Chapel";
             this.Chapel.Size = new System.Drawing.Size(45, 40);
             this.Chapel.TabIndex = 2;
-            this.Chapel.Text = "Chapelle";
             this.Chapel.UseVisualStyleBackColor = true;
             // 
             // ApothecaryOffice
@@ -306,11 +309,12 @@
             // 
             // Tavern
             // 
+            this.Tavern.BackgroundImage = global::GamePages.Properties.Resources.Building_Tavern;
+            this.Tavern.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Tavern.Location = new System.Drawing.Point(131, 227);
             this.Tavern.Name = "Tavern";
             this.Tavern.Size = new System.Drawing.Size(45, 40);
             this.Tavern.TabIndex = 0;
-            this.Tavern.Text = "Taverne";
             this.Tavern.UseVisualStyleBackColor = true;
             // 
             // UpgradesTab
@@ -512,6 +516,7 @@
             // godSpellsTab
             // 
             this.godSpellsTab.BackgroundImage = global::GamePages.Properties.Resources.ActionTab_action_background;
+            this.godSpellsTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.godSpellsTab.Controls.Add(this.StartFest);
             this.godSpellsTab.Controls.Add(this.StartHeal);
             this.godSpellsTab.Controls.Add(this.StartEarthquake);
@@ -525,6 +530,7 @@
             // 
             // StartFest
             // 
+            this.StartFest.Image = global::GamePages.Properties.Resources.ButtonIcon_VillageFest;
             this.StartFest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.StartFest.Location = new System.Drawing.Point(24, 125);
             this.StartFest.Name = "StartFest";
