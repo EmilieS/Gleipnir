@@ -316,7 +316,8 @@ namespace GamePages
             _stats.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
             _stats.SendToBack();
             _stats.Show();
-            PushGeneralGold(_game.Villages[0].Gold);
+            //PushGeneralGold(_game.Villages[0].Gold); // Must add gold in village.Gold
+            PushGeneralGold(_game.TotalGold);
             PushPopulation(_game.TotalPop);
             PushGeneralFaith(_game.Villages[0].Faith);
             PushGeneralHappiness(_game.Villages[0].Happiness);
