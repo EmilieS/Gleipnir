@@ -330,5 +330,90 @@ namespace GamePages
             }
         }
         #endregion
+        #region Crafter's Upgrades
+        private void Pulley_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Pulley.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Pulley.IsActivated)
+            {
+                Pulley_butt.Enabled = false;
+                _page.PushAlert("Vos ouvriers sont plus efficaces", "Poulie achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Pulley.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
+
+        private void Hoist_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Hoist.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Hoist.IsActivated)
+            {
+                Hoist_butt.Enabled = false;
+                _page.PushAlert("Vos ouvriers sont plus efficaces", "Grue achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Hoist.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else if (!_page.TheGame.Villages[0].Upgrades.Pulley.IsActivated)
+            {
+                _page.PushAlert("Achetez d'abord un poulie !", "Amélioration manquante");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
+
+        private void Scaffholding_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Scaffolding.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Hoist.IsActivated)
+            {
+                Hoist_butt.Enabled = false;
+                _page.PushAlert("Vos ouvriers sont plus efficaces", "Grue achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Scaffolding.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else if (!_page.TheGame.Villages[0].Upgrades.Pulley.IsActivated && !_page.TheGame.Villages[0].Upgrades.Pulley.IsActivated)
+            {
+                _page.PushAlert("Vous devez d'abord avoir une poulie et une grue !", "Amélioration manquante");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
+        #endregion
+
+
+        #region Blacksmith's Upgrades
+        private void Saw_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Saw.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Level4.IsActivated)
+            {
+                Saw_butt.Enabled = false;
+                _page.PushAlert("Votre niveau de restauration a augmenté", "La scie est achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Saw.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
+        #endregion
+
     }
 }
