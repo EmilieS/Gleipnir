@@ -112,7 +112,15 @@ namespace GamePages
             _loading.Show();
 
             // Create the game
-            _game = new Game.Game();
+            HomepageUC sender2 =  sender as HomepageUC;
+            if(sender2!=null)
+            {
+                _game =  sender2._startedGame;
+            }
+            else
+            {
+                _game = new Game.Game();
+            }
 
             // Create objects
             _gameMenu = new InGameMenu(this);

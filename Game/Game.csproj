@@ -57,7 +57,6 @@
     <Compile Include="Upgrades\Crafter\CrafterTools\Pulley.cs" />
     <Compile Include="Upgrades\Crafter\CrafterTools\Scaffolding.cs" />
     <Compile Include="Upgrades\Crafter\Materials\Cement.cs" />
-    <Compile Include="Upgrades\Crafter\Materials\Materials.cs" />
     <Compile Include="Upgrades\Crafter\Materials\Reinforced.cs" />
     <Compile Include="Upgrades\Crafter\Materials\Whitewash.cs" />
     <Compile Include="Upgrades\Farmer\Fertilizer.cs" />

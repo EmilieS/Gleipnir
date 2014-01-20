@@ -2,30 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Game;
 
 namespace Game
 {
     [Serializable]
-    public class Whitewash
+    public class Whitewash : UpgradesModel
     {
-        public double _power;
-        public bool _isBought;
-
-        internal Whitewash()
+        JobsModel _selected;
+        Village _owner;
+        internal Whitewash(Game g, Village v, UpgradesList _listOfUpgrades, JobList _jobs)
+            : base(g, v)
         {
-
-            _power = 300;
-            _isBought = false;
+            CostPrice = 100;
+            IsActivated = false;
+            _selected = _jobs.Cooker;
+            _owner = v;
         }
-        
-        public bool IsBought
+
+        internal override void VerififyPrerequisites()
         {
-            get { return _isBought; }
-            set { _isBought = value ; }
+            if (_owner.Buildings.UnionOfCrafterList.Count > 0 && _owner.Game.Offerings >= CostPrice && _owner.Upgrades.Pulley.IsActivated)
+                IsPossible = true;
+            else
+                IsPossible = false;
         }
-        public double PowerOfWhitewash
+        internal override void AffectUpgrade()
         {
-            get { return _power; }
+            _selected.Coefficient += 1;
+            _selected.HappinessToAdd += 2;
+            foreach (var buildingsList in _owner.Buildings)
+            {
+                buildingsList.Hp += 200;
+            }
         }
     }
 }

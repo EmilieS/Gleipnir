@@ -14,11 +14,9 @@ namespace GamePages
     public partial class SquareControl : UserControl
     {
         #region Background Colors
-        // Background when cursor is on a right place
-        public static readonly Color ActiveSquareBackColorDefault = Color.FromArgb(65, 175, 25);
-
         // Background for right zone to place a building
         public static readonly Color ValidPlaceBackColorDefault = Color.FromArgb(75, 200, 30);
+        public static readonly Color ActivePlaceBackColorDefault = Color.FromArgb(50, 130, 20);
 
         // Default backgrounds
         public static readonly Color EmptyBackColorDefault = Color.FromArgb(50, 130, 20);
@@ -26,32 +24,25 @@ namespace GamePages
         public static readonly Color WaterBackColorDefault = Color.FromArgb(30, 170, 200);
         public static readonly Color RoadBackColorDefault = Color.FromArgb(70, 70, 70);
         public static readonly Color TableBackColorDefault = Color.FromArgb(175, 70, 0);
-        public static readonly Color FarmFieldBackColorDefault = Color.FromArgb(255, 213, 20);
+        public static readonly Color FarmFieldBackColorDefault = Color.FromArgb(240, 210, 20);
+        //public static readonly Color FarmFieldBackColorDefault = Color.FromArgb(180, 100, 25); // Marron
+        //public static readonly Color FarmFieldBackColorDefault = Color.FromArgb(255, 240, 120); // Jaune Pale
         public static readonly Color HouseBackColorDefault = Color.FromArgb(175, 0, 0);
         public static readonly Color JobsBackColorDefault = Color.FromArgb(200, 200, 200);
         public static readonly Color HobbyBackColorDefault = Color.FromArgb(255, 150, 150);
         public static readonly Color SpecialsBackColorDefault = Color.FromArgb(140, 90, 30);
+<<<<<<< .merge_file_a03884
+        public static readonly Color DestroyedBackColorDefault = Color.FromArgb(100, 25, 0);
+=======
+>>>>>>> .merge_file_a03516
 
         // Colors used in rendering the control.
-        public static Color ActiveSquareBackColor = ActiveSquareBackColorDefault;
-        public static Color ValidMoveBackColor = ValidPlaceBackColorDefault;
-        public static Color NormalBackColor = EmptyBackColorDefault;
+        public static Color ActiveSquareBackColor;
         #endregion
 
         // This represents the contents of the square, see the values defined in the Grid class
         public int Contents;
         public int PreviewContents;
-
-        // These are used to set the right color
-        internal readonly int IsForest = 1;
-        internal readonly int IsWater = 2;
-        internal readonly int IsRoad = 3;
-        internal readonly int IsTable = 4;
-        internal readonly int IsFarmField = 10;
-        internal readonly int IsFamilyHouse = 20;
-        internal readonly int IsJobBuilding = 30;
-        internal readonly int IsHobbyPlace = 40;
-        internal readonly int IsSpecialBuiding = 50;
 
         // These are used to set highlighting.
         public bool IsValid = false;
@@ -73,7 +64,7 @@ namespace GamePages
         {
             InitializeComponent();
 
-            this.Contents = Board.Empty;
+            this.Contents = Board.EmptyInt;
             row = squareRow;
             col = squareCol;
 
@@ -81,7 +72,7 @@ namespace GamePages
             this.TabStop = false;
 
             // Color all the grid with "Empty" color
-            this.BackColor = NormalBackColor;
+            this.BackColor = EmptyBackColorDefault;
 
             // If resized -> Redraw
             this.ResizeRedraw = true;
@@ -99,84 +90,148 @@ namespace GamePages
         private void Grid_paint(object sender, PaintEventArgs e)
         {
             // Clear the square, filling with the appropriate background color.
-<<<<<<< HEAD
             Color backColor;
-=======
-            Color backColor = NormalBackColor;
-            if (Contents == IsForest)
-                backColor = ForestBackColorDefault;
-            if (Contents == IsWater)
-                backColor = WaterBackColorDefault;
-            if (Contents == IsRoad)
-                backColor = RoadBackColorDefault;
-            if (Contents == IsTable)
-                backColor = TableBackColorDefault;
-            if (Contents == IsFarmField)
-                backColor = FarmFieldBackColorDefault;
-            if (Contents == IsFamilyHouse)
-                backColor = HouseBackColorDefault;
-            if (Contents == IsJobBuilding)
-                backColor = JobsBackColorDefault;
-            if (Contents == IsHobbyPlace)
-                backColor = HobbyBackColorDefault;
-            if (Contents == IsSpecialBuiding)
-                backColor = SpecialsBackColorDefault;
->>>>>>> fx-map_events
-            if (IsValid)
-                backColor = ValidMoveBackColor;
-            else if (IsActive)
-                backColor = ActiveSquareBackColor;
-            else
-                switch (Contents)
-                {
-                    case 1:
-                        {
-                            backColor = ForestBackColorDefault;
-                            break;
-                        }
-                    case 2:
-                        {
-                            backColor = WaterBackColorDefault;
-                            break;
-                        }
-                    case 3:
-                        {
-                            backColor = RoadBackColorDefault;
-                            break;
-                        }
-                    case 10:
-                        {
-                            backColor = FarmFieldBackColorDefault;
-                            break;
-                        }
-                    case 20:
-                        {
-                            backColor = HouseBackColorDefault;
-                            break;
-                        }
-                    case 30:
-                        {
-                            backColor = JobsBackColorDefault;
-                            break;
-                        }
-                    case 40:
-                        {
-                            backColor = HobbyBackColorDefault;
-                            break;
-                        }
-                    case 50:
-                        {
-                            backColor = SpecialsBackColorDefault;
-                            break;
-                        }
-                    default:
-                        {
-                            backColor = NormalBackColor;
-                            break;
-                        }
-                }
-
+            switch (Contents)
+            {
+                #region LandScape Colors
+                case 1:     // Forest
+                    {
+                        backColor = ForestBackColorDefault;
+                        break;
+                    }
+                case 2:     // Water
+                    {
+                        backColor = WaterBackColorDefault;
+                        break;
+                    }
+                case 3:     // Roads
+                    {
+                        backColor = RoadBackColorDefault;
+                        break;
+                    }
+                case 4:     // FarmField
+                    {
+                        backColor = FarmFieldBackColorDefault;
+                        break;
+                    }
+                #endregion
+                #region Jobs Buildings Colors
+                case 100:
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                case 101:   // ApothecaryOffice
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                case 102:   // Forge
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                case 103:   // UnionOfCrafter
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                case 104:   // Restaurant
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                case 105:   // Farm
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                case 106:   // MiliratyCamp
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                case 107:   // Mill
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                case 108:   // ClothesShop
+                    {
+                        backColor = JobsBackColorDefault;
+                        break;
+                    }
+                #endregion
+                #region Hobbies Buildings Colors
+                case 200:
+                    {
+                        backColor = HobbyBackColorDefault;
+                        break;
+                    }
+                case 201:   // Baths
+                    {
+                        backColor = HobbyBackColorDefault;
+                        break;
+                    }
+                case 202:   // Brothel
+                    {
+                        backColor = HobbyBackColorDefault;
+                        break;
+                    }
+                case 203:   // PartyRoom
+                    {
+                        backColor = HobbyBackColorDefault;
+                        break;
+                    }
+                case 204:   // Tarvern
+                    {
+                        backColor = HobbyBackColorDefault;
+                        break;
+                    }
+                case 205:   // Theater
+                    {
+                        backColor = HobbyBackColorDefault;
+                        break;
+                    }
+                #endregion
+                #region Specials Buildings Colors
+                case 300:
+                    {
+                        backColor = SpecialsBackColorDefault;
+                        break;
+                    }
+                case 301:   // Table
+                    {
+                        backColor = TableBackColorDefault;
+                        break;
+                    }
+                case 302:   // House
+                    {
+                        backColor = HouseBackColorDefault;
+                        break;
+                    }
+                case 303:   // Chapel
+                    {
+                        backColor = SpecialsBackColorDefault;
+                        break;
+                    }
+                case 304:   // OfferingsWarehouse
+                    {
+                        backColor = SpecialsBackColorDefault;
+                        break;
+                    }
+                #endregion
+                default:
+                    {
+                        backColor = EmptyBackColorDefault;
+                        break;
+                    }
+            }
             ActiveSquareBackColor = Color.FromArgb(128, backColor.R, backColor.G, backColor.B);
+            if (IsValid)
+                backColor = ValidPlaceBackColorDefault;
+            if (IsActive)
+                backColor = ActiveSquareBackColor;
 
             e.Graphics.Clear(backColor);
 

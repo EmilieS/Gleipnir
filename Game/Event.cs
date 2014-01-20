@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+
     [Serializable]
     public class Event<T> : IEvent
     //where T : GameItem
@@ -198,6 +199,7 @@ namespace Game
         }
 
     }
+
     [Serializable]
     public class FamilyEndEvent : Event<Family>
     {

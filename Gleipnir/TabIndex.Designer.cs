@@ -50,6 +50,21 @@
             this.ApothecaryOffice = new System.Windows.Forms.Button();
             this.Tavern = new System.Windows.Forms.Button();
             this.UpgradesTab = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.Cement_butt = new System.Windows.Forms.Button();
+            this.Reinforced_butt = new System.Windows.Forms.Button();
+            this.Whitewash_butt = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.Tools = new System.Windows.Forms.Label();
+            this.Scaffholding_butt = new System.Windows.Forms.Button();
+            this.Hoist_butt = new System.Windows.Forms.Button();
+            this.Pulley_butt = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Level3_butt = new System.Windows.Forms.Button();
+            this.Level2_butt = new System.Windows.Forms.Button();
+            this.Level4_butt = new System.Windows.Forms.Button();
             this.Level1_butt = new System.Windows.Forms.Button();
             this.VillagerList = new System.Windows.Forms.TabPage();
             this.godSpellsTab = new System.Windows.Forms.TabPage();
@@ -60,6 +75,8 @@
             this.actionsMenu.SuspendLayout();
             this.buildingsTab.SuspendLayout();
             this.UpgradesTab.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.godSpellsTab.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -298,7 +315,8 @@
             // 
             // UpgradesTab
             // 
-            this.UpgradesTab.Controls.Add(this.Level1_butt);
+            this.UpgradesTab.Controls.Add(this.panel2);
+            this.UpgradesTab.Controls.Add(this.panel1);
             this.UpgradesTab.ImageKey = "(aucun)";
             this.UpgradesTab.Location = new System.Drawing.Point(4, 4);
             this.UpgradesTab.Name = "UpgradesTab";
@@ -307,11 +325,159 @@
             this.UpgradesTab.TabIndex = 1;
             this.UpgradesTab.UseVisualStyleBackColor = true;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.Cement_butt);
+            this.panel2.Controls.Add(this.Reinforced_butt);
+            this.panel2.Controls.Add(this.Whitewash_butt);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.Tools);
+            this.panel2.Controls.Add(this.Scaffholding_butt);
+            this.panel2.Controls.Add(this.Hoist_butt);
+            this.panel2.Controls.Add(this.Pulley_butt);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Location = new System.Drawing.Point(0, 78);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(208, 141);
+            this.panel2.TabIndex = 2;
+            // 
+            // Cement_butt
+            // 
+            this.Cement_butt.Location = new System.Drawing.Point(80, 98);
+            this.Cement_butt.Name = "Cement_butt";
+            this.Cement_butt.Size = new System.Drawing.Size(45, 40);
+            this.Cement_butt.TabIndex = 9;
+            this.Cement_butt.Text = "Ciment";
+            this.Cement_butt.UseVisualStyleBackColor = true;
+            // 
+            // Reinforced_butt
+            // 
+            this.Reinforced_butt.Location = new System.Drawing.Point(152, 98);
+            this.Reinforced_butt.Name = "Reinforced_butt";
+            this.Reinforced_butt.Size = new System.Drawing.Size(45, 40);
+            this.Reinforced_butt.TabIndex = 7;
+            this.Reinforced_butt.Text = "Béton Armé";
+            this.Reinforced_butt.UseVisualStyleBackColor = true;
+            // 
+            // Whitewash_butt
+            // 
+            this.Whitewash_butt.Location = new System.Drawing.Point(10, 98);
+            this.Whitewash_butt.Name = "Whitewash_butt";
+            this.Whitewash_butt.Size = new System.Drawing.Size(45, 40);
+            this.Whitewash_butt.TabIndex = 6;
+            this.Whitewash_butt.Text = "Whitewash";
+            this.Whitewash_butt.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(137, 76);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(60, 15);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Matériaux";
+            // 
+            // Tools
+            // 
+            this.Tools.AutoSize = true;
+            this.Tools.Location = new System.Drawing.Point(159, 15);
+            this.Tools.Name = "Tools";
+            this.Tools.Size = new System.Drawing.Size(38, 15);
+            this.Tools.TabIndex = 4;
+            this.Tools.Text = "Outils";
+            // 
+            // Scaffholding_butt
+            // 
+            this.Scaffholding_butt.Location = new System.Drawing.Point(152, 33);
+            this.Scaffholding_butt.Name = "Scaffholding_butt";
+            this.Scaffholding_butt.Size = new System.Drawing.Size(45, 40);
+            this.Scaffholding_butt.TabIndex = 3;
+            this.Scaffholding_butt.Text = "Echaffaudage";
+            this.Scaffholding_butt.UseVisualStyleBackColor = true;
+            // 
+            // Hoist_butt
+            // 
+            this.Hoist_butt.Location = new System.Drawing.Point(80, 33);
+            this.Hoist_butt.Name = "Hoist_butt";
+            this.Hoist_butt.Size = new System.Drawing.Size(45, 40);
+            this.Hoist_butt.TabIndex = 2;
+            this.Hoist_butt.Text = "Grue";
+            this.Hoist_butt.UseVisualStyleBackColor = true;
+            // 
+            // Pulley_butt
+            // 
+            this.Pulley_butt.Location = new System.Drawing.Point(10, 33);
+            this.Pulley_butt.Name = "Pulley_butt";
+            this.Pulley_butt.Size = new System.Drawing.Size(45, 40);
+            this.Pulley_butt.TabIndex = 1;
+            this.Pulley_butt.Text = "Poulie";
+            this.Pulley_butt.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(4, 4);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 15);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Ouvriers";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.Level3_butt);
+            this.panel1.Controls.Add(this.Level2_butt);
+            this.panel1.Controls.Add(this.Level4_butt);
+            this.panel1.Controls.Add(this.Level1_butt);
+            this.panel1.Location = new System.Drawing.Point(3, 6);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(205, 66);
+            this.panel1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 15);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Cuisiniers";
+            // 
+            // Level3_butt
+            // 
+            this.Level3_butt.Location = new System.Drawing.Point(105, 23);
+            this.Level3_butt.Name = "Level3_butt";
+            this.Level3_butt.Size = new System.Drawing.Size(45, 40);
+            this.Level3_butt.TabIndex = 3;
+            this.Level3_butt.Text = "Level3";
+            this.Level3_butt.UseVisualStyleBackColor = true;
+            this.Level3_butt.Click += new System.EventHandler(this.Level3_butt_Click);
+            // 
+            // Level2_butt
+            // 
+            this.Level2_butt.Location = new System.Drawing.Point(54, 23);
+            this.Level2_butt.Name = "Level2_butt";
+            this.Level2_butt.Size = new System.Drawing.Size(45, 40);
+            this.Level2_butt.TabIndex = 2;
+            this.Level2_butt.Text = "Level 2";
+            this.Level2_butt.UseVisualStyleBackColor = true;
+            this.Level2_butt.Click += new System.EventHandler(this.Level2_butt_Click);
+            // 
+            // Level4_butt
+            // 
+            this.Level4_butt.Location = new System.Drawing.Point(156, 23);
+            this.Level4_butt.Name = "Level4_butt";
+            this.Level4_butt.Size = new System.Drawing.Size(45, 40);
+            this.Level4_butt.TabIndex = 1;
+            this.Level4_butt.Text = "Level4";
+            this.Level4_butt.UseVisualStyleBackColor = true;
+            this.Level4_butt.Click += new System.EventHandler(this.Level4_butt_Click);
+            // 
             // Level1_butt
             // 
-            this.Level1_butt.Location = new System.Drawing.Point(6, 18);
+            this.Level1_butt.Location = new System.Drawing.Point(3, 23);
             this.Level1_butt.Name = "Level1_butt";
-            this.Level1_butt.Size = new System.Drawing.Size(47, 23);
+            this.Level1_butt.Size = new System.Drawing.Size(45, 40);
             this.Level1_butt.TabIndex = 0;
             this.Level1_butt.Text = "Level1";
             this.Level1_butt.UseVisualStyleBackColor = true;
@@ -319,15 +485,14 @@
             // 
             // happinessTab
             // 
-            this.VillagerList.BackgroundImage = global::GamePages.Properties.Resources.ActionTab_happiness_background;
-            this.VillagerList.ImageKey = "(aucun)";
-            this.VillagerList.Location = new System.Drawing.Point(4, 4);
-            this.VillagerList.Name = "happinessTab";
-            this.VillagerList.Padding = new System.Windows.Forms.Padding(3);
-            this.VillagerList.Size = new System.Drawing.Size(208, 528);
-            this.VillagerList.TabIndex = 1;
-            this.VillagerList.UseVisualStyleBackColor = true;
-
+            this.happinessTab.BackgroundImage = global::GamePages.Properties.Resources.ActionTab_happiness_background;
+            this.happinessTab.ImageKey = "(aucun)";
+            this.happinessTab.Location = new System.Drawing.Point(4, 4);
+            this.happinessTab.Name = "happinessTab";
+            this.happinessTab.Padding = new System.Windows.Forms.Padding(3);
+            this.happinessTab.Size = new System.Drawing.Size(208, 528);
+            this.happinessTab.TabIndex = 1;
+            this.happinessTab.UseVisualStyleBackColor = true;
             // 
             // VillagerList
             // 
@@ -416,6 +581,10 @@
             this.actionsMenu.ResumeLayout(false);
             this.buildingsTab.ResumeLayout(false);
             this.UpgradesTab.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.godSpellsTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -451,5 +620,20 @@
         private System.Windows.Forms.Button StartEarthquake;
         private System.Windows.Forms.Button StartHeal;
         private System.Windows.Forms.Button StartFest;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button Level3_butt;
+        private System.Windows.Forms.Button Level2_butt;
+        private System.Windows.Forms.Button Level4_butt;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button Pulley_butt;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button Scaffholding_butt;
+        private System.Windows.Forms.Button Hoist_butt;
+        private System.Windows.Forms.Button Cement_butt;
+        private System.Windows.Forms.Button Reinforced_butt;
+        private System.Windows.Forms.Button Whitewash_butt;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label Tools;
     }
 }

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-<<<<<<< HEAD
+<<<<<<< .merge_file_a07880
 =======
 
+>>>>>>> .merge_file_a08020
     [Serializable]
->>>>>>> SAVE
     public class Event<T> : IEvent
     //where T : GameItem
     {
@@ -41,6 +41,8 @@ namespace Game
 
         override public void PublishMessage(IWindow b)
         {
+            Debug.Assert(ChangedProperty != null, "public class EventProperty<T> : Event<T>, PublishMessage [Event] ChangedProperty is null !");
+            Debug.Assert(b != null, "public class EventProperty<T> : Event<T>, PublishMessage [Event] IWindow b is null !");
             b.PushTrace(String.Format("Property {0} has changed...", ChangedProperty));
         }
         public override void Do(IWindow b)
@@ -98,12 +100,12 @@ namespace Game
         }
 
     }
-<<<<<<< HEAD
+    [Serializable]
+<<<<<<< .merge_file_a07880
     public class GameEventProperty : EventProperty<Game>
 =======
-    [Serializable]
     public class GameEventProperty: EventProperty<Game>
->>>>>>> SAVE
+>>>>>>> .merge_file_a08020
     {
         internal GameEventProperty(Game item, string propName)
             : base(item, propName)
@@ -204,11 +206,11 @@ namespace Game
         }
 
     }
-<<<<<<< HEAD
+<<<<<<< .merge_file_a07880
 =======
 
+>>>>>>> .merge_file_a08020
     [Serializable]
->>>>>>> SAVE
     public class FamilyEndEvent : Event<Family>
     {
         internal FamilyEndEvent(Family v)
@@ -221,10 +223,7 @@ namespace Game
             b.PushTrace(String.Format("La famille {0} est terminée.", GameItem.Name));
         }
     }
-<<<<<<< HEAD
-=======
     [Serializable]
->>>>>>> SAVE
     public class VillagerBirthEvent : Event<Villager>
     {
         internal VillagerBirthEvent(Villager v)
@@ -283,8 +282,6 @@ namespace Game
         }
     }
 }
-
-
 /*
 // Two good ways to challenge types!
 if (GameItem is Villager)
