@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+    [Serializable]
     internal class SamhainFest : GameItem
     {
         int _duration;
@@ -34,8 +35,8 @@ namespace Game
             foreach (Family family in village.FamiliesList)
                 foreach (Villager villager in family.FamilyMembers)
                 {
-                    if (!villager.IsHeretic())
-                        villager.ActivityStatus = ActivityStatus.PARTYING;
+                    //if (!villager.IsHeretic())
+                        villager.FestStarted();
                     villager.AddOrRemoveHappiness(3);
                     villager.AddOrRemoveFaith(2);
                 }
@@ -52,7 +53,7 @@ namespace Game
                 {
                     if (!family.Mother.IsDead() && !family.Father.IsDead() && family.Mother.Age < 420)
                     {
-                        if (Game.Rand.Next(3) == 2)
+                        if (Game.Rand.Next(5) == 2)
                         {
                             eventList.Add(new VillagerBirthEvent(family.NewFamilyMember()));
                         }
@@ -60,7 +61,6 @@ namespace Game
 
                 }
             }
-
         }
         internal override void OnDestroy()
         {
@@ -75,10 +75,7 @@ namespace Game
                 {
                     foreach (Villager villager in family.FamilyMembers)
                     {
-                        if (!villager.IsHeretic())
-                        {
-                            villager.ActivityStatus = ActivityStatus.NONE;
-                        }
+                        villager.FestEnded();
                     }
                 }
                 Destroy();

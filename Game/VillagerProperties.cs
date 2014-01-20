@@ -44,13 +44,14 @@ namespace Game
             ENGAGED = 2,
             MOURNING = 3
         };
+        [Flags]
         public enum ActivityStatus
         {
             NONE = 0,
-            HOBBY = 10,
-            WORKING = 20,
-            CONVOCATED = 30,
-            PARTYING = 40    //Make the fest 
+            HOBBY = 1,
+            WORKING = 2,
+            CONVOCATED = 1<<3,
+            PARTYING = 1<<4    
         }
         public enum Missions
         {

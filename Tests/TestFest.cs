@@ -14,11 +14,14 @@ namespace Tests
         public void fest()
         {
             var game = new Game.Game();
-            new Game.SamhainFest(game.Villages[0]);
+            //new Game.SamhainFest(game.Villages[0]);
+            new Game.Buildings.PartyRoom(game.Villages[0]);
+            game.Villages[0].FestStart();
             int argent = game.Villages[0].FamiliesList[0].GoldStash;
             int argent2 = argent - game.Villages[0].FamiliesList[0].FamilyMembers.Count;
             Game.Villager fa=game.Villages[0].FamiliesList[0].Father;
             Assert.That(fa.ActivityStatus == Game.ActivityStatus.PARTYING);
+            Assert.That(!fa.IsWorking);
             game.NextStep();
             Assert.AreEqual(argent2, game.Villages[0].FamiliesList[0].GoldStash);
 

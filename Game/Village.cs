@@ -301,12 +301,13 @@ namespace Game
 
         public bool FestStart()
         {
-            if (_samhainFest == null)
-            {
-                _samhainFest = new SamhainFest(this);
-                return true;
-            }
-            return false;
+            if (_samhainFest != null)
+                return false;
+            if (BuildingsList.PartyRoomList.Count == 0)
+                return false;
+
+            _samhainFest = new SamhainFest(this);
+            return true;
         }
         internal void FestEnded()
         {

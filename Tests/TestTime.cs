@@ -8,13 +8,13 @@ using Game;
 
 namespace Tests
 {
-    [TestFixture]
+    //[TestFixture]
     class TestTime
     {
         [Test]
         public void time()
         {
-            var game = new Game.Game(1000);
+            /*var game = new Game.Game(1000);
             var MyWindow = new Tests.IWindowImplementationForTests();
             game._timer.AutoReset = true;
             game.StartTime();
@@ -28,7 +28,7 @@ namespace Tests
                 e.Do(MyWindow);
             }
             Assert.That(MyWindow.nb_pushTrace > 1);
-            //game._timer.Join
+            //game._timer.Join*/
         }
 
     }
