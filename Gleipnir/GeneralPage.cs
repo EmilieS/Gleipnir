@@ -125,10 +125,10 @@ namespace GamePages
             #region grid generation
             options = new Options();
             _board = new Board();
-            _grid = new SquareControl[20, 32];
-            for (int i = 0; i < 20; i++)
+            _grid = new SquareControl[Board.GridMaxRow, Board.GridMaxCol];
+            for (int i = 0; i < Board.GridMaxRow; i++)
             {
-                for (int j = 0; j < 32; j++)
+                for (int j = 0; j < Board.GridMaxCol; j++)
                 {
                     // Create
                     _grid[i, j] = new SquareControl(i, j);
@@ -230,10 +230,9 @@ namespace GamePages
             // Do 1 step
             Step();
 
+            // Timer
             if (_interval == 0)
-            {
                 _timer = null;
-            }
             else
             {
                 _timer = new System.Windows.Forms.Timer();
@@ -266,10 +265,10 @@ namespace GamePages
             #region grid generation
             options = new Options();
             _board = new Board();
-            _grid = new SquareControl[20, 32];
-            for (int i = 0; i < 20; i++)
+            _grid = new SquareControl[Board.GridMaxRow, Board.GridMaxCol];
+            for (int i = 0; i < Board.GridMaxRow; i++)
             {
-                for (int j = 0; j < 32; j++)
+                for (int j = 0; j < Board.GridMaxCol; j++)
                 {
                     // Create
                     _grid[i, j] = new SquareControl(i, j);
@@ -352,10 +351,9 @@ namespace GamePages
             _loading.SendToBack();
             _loading.Hide();
 
+            // Timer
             if (_interval == 0)
-            {
                 _timer = null;
-            }
             else
             {
                 _timer = new System.Windows.Forms.Timer();
@@ -364,35 +362,60 @@ namespace GamePages
                 _timer.Start();
             }
         }
+        // LostGame
+        public void GameLost()
+        {
+            LockEverything();
+            _scenarioBox.GameLostText();
+            _gameMenu.Show();
+            _gameMenu.IsOpen = true;
+            _gameMenu.InGameQuit.Enabled = false;
+        }
 
         // Window Methods
         internal void LockEverything()
         {
+            // Lock Windows Elements
             _actionMenu.Enabled = false;
             _stats.Enabled = false;
             _eventFlux.Enabled = false;
             _infoBox.Enabled = false;
+
+            // Lock Grid
+            for (int i = 0; i < Board.GridMaxRow; i++)
+                for (int j = 0; j < Board.GridMaxCol; j++)
+                    _grid[i, j].Enabled = false;
+
+            // Stop Timer
             if (_timer != null)
-            {
                 _timer.Stop();
-            }
         }
         internal void UnLockEverything()
         {
+            // Unlock Windows Elements
             _actionMenu.Enabled = true;
             _stats.Enabled = true;
             _infoBox.Enabled = true;
             _eventFlux.Enabled = true;
+
+            // Unlock Grid
+            for (int i = 0; i < Board.GridMaxRow; i++)
+                for (int j = 0; j < Board.GridMaxCol; j++)
+                    _grid[i, j].Enabled = false;
+
+            // Start Timer
             if (_timer != null)
-            {
                 _timer.Start();
-            }
         }
 
         // InGameMenu Events
         public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
         {
             LockEverything();
+
+            // Show loading effects
+            _loading.BringToFront();
+            _loading.Show();
 
             // Set double-buffering
             SetStyle(ControlStyles.UserPaint, true);
@@ -403,8 +426,8 @@ namespace GamePages
             this.Controls.Remove(_gameMenu);
 
             // Remove grid
-            for (int i = 0; i < 20; i++)
-                for (int j = 0; j < 32; j++)
+            for (int i = 0; i < Board.GridMaxRow; i++)
+                for (int j = 0; j < Board.GridMaxCol; j++)
                     this.Controls.Remove(_grid[i, j]);
 
             // Remove window elements
@@ -413,6 +436,10 @@ namespace GamePages
             this.Controls.Remove(_scenarioBox);
             this.Controls.Remove(_stats);
             this.Controls.Remove(_eventFlux);
+
+            // Hide loading effects
+            _loading.SendToBack();
+            _loading.Hide();
 
             // Show HomePage
             _home.Show();
@@ -494,26 +521,24 @@ namespace GamePages
             trace.traceBoxViewer.Text = traceMessages;
             //PushAlert(message, "PUSHTRACE");//MARCHE
         }
-        public void GameLost()
-        {
-            _scenarioBox.GameLostText();
-            _gameMenu.Show();
-            LockEverything();
-            _gameMenu.IsOpen = true;
-            _gameMenu.InGameQuit.Enabled = false;
-        }
+
         // Grid Methods
         private void UpdateGrid(Board board, SquareControl[,] grid)
         {
             // Map the current game board to the square controls.
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < Board.GridMaxRow; i++)
             {
-                for (int j = 0; j < 32; j++)
+                for (int j = 0; j < Board.GridMaxCol; j++)
                 {
                     grid[i, j].Contents = board.GetSquareContents(i, j);
                     grid[i, j].Refresh();
                 }
             }
+        }
+        private void UpdateSquare(int row, int col, SquareControl[,] grid, Board board)
+        {
+            grid[row, col].Contents = board.GetSquareContents(row, col);
+            grid[row, col].Refresh();
         }
         private bool CheckIfFamilyHouseIsPlaced(House house)
         {
@@ -526,12 +551,13 @@ namespace GamePages
         {
             // Check if new family is created
             _board.PlaceRandomlyBuilding(house, Board.FamilyHouseInt);
+            UpdateSquare(house.HorizontalPos, house.VerticalPos, _grid, _board);
         }
         private void ShowValidPlaces()
         {
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < Board.GridMaxRow; i++)
             {
-                for (int j = 0; j < 32; j++)
+                for (int j = 0; j < Board.GridMaxCol; j++)
                 {
                     if (_board.IsValidSquare(i, j))
                         _grid[i, j].IsValid = true;
@@ -542,9 +568,9 @@ namespace GamePages
         }
         private void HideValidPlaces()
         {
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < Board.GridMaxRow; i++)
             {
-                for (int j = 0; j < 32; j++)
+                for (int j = 0; j < Board.GridMaxCol; j++)
                 {
                     if (_board.IsValidSquare(i, j))
                         _grid[i, j].IsValid = false;
@@ -562,6 +588,8 @@ namespace GamePages
             apo.IsBought = true;
             village.BuildingsList.Add(apo);
             job.Building = (ApothecaryOffice)apo;
+
+            // Update the grid
             _board.UpdateSquares(row, col, Board.ApothecaryOfficeInt);
         }
         private void PlaceForge(int row, int col, Forge forge)
@@ -742,6 +770,7 @@ namespace GamePages
         {
             _grid[row, col].Contents = Board.EmptyInt;
             _board.UpdateSquares(row, col, Board.EmptyInt);
+            UpdateSquare(row, col, _grid, _board);
         }
 
         // Grid Events
@@ -774,9 +803,9 @@ namespace GamePages
                         Board copy_board = new Board(_board);
 
                         // Set up the move preview
-                        for (int i = 0; i < 20; i++)
+                        for (int i = 0; i < Board.GridMaxRow; i++)
                         {
-                            for (int j = 0; j < 32; j++)
+                            for (int j = 0; j < Board.GridMaxCol; j++)
                             {
                                 if (copy_board.GetSquareContents(i, j) != _board.GetSquareContents(i, j))
                                 {
@@ -819,9 +848,9 @@ namespace GamePages
                         Board copy_board = new Board(_board);
 
                         // Set up the move preview
-                        for (int i = 0; i < 20; i++)
+                        for (int i = 0; i < Board.GridMaxRow; i++)
                         {
-                            for (int j = 0; j < 32; j++)
+                            for (int j = 0; j < Board.GridMaxCol; j++)
                             {
                                 if (copy_board.GetSquareContents(i, j) != _board.GetSquareContents(i, j))
                                 {
@@ -854,9 +883,9 @@ namespace GamePages
             if (squareControl.PreviewContents != Board.EmptyInt)
             {
                 // Clear the move preview
-                for (int i = 0; i < 20; i++)
+                for (int i = 0; i < Board.GridMaxRow; i++)
                 {
-                    for (int j = 0; j < 32; j++)
+                    for (int j = 0; j < Board.GridMaxCol; j++)
                     {
                         if (_grid[i, j].PreviewContents != Board.EmptyInt)
                         {
@@ -931,8 +960,8 @@ namespace GamePages
                     // Take Offerings Points
                     _game.AddOrTakeFromOfferings(-buildingSelected.CostPrice);
 
-                    // Update grid
-                    UpdateGrid(_board, _grid);
+                    // Update Grid
+                    UpdateSquare(squareControl.Row, squareControl.Col, _grid, _board);
 
                     // End Placement
                     actionState = ActionState.None;
@@ -1101,7 +1130,7 @@ namespace GamePages
                                 int vPos = bath.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                     if (bath.Hp > 0)
-                                        _infoBox.SetOtherBuildingsInfo(bath, GamePages.Properties.Resources.Error);
+                                        _infoBox.SetOtherBuildingsInfo(bath, GamePages.Properties.Resources.Building_Baths);
                                     else
                                         _infoBox.SetDestroyedBuilding(bath);
                             }
@@ -1117,7 +1146,7 @@ namespace GamePages
                                 int vPos = brothel.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                     if (brothel.Hp > 0)
-                                        _infoBox.SetOtherBuildingsInfo(brothel, GamePages.Properties.Resources.Error);
+                                        _infoBox.SetOtherBuildingsInfo(brothel, GamePages.Properties.Resources.Building_Brothel);
                                     else
                                         _infoBox.SetDestroyedBuilding(brothel);
                             }
@@ -1133,7 +1162,7 @@ namespace GamePages
                                 int vPos = party.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                     if (party.Hp > 0)
-                                        _infoBox.SetOtherBuildingsInfo(party, GamePages.Properties.Resources.Error);
+                                        _infoBox.SetOtherBuildingsInfo(party, GamePages.Properties.Resources.Building_PartyRoom);
                                     else
                                         _infoBox.SetDestroyedBuilding(party);
                             }
@@ -1149,7 +1178,7 @@ namespace GamePages
                                 int vPos = tavern.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                     if (tavern.Hp > 0)
-                                        _infoBox.SetOtherBuildingsInfo(tavern, GamePages.Properties.Resources.Error);
+                                        _infoBox.SetOtherBuildingsInfo(tavern, GamePages.Properties.Resources.Building_Tavern);
                                     else
                                         _infoBox.SetDestroyedBuilding(tavern);
                             }
@@ -1165,7 +1194,7 @@ namespace GamePages
                                 int vPos = theater.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                     if (theater.Hp > 0)
-                                        _infoBox.SetOtherBuildingsInfo(theater, GamePages.Properties.Resources.Error);
+                                        _infoBox.SetOtherBuildingsInfo(theater, GamePages.Properties.Resources.Building_Theater);
                                     else
                                         _infoBox.SetDestroyedBuilding(theater);
                             }
@@ -1222,7 +1251,7 @@ namespace GamePages
                                 int vPos = chapel.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                     if (chapel.Hp > 0)
-                                        _infoBox.SetOtherBuildingsInfo(chapel, GamePages.Properties.Resources.Error);
+                                        _infoBox.SetOtherBuildingsInfo(chapel, GamePages.Properties.Resources.Building_Chapel);
                                     else
                                         _infoBox.SetDestroyedBuilding(chapel);
                             }
@@ -1238,7 +1267,7 @@ namespace GamePages
                                 int vPos = warehouse.VerticalPos;
                                 if (hPos == squareControl.Row && vPos == squareControl.Col)
                                     if (warehouse.Hp > 0)
-                                        _infoBox.SetOtherBuildingsInfo(warehouse, GamePages.Properties.Resources.Error);
+                                        _infoBox.SetOtherBuildingsInfo(warehouse, GamePages.Properties.Resources.Building_OfferingsWarehouse);
                                     else
                                         _infoBox.SetDestroyedBuilding(warehouse);
                             }
@@ -1304,24 +1333,11 @@ namespace GamePages
                 events.Do(this);
                 events.PublishMessage(this);
             }
-            UpdateGrid(_board, _grid);
-        }
-        private void StepWithoutGridUpdate()
-        {
-            _game.NextStep();
-            foreach (IEvent events in _game.EventList)
-            {
-                events.Do(this);
-                events.PublishMessage(this);
-            }
         }
         internal void StepX50()
         {
             for (int i = 0; i < 50; i++)
-            {
-                StepWithoutGridUpdate();
-            }
-            UpdateGrid(_board, _grid);
+                Step();
         }
     }
 }

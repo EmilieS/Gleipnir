@@ -11,7 +11,6 @@ namespace GamePages
 {
     public class Board
     {
-        // Differents value for the box
         // Landscape
         public static readonly int EmptyInt = 0;
         public static readonly int ForestInt = 1;
@@ -45,15 +44,23 @@ namespace GamePages
         // This two-dimensional array represents the squares on the grid.
         private int[,] squares;
 
+        // Grid width & height
+        public static readonly int GridMaxRow = 20;
+        public static readonly int GridMaxCol = 32;
+
+        // RandomPlace
+        Random randomNumber;
+
         // Create empty grid
         public Board()
         {
-            squares = new int[20, 32];
+            squares = new int[GridMaxRow, GridMaxCol];
+            randomNumber = new Random();
 
             // Empty all squares
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < GridMaxRow; i++)
             {
-                for (int j = 0; j < 32; j++)
+                for (int j = 0; j < GridMaxCol; j++)
                 {
                     squares[i, j] = EmptyInt;
                 }
@@ -62,12 +69,12 @@ namespace GamePages
         public Board(Board board)
         {
             // Create the squares and map.
-            squares = new int[20, 32];
+            squares = new int[GridMaxRow, GridMaxCol];
 
             // Copy the given board.
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < GridMaxRow; i++)
             {
-                for (int j = 0; j < 30; j++)
+                for (int j = 0; j < GridMaxCol; j++)
                 {
                     squares[i, j] = board.squares[i, j];
                 }
@@ -80,17 +87,13 @@ namespace GamePages
         public void SetForNewGame(Game.Game game)
         {
             // Fill all the grid with Empty color
-            for (int i = 0; i < 20; i++)
-            {
-                for (int j = 0; j < 32; j++)
-                {
+            for (int i = 0; i < GridMaxRow; i++)
+                for (int j = 0; j < GridMaxCol; j++)
                     squares[i, j] = EmptyInt;
-                }
-            }
 
             #region Place elements on map
             #region forest
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < GridMaxRow; i++)
             {
                 if (i == 0 || i == 1)
                     for (int j = 0; j < 11; j++)
@@ -148,7 +151,7 @@ namespace GamePages
             }
             #endregion
             #region river
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < GridMaxRow; i++)
             {
                 if (i == 0)
                     for (int j = 31; j > 29; j--)
@@ -207,7 +210,7 @@ namespace GamePages
             }
             #endregion
             #region roads
-            /*for (int i = 0; i < 20; i++)
+            /*for (int i = 0; i < GridWidth; i++)
                 if (i == 4)
                     squares[i, 13] = Road;
                 else if (i == 5)
@@ -273,9 +276,9 @@ namespace GamePages
         internal void SetLoadGame(Game.Game game)
         {
             // Fill all the grid with Empty color
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < GridMaxRow; i++)
             {
-                for (int j = 0; j < 32; j++)
+                for (int j = 0; j < GridMaxCol; j++)
                 {
                     squares[i, j] = EmptyInt;
                 }
@@ -283,7 +286,7 @@ namespace GamePages
 
             // Landscape
             #region forest
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < GridMaxRow; i++)
             {
                 if (i == 0 || i == 1)
                     for (int j = 0; j < 11; j++)
@@ -341,7 +344,7 @@ namespace GamePages
             }
             #endregion
             #region river
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < GridMaxRow; i++)
             {
                 if (i == 0)
                     for (int j = 31; j > 29; j--)
@@ -400,7 +403,7 @@ namespace GamePages
             }
             #endregion
             #region roads
-            /*for (int i = 0; i < 20; i++)
+            /*for (int i = 0; i < GridWidth; i++)
                 if (i == 4)
                     squares[i, 13] = Road;
                 else if (i == 5)
@@ -493,8 +496,8 @@ namespace GamePages
         public bool HasAnyEmptyPlace()
         {
             // Check all the grid
-            for (int i = 0; i < 20; i++)
-                for (int j = 0; j < 32; j++)
+            for (int i = 0; i < GridMaxRow; i++)
+                for (int j = 0; j < GridMaxCol; j++)
                     if (IsValidSquare(i, j))
                         return true;
             // No place
@@ -548,14 +551,11 @@ namespace GamePages
         /// <returns></returns>
         private int RandomPos(int maxValue)
         {
-            var randomNumber = new Random();
             int pos;
-            if (maxValue == 20 || maxValue == 32)
-            {
+            if (maxValue == GridMaxRow || maxValue == GridMaxCol)
                 pos = randomNumber.Next(0, maxValue);
-            }
             else
-                throw new IndexOutOfRangeException("RandomPos Error");
+                throw new IndexOutOfRangeException(@"(board, RandomPos) RandomPos Error");
             return pos;
         }
 
@@ -571,16 +571,13 @@ namespace GamePages
                 int vPos;
                 do
                 {
-                    hPos = RandomPos(20);
-                    vPos = RandomPos(32);
+                    hPos = RandomPos(GridMaxRow);
+                    vPos = RandomPos(GridMaxCol);
                 } while (!IsValidSquare(hPos, vPos));
 
                 building.SetCoordinates(hPos, vPos);
                 squares[hPos, vPos] = value;
                 building.IsBought = true;
-            }
-            else
-            {
             }
         }
     }
