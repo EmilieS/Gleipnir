@@ -73,8 +73,13 @@ namespace Game.Buildings
         internal void Repair(int amount)
         {
             if (amount < 0) { throw new ArgumentException(); }
-            if (amount == 0) { return; }
+            if (amount == 0)
+                return;
+            if (_hp + amount > _maxHp)
+                _hp = _maxHp;
+            else
             _hp += amount;
+
             Game.DamagedBuildingsNotRepairedOrRepairedFaithImpact(5);
             _damageRepairTimer = 0;
         }
