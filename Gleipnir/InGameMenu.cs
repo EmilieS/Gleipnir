@@ -14,7 +14,6 @@ namespace GamePages
 {
     public partial class InGameMenu : UserControl
     {
-        public event PropertyChangedEventHandler ExpectGoBackToMenu;
         bool _goBack;
         bool _isMenuOpen;
         GeneralPage _page;
@@ -30,13 +29,11 @@ namespace GamePages
         public void GoBack_Click(object sender, EventArgs e)
         {
             GoBackExpected = true;
-            RaisePropertyChanged();
+            _page.GoBackToMenu();
+            _page.GameStarted = false;
+            _page.CloseGame();
         }
-        private void RaisePropertyChanged([CallerMemberName]string propertyName = null)
-        {
-            var h = ExpectGoBackToMenu;
-            if (h != null) h(this, new PropertyChangedEventArgs(propertyName));
-        }
+
 
         // Back to game
         public void InGameQuit_Click(object sender, EventArgs e)

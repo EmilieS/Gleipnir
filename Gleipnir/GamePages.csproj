@@ -50,12 +50,6 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuildingButton.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="BuildingButton.Designer.cs">
-      <DependentUpon>BuildingButton.cs</DependentUpon>
-    </Compile>
     <Compile Include="EventFluxUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -144,9 +138,6 @@
     <Compile Include="VillagerBannerUC.Designer.cs">
       <DependentUpon>VillagerBannerUC.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="BuildingButton.resx">
-      <DependentUpon>BuildingButton.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EventFluxUC.resx">
       <DependentUpon>EventFluxUC.cs</DependentUpon>
     </EmbeddedResource>

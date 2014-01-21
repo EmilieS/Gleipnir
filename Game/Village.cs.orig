@@ -10,15 +10,7 @@ namespace Game
     [Serializable]
     public class Village : GameItem
     {
-<<<<<<< HEAD
-=======
-        //List<JobsModel> _jobs;// needs to be cleansed
-        public JobList Jobs;
         public UpgradesList _upgrades;
-        int _familiesGold;
-        double _villageFaith;
-        double _villageHappiness;
->>>>>>> origin/fx-Upgrades
         internal readonly HistorizedValue<int, Village> _offeringsPointsPerTick;
         internal readonly HistorizedValue<int, Village> _villagePop;
         internal List<Buildings.House> EmptyHouseList;
@@ -29,6 +21,7 @@ namespace Game
         double _villageFaith;
         double _villageHappiness;
         FamilyInVillageList _familiesList;
+        SamhainFest _samhainFest;
 
         internal Village(Game game, string name)
             : base(game)
@@ -41,7 +34,7 @@ namespace Game
             EmptyHouseList = new List<Buildings.House>();
             JobsList = new JobList(this);
             _familiesList = new FamilyInVillageList(this);
-<<<<<<< HEAD
+            _upgrades = new UpgradesList(this);
 
             // Initialize historized values
             _offeringsPointsPerTick = new HistorizedValue<int, Village>(this, @"_offeringsPointsPerTick", 20);
@@ -49,14 +42,10 @@ namespace Game
 
             // Set values
             _name = name;
-=======
-            //_jobs = CreateJobs();
-            Jobs = new JobList(this);
-            _upgrades = new UpgradesList(this);
->>>>>>> origin/fx-Upgrades
             _offeringsPointsPerTick.Current = 1;
         }
 
+        // Village Properties
         /// <summary>
         /// Gets village's families list
         /// </summary>
@@ -78,7 +67,16 @@ namespace Game
         /// Gets tax per villager per tick
         /// </summary>
         public int OfferingsPointsPerTick { get { return _offeringsPointsPerTick.Current; } }
+        /// <summary>
+        /// Gets the upgrades list
+        /// </summary>
+        public UpgradesList Upgrades { get { return _upgrades; } }
+        /// <summary>
+        /// Gets or Sets village fest
+        /// </summary>
+        SamhainFest SamhainFest { get { return _samhainFest; } set { _samhainFest = value; } }
 
+        // Villagers Methods
         /// <summary>
         /// Add new villager in village
         /// </summary>
@@ -95,6 +93,7 @@ namespace Game
             _villagePop.Current--;
         }
 
+        // Families Methods
         /// <summary>
         /// Create family with mother and father
         /// </summary>
@@ -118,7 +117,7 @@ namespace Game
 
             // Add family to families list
             _familiesList.Add(newFamily);
-            
+
             // Try add empty house to family
             if (EmptyHouseList.Count > 0)
             {
@@ -177,7 +176,7 @@ namespace Game
         public Family CreateFamilyFromScratch(JobsModel mothersJob, JobsModel fathersJob)
         {
             Debug.Assert(Game != null, @"(village, CreateFamilyFromScratch2) Game is null");
-            
+
             // Create family
             var name = Game.NameList.NextName;
             Villager VillagerAM = new Villager(Game, Genders.MALE, Game.FirstNameList.NextName);
@@ -206,7 +205,38 @@ namespace Game
 
             return newFamily;
         }
-        
+        /// <summary>
+        /// Remove and delete empty families
+        /// </summary>
+        /// <param name="eventList"></param>
+        internal void EmptyFamiliesCleaner(List<IEvent> eventList)
+        {
+            int nbf = FamiliesList.Count;
+            Family tmpFamily;
+
+            int i = 0;
+            while (i < nbf)
+            {
+                tmpFamily = FamiliesList[i];
+                FamiliesList[i].DieOrIsAlive(eventList);
+                if (tmpFamily.IsDestroyed)
+                    nbf--;
+                else
+                    i++;
+            }
+            tmpFamily = null;
+        }
+        /// <summary>
+        /// Remove destroyed family from families list
+        /// </summary>
+        /// <param name="family"></param>
+        internal void FamilyDestroyed(Family family)
+        {
+            Debug.Assert(family != null, @"(village, FamilyDestroyed) Family don't exist");
+            _familiesList.Remove(family);
+        }
+
+        // House Methods
         /// <summary>
         /// Add new empty house in empty houses list
         /// </summary>
@@ -214,7 +244,7 @@ namespace Game
         public void AddEmptyHouse(Buildings.House house)
         {
             // Debug.Assert(!EmptyHouseList.Contains(house), @"(village, AddEmptyHouse) This house is in EmptyHouseList");
-            if(!EmptyHouseList.Contains(house))
+            if (!EmptyHouseList.Contains(house))
                 EmptyHouseList.Add(house);
         }
         /// <summary>
@@ -227,7 +257,7 @@ namespace Game
             EmptyHouseList.Remove(house);
         }
 
-        public UpgradesList Upgrades { get { return _upgrades; } }
+        // Village Stats Methods
         /// <summary>
         /// Addition of all gold of all families
         /// </summary>
@@ -239,9 +269,9 @@ namespace Game
             foreach (Family fam in _familiesList)
                 result += fam.GoldStash;
 
-            if (result < 0) 
+            if (result < 0)
                 throw new IndexOutOfRangeException(@"(village, CalculateVillageGold) Negative gold!");
-            else 
+            else
                 _familiesGold = result;
         }
         /// <summary>
@@ -310,6 +340,32 @@ namespace Game
             _villageFaith = totalF / nbf;
         }
 
+        // GodSpells Methods
+        /// <summary>
+        /// Starts new village fest if party room exists
+        /// </summary>
+        /// <returns></returns>
+        public bool FestStart()
+        {
+            if (_samhainFest != null)
+                return false;
+            if (BuildingsList.PartyRoomList.Count == 0)
+                return false;
+
+            _samhainFest = new SamhainFest(this);
+            return true;
+        }
+        /// <summary>
+        /// Ends village fest
+        /// </summary>
+        internal void FestEnded()
+        {
+            if (_samhainFest == null)
+                throw new InvalidOperationException(@"(village, FestEnded) SamhainFest is already null");
+            _samhainFest = null;
+        }
+
+        // Offerings Points Methods
         /// <summary>
         /// Modify number offering points generated
         /// </summary>
@@ -327,7 +383,7 @@ namespace Game
         /// Take gold from families and add offerings points
         /// </summary>
         /// <param name="amount"></param>
-        public void TransformGoldToOfferingsPoints(int amount)// WTF NOT USED a part from village test.
+        public void TransformGoldToOfferingsPoints(int amount) // WTF NOT USED a part from village test.
         {
             if (amount >= 1 && amount <= 100)
             {
@@ -337,10 +393,18 @@ namespace Game
 
                 Game.AddOrTakeFromOfferings(offerings);
             }
-            else 
+            else
                 throw new ArgumentOutOfRangeException(@"(village, TransformGoldToOfferingsPoints) Take 0 or more than 100");
         }
 
+<<<<<<< HEAD
+        //TODO: !!! use new list & all jobs destroyed.
+        /*internal void DestroyJobs(JobsModel jobName)
+        {
+            Debug.Assert(jobName != null);
+            _jobs.Remove(jobName);
+        }*/
+=======
         /// <summary>
         /// Remove and delete empty families
         /// </summary>
@@ -371,13 +435,7 @@ namespace Game
             Debug.Assert(family != null, @"(village, FamilyDestroyed) Family don't exist");
             _familiesList.Remove(family);
         }
-
-        //TODO: !!! use new list & all jobs destroyed.
-        /*internal void DestroyJobs(JobsModel jobName)
-        {
-            Debug.Assert(jobName != null);
-            _jobs.Remove(jobName);
-        }*/
+>>>>>>> origin/time
 
         // called by ImpactHappiness
         /// <summary>
@@ -405,13 +463,12 @@ namespace Game
         /// <param name="eventList"></param>
         override internal void CloseStep(List<IEvent> eventList)
         {
-            //TODO :  put current values in value history.
+            //put current values in value history. & make events
             if (_familiesList.Conclude())
                 eventList.Add(new VillageEventProperty(this, @"FamiliesList"));
             if (_offeringsPointsPerTick.Conclude())
                 eventList.Add(new VillageEventProperty(this, @"OfferingsPointsPerTick"));
             //JobList is invariant.
-            //TODO : events!
         }
     }
 }

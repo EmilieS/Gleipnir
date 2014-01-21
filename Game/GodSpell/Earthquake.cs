@@ -31,7 +31,6 @@ namespace Game.GodSpell
 
         override internal void DieOrIsAlive(List<IEvent> eventlist)
         {
-            //TO DO : kill off a few random people.
             Destroy();
         }
         internal override void CloseStep(List<IEvent> eventList){ }              

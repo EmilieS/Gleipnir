@@ -397,13 +397,6 @@ namespace Game
                 throw new ArgumentOutOfRangeException(@"(village, TransformGoldToOfferingsPoints) Take 0 or more than 100");
         }
 
-        //TODO: !!! use new list & all jobs destroyed.
-        /*internal void DestroyJobs(JobsModel jobName)
-        {
-            Debug.Assert(jobName != null);
-            _jobs.Remove(jobName);
-        }*/
-
         // called by ImpactHappiness
         /// <summary>
         /// Add happiness from job to villagers
@@ -430,13 +423,12 @@ namespace Game
         /// <param name="eventList"></param>
         override internal void CloseStep(List<IEvent> eventList)
         {
-            //TODO :  put current values in value history.
+            // Put current values in value history & make events
             if (_familiesList.Conclude())
                 eventList.Add(new VillageEventProperty(this, @"FamiliesList"));
             if (_offeringsPointsPerTick.Conclude())
                 eventList.Add(new VillageEventProperty(this, @"OfferingsPointsPerTick"));
             //JobList is invariant.
-            //TODO : events!
         }
     }
 }

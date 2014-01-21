@@ -35,6 +35,7 @@ namespace GamePages
         string traceMessages; 
         public System.Windows.Forms.Timer _timer;
         int _interval;
+        public bool GameStarted { get; set; }
 
         public int Interval
         {
@@ -94,7 +95,6 @@ namespace GamePages
             _loading.Hide();
 
             // Show home page
-            _home.Launched += IsStarted_Changed;
             _home.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
             this.Controls.Add(_home);
             _home.Show();
@@ -102,7 +102,7 @@ namespace GamePages
             _timer = null;
         }
         // NewGame
-        public void IsStarted_Changed(object sender, PropertyChangedEventArgs e)
+        public void StartGame()
         {
             // Hide home page
             _home.Hide();
@@ -187,7 +187,7 @@ namespace GamePages
             _gameMenu.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             _gameMenu.BringToFront();
             _gameMenu.Hide();
-            _gameMenu.ExpectGoBackToMenu += GoBackToMenu;
+            //_gameMenu.ExpectGoBackToMenu += GoBackToMenu;
 
             // EventFluw
             _eventFlux.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
@@ -240,6 +240,7 @@ namespace GamePages
                 _timer.Interval = _interval;
                 _timer.Start();
             }
+            GameStarted = true;
         }
         // LoadGame
         public void LoadGame()
@@ -334,7 +335,7 @@ namespace GamePages
             _gameMenu.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             _gameMenu.BringToFront();
             _gameMenu.Hide();
-            _gameMenu.ExpectGoBackToMenu += GoBackToMenu;
+            //_gameMenu.ExpectGoBackToMenu += GoBackToMenu;
 
             // EventFluw
             _eventFlux.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
@@ -361,6 +362,7 @@ namespace GamePages
                 _timer.Interval = _interval;
                 _timer.Start();
             }
+            GameStarted = true;
         }
         // LostGame
         public void GameLost()
@@ -409,7 +411,7 @@ namespace GamePages
         }
 
         // InGameMenu Events
-        public void GoBackToMenu(object sender, PropertyChangedEventArgs e)
+        public void GoBackToMenu()
         {
             LockEverything();
 
@@ -1323,6 +1325,19 @@ namespace GamePages
                 _gameMenu.IsOpen = true;
             }
         }
+        internal void CloseGame()
+        {
+            if (_timer != null)
+            {
+                _timer.Tick -= (source, eventArgs) => {Step();};
+                _timer = null;
+            }
+            GameStarted = false;
+            _game = null;
+
+        }
+
+
 
         // Game next Step
         internal void Step()
