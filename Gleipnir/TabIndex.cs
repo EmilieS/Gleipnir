@@ -210,7 +210,15 @@ namespace GamePages
                 // Set VillagerBannerUC
                 tmp.VillagerName.Text = fam.FamilyMembers[i].FirstName + " " + fam.FamilyMembers[i].Name;
                 tmp.Location = new System.Drawing.Point(positionX, positionY);
-
+                tmp.Job_label.Text = "Metier : " + fam.FamilyMembers[i].Job.Name;
+                if (fam.FamilyMembers[i].Health == Healths.SICK)
+                {
+                    tmp.Sick_status_pic.Visible = true;
+                }
+                else
+                {
+                    tmp.Sick_status_pic.Visible = false;
+                }
                 // Add VillagerBannerUC to lists and show it
                 this.VillagerList.Controls.Add(tmp);
                 ListOfVillagersToShow.Add(tmp);

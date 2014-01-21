@@ -521,7 +521,10 @@ namespace GamePages
             trace.traceBoxViewer.Text = traceMessages;
             //PushAlert(message, "PUSHTRACE");//MARCHE
         }
-
+        public void PushText(string message)
+        {
+            _scenarioBox.TextLabel.Text = message;
+        }
         // Grid Methods
         private void UpdateGrid(Board board, SquareControl[,] grid)
         {

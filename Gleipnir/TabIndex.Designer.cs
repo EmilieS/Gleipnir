@@ -364,18 +364,6 @@
             this.panel2.Size = new System.Drawing.Size(208, 85);
             this.panel2.TabIndex = 2;
             // 
-            // 
-            // Tools
-            // 
-            this.Tools.AutoSize = true;
-            this.Tools.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Tools.ForeColor = System.Drawing.Color.Navy;
-            this.Tools.Location = new System.Drawing.Point(25, 30);
-            this.Tools.Name = "Tools";
-            this.Tools.Size = new System.Drawing.Size(45, 19);
-            this.Tools.TabIndex = 4;
-            this.Tools.Text = "Outils";
-            // 
             // Scaffholding_butt
             // 
             this.Scaffholding_butt.Location = new System.Drawing.Point(128, 51);
