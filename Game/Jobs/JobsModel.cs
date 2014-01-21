@@ -82,6 +82,10 @@ namespace Game
         public void RemovePerson(Villager person)
         {
             if (person == null) throw new ArgumentNullException();
+            if ((person.Health & Healths.HERETIC) != 0)
+            {
+                removeHereticWorker();
+            }
             if (_workers.Contains(person))
             {
                 person.setJob(null);
@@ -180,10 +184,6 @@ namespace Game
             Debug.Assert(dead.IsDead(), "(JobsModel) villager is not dead ?!");
             Debug.Assert(_workers.Contains(dead), "(JobModel) villager isn't even in the workerlist!");
             Debug.Assert((dead.Faith <= 15) == ((dead.Health & Healths.HERETIC) != 0), "(JobModel/villagerdestroyed) heretism is not right!");
-            if ((dead.Health & Healths.HERETIC) != 0)
-            {
-                removeHereticWorker();
-            }
             RemovePerson(dead);
         }
         #endregion

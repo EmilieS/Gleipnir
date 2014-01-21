@@ -124,9 +124,13 @@ namespace Game
             get { return _parentFamily; }
             internal set { _parentFamily = value; }
         }
-        public void setJob(JobsModel NewJob)
+        internal void setJob(JobsModel NewJob)
         {
             _job = NewJob;
+        }
+        public void RemoveJob()
+        {
+            _job.RemovePerson(this);
         }
         public ActivityStatus ActivityStatus
         {
