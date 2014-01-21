@@ -17,7 +17,7 @@ namespace Game
             _job = Jobs.FARMER;
             _coefficient = 10;
         }
-        internal override bool AddPersonPrerequisites()
+        public override bool AddPersonPrerequisites()
         {
             if (Owner.Owner.BuildingsList.FarmList.Count > 0)
                 return true;

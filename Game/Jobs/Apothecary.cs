@@ -19,7 +19,7 @@ namespace Game
             _coefficient = 15;
         }
 
-        internal override bool AddPersonPrerequisites()
+        public override bool AddPersonPrerequisites()
         {
             if (Owner.Owner.BuildingsList.ApothecaryOfficeList.Count > 0)
                 return true;
