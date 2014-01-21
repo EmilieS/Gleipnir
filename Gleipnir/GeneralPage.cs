@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 
 namespace GamePages
 {
@@ -30,13 +31,20 @@ namespace GamePages
         Options options;
         Game.Game _game;
         traceBox trace;
+        List<SquareControl> _emptySquaresList;
         private BuildingsModel buildingSelected;
         private ActionState actionState;
         string traceMessages; 
         public System.Windows.Forms.Timer _timer;
         int _interval;
-        public bool GameStarted { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Gets the game object
+        /// </summary>
+        internal Game.Game TheGame { get { return _game; } }
+        internal TabIndex ActionMenu { get { return _actionMenu; } }
+        internal Parameters ParametersBox { get { return _parametersBox; } }
         public int Interval
         {
             get { return _interval; }
@@ -49,19 +57,8 @@ namespace GamePages
                 }
             }
         }
-        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            var h = PropertyChanged;
-            if (h != null) h(this, new PropertyChangedEventArgs(propertyName));
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Gets the game object
-        /// </summary>
-        internal Game.Game TheGame { get { return _game; } }
-        internal TabIndex ActionMenu { get { return _actionMenu; } }
-        internal Parameters ParametersBox { get { return _parametersBox; } }
+        public bool GameStarted { get; set; }
+        public List<SquareControl> EmptySquaresList { get { return _emptySquaresList; } }
 
         /// <summary>
         /// Player state
@@ -74,6 +71,8 @@ namespace GamePages
 
         public GeneralPage()
         {
+            InitializeComponent();
+
             // Timer set
             _interval = 2000; // 2s timer
             _timer = null;
@@ -82,7 +81,6 @@ namespace GamePages
             _loading = new LoadingUC();
             _home = new HomepageUC(this);
             _parametersBox = new Parameters(this);
-            InitializeComponent();
 
             // Hide ParametersBox
             this.Controls.Add(_parametersBox);
@@ -108,10 +106,12 @@ namespace GamePages
         {
             // Hide home page
             _home.Hide();
+            _home.Refresh();
 
             // Show loading effects
             _loading.BringToFront();
             _loading.Show();
+            _loading.Refresh();
 
             // Create the game
             _game = new Game.Game();
@@ -122,12 +122,19 @@ namespace GamePages
             _stats = new InformationsUC(this);
             _eventFlux = new EventFluxUC();
             _scenarioBox = new ScenarioBox(this);
-            _infoBox = new InformationBox(this);
+            _infoBox = new InformationBox(this);      
+            options = new Options();
+
+            // Prepare Grid
+            _board = _game.Villages[0].VillageGrid;
+            _grid = new SquareControl[Board.GridMaxRow, Board.GridMaxCol];
 
             #region grid generation
-            options = new Options();
-            _board = new Board();
-            _grid = new SquareControl[Board.GridMaxRow, Board.GridMaxCol];
+            // Set double-buffering
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
+
             for (int i = 0; i < Board.GridMaxRow; i++)
             {
                 for (int j = 0; j < Board.GridMaxCol; j++)
@@ -148,10 +155,20 @@ namespace GamePages
                     _grid[i, j].Click += new EventHandler(SquareControl_Click);
                 }
             }
+            #endregion
+
             // Set the grid
             _board.SetForNewGame(_game);
+            _emptySquaresList = new List<SquareControl>();
+            _emptySquaresList = SetEmptySquaresList(_emptySquaresList, _board, _grid);
             UpdateGrid(_board, _grid);
-            #endregion
+
+            // Hide loading effects
+            gleipnir_logo.Hide();
+            gleipnir_logo.Refresh();
+            _loading.SendToBack();
+            _loading.Hide();
+            _loading.Refresh();
 
             #region Window elements
             #region Add all elements
@@ -221,11 +238,6 @@ namespace GamePages
             //trace.Show();
             #endregion
 
-            // Hide loading effects
-            gleipnir_logo.Hide();
-            _loading.SendToBack();
-            _loading.Hide();
-
             // Wait the scenario's end
             // LockEverything();
 
@@ -249,10 +261,12 @@ namespace GamePages
         {
             // Hide home page
             _home.Hide();
+            _home.Refresh();
 
             // Show loading effects
             _loading.BringToFront();
             _loading.Show();
+            _loading.Refresh();
 
             // Load the game
             _game = Game.serialize.load();
@@ -264,11 +278,17 @@ namespace GamePages
             _eventFlux = new EventFluxUC();
             _scenarioBox = new ScenarioBox(this);
             _infoBox = new InformationBox(this);
+            options = new Options();
+
+            // Prepare Grid
+            _board = _game.Villages[0].VillageGrid;
+            _grid = new SquareControl[Board.GridMaxRow, Board.GridMaxCol];
 
             #region grid generation
-            options = new Options();
-            _board = new Board();
-            _grid = new SquareControl[Board.GridMaxRow, Board.GridMaxCol];
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
+
             for (int i = 0; i < Board.GridMaxRow; i++)
             {
                 for (int j = 0; j < Board.GridMaxCol; j++)
@@ -289,10 +309,20 @@ namespace GamePages
                     _grid[i, j].Click += new EventHandler(SquareControl_Click);
                 }
             }
+            #endregion
+
             // Set the grid
             _board.SetLoadGame(_game);
+            _emptySquaresList = new List<SquareControl>();
+            _emptySquaresList = SetEmptySquaresList(_emptySquaresList, _board, _grid);
             UpdateGrid(_board, _grid);
-            #endregion
+
+            // Hide loading effects
+            gleipnir_logo.Hide();
+            gleipnir_logo.Refresh();
+            _loading.SendToBack();
+            _loading.Hide();
+            _loading.Refresh();
 
             #region Window elements
             #region Add all elements
@@ -346,13 +376,9 @@ namespace GamePages
             #endregion
             #endregion
 
-
+            // Trace Window
             trace = new traceBox();
-
-            // Hide loading effects
-            gleipnir_logo.Hide();
-            _loading.SendToBack();
-            _loading.Hide();
+            // trace.Show();
 
             // Timer
             if (_interval == 0)
@@ -422,6 +448,13 @@ namespace GamePages
                 _timer.Start();
         }
 
+        // Timer Events
+        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var h = PropertyChanged;
+            if (h != null) h(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         // InGameMenu Events
         public void GoBackToMenu()
         {
@@ -430,14 +463,15 @@ namespace GamePages
             // Show loading effects
             _loading.BringToFront();
             _loading.Show();
+            _loading.Refresh();
+
+            // Remove gameMenu
+            this.Controls.Remove(_gameMenu);
 
             // Set double-buffering
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
-
-            // Remove gameMenu
-            this.Controls.Remove(_gameMenu);
 
             // Remove grid
             for (int i = 0; i < Board.GridMaxRow; i++)
@@ -498,29 +532,40 @@ namespace GamePages
         }
         public void PushPopulation(int pop)
         {
-            _stats.population.Text = TransformHighNumberToKnumbers(pop);
+            _stats.population.Text = pop.ToString();
         }
         public string TransformHighNumberToKnumbers(int value)
         {
             string text = "";
             string nb = value.ToString();
+            int i = 0;
 
             if (value < 1000)
                 text = nb;
             else if (value > 999 && value <= 999999)
             {
-                for (int i = 0; i < nb.Count<char>() - 3; i++)
+                while(i < nb.Count<char>() - 3)
+                {
                     text += nb[i];
-                text += "K";
+                    i++;
+                }
+                text += ".";
+                text += nb[i];
+                text += " K";
             }
             else if (value > 999999 && value <= 999999999)
             {
-                for (int i = 0; i < nb.Count<char>() - 6; i++)
+                while (i < nb.Count<char>() - 6)
+                {
                     text += nb[i];
-                text += "M";
+                    i++;
+                }
+                text += ".";
+                text += nb[i];
+                text += " M";
             }
             else
-                text += "+999M";
+                text += "+999 M";
             return text;
         }
 
@@ -570,33 +615,51 @@ namespace GamePages
         }
         public void AddNewFamilyHouse(House house)
         {
-            // Check if new family is created
-            _board.PlaceRandomlyBuilding(house, Board.FamilyHouseInt);
-            UpdateSquare(house.HorizontalPos, house.VerticalPos, _grid, _board);
+            if (_emptySquaresList.Count > 0 && _board.HasAnyEmptyPlace())
+            {
+                if (!house.IsBought)
+                {
+                    SquareControl s = _emptySquaresList[_board.randomNumber.Next(0, _emptySquaresList.Count)];
+
+                    // Set coordinates
+                    int hPos = s.Row;
+                    int vPos = s.Col;
+
+                    // Setting the building
+                    house.SetCoordinates(hPos, vPos);
+                    house.IsBought = true;
+                    _game.Villages[0].BuildingsList.Add(house);
+
+                    // Update the grid
+                    _emptySquaresList.Remove(s);
+                    _board.UpdateSquares(hPos, vPos, Board.FamilyHouseInt);
+                    UpdateSquare(house.HorizontalPos, house.VerticalPos, _grid, _board);
+                }
+            }
+            /*else
+            {
+                string message = @"La famille " + house.Family.Name + " n'a pas de maison où s'installer.";
+                string title = @"Village plein.";
+                PushAlert(message, title);
+            }*/
+        }
+        private List<SquareControl> SetEmptySquaresList(List<SquareControl> list, Board b, SquareControl[,] g)
+        {
+            for (int i = 0; i < Board.GridMaxRow; i++)
+                for (int j = 0; j < Board.GridMaxCol; j++)
+                    if(b.IsValidSquare(i, j))
+                        list.Add(g[i, j]);
+            return list;
         }
         private void ShowValidPlaces()
         {
-            for (int i = 0; i < Board.GridMaxRow; i++)
-            {
-                for (int j = 0; j < Board.GridMaxCol; j++)
-                {
-                    if (_board.IsValidSquare(i, j))
-                        _grid[i, j].IsValid = true;
-                    else
-                        _grid[i, j].IsValid = false;
-                }
-            }
+            foreach(SquareControl s in _emptySquaresList)
+                s.IsValid = true;
         }
         private void HideValidPlaces()
         {
-            for (int i = 0; i < Board.GridMaxRow; i++)
-            {
-                for (int j = 0; j < Board.GridMaxCol; j++)
-                {
-                    if (_board.IsValidSquare(i, j))
-                        _grid[i, j].IsValid = false;
-                }
-            }
+            foreach (SquareControl s in _emptySquaresList)
+                s.IsValid = false;
         }
         #region Jobs Buildings Placement
         private void PlaceApothecaryOffice(int row, int col, ApothecaryOffice apo)
@@ -982,6 +1045,7 @@ namespace GamePages
                     _game.AddOrTakeFromOfferings(-buildingSelected.CostPrice);
 
                     // Update Grid
+                    _emptySquaresList.Remove(squareControl);
                     UpdateSquare(squareControl.Row, squareControl.Col, _grid, _board);
 
                     // End Placement
@@ -995,11 +1059,6 @@ namespace GamePages
             else
             {
                 SquareControl squareControl = (SquareControl)sender;
-
-                // Set double-buffering
-                SetStyle(ControlStyles.UserPaint, true);
-                SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-                SetStyle(ControlStyles.DoubleBuffer, true);
 
                 switch (_grid[squareControl.Row, squareControl.Col].Contents)
                 {
@@ -1306,6 +1365,7 @@ namespace GamePages
                             break;
                         }
                 }
+                _infoBox.Refresh();
             }
             #endregion
         }
@@ -1360,8 +1420,6 @@ namespace GamePages
             _game = null;
 
         }
-
-
 
         // Game next Step
         internal void Step()

@@ -45,16 +45,16 @@
             this.menuButton = new System.Windows.Forms.Button();
             this.faithIcon = new System.Windows.Forms.PictureBox();
             this.happinessIcon = new System.Windows.Forms.PictureBox();
-            this.villageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pauseButton = new System.Windows.Forms.Button();
+            this.villageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.TaxAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.populationIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.goldIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.faithIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.happinessIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.villageBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.villageBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // offeringsPoints
@@ -64,7 +64,7 @@
             this.offeringsPoints.BackColor = System.Drawing.Color.Transparent;
             this.offeringsPoints.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.offeringsPoints.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.offeringsPoints.Location = new System.Drawing.Point(485, 6);
+            this.offeringsPoints.Location = new System.Drawing.Point(483, 6);
             this.offeringsPoints.Name = "offeringsPoints";
             this.offeringsPoints.Size = new System.Drawing.Size(118, 19);
             this.offeringsPoints.TabIndex = 19;
@@ -117,7 +117,7 @@
             this.goldVillage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.goldVillage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.goldVillage.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.goldVillage.Location = new System.Drawing.Point(126, 8);
+            this.goldVillage.Location = new System.Drawing.Point(124, 8);
             this.goldVillage.Name = "goldVillage";
             this.goldVillage.Size = new System.Drawing.Size(24, 17);
             this.goldVillage.TabIndex = 15;
@@ -146,7 +146,6 @@
             this.StepByStep.TabIndex = 21;
             this.StepByStep.Text = "Step";
             this.StepByStep.UseVisualStyleBackColor = true;
-            this.StepByStep.Visible = false;
             this.StepByStep.Click += new System.EventHandler(this.StepByStep_Click);
             // 
             // TaxAmount
@@ -252,10 +251,6 @@
             this.happinessIcon.TabIndex = 28;
             this.happinessIcon.TabStop = false;
             // 
-            // villageBindingSource
-            // 
-            this.villageBindingSource.DataSource = typeof(Game.Village);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
@@ -279,6 +274,10 @@
             this.pauseButton.TabIndex = 30;
             this.pauseButton.UseVisualStyleBackColor = false;
             this.pauseButton.Click += new System.EventHandler(this.pauseButton_Click);
+            // 
+            // villageBindingSource
+            // 
+            this.villageBindingSource.DataSource = typeof(Game.Village);
             // 
             // InformationsUC
             // 
@@ -309,8 +308,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.goldIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.faithIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.happinessIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.villageBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.villageBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

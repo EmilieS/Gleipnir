@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+    [Serializable]
     public class Board
     {
         // Landscape
@@ -48,7 +49,7 @@ namespace Game
         public static readonly int GridMaxCol = 32;
 
         // RandomPlace
-        Random randomNumber;
+        public Random randomNumber;
 
         // Create empty grid
         public Board()
@@ -69,6 +70,7 @@ namespace Game
         {
             // Create the squares and map.
             squares = new int[GridMaxRow, GridMaxCol];
+            randomNumber = new Random();
 
             // Copy the given board.
             for (int i = 0; i < GridMaxRow; i++)
@@ -267,7 +269,6 @@ namespace Game
             #endregion
             #endregion
         }
-
         /// <summary>
         /// Gets and sets grid from saved game
         /// </summary>
@@ -487,6 +488,17 @@ namespace Game
         {
             return squares[row, col];
         }
+        /// <summary>
+        /// Update the square content
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public void UpdateSquares(int row, int col, int value)
+        {
+            squares[row, col] = value;
+        }
 
         /// <summary>
         /// Check all the grid for empty place
@@ -502,7 +514,6 @@ namespace Game
             // No place
             return false;
         }
-
         /// <summary>
         /// Check if one square is empty
         /// </summary>
@@ -516,7 +527,6 @@ namespace Game
             else
                 return false;
         }
-
         /// <summary>
         /// Check if the square have a building
         /// </summary>
@@ -529,18 +539,6 @@ namespace Game
                 return true;
             else
                 return false;
-        }
-
-        /// <summary>
-        /// Update the square content
-        /// </summary>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public void UpdateSquares(int row, int col, int value)
-        {
-            squares[row, col] = value;
         }
 
         /// <summary>
@@ -557,7 +555,6 @@ namespace Game
                 throw new IndexOutOfRangeException(@"(board, RandomPos) RandomPos Error");
             return pos;
         }
-
         /// <summary>
         /// Place randomly a buidling
         /// </summary>
