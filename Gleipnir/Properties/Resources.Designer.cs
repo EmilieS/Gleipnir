@@ -373,6 +373,26 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ButtonIcon_Pause {
+            get {
+                object obj = ResourceManager.GetObject("ButtonIcon_Pause", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ButtonIcon_start {
+            get {
+                object obj = ResourceManager.GetObject("ButtonIcon_start", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ButtonIcon_VillageFest {
             get {
                 object obj = ResourceManager.GetObject("ButtonIcon_VillageFest", resourceCulture);

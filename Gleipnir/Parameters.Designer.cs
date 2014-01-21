@@ -52,7 +52,7 @@
             this.timerTrackBar.BackColor = System.Drawing.Color.Peru;
             this.timerTrackBar.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.timerTrackBar.Location = new System.Drawing.Point(29, 35);
-            this.timerTrackBar.Maximum = 10000;
+            this.timerTrackBar.Maximum = 5000;
             this.timerTrackBar.Minimum = 500;
             this.timerTrackBar.Name = "timerTrackBar";
             this.timerTrackBar.Size = new System.Drawing.Size(150, 35);

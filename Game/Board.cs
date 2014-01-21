@@ -1,5 +1,4 @@
-﻿using Game;
-using Game.Buildings;
+﻿using Game.Buildings;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GamePages
+namespace Game
 {
     public class Board
     {
@@ -84,7 +83,7 @@ namespace GamePages
         /// <summary>
         /// Set the differents box with basics buildings and map objects
         /// </summary>
-        public void SetForNewGame(Game.Game game)
+        public void SetForNewGame(Game game)
         {
             // Fill all the grid with Empty color
             for (int i = 0; i < GridMaxRow; i++)
@@ -273,7 +272,7 @@ namespace GamePages
         /// Gets and sets grid from saved game
         /// </summary>
         /// <param name="game"></param>
-        internal void SetLoadGame(Game.Game game)
+        public void SetLoadGame(Game game)
         {
             // Fill all the grid with Empty color
             for (int i = 0; i < GridMaxRow; i++)

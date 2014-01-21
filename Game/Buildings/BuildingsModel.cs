@@ -72,7 +72,7 @@ namespace Game.Buildings
             _damageRepairTimer++;
         }
 
-        internal virtual void OnDamage(){}
+        internal virtual void OnDamage() { }
 
         /// <summary>
         /// Repair. amount must be positive.
@@ -133,8 +133,8 @@ namespace Game.Buildings
         {
             /*if (x == null || y == null)
                 throw new ArgumentNullException("(buildingModel, SetCoordinates) X or Y doesn't exist");*/
-            if ((x < 0 || x > 20) || (y < 0 || y > 32))
-                throw new IndexOutOfRangeException("(buildingModel, SetCoordinates) Must be in tab");
+            if ((x < 0 || x > Board.GridMaxRow) ||  (y < 0 || y > Board.GridMaxCol))
+                throw new IndexOutOfRangeException(@"(buildingModel, SetCoordinates) Must be in tab");
             this.HorizontalPos = x;
             this.VerticalPos = y;
         }
