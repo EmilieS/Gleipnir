@@ -356,6 +356,26 @@ namespace Game
         {
             //RegularBirths done in villager.
             Debug.Assert(_ownerVillage != null, @"(family, Evolution) Family's village is null");
+            //TODO : do this better! 
+            //TODO event !
+            if (OwnerVillage.JobsList.Farmer.Workers.Count * 5 < Game.TotalPop)
+            {
+                int i = 0;
+                bool hasFarmer = false;
+                while (!hasFarmer && i < _familyMembersList.Count)
+                {
+                    if (_familyMembersList[i].Job == OwnerVillage.JobsList.Farmer)
+                        hasFarmer = true;
+                    i++;
+                }
+                if (!hasFarmer)
+                {
+                    foreach (Villager v in _familyMembersList)
+                    {
+                        v.FamineImpact();
+                    }
+                }
+            }
         }
         /// <summary>
         /// Check if family is dead or not

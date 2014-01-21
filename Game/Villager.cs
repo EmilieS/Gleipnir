@@ -313,6 +313,10 @@ namespace Game
 
         #endregion
         #region called by Evolution
+        internal void FamineImpact()
+        {
+            ReduceLifeExpectancy(2);
+        }
         private void HereticFaithImpact()
         {
             if ((_health.Current & Healths.HERETIC) != 0)
