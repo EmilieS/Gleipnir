@@ -17,7 +17,7 @@ namespace Game
         ////Blacksmithes' Upgrades
         //readonly Furnace _furnace;
         //readonly Plow _plow;
-        //readonly Saw _saw;
+        readonly Saw _saw;
         //Cookers' Upgrades
         readonly Level1 _level1;
         readonly Level2 _level2;
@@ -26,7 +26,7 @@ namespace Game
         ////Crafters' Upgrades
         readonly Pulley _pulley;
         readonly Hoist _hoist;
-        //readonly Scaffolding _scaffolding;
+        readonly Scaffolding _scaffolding;
         //readonly Whitewash _whitewash;
         //readonly Cement _cement;
         //readonly Reinforced _reinforced;
@@ -43,11 +43,11 @@ namespace Game
         //public UpgradesModel Furnace { get { return Furnace; } }
         public UpgradesModel Hoist { get { return _hoist; } }
         //public UpgradesModel Plow { get { return _plow; } }
-        //public UpgradesModel Saw { get { return _saw; } }
+        public UpgradesModel Saw { get { return _saw; } }
         //public UpgradesModel Surgery { get { return _surgery; } }
         //public UpgradesModel Drugs { get { return _drugs; } }
         public UpgradesModel Pulley { get { return _pulley; } }
-        //public UpgradesModel Scaffolding { get { return _scaffolding; } }
+        public UpgradesModel Scaffolding { get { return _scaffolding; } }
         //public UpgradesModel Whitewash { get { return _whitewash; } }
         //public UpgradesModel Cement { get { return _cement; } }
         //public UpgradesModel Reinforced { get { return _reinforced; } }
@@ -79,8 +79,8 @@ namespace Game
             //_plow = new Plow(game);
             _pulley = new Pulley(game, village, this, Owner.JobsList);
             //_reinforced = new Reinforced(game);
-            //_saw = new Saw(game);
-            //_scaffolding = new Scaffolding(game);
+            _saw = new Saw(game, village, this, Owner.JobsList);
+            _scaffolding = new Scaffolding(game, village, this, Owner.JobsList);
             //_scarecrow = new Scarecrow(game);
             //_surgery = new Surgery(game);
             //_whitewash = new Whitewash(game);
@@ -98,8 +98,8 @@ namespace Game
             //_upgradesList.Add(_plow);
             _upgradesList.Add(_pulley);
             //_upgradesList.Add(_reinforced);
-            //_upgradesList.Add(_saw);
-            //_upgradesList.Add(_scaffolding);
+            _upgradesList.Add(_saw);
+            _upgradesList.Add(_scaffolding);
             //_upgradesList.Add(_scarecrow);
             //_upgradesList.Add(_surgery);
             //_upgradesList.Add(_whitewash);

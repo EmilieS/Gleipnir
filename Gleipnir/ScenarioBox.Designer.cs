@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScenarioBox));
             this.TextLabel = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // TextLabel
@@ -44,7 +47,17 @@
             this.TextLabel.TabIndex = 0;
             this.TextLabel.Text = "Bienvenue à Ragnar";
             this.TextLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.TextLabel.Click += new System.EventHandler(this.TextLabel_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(551, 99);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(47, 37);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // ScenarioBox
             // 
@@ -52,12 +65,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = global::GamePages.Properties.Resources.ScenarioBox_background;
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.TextLabel);
             this.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Location = new System.Drawing.Point(220, 450);
             this.Name = "ScenarioBox";
             this.Size = new System.Drawing.Size(640, 150);
-            this.Click += new System.EventHandler(this.ScenarioBox_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -65,6 +78,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label TextLabel;
+        internal System.Windows.Forms.Label TextLabel;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

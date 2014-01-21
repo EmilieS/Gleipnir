@@ -28,6 +28,7 @@ namespace Tests
             Assert.That(g.Villages[0].Upgrades.Level1.IsActivated);
             Assert.That(_initialCoeff != g.Villages[0].JobsList.Cooker.Coefficient);
 
+            Assert.That(g.Villages[0].Upgrades.Scaffolding != null);
         }
     }
 }
