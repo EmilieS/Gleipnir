@@ -133,8 +133,8 @@ namespace Game
             Debug.Assert(_owner != null, "(ModifyGoldGeneration) _owner is null");
             Debug.Assert(_owner.Owner != null, "(ModifyGoldGeneration) _owner._owner is null");
             Debug.Assert(_workers.Count != 0, "(ModifyGoldGeneration) there are no workers");
-            result = _owner.Owner._villagePop.Current / 2;
-            result = (result / _workers.Count) * _coefficient;
+            result = _owner.Owner._villagePop.Current * _coefficient;
+            result = result / (_workers.Count * 2);
             return result;
         }
 

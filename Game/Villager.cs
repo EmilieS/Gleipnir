@@ -427,7 +427,7 @@ namespace Game
             }
             if ((_health.Current & Healths.UNHAPPY) != 0)
             {
-                if (_callForHelpTickTimer == 20)//can get adjusted
+                if (_callForHelpTickTimer == 12)//can get adjusted
                 {
                     _callForHelpTickTimer = 0;
                     CallForHelpEnded();
@@ -438,7 +438,7 @@ namespace Game
         }
         private void CallForHelp()
         {
-            if (_happiness.Current < 25 && (_health.Current & Healths.UNHAPPY) == 0)
+            if (_happiness.Current < 50 && (_health.Current & Healths.UNHAPPY) == 0)
             {
                 _health.Current = _health.Current | Healths.UNHAPPY;
 
@@ -446,11 +446,11 @@ namespace Game
         }
 	private void CallForHelpEnded()
         {
-            if (_happiness.Current > 27)
+            if (_happiness.Current > 55)
             {
                 AddOrRemoveFaith(20);
             }
-            else if (_happiness.Current < 25)
+            else if (_happiness.Current < 45)
             {
                 AddOrRemoveFaith(-20);
             }

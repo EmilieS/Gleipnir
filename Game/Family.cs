@@ -274,12 +274,15 @@ namespace Game
         {
             if (_familyMembersList.Count != 0)//not needed as long as the families are cleaned
             {
-                if (_goldStash.Current < 16 || _goldStash.Current / FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
+                if(_goldStash.Current <1)
                     for (int i = 0; i < FamilyMembers.Count; i++)
-                        FamilyMembers[i].AddOrRemoveHappiness(-0.1);
+                        FamilyMembers[i].AddOrRemoveHappiness(-2);
+                else if (_goldStash.Current < 16 || _goldStash.Current / FamilyMembers.Count < (Game.TotalGold / Game.TotalPop) / 2)
+                    for (int i = 0; i < FamilyMembers.Count; i++)
+                        FamilyMembers[i].AddOrRemoveHappiness(-0.4);
                 else if (_goldStash.Current / FamilyMembers.Count > (Game.TotalGold / Game.TotalPop) * 3)
                     for (int i = 0; i < FamilyMembers.Count; i++)
-                        FamilyMembers[i].AddOrRemoveHappiness(0.1);
+                        FamilyMembers[i].AddOrRemoveHappiness(1);
             }
         }
         #endregion
