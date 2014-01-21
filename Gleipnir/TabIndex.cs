@@ -412,7 +412,7 @@ namespace GamePages
         private void Saw_butt_Click(object sender, EventArgs e)
         {
             _page.TheGame.Villages[0].Upgrades.Saw.Buy();
-            if (_page.TheGame.Villages[0].Upgrades.Level4.IsActivated)
+            if (_page.TheGame.Villages[0].Upgrades.Saw.IsActivated)
             {
                 Saw_butt.Enabled = false;
                 _page.PushAlert("Votre niveau de restauration a augmenté", "La scie est achetée");
@@ -427,6 +427,61 @@ namespace GamePages
             }
         }
         #endregion
+        #region Farmer's Upgrades
+        private void Scarecrow_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Scarecrow.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Scarecrow.IsActivated)
+            {
+                Saw_butt.Enabled = false;
+                _page.PushAlert("Votre niveau de restauration a augmenté", "La scie est achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Scarecrow.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
 
+        private void Fertilizer_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Fertilizer.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Fertilizer.IsActivated)
+            {
+                Saw_butt.Enabled = false;
+                _page.PushAlert("Votre niveau de restauration a augmenté", "La scie est achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Fertilizer.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
+        private void Irrigation_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Irrigation.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Irrigation.IsActivated)
+            {
+                Saw_butt.Enabled = false;
+                _page.PushAlert("Votre niveau de restauration a augmenté", "La scie est achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Irrigation.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
+        #endregion
+
+        
     }
 }

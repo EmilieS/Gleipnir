@@ -51,6 +51,7 @@
             this.Tavern = new System.Windows.Forms.Button();
             this.UpgradesTab = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.Saw_butt = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.Scaffholding_butt = new System.Windows.Forms.Button();
@@ -69,7 +70,11 @@
             this.StartHeal = new System.Windows.Forms.Button();
             this.StartEarthquake = new System.Windows.Forms.Button();
             this.StartEpidemic = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.Farmers_Label_Up = new System.Windows.Forms.Label();
+            this.Scarecrow_butt = new System.Windows.Forms.Button();
+            this.Fertilizer_butt = new System.Windows.Forms.Button();
+            this.Irrigation_butt = new System.Windows.Forms.Button();
             this.actionsMenu.SuspendLayout();
             this.buildingsTab.SuspendLayout();
             this.UpgradesTab.SuspendLayout();
@@ -77,6 +82,7 @@
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.godSpellsTab.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // actionsMenu
@@ -323,6 +329,7 @@
             // 
             this.UpgradesTab.BackgroundImage = global::GamePages.Properties.Resources.ActionTab_happiness_background;
             this.UpgradesTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.UpgradesTab.Controls.Add(this.panel4);
             this.UpgradesTab.Controls.Add(this.panel3);
             this.UpgradesTab.Controls.Add(this.panel2);
             this.UpgradesTab.Controls.Add(this.panel1);
@@ -342,6 +349,15 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(200, 115);
             this.panel3.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 15);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Forgeron";
             // 
             // Saw_butt
             // 
@@ -551,14 +567,55 @@
             this.StartEpidemic.UseVisualStyleBackColor = true;
             this.StartEpidemic.Click += new System.EventHandler(this.StartEpidemic_Click);
             // 
-            // label3
+            // panel4
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 15);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Forgeron";
+            this.panel4.Controls.Add(this.Irrigation_butt);
+            this.panel4.Controls.Add(this.Fertilizer_butt);
+            this.panel4.Controls.Add(this.Scarecrow_butt);
+            this.panel4.Controls.Add(this.Farmers_Label_Up);
+            this.panel4.Location = new System.Drawing.Point(6, 290);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(200, 100);
+            this.panel4.TabIndex = 4;
+            // 
+            // Farmers_Label_Up
+            // 
+            this.Farmers_Label_Up.AutoSize = true;
+            this.Farmers_Label_Up.Location = new System.Drawing.Point(4, 4);
+            this.Farmers_Label_Up.Name = "Farmers_Label_Up";
+            this.Farmers_Label_Up.Size = new System.Drawing.Size(52, 15);
+            this.Farmers_Label_Up.TabIndex = 0;
+            this.Farmers_Label_Up.Text = "Fermiers";
+            // 
+            // Scarecrow_butt
+            // 
+            this.Scarecrow_butt.Location = new System.Drawing.Point(0, 22);
+            this.Scarecrow_butt.Name = "Scarecrow_butt";
+            this.Scarecrow_butt.Size = new System.Drawing.Size(45, 40);
+            this.Scarecrow_butt.TabIndex = 5;
+            this.Scarecrow_butt.Text = "Epouv";
+            this.Scarecrow_butt.UseVisualStyleBackColor = true;
+            this.Scarecrow_butt.Click += new System.EventHandler(this.Scarecrow_butt_Click);
+            // 
+            // Fertilizer_butt
+            // 
+            this.Fertilizer_butt.Location = new System.Drawing.Point(51, 22);
+            this.Fertilizer_butt.Name = "Fertilizer_butt";
+            this.Fertilizer_butt.Size = new System.Drawing.Size(45, 40);
+            this.Fertilizer_butt.TabIndex = 6;
+            this.Fertilizer_butt.Text = "Fertilisant";
+            this.Fertilizer_butt.UseVisualStyleBackColor = true;
+            this.Fertilizer_butt.Click += new System.EventHandler(this.Fertilizer_butt_Click);
+            // 
+            // Irrigation_butt
+            // 
+            this.Irrigation_butt.Location = new System.Drawing.Point(102, 22);
+            this.Irrigation_butt.Name = "Irrigation_butt";
+            this.Irrigation_butt.Size = new System.Drawing.Size(45, 40);
+            this.Irrigation_butt.TabIndex = 7;
+            this.Irrigation_butt.Text = "Irrigation";
+            this.Irrigation_butt.UseVisualStyleBackColor = true;
+            this.Irrigation_butt.Click += new System.EventHandler(this.Irrigation_butt_Click);
             // 
             // TabIndex
             // 
@@ -578,6 +635,8 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.godSpellsTab.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -625,5 +684,10 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button Saw_butt;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button Scarecrow_butt;
+        private System.Windows.Forms.Label Farmers_Label_Up;
+        private System.Windows.Forms.Button Fertilizer_butt;
+        private System.Windows.Forms.Button Irrigation_butt;
     }
 }
