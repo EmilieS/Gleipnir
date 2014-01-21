@@ -25,7 +25,7 @@ namespace Game
             g.VillagerAdded();
             parentFamily.OwnerVillage.VillagerAdded();
             Debug.Assert(g != null);
-            if (Game.Rand.Next(101) < 2)
+            if (Game.Rand.Next(100) < 6)
             {
                 _faith.Current = 13;
             }

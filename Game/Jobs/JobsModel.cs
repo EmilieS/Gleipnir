@@ -169,7 +169,7 @@ namespace Game
                 int nbHeretics = _nbHeretics;
                 foreach (Villager v in _workers)
                 {
-                    v.AddOrRemoveFaith(-0.1 * nbHeretics);
+                    v.AddOrRemoveFaith(-0.4 * nbHeretics);
                 }
             }
         }
