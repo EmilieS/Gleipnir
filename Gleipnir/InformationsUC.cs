@@ -11,17 +11,31 @@ using Game;
 
 namespace GamePages
 {
-    public partial class InformationsUC : UserControl // create an interface to engine advance
+    public partial class InformationsUC : UserControl
     {
         readonly GeneralPage _page;
+        bool isPaused;
 
-        // TODO : Complete the Transitions, Create ingame menu, go back to a Main menu
         public InformationsUC(GeneralPage p)
         {
             _page = p;
             InitializeComponent();
+        }
 
-            menuButton.Click += menuButton_Click;
+        private void pauseButton_Click(object sender, EventArgs e)
+        {
+            if (isPaused)
+            {
+                pauseButton.BackgroundImage = GamePages.Properties.Resources.ButtonIcon_Pause;
+                isPaused = false;
+                _page.RestartTimer();
+            }
+            else
+            {
+                pauseButton.BackgroundImage = GamePages.Properties.Resources.ButtonIcon_start;
+                isPaused = true;
+                _page.PauseTimer();
+            }
         }
 
         private void StepByStep_Click(object sender, EventArgs e)

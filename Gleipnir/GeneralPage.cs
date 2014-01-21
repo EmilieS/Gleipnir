@@ -74,6 +74,10 @@ namespace GamePages
 
         public GeneralPage()
         {
+            // Timer set
+            _interval = 2000; // 2s timer
+            _timer = null;
+
             // Create windows objects
             _loading = new LoadingUC();
             _home = new HomepageUC(this);
@@ -98,8 +102,6 @@ namespace GamePages
             _home.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
             this.Controls.Add(_home);
             _home.Show();
-            _interval = 0;
-            _timer = null;
         }
         // NewGame
         public void StartGame()
@@ -388,9 +390,8 @@ namespace GamePages
                 for (int j = 0; j < Board.GridMaxCol; j++)
                     _grid[i, j].Enabled = false;
 
-            // Stop Timer
-            if (_timer != null)
-                _timer.Stop();
+            // Pause Game
+            PauseTimer();
         }
         internal void UnLockEverything()
         {
@@ -403,9 +404,20 @@ namespace GamePages
             // Unlock Grid
             for (int i = 0; i < Board.GridMaxRow; i++)
                 for (int j = 0; j < Board.GridMaxCol; j++)
-                    _grid[i, j].Enabled = false;
+                    _grid[i, j].Enabled = true;
 
-            // Start Timer
+            // Restart Game
+            RestartTimer();
+        }
+
+        // Timer Methods
+        public void PauseTimer()
+        {
+            if (_timer != null)
+                _timer.Stop();
+        }
+        public void RestartTimer()
+        {
             if (_timer != null)
                 _timer.Start();
         }
@@ -438,6 +450,10 @@ namespace GamePages
             this.Controls.Remove(_scenarioBox);
             this.Controls.Remove(_stats);
             this.Controls.Remove(_eventFlux);
+
+            // Destroy Grid & Board
+            _board = null;
+            _grid = null;
 
             // Hide loading effects
             _loading.SendToBack();
@@ -976,6 +992,11 @@ namespace GamePages
             else
             {
                 SquareControl squareControl = (SquareControl)sender;
+
+                // Set double-buffering
+                SetStyle(ControlStyles.UserPaint, true);
+                SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+                SetStyle(ControlStyles.DoubleBuffer, true);
 
                 switch (_grid[squareControl.Row, squareControl.Col].Contents)
                 {

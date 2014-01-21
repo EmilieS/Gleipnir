@@ -62,7 +62,6 @@
     <Compile Include="GameEventUC.Designer.cs">
       <DependentUpon>GameEventUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Board.cs" />
     <Compile Include="HomepageUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -272,6 +271,8 @@
     <None Include="Resources\Building_Baths.png" />
     <None Include="Resources\Building_OfferingsWarehouse.png" />
     <None Include="Resources\Building_Brothel.png" />
+    <None Include="Resources\ButtonIcon_Pause.png" />
+    <None Include="Resources\ButtonIcon_start.png" />
     <Content Include="Resources\Extra\firstNameList.txt" />
     <Content Include="Resources\Extra\nameList.txt" />
     <Content Include="Resources\Extra\scenario.txt" />
