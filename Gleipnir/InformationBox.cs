@@ -14,7 +14,6 @@ namespace GamePages
 {
     public partial class InformationBox : UserControl
     {
-        Meeting _meeting;
         GeneralPage _page;
         Family _family;
         int positionX;
@@ -32,8 +31,12 @@ namespace GamePages
         // Meeting Button Event
         private void GodMeeting_Click(object sender, EventArgs e)
         {
-            _meeting.Convocate();
-            _page.ActionMenu.ShowVillagerListInFamily(_family);
+            if (_page.TheGame.Villages[0].MeetingStart(_family))
+            {
+                GodMeeting.Visible = false;
+                GodMeeting.Enabled = false;
+            }
+            //_page.ActionMenu.ShowVillagerListInFamily(_family);
         }
 
         // Hide or Show elements in InfoBox
@@ -93,10 +96,17 @@ namespace GamePages
                 _page.ActionMenu.ShowVillagerListInFamily(family);
 
                 // Meetings Details
-                _meeting = new Meeting(family);
                 _family = family;
-                GodMeeting.Visible = true;
-                GodMeeting.Enabled = true;
+                if (_page.TheGame.Villages[0].Meeting != null)
+                {
+                    GodMeeting.Visible = false;
+                    GodMeeting.Enabled = false;
+                }
+                else
+                {
+                    GodMeeting.Visible = true;
+                    GodMeeting.Enabled = true;
+                }
             }
             else
             {

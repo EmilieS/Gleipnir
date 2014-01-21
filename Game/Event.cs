@@ -271,6 +271,20 @@ namespace Game
             }
         }
     }
+    public class MeetingDestroyedEvent : Event<Meeting>
+    {
+        string _familyName;
+        internal MeetingDestroyedEvent(Meeting m, string familyName)
+            : base(m)
+        {
+            _familyName = familyName;
+        }
+        override public void PublishMessage(IWindow b)
+        {
+            string toPush = String.Format("La convocation de la famille {0} est terminée.", _familyName);
+            b.PushAlert(toPush, "Convocation");
+        }
+    }
 }
 /*
 // Two good ways to challenge types!

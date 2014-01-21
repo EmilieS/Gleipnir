@@ -6,56 +6,64 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    public class Meeting
+    public class Meeting : GameItem
     {
 
-        Family actualConvocated;
+        Family _family;
+        public Family Family { get { return _family; } }
+        Village _village;
+        bool _endMeeting;
 
         public Meeting(Family f)
+            : base(f.Game)
         {
-            actualConvocated = f;
+            _family = f;
+            _village = f.OwnerVillage;
+            Convocate();
         }
 
-        public Family ActualConvocated
-        {
-            get { return actualConvocated; }
-            set { actualConvocated = value; }
-
-        }
+        public Family ActualConvocated { get { return _family; } }
 
         public void Convocate()
         {
-            if (actualConvocated != null)
-            {
-                foreach (Family f in actualConvocated.OwnerVillage.FamiliesList)
-                {
-                    foreach (Villager villager in f.FamilyMembers)
-                    {
-                        villager.MeetingEnded();
-                    }
-                }
-            }
-            foreach (Villager villager in actualConvocated.FamilyMembers)
+            foreach (Villager villager in _family.FamilyMembers)
             {
                 villager.MeetingStarted();
-
             }
         }
 
-        public void ReleaseConvocated(Family family)
+        //public void AffectMissionToVillager(Villager villager, Missions expectedMission)
+        //{
+        //    if (expectedMission != villager.Mission)
+        //    {
+        //        villager.Mission = expectedMission;
+        //    }
+        //}
+        internal void EndMeeting()
         {
-            foreach (Villager villager in family.FamilyMembers)
+            _endMeeting = true;
+        }
+        internal override void OnDestroy()
+        {
+            _village.MeetingEnded();
+            _village = null;
+            _family = null;
+        }
+        internal override void DieOrIsAlive(List<IEvent> eventList)
+        {
+            if (_endMeeting == true)
             {
-                villager.MeetingEnded();
+                eventList.Add(new MeetingDestroyedEvent(this, _family.Name));
+                foreach (Villager villager in _family.FamilyMembers)
+                {
+                    villager.MeetingEnded();
+                }
+                Destroy();
             }
         }
-
-        public void AffectMissionToVillager(Villager villager, Missions expectedMission)
+        internal override void CloseStep(List<IEvent> eventList)
         {
-            if (expectedMission != villager.Mission)
-            {
-                villager.Mission = expectedMission;
-            }
+
         }
     }
 }

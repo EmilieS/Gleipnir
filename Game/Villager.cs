@@ -58,6 +58,13 @@ namespace Game
                     }
                     Engage(this, parentFamily); break;
             }
+            if (parentFamily.OwnerVillage.Meeting != null)
+            {
+                if (parentFamily.OwnerVillage.Meeting.Family == parentFamily)
+                {
+                    MeetingStarted();
+                }
+            }
             _happiness.Current = parentFamily.HappinessAverage();
             //_job = Jobs.FARMER;
             _age = 0;

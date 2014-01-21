@@ -296,6 +296,7 @@ namespace Game
             _villageHappiness = totalH / nbf;
             _villageFaith = totalF / nbf;
         }
+        #region Fest
         SamhainFest _samhainFest;
         SamhainFest SamhainFest { get; set; }
 
@@ -314,8 +315,36 @@ namespace Game
             if (_samhainFest == null) { throw new InvalidOperationException(); }
             _samhainFest = null;
         }
+        #endregion
 
+        #region meeting
+        Meeting _meeting;
+        public Meeting Meeting { get { return _meeting; } }
+        public bool MeetingStart(Family f)
+        {
+            if (_meeting != null)
+                return false;
+            if (f == null)
+                return false;
+            if (BuildingsList.TablePlaceList.Count == 0)
+                return false;
 
+            _meeting = new Meeting(f);
+            return true;
+        }
+        public bool EndMeeting()
+        {
+            if (_meeting == null)
+                return false;
+            _meeting.EndMeeting();
+            return true;
+        }
+        internal void MeetingEnded()
+        {
+            if (_meeting == null) { throw new InvalidOperationException(); }
+            _meeting = null;
+        }
+        #endregion
 
         /// <summary>
         /// Modify number offering points generated
@@ -375,6 +404,13 @@ namespace Game
         /// <param name="family"></param>
         internal void FamilyDestroyed(Family family)
         {
+            if (_meeting != null)
+            {
+                if (family == _meeting.Family)
+                {
+                    EndMeeting();
+                }
+            }
             Debug.Assert(family != null, @"(village, FamilyDestroyed) Family don't exist");
             _familiesList.Remove(family);
         }
