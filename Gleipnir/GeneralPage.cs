@@ -218,7 +218,7 @@ namespace GamePages
 
             #region Trace Window
             trace = new traceBox();
-            //trace.Show();
+            trace.Show();
             #endregion
 
             // Hide loading effects

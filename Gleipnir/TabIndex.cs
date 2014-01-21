@@ -23,6 +23,7 @@ namespace GamePages
         int positionX;
         int positionY;
         Random rnd;
+        ToolTip GeneralTooltip;
 
         public TabIndex(GeneralPage p)
         {
@@ -34,6 +35,11 @@ namespace GamePages
 
             positionX = 0;
             positionY = 10;
+
+            GeneralTooltip = new ToolTip();
+            GeneralTooltip.ShowAlways = true;
+            GeneralTooltip.InitialDelay = 100;
+            GeneralTooltip.ReshowDelay = 100;
 
             // Create imageList
             ImageList imageList = new ImageList();
@@ -482,6 +488,132 @@ namespace GamePages
         }
         #endregion
 
-        
+        #region Tooltips' implementation 
+        private void UnionOfCrafter_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(UnionOfCrafter, "Syndicat");
+        }
+
+        private void Forge_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Forge, "Forge");
+        }
+
+        private void Farm_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Farm, "Ferme");
+        }
+
+        private void ApothecaryOffice_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(ApothecaryOffice, "Cabinet d'apothicaire");
+        }
+
+        private void Restaurant_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Restaurant, "Restaurant");
+        }
+
+        private void ClothesShop_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(ClothesShop, "Tailleur");
+        }
+
+        private void Mill_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Mill, "Moulin");
+        }
+
+        private void Baths_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Baths, "Bains");
+        }
+
+        private void Brothel_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Brothel, "Maison close");
+        }
+
+        private void Tavern_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Tavern, "Taverne");
+        }
+
+        private void Theater_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Theater, "Théatre");
+        }
+
+        private void PartyRoom_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(PartyRoom, "Salle des fêtes");
+        }
+
+        private void OfferingsWarehouse_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(OfferingsWarehouse, "Sanctuaire");
+        }
+
+        private void Chapel_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Chapel, "Chapelle");
+        }
+
+        private void Level1_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Level1_butt, "Niveau 2 Cuisine");
+        }
+
+        private void Level2_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Level2_butt, "Niveau 3 Cuisine");
+        }
+
+        private void Level3_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Level3_butt, "Niveau 4 Cuisine");
+        }
+
+        private void Level4_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Level4_butt, "Niveau 5 Cuisine");
+        }
+
+        private void Pulley_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Pulley_butt, "Poulie");
+        }
+
+        private void Hoist_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Hoist_butt, "Grue");
+        }
+
+        private void Scaffolding_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Scaffolding_butt, "Echaffaudage");
+        }
+
+        private void Saw_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Saw_butt, "Scie");
+        }
+
+        private void Scarecrow_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Scarecrow_butt, "Epouvantail");
+        }
+
+        private void Fertilizer_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Fertilizer_butt, "Fertilisant");
+        }
+
+        private void Irrigation_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Irrigation_butt, "Système d'irrigation");
+        }
+
+        #endregion
     }
 }
