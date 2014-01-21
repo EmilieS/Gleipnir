@@ -53,7 +53,7 @@ namespace Game
         /// Add a Villager to the Job
         /// </summary>
         /// <param name="person"></param>
-        public void AddPerson(Villager person)
+        internal void AddPerson(Villager person)
         {
             if (!AddPersonPrerequisites())
                 return;
@@ -72,20 +72,38 @@ namespace Game
             }
             else throw new InvalidOperationException();
         }
+        public bool AddPerson2(Villager person)
+        {
+            if (!AddPersonPrerequisites())
+                return false;
+            if (person == null)
+                return false;
+            if (!_workers.Contains(person))
+            {
+                person.setJob(this);
+                _workerListChanged = true;
+                _workers.Add(person);
+                if ((person.Health & Healths.HERETIC) != 0)
+                {
+                    addHereticWorker();
+                }
+                Debug.Assert(_workers.Contains(person), "(AddPerson) the person was not added Oo");
+                //_gold = ModifyGoldGeneration();//not usefull here really...
+                return true;
+            }
+            else
+                return false;
+        }
         //TODO (check if building)
-        internal abstract bool AddPersonPrerequisites();
+        public abstract bool AddPersonPrerequisites();
 
         /// <summary>
         /// Remove the Villager from the Job
         /// </summary>
         /// <param name="person"></param>
-        public void RemovePerson(Villager person)
+        internal void RemovePerson(Villager person)
         {
             if (person == null) throw new ArgumentNullException();
-            if ((person.Health & Healths.HERETIC) != 0)
-            {
-                removeHereticWorker();
-            }
             if (_workers.Contains(person))
             {
                 person.setJob(null);
@@ -95,7 +113,25 @@ namespace Game
             }
             else throw new InvalidOperationException();
         }
-
+        public bool RemovePerson2(Villager person)
+        {
+            if (person == null)
+                return false;
+            if (_workers.Contains(person))
+            {
+                if ((person.Health & Healths.HERETIC) != 0)
+                {
+                    removeHereticWorker();
+                }
+                person.setJob(null);
+                _workerListChanged = true;
+                _workers.Remove(person);
+                //_gold = ModifyGoldGeneration();//not usefull here really
+                return true;
+            }
+            else
+                return false;
+        }
         /// <summary>
         /// Add gold to workers
         /// </summary>
@@ -184,6 +220,10 @@ namespace Game
             Debug.Assert(dead.IsDead(), "(JobsModel) villager is not dead ?!");
             Debug.Assert(_workers.Contains(dead), "(JobModel) villager isn't even in the workerlist!");
             Debug.Assert((dead.Faith <= 15) == ((dead.Health & Healths.HERETIC) != 0), "(JobModel/villagerdestroyed) heretism is not right!");
+            if ((dead.Health & Healths.HERETIC) != 0)
+            {
+                removeHereticWorker();
+            }
             RemovePerson(dead);
         }
         #endregion

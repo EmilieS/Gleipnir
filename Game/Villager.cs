@@ -128,9 +128,15 @@ namespace Game
         {
             _job = NewJob;
         }
-        public void RemoveJob()
+        public bool RemoveJob()
         {
-            _job.RemovePerson(this);
+            return _job.RemovePerson2(this);
+        }
+        public bool AddToJob(JobsModel job)
+        {
+            if (_job != null)
+                _job.RemovePerson2(this);
+            return job.AddPerson2(this);
         }
         public ActivityStatus ActivityStatus
         {
