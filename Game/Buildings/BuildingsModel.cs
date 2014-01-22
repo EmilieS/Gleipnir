@@ -87,6 +87,8 @@ namespace Game.Buildings
         internal bool Repair2(int amount)
         {
             Debug.Assert(amount > 0, "(Repair2|BuildingsModel) amount is negative or null");
+            if (_hp < 1)
+                return false;
 
             if (_hp + amount >= _maxHp)
             {
