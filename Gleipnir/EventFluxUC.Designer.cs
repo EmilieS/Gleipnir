@@ -42,7 +42,7 @@
             this.ImeMode = System.Windows.Forms.ImeMode.HangulFull;
             this.Location = new System.Drawing.Point(870, 40);
             this.Name = "EventFluxUC";
-            this.Size = new System.Drawing.Size(247, 400);
+            this.Size = new System.Drawing.Size(270, 400);
             this.ResumeLayout(false);
 
         }

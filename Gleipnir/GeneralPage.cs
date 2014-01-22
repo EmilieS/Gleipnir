@@ -74,7 +74,7 @@ namespace GamePages
             InitializeComponent();
 
             // Timer set
-            _interval = 2000; // 2s timer
+            _interval = 1000; // 1s timer
             _timer = null;
 
             // Create windows objects
@@ -83,53 +83,61 @@ namespace GamePages
             _parametersBox = new Parameters(this);
 
             // Hide ParametersBox
-            this.Controls.Add(_parametersBox);
             _parametersBox.SendToBack();
+            this.Controls.Add(_parametersBox);
+            _parametersBox.Visible = false;
             _parametersBox.Hide();
 
             // Show Logo
             this.Controls.Add(gleipnir_logo);
             gleipnir_logo.SendToBack();
+            gleipnir_logo.Visible = true;
             gleipnir_logo.Show();
 
             // Hide loading
             this.Controls.Add(_loading);
+            _loading.Visible = false;
             _loading.Hide();
 
             // Show home page
             _home.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
             this.Controls.Add(_home);
+            _home.Visible = true;
             _home.Show();
         }
         // NewGame
         public void StartGame()
         {
-            // Hide home page
-            _home.Hide();
-            _home.Refresh();
+            // Suspend Graphic Update
+            this.SuspendLayout();
 
-            // Show loading effects
+            // Hide home page
+            _home.Visible = false;
+            _home.Hide();
             _loading.BringToFront();
+            _loading.Visible = true;
             _loading.Show();
             _loading.Refresh();
 
-            // Create the game
-            _game = new Game.Game();
+            // Restart Graphics Updates
+            this.ResumeLayout();
 
-            // Create objects
+            // Suspend Graphic Update
+            this.SuspendLayout();
+
+            // Create the game & objects
+            _game = new Game.Game();
             _gameMenu = new InGameMenu(this);
-            _actionMenu = new TabIndex(this);
             _stats = new InformationsUC(this);
             _eventFlux = new EventFluxUC();
             _scenarioBox = new ScenarioBox(this);
-            _infoBox = new InformationBox(this);      
+            _actionMenu = new TabIndex(this);
+            _infoBox = new InformationBox(this);
+            _grid = new SquareControl[Board.GridMaxRow, Board.GridMaxCol];
+            _board = _game.Villages[0].VillageGrid;
             options = new Options();
 
-            // Prepare Grid
-            _board = _game.Villages[0].VillageGrid;
-            _grid = new SquareControl[Board.GridMaxRow, Board.GridMaxCol];
-
-            #region grid generation
+            #region Grid Generation
             // Set double-buffering
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
@@ -141,13 +149,15 @@ namespace GamePages
                 {
                     // Create
                     _grid[i, j] = new SquareControl(i, j);
-                    // Locate
+
+                    // Hide & Configure
+                    _grid[i, j].Visible = false;
+                    _grid[i, j].SuspendLayout();
                     _grid[i, j].Left = 220 + (j * _grid[i, j].Width);
                     _grid[i, j].Top = 40 + (i * _grid[i, j].Height);
-                    // Add
-                    this.Controls.Add(_grid[i, j]);
                     _grid[i, j].SendToBack();
-                    _grid[i, j].Show();
+                    this.Controls.Add(_grid[i, j]);
+                    _grid[i, j].ResumeLayout();
 
                     // Add events
                     _grid[i, j].MouseMove += new MouseEventHandler(SquareControl_MouseMove);
@@ -157,80 +167,102 @@ namespace GamePages
             }
             #endregion
 
-            // Set the grid
+            // Setting the grid
             _board.SetForNewGame(_game);
             _emptySquaresList = new List<SquareControl>();
             _emptySquaresList = SetEmptySquaresList(_emptySquaresList, _board, _grid);
             UpdateGrid(_board, _grid);
 
+            #region Create, Hide and Configure objects
+            // InGameMenu
+            _gameMenu.SuspendLayout();
+            _gameMenu.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            _gameMenu.BringToFront();
+            this.Controls.Add(_gameMenu);
+            _gameMenu.ResumeLayout();
+            _gameMenu.Visible = false;
+            _gameMenu.Hide();
+
+            // Stats
+            _stats.SuspendLayout();
+            _stats.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+            _stats.SendToBack();
+            PushGeneralGold(_game.TotalGold); //PushGeneralGold(_game.Villages[0].Gold);
+            PushPopulation(_game.TotalPop);
+            PushGeneralFaith(_game.Villages[0].Faith);
+            PushGeneralHappiness(_game.Villages[0].Happiness);
+            PushGeneralCoins(_game.Offerings);
+            PushOfferingsPointsPerTick(_game.Villages[0].OfferingsPointsPerTick);
+            this.Controls.Add(_stats);
+            _stats.ResumeLayout();
+            _stats.Visible = false;
+            _stats.Hide();
+
+            // EventFlux
+            _eventFlux.Visible = false;
+            _eventFlux.Hide();
+            _eventFlux.SuspendLayout();
+            _eventFlux.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            _eventFlux.SendToBack();
+            this.Controls.Add(_eventFlux);
+            _eventFlux.ResumeLayout();
+
+            // ScenarioBox
+            _scenarioBox.Visible = false;
+            _scenarioBox.Hide();
+            _scenarioBox.SuspendLayout();
+            _scenarioBox.Anchor = AnchorStyles.Bottom;
+            _scenarioBox.SendToBack();
+            this.Controls.Add(_scenarioBox);
+            _scenarioBox.ResumeLayout();
+
+            // ActionMenu
+            _actionMenu.Visible = false;
+            _actionMenu.Hide();
+            _actionMenu.SuspendLayout();
+            _actionMenu.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top);
+            _actionMenu.SendToBack();
+            this.Controls.Add(_actionMenu);
+            _actionMenu.ResumeLayout();
+            _actionMenu.Refresh();
+
+            // InfoBox
+            _infoBox.Visible = false;
+            _infoBox.Hide();
+            _infoBox.SuspendLayout();
+            _infoBox.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            _infoBox.SetNothingSelected();
+            this.Controls.Add(_infoBox);
+            _infoBox.ResumeLayout();
+            #endregion
+
             // Hide loading effects
+            gleipnir_logo.Visible = false;
             gleipnir_logo.Hide();
             gleipnir_logo.Refresh();
             _loading.SendToBack();
+            _loading.Visible = false;
             _loading.Hide();
-            _loading.Refresh();
 
-            #region Window elements
-            #region Add all elements
-            this.Controls.Add(_actionMenu);
-            this.Controls.Add(_scenarioBox);
-            this.Controls.Add(_stats);
-            this.Controls.Add(_infoBox);
-            this.Controls.Add(_eventFlux);
-            this.Controls.Add(_gameMenu);
-            #endregion
-            #region Configure all elements
-            // ActionMenu
-            _actionMenu.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top);
-            _actionMenu.SendToBack();
+            #region Show Elements
+            _actionMenu.Visible = true;
             _actionMenu.Show();
-
-            // ScenarioBox
-            _scenarioBox.Anchor = AnchorStyles.Bottom;
-            _scenarioBox.SendToBack();
-            _scenarioBox.Show();
-
-            // Stats
-            _stats.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
-            _stats.SendToBack();
+            _stats.Visible = true;
             _stats.Show();
-            _stats.StepByStep.Visible = true;
-
-            // InfoBox
-            _infoBox.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
-            _infoBox.SetNothingSelected();
-            _infoBox.SendToBack();
-            _infoBox.Show();
-
-            // GameMenu
-            _gameMenu.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
-            _gameMenu.BringToFront();
-            _gameMenu.Hide();
-            //_gameMenu.ExpectGoBackToMenu += GoBackToMenu;
-
-            // EventFluw
-            _eventFlux.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
-            _eventFlux.SendToBack();
+            _eventFlux.Visible = true;
             _eventFlux.Show();
-            #endregion
-            #endregion
-
-            #region EventBox tests
-            /*PushAlert("coucoudfghjkjhgfd", "coucou1");
-            PushAlert("coucou2546", "coucou2");
-            PushAlert("coucou4543", "coucou3");
-            PushAlert("coucou44545", "coucou4");
-            PushAlert("coucou54545", "coucou5");
-            PushAlert("coucou65454", "coucou6");
-            PushAlert("coucou75454", "coucou7");
-            PushAlert("coucou8888", "coucou8");
-            PushAlert("coucou9", "coucou");
-            PushAlert("coucou10", "coucou");
-            PushAlert("coucou11", "coucou");
-            PushAlert("coucou12", "coucou");
-            PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");*/
+            _scenarioBox.Visible = true;
+            _scenarioBox.Show();
+            _infoBox.Visible = true;
+            _infoBox.Show();
+            for (int i = 0; i < Board.GridMaxRow; i++)
+            {
+                for (int j = 0; j < Board.GridMaxCol; j++)
+                {
+                    _grid[i, j].Visible = true;
+                    _grid[i, j].Show();
+                }
+            }
             #endregion
 
             #region Trace Window
@@ -241,9 +273,6 @@ namespace GamePages
             // Wait the scenario's end
             // LockEverything();
 
-            // Do 1 step
-            Step();
-
             // Timer
             if (_interval == 0)
                 _timer = null;
@@ -255,36 +284,44 @@ namespace GamePages
                 _timer.Start();
             }
             GameStarted = true;
+
+            // Restart Graphics Updates
+            this.ResumeLayout();
         }
         // LoadGame
         public void LoadGame()
         {
-            // Hide home page
-            _home.Hide();
-            _home.Refresh();
+            // Wait Loadings Effecs
+            this.SuspendLayout();
 
-            // Show loading effects
+            // Hide home page
+            _home.Visible = false;
+            _home.Hide();
             _loading.BringToFront();
+            _loading.Visible = true;
             _loading.Show();
             _loading.Refresh();
 
-            // Load the game
-            _game = Game.serialize.load();
+            // Restart Graphics Updates
+            this.ResumeLayout();
 
-            // Create objects
+            // Wait Windows Elements
+            this.SuspendLayout();
+
+            // Create the game & objects
+            _game = Game.serialize.load();
             _gameMenu = new InGameMenu(this);
-            _actionMenu = new TabIndex(this);
             _stats = new InformationsUC(this);
             _eventFlux = new EventFluxUC();
             _scenarioBox = new ScenarioBox(this);
+            _actionMenu = new TabIndex(this);
             _infoBox = new InformationBox(this);
-            options = new Options();
-
-            // Prepare Grid
             _board = _game.Villages[0].VillageGrid;
             _grid = new SquareControl[Board.GridMaxRow, Board.GridMaxCol];
+            options = new Options();
 
-            #region grid generation
+            #region Grid Generation
+            // Set double-buffering
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
@@ -295,13 +332,15 @@ namespace GamePages
                 {
                     // Create
                     _grid[i, j] = new SquareControl(i, j);
-                    // Locate
+
+                    // Hide & Configure
+                    _grid[i, j].Visible = false;
+                    _grid[i, j].SuspendLayout();
                     _grid[i, j].Left = 220 + (j * _grid[i, j].Width);
                     _grid[i, j].Top = 40 + (i * _grid[i, j].Height);
-                    // Add
-                    this.Controls.Add(_grid[i, j]);
                     _grid[i, j].SendToBack();
-                    _grid[i, j].Show();
+                    this.Controls.Add(_grid[i, j]);
+                    _grid[i, j].ResumeLayout();
 
                     // Add events
                     _grid[i, j].MouseMove += new MouseEventHandler(SquareControl_MouseMove);
@@ -311,74 +350,111 @@ namespace GamePages
             }
             #endregion
 
-            // Set the grid
+            // Setting the grid
             _board.SetLoadGame(_game);
             _emptySquaresList = new List<SquareControl>();
             _emptySquaresList = SetEmptySquaresList(_emptySquaresList, _board, _grid);
             UpdateGrid(_board, _grid);
 
-            // Hide loading effects
-            gleipnir_logo.Hide();
-            gleipnir_logo.Refresh();
-            _loading.SendToBack();
-            _loading.Hide();
-            _loading.Refresh();
-
-            #region Window elements
-            #region Add all elements
-            this.Controls.Add(_actionMenu);
-            this.Controls.Add(_scenarioBox);
-            this.Controls.Add(_stats);
-            this.Controls.Add(_infoBox);
-            this.Controls.Add(_eventFlux);
+            #region Create, Hide and Configure objects
+            // InGameMenu
+            _gameMenu.SuspendLayout();
+            _gameMenu.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            _gameMenu.BringToFront();
             this.Controls.Add(_gameMenu);
-            #endregion
-            #region Configure all elements
-            // ActionMenu
-            _actionMenu.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top);
-            _actionMenu.SendToBack();
-            _actionMenu.Show();
-
-            // ScenarioBox
-            _scenarioBox.Anchor = AnchorStyles.Bottom;
-            _scenarioBox.SendToBack();
-            _scenarioBox.Show();
+            _gameMenu.ResumeLayout();
+            _gameMenu.Visible = false;
+            _gameMenu.Hide();
 
             // Stats
+            _stats.SuspendLayout();
             _stats.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
             _stats.SendToBack();
-            _stats.Show();
-            //PushGeneralGold(_game.Villages[0].Gold); // Must add gold in village.Gold
-            PushGeneralGold(_game.TotalGold);
+            PushGeneralGold(_game.TotalGold); //PushGeneralGold(_game.Villages[0].Gold);
             PushPopulation(_game.TotalPop);
             PushGeneralFaith(_game.Villages[0].Faith);
             PushGeneralHappiness(_game.Villages[0].Happiness);
             PushGeneralCoins(_game.Offerings);
             PushOfferingsPointsPerTick(_game.Villages[0].OfferingsPointsPerTick);
-            _stats.StepByStep.Visible = true;
+            this.Controls.Add(_stats);
+            _stats.ResumeLayout();
+            _stats.Visible = false;
+            _stats.Hide();
 
-            // InfoBox
-            _infoBox.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
-            _infoBox.SetNothingSelected();
-            _infoBox.SendToBack();
-            _infoBox.Show();
-
-            // GameMenu
-            _gameMenu.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
-            _gameMenu.BringToFront();
-            _gameMenu.Hide();
-            //_gameMenu.ExpectGoBackToMenu += GoBackToMenu;
-
-            // EventFluw
+            // EventFlux
+            _eventFlux.Visible = false;
+            _eventFlux.Hide();
+            _eventFlux.SuspendLayout();
             _eventFlux.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             _eventFlux.SendToBack();
-            _eventFlux.Show();
-            #endregion
+            this.Controls.Add(_eventFlux);
+            _eventFlux.ResumeLayout();
+
+            // ScenarioBox
+            _scenarioBox.Visible = false;
+            _scenarioBox.Hide();
+            _scenarioBox.SuspendLayout();
+            _scenarioBox.Anchor = AnchorStyles.Bottom;
+            _scenarioBox.SendToBack();
+            this.Controls.Add(_scenarioBox);
+            _scenarioBox.ResumeLayout();
+
+            // ActionMenu
+            _actionMenu.Visible = false;
+            _actionMenu.Hide();
+            _actionMenu.SuspendLayout();
+            _actionMenu.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top);
+            _actionMenu.SendToBack();
+            this.Controls.Add(_actionMenu);
+            _actionMenu.ResumeLayout();
+            _actionMenu.Refresh();
+
+            // InfoBox
+            _infoBox.Visible = false;
+            _infoBox.Hide();
+            _infoBox.SuspendLayout();
+            _infoBox.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            _infoBox.SetNothingSelected();
+            this.Controls.Add(_infoBox);
+            _infoBox.ResumeLayout();
             #endregion
 
-            // Trace Window
+            // Hide loading effects
+            gleipnir_logo.Visible = false;
+            gleipnir_logo.Hide();
+            gleipnir_logo.Refresh();
+            _loading.SendToBack();
+            _loading.Visible = false;
+            _loading.Hide();
+
+            #region Show Elements
+            _actionMenu.Visible = true;
+            _actionMenu.Show();
+            _stats.Visible = true;
+            _stats.Show();
+            _eventFlux.Visible = true;
+            _eventFlux.Show();
+            _scenarioBox.Visible = true;
+            _scenarioBox.Show();
+            _infoBox.Visible = true;
+            _infoBox.Show();
+            for (int i = 0; i < Board.GridMaxRow; i++)
+            {
+                for (int j = 0; j < Board.GridMaxCol; j++)
+                {
+                    _grid[i, j].Visible = true;
+                    _grid[i, j].Show();
+                }
+            }
+            #endregion
+
+            #region Trace Window
             trace = new traceBox();
-            // trace.Show();
+            //trace.Show();
+            #endregion
+
+            // Wait the scenario's end
+            // LockEverything();
 
             // Timer
             if (_interval == 0)
@@ -390,7 +466,10 @@ namespace GamePages
                 _timer.Interval = _interval;
                 _timer.Start();
             }
-            GameStarted = true;
+            GameStarted = true;            
+            
+            // Restart Graphics Updates
+            this.ResumeLayout();
         }
         // LostGame
         public void GameLost()
@@ -405,6 +484,7 @@ namespace GamePages
         // Window Methods
         internal void LockEverything()
         {
+            this.SuspendLayout();
             // Lock Windows Elements
             _actionMenu.Enabled = false;
             _stats.Enabled = false;
@@ -418,9 +498,11 @@ namespace GamePages
 
             // Pause Game
             PauseTimer();
+            this.ResumeLayout();
         }
         internal void UnLockEverything()
         {
+            this.SuspendLayout();
             // Unlock Windows Elements
             _actionMenu.Enabled = true;
             _stats.Enabled = true;
@@ -434,6 +516,7 @@ namespace GamePages
 
             // Restart Game
             RestartTimer();
+            this.ResumeLayout();
         }
 
         // Timer Methods
@@ -497,11 +580,41 @@ namespace GamePages
             _home.Show();
             gleipnir_logo.Show();
         }
-        public void ShowParametersBox()
+        public void ShowOrHideInGameParametersBox()
         {
-            LockEverything();
-            _parametersBox.BringToFront();
-            _parametersBox.Show();
+            if (!_parametersBox.IsOpen)
+            {
+                _gameMenu.Enabled = false;
+                _parametersBox.BringToFront();
+                _parametersBox.Visible = true;
+                _parametersBox.Show();
+                _parametersBox.IsOpen = true;
+            }
+            else
+            {
+                _gameMenu.Enabled = true;
+                _parametersBox.Visible = false;
+                _parametersBox.Hide();
+                _parametersBox.IsOpen = false;
+            }
+        }
+        public void ShowOrHideParametersBox()
+        {
+            if (!_parametersBox.IsOpen)
+            {
+                _home.Enabled = false;
+                _parametersBox.BringToFront();
+                _parametersBox.Visible = true;
+                _parametersBox.Show();
+                _parametersBox.IsOpen = true;
+            }
+            else
+            {
+                _home.Enabled = true;
+                _parametersBox.Visible = false;
+                _parametersBox.Hide();
+                _parametersBox.IsOpen = false;
+            }
         }
 
         // Stats Methods
@@ -588,6 +701,7 @@ namespace GamePages
         {
             _scenarioBox.TextLabel.Text = message;
         }
+
         // Grid Methods
         private void UpdateGrid(Board board, SquareControl[,] grid)
         {
@@ -1059,6 +1173,8 @@ namespace GamePages
             else
             {
                 SquareControl squareControl = (SquareControl)sender;
+                _infoBox.Visible = false;
+                _infoBox.SuspendLayout();
 
                 switch (_grid[squareControl.Row, squareControl.Col].Contents)
                 {
@@ -1366,6 +1482,8 @@ namespace GamePages
                         }
                 }
                 _infoBox.Refresh();
+                _infoBox.ResumeLayout();
+                _infoBox.Visible = true;
             }
             #endregion
         }
@@ -1396,18 +1514,25 @@ namespace GamePages
         // InGameButton Method
         public void OnClickMenu()
         {
+            this.SuspendLayout();
             if (_gameMenu.IsOpen)
             {
-                _gameMenu.Hide();
                 UnLockEverything();
+                _gameMenu.SendToBack();
+                _gameMenu.Visible = false;
+                _gameMenu.Hide();
                 _gameMenu.IsOpen = false;
             }
             else
             {
-                _gameMenu.Show();
                 LockEverything();
+                _gameMenu.BringToFront();
+                _gameMenu.Visible = true;
+                _gameMenu.Show();
+                _gameMenu.Refresh();
                 _gameMenu.IsOpen = true;
             }
+            this.ResumeLayout();
         }
         internal void CloseGame()
         {
