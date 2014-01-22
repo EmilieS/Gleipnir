@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-<<<<<<< .merge_file_a07880
-=======
 
->>>>>>> .merge_file_a08020
     [Serializable]
     public class Event<T> : IEvent
     //where T : GameItem
@@ -101,11 +98,7 @@ namespace Game
 
     }
     [Serializable]
-<<<<<<< .merge_file_a07880
     public class GameEventProperty : EventProperty<Game>
-=======
-    public class GameEventProperty: EventProperty<Game>
->>>>>>> .merge_file_a08020
     {
         internal GameEventProperty(Game item, string propName)
             : base(item, propName)
@@ -117,9 +110,9 @@ namespace Game
             switch (ChangedProperty)
             {
                 case "Offerings": b.PushGeneralCoins(GameItem.Offerings); break;
-                case "TotalPop": b.PushPopulation(GameItem.TotalPop); break;
+                case "TotalPop": b.PushPopulation(GameItem.TotalPop); if (GameItem.TotalPop == 0) { b.GameLost(); } break;
                 case "TotalGold": b.PushGeneralGold(GameItem.TotalGold); break;
-                case "AverageFaith": b.PushGeneralFaith(GameItem.AverageFaith); break;
+                case "AverageFaith": b.PushGeneralFaith(GameItem.AverageFaith); if(GameItem.AverageFaith==0){b.GameLost();}  break;
                 case "AverageHappiness": b.PushGeneralHappiness(GameItem.AverageHappiness); break;
             }
         }
@@ -206,10 +199,7 @@ namespace Game
         }
 
     }
-<<<<<<< .merge_file_a07880
-=======
 
->>>>>>> .merge_file_a08020
     [Serializable]
     public class FamilyEndEvent : Event<Family>
     {
@@ -259,7 +249,7 @@ namespace Game
             b.AddNewFamilyHouse(_family.House);
         }
     }
-
+    [Serializable]
     public class EpidimicEradicatedEvent : Event<GodSpell.Epidemic>
     {
         Game _game;
@@ -281,6 +271,57 @@ namespace Game
             }
         }
     }
+    [Serializable]
+    public class BuildingHpChanged : Event<Buildings.BuildingsModel>
+    {
+        public readonly string ChangedProperty;
+
+        internal BuildingHpChanged(Buildings.BuildingsModel item, string propName)
+            : base(item)
+        {
+            ChangedProperty = propName;
+        }
+
+        override public void PublishMessage(IWindow b)
+        {
+            Debug.Assert(ChangedProperty != null, "public class EventProperty<T> : Event<T>, PublishMessage [Event] ChangedProperty is null !");
+            Debug.Assert(b != null, "public class EventProperty<T> : Event<T>, PublishMessage [Event] IWindow b is null !");
+            b.PushTrace(String.Format("Property {0} has changed...", ChangedProperty));
+            if (GameItem.Hp == GameItem.MaxHp)
+            {
+                b.PushAlert(String.Format("{0} est réparé.", GameItem.Name), "Bâtiment");
+            }
+        }
+        public override void Do(IWindow b)
+        {
+            base.Do(b);
+
+	[Serializable]
+    public class SamhaimFestEndedEvent: Event<SamhainFest>
+    {
+        internal SamhaimFestEndedEvent(SamhainFest fest)
+            : base(fest)
+        {
+        }
+        override public void PublishMessage(IWindow b)
+        {
+                b.PushAlert("Le festival est terminé.", "Festival");
+                b.PushTrace("SamhaimFest destroyed");
+        }
+    }
+    public class SamhaimFestStartedEvent : Event<SamhainFest>
+    {
+        internal SamhaimFestStartedEvent(SamhainFest fest)
+            : base(fest)
+        {
+        }
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushAlert("Le festival a commencé.", "Festival");
+            b.PushTrace("SamhaimFest created");
+        }
+    }
+
 }
 /*
 // Two good ways to challenge types!
