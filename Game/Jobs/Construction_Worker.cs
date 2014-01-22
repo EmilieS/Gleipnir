@@ -17,7 +17,7 @@ namespace Game
             _job = Jobs.CONSTRUCTION_WORKER;
             _coefficient = 10;
         }
-        internal override bool AddPersonPrerequisites()
+        public override bool AddPersonPrerequisites()
         {
             return true;
         }

@@ -21,6 +21,7 @@ namespace Game
         double _villageFaith;
         double _villageHappiness;
         FamilyInVillageList _familiesList;
+        SamhainFest _samhainFest;
 
         internal Village(Game game, string name)
             : base(game)
@@ -33,9 +34,9 @@ namespace Game
             EmptyHouseList = new List<Buildings.House>();
             JobsList = new JobList(this);
             _familiesList = new FamilyInVillageList(this);
+            _upgrades = new UpgradesList(this);
 
             // Initialize historized values
-            _upgrades = new UpgradesList(this);
             _offeringsPointsPerTick = new HistorizedValue<int, Village>(this, @"_offeringsPointsPerTick", 20);
             _villagePop = new HistorizedValue<int, Village>(this, @"_villagePop", 20);
 
@@ -44,6 +45,7 @@ namespace Game
             _offeringsPointsPerTick.Current = 1;
         }
 
+        // Village Properties
         /// <summary>
         /// Gets village's families list
         /// </summary>
@@ -65,7 +67,16 @@ namespace Game
         /// Gets tax per villager per tick
         /// </summary>
         public int OfferingsPointsPerTick { get { return _offeringsPointsPerTick.Current; } }
+        /// <summary>
+        /// Gets the upgrades list
+        /// </summary>
+        public UpgradesList Upgrades { get { return _upgrades; } }
+        /// <summary>
+        /// Gets or Sets village fest
+        /// </summary>
+        SamhainFest SamhainFest { get { return _samhainFest; } set { _samhainFest = value; } }
 
+        // Villagers Methods
         /// <summary>
         /// Add new villager in village
         /// </summary>
@@ -82,6 +93,7 @@ namespace Game
             _villagePop.Current--;
         }
 
+        // Families Methods
         /// <summary>
         /// Create family with mother and father
         /// </summary>
@@ -193,7 +205,38 @@ namespace Game
 
             return newFamily;
         }
+        /// <summary>
+        /// Remove and delete empty families
+        /// </summary>
+        /// <param name="eventList"></param>
+        internal void EmptyFamiliesCleaner(List<IEvent> eventList)
+        {
+            int nbf = FamiliesList.Count;
+            Family tmpFamily;
 
+            int i = 0;
+            while (i < nbf)
+            {
+                tmpFamily = FamiliesList[i];
+                FamiliesList[i].DieOrIsAlive(eventList);
+                if (tmpFamily.IsDestroyed)
+                    nbf--;
+                else
+                    i++;
+            }
+            tmpFamily = null;
+        }
+        /// <summary>
+        /// Remove destroyed family from families list
+        /// </summary>
+        /// <param name="family"></param>
+        internal void FamilyDestroyed(Family family)
+        {
+            Debug.Assert(family != null, @"(village, FamilyDestroyed) Family don't exist");
+            _familiesList.Remove(family);
+        }
+
+        // House Methods
         /// <summary>
         /// Add new empty house in empty houses list
         /// </summary>
@@ -214,7 +257,7 @@ namespace Game
             EmptyHouseList.Remove(house);
         }
 
-        public UpgradesList Upgrades { get { return _upgrades; } }
+        // Village Stats Methods
         /// <summary>
         /// Addition of all gold of all families
         /// </summary>
@@ -297,9 +340,12 @@ namespace Game
             _villageFaith = totalF / nbf;
         }
         #region Fest
-        SamhainFest _samhainFest;
-        SamhainFest SamhainFest { get; set; }
 
+        // GodSpells Methods
+        /// <summary>
+        /// Starts new village fest if party room exists
+        /// </summary>
+        /// <returns></returns>
         public bool FestStart()
         {
             if (_samhainFest != null)
@@ -310,13 +356,18 @@ namespace Game
             _samhainFest = new SamhainFest(this);
             return true;
         }
+        /// <summary>
+        /// Ends village fest
+        /// </summary>
         internal void FestEnded()
         {
-            if (_samhainFest == null) { throw new InvalidOperationException(); }
+            if (_samhainFest == null)
+                throw new InvalidOperationException(@"(village, FestEnded) SamhainFest is already null");
             _samhainFest = null;
         }
         #endregion
 
+        // Offerings Points Methods
         #region meeting
         Meeting _meeting;
         public Meeting Meeting { get { return _meeting; } }
@@ -346,7 +397,6 @@ namespace Game
             _meeting = null;
         }
         #endregion
-
         /// <summary>
         /// Modify number offering points generated
         /// </summary>
@@ -364,7 +414,7 @@ namespace Game
         /// Take gold from families and add offerings points
         /// </summary>
         /// <param name="amount"></param>
-        public void TransformGoldToOfferingsPoints(int amount)// WTF NOT USED a part from village test.
+        public void TransformGoldToOfferingsPoints(int amount) // WTF NOT USED a part from village test.
         {
             if (amount >= 1 && amount <= 100)
             {
@@ -442,7 +492,7 @@ namespace Game
         /// <param name="eventList"></param>
         override internal void CloseStep(List<IEvent> eventList)
         {
-            //put current values in value history. & make events
+            // Put current values in value history & make events
             if (_familiesList.Conclude())
                 eventList.Add(new VillageEventProperty(this, @"FamiliesList"));
             if (_offeringsPointsPerTick.Conclude())

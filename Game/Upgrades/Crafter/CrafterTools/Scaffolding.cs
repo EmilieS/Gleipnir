@@ -16,7 +16,7 @@ namespace Game
         {
             CostPrice = 15000;
             IsActivated = false;
-            _selected = _jobs.Cooker;
+            _selected = _jobs.Construction_Worker;
             _owner = v;
         }
         internal override void VerififyPrerequisites()

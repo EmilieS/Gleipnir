@@ -22,7 +22,7 @@ namespace GamePages
             InitializeComponent();
         }
 
-        private void SetScenarionText()
+        private void SetScenarioText()
         {
             gameWindow.LockEverything();
             string sentence;
@@ -31,25 +31,22 @@ namespace GamePages
             {
                 gameWindow.UnLockEverything();
                 TextLabel.Text = "Vous êtes à Ragnar";
+                this.pictureBox1.Visible = false;
+                this.pictureBox1.Enabled = false;
             }
             else
                 TextLabel.Text = sentence;
-        }
-
-        private void ScenarioBox_Click(object sender, EventArgs e)
-        {
-            SetScenarionText();
-        }
-
-        private void TextLabel_Click(object sender, EventArgs e)
-        {
-            SetScenarionText();
         }
 
         public void GameLostText()
         {
             TextLabel.Text = "Vous avez perdu !";
             this.Enabled = false;
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            SetScenarioText();
         }
     }
 }

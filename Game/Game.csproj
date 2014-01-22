@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Board.cs" />
     <Compile Include="Upgrades\Apothecary\Drugs.cs" />
     <Compile Include="Upgrades\Apothecary\Surgery.cs" />
     <Compile Include="Upgrades\Blacksmith\Furnace.cs" />

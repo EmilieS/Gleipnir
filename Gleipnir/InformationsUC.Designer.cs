@@ -47,10 +47,10 @@
             this.happinessIcon = new System.Windows.Forms.PictureBox();
             this.villageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pauseButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.TaxAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.populationIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.goldIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.villageBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.faithIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.happinessIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.villageBindingSource)).BeginInit();
@@ -196,6 +196,7 @@
             // 
             this.populationIcon.BackColor = System.Drawing.Color.Transparent;
             this.populationIcon.BackgroundImage = global::GamePages.Properties.Resources.Stats_Population;
+            this.populationIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.populationIcon.ErrorImage = ((System.Drawing.Image)(resources.GetObject("populationIcon.ErrorImage")));
             this.populationIcon.Location = new System.Drawing.Point(192, 7);
             this.populationIcon.Name = "populationIcon";
@@ -207,6 +208,7 @@
             // 
             this.goldIcon.BackColor = System.Drawing.Color.Transparent;
             this.goldIcon.BackgroundImage = global::GamePages.Properties.Resources.Stats_Gold;
+            this.goldIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.goldIcon.ErrorImage = ((System.Drawing.Image)(resources.GetObject("goldIcon.ErrorImage")));
             this.goldIcon.Location = new System.Drawing.Point(102, 7);
             this.goldIcon.Name = "goldIcon";
@@ -226,11 +228,13 @@
             this.menuButton.TabIndex = 14;
             this.menuButton.Text = "Menu";
             this.menuButton.UseVisualStyleBackColor = false;
+            this.menuButton.Click += new System.EventHandler(this.menuButton_Click);
             // 
             // faithIcon
             // 
             this.faithIcon.BackColor = System.Drawing.Color.Transparent;
             this.faithIcon.BackgroundImage = global::GamePages.Properties.Resources.Stats_Faith;
+            this.faithIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.faithIcon.Location = new System.Drawing.Point(282, 7);
             this.faithIcon.Name = "faithIcon";
             this.faithIcon.Size = new System.Drawing.Size(20, 20);
@@ -241,6 +245,7 @@
             // 
             this.happinessIcon.BackColor = System.Drawing.Color.Transparent;
             this.happinessIcon.BackgroundImage = global::GamePages.Properties.Resources.Stats_Happiness;
+            this.happinessIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.happinessIcon.Location = new System.Drawing.Point(371, 7);
             this.happinessIcon.Name = "happinessIcon";
             this.happinessIcon.Size = new System.Drawing.Size(20, 20);
@@ -255,17 +260,32 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BackgroundImage = global::GamePages.Properties.Resources.Stats_Offerings;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(463, 8);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(20, 20);
             this.pictureBox1.TabIndex = 29;
             this.pictureBox1.TabStop = false;
             // 
+            // pauseButton
+            // 
+            this.pauseButton.BackColor = System.Drawing.Color.Transparent;
+            this.pauseButton.BackgroundImage = global::GamePages.Properties.Resources.ButtonIcon_Pause;
+            this.pauseButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pauseButton.Font = new System.Drawing.Font("Malgun Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pauseButton.Location = new System.Drawing.Point(920, 4);
+            this.pauseButton.Name = "pauseButton";
+            this.pauseButton.Size = new System.Drawing.Size(25, 25);
+            this.pauseButton.TabIndex = 30;
+            this.pauseButton.UseVisualStyleBackColor = false;
+            this.pauseButton.Click += new System.EventHandler(this.pauseButton_Click);
+            // 
             // InformationsUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.Controls.Add(this.pauseButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.happinessIcon);
             this.Controls.Add(this.faithIcon);
@@ -315,5 +335,6 @@
         private System.Windows.Forms.PictureBox faithIcon;
         private System.Windows.Forms.PictureBox happinessIcon;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button pauseButton;
     }
 }

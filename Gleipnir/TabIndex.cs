@@ -22,6 +22,7 @@ namespace GamePages
         bool passed;
         int positionX;
         int positionY;
+        Random rnd;
 
         public TabIndex(GeneralPage p)
         {
@@ -29,17 +30,22 @@ namespace GamePages
 
             _page = p;
             isOnBought = false;
+            rnd = new Random();
 
             positionX = 0;
             positionY = 10;
 
             // Create imageList
             ImageList imageList = new ImageList();
-            imageList.Images.Add(GamePages.Properties.Resources.Building_House);
+            imageList.Images.Add(GamePages.Properties.Resources.ActionTab_building_TabIcon);
+            imageList.Images.Add(GamePages.Properties.Resources.ActionTab_happiness_TabIcon);
+            imageList.Images.Add(GamePages.Properties.Resources.ActionTab_VillagerList_TabIcon);
+            imageList.Images.Add(GamePages.Properties.Resources.ActionTab_action_TabIcon);
 
             // Add images to tabs
             actionsMenu.ImageList = imageList;
-            actionsMenu.TabPages[0].ImageIndex = 0;
+            for (int i = 0; i < 4; i++)
+                actionsMenu.TabPages[i].ImageIndex = i;
 
             #region Jobs
             ApothecaryOffice.Click += ApothicaryOffice_Click;
@@ -163,7 +169,6 @@ namespace GamePages
         {
             if (_page.TheGame.Villages[0].FamiliesList.Count > 0)
             {
-                Random rnd = new Random();
                 int familyChoosen = rnd.Next(0, _page.TheGame.Villages[0].FamiliesList.Count);
                 int villagerChoosen = rnd.Next(0, _page.TheGame.Villages[0].FamiliesList[familyChoosen].FamilyMembers.Count);
                 Epidemic epidemic = new Epidemic(_page.TheGame, _page.TheGame.Villages[0].FamiliesList[familyChoosen].FamilyMembers[villagerChoosen]);
@@ -205,7 +210,15 @@ namespace GamePages
                 // Set VillagerBannerUC
                 tmp.VillagerName.Text = fam.FamilyMembers[i].FirstName + " " + fam.FamilyMembers[i].Name;
                 tmp.Location = new System.Drawing.Point(positionX, positionY);
-
+                tmp.Job_label.Text = "Metier : " + fam.FamilyMembers[i].Job.Name;
+                if (fam.FamilyMembers[i].Health == Healths.SICK)
+                {
+                    tmp.Sick_status_pic.Visible = true;
+                }
+                else
+                {
+                    tmp.Sick_status_pic.Visible = false;
+                }
                 // Add VillagerBannerUC to lists and show it
                 this.VillagerList.Controls.Add(tmp);
                 ListOfVillagersToShow.Add(tmp);
@@ -362,5 +375,90 @@ namespace GamePages
             }
         }
         #endregion
+        #region Crafter's Upgrades
+        private void Pulley_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Pulley.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Pulley.IsActivated)
+            {
+                Pulley_butt.Enabled = false;
+                _page.PushAlert("Vos ouvriers sont plus efficaces", "Poulie achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Pulley.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
+
+        private void Hoist_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Hoist.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Hoist.IsActivated)
+            {
+                Hoist_butt.Enabled = false;
+                _page.PushAlert("Vos ouvriers sont plus efficaces", "Grue achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Hoist.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else if (!_page.TheGame.Villages[0].Upgrades.Pulley.IsActivated)
+            {
+                _page.PushAlert("Achetez d'abord un poulie !", "Amélioration manquante");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
+
+        private void Scaffholding_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Scaffolding.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Hoist.IsActivated)
+            {
+                Hoist_butt.Enabled = false;
+                _page.PushAlert("Vos ouvriers sont plus efficaces", "Grue achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Scaffolding.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else if (!_page.TheGame.Villages[0].Upgrades.Pulley.IsActivated && !_page.TheGame.Villages[0].Upgrades.Pulley.IsActivated)
+            {
+                _page.PushAlert("Vous devez d'abord avoir une poulie et une grue !", "Amélioration manquante");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
+        #endregion
+
+
+        #region Blacksmith's Upgrades
+        private void Saw_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Saw.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Level4.IsActivated)
+            {
+                Saw_butt.Enabled = false;
+                _page.PushAlert("Votre niveau de restauration a augmenté", "La scie est achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Saw.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
+        #endregion
+
     }
 }

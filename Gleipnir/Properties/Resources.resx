@@ -139,6 +139,9 @@
   <data name="Building_UnionOfCrafter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Building_UnionOfCrafter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Building_Tavern" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Building_Tavern.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="InformationBox_others_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\InformationBox_others_background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -157,29 +160,41 @@
   <data name="Building_Restaurant" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Building_Restaurant.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Upgrade_RestaurantBlue2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Upgrade_RestaurantBlue2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="InformationBox_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\InformationBox_background1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ActionTab_action_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ActionTab_action_background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="InformationBox_house_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\InformationBox_house_background1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Building_Brothel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Building_Brothel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Error" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Error1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GameEventUC_backgroung" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GameEventUC_backgroung1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ActionTab_happiness_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ActionTab_happiness_background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Upgrade_RestaurantBlue4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Upgrade_RestaurantBlue4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ActionTab_VillagerList_TabIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ActionTab_VillagerList_TabIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="InformationBox_destroyed_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\InformationBox_destroyed_background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Building_ApothecaryOffice" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Building_ApothecaryOffice.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ButtonIcon_VillageFest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ButtonIcon_VillageFest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LoadingUC" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LoadingUC1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GeneralPage_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GeneralPage_background1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Building_Forge" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Building_Forge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -193,20 +208,41 @@
   <data name="button_homepage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\button_homepage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Gender_Male" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Gender_Male.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Building_Chapel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Building_Chapel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Building_HealthPoints" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Building_HealthPoints.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Building_Theater" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Building_Theater.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Stats_Happiness" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Stats_Happiness.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LoadingUC" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LoadingUC1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="GameEventUC_backgroung" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GameEventUC_backgroung1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Upgrade_RestaurantBlue1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Upgrade_RestaurantBlue1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="EventFlux_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EventFlux_background1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ActionTab_action_TabIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ActionTab_action_TabIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Building_Mill" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Building_Mill.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="InformationBox_job_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\InformationBox_job_background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Building_PartyRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Building_PartyRoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Upgrade_RestaurantBlue3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Upgrade_RestaurantBlue3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Stats_ObjectName" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Stats_ObjectName.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -217,14 +253,14 @@
   <data name="InformationBox_table_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\InformationBox_table_background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Sablier" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Sablier.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Building_Baths" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Building_Baths.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Stats_Offerings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Stats_Offerings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Building_Mill" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Building_Mill.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="InformationBox_house_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\InformationBox_house_background1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Stats_Gold" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Stats_Gold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -232,11 +268,17 @@
   <data name="Building_Table" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Building_Table.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Building_HealthPoints" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Building_HealthPoints.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Building_ApothecaryOffice" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Building_ApothecaryOffice.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Building_ClothesShop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Building_ClothesShop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ButtonIcon_Earthquake" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ButtonIcon_Earthquake.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ActionTab_building_TabIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ActionTab_building_TabIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Gender_Female" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Gender_Female.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -247,13 +289,25 @@
   <data name="Sablier2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sablier2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GeneralPage_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GeneralPage_background1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Gender_Male" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Gender_Male.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ActionTab_happiness_TabIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ActionTab_happiness_TabIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Stats_Members" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Stats_Members.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ButtonIcon_Earthquake" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ButtonIcon_Earthquake.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Building_OfferingsWarehouse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Building_OfferingsWarehouse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sablier" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sablier.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ButtonIcon_Pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ButtonIcon_Pause.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ButtonIcon_start" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ButtonIcon_start.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

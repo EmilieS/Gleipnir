@@ -254,7 +254,10 @@ namespace GamePages
 
             // InfoBox Texts
             Title.Visible = true;
-            Title.Location = new Point(positionX, positionY);
+            if (building.Name.Count<char>() > 8)
+                Title.Location = new Point(positionX - 15, positionY);
+            else
+                Title.Location = new Point(positionX, positionY);
             Title.Text = building.Name;
             objectName.Visible = false;
             ElementName.Visible = false;
