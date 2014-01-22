@@ -323,7 +323,38 @@ namespace Game
             b.PushTrace("SamhaimFest created");
         }
     }
+    [Serializable]
+    public class NotEnoughFarmsEvent : Event<Farmer>
+    {
+        internal NotEnoughFarmsEvent(Farmer farmer)
+            : base(farmer)
+        {
+        }
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushAlert("Il n'y a pas assez de fermes pour embaucher de nouveaux fermiers.", "Fermiers");
+            b.PushTrace("EnoughFarms went to true to false");
+        }
+    }
+    [Serializable]
+    public class HungryFamilyEvent : Event<Family>
+    {
+        Family _family;
+        internal HungryFamilyEvent(Family f)
+            : base(f)
+        {
+            _family = f;
+        }
 
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushTrace(String.Format("Family {0} hungry status changed.", GameItem.Name));
+            if (GameItem._hungry.Current == true)
+            {
+                b.PushAlert(String.Format("La famille {0} a faim.", GameItem.Name), "Famine");
+            }
+        }
+    }
 }
 /*
 // Two good ways to challenge types!

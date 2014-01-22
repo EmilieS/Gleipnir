@@ -28,6 +28,7 @@ namespace Game
         {
             // Initialized historized value for gold
             _goldStash = new HistorizedValue<int, Family>(this, @"_goldstash", 20);
+            _hungry = new HistorizedValue<bool, Family>(this, @"_hungry", 5);
 
             if (mother.ParentFamily != null && father.ParentFamily != null)
             {
@@ -346,9 +347,8 @@ namespace Game
             Debug.Assert(_ownerVillage != null, @"(family, ImpactHappiness) Family's village is null");
             IsPoorOrRich_HappinessImpact();        
         }
-        /// <summary>
-        /// Evolute family
-        /// </summary>
+
+        internal HistorizedValue<bool, Family> _hungry;
         override internal void Evolution()
         {
             //RegularBirths done in villager.
@@ -367,12 +367,17 @@ namespace Game
                 }
                 if (!hasFarmer)
                 {
+                    _hungry.Current = !hasFarmer;
                     foreach (Villager v in _familyMembersList)
                     {
                         v.FamineImpact();
                     }
                 }
+                else
+                    _hungry.Current = false;
             }
+            else
+                _hungry.Current = false;
         }
         /// <summary>
         /// Check if family is dead or not
@@ -398,6 +403,7 @@ namespace Game
             Debug.Assert(_ownerVillage != null, @"(family, CloseStep) Family's village is null");
             if (_goldStash.Conclude()) { eventList.Add(new EventProperty<Family>(this, @"LastGoldStash")); }
             if (_familyMembersList.Conclude()) { eventList.Add(new EventProperty<Family>(this, @"FamilyMembers")); }
+            if (_hungry.Conclude()) { eventList.Add(new HungryFamilyEvent(this)); }
         }
         #endregion
         //=================================================================

@@ -17,6 +17,7 @@ namespace Game
             _job = Jobs.FARMER;
             _coefficient = 10;
         }
+        bool EnoughFarms;//just for the event
         internal override bool AddPersonPrerequisites()
         {//TODO event
             if (Owner.Owner.BuildingsList.FarmList.Count*10 > _workers.Count)
@@ -38,6 +39,19 @@ namespace Game
                 i++;
             } while (i < Owner.Owner.BuildingsList.FarmList.Count);
             return false;
+        }
+        internal override void CloseStep(List<IEvent> eventList)
+        {
+            base.CloseStep(eventList);//do not remove.
+            if (Owner.Owner.BuildingsList.FarmList.Count * 10 <= _workers.Count && EnoughFarms)
+            {
+                EnoughFarms = false;
+                eventList.Add(new NotEnoughFarmsEvent(this));
+            }
+            else if (Owner.Owner.BuildingsList.FarmList.Count * 10 > _workers.Count)
+            {
+                EnoughFarms = true;
+            }
         }
     }
 }
