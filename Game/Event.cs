@@ -249,7 +249,7 @@ namespace Game
             b.AddNewFamilyHouse(_family.House);
         }
     }
-
+    [Serializable]
     public class EpidimicEradicatedEvent : Event<GodSpell.Epidemic>
     {
         Game _game;
@@ -271,6 +271,33 @@ namespace Game
             }
         }
     }
+    [Serializable]
+    public class BuildingHpChanged : Event<Buildings.BuildingsModel>
+    {
+        public readonly string ChangedProperty;
+
+        internal BuildingHpChanged(Buildings.BuildingsModel item, string propName)
+            : base(item)
+        {
+            ChangedProperty = propName;
+        }
+
+        override public void PublishMessage(IWindow b)
+        {
+            Debug.Assert(ChangedProperty != null, "public class EventProperty<T> : Event<T>, PublishMessage [Event] ChangedProperty is null !");
+            Debug.Assert(b != null, "public class EventProperty<T> : Event<T>, PublishMessage [Event] IWindow b is null !");
+            b.PushTrace(String.Format("Property {0} has changed...", ChangedProperty));
+            if (GameItem.Hp == GameItem.MaxHp)
+            {
+                b.PushAlert(String.Format("{0} est réparé.", GameItem.Name), "Bâtiment");
+            }
+        }
+        public override void Do(IWindow b)
+        {
+            base.Do(b);
+        }
+    }
+
 }
 /*
 // Two good ways to challenge types!

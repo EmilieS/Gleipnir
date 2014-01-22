@@ -18,7 +18,7 @@ namespace Game.Buildings
         double _enterPrice;
         bool _isBought;
         string _name;
-        int _hp;
+        readonly HistorizedValue<int, BuildingsModel> _hp;
         int _maxHp;
         int _destroyedTimer;
         bool _justCreated;
@@ -30,6 +30,7 @@ namespace Game.Buildings
         public BuildingsModel(Village v)
             :base(v.Game)
         {
+            _hp = new HistorizedValue<int, BuildingsModel>(this, @"_hp", 20);
             _justCreated = true;
             _horizontalPos = 0;
             _verticalPos = 0;
@@ -42,7 +43,7 @@ namespace Game.Buildings
         }
         abstract internal void AddToList();
 
-        public int Hp { get { return _hp; } internal set { _hp = value; } }
+        public int Hp { get { return _hp.Current; } internal set { _hp.Current = value; } }
         public int MaxHp { get{ return _maxHp; } internal set{_maxHp=value; }}
         int _damageRepairTimer;
         /// <summary>
@@ -54,13 +55,13 @@ namespace Game.Buildings
             if (amount < 0) { throw new ArgumentException(); }
             if (amount == 0) { return; }
             OnDamage();
-            if (_hp - amount < 0)
+            if (_hp.Current - amount < 0)
             {
-                _hp = 0;
+                _hp.Current = 0;
             }
             else
             {
-                _hp -= amount;
+                _hp.Current -= amount;
             }
             _damageRepairTimer++;
         }
@@ -87,22 +88,22 @@ namespace Game.Buildings
         internal bool Repair2(int amount)
         {
             Debug.Assert(amount > 0, "(Repair2|BuildingsModel) amount is negative or null");
-            if (_hp < 1)
+            if (_hp.Current < 1)
                 return false;
 
-            if (_hp + amount >= _maxHp)
+            if (_hp.Current + amount >= _maxHp)
             {
-                _hp = _maxHp;
+                _hp.Current = _maxHp;
             }
             else
             {
-                _hp += amount;
+                _hp.Current += amount;
             }
 
             Game.DamagedBuildingsNotRepairedOrRepairedFaithImpact(0.1);
             _damageRepairTimer = 0;
 
-            if (_hp >= MaxHp)
+            if (_hp.Current >= MaxHp)
                 return true;
             return false;
         }
@@ -174,7 +175,7 @@ namespace Game.Buildings
                 _damageRepairTimer = 0;
                 Game.DamagedBuildingsNotRepairedOrRepairedFaithImpact(-5);
             }
-            else if (_damageRepairTimer > 0 && _hp < _maxHp)
+            else if (_damageRepairTimer > 0 && _hp.Current < _maxHp)
             {
                 _damageRepairTimer++;
             }
@@ -185,7 +186,7 @@ namespace Game.Buildings
         }
         internal override void DieOrIsAlive(List<IEvent> eventList)
         {            
-            if (_hp == 0)
+            if (_hp.Current == 0)
             {
                 if (_destroyedTimer == 3)
                 {
@@ -220,6 +221,7 @@ namespace Game.Buildings
                 eventList.Add(new BuildingCreatedEvent(this));
                 _justCreated = false;
             }
+            if (_hp.Conclude()) { eventList.Add(new EventProperty<BuildingsModel>(this, @"HP")); }
         }
     }
 }
