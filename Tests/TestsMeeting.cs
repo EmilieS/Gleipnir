@@ -56,7 +56,7 @@ namespace Tests
             Assert.That(mother.ActivityStatus == ActivityStatus.CONVOCATED);
             Assert.That(father.ActivityStatus == ActivityStatus.CONVOCATED);
 
-            meeting.ReleaseConvocated(meeting.ActualConvocated);
+            //meeting.ReleaseConvocated(meeting.ActualConvocated);
 
             Assert.That((mother.ActivityStatus & ActivityStatus.CONVOCATED) == 0);
             Assert.That((father.ActivityStatus & ActivityStatus.CONVOCATED) == 0);

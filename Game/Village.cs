@@ -341,7 +341,8 @@ namespace Game
         }
         internal void MeetingEnded()
         {
-            if (_meeting == null) { throw new InvalidOperationException(); }
+            if (_meeting == null)
+                throw new InvalidOperationException();
             _meeting = null;
         }
         #endregion

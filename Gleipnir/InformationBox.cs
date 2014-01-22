@@ -23,7 +23,6 @@ namespace GamePages
         {
             InitializeComponent();
             _page = page;
-            GodMeeting.Visible = false;
             positionX = 125;
             positionY = 10;
         }
@@ -32,11 +31,16 @@ namespace GamePages
         private void GodMeeting_Click(object sender, EventArgs e)
         {
             if (_page.TheGame.Villages[0].MeetingStart(_family))
-            {
-                GodMeeting.Visible = false;
                 GodMeeting.Enabled = false;
-            }
-            //_page.ActionMenu.ShowVillagerListInFamily(_family);
+            else
+                GodMeeting.Enabled = true;
+        }
+        private void StopMeeting_Click(object sender, EventArgs e)
+        {
+            if (_page.TheGame.Villages[0].EndMeeting())
+                StopMeeting.Enabled = false;
+            else
+                StopMeeting.Enabled = true;
         }
 
         // Hide or Show elements in InfoBox
@@ -44,6 +48,8 @@ namespace GamePages
         {
             if (family != null)
             {
+                _family = family;
+
                 // Background
                 this.BackgroundImage = GamePages.Properties.Resources.InformationBox_house_background;
 
@@ -96,17 +102,14 @@ namespace GamePages
                 _page.ActionMenu.ShowVillagerListInFamily(family);
 
                 // Meetings Details
-                _family = family;
+                GodMeeting.Visible = true;
                 if (_page.TheGame.Villages[0].Meeting != null)
-                {
-                    GodMeeting.Visible = false;
                     GodMeeting.Enabled = false;
-                }
                 else
-                {
-                    GodMeeting.Visible = true;
                     GodMeeting.Enabled = true;
-                }
+                StopMeeting.Visible = false;
+                StopMeeting.Enabled = false;
+
             }
             else
             {
@@ -148,6 +151,8 @@ namespace GamePages
             // Meeting Info
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
+            StopMeeting.Visible = false;
+            StopMeeting.Enabled = false;
         }
         internal void SetJobInfo(JobsModel job, Image buildingImage)
         {
@@ -186,6 +191,8 @@ namespace GamePages
                 // Meetings Details
                 GodMeeting.Visible = false;
                 GodMeeting.Enabled = false;
+                StopMeeting.Visible = false;
+                StopMeeting.Enabled = false;
             }
             else
             {
@@ -222,12 +229,19 @@ namespace GamePages
             buildingLife.Text = table.Hp.ToString();
 
             // Action Tab infos
-            // TODO: Change list for families convocated//table nom famille convoquée
-            _page.ActionMenu.DestroyVillagerList();
+            if (_page.TheGame.Villages[0].Meeting != null && _page.TheGame.Villages[0].Meeting.ActualConvocated != null)
+                _page.ActionMenu.ShowConvocatedVillagers(_page.TheGame.Villages[0].Meeting.ActualConvocated);
+            else
+                _page.ActionMenu.DestroyVillagerList();
 
             // Meeting Info
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
+            StopMeeting.Visible = true;
+            if (_page.TheGame.Villages[0].Meeting != null && _page.TheGame.Villages[0].Meeting.ActualConvocated != null)
+                StopMeeting.Enabled = true;
+            else
+                StopMeeting.Enabled = false;
         }
         internal void SetOtherBuildingsInfo(BuildingsModel building, Image buildingImage)
         {
@@ -262,6 +276,8 @@ namespace GamePages
             // Meetings Details
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
+            StopMeeting.Visible = false;
+            StopMeeting.Enabled = false;
         }
         internal void SetDestroyedBuilding(BuildingsModel building)
         {
@@ -296,6 +312,8 @@ namespace GamePages
             //Meeting button
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
+            StopMeeting.Visible = false;
+            StopMeeting.Enabled = false;
         }
         internal void SetNothingSelected()
         {
@@ -326,6 +344,8 @@ namespace GamePages
             // Meeting Info
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
+            StopMeeting.Visible = false;
+            StopMeeting.Enabled = false;
         }
     }
 }

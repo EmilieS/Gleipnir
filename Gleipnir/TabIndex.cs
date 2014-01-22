@@ -215,6 +215,38 @@ namespace GamePages
                 positionY += 62;
             }
         }
+        internal void ShowConvocatedVillagers(Family fam)
+        {
+            if (!passed)
+            {
+                ListOfVillagersToShow = new List<VillagerBannerUC>();
+                passed = true;
+            }
+            DestroyVillagerList();
+
+            for (int i = 0; i < fam.FamilyMembers.Count; i++)
+            {
+                VillagerBannerUC tmp = new VillagerBannerUC();
+
+                // Add gender icon
+                if (fam.FamilyMembers[i].Gender == Genders.FEMALE)
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
+                else
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
+
+                // Set VillagerBannerUC
+                tmp.VillagerName.Text = fam.FamilyMembers[i].FirstName + " " + fam.FamilyMembers[i].Name;
+                tmp.Location = new System.Drawing.Point(positionX, positionY);
+
+                // Add VillagerBannerUC to lists and show it
+                this.VillagerList.Controls.Add(tmp);
+                ListOfVillagersToShow.Add(tmp);
+                tmp.Show();
+
+                // Set position for next VillagerBannerUC
+                positionY += 62;
+            }
+        }
         internal void ShowWorkersInJob(JobsModel job)
         {
             if (passed == false)

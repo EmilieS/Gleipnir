@@ -8,7 +8,6 @@ namespace Game
 {
     public class Meeting : GameItem
     {
-
         Family _family;
         public Family Family { get { return _family; } }
         Village _village;
@@ -23,13 +22,17 @@ namespace Game
         }
 
         public Family ActualConvocated { get { return _family; } }
+        public bool IsEnded { get { return _endMeeting; } }
 
         public void Convocate()
         {
             foreach (Villager villager in _family.FamilyMembers)
-            {
                 villager.MeetingStarted();
-            }
+        }
+        internal void EndMeeting()
+        {
+            _endMeeting = true;
+            //_family = null;
         }
 
         //public void AffectMissionToVillager(Villager villager, Missions expectedMission)
@@ -39,10 +42,6 @@ namespace Game
         //        villager.Mission = expectedMission;
         //    }
         //}
-        internal void EndMeeting()
-        {
-            _endMeeting = true;
-        }
         internal override void OnDestroy()
         {
             _village.MeetingEnded();
