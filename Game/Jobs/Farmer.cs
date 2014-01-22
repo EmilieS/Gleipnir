@@ -18,8 +18,8 @@ namespace Game
             _coefficient = 10;
         }
         internal override bool AddPersonPrerequisites()
-        {
-            if (Owner.Owner.BuildingsList.FarmList.Count > 0)
+        {//TODO event
+            if (Owner.Owner.BuildingsList.FarmList.Count*10 > _workers.Count)
                 return true;
             else
                 return false;
