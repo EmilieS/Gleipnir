@@ -476,8 +476,11 @@ namespace GamePages
         {
             LockEverything();
             _scenarioBox.GameLostText();
+            _gameMenu.BringToFront();
+            _gameMenu.Visible = true;
             _gameMenu.Show();
             _gameMenu.IsOpen = true;
+            _gameMenu.Save.Enabled = false;
             _gameMenu.InGameQuit.Enabled = false;
         }
 

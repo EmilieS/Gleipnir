@@ -116,7 +116,7 @@
 
         private System.Windows.Forms.Button GoBack;
         private System.Windows.Forms.Button InGameSettings;
-        private System.Windows.Forms.Button Save;
         internal System.Windows.Forms.Button InGameQuit;
+        internal System.Windows.Forms.Button Save;
     }
 }
