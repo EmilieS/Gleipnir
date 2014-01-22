@@ -25,6 +25,27 @@ namespace Game
             MILLER = 70,
             TAILOR = 80
         };
+        public enum BuildingTypes
+        {
+            NONE = 0,
+            HOUSE = 5,
+            FARM = 10,
+            UNION = 20,
+            RESTAURANT = 30,
+            FORGE = 40,
+            APOTHECARY_OFFICE = 50,
+            MILITARY_CAMP = 60,
+            MILL = 70,
+            CLOTHES_SHOP = 80,
+            BATHS=90,
+            BROTHEL=100,
+            CHAPEL=110,
+            OFFERING_WAREHOUSE=120,
+            PARTY_ROOM=130,
+            TAVERN=140,
+            THEATER=150,
+        };
+
         [Flags]
         public enum Healths
         {

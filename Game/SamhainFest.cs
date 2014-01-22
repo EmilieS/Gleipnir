@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Game
 {
     [Serializable]
-    internal class SamhainFest : GameItem
+    public class SamhainFest : GameItem
     {
         int _duration;
         int _timer;
@@ -42,7 +42,7 @@ namespace Game
         }
         internal override void ImpactHappiness()
         {
-            _timer--;
+
         }
         internal override void Creation(List<IEvent> eventList)
         {
@@ -67,9 +67,10 @@ namespace Game
         }
         internal override void DieOrIsAlive(List<IEvent> eventList)
         {
-            //TODO : create event : samham fest is over.
+            
             if (_timer <= 0)
             {
+                eventList.Add(new SamhaimFestEndedEvent(this));
                 foreach (Family family in _village.FamiliesList)
                 {
                     foreach (Villager villager in family.FamilyMembers)
@@ -83,6 +84,11 @@ namespace Game
         internal override void CloseStep(List<IEvent> eventList)
         {
             //TODO : create event : samham fest has started.
+            if (_duration == _timer)
+            {
+                eventList.Add(new SamhaimFestStartedEvent(this));
+            }
+            _timer--;
         }
     }
 }
