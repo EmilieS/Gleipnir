@@ -30,7 +30,6 @@ namespace GamePages
         Options options;
         Game.Game _game;
         traceBox trace;
-        private BuildingsModel buildingSelected;//to get rid of
         internal BuildingTypes BuildingSelected { get; set; }
         private ActionState actionState;
         string traceMessages; 
@@ -979,7 +978,7 @@ namespace GamePages
                     // End Placement
                     actionState = ActionState.None;
                     _actionMenu.IsOnBought = false;
-                    buildingSelected = null;
+                    BuildingSelected = BuildingTypes.NONE;
                 }
             }
             #endregion
