@@ -295,6 +295,30 @@ namespace Game
         public override void Do(IWindow b)
         {
             base.Do(b);
+
+	[Serializable]
+    public class SamhaimFestEndedEvent: Event<SamhainFest>
+    {
+        internal SamhaimFestEndedEvent(SamhainFest fest)
+            : base(fest)
+        {
+        }
+        override public void PublishMessage(IWindow b)
+        {
+                b.PushAlert("Le festival est terminé.", "Festival");
+                b.PushTrace("SamhaimFest destroyed");
+        }
+    }
+    public class SamhaimFestStartedEvent : Event<SamhainFest>
+    {
+        internal SamhaimFestStartedEvent(SamhainFest fest)
+            : base(fest)
+        {
+        }
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushAlert("Le festival a commencé.", "Festival");
+            b.PushTrace("SamhaimFest created");
         }
     }
 
