@@ -80,87 +80,135 @@ namespace GamePages
         #region Jobs Buildings Buttons
         private void ApothicaryOffice_Click(object sender, EventArgs e)
         {
-            ApothecaryOffice apo = new ApothecaryOffice(_page.TheGame.Villages[0], _page.TheGame.Villages[0].JobsList.Apothecary);
-            _page.OnBoughtBuilding_Click(apo);
+            if (_page.TheGame.Villages[0].BuildingsList.ApothecaryOfficeCreationCondition())
+            {
+                _page.BuildingSelected = BuildingTypes.APOTHECARY_OFFICE;
+                _page.OnBoughtBuilding_Click();
+            }
         }
         private void Forge_Click(object sender, EventArgs e)
         {
-            Game.Buildings.Forge forge = new Forge(_page.TheGame.Villages[0], _page.TheGame.Villages[0].JobsList.Blacksmith);
-            _page.OnBoughtBuilding_Click(forge);
+            if (_page.TheGame.Villages[0].BuildingsList.ForgeCreationCondition())
+            {
+                _page.BuildingSelected = BuildingTypes.FORGE;
+                _page.OnBoughtBuilding_Click();
+            }
         }
         private void UnionOfCrafter_Click(object sender, EventArgs e)
         {
-            Game.Buildings.UnionOfCrafter uoc = new UnionOfCrafter(_page.TheGame.Villages[0], _page.TheGame.Villages[0].JobsList.Construction_Worker);
-            _page.OnBoughtBuilding_Click(uoc);
+            if (_page.TheGame.Villages[0].BuildingsList.UnionOfCrafterCreationCondition())
+            {
+                _page.BuildingSelected = BuildingTypes.UNION;
+                _page.OnBoughtBuilding_Click();
+            }
         }
         private void Restaurant_Click(object sender, EventArgs e)
         {
-            Game.Buildings.Restaurant resto = new Restaurant(_page.TheGame.Villages[0], _page.TheGame.Villages[0].JobsList.Cooker);
-            _page.OnBoughtBuilding_Click(resto);
+            if (_page.TheGame.Villages[0].BuildingsList.RestaurantCreationCondition())
+            {
+                _page.BuildingSelected = BuildingTypes.RESTAURANT;
+                _page.OnBoughtBuilding_Click();
+            }
         }
         private void Farm_Click(object sender, EventArgs e)
         {
-            Game.Buildings.Farm farm = new Farm(_page.TheGame.Villages[0], _page.TheGame.Villages[0].JobsList.Farmer);
-            _page.OnBoughtBuilding_Click(farm);
+            if (_page.TheGame.Villages[0].BuildingsList.FarmCreationCondition())
+            {
+                _page.BuildingSelected = BuildingTypes.FARM;
+                _page.OnBoughtBuilding_Click();
+            }
         }
         private void Mill_Click(object sender, EventArgs e)
         {
-            Game.Buildings.Mill mill = new Mill(_page.TheGame.Villages[0], _page.TheGame.Villages[0].JobsList.Miller);
-            _page.OnBoughtBuilding_Click(mill);
+            if (_page.TheGame.Villages[0].BuildingsList.MillCreationCondition())
+            {
+                _page.BuildingSelected = BuildingTypes.MILL;
+                _page.OnBoughtBuilding_Click();
+            }
         }
         private void MilitaryCamp_Click(object sender, EventArgs e)
         {
-            Game.Buildings.MilitaryCamp gq = new MilitaryCamp(_page.TheGame.Villages[0], _page.TheGame.Villages[0].JobsList.Militia);
-            _page.OnBoughtBuilding_Click(gq);
+            if (_page.TheGame.Villages[0].BuildingsList.MilitaryCampCreationCondition())
+            {
+                _page.BuildingSelected = BuildingTypes.MILITARY_CAMP;
+                _page.OnBoughtBuilding_Click();
+            }
         }
         private void ClothesShop_Click(object sender, EventArgs e)
         {
-            Game.Buildings.ClothesShop shop = new ClothesShop(_page.TheGame.Villages[0], _page.TheGame.Villages[0].JobsList.Tailor);
-            _page.OnBoughtBuilding_Click(shop);
+            if (_page.TheGame.Villages[0].BuildingsList.ClothesShopCreationCondition())
+            {
+                _page.BuildingSelected = BuildingTypes.CLOTHES_SHOP;
+                _page.OnBoughtBuilding_Click();
+            }
         }
         #endregion
         #region Hobbies Buildings
         private void Baths_Click(object sender, EventArgs e)
         {
-            Baths baths = new Baths(_page.TheGame.Villages[0]);
-            _page.OnBoughtBuilding_Click(baths);
+            if (_page.TheGame.Villages[0].BuildingsList.BathsCreationCondition())
+            {
+                _page.BuildingSelected = BuildingTypes.BATHS;
+                _page.OnBoughtBuilding_Click();
+            }
         }
         private void Brothel_Click(object sender, EventArgs e)
         {
-            Brothel brothel = new Brothel(_page.TheGame.Villages[0]);
-            _page.OnBoughtBuilding_Click(brothel);
+            if (_page.TheGame.Villages[0].BuildingsList.BrothelCreationCondition())
+            {
+                _page.BuildingSelected = BuildingTypes.BROTHEL;
+                _page.OnBoughtBuilding_Click();
+            }
         }
         private void PartyRoom_Click(object sender, EventArgs e)
         {
-            PartyRoom party = new PartyRoom(_page.TheGame.Villages[0]);
-            _page.OnBoughtBuilding_Click(party);
+            if (_page.TheGame.Villages[0].BuildingsList.PartyRoomCreationCondition())
+            {
+                _page.BuildingSelected = BuildingTypes.PARTY_ROOM;
+                _page.OnBoughtBuilding_Click();
+            }
         }
         private void TavernButton_Click(object sender, EventArgs e)
         {
-            Tavern tavern = new Tavern(_page.TheGame.Villages[0]);
-            _page.OnBoughtBuilding_Click(tavern);
+            if (_page.TheGame.Villages[0].BuildingsList.TavernCreationCondition())
+            {
+                _page.BuildingSelected = BuildingTypes.TAVERN;
+                _page.OnBoughtBuilding_Click();
+            }
         }
         private void Theater_Click(object sender, EventArgs e)
         {
-            Theater theater = new Theater(_page.TheGame.Villages[0]);
-            _page.OnBoughtBuilding_Click(theater);
+            if (_page.TheGame.Villages[0].BuildingsList.TheaterCreationCondition())
+            {
+                _page.BuildingSelected = BuildingTypes.THEATER;
+                _page.OnBoughtBuilding_Click();
+            }
         }
         #endregion
         #region Specials Buildings
         private void Chapel_Click(object sender, EventArgs e)
         {
-            Chapel chapel = new Chapel(_page.TheGame.Villages[0]);
-            _page.OnBoughtBuilding_Click(chapel);
+            if (_page.TheGame.Villages[0].BuildingsList.ChapelCreationCondition())
+            {
+                _page.BuildingSelected = BuildingTypes.CHAPEL;
+                _page.OnBoughtBuilding_Click();
+            }
         }
         private void OfferingsWarehouse_Click(object sender, EventArgs e)
         {
-            OfferingWarehouse offeringsWarehouse = new OfferingWarehouse(_page.TheGame.Villages[0]);
-            _page.OnBoughtBuilding_Click(offeringsWarehouse);
+            if (_page.TheGame.Villages[0].BuildingsList.OfferingWarehouseCreationCondition())
+            {
+                _page.BuildingSelected = BuildingTypes.OFFERING_WAREHOUSE;
+                _page.OnBoughtBuilding_Click();
+            }
         }
         private void House_Click(object sender, EventArgs e)
         {
-            House house = new House(_page.TheGame.Villages[0]);
-            _page.OnBoughtBuilding_Click(house);
+            if (_page.TheGame.Villages[0].BuildingsList.HouseCreationCondition())
+            {
+                _page.BuildingSelected = BuildingTypes.HOUSE;
+                _page.OnBoughtBuilding_Click();
+            }
         }
         #endregion
 
