@@ -295,6 +295,8 @@ namespace Game
         public override void Do(IWindow b)
         {
             base.Do(b);
+        }
+    }
 
 	[Serializable]
     public class SamhaimFestEndedEvent: Event<SamhainFest>
