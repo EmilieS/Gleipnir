@@ -77,10 +77,10 @@ namespace Game.Buildings
             if (amount < 0) { throw new ArgumentException(); }
             if (amount == 0)
                 return;
-            if (_hp + amount > _maxHp)
-                _hp = _maxHp;
+            if (_hp.Current + amount > _maxHp)
+                _hp.Current = _maxHp;
             else
-            _hp += amount;
+            _hp.Current += amount;
 
             Game.DamagedBuildingsNotRepairedOrRepairedFaithImpact(5);
             _damageRepairTimer = 0;
