@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Game.Buildings
 {
@@ -83,8 +84,28 @@ namespace Game.Buildings
             Game.DamagedBuildingsNotRepairedOrRepairedFaithImpact(5);
             _damageRepairTimer = 0;
         }
-        //TODO : Repair.
-        //TODO : Timer since Damage
+        internal bool Repair2(int amount)
+        {
+            Debug.Assert(amount > 0, "(Repair2|BuildingsModel) amount is negative or null");
+
+            if (_hp + amount >= _maxHp)
+            {
+                _hp = _maxHp;
+            }
+            else
+            {
+                _hp += amount;
+            }
+
+            Game.DamagedBuildingsNotRepairedOrRepairedFaithImpact(0.1);
+            _damageRepairTimer = 0;
+
+            if (_hp >= MaxHp)
+                return true;
+            return false;
+        }
+
+
         public int HorizontalPos
         {
             get { return _horizontalPos; }
@@ -144,17 +165,21 @@ namespace Game.Buildings
         }
         abstract internal void OnOnDestroy();
 
-        internal override void Evolution()
+        internal override void ImpactHappiness()
         {
             if (_damageRepairTimer == 36)
             {
                 _damageRepairTimer = 0;
                 Game.DamagedBuildingsNotRepairedOrRepairedFaithImpact(-5);
             }
-            else if (_damageRepairTimer >0 && _hp < _maxHp)
+            else if (_damageRepairTimer > 0 && _hp < _maxHp)
             {
                 _damageRepairTimer++;
             }
+        }
+        internal override void Evolution()
+        {
+            //moved into ImpactHappiness because damage in earthquake happens in evolution, repair(constructionworker) happens in evolution to.
         }
         internal override void DieOrIsAlive(List<IEvent> eventList)
         {            
@@ -187,7 +212,7 @@ namespace Game.Buildings
         }
 
         internal override void CloseStep(List<IEvent> eventList)
-        {
+        {//event fully repaired.
             if (_justCreated)
             {
                 eventList.Add(new BuildingCreatedEvent(this));
