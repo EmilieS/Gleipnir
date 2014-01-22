@@ -279,7 +279,7 @@ namespace GamePages
             if (_page.TheGame.Villages[0].Upgrades.Level1.IsActivated)
             {
                 Level1_butt.Enabled = false;
-                _page.PushAlert("Votre niveau de restauration a augmenté", "Level1 acheté");
+                _page.PushText("Votre niveau de restauration a augmenté", "Level1 acheté");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Level1.CostPrice > _page.TheGame.Offerings)
             {
@@ -301,7 +301,7 @@ namespace GamePages
             if (_page.TheGame.Villages[0].Upgrades.Level2.IsActivated)
             {
                 Level2_butt.Enabled = false;
-                _page.PushAlert("Votre niveau de restauration a augmenté", "Level2 acheté");
+                _page.PushText("Votre niveau de restauration a augmenté", "Level2 acheté");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Level2.CostPrice > _page.TheGame.Offerings)
             {
@@ -319,7 +319,7 @@ namespace GamePages
             if (_page.TheGame.Villages[0].Upgrades.Level3.IsActivated)
             {
                 Level3_butt.Enabled = false;
-                _page.PushAlert("Votre niveau de restauration a augmenté", "Level3 acheté");
+                _page.PushText("Votre niveau de restauration a augmenté", "Level3 acheté");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Level3.CostPrice > _page.TheGame.Offerings)
             {
@@ -337,7 +337,7 @@ namespace GamePages
             if (_page.TheGame.Villages[0].Upgrades.Level4.IsActivated)
             {
                 Level4_butt.Enabled = false;
-                _page.PushAlert("Votre niveau de restauration a augmenté", "Level4 acheté");
+                _page.PushText("Votre niveau de restauration a augmenté", "Level4 acheté");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Level4.CostPrice > _page.TheGame.Offerings)
             {
@@ -356,7 +356,7 @@ namespace GamePages
             if (_page.TheGame.Villages[0].Upgrades.Pulley.IsActivated)
             {
                 Pulley_butt.Enabled = false;
-                _page.PushAlert("Vos ouvriers sont plus efficaces", "Poulie achetée");
+                _page.PushText("Vos ouvriers sont plus efficaces", "Poulie achetée");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Pulley.CostPrice > _page.TheGame.Offerings)
             {
@@ -374,7 +374,7 @@ namespace GamePages
             if (_page.TheGame.Villages[0].Upgrades.Hoist.IsActivated)
             {
                 Hoist_butt.Enabled = false;
-                _page.PushAlert("Vos ouvriers sont plus efficaces", "Grue achetée");
+                _page.PushText("Vos ouvriers sont plus efficaces", "Grue achetée");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Hoist.CostPrice > _page.TheGame.Offerings)
             {
@@ -393,10 +393,10 @@ namespace GamePages
         private void Scaffholding_butt_Click(object sender, EventArgs e)
         {
             _page.TheGame.Villages[0].Upgrades.Scaffolding.Buy();
-            if (_page.TheGame.Villages[0].Upgrades.Hoist.IsActivated)
+            if (_page.TheGame.Villages[0].Upgrades.Scaffolding.IsActivated)
             {
-                Hoist_butt.Enabled = false;
-                _page.PushAlert("Vos ouvriers sont plus efficaces", "Grue achetée");
+                Scaffolding_butt.Enabled = false;
+                _page.PushText("Vos ouvriers sont plus efficaces", "Grue achetée");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Scaffolding.CostPrice > _page.TheGame.Offerings)
             {
@@ -412,8 +412,6 @@ namespace GamePages
             }
         }
         #endregion
-
-
         #region Blacksmith's Upgrades
         private void Saw_butt_Click(object sender, EventArgs e)
         {
@@ -421,9 +419,43 @@ namespace GamePages
             if (_page.TheGame.Villages[0].Upgrades.Saw.IsActivated)
             {
                 Saw_butt.Enabled = false;
-                _page.PushAlert("Votre niveau de restauration a augmenté", "La scie est achetée");
+                _page.PushText("Les forgeron sont plus compétents", "La scie est achetée");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Saw.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
+        private void Furnace_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Furnace.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Furnace.IsActivated)
+            {
+                Furnace_butt.Enabled = false;
+                _page.PushText("Les forgeron sont plus compétents", "Le four est achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Furnace.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
+        private void Plow_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Plow.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Plow.IsActivated)
+            {
+                Plow_butt.Enabled = false;
+                _page.PushText("Les forgeron sont plus compétents", "La charrue est achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Plow.CostPrice > _page.TheGame.Offerings)
             {
                 _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
             }
@@ -439,8 +471,8 @@ namespace GamePages
             _page.TheGame.Villages[0].Upgrades.Scarecrow.Buy();
             if (_page.TheGame.Villages[0].Upgrades.Scarecrow.IsActivated)
             {
-                Saw_butt.Enabled = false;
-                _page.PushAlert("Votre niveau de restauration a augmenté", "La scie est achetée");
+                Scarecrow_butt.Enabled = false;
+                _page.PushText("La production de la ferme augmente", "L'épouvantail est achetée");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Scarecrow.CostPrice > _page.TheGame.Offerings)
             {
@@ -451,14 +483,13 @@ namespace GamePages
                 _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
             }
         }
-
         private void Fertilizer_butt_Click(object sender, EventArgs e)
         {
             _page.TheGame.Villages[0].Upgrades.Fertilizer.Buy();
             if (_page.TheGame.Villages[0].Upgrades.Fertilizer.IsActivated)
             {
-                Saw_butt.Enabled = false;
-                _page.PushAlert("Votre niveau de restauration a augmenté", "La scie est achetée");
+                Fertilizer_butt.Enabled = false;
+                _page.PushText("La production de la ferme augmente", "Le fertilisant est achetée");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Fertilizer.CostPrice > _page.TheGame.Offerings)
             {
@@ -474,8 +505,8 @@ namespace GamePages
             _page.TheGame.Villages[0].Upgrades.Irrigation.Buy();
             if (_page.TheGame.Villages[0].Upgrades.Irrigation.IsActivated)
             {
-                Saw_butt.Enabled = false;
-                _page.PushAlert("Votre niveau de restauration a augmenté", "La scie est achetée");
+                Irrigation_butt.Enabled = false;
+                _page.PushText("La production de la ferme augmente", "L'irrigation est achetée");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Irrigation.CostPrice > _page.TheGame.Offerings)
             {
@@ -488,7 +519,7 @@ namespace GamePages
         }
         #endregion
 
-        #region Tooltips' implementation 
+        #region Tooltips' implementation
         private void UnionOfCrafter_MouseHover(object sender, EventArgs e)
         {
             GeneralTooltip.SetToolTip(UnionOfCrafter, "Syndicat");
@@ -615,5 +646,9 @@ namespace GamePages
         }
 
         #endregion
+
+        
+
+
     }
 }

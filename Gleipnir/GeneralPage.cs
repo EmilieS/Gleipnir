@@ -218,7 +218,7 @@ namespace GamePages
 
             #region Trace Window
             trace = new traceBox();
-            trace.Show();
+           // trace.Show();
             #endregion
 
             // Hide loading effects
@@ -228,7 +228,7 @@ namespace GamePages
 
             // Wait the scenario's end
             // LockEverything();
-
+            PushText("","Bienvenue à Ragnar");
             // Do 1 step
             Step();
 
@@ -539,9 +539,9 @@ namespace GamePages
             trace.traceBoxViewer.Text = traceMessages;
             //PushAlert(message, "PUSHTRACE");//MARCHE
         }
-        public void PushText(string message)
+        public void PushText(string message, string title)
         {
-            _scenarioBox.TextLabel.Text = message;
+            _scenarioBox.TextLabel.Text = title + "\n" + message;
         }
         // Grid Methods
         private void UpdateGrid(Board board, SquareControl[,] grid)

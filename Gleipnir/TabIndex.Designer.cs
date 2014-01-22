@@ -58,6 +58,8 @@
             this.Scarecrow_butt = new System.Windows.Forms.Button();
             this.Farmers_Label_Up = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.Plow_butt = new System.Windows.Forms.Button();
+            this.Furnace_butt = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.Saw_butt = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -371,14 +373,14 @@
             this.panel4.Controls.Add(this.Fertilizer_butt);
             this.panel4.Controls.Add(this.Scarecrow_butt);
             this.panel4.Controls.Add(this.Farmers_Label_Up);
-            this.panel4.Location = new System.Drawing.Point(5, 287);
+            this.panel4.Location = new System.Drawing.Point(8, 264);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(200, 100);
             this.panel4.TabIndex = 4;
             // 
             // Irrigation_butt
             // 
-            this.Irrigation_butt.Location = new System.Drawing.Point(102, 22);
+            this.Irrigation_butt.Location = new System.Drawing.Point(125, 24);
             this.Irrigation_butt.Name = "Irrigation_butt";
             this.Irrigation_butt.Size = new System.Drawing.Size(45, 40);
             this.Irrigation_butt.TabIndex = 7;
@@ -389,7 +391,7 @@
             // 
             // Fertilizer_butt
             // 
-            this.Fertilizer_butt.Location = new System.Drawing.Point(51, 22);
+            this.Fertilizer_butt.Location = new System.Drawing.Point(74, 24);
             this.Fertilizer_butt.Name = "Fertilizer_butt";
             this.Fertilizer_butt.Size = new System.Drawing.Size(45, 40);
             this.Fertilizer_butt.TabIndex = 6;
@@ -400,7 +402,7 @@
             // 
             // Scarecrow_butt
             // 
-            this.Scarecrow_butt.Location = new System.Drawing.Point(0, 22);
+            this.Scarecrow_butt.Location = new System.Drawing.Point(23, 24);
             this.Scarecrow_butt.Name = "Scarecrow_butt";
             this.Scarecrow_butt.Size = new System.Drawing.Size(45, 40);
             this.Scarecrow_butt.TabIndex = 5;
@@ -412,33 +414,59 @@
             // Farmers_Label_Up
             // 
             this.Farmers_Label_Up.AutoSize = true;
-            this.Farmers_Label_Up.Location = new System.Drawing.Point(4, 4);
+            this.Farmers_Label_Up.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Farmers_Label_Up.ForeColor = System.Drawing.Color.Navy;
+            this.Farmers_Label_Up.Location = new System.Drawing.Point(64, 0);
             this.Farmers_Label_Up.Name = "Farmers_Label_Up";
-            this.Farmers_Label_Up.Size = new System.Drawing.Size(52, 15);
+            this.Farmers_Label_Up.Size = new System.Drawing.Size(74, 21);
             this.Farmers_Label_Up.TabIndex = 0;
             this.Farmers_Label_Up.Text = "Fermiers";
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.Plow_butt);
+            this.panel3.Controls.Add(this.Furnace_butt);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.Saw_butt);
             this.panel3.Location = new System.Drawing.Point(6, 166);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(200, 115);
+            this.panel3.Size = new System.Drawing.Size(200, 90);
             this.panel3.TabIndex = 3;
+            // 
+            // Plow_butt
+            // 
+            this.Plow_butt.Location = new System.Drawing.Point(127, 24);
+            this.Plow_butt.Name = "Plow_butt";
+            this.Plow_butt.Size = new System.Drawing.Size(45, 40);
+            this.Plow_butt.TabIndex = 6;
+            this.Plow_butt.Text = "Charrue";
+            this.Plow_butt.UseVisualStyleBackColor = true;
+            this.Plow_butt.Click += new System.EventHandler(this.Plow_butt_Click);
+            // 
+            // Furnace_butt
+            // 
+            this.Furnace_butt.Location = new System.Drawing.Point(76, 24);
+            this.Furnace_butt.Name = "Furnace_butt";
+            this.Furnace_butt.Size = new System.Drawing.Size(45, 40);
+            this.Furnace_butt.TabIndex = 5;
+            this.Furnace_butt.Text = "Furnace";
+            this.Furnace_butt.UseVisualStyleBackColor = true;
+            this.Furnace_butt.Click += new System.EventHandler(this.Furnace_butt_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 0);
+            this.label3.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Navy;
+            this.label3.Location = new System.Drawing.Point(62, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 15);
+            this.label3.Size = new System.Drawing.Size(79, 21);
             this.label3.TabIndex = 4;
             this.label3.Text = "Forgeron";
             // 
             // Saw_butt
             // 
-            this.Saw_butt.Location = new System.Drawing.Point(3, 18);
+            this.Saw_butt.Location = new System.Drawing.Point(25, 24);
             this.Saw_butt.Name = "Saw_butt";
             this.Saw_butt.Size = new System.Drawing.Size(45, 40);
             this.Saw_butt.TabIndex = 0;
@@ -460,7 +488,7 @@
             // 
             // Scaffolding_butt
             // 
-            this.Scaffolding_butt.Location = new System.Drawing.Point(130, 33);
+            this.Scaffolding_butt.Location = new System.Drawing.Point(133, 34);
             this.Scaffolding_butt.Name = "Scaffolding_butt";
             this.Scaffolding_butt.Size = new System.Drawing.Size(45, 40);
             this.Scaffolding_butt.TabIndex = 3;
@@ -471,7 +499,7 @@
             // 
             // Hoist_butt
             // 
-            this.Hoist_butt.Location = new System.Drawing.Point(82, 33);
+            this.Hoist_butt.Location = new System.Drawing.Point(82, 34);
             this.Hoist_butt.Name = "Hoist_butt";
             this.Hoist_butt.Size = new System.Drawing.Size(45, 40);
             this.Hoist_butt.TabIndex = 2;
@@ -724,5 +752,7 @@
         private System.Windows.Forms.Label Farmers_Label_Up;
         private System.Windows.Forms.Button Fertilizer_butt;
         private System.Windows.Forms.Button Irrigation_butt;
+        private System.Windows.Forms.Button Plow_butt;
+        private System.Windows.Forms.Button Furnace_butt;
     }
 }

@@ -15,8 +15,8 @@ namespace Game
         //readonly Drugs _drugs;
         //readonly Surgery _surgery;
         ////Blacksmithes' Upgrades
-        //readonly Furnace _furnace;
-        //readonly Plow _plow;
+        readonly Furnace _furnace;
+        readonly Plow _plow;
         readonly Saw _saw;
         //Cookers' Upgrades
         readonly Level1 _level1;
@@ -40,9 +40,9 @@ namespace Game
         public UpgradesModel Level2 { get { return _level2; } }
         public UpgradesModel Level3 { get { return _level3; } }
         public UpgradesModel Level4 { get { return _level4; } }
-        //public UpgradesModel Furnace { get { return Furnace; } }
+        public UpgradesModel Furnace { get { return _furnace; } }
         public UpgradesModel Hoist { get { return _hoist; } }
-        //public UpgradesModel Plow { get { return _plow; } }
+        public UpgradesModel Plow { get { return _plow; } }
         public UpgradesModel Saw { get { return _saw; } }
         //public UpgradesModel Surgery { get { return _surgery; } }
         //public UpgradesModel Drugs { get { return _drugs; } }
@@ -65,25 +65,25 @@ namespace Game
             Game game = village.Game;
             _upgradesList = new List<UpgradesModel>();
             _owner = village;
-            //_cement = new Cement(game);
-            //_drugs = new Drugs(game);
+            //_cement = new Cement(game, village, this, Owner.JobsList);
+            //_drugs = new Drugs(game, village, this, Owner.JobsList);
             _fertilizer = new Fertilizer(game, village, this, Owner.JobsList);
             _fields_expansion = new Fields_expansion(game, village, this, Owner.JobsList);
-            //_furnace = new Furnace(game);
+            _furnace = new Furnace(game, village, this, Owner.JobsList);
             _hoist = new Hoist(game, village, this, Owner.JobsList);
             _irrigation = new Irrigation(game, village, this, Owner.JobsList);
             _level1 = new Level1(game, village, this, Owner.JobsList);
             _level2 = new Level2(game, village, this, Owner.JobsList);
             _level3 = new Level3(game, village, this, Owner.JobsList);
             _level4 = new Level4(game, village, this, Owner.JobsList);
-            //_plow = new Plow(game);
+            _plow = new Plow(game, village, this, Owner.JobsList);
             _pulley = new Pulley(game, village, this, Owner.JobsList);
-            //_reinforced = new Reinforced(game);
+            //_reinforced = new Reinforced(game, village, this, Owner.JobsList);
             _saw = new Saw(game, village, this, Owner.JobsList);
             _scaffolding = new Scaffolding(game, village, this, Owner.JobsList);
             _scarecrow = new Scarecrow(game, village, this, Owner.JobsList);
-            //_surgery = new Surgery(game);
-            //_whitewash = new Whitewash(game);
+            //_surgery = new Surgery(game, village, this, Owner.JobsList);
+            //_whitewash = new Whitewash(game, village, this, Owner.JobsList);
             //_upgradesList.Add(_cement);
             //_upgradesList.Add(_drugs);
             _upgradesList.Add(_fertilizer);
