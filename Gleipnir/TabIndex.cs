@@ -23,6 +23,7 @@ namespace GamePages
         int positionX;
         int positionY;
         Random rnd;
+        ToolTip GeneralTooltip;
 
         public TabIndex(GeneralPage p)
         {
@@ -34,6 +35,11 @@ namespace GamePages
 
             positionX = 0;
             positionY = 10;
+
+            GeneralTooltip = new ToolTip();
+            GeneralTooltip.ShowAlways = true;
+            GeneralTooltip.InitialDelay = 100;
+            GeneralTooltip.ReshowDelay = 100;
 
             // Create imageList
             ImageList imageList = new ImageList();
@@ -324,7 +330,7 @@ namespace GamePages
             if (_page.TheGame.Villages[0].Upgrades.Level1.IsActivated)
             {
                 Level1_butt.Enabled = false;
-                _page.PushAlert("Votre niveau de restauration a augmenté", "Level1 acheté");
+                _page.PushText("Votre niveau de restauration a augmenté", "Level1 acheté");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Level1.CostPrice > _page.TheGame.Offerings)
             {
@@ -346,7 +352,7 @@ namespace GamePages
             if (_page.TheGame.Villages[0].Upgrades.Level2.IsActivated)
             {
                 Level2_butt.Enabled = false;
-                _page.PushAlert("Votre niveau de restauration a augmenté", "Level2 acheté");
+                _page.PushText("Votre niveau de restauration a augmenté", "Level2 acheté");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Level2.CostPrice > _page.TheGame.Offerings)
             {
@@ -364,7 +370,7 @@ namespace GamePages
             if (_page.TheGame.Villages[0].Upgrades.Level3.IsActivated)
             {
                 Level3_butt.Enabled = false;
-                _page.PushAlert("Votre niveau de restauration a augmenté", "Level3 acheté");
+                _page.PushText("Votre niveau de restauration a augmenté", "Level3 acheté");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Level3.CostPrice > _page.TheGame.Offerings)
             {
@@ -382,7 +388,7 @@ namespace GamePages
             if (_page.TheGame.Villages[0].Upgrades.Level4.IsActivated)
             {
                 Level4_butt.Enabled = false;
-                _page.PushAlert("Votre niveau de restauration a augmenté", "Level4 acheté");
+                _page.PushText("Votre niveau de restauration a augmenté", "Level4 acheté");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Level4.CostPrice > _page.TheGame.Offerings)
             {
@@ -401,7 +407,7 @@ namespace GamePages
             if (_page.TheGame.Villages[0].Upgrades.Pulley.IsActivated)
             {
                 Pulley_butt.Enabled = false;
-                _page.PushAlert("Vos ouvriers sont plus efficaces", "Poulie achetée");
+                _page.PushText("Vos ouvriers sont plus efficaces", "Poulie achetée");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Pulley.CostPrice > _page.TheGame.Offerings)
             {
@@ -419,7 +425,7 @@ namespace GamePages
             if (_page.TheGame.Villages[0].Upgrades.Hoist.IsActivated)
             {
                 Hoist_butt.Enabled = false;
-                _page.PushAlert("Vos ouvriers sont plus efficaces", "Grue achetée");
+                _page.PushText("Vos ouvriers sont plus efficaces", "Grue achetée");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Hoist.CostPrice > _page.TheGame.Offerings)
             {
@@ -438,10 +444,10 @@ namespace GamePages
         private void Scaffholding_butt_Click(object sender, EventArgs e)
         {
             _page.TheGame.Villages[0].Upgrades.Scaffolding.Buy();
-            if (_page.TheGame.Villages[0].Upgrades.Hoist.IsActivated)
+            if (_page.TheGame.Villages[0].Upgrades.Scaffolding.IsActivated)
             {
-                Hoist_butt.Enabled = false;
-                _page.PushAlert("Vos ouvriers sont plus efficaces", "Grue achetée");
+                Scaffolding_butt.Enabled = false;
+                _page.PushText("Vos ouvriers sont plus efficaces", "Grue achetée");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Scaffolding.CostPrice > _page.TheGame.Offerings)
             {
@@ -457,16 +463,14 @@ namespace GamePages
             }
         }
         #endregion
-
-
         #region Blacksmith's Upgrades
         private void Saw_butt_Click(object sender, EventArgs e)
         {
             _page.TheGame.Villages[0].Upgrades.Saw.Buy();
-            if (_page.TheGame.Villages[0].Upgrades.Level4.IsActivated)
+            if (_page.TheGame.Villages[0].Upgrades.Saw.IsActivated)
             {
                 Saw_butt.Enabled = false;
-                _page.PushAlert("Votre niveau de restauration a augmenté", "La scie est achetée");
+                _page.PushText("Les forgeron sont plus compétents", "La scie est achetée");
             }
             else if (_page.TheGame.Villages[0].Upgrades.Saw.CostPrice > _page.TheGame.Offerings)
             {
@@ -477,6 +481,221 @@ namespace GamePages
                 _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
             }
         }
+        private void Furnace_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Furnace.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Furnace.IsActivated)
+            {
+                Furnace_butt.Enabled = false;
+                _page.PushText("Les forgeron sont plus compétents", "Le four est achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Furnace.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
+        private void Plow_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Plow.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Plow.IsActivated)
+            {
+                Plow_butt.Enabled = false;
+                _page.PushText("Les forgeron sont plus compétents", "La charrue est achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Plow.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
+        #endregion
+        #region Farmer's Upgrades
+        private void Scarecrow_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Scarecrow.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Scarecrow.IsActivated)
+            {
+                Scarecrow_butt.Enabled = false;
+                _page.PushText("La production de la ferme augmente", "L'épouvantail est achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Scarecrow.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
+        private void Fertilizer_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Fertilizer.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Fertilizer.IsActivated)
+            {
+                Fertilizer_butt.Enabled = false;
+                _page.PushText("La production de la ferme augmente", "Le fertilisant est achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Fertilizer.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
+        private void Irrigation_butt_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].Upgrades.Irrigation.Buy();
+            if (_page.TheGame.Villages[0].Upgrades.Irrigation.IsActivated)
+            {
+                Irrigation_butt.Enabled = false;
+                _page.PushText("La production de la ferme augmente", "L'irrigation est achetée");
+            }
+            else if (_page.TheGame.Villages[0].Upgrades.Irrigation.CostPrice > _page.TheGame.Offerings)
+            {
+                _page.PushAlert("Vous n'avez pas assez d'argent pour acheter", "Pas assez d'argent ! ");
+            }
+            else
+            {
+                _page.PushAlert("Vous n'avez pas put acheter l'amélioration", "Echec d'achat !");
+            }
+        }
+        #endregion
+
+        #region Tooltips' implementation
+        private void UnionOfCrafter_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(UnionOfCrafter, "Syndicat");
+        }
+
+        private void Forge_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Forge, "Forge");
+        }
+
+        private void Farm_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Farm, "Ferme");
+        }
+
+        private void ApothecaryOffice_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(ApothecaryOffice, "Cabinet d'apothicaire");
+        }
+
+        private void Restaurant_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Restaurant, "Restaurant");
+        }
+
+        private void ClothesShop_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(ClothesShop, "Tailleur");
+        }
+
+        private void Mill_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Mill, "Moulin");
+        }
+
+        private void Baths_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Baths, "Bains");
+        }
+
+        private void Brothel_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Brothel, "Maison close");
+        }
+
+        private void Tavern_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Tavern, "Taverne");
+        }
+
+        private void Theater_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Theater, "Théatre");
+        }
+
+        private void PartyRoom_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(PartyRoom, "Salle des fêtes");
+        }
+
+        private void OfferingsWarehouse_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(OfferingsWarehouse, "Sanctuaire");
+        }
+
+        private void Chapel_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Chapel, "Chapelle");
+        }
+
+        private void Level1_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Level1_butt, "Niveau 2 Cuisine");
+        }
+
+        private void Level2_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Level2_butt, "Niveau 3 Cuisine");
+        }
+
+        private void Level3_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Level3_butt, "Niveau 4 Cuisine");
+        }
+
+        private void Level4_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Level4_butt, "Niveau 5 Cuisine");
+        }
+
+        private void Pulley_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Pulley_butt, "Poulie");
+        }
+
+        private void Hoist_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Hoist_butt, "Grue");
+        }
+
+        private void Scaffolding_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Scaffolding_butt, "Echaffaudage");
+        }
+
+        private void Saw_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Saw_butt, "Scie");
+        }
+
+        private void Scarecrow_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Scarecrow_butt, "Epouvantail");
+        }
+
+        private void Fertilizer_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Fertilizer_butt, "Fertilisant");
+        }
+
+        private void Irrigation_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Irrigation_butt, "Système d'irrigation");
+        }
+
         #endregion
 
     }

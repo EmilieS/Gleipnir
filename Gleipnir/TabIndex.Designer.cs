@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.ToolTip UnionOfCrafter_tooltip;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabIndex));
             this.actionsMenu = new System.Windows.Forms.TabControl();
             this.buildingsTab = new System.Windows.Forms.TabPage();
@@ -50,10 +52,18 @@
             this.ApothecaryOffice = new System.Windows.Forms.Button();
             this.Tavern = new System.Windows.Forms.Button();
             this.UpgradesTab = new System.Windows.Forms.TabPage();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.Irrigation_butt = new System.Windows.Forms.Button();
+            this.Fertilizer_butt = new System.Windows.Forms.Button();
+            this.Scarecrow_butt = new System.Windows.Forms.Button();
+            this.Farmers_Label_Up = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.Plow_butt = new System.Windows.Forms.Button();
+            this.Furnace_butt = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.Saw_butt = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.Scaffholding_butt = new System.Windows.Forms.Button();
+            this.Scaffolding_butt = new System.Windows.Forms.Button();
             this.Hoist_butt = new System.Windows.Forms.Button();
             this.Pulley_butt = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -69,15 +79,23 @@
             this.StartHeal = new System.Windows.Forms.Button();
             this.StartEarthquake = new System.Windows.Forms.Button();
             this.StartEpidemic = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            UnionOfCrafter_tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.actionsMenu.SuspendLayout();
             this.buildingsTab.SuspendLayout();
             this.UpgradesTab.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.godSpellsTab.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // UnionOfCrafter_tooltip
+            // 
+            UnionOfCrafter_tooltip.IsBalloon = true;
+            UnionOfCrafter_tooltip.OwnerDraw = true;
+            UnionOfCrafter_tooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            UnionOfCrafter_tooltip.ToolTipTitle = "Syndicat";
             // 
             // actionsMenu
             // 
@@ -179,6 +197,7 @@
             this.OfferingsWarehouse.Size = new System.Drawing.Size(45, 40);
             this.OfferingsWarehouse.TabIndex = 13;
             this.OfferingsWarehouse.UseVisualStyleBackColor = true;
+            this.OfferingsWarehouse.MouseHover += new System.EventHandler(this.OfferingsWarehouse_MouseHover);
             // 
             // ClothesShop
             // 
@@ -190,6 +209,7 @@
             this.ClothesShop.Size = new System.Drawing.Size(45, 40);
             this.ClothesShop.TabIndex = 12;
             this.ClothesShop.UseVisualStyleBackColor = true;
+            this.ClothesShop.MouseHover += new System.EventHandler(this.ClothesShop_MouseHover);
             // 
             // Mill
             // 
@@ -201,6 +221,7 @@
             this.Mill.Size = new System.Drawing.Size(45, 40);
             this.Mill.TabIndex = 11;
             this.Mill.UseVisualStyleBackColor = true;
+            this.Mill.MouseHover += new System.EventHandler(this.Mill_MouseHover);
             // 
             // Farm
             // 
@@ -212,6 +233,7 @@
             this.Farm.Size = new System.Drawing.Size(45, 40);
             this.Farm.TabIndex = 10;
             this.Farm.UseVisualStyleBackColor = true;
+            this.Farm.MouseHover += new System.EventHandler(this.Farm_MouseHover);
             // 
             // UnionOfCrafter
             // 
@@ -223,6 +245,7 @@
             this.UnionOfCrafter.Size = new System.Drawing.Size(45, 40);
             this.UnionOfCrafter.TabIndex = 9;
             this.UnionOfCrafter.UseVisualStyleBackColor = true;
+            this.UnionOfCrafter.MouseHover += new System.EventHandler(this.UnionOfCrafter_MouseHover);
             // 
             // Forge
             // 
@@ -234,6 +257,7 @@
             this.Forge.Size = new System.Drawing.Size(45, 40);
             this.Forge.TabIndex = 8;
             this.Forge.UseVisualStyleBackColor = true;
+            this.Forge.MouseHover += new System.EventHandler(this.Forge_MouseHover);
             // 
             // Restaurant
             // 
@@ -245,6 +269,7 @@
             this.Restaurant.Size = new System.Drawing.Size(45, 40);
             this.Restaurant.TabIndex = 7;
             this.Restaurant.UseVisualStyleBackColor = true;
+            this.Restaurant.MouseHover += new System.EventHandler(this.Restaurant_MouseHover);
             // 
             // Theater
             // 
@@ -255,6 +280,7 @@
             this.Theater.Size = new System.Drawing.Size(45, 40);
             this.Theater.TabIndex = 6;
             this.Theater.UseVisualStyleBackColor = true;
+            this.Theater.MouseHover += new System.EventHandler(this.Theater_MouseHover);
             // 
             // Brothel
             // 
@@ -265,6 +291,7 @@
             this.Brothel.Size = new System.Drawing.Size(45, 40);
             this.Brothel.TabIndex = 5;
             this.Brothel.UseVisualStyleBackColor = true;
+            this.Brothel.MouseHover += new System.EventHandler(this.Brothel_MouseHover);
             // 
             // Baths
             // 
@@ -275,6 +302,7 @@
             this.Baths.Size = new System.Drawing.Size(45, 40);
             this.Baths.TabIndex = 4;
             this.Baths.UseVisualStyleBackColor = true;
+            this.Baths.MouseHover += new System.EventHandler(this.Baths_MouseHover);
             // 
             // PartyRoom
             // 
@@ -285,6 +313,7 @@
             this.PartyRoom.Size = new System.Drawing.Size(45, 40);
             this.PartyRoom.TabIndex = 3;
             this.PartyRoom.UseVisualStyleBackColor = true;
+            this.PartyRoom.MouseHover += new System.EventHandler(this.PartyRoom_MouseHover);
             // 
             // Chapel
             // 
@@ -295,6 +324,7 @@
             this.Chapel.Size = new System.Drawing.Size(45, 40);
             this.Chapel.TabIndex = 2;
             this.Chapel.UseVisualStyleBackColor = true;
+            this.Chapel.MouseHover += new System.EventHandler(this.Chapel_MouseHover);
             // 
             // ApothecaryOffice
             // 
@@ -308,6 +338,7 @@
             this.ApothecaryOffice.Size = new System.Drawing.Size(45, 40);
             this.ApothecaryOffice.TabIndex = 1;
             this.ApothecaryOffice.UseVisualStyleBackColor = false;
+            this.ApothecaryOffice.MouseHover += new System.EventHandler(this.ApothecaryOffice_MouseHover);
             // 
             // Tavern
             // 
@@ -318,11 +349,13 @@
             this.Tavern.Size = new System.Drawing.Size(45, 40);
             this.Tavern.TabIndex = 0;
             this.Tavern.UseVisualStyleBackColor = true;
+            this.Tavern.MouseHover += new System.EventHandler(this.Tavern_MouseHover);
             // 
             // UpgradesTab
             // 
             this.UpgradesTab.BackgroundImage = global::GamePages.Properties.Resources.ActionTab_happiness_background;
             this.UpgradesTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.UpgradesTab.Controls.Add(this.panel4);
             this.UpgradesTab.Controls.Add(this.panel3);
             this.UpgradesTab.Controls.Add(this.panel2);
             this.UpgradesTab.Controls.Add(this.panel1);
@@ -334,28 +367,117 @@
             this.UpgradesTab.TabIndex = 1;
             this.UpgradesTab.UseVisualStyleBackColor = true;
             // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.Irrigation_butt);
+            this.panel4.Controls.Add(this.Fertilizer_butt);
+            this.panel4.Controls.Add(this.Scarecrow_butt);
+            this.panel4.Controls.Add(this.Farmers_Label_Up);
+            this.panel4.Location = new System.Drawing.Point(8, 264);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(200, 100);
+            this.panel4.TabIndex = 4;
+            // 
+            // Irrigation_butt
+            // 
+            this.Irrigation_butt.Location = new System.Drawing.Point(125, 24);
+            this.Irrigation_butt.Name = "Irrigation_butt";
+            this.Irrigation_butt.Size = new System.Drawing.Size(45, 40);
+            this.Irrigation_butt.TabIndex = 7;
+            this.Irrigation_butt.Text = "Irrigation";
+            this.Irrigation_butt.UseVisualStyleBackColor = true;
+            this.Irrigation_butt.Click += new System.EventHandler(this.Irrigation_butt_Click);
+            this.Irrigation_butt.MouseHover += new System.EventHandler(this.Irrigation_butt_MouseHover);
+            // 
+            // Fertilizer_butt
+            // 
+            this.Fertilizer_butt.Location = new System.Drawing.Point(74, 24);
+            this.Fertilizer_butt.Name = "Fertilizer_butt";
+            this.Fertilizer_butt.Size = new System.Drawing.Size(45, 40);
+            this.Fertilizer_butt.TabIndex = 6;
+            this.Fertilizer_butt.Text = "Fertilisant";
+            this.Fertilizer_butt.UseVisualStyleBackColor = true;
+            this.Fertilizer_butt.Click += new System.EventHandler(this.Fertilizer_butt_Click);
+            this.Fertilizer_butt.MouseHover += new System.EventHandler(this.Fertilizer_butt_MouseHover);
+            // 
+            // Scarecrow_butt
+            // 
+            this.Scarecrow_butt.Location = new System.Drawing.Point(23, 24);
+            this.Scarecrow_butt.Name = "Scarecrow_butt";
+            this.Scarecrow_butt.Size = new System.Drawing.Size(45, 40);
+            this.Scarecrow_butt.TabIndex = 5;
+            this.Scarecrow_butt.Text = "Epouv";
+            this.Scarecrow_butt.UseVisualStyleBackColor = true;
+            this.Scarecrow_butt.Click += new System.EventHandler(this.Scarecrow_butt_Click);
+            this.Scarecrow_butt.MouseHover += new System.EventHandler(this.Scarecrow_butt_MouseHover);
+            // 
+            // Farmers_Label_Up
+            // 
+            this.Farmers_Label_Up.AutoSize = true;
+            this.Farmers_Label_Up.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Farmers_Label_Up.ForeColor = System.Drawing.Color.Navy;
+            this.Farmers_Label_Up.Location = new System.Drawing.Point(64, 0);
+            this.Farmers_Label_Up.Name = "Farmers_Label_Up";
+            this.Farmers_Label_Up.Size = new System.Drawing.Size(74, 21);
+            this.Farmers_Label_Up.TabIndex = 0;
+            this.Farmers_Label_Up.Text = "Fermiers";
+            // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.Plow_butt);
+            this.panel3.Controls.Add(this.Furnace_butt);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.Saw_butt);
-            this.panel3.Location = new System.Drawing.Point(7, 169);
+            this.panel3.Location = new System.Drawing.Point(6, 166);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(200, 115);
+            this.panel3.Size = new System.Drawing.Size(200, 90);
             this.panel3.TabIndex = 3;
+            // 
+            // Plow_butt
+            // 
+            this.Plow_butt.Location = new System.Drawing.Point(127, 24);
+            this.Plow_butt.Name = "Plow_butt";
+            this.Plow_butt.Size = new System.Drawing.Size(45, 40);
+            this.Plow_butt.TabIndex = 6;
+            this.Plow_butt.Text = "Charrue";
+            this.Plow_butt.UseVisualStyleBackColor = true;
+            this.Plow_butt.Click += new System.EventHandler(this.Plow_butt_Click);
+            // 
+            // Furnace_butt
+            // 
+            this.Furnace_butt.Location = new System.Drawing.Point(76, 24);
+            this.Furnace_butt.Name = "Furnace_butt";
+            this.Furnace_butt.Size = new System.Drawing.Size(45, 40);
+            this.Furnace_butt.TabIndex = 5;
+            this.Furnace_butt.Text = "Furnace";
+            this.Furnace_butt.UseVisualStyleBackColor = true;
+            this.Furnace_butt.Click += new System.EventHandler(this.Furnace_butt_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Navy;
+            this.label3.Location = new System.Drawing.Point(62, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(79, 21);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Forgeron";
             // 
             // Saw_butt
             // 
-            this.Saw_butt.Location = new System.Drawing.Point(3, 18);
+            this.Saw_butt.Location = new System.Drawing.Point(25, 24);
             this.Saw_butt.Name = "Saw_butt";
             this.Saw_butt.Size = new System.Drawing.Size(45, 40);
             this.Saw_butt.TabIndex = 0;
             this.Saw_butt.Text = "Scie";
             this.Saw_butt.UseVisualStyleBackColor = true;
             this.Saw_butt.Click += new System.EventHandler(this.Saw_butt_Click);
+            this.Saw_butt.MouseHover += new System.EventHandler(this.Saw_butt_MouseHover);
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.Scaffholding_butt);
+            this.panel2.Controls.Add(this.Scaffolding_butt);
             this.panel2.Controls.Add(this.Hoist_butt);
             this.panel2.Controls.Add(this.Pulley_butt);
             this.panel2.Controls.Add(this.label2);
@@ -364,35 +486,38 @@
             this.panel2.Size = new System.Drawing.Size(208, 85);
             this.panel2.TabIndex = 2;
             // 
-            // Scaffholding_butt
+            // Scaffolding_butt
             // 
-            this.Scaffholding_butt.Location = new System.Drawing.Point(128, 51);
-            this.Scaffholding_butt.Name = "Scaffholding_butt";
-            this.Scaffholding_butt.Size = new System.Drawing.Size(45, 40);
-            this.Scaffholding_butt.TabIndex = 3;
-            this.Scaffholding_butt.Text = "Echaffaudage";
-            this.Scaffholding_butt.UseVisualStyleBackColor = true;
-            this.Scaffholding_butt.Click += new System.EventHandler(this.Scaffholding_butt_Click);
+            this.Scaffolding_butt.Location = new System.Drawing.Point(133, 34);
+            this.Scaffolding_butt.Name = "Scaffolding_butt";
+            this.Scaffolding_butt.Size = new System.Drawing.Size(45, 40);
+            this.Scaffolding_butt.TabIndex = 3;
+            this.Scaffolding_butt.Text = "Echaffaudage";
+            this.Scaffolding_butt.UseVisualStyleBackColor = true;
+            this.Scaffolding_butt.Click += new System.EventHandler(this.Scaffholding_butt_Click);
+            this.Scaffolding_butt.MouseHover += new System.EventHandler(this.Scaffolding_butt_MouseHover);
             // 
             // Hoist_butt
             // 
-            this.Hoist_butt.Location = new System.Drawing.Point(80, 51);
+            this.Hoist_butt.Location = new System.Drawing.Point(82, 34);
             this.Hoist_butt.Name = "Hoist_butt";
             this.Hoist_butt.Size = new System.Drawing.Size(45, 40);
             this.Hoist_butt.TabIndex = 2;
             this.Hoist_butt.Text = "Grue";
             this.Hoist_butt.UseVisualStyleBackColor = true;
             this.Hoist_butt.Click += new System.EventHandler(this.Hoist_butt_Click);
+            this.Hoist_butt.MouseHover += new System.EventHandler(this.Hoist_butt_MouseHover);
             // 
             // Pulley_butt
             // 
-            this.Pulley_butt.Location = new System.Drawing.Point(29, 52);
+            this.Pulley_butt.Location = new System.Drawing.Point(31, 34);
             this.Pulley_butt.Name = "Pulley_butt";
             this.Pulley_butt.Size = new System.Drawing.Size(45, 40);
             this.Pulley_butt.TabIndex = 1;
             this.Pulley_butt.Text = "Poulie";
             this.Pulley_butt.UseVisualStyleBackColor = true;
             this.Pulley_butt.Click += new System.EventHandler(this.Pulley_butt_Click);
+            this.Pulley_butt.MouseHover += new System.EventHandler(this.Pulley_butt_MouseHover);
             // 
             // label2
             // 
@@ -438,6 +563,7 @@
             this.Level3_butt.TabIndex = 3;
             this.Level3_butt.UseVisualStyleBackColor = true;
             this.Level3_butt.Click += new System.EventHandler(this.Level3_butt_Click);
+            this.Level3_butt.MouseHover += new System.EventHandler(this.Level3_butt_MouseHover);
             // 
             // Level2_butt
             // 
@@ -449,6 +575,7 @@
             this.Level2_butt.TabIndex = 2;
             this.Level2_butt.UseVisualStyleBackColor = true;
             this.Level2_butt.Click += new System.EventHandler(this.Level2_butt_Click);
+            this.Level2_butt.MouseHover += new System.EventHandler(this.Level2_butt_MouseHover);
             // 
             // Level4_butt
             // 
@@ -460,6 +587,7 @@
             this.Level4_butt.TabIndex = 1;
             this.Level4_butt.UseVisualStyleBackColor = true;
             this.Level4_butt.Click += new System.EventHandler(this.Level4_butt_Click);
+            this.Level4_butt.MouseHover += new System.EventHandler(this.Level4_butt_MouseHover);
             // 
             // Level1_butt
             // 
@@ -471,6 +599,7 @@
             this.Level1_butt.TabIndex = 0;
             this.Level1_butt.UseVisualStyleBackColor = true;
             this.Level1_butt.Click += new System.EventHandler(this.Level1_butt_Click);
+            this.Level1_butt.MouseHover += new System.EventHandler(this.Level1_butt_MouseHover);
             // 
             // VillagerList
             // 
@@ -551,15 +680,6 @@
             this.StartEpidemic.UseVisualStyleBackColor = true;
             this.StartEpidemic.Click += new System.EventHandler(this.StartEpidemic_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 15);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Forgeron";
-            // 
             // TabIndex
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -571,6 +691,8 @@
             this.actionsMenu.ResumeLayout(false);
             this.buildingsTab.ResumeLayout(false);
             this.UpgradesTab.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -620,10 +742,17 @@
         private System.Windows.Forms.Button Pulley_butt;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button Scaffholding_butt;
+        private System.Windows.Forms.Button Scaffolding_butt;
         private System.Windows.Forms.Button Hoist_butt;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button Saw_butt;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button Scarecrow_butt;
+        private System.Windows.Forms.Label Farmers_Label_Up;
+        private System.Windows.Forms.Button Fertilizer_butt;
+        private System.Windows.Forms.Button Irrigation_butt;
+        private System.Windows.Forms.Button Plow_butt;
+        private System.Windows.Forms.Button Furnace_butt;
     }
 }

@@ -15,8 +15,8 @@ namespace Game
         //readonly Drugs _drugs;
         //readonly Surgery _surgery;
         ////Blacksmithes' Upgrades
-        //readonly Furnace _furnace;
-        //readonly Plow _plow;
+        readonly Furnace _furnace;
+        readonly Plow _plow;
         readonly Saw _saw;
         //Cookers' Upgrades
         readonly Level1 _level1;
@@ -31,18 +31,18 @@ namespace Game
         //readonly Cement _cement;
         //readonly Reinforced _reinforced;
         ////Farmers' Upgrades
-        //readonly Fertilizer _fertilizer;
-        //readonly Fields_expansion _fields_expansion;
-        //readonly Irrigation _irrigation;
-        //readonly Scarecrow _scarecrow;
+        readonly Fertilizer _fertilizer;
+        readonly Fields_expansion _fields_expansion;
+        readonly Irrigation _irrigation;
+        readonly Scarecrow _scarecrow;
 
         public UpgradesModel Level1 { get { return _level1; } }
         public UpgradesModel Level2 { get { return _level2; } }
         public UpgradesModel Level3 { get { return _level3; } }
         public UpgradesModel Level4 { get { return _level4; } }
-        //public UpgradesModel Furnace { get { return Furnace; } }
+        public UpgradesModel Furnace { get { return _furnace; } }
         public UpgradesModel Hoist { get { return _hoist; } }
-        //public UpgradesModel Plow { get { return _plow; } }
+        public UpgradesModel Plow { get { return _plow; } }
         public UpgradesModel Saw { get { return _saw; } }
         //public UpgradesModel Surgery { get { return _surgery; } }
         //public UpgradesModel Drugs { get { return _drugs; } }
@@ -51,10 +51,10 @@ namespace Game
         //public UpgradesModel Whitewash { get { return _whitewash; } }
         //public UpgradesModel Cement { get { return _cement; } }
         //public UpgradesModel Reinforced { get { return _reinforced; } }
-        //public UpgradesModel Fertilizer { get { return _fertilizer; } }
-        //public UpgradesModel Fields_expansion { get { return _fields_expansion; } }
-        //public UpgradesModel Irrigation { get { return _irrigation; } }
-        //public UpgradesModel Scarecrow { get { return _scarecrow; } }
+        public UpgradesModel Fertilizer { get { return _fertilizer; } }
+        public UpgradesModel Fields_expansion { get { return _fields_expansion; } }
+        public UpgradesModel Irrigation { get { return _irrigation; } }
+        public UpgradesModel Scarecrow { get { return _scarecrow; } }
 
         readonly List<UpgradesModel> _upgradesList;
 
@@ -65,32 +65,32 @@ namespace Game
             Game game = village.Game;
             _upgradesList = new List<UpgradesModel>();
             _owner = village;
-            //_cement = new Cement(game);
-            //_drugs = new Drugs(game);
-            //_fertilizer = new Fertilizer(game);
-            //_fields_expansion = new Fields_expansion(game);
-            //_furnace = new Furnace(game);
+            //_cement = new Cement(game, village, this, Owner.JobsList);
+            //_drugs = new Drugs(game, village, this, Owner.JobsList);
+            _fertilizer = new Fertilizer(game, village, this, Owner.JobsList);
+            _fields_expansion = new Fields_expansion(game, village, this, Owner.JobsList);
+            _furnace = new Furnace(game, village, this, Owner.JobsList);
             _hoist = new Hoist(game, village, this, Owner.JobsList);
-            //_irrigation = new Irrigation(game);
+            _irrigation = new Irrigation(game, village, this, Owner.JobsList);
             _level1 = new Level1(game, village, this, Owner.JobsList);
             _level2 = new Level2(game, village, this, Owner.JobsList);
             _level3 = new Level3(game, village, this, Owner.JobsList);
             _level4 = new Level4(game, village, this, Owner.JobsList);
-            //_plow = new Plow(game);
+            _plow = new Plow(game, village, this, Owner.JobsList);
             _pulley = new Pulley(game, village, this, Owner.JobsList);
-            //_reinforced = new Reinforced(game);
+            //_reinforced = new Reinforced(game, village, this, Owner.JobsList);
             _saw = new Saw(game, village, this, Owner.JobsList);
             _scaffolding = new Scaffolding(game, village, this, Owner.JobsList);
-            //_scarecrow = new Scarecrow(game);
-            //_surgery = new Surgery(game);
-            //_whitewash = new Whitewash(game);
+            _scarecrow = new Scarecrow(game, village, this, Owner.JobsList);
+            //_surgery = new Surgery(game, village, this, Owner.JobsList);
+            //_whitewash = new Whitewash(game, village, this, Owner.JobsList);
             //_upgradesList.Add(_cement);
             //_upgradesList.Add(_drugs);
-            //_upgradesList.Add(_fertilizer);
-            //_upgradesList.Add(_fields_expansion);
+            _upgradesList.Add(_fertilizer);
+            _upgradesList.Add(_fields_expansion);
             //_upgradesList.Add(_furnace);
             _upgradesList.Add(_hoist);
-            //_upgradesList.Add(_irrigation);
+            _upgradesList.Add(_irrigation);
             _upgradesList.Add(_level1);
             _upgradesList.Add(_level2);
             _upgradesList.Add(_level3);
@@ -100,7 +100,7 @@ namespace Game
             //_upgradesList.Add(_reinforced);
             _upgradesList.Add(_saw);
             _upgradesList.Add(_scaffolding);
-            //_upgradesList.Add(_scarecrow);
+            _upgradesList.Add(_scarecrow);
             //_upgradesList.Add(_surgery);
             //_upgradesList.Add(_whitewash);
             _owner = village;
