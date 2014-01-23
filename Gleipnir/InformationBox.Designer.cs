@@ -44,6 +44,8 @@
             this.buildingIcon = new System.Windows.Forms.PictureBox();
             this.membersIcon = new System.Windows.Forms.PictureBox();
             this.objectName = new System.Windows.Forms.PictureBox();
+            this.StopMeeting = new System.Windows.Forms.Button();
+            this.ActionsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.buildingHealthIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.faithIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.goldIcon)).BeginInit();
@@ -101,6 +103,7 @@
             // 
             this.GodMeeting.BackgroundImage = global::GamePages.Properties.Resources.button_homepage;
             this.GodMeeting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.GodMeeting.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GodMeeting.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.GodMeeting.Location = new System.Drawing.Point(177, 71);
             this.GodMeeting.Name = "GodMeeting";
@@ -206,12 +209,42 @@
             this.objectName.TabIndex = 19;
             this.objectName.TabStop = false;
             // 
+            // StopMeeting
+            // 
+            this.StopMeeting.BackgroundImage = global::GamePages.Properties.Resources.button_homepage;
+            this.StopMeeting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.StopMeeting.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StopMeeting.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.StopMeeting.Location = new System.Drawing.Point(177, 72);
+            this.StopMeeting.Name = "StopMeeting";
+            this.StopMeeting.Size = new System.Drawing.Size(86, 45);
+            this.StopMeeting.TabIndex = 20;
+            this.StopMeeting.Text = "Renvoyer";
+            this.StopMeeting.UseVisualStyleBackColor = true;
+            this.StopMeeting.Click += new System.EventHandler(this.StopMeeting_Click);
+            // 
+            // ActionsButton
+            // 
+            this.ActionsButton.BackgroundImage = global::GamePages.Properties.Resources.button_homepage;
+            this.ActionsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ActionsButton.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ActionsButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ActionsButton.Location = new System.Drawing.Point(17, 74);
+            this.ActionsButton.Name = "ActionsButton";
+            this.ActionsButton.Size = new System.Drawing.Size(75, 40);
+            this.ActionsButton.TabIndex = 21;
+            this.ActionsButton.Text = "Actions";
+            this.ActionsButton.UseVisualStyleBackColor = true;
+            this.ActionsButton.Click += new System.EventHandler(this.ActionsButton_Click);
+            // 
             // InformationBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.Controls.Add(this.ActionsButton);
+            this.Controls.Add(this.StopMeeting);
             this.Controls.Add(this.objectName);
             this.Controls.Add(this.membersIcon);
             this.Controls.Add(this.buildingIcon);
@@ -260,5 +293,7 @@
         private System.Windows.Forms.PictureBox buildingIcon;
         private System.Windows.Forms.PictureBox membersIcon;
         private System.Windows.Forms.PictureBox objectName;
+        private System.Windows.Forms.Button StopMeeting;
+        internal System.Windows.Forms.Button ActionsButton;
     }
 }

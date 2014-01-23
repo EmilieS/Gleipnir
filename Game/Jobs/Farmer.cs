@@ -17,10 +17,16 @@ namespace Game
             _job = Jobs.FARMER;
             _coefficient = 10;
         }
+<<<<<<< HEAD
         bool EnoughFarms;//just for the event
         internal override bool AddPersonPrerequisites()
         {//TODO event
             if (Owner.Owner.BuildingsList.FarmList.Count*10 > _workers.Count)
+=======
+        public override bool AddPersonPrerequisites()
+        {
+            if (Owner.Owner.BuildingsList.FarmList.Count > 0)
+>>>>>>> Meeting
                 return true;
             else
                 return false;

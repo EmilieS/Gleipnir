@@ -23,7 +23,7 @@ namespace Tests
                 {
                     if (v.Job != null)
                     {
-                        v.Job.RemovePerson(v);
+                        v.Job.RemovePerson2(v);
                     }
                 }
             }
@@ -90,7 +90,7 @@ namespace Tests
                 {
                     if (v.Job != null)
                     {
-                        v.Job.RemovePerson(v);
+                        v.Job.RemovePerson2(v);
                     }
                 }
             }

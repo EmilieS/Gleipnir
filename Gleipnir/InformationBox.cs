@@ -14,7 +14,6 @@ namespace GamePages
 {
     public partial class InformationBox : UserControl
     {
-        Meeting _meeting;
         GeneralPage _page;
         Family _family;
         int positionX;
@@ -24,7 +23,6 @@ namespace GamePages
         {
             InitializeComponent();
             _page = page;
-            GodMeeting.Visible = false;
             positionX = 125;
             positionY = 10;
         }
@@ -32,8 +30,31 @@ namespace GamePages
         // Meeting Button Event
         private void GodMeeting_Click(object sender, EventArgs e)
         {
-            _meeting.Convocate();
-            _page.ActionMenu.ShowVillagerListInFamily(_family);
+            if (_page.TheGame.Villages[0].MeetingStart(_family))
+                GodMeeting.Enabled = false;
+            else
+                GodMeeting.Enabled = true;
+        }
+        private void StopMeeting_Click(object sender, EventArgs e)
+        {
+            if (_page.TheGame.Villages[0].EndMeeting())
+            {
+                StopMeeting.Enabled = false;
+                ActionsButton.Enabled = false;
+            }
+            else
+                StopMeeting.Enabled = true;
+        }
+        private void ActionsButton_Click(object sender, EventArgs e)
+        {
+            if (!_page.MeetingActionsPanel.IsOpen && _page.TheGame.Villages[0].Meeting != null)
+            {
+                if (_page.MeetingActionsPanel.OpenPanel(_page.TheGame.Villages[0].Meeting.ActualConvocated))
+                {
+                    _page.LockEverything();
+                    ActionsButton.Enabled = false;
+                }
+            }
         }
 
         // Hide or Show elements in InfoBox
@@ -41,6 +62,8 @@ namespace GamePages
         {
             if (family != null)
             {
+                _family = family;
+
                 // Background
                 this.BackgroundImage = GamePages.Properties.Resources.InformationBox_house_background;
 
@@ -93,10 +116,15 @@ namespace GamePages
                 _page.ActionMenu.ShowVillagerListInFamily(family);
 
                 // Meetings Details
-                _meeting = new Meeting(family);
-                _family = family;
                 GodMeeting.Visible = true;
-                GodMeeting.Enabled = true;
+                if (_page.TheGame.Villages[0].Meeting != null)
+                    GodMeeting.Enabled = false;
+                else
+                    GodMeeting.Enabled = true;
+                StopMeeting.Visible = false;
+                StopMeeting.Enabled = false;
+                ActionsButton.Visible = false;
+                ActionsButton.Enabled = false;
             }
             else
             {
@@ -138,6 +166,10 @@ namespace GamePages
             // Meeting Info
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
+            StopMeeting.Visible = false;
+            StopMeeting.Enabled = false;
+            ActionsButton.Visible = false;
+            ActionsButton.Enabled = false;
         }
         internal void SetJobInfo(JobsModel job, Image buildingImage)
         {
@@ -176,6 +208,10 @@ namespace GamePages
                 // Meetings Details
                 GodMeeting.Visible = false;
                 GodMeeting.Enabled = false;
+                StopMeeting.Visible = false;
+                StopMeeting.Enabled = false;
+                ActionsButton.Visible = false;
+                ActionsButton.Enabled = false;
             }
             else
             {
@@ -212,12 +248,26 @@ namespace GamePages
             buildingLife.Text = table.Hp.ToString();
 
             // Action Tab infos
-            // TODO: Change list for families convocated//table nom famille convoquée
-            _page.ActionMenu.DestroyVillagerList();
+            if (_page.TheGame.Villages[0].Meeting != null && _page.TheGame.Villages[0].Meeting.ActualConvocated != null)
+                _page.ActionMenu.ShowConvocatedVillagers(_page.TheGame.Villages[0].Meeting.ActualConvocated);
+            else
+                _page.ActionMenu.DestroyVillagerList();
 
             // Meeting Info
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
+            StopMeeting.Visible = true;
+            ActionsButton.Visible = true;
+            if (_page.TheGame.Villages[0].Meeting != null && _page.TheGame.Villages[0].Meeting.ActualConvocated != null)
+            {
+                StopMeeting.Enabled = true;
+                ActionsButton.Enabled = true;
+            }
+            else
+            {
+                StopMeeting.Enabled = false;
+                ActionsButton.Enabled = false;
+            }
         }
         internal void SetOtherBuildingsInfo(BuildingsModel building, Image buildingImage)
         {
@@ -255,6 +305,10 @@ namespace GamePages
             // Meetings Details
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
+            StopMeeting.Visible = false;
+            StopMeeting.Enabled = false;
+            ActionsButton.Visible = false;
+            ActionsButton.Enabled = false;
         }
         internal void SetDestroyedBuilding(BuildingsModel building)
         {
@@ -289,6 +343,10 @@ namespace GamePages
             //Meeting button
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
+            StopMeeting.Visible = false;
+            StopMeeting.Enabled = false;
+            ActionsButton.Visible = false;
+            ActionsButton.Enabled = false;
         }
         internal void SetNothingSelected()
         {
@@ -319,6 +377,19 @@ namespace GamePages
             // Meeting Info
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
+            StopMeeting.Visible = false;
+            StopMeeting.Enabled = false;
+            ActionsButton.Visible = false;
+            ActionsButton.Enabled = false;
+        }
+
+        internal void UnlockOpenActionMenuButton()
+        {
+            if (!_page.MeetingActionsPanel.IsOpen)
+            {
+                ActionsButton.Enabled = true;
+                _page.UnLockEverything();
+            }
         }
     }
 }

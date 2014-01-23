@@ -58,6 +58,13 @@ namespace Game
                     }
                     Engage(this, parentFamily); break;
             }
+            if (parentFamily.OwnerVillage.Meeting != null)
+            {
+                if (parentFamily.OwnerVillage.Meeting.Family == parentFamily)
+                {
+                    MeetingStarted();
+                }
+            }
             _happiness.Current = parentFamily.HappinessAverage();
             //_job = Jobs.FARMER;
             _age = 0;
@@ -124,9 +131,19 @@ namespace Game
             get { return _parentFamily; }
             internal set { _parentFamily = value; }
         }
-        public void setJob(JobsModel NewJob)
+        internal void setJob(JobsModel NewJob)
         {
             _job = NewJob;
+        }
+        public bool RemoveJob()
+        {
+            return _job.RemovePerson2(this);
+        }
+        public bool AddToJob(JobsModel job)
+        {
+            if (_job != null)
+                _job.RemovePerson2(this);
+            return job.AddPerson2(this);
         }
         public ActivityStatus ActivityStatus
         {
