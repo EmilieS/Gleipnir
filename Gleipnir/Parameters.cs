@@ -17,14 +17,18 @@ namespace GamePages
 
         public Parameters(GeneralPage generalPage)
         {
+            InitializeComponent();
+
             _generalPage = generalPage;
             _generalPage.PropertyChanged += timerValue_value;
-            InitializeComponent();
 
             if (_generalPage.Interval == 0)
                 timerValue.Text = "Aucun.";
             else
+            {
+                timerTrackBar.Value = _generalPage.Interval;
                 timerValue.Text = _generalPage.Interval.ToString() + " ms";
+            }
         }
 
         public bool IsOpen { get { return _isOpen; } set { _isOpen = value; } }
@@ -47,28 +51,30 @@ namespace GamePages
         }
         private void quitButton_Click(object sender, EventArgs e)
         {
-            if (_generalPage.GameStarted == true)
-            {
-                if (_generalPage.Interval != 0)
-                {
-                    if (_generalPage._timer == null)
-                    {
-                        _generalPage._timer = new System.Windows.Forms.Timer();
-                        _generalPage._timer.Tick += (source, eventArgs) => { _generalPage.Step(); };
-                    }
-                    _generalPage._timer.Interval = _generalPage.Interval;
-                }
-                if (_generalPage.Interval == 0 && _generalPage._timer != null)
-                {
-                    _generalPage._timer.Tick -= (source, eventArgs) => { _generalPage.Step(); };
-                    _generalPage._timer = null;
-                }
-            }
             if (_isOpen)
             {
-                this.SendToBack();
-                this.Hide();
-                _isOpen = false;
+                if (_generalPage.GameStarted == true)
+                {
+                    if (_generalPage.Interval != 0)
+                    {
+                        if (_generalPage._timer == null)
+                        {
+                            _generalPage._timer = new System.Windows.Forms.Timer();
+                            _generalPage._timer.Tick += (source, eventArgs) => { _generalPage.Step(); };
+                        }
+                        _generalPage._timer.Interval = _generalPage.Interval;
+                    }
+                    if (_generalPage.Interval == 0 && _generalPage._timer != null)
+                    {
+                        _generalPage._timer.Tick -= (source, eventArgs) => { _generalPage.Step(); };
+                        _generalPage._timer = null;
+                    }
+
+                    // Quit
+                    _generalPage.ShowOrHideInGameParametersBox();
+                }
+                else
+                    _generalPage.ShowOrHideParametersBox();
             }
         }
     }

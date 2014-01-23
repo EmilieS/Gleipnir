@@ -9,8 +9,7 @@ namespace Game
 {
 
     [Serializable]
-    public class Event<T> : IEvent
-    //where T : GameItem
+    public class Event<T> : IEvent //where T : GameItem
     {
         public readonly T GameItem;
 
@@ -95,7 +94,6 @@ namespace Game
         {
             b.PushTrace(String.Format("{0} is created", GameItem.Name));
         }
-
     }
     [Serializable]
     public class GameEventProperty : EventProperty<Game>
@@ -203,7 +201,6 @@ namespace Game
         }
 
     }
-
     [Serializable]
     public class FamilyEndEvent : Event<Family>
     {
@@ -246,7 +243,6 @@ namespace Game
         {
             b.PushTrace(String.Format("Une nouvelle famille s'est consituée {0}.", GameItem.Name));
         }
-
         public override void Do(IWindow b)
         {
             base.Do(b);

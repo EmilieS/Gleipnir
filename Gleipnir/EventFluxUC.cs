@@ -23,12 +23,13 @@ namespace GamePages
         {
             InitializeComponent();
             _eventList = new FIFOList(10);
-            positionX = 0;
+            positionX = 3;
             positionY = 0;
         }
 
         public void CreateNewEventAndShow(string message, string title)
         {
+            this.SuspendLayout();
             positionY = 3;
             GameEventUC newMessage = new GameEventUC();
             newMessage.EventTitle.Text = title;
@@ -57,6 +58,7 @@ namespace GamePages
                 _eventList[i].Location = new System.Drawing.Point(positionX + 3, positionY);
                 positionY += 68;
             }
+            this.ResumeLayout();
         }
     }
 

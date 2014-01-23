@@ -22,9 +22,12 @@ namespace GamePages
         public InformationBox(GeneralPage page)
         {
             InitializeComponent();
+
             _page = page;
             positionX = 125;
             positionY = 10;
+
+            BackgroundImageLayout = ImageLayout.Stretch;
         }
 
         // Meeting Button Event
@@ -62,27 +65,34 @@ namespace GamePages
         {
             if (family != null)
             {
+                this.SuspendLayout();
                 _family = family;
 
                 // Background
                 this.BackgroundImage = GamePages.Properties.Resources.InformationBox_house_background;
 
                 // BuildingImage
-                buildingIcon.Visible = true;
                 buildingIcon.BackgroundImage = GamePages.Properties.Resources.Building_House;
+                buildingIcon.Visible = true;
 
-                // InfoBox Texts
-                Title.Visible = true;
+                #region InfoBox infos
+                // Title
                 Title.Location = new Point(positionX, positionY);
                 Title.Text = "Famille";
+                Title.Visible = true;
+
+                // ObjectName
                 objectName.Visible = true;
-                ElementName.Visible = true;
                 ElementName.Text = family.Name;
+                ElementName.Visible = true;
+
+                // Gold
                 goldIcon.Visible = true;
-                Gold.Visible = true;
                 Gold.Text = _page.TransformHighNumberToKnumbers(family.GoldStash);
+                Gold.Visible = true;
+
+                // Faith
                 faithIcon.Visible = true;
-                Faith.Visible = true;
                 if (family.FaithAverageValue.ToString().Count<char>() > 5)
                 {
                     string txt = family.FaithAverageValue.ToString();
@@ -93,11 +103,15 @@ namespace GamePages
                 }
                 else
                     Faith.Text = family.FaithAverageValue.ToString();
+                Faith.Visible = true;
+
+                // Members
                 membersIcon.Visible = true;
-                NbMembers.Visible = true;
                 NbMembers.Text = family.FamilyMembers.Count.ToString();
+                NbMembers.Visible = true;
+
+                // Happiness
                 happinessIcon.Visible = true;
-                Happiness.Visible = true;
                 if (family.HappinessAverageValue.ToString().Count<char>() > 5)
                 {
                     string txt = family.HappinessAverageValue.ToString();
@@ -108,12 +122,22 @@ namespace GamePages
                 }
                 else
                     Happiness.Text = family.HappinessAverageValue.ToString();
+                Happiness.Visible = true;
+
+                // Building Life
                 buildingHealthIcon.Visible = true;
-                buildingLife.Visible = true;
                 buildingLife.Text = family.House.Hp.ToString();
+                buildingLife.Visible = true;
+
+                this.ResumeLayout();
+                #endregion
 
                 // Action Tab infos
+                _page.ActionMenu.Visible = false;
+                _page.ActionMenu.SuspendLayout();
                 _page.ActionMenu.ShowVillagerListInFamily(family);
+                _page.ActionMenu.ResumeLayout();
+                _page.ActionMenu.Visible = true;
 
                 // Meetings Details
                 GodMeeting.Visible = true;
@@ -127,83 +151,115 @@ namespace GamePages
                 ActionsButton.Enabled = false;
             }
             else
-            {
-                SetNothingSelected();
-                Title.Visible = true;
-                Title.Text = "Failed Open Family";
-            }
+                SetError();
         }
         internal void SetEmptyHouseInfo(House house)
         {
-            // Background
-            this.BackgroundImage = GamePages.Properties.Resources.InformationBox_others_background;
-
-            // BuildingImage
-            buildingIcon.Visible = true;
-            buildingIcon.BackgroundImage = GamePages.Properties.Resources.Building_House;
-
-            // InfoBox Texts
-            objectName.Visible = false;
-            Title.Visible = true;
-            Title.Location = new Point(positionX - 20, positionY);
-            Title.Text = "Maison Vide";
-            ElementName.Visible = false;
-            goldIcon.Visible = false;
-            Gold.Visible = false;
-            faithIcon.Visible = false;
-            Faith.Visible = false;
-            happinessIcon.Visible = false;
-            Happiness.Visible = false;
-            membersIcon.Visible = false;
-            NbMembers.Visible = false;
-            buildingHealthIcon.Visible = true;
-            buildingLife.Visible = true;
-            buildingLife.Text = house.Hp.ToString();
-
-            // Action Tab infos
-            _page.ActionMenu.DestroyVillagerList();
-
-            // Meeting Info
-            GodMeeting.Visible = false;
-            GodMeeting.Enabled = false;
-            StopMeeting.Visible = false;
-            StopMeeting.Enabled = false;
-            ActionsButton.Visible = false;
-            ActionsButton.Enabled = false;
-        }
-        internal void SetJobInfo(JobsModel job, Image buildingImage)
-        {
-            if (job != null)
+            if (house != null)
             {
+                this.SuspendLayout();
+
                 // Background
-                this.BackgroundImage = GamePages.Properties.Resources.InformationBox_job_background;
+                this.BackgroundImage = GamePages.Properties.Resources.InformationBox_others_background;
 
                 // BuildingImage
+                buildingIcon.BackgroundImage = GamePages.Properties.Resources.Building_House;
                 buildingIcon.Visible = true;
-                buildingIcon.BackgroundImage = buildingImage;
 
-                // InfoBox Texts
-                objectName.Visible = true;
+                #region InfoBox infos
+                // Title
+                Title.Location = new Point(positionX - 20, positionY);
+                Title.Text = "Maison Vide";
                 Title.Visible = true;
-                Title.Location = new Point(positionX, positionY);
-                Title.Text = job.Building.Name;
-                ElementName.Visible = true;
-                ElementName.Text = job.Name;
+
+                // Hidden infos
+                objectName.Visible = false;
+                ElementName.Visible = false;
                 goldIcon.Visible = false;
                 Gold.Visible = false;
                 faithIcon.Visible = false;
                 Faith.Visible = false;
                 happinessIcon.Visible = false;
                 Happiness.Visible = false;
+                membersIcon.Visible = false;
+                NbMembers.Visible = false;
+
+                // Building
+                buildingHealthIcon.Visible = true;
+                buildingLife.Text = house.Hp.ToString();
+                buildingLife.Visible = true;
+
+                this.ResumeLayout();
+                #endregion
+
+                // Action Tab infos
+                _page.ActionMenu.Visible = false;
+                _page.ActionMenu.SuspendLayout();
+                _page.ActionMenu.DestroyVillagerList();
+                _page.ActionMenu.ResumeLayout();
+                _page.ActionMenu.Visible = true;
+
+                // Meeting Info
+                GodMeeting.Visible = false;
+                GodMeeting.Enabled = false;
+            StopMeeting.Visible = false;
+            StopMeeting.Enabled = false;
+            ActionsButton.Visible = false;
+            ActionsButton.Enabled = false;
+            }
+            else
+                SetError();
+        }
+        internal void SetJobInfo(JobsModel job, Image buildingImage)
+        {
+            if (job != null)
+            {
+                this.SuspendLayout();
+                // Background
+                this.BackgroundImage = GamePages.Properties.Resources.InformationBox_job_background;
+
+                // BuildingImage
+                buildingIcon.BackgroundImage = buildingImage;
+                buildingIcon.Visible = true;
+
+                #region InfoBox Infos
+                // Title
+                Title.Location = new Point(positionX, positionY);
+                Title.Text = job.Building.Name;
+                Title.Visible = true;
+
+                // Object
+                ElementName.Visible = true;
+                ElementName.Text = job.Name;
+                objectName.Visible = true;
+
+                // Hidden Infos
+                goldIcon.Visible = false;
+                Gold.Visible = false;
+                faithIcon.Visible = false;
+                Faith.Visible = false;
+                happinessIcon.Visible = false;
+                Happiness.Visible = false;
+
+                // Members
                 membersIcon.Visible = true;
-                NbMembers.Visible = true;
                 NbMembers.Text = job.Workers.Count.ToString();
+                NbMembers.Visible = true;
+
+                // Building
                 buildingHealthIcon.Visible = true;
                 buildingLife.Visible = true;
                 buildingLife.Text = job.Building.Hp.ToString();
 
+                this.ResumeLayout();
+                #endregion
+
                 // Action Tab infos
+                _page.ActionMenu.Visible = false;
+                _page.ActionMenu.SuspendLayout();
                 _page.ActionMenu.ShowWorkersInJob(job);
+                _page.ActionMenu.ResumeLayout();
+                _page.ActionMenu.Visible = true;
 
                 // Meetings Details
                 GodMeeting.Visible = false;
@@ -214,40 +270,48 @@ namespace GamePages
                 ActionsButton.Enabled = false;
             }
             else
-            {
-                SetNothingSelected();
-                Title.Visible = true;
-                Title.Text = "Open Job Failed";
-            }
+                SetError();
         }
         internal void SetTableInfo(TablePlace table)
         {
-            // Background
-            this.BackgroundImage = GamePages.Properties.Resources.InformationBox_table_background;
+            if (table != null)
+            {
+                this.SuspendLayout();
 
-            // BuildingImage
-            buildingIcon.Visible = true;
-            buildingIcon.BackgroundImage = GamePages.Properties.Resources.Building_Table;
+                // Background
+                this.BackgroundImage = GamePages.Properties.Resources.InformationBox_table_background;
 
-            // InfoBox Texts
-            objectName.Visible = false;
-            Title.Visible = true;
-            Title.Location = new Point(positionX - 20, positionY);
-            Title.Text = table.Name;
-            ElementName.Visible = false;
-            goldIcon.Visible = false;
-            Gold.Visible = false;
-            faithIcon.Visible = false;
-            Faith.Visible = false;
-            happinessIcon.Visible = false;
-            Happiness.Visible = false;
-            membersIcon.Visible = false;
-            NbMembers.Visible = false;
-            buildingHealthIcon.Visible = true;
-            buildingLife.Visible = true;
-            buildingLife.Text = table.Hp.ToString();
+                // BuildingImage
+                buildingIcon.BackgroundImage = GamePages.Properties.Resources.Building_Table;
+                buildingIcon.Visible = true;
 
-            // Action Tab infos
+                #region InfoBox Infos
+                // Title
+                Title.Location = new Point(positionX - 20, positionY);
+                Title.Text = table.Name;
+                Title.Visible = true;
+
+                // Hidden Infos
+                objectName.Visible = false;
+                ElementName.Visible = false;
+                goldIcon.Visible = false;
+                Gold.Visible = false;
+                faithIcon.Visible = false;
+                Faith.Visible = false;
+                happinessIcon.Visible = false;
+                Happiness.Visible = false;
+                membersIcon.Visible = false;
+                NbMembers.Visible = false;
+
+                // Building
+                buildingHealthIcon.Visible = true;
+                buildingLife.Text = table.Hp.ToString();
+                buildingLife.Visible = true;
+
+                this.ResumeLayout();
+                #endregion
+
+                // Action Tab infos
             if (_page.TheGame.Villages[0].Meeting != null && _page.TheGame.Villages[0].Meeting.ActualConvocated != null)
                 _page.ActionMenu.ShowConvocatedVillagers(_page.TheGame.Villages[0].Meeting.ActualConvocated);
             else
@@ -268,97 +332,141 @@ namespace GamePages
                 StopMeeting.Enabled = false;
                 ActionsButton.Enabled = false;
             }
+            }
+            else
+                SetError();
         }
         internal void SetOtherBuildingsInfo(BuildingsModel building, Image buildingImage)
         {
-            // Background
-            this.BackgroundImage = GamePages.Properties.Resources.InformationBox_others_background;
+            if (building != null)
+            {
+                this.SuspendLayout();
 
-            // BuildingImage
-            buildingIcon.Visible = true;
-            buildingIcon.BackgroundImage = buildingImage;
+                // Background
+                this.BackgroundImage = GamePages.Properties.Resources.InformationBox_others_background;
 
-            // InfoBox Texts
-            Title.Visible = true;
-            if (building.Name.Count<char>() > 8)
-                Title.Location = new Point(positionX - 15, positionY);
-            else
-                Title.Location = new Point(positionX, positionY);
-            Title.Text = building.Name;
-            objectName.Visible = false;
-            ElementName.Visible = false;
-            goldIcon.Visible = false;
-            Gold.Visible = false;
-            faithIcon.Visible = false;
-            Faith.Visible = false;
-            happinessIcon.Visible = false;
-            Happiness.Visible = false;
-            membersIcon.Visible = false;
-            NbMembers.Visible = false;
-            buildingHealthIcon.Visible = true;
-            buildingLife.Visible = true;
-            buildingLife.Text = building.Hp.ToString();
+                // BuildingImage
+                buildingIcon.BackgroundImage = buildingImage;
+                buildingIcon.Visible = true;
 
-            // Action Tab infos
-            _page.ActionMenu.DestroyVillagerList();
+                #region InfoBox Infos
+                // Title
+                if (building.Name.Count<char>() > 8)
+                    Title.Location = new Point(positionX - 15, positionY);
+                else
+                    Title.Location = new Point(positionX, positionY);
+                Title.Text = building.Name;
+                Title.Visible = true;
 
-            // Meetings Details
-            GodMeeting.Visible = false;
-            GodMeeting.Enabled = false;
+                // Hidden Infos
+                objectName.Visible = false;
+                ElementName.Visible = false;
+                goldIcon.Visible = false;
+                Gold.Visible = false;
+                faithIcon.Visible = false;
+                Faith.Visible = false;
+                happinessIcon.Visible = false;
+                Happiness.Visible = false;
+                membersIcon.Visible = false;
+                NbMembers.Visible = false;
+
+                // Building
+                buildingHealthIcon.Visible = true;
+                buildingLife.Visible = true;
+                buildingLife.Text = building.Hp.ToString();
+
+                this.ResumeLayout();
+                #endregion
+
+                // Action Tab infos
+                _page.ActionMenu.Visible = false;
+                _page.ActionMenu.SuspendLayout();
+                _page.ActionMenu.DestroyVillagerList();
+                _page.ActionMenu.ResumeLayout();
+                _page.ActionMenu.Visible = true;
+
+                // Meetings Details
+                GodMeeting.Visible = false;
+                GodMeeting.Enabled = false;
             StopMeeting.Visible = false;
             StopMeeting.Enabled = false;
             ActionsButton.Visible = false;
             ActionsButton.Enabled = false;
+            }
+            else
+                SetError();
         }
         internal void SetDestroyedBuilding(BuildingsModel building)
         {
-            // Background
-            this.BackgroundImage = GamePages.Properties.Resources.InformationBox_destroyed_background;
+            if (building != null)
+            {
+                this.SuspendLayout();
 
-            // BuildingImage
-            buildingIcon.Visible = true;
-            buildingIcon.BackgroundImage = GamePages.Properties.Resources.Building_Destroyed;
+                // Background
+                this.BackgroundImage = GamePages.Properties.Resources.InformationBox_destroyed_background;
 
-            // InfoBox Texts
-            Title.Visible = true;
-            Title.Location = new Point(positionX - 35, positionY);
-            Title.Text = "Bâtiment détruit";
-            objectName.Visible = true;
-            ElementName.Visible = true;
-            ElementName.Text = building.Name;
-            goldIcon.Visible = false;
-            Gold.Visible = false;
-            faithIcon.Visible = false;
-            Faith.Visible = false;
-            happinessIcon.Visible = false;
-            Happiness.Visible = false;
-            membersIcon.Visible = false;
-            NbMembers.Visible = false;
-            buildingHealthIcon.Visible = false;
-            buildingLife.Visible = false;
+                // BuildingImage
+                buildingIcon.BackgroundImage = GamePages.Properties.Resources.Building_Destroyed;
+                buildingIcon.Visible = true;
 
-            // Action Tab infos
-            _page.ActionMenu.DestroyVillagerList();
+                #region InfoBox Infos
+                // Title
+                Title.Location = new Point(positionX - 35, positionY);
+                Title.Text = "Bâtiment détruit";
+                Title.Visible = true;
 
-            //Meeting button
-            GodMeeting.Visible = false;
-            GodMeeting.Enabled = false;
+                // Object
+                objectName.Visible = true;
+                ElementName.Text = building.Name;
+                ElementName.Visible = true;
+
+                // Hidden Infos
+                goldIcon.Visible = false;
+                Gold.Visible = false;
+                faithIcon.Visible = false;
+                Faith.Visible = false;
+                happinessIcon.Visible = false;
+                Happiness.Visible = false;
+                membersIcon.Visible = false;
+                NbMembers.Visible = false;
+                buildingHealthIcon.Visible = false;
+                buildingLife.Visible = false;
+
+                this.ResumeLayout();
+                #endregion
+
+                // Action Tab infos
+                _page.ActionMenu.Visible = false;
+                _page.ActionMenu.SuspendLayout();
+                _page.ActionMenu.DestroyVillagerList();
+                _page.ActionMenu.ResumeLayout();
+                _page.ActionMenu.Visible = true;
+
+                //Meeting button
+                GodMeeting.Visible = false;
+                GodMeeting.Enabled = false;
             StopMeeting.Visible = false;
             StopMeeting.Enabled = false;
             ActionsButton.Visible = false;
             ActionsButton.Enabled = false;
+            }
+            else
+                SetError();
         }
         internal void SetNothingSelected()
         {
+            this.SuspendLayout();
+
             // Background
             this.BackgroundImage = GamePages.Properties.Resources.InformationBox_background;
 
             // BuildingImage
             buildingIcon.Visible = false;
 
-            // InfoBox Texts
-            objectName.Visible = false;
+            #region InfoBox Infos
+            // Hidden Infos
             Title.Visible = false;
+            objectName.Visible = false;
             ElementName.Visible = false;
             goldIcon.Visible = false;
             Gold.Visible = false;
@@ -371,10 +479,65 @@ namespace GamePages
             buildingHealthIcon.Visible = false;
             buildingLife.Visible = false;
 
+            this.ResumeLayout();
+            #endregion
+
             // Action Tab infos
+            _page.ActionMenu.Visible = false;
+            _page.ActionMenu.SuspendLayout();
             _page.ActionMenu.DestroyVillagerList();
+            _page.ActionMenu.ResumeLayout();
+            _page.ActionMenu.Visible = true;
 
             // Meeting Info
+            GodMeeting.Visible = false;
+            GodMeeting.Enabled = false;
+        }
+        internal void SetError()
+        {
+            this.SuspendLayout();
+
+            // Background
+            BackgroundImage = GamePages.Properties.Resources.InformationBox_destroyed_background;
+
+            // BuildingImage
+            buildingIcon.BackgroundImage = GamePages.Properties.Resources.Error;
+            buildingIcon.Visible = true;
+
+            #region InfoBox Infos
+            // Title
+            Title.Location = new Point(positionX, positionY);
+            Title.Text = @"ERREUR";
+            Title.Visible = true;
+
+            // Object
+            ElementName.Text = @"Failed open building object";
+            ElementName.Visible = true;
+
+            // Hidden Infos
+            objectName.Visible = false;
+            goldIcon.Visible = false;
+            Gold.Visible = false;
+            faithIcon.Visible = false;
+            Faith.Visible = false;
+            happinessIcon.Visible = false;
+            Happiness.Visible = false;
+            membersIcon.Visible = false;
+            NbMembers.Visible = false;
+            buildingHealthIcon.Visible = false;
+            buildingLife.Visible = false;
+
+            this.ResumeLayout();
+            #endregion
+
+            // Action Tab infos
+            _page.ActionMenu.Visible = false;
+            _page.ActionMenu.SuspendLayout();
+            _page.ActionMenu.DestroyVillagerList();
+            _page.ActionMenu.ResumeLayout();
+            _page.ActionMenu.Visible = true;
+
+            //Meeting button
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
             StopMeeting.Visible = false;

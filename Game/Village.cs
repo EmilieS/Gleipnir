@@ -22,12 +22,16 @@ namespace Game
         double _villageHappiness;
         FamilyInVillageList _familiesList;
         SamhainFest _samhainFest;
+        Board _villageGrid;
 
         internal Village(Game game, string name)
             : base(game)
         {
             Debug.Assert(!String.IsNullOrWhiteSpace(name));
             Debug.Assert(game != null, @"(village, Village) Game is null");
+
+            // Initialize village's grid
+            _villageGrid = new Board();
 
             // Initilize village's lists
             BuildingsList = new Buildings.BuildingsList(this);
@@ -46,6 +50,10 @@ namespace Game
         }
 
         // Village Properties
+        /// <summary>
+        /// Gets the village grid
+        /// </summary>
+        public Board VillageGrid { get { return _villageGrid; } }
         /// <summary>
         /// Gets village's families list
         /// </summary>
@@ -102,13 +110,17 @@ namespace Game
         /// <returns></returns>
         public Family CreateFamily(Villager mother, Villager father)
         {
-            if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE)
-                throw new InvalidOperationException(@"(village, CreateFamily) Gender issue");
-            if (mother.ParentFamily != null && father.ParentFamily != null)
+            if (mother.ParentFamily == null || father.ParentFamily == null)
+                throw new ArgumentNullException(@"(village, CreateFamily) Mother or Father is null");
+            else
+            {
+                if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE)
+                    throw new InvalidOperationException(@"(village, CreateFamily) Gender issue");
                 if (mother.ParentFamily == father.ParentFamily)
                     throw new InvalidOperationException(@"(village, CreateFamily) Same family");
+            }
 
-            // Create family
+            // Create family if still one place in village
             var name = Game.NameList.NextName;
             var newFamily = new Family(Game, mother, father, name);
 
@@ -132,7 +144,7 @@ namespace Game
                     i++;
                 }
             }
-            else // (house == null)
+            else
                 house = new Buildings.House(this, JobsList.Construction_Worker.Workers.Count > 0);
 
             // Add house to family and family into house
