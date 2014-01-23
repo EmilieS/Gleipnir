@@ -275,7 +275,6 @@ namespace Game
             }
         }
     }
-<<<<<<< HEAD
     [Serializable]
     public class BuildingHpChanged : Event<Buildings.BuildingsModel>
     {
@@ -358,7 +357,9 @@ namespace Game
             {
                 b.PushAlert(String.Format("La famille {0} a faim.", GameItem.Name), "Famine");
             }
-=======
+        }
+    }
+    [Serializable]
     public class MeetingDestroyedEvent : Event<Meeting>
     {
         string _familyName;
@@ -371,7 +372,6 @@ namespace Game
         {
             string toPush = String.Format("La convocation de la famille {0} est terminée.", _familyName);
             b.PushAlert(toPush, "Convocation");
->>>>>>> Meeting
         }
     }
 }

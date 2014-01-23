@@ -218,115 +218,7 @@ namespace GamePages
         }
         #endregion
 
-<<<<<<< HEAD
-        // God Spells Click
-        private void StartEpidemic_Click(object sender, EventArgs e)
-        {
-            if (_page.TheGame.Villages[0].FamiliesList.Count > 0)
-            {
-                int familyChoosen = rnd.Next(0, _page.TheGame.Villages[0].FamiliesList.Count);
-                int villagerChoosen = rnd.Next(0, _page.TheGame.Villages[0].FamiliesList[familyChoosen].FamilyMembers.Count);
-                Epidemic epidemic = new Epidemic(_page.TheGame, _page.TheGame.Villages[0].FamiliesList[familyChoosen].FamilyMembers[villagerChoosen]);
-            }
-        }
-        private void StartEarthquake_Click(object sender, EventArgs e)
-        {
-            Earthquake earthquake = new Earthquake(_page.TheGame, _page.TheGame.Villages[0]);
-        }
-        private void StartHeal_Click(object sender, EventArgs e)
-        {
-            Heal heal = new Heal(_page.TheGame);
-        }
-        private void StartFest_Click(object sender, EventArgs e)
-        {
-            _page.TheGame.Villages[0].FestStart();
-        }
-
-        // Villagers list
-        internal void ShowVillagerListInFamily(Family fam)
-        {
-            if (!passed)
-            {
-                ListOfVillagersToShow = new List<VillagerBannerUC>();
-                passed = true;
-            }
-            DestroyVillagerList();
-
-            for (int i = 0; i < fam.FamilyMembers.Count; i++)
-            {
-                VillagerBannerUC tmp = new VillagerBannerUC();
-
-                // Add gender icon
-                if (fam.FamilyMembers[i].Gender == Genders.FEMALE)
-                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
-                else
-                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
-
-                // Set VillagerBannerUC
-                tmp.VillagerName.Text = fam.FamilyMembers[i].FirstName + " " + fam.FamilyMembers[i].Name;
-                tmp.Location = new System.Drawing.Point(positionX, positionY);
-                if (fam.FamilyMembers[i].Job != null)
-                    tmp.Job_label.Text = "Metier : " + fam.FamilyMembers[i].Job.Name;
-                else
-                    tmp.Job_label.Text = "N'a pas de métier !";
-                if (fam.FamilyMembers[i].Health == Healths.SICK)
-                {
-                    tmp.Sick_status_pic.Visible = true;
-                }
-                else
-                {
-                    tmp.Sick_status_pic.Visible = false;
-                }
-                // Add VillagerBannerUC to lists and show it
-                this.VillagerList.Controls.Add(tmp);
-                ListOfVillagersToShow.Add(tmp);
-                tmp.Show();
-
-                // Set position for next VillagerBannerUC
-                positionY += 62;
-            }
-        }
-        internal void ShowWorkersInJob(JobsModel job)
-        {
-            if (passed == false)
-            {
-                passed = true;
-                ListOfVillagersToShow = new List<VillagerBannerUC>();
-            }
-            DestroyVillagerList();
-
-            for (int i = 0; i < job.Workers.Count; i++)
-            {
-                VillagerBannerUC tmp = new VillagerBannerUC();
-                ListOfVillagersToShow.Add(tmp);
-                if (job.Workers[i].Gender == Genders.FEMALE)
-                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
-                else
-                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
-                tmp.VillagerName.Text = job.Workers[i].FirstName + " " + job.Workers[i].Name;
-                this.VillagerList.Controls.Add(tmp);
-                tmp.Show();
-                tmp.Location = new System.Drawing.Point(positionX, positionY);
-                positionY += 62;
-            }
-        }
-        internal void DestroyVillagerList()
-        {
-            if (ListOfVillagersToShow != null)
-            {
-                for (int i = 0; i < ListOfVillagersToShow.Count; i++)
-                {
-                    ListOfVillagersToShow[i].Hide();
-                    this.VillagerList.Controls.Remove(ListOfVillagersToShow[i]);
-                }
-                positionX = positionY = 0;
-                ListOfVillagersToShow.Clear();
-            }
-        }
-
-=======
         // Upgrades Click
->>>>>>> Meeting
         #region Cooker's Upgrades
         private void Level1_butt_Click(object sender, EventArgs e)
         {
@@ -574,134 +466,6 @@ namespace GamePages
         }
         #endregion
 
-        #region Tooltips' implementation
-        private void UnionOfCrafter_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(UnionOfCrafter, "Syndicat");
-        }
-
-        private void Forge_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Forge, "Forge");
-        }
-
-        private void Farm_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Farm, "Ferme");
-        }
-
-        private void ApothecaryOffice_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(ApothecaryOffice, "Cabinet d'apothicaire");
-        }
-
-        private void Restaurant_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Restaurant, "Restaurant");
-        }
-
-        private void ClothesShop_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(ClothesShop, "Tailleur");
-        }
-
-        private void Mill_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Mill, "Moulin");
-        }
-
-        private void Baths_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Baths, "Bains");
-        }
-
-        private void Brothel_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Brothel, "Maison close");
-        }
-
-        private void Tavern_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Tavern, "Taverne");
-        }
-
-        private void Theater_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Theater, "Théatre");
-        }
-
-        private void PartyRoom_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(PartyRoom, "Salle des fêtes");
-        }
-
-        private void OfferingsWarehouse_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(OfferingsWarehouse, "Sanctuaire");
-        }
-
-        private void Chapel_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Chapel, "Chapelle");
-        }
-
-        private void Level1_butt_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Level1_butt, "Niveau 2 Cuisine");
-        }
-
-        private void Level2_butt_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Level2_butt, "Niveau 3 Cuisine");
-        }
-
-        private void Level3_butt_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Level3_butt, "Niveau 4 Cuisine");
-        }
-
-        private void Level4_butt_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Level4_butt, "Niveau 5 Cuisine");
-        }
-
-        private void Pulley_butt_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Pulley_butt, "Poulie");
-        }
-
-        private void Hoist_butt_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Hoist_butt, "Grue");
-        }
-
-        private void Scaffolding_butt_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Scaffolding_butt, "Echaffaudage");
-        }
-
-        private void Saw_butt_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Saw_butt, "Scie");
-        }
-
-        private void Scarecrow_butt_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Scarecrow_butt, "Epouvantail");
-        }
-
-        private void Fertilizer_butt_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Fertilizer_butt, "Fertilisant");
-        }
-
-        private void Irrigation_butt_MouseHover(object sender, EventArgs e)
-        {
-            GeneralTooltip.SetToolTip(Irrigation_butt, "Système d'irrigation");
-        }
-
-        #endregion
-
         // God Spells Click
         private void StartEpidemic_Click(object sender, EventArgs e)
         {
@@ -835,5 +599,134 @@ namespace GamePages
                 ListOfVillagersToShow.Clear();
             }
         }
+
+        // Tooltip
+        #region Tooltips' implementation
+        private void UnionOfCrafter_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(UnionOfCrafter, "Syndicat");
+        }
+
+        private void Forge_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Forge, "Forge");
+        }
+
+        private void Farm_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Farm, "Ferme");
+        }
+
+        private void ApothecaryOffice_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(ApothecaryOffice, "Cabinet d'apothicaire");
+        }
+
+        private void Restaurant_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Restaurant, "Restaurant");
+        }
+
+        private void ClothesShop_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(ClothesShop, "Tailleur");
+        }
+
+        private void Mill_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Mill, "Moulin");
+        }
+
+        private void Baths_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Baths, "Bains");
+        }
+
+        private void Brothel_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Brothel, "Maison close");
+        }
+
+        private void Tavern_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Tavern, "Taverne");
+        }
+
+        private void Theater_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Theater, "Théatre");
+        }
+
+        private void PartyRoom_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(PartyRoom, "Salle des fêtes");
+        }
+
+        private void OfferingsWarehouse_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(OfferingsWarehouse, "Sanctuaire");
+        }
+
+        private void Chapel_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Chapel, "Chapelle");
+        }
+
+        private void Level1_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Level1_butt, "Niveau 2 Cuisine");
+        }
+
+        private void Level2_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Level2_butt, "Niveau 3 Cuisine");
+        }
+
+        private void Level3_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Level3_butt, "Niveau 4 Cuisine");
+        }
+
+        private void Level4_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Level4_butt, "Niveau 5 Cuisine");
+        }
+
+        private void Pulley_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Pulley_butt, "Poulie");
+        }
+
+        private void Hoist_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Hoist_butt, "Grue");
+        }
+
+        private void Scaffolding_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Scaffolding_butt, "Echaffaudage");
+        }
+
+        private void Saw_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Saw_butt, "Scie");
+        }
+
+        private void Scarecrow_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Scarecrow_butt, "Epouvantail");
+        }
+
+        private void Fertilizer_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Fertilizer_butt, "Fertilisant");
+        }
+
+        private void Irrigation_butt_MouseHover(object sender, EventArgs e)
+        {
+            GeneralTooltip.SetToolTip(Irrigation_butt, "Système d'irrigation");
+        }
+
+        #endregion
     }
 }
