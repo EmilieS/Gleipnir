@@ -647,8 +647,5 @@ namespace GamePages
 
         #endregion
 
-        
-
-
     }
 }
