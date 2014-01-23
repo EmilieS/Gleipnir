@@ -30,7 +30,7 @@ namespace GamePages
         }
         private void loadGame_Click(object sender, EventArgs e)
         {
-            if (Game.serialize.load() != null)
+            if (Game.Serialize.Load() != null)
             {
                 this.Visible = false;
                 _page.LoadGame();

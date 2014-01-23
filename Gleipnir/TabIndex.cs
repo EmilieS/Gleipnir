@@ -501,26 +501,11 @@ namespace GamePages
 
             for (int i = 0; i < fam.FamilyMembers.Count; i++)
             {
-                VillagerBannerUC tmp = new VillagerBannerUC();
-
-                // Add gender icon
-                if (fam.FamilyMembers[i].Gender == Genders.FEMALE)
-                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
-                else
-                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
+                VillagerBannerUC tmp = new VillagerBannerUC(fam.FamilyMembers[i]);
 
                 // Set VillagerBannerUC
-                tmp.VillagerName.Text = fam.FamilyMembers[i].FirstName + " " + fam.FamilyMembers[i].Name;
                 tmp.Location = new System.Drawing.Point(positionX, positionY);
-                tmp.Job_label.Text = "Metier : " + fam.FamilyMembers[i].Job.Name;
-                if (fam.FamilyMembers[i].Health == Healths.SICK)
-                {
-                    tmp.Sick_status_pic.Visible = true;
-                }
-                else
-                {
-                    tmp.Sick_status_pic.Visible = false;
-                }
+
                 // Add VillagerBannerUC to lists and show it
                 this.VillagerList.Controls.Add(tmp);
                 ListOfVillagersToShow.Add(tmp);
@@ -541,16 +526,9 @@ namespace GamePages
 
             for (int i = 0; i < fam.FamilyMembers.Count; i++)
             {
-                VillagerBannerUC tmp = new VillagerBannerUC();
-
-                // Add gender icon
-                if (fam.FamilyMembers[i].Gender == Genders.FEMALE)
-                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
-                else
-                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
+                VillagerBannerUC tmp = new VillagerBannerUC(fam.FamilyMembers[i]);
 
                 // Set VillagerBannerUC
-                tmp.VillagerName.Text = fam.FamilyMembers[i].FirstName + " " + fam.FamilyMembers[i].Name;
                 tmp.Location = new System.Drawing.Point(positionX, positionY);
 
                 // Add VillagerBannerUC to lists and show it
@@ -573,16 +551,17 @@ namespace GamePages
 
             for (int i = 0; i < job.Workers.Count; i++)
             {
-                VillagerBannerUC tmp = new VillagerBannerUC();
-                ListOfVillagersToShow.Add(tmp);
-                if (job.Workers[i].Gender == Genders.FEMALE)
-                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
-                else
-                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
-                tmp.VillagerName.Text = job.Workers[i].FirstName + " " + job.Workers[i].Name;
-                this.VillagerList.Controls.Add(tmp);
-                tmp.Show();
+                VillagerBannerUC tmp = new VillagerBannerUC(job.Workers[i]);
+
+                // Set VillagerBannerUC
                 tmp.Location = new System.Drawing.Point(positionX, positionY);
+
+                // Add VillagerBannerUC to lists and show it
+                this.VillagerList.Controls.Add(tmp);
+                ListOfVillagersToShow.Add(tmp);
+                tmp.Show();
+
+                // Set position for next VillagerBannerUC
                 positionY += 62;
             }
         }

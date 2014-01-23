@@ -112,7 +112,7 @@ namespace Tests
             } while (myGame.TotalPop < 30);
 
 
-            Game.serialize.save(myGame);
+            Game.Serialize.Save(myGame);
             /*{
                 IFormatter formatter = new BinaryFormatter();
                 Stream stream = new FileStream("SAVED.bin", FileMode.Create, FileAccess.Write, FileShare.None);
@@ -136,7 +136,7 @@ namespace Tests
                 myGame = (Game.Game)formatter.Deserialize(stream);
                 stream.Close();
             }*/
-            myGame=Game.serialize.load();
+            myGame=Game.Serialize.Load();
             Assert.That(myGame.TotalPop < 65 && myGame.TotalPop > 29);
 
         }

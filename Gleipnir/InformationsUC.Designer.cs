@@ -140,12 +140,16 @@
             // 
             // StepByStep
             // 
-            this.StepByStep.Location = new System.Drawing.Point(952, 6);
+            this.StepByStep.BackColor = System.Drawing.Color.Transparent;
+            this.StepByStep.BackgroundImage = global::GamePages.Properties.Resources.button_homepage;
+            this.StepByStep.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.StepByStep.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.StepByStep.Location = new System.Drawing.Point(941, 5);
             this.StepByStep.Name = "StepByStep";
-            this.StepByStep.Size = new System.Drawing.Size(40, 21);
+            this.StepByStep.Size = new System.Drawing.Size(38, 25);
             this.StepByStep.TabIndex = 21;
             this.StepByStep.Text = "Step";
-            this.StepByStep.UseVisualStyleBackColor = true;
+            this.StepByStep.UseVisualStyleBackColor = false;
             this.StepByStep.Click += new System.EventHandler(this.StepByStep_Click);
             // 
             // TaxAmount
@@ -183,12 +187,17 @@
             // 
             // StepBy50
             // 
-            this.StepBy50.Location = new System.Drawing.Point(993, 6);
+            this.StepBy50.BackColor = System.Drawing.Color.Transparent;
+            this.StepBy50.BackgroundImage = global::GamePages.Properties.Resources.button_homepage;
+            this.StepBy50.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.StepBy50.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StepBy50.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.StepBy50.Location = new System.Drawing.Point(981, 5);
             this.StepBy50.Name = "StepBy50";
-            this.StepBy50.Size = new System.Drawing.Size(32, 21);
+            this.StepBy50.Size = new System.Drawing.Size(50, 26);
             this.StepBy50.TabIndex = 24;
-            this.StepBy50.Text = "x50";
-            this.StepBy50.UseVisualStyleBackColor = true;
+            this.StepBy50.Text = "Boost";
+            this.StepBy50.UseVisualStyleBackColor = false;
             this.StepBy50.Click += new System.EventHandler(this.StepX50_Click);
             // 
             // populationIcon
@@ -221,7 +230,7 @@
             this.menuButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("menuButton.BackgroundImage")));
             this.menuButton.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.menuButton.Location = new System.Drawing.Point(1032, 3);
+            this.menuButton.Location = new System.Drawing.Point(1032, 5);
             this.menuButton.Name = "menuButton";
             this.menuButton.Size = new System.Drawing.Size(103, 27);
             this.menuButton.TabIndex = 14;
@@ -268,7 +277,7 @@
             this.pauseButton.BackgroundImage = global::GamePages.Properties.Resources.ButtonIcon_Pause;
             this.pauseButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pauseButton.Font = new System.Drawing.Font("Malgun Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pauseButton.Location = new System.Drawing.Point(920, 4);
+            this.pauseButton.Location = new System.Drawing.Point(915, 5);
             this.pauseButton.Name = "pauseButton";
             this.pauseButton.Size = new System.Drawing.Size(25, 25);
             this.pauseButton.TabIndex = 30;

@@ -207,11 +207,12 @@
             this.SetMission.BackgroundImage = global::GamePages.Properties.Resources.button_homepage;
             this.SetMission.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.SetMission.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SetMission.Location = new System.Drawing.Point(37, 145);
+            this.SetMission.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.SetMission.Location = new System.Drawing.Point(65, 153);
             this.SetMission.Name = "SetMission";
-            this.SetMission.Size = new System.Drawing.Size(166, 37);
+            this.SetMission.Size = new System.Drawing.Size(114, 37);
             this.SetMission.TabIndex = 13;
-            this.SetMission.Text = "Attribuer la mission";
+            this.SetMission.Text = "Valider";
             this.SetMission.UseVisualStyleBackColor = false;
             this.SetMission.Click += new System.EventHandler(this.SetMission_Click);
             // 

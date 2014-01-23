@@ -33,7 +33,7 @@ namespace GamePages
         Game.Game _game;
         traceBox trace;
         List<SquareControl> _emptySquaresList;
-        private BuildingsModel buildingSelected;
+        private BuildingTypes buildingSelected;
         private ActionState actionState;
         string traceMessages; 
         public System.Windows.Forms.Timer _timer;
@@ -62,6 +62,7 @@ namespace GamePages
         public List<SquareControl> EmptySquaresList { get { return _emptySquaresList; } }
         internal ActionsPanel MeetingActionsPanel { get { return _actionsPanel; } }
         internal InformationBox InformationsBox { get { return _infoBox; } }
+        internal BuildingTypes BuildingSelected { get { return buildingSelected; } set { buildingSelected = value; } }
 
         /// <summary>
         /// Player state
@@ -322,7 +323,7 @@ namespace GamePages
             this.SuspendLayout();
 
             // Create the game & objects
-            _game = Game.serialize.load();
+            _game = Game.Serialize.Load();
             _gameMenu = new InGameMenu(this);
             _stats = new InformationsUC(this);
             _eventFlux = new EventFluxUC();
@@ -403,6 +404,15 @@ namespace GamePages
             _eventFlux.SendToBack();
             this.Controls.Add(_eventFlux);
             _eventFlux.ResumeLayout();
+
+            // ActionsPanel
+            _actionsPanel.Visible = false;
+            _actionsPanel.Hide();
+            _actionsPanel.SuspendLayout();
+            _actionsPanel.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            _actionsPanel.SendToBack();
+            this.Controls.Add(_actionsPanel);
+            _actionsPanel.ResumeLayout();
 
             // ScenarioBox
             _scenarioBox.Visible = false;
@@ -758,7 +768,6 @@ namespace GamePages
                     // Setting the building
                     house.SetCoordinates(hPos, vPos);
                     house.IsBought = true;
-                    _game.Villages[0].BuildingsList.Add(house);
 
                     // Update the grid
                     _emptySquaresList.Remove(s);

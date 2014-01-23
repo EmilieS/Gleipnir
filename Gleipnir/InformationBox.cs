@@ -202,10 +202,10 @@ namespace GamePages
                 // Meeting Info
                 GodMeeting.Visible = false;
                 GodMeeting.Enabled = false;
-            StopMeeting.Visible = false;
-            StopMeeting.Enabled = false;
-            ActionsButton.Visible = false;
-            ActionsButton.Enabled = false;
+                StopMeeting.Visible = false;
+                StopMeeting.Enabled = false;
+                ActionsButton.Visible = false;
+                ActionsButton.Enabled = false;
             }
             else
                 SetError();
@@ -312,26 +312,26 @@ namespace GamePages
                 #endregion
 
                 // Action Tab infos
-            if (_page.TheGame.Villages[0].Meeting != null && _page.TheGame.Villages[0].Meeting.ActualConvocated != null)
-                _page.ActionMenu.ShowConvocatedVillagers(_page.TheGame.Villages[0].Meeting.ActualConvocated);
-            else
-                _page.ActionMenu.DestroyVillagerList();
+                if (_page.TheGame.Villages[0].Meeting != null && _page.TheGame.Villages[0].Meeting.ActualConvocated != null)
+                    _page.ActionMenu.ShowConvocatedVillagers(_page.TheGame.Villages[0].Meeting.ActualConvocated);
+                else
+                    _page.ActionMenu.DestroyVillagerList();
 
-            // Meeting Info
-            GodMeeting.Visible = false;
-            GodMeeting.Enabled = false;
-            StopMeeting.Visible = true;
-            ActionsButton.Visible = true;
-            if (_page.TheGame.Villages[0].Meeting != null && _page.TheGame.Villages[0].Meeting.ActualConvocated != null)
-            {
-                StopMeeting.Enabled = true;
-                ActionsButton.Enabled = true;
-            }
-            else
-            {
-                StopMeeting.Enabled = false;
-                ActionsButton.Enabled = false;
-            }
+                // Meeting Info
+                GodMeeting.Visible = false;
+                GodMeeting.Enabled = false;
+                StopMeeting.Visible = true;
+                ActionsButton.Visible = true;
+                if (_page.TheGame.Villages[0].Meeting != null && _page.TheGame.Villages[0].Meeting.ActualConvocated != null)
+                {
+                    StopMeeting.Enabled = true;
+                    ActionsButton.Enabled = true;
+                }
+                else
+                {
+                    StopMeeting.Enabled = false;
+                    ActionsButton.Enabled = false;
+                }
             }
             else
                 SetError();
@@ -388,10 +388,10 @@ namespace GamePages
                 // Meetings Details
                 GodMeeting.Visible = false;
                 GodMeeting.Enabled = false;
-            StopMeeting.Visible = false;
-            StopMeeting.Enabled = false;
-            ActionsButton.Visible = false;
-            ActionsButton.Enabled = false;
+                StopMeeting.Visible = false;
+                StopMeeting.Enabled = false;
+                ActionsButton.Visible = false;
+                ActionsButton.Enabled = false;
             }
             else
                 SetError();
@@ -445,10 +445,10 @@ namespace GamePages
                 //Meeting button
                 GodMeeting.Visible = false;
                 GodMeeting.Enabled = false;
-            StopMeeting.Visible = false;
-            StopMeeting.Enabled = false;
-            ActionsButton.Visible = false;
-            ActionsButton.Enabled = false;
+                StopMeeting.Visible = false;
+                StopMeeting.Enabled = false;
+                ActionsButton.Visible = false;
+                ActionsButton.Enabled = false;
             }
             else
                 SetError();
@@ -492,6 +492,10 @@ namespace GamePages
             // Meeting Info
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
+            StopMeeting.Visible = false;
+            StopMeeting.Enabled = false;
+            ActionsButton.Visible = false;
+            ActionsButton.Enabled = false;
         }
         internal void SetError()
         {

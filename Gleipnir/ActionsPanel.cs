@@ -109,7 +109,10 @@ namespace GamePages
 
             // Set villager Job
             VillagerJob.Visible = true;
-            VillagerJob.Text = v.Job.Name;
+            if (v.Job != null)
+                VillagerJob.Text = v.Job.Name;
+            else
+                VillagerJob.Text = "Aucun métier";
 
             // Set sickIcon
             SickIcon.Visible = true;
@@ -171,9 +174,17 @@ namespace GamePages
                 {
                     case 0: // New Job
                         {
-                            var lastJob = _villager.Job.Name;
-                            _villager.AddToJob(_job);
-                            MessageBox.Show(_villager.FirstName + " n'est plus " + lastJob + ".\n Il est maintenant " + _job.Name);
+                            if (_villager.Job != null)
+                            {
+                                var lastJob = _villager.Job.Name;
+                                _villager.AddToJob(_job);
+                                MessageBox.Show(_villager.FirstName + " n'est plus " + lastJob + ".\nIl est maintenant " + _job.Name + ".");
+                            }
+                            else
+                            {
+                                _villager.AddToJob(_job);
+                                MessageBox.Show(_villager.FirstName + " est maintenant " + _job.Name + ".");
+                            }
                             break;
                         }
                     default:

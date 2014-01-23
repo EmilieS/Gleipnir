@@ -41,7 +41,7 @@ namespace GamePages
         // Save Game
         private void Save_Click(object sender, EventArgs e)
         {
-             Game.serialize.save(_page.TheGame);
+             Game.Serialize.Save(_page.TheGame);
         }
         // Settings
         private void InGameSettings_Click(object sender, EventArgs e)

@@ -11,7 +11,7 @@ namespace Game
     [Serializable]
     public class Farmer : JobsModel
     {
-        bool EnoughFarms; //just for the event
+        bool EnoughFarms; // Just for the event
 
         public Farmer(Game game, JobList list, string name)
             : base(game, list, name)
@@ -22,7 +22,7 @@ namespace Game
 
         public override bool AddPersonPrerequisites()
         {
-            if (Owner.Owner.BuildingsList.FarmList.Count > 0)
+            if (Owner.Owner.BuildingsList.FarmList.Count * 10 > Workers.Count)
                 return true;
             else
                 return false;

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+    [Serializable]
     public class Meeting : GameItem
     {
         Family _family;
