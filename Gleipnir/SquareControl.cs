@@ -36,6 +36,7 @@ namespace GamePages
 
         // Colors used in rendering the control.
         public static Color ActiveSquareBackColor;
+        public static Color ValidSquareBackColor;
         #endregion
 
         // This represents the contents of the square, see the values defined in the Grid class
@@ -226,8 +227,9 @@ namespace GamePages
                     }
             }
             ActiveSquareBackColor = Color.FromArgb(128, backColor.R, backColor.G, backColor.B);
+            ValidSquareBackColor = Color.FromArgb(200, backColor.R, backColor.G, backColor.B);
             if (IsValid)
-                backColor = ValidPlaceBackColorDefault;
+                backColor = ValidSquareBackColor;
             if (IsActive)
                 backColor = ActiveSquareBackColor;
 

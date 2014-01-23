@@ -24,6 +24,7 @@ namespace GamePages
         int positionY;
         Random rnd;
         ToolTip GeneralTooltip;
+        bool repairIsClicked;
 
         public TabIndex(GeneralPage p)
         {
@@ -487,6 +488,23 @@ namespace GamePages
         private void StartFest_Click(object sender, EventArgs e)
         {
             _page.TheGame.Villages[0].FestStart();
+        }
+        private void StartRepair_Click(object sender, EventArgs e)
+        {
+            if (!repairIsClicked)
+            {
+                if (_page.TheGame.Villages[0].JobsList.Construction_Worker.Workers.Count > 0)
+                {
+                    _page.ActionStatement = GamePages.GeneralPage.ActionState.SelectRepair;
+                    _page.ShowBuildingsCanBeRepaired();
+                    repairIsClicked = true;
+                }
+            }
+            else
+            {
+                _page.HideBuildingsCanBeRepaired();
+                repairIsClicked = false;
+            }
         }
 
         // Villagers list
