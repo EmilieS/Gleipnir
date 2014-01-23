@@ -339,11 +339,6 @@ namespace Game
             return v;
         }
 
-        // Events Methods
-        static public void BigEvent()
-        {
-            //TODO: BigEvent
-        }
 
         // Time Methods
         /// <summary>

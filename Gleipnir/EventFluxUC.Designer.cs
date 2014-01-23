@@ -39,9 +39,10 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = global::GamePages.Properties.Resources.EventFlux_background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ImeMode = System.Windows.Forms.ImeMode.HangulFull;
             this.Location = new System.Drawing.Point(870, 40);
             this.Name = "EventFluxUC";
-            this.Size = new System.Drawing.Size(264, 400);
+            this.Size = new System.Drawing.Size(269, 400);
             this.ResumeLayout(false);
 
         }

@@ -9,8 +9,7 @@ namespace Game
 {
 
     [Serializable]
-    public class Event<T> : IEvent
-    //where T : GameItem
+    public class Event<T> : IEvent //where T : GameItem
     {
         public readonly T GameItem;
 
@@ -95,7 +94,6 @@ namespace Game
         {
             b.PushTrace(String.Format("{0} is created", GameItem.Name));
         }
-
     }
     [Serializable]
     public class GameEventProperty : EventProperty<Game>
@@ -166,6 +164,10 @@ namespace Game
             {
                 toPush = String.Format("{0} {1} est mort de viellesse", GameItem.FirstName, _familyName);
             }
+            else if ((GameItem.Health & Healths.HUNGRY) != 0)
+            {
+                toPush = String.Format("{0} {1} est mort de malnutrition", GameItem.FirstName, _familyName);
+            }
             else
             {
                 toPush = String.Format("{0} {1} est mort mystèrieusement", GameItem.FirstName, _familyName);
@@ -199,7 +201,6 @@ namespace Game
         }
 
     }
-
     [Serializable]
     public class FamilyEndEvent : Event<Family>
     {
@@ -242,7 +243,6 @@ namespace Game
         {
             b.PushTrace(String.Format("Une nouvelle famille s'est consituée {0}.", GameItem.Name));
         }
-
         public override void Do(IWindow b)
         {
             base.Do(b);
@@ -323,7 +323,53 @@ namespace Game
             b.PushTrace("SamhaimFest created");
         }
     }
+    [Serializable]
+    public class NotEnoughFarmsEvent : Event<Farmer>
+    {
+        internal NotEnoughFarmsEvent(Farmer farmer)
+            : base(farmer)
+        {
+        }
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushAlert("Il n'y a pas assez de fermes pour embaucher de nouveaux fermiers.", "Fermiers");
+            b.PushTrace("EnoughFarms went to true to false");
+        }
+    }
+    [Serializable]
+    public class HungryFamilyEvent : Event<Family>
+    {
+        Family _family;
+        internal HungryFamilyEvent(Family f)
+            : base(f)
+        {
+            _family = f;
+        }
 
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushTrace(String.Format("Family {0} hungry status changed.", GameItem.Name));
+            if (GameItem._hungry.Current == true)
+            {
+                b.PushAlert(String.Format("La famille {0} a faim.", GameItem.Name), "Famine");
+            }
+        }
+    }
+    [Serializable]
+    public class MeetingDestroyedEvent : Event<Meeting>
+    {
+        string _familyName;
+        internal MeetingDestroyedEvent(Meeting m, string familyName)
+            : base(m)
+        {
+            _familyName = familyName;
+        }
+        override public void PublishMessage(IWindow b)
+        {
+            string toPush = String.Format("La convocation de la famille {0} est terminée.", _familyName);
+            b.PushAlert(toPush, "Convocation");
+        }
+    }
 }
 /*
 // Two good ways to challenge types!

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Game.Buildings.ApothecaryOffice" Collapsed="true">
+    <Position X="1.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAIAAAAAAAAAAAAAAAAAAAQAACAAgAAAAASAAAAAQ=</HashCode>
+      <FileName>Buildings\ApothecaryOffice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Buildings.Baths" Collapsed="true">
+    <Position X="3.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAQAAAAAAAAAAAQAAAQAA=</HashCode>
+      <FileName>Buildings\Baths.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Buildings.Brothel" Collapsed="true">
+    <Position X="5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAQAAAAAAAAAAAQAAAQAA=</HashCode>
+      <FileName>Buildings\Brothel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Buildings.BuildingsModel" Collapsed="true">
+    <Position X="3.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ICABIBCAAAiEAQAABlaACARCQCAFAAABhABESAIAQAI=</HashCode>
+      <FileName>Buildings\BuildingsModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Village" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Game.Village" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DAAFsAgAQAAEIAAAAHAAgAACABBwCIUAiAABEKAEQIE=</HashCode>
+      <FileName>Village.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

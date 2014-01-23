@@ -26,7 +26,7 @@ namespace Tests
                 {
                     if (v.Job!=null)
                     {
-                    v.Job.RemovePerson(v);
+                    v.Job.RemovePerson2(v);
                     }
                 }
             }
@@ -47,12 +47,13 @@ namespace Tests
 
             // Add new worker to job
             Assert.That(cooker.Workers.Count, Is.EqualTo(0));
-            cooker.AddPerson(v0);
+            cooker.AddPerson2(v0);
             Assert.That(cooker.Workers.Count, Is.EqualTo(1));
             Assert.That(v0.Job==cooker);
 
             // Try add the same worker to Apothecary job
-            Assert.Throws<InvalidOperationException>(() => cooker.AddPerson(v0), "Add worker issue!");
+            //Assert.Throws<InvalidOperationException>(() => cooker.AddPerson(v0), "Add worker issue!");
+            Assert.That( cooker.AddPerson2(v0)==false);
             Assert.That(cooker.Workers.Count, Is.EqualTo(1));
 
             game.NextStep();
@@ -65,7 +66,7 @@ namespace Tests
             Assert.That(v2.ParentFamily.GoldStash, Is.EqualTo(18));//0+20
 
             // Add other worker
-            cooker.AddPerson(v2);
+            cooker.AddPerson2(v2);
             Assert.That(cooker.Workers.Count, Is.EqualTo(2));
 
             // New Gold generation
@@ -75,12 +76,13 @@ namespace Tests
             Assert.That(v2.ParentFamily.GoldStash, Is.EqualTo(83));//64+20
 
             // Remove worker
-            cooker.RemovePerson(v0);
+            cooker.RemovePerson2(v0);
             Assert.That(cooker.Workers.Count, Is.EqualTo(1));
             Assert.That(v0.Job==null);
 
             // Try remove the same worker
-            Assert.Throws<InvalidOperationException>(() => cooker.RemovePerson(v0), "Remove worker issue!");
+            //Assert.Throws<InvalidOperationException>(() => cooker.RemovePerson2(v0), "Remove worker issue!");
+            Assert.That(cooker.RemovePerson2(v0)==false);
             Assert.That(cooker.Workers.Count, Is.EqualTo(1));
 
             // Gold generation up

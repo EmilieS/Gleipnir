@@ -36,7 +36,7 @@ namespace Game
             happinessToAdd = _happinessAddition + _workers.Count * 0.5;
             villager.AddOrRemoveHappiness(happinessToAdd);
         }
-        internal override bool AddPersonPrerequisites()
+        public override bool AddPersonPrerequisites()
         {
             if (Owner.Owner.BuildingsList.MillList.Count > 0)
                 return true;

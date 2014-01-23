@@ -21,50 +21,39 @@ namespace Game
             _statusInFamily = new HistorizedValue<Status, Villager>(this, "_statusInFamily", 20);
             _statusInFamily.Current = Status.SINGLE;
             
-            
             g.VillagerAdded();
             parentFamily.OwnerVillage.VillagerAdded();
             Debug.Assert(g != null);
             if (Game.Rand.Next(100) < 6)
-            {
                 _faith.Current = 13;
-            }
             else
-            {
                 _faith.Current = parentFamily.FaithAverage();
-            }
             if (_faith.Current <= 15)
-            {
                 _health.Current = Healths.HERETIC;
-            }
             switch (Game.Rand.Next(2))
             {
                 case 0: _gender = Genders.MALE;
                     if (parentFamily.Father != null)
-                    {
                         if (parentFamily.Father.Job != null)
-                        {
                             parentFamily.Father.Job.AddPerson(this);
-                        }
-                    }
                     g.AddSingleMan(this); break;
                 case 1: _gender = Genders.FEMALE;
                     if (parentFamily.Mother != null)
-                    {
                         if (parentFamily.Mother.Job != null)
-                        {
                             parentFamily.Mother.Job.AddPerson(this);
-                        }
-                    }
                     Engage(this, parentFamily); break;
             }
+            if (parentFamily.OwnerVillage.Meeting != null)
+            {
+                if (parentFamily.OwnerVillage.Meeting.Family == parentFamily)
+                {
+                    MeetingStarted();
+                }
+            }
             _happiness.Current = parentFamily.HappinessAverage();
-            //_job = Jobs.FARMER;
             _age = 0;
-            //_lifeExpectancy = 85;
             _lifeExpectancy = 85 * 12;
             _name = name;
-
         }
         public Villager(Game g, Genders gender, string name)
             : base(g)
@@ -76,12 +65,11 @@ namespace Game
             g.VillagerAdded();
             _faith.Current = 100;
             _happiness.Current = 80;
-            // _lifeExpectancy = 85;
             _lifeExpectancy = 85 * 12;
             _gender = gender;
             _statusInFamily.Current = Status.SINGLE;
-            _name = name;//_health.Conclude();
-            Game.Villages[0].VillagerAdded();//hmmmmm
+            _name = name;
+            Game.Villages[0].VillagerAdded();
             Game.Villages[0].JobsList.Farmer.AddPerson(this);
         }
 
@@ -124,9 +112,19 @@ namespace Game
             get { return _parentFamily; }
             internal set { _parentFamily = value; }
         }
-        public void setJob(JobsModel NewJob)
+        internal void setJob(JobsModel NewJob)
         {
             _job = NewJob;
+        }
+        public bool RemoveJob()
+        {
+            return _job.RemovePerson2(this);
+        }
+        public bool AddToJob(JobsModel job)
+        {
+            if (_job != null)
+                _job.RemovePerson2(this);
+            return job.AddPerson2(this);
         }
         public ActivityStatus ActivityStatus
         {
@@ -168,7 +166,6 @@ namespace Game
             }
             _lifeExpectancy = lifeExpectancy;
         }
-
         /// <summary>
         /// Sets the new life expectancy based on the time left you want. only if shorter than before.
         /// </summary>
@@ -182,7 +179,6 @@ namespace Game
             }
 
         }
-
         /// <summary>
         /// Reduces the life expectancy by 'time'.(minimum is 0)
         /// </summary>
@@ -315,7 +311,12 @@ namespace Game
         #region called by Evolution
         internal void FamineImpact()
         {
-            ReduceLifeExpectancy(2);
+            ReduceLifeExpectancy(5);//TODO : change flag here.
+            _health.Current = Health | Healths.HUNGRY;
+        }
+        internal void NotHungry()
+        {
+            _health.Current = Health & ~Healths.HUNGRY;
         }
         private void HereticFaithImpact()
         {
@@ -500,13 +501,12 @@ namespace Game
                 return;
             if (_engagedTickTimer == 45)
             {
-                if (_gender == Genders.FEMALE)
+                if (this.ParentFamily.OwnerVillage.VillageGrid.HasAnyEmptyPlace())
                 {
-                    eventList.Add(new FamilyBirthEvent(_parentFamily.OwnerVillage.CreateFamily(this, _fiance)));
-                }
-                else
-                {
-                    eventList.Add(new FamilyBirthEvent(_parentFamily.OwnerVillage.CreateFamily(_fiance, this)));
+                    if (_gender == Genders.FEMALE)
+                        eventList.Add(new FamilyBirthEvent(_parentFamily.OwnerVillage.CreateFamily(this, _fiance)));
+                    else
+                        eventList.Add(new FamilyBirthEvent(_parentFamily.OwnerVillage.CreateFamily(_fiance, this)));
                 }
             }
             else { _engagedTickTimer++; }
@@ -526,9 +526,7 @@ namespace Game
             if (_virus != null)
             {
                 if (_virus.Epidemic != null)
-                {
                     _virus.Epidemic.SickVillagerList.Remove(this);
-                }
                 _virus = null;
             }
 

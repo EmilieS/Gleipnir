@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 
 namespace GamePages
 {
@@ -25,18 +26,26 @@ namespace GamePages
         EventFluxUC _eventFlux;
         ScenarioBox _scenarioBox;
         Parameters _parametersBox;
+        ActionsPanel _actionsPanel;
         Board _board;
         SquareControl[,] _grid;
         Options options;
         Game.Game _game;
         traceBox trace;
-        internal BuildingTypes BuildingSelected { get; set; }
+        List<SquareControl> _emptySquaresList;
+        private BuildingTypes buildingSelected;
         private ActionState actionState;
         string traceMessages; 
         public System.Windows.Forms.Timer _timer;
         int _interval;
-        public bool GameStarted { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Gets the game object
+        /// </summary>
+        internal Game.Game TheGame { get { return _game; } }
+        internal TabIndex ActionMenu { get { return _actionMenu; } }
+        internal Parameters ParametersBox { get { return _parametersBox; } }
         public int Interval
         {
             get { return _interval; }
@@ -49,19 +58,11 @@ namespace GamePages
                 }
             }
         }
-        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            var h = PropertyChanged;
-            if (h != null) h(this, new PropertyChangedEventArgs(propertyName));
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Gets the game object
-        /// </summary>
-        internal Game.Game TheGame { get { return _game; } }
-        internal TabIndex ActionMenu { get { return _actionMenu; } }
-        internal Parameters ParametersBox { get { return _parametersBox; } }
+        public bool GameStarted { get; set; }
+        public List<SquareControl> EmptySquaresList { get { return _emptySquaresList; } }
+        internal ActionsPanel MeetingActionsPanel { get { return _actionsPanel; } }
+        internal InformationBox InformationsBox { get { return _infoBox; } }
+        internal BuildingTypes BuildingSelected { get { return buildingSelected; } set { buildingSelected = value; } }
 
         /// <summary>
         /// Player state
@@ -74,73 +75,94 @@ namespace GamePages
 
         public GeneralPage()
         {
+            InitializeComponent();
+
             // Timer set
-            _interval = 2000; // 2s timer
+            _interval = 1000; // 1s timer
             _timer = null;
 
             // Create windows objects
             _loading = new LoadingUC();
             _home = new HomepageUC(this);
             _parametersBox = new Parameters(this);
-            InitializeComponent();
 
             // Hide ParametersBox
-            this.Controls.Add(_parametersBox);
             _parametersBox.SendToBack();
+            this.Controls.Add(_parametersBox);
+            _parametersBox.Visible = false;
             _parametersBox.Hide();
 
             // Show Logo
             this.Controls.Add(gleipnir_logo);
             gleipnir_logo.SendToBack();
+            gleipnir_logo.Visible = true;
             gleipnir_logo.Show();
 
             // Hide loading
             this.Controls.Add(_loading);
+            _loading.Visible = false;
             _loading.Hide();
 
             // Show home page
             _home.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
             this.Controls.Add(_home);
+            _home.Visible = true;
             _home.Show();
         }
         // NewGame
         public void StartGame()
         {
+            // Suspend Graphic Update
+            this.SuspendLayout();
+
             // Hide home page
+            _home.Visible = false;
             _home.Hide();
-
-            // Show loading effects
             _loading.BringToFront();
+            _loading.Visible = true;
             _loading.Show();
+            _loading.Refresh();
 
-            // Create the game
+            // Restart Graphics Updates
+            this.ResumeLayout();
+
+            // Suspend Graphic Update
+            this.SuspendLayout();
+
+            // Create the game & objects
             _game = new Game.Game();
-
-            // Create objects
             _gameMenu = new InGameMenu(this);
-            _actionMenu = new TabIndex(this);
             _stats = new InformationsUC(this);
             _eventFlux = new EventFluxUC();
             _scenarioBox = new ScenarioBox(this);
+            _actionMenu = new TabIndex(this);
             _infoBox = new InformationBox(this);
-
-            #region grid generation
-            options = new Options();
-            _board = new Board();
+            _actionsPanel = new ActionsPanel(this);
             _grid = new SquareControl[Board.GridMaxRow, Board.GridMaxCol];
+            _board = _game.Villages[0].VillageGrid;
+            options = new Options();
+
+            #region Grid Generation
+            // Set double-buffering
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
+
             for (int i = 0; i < Board.GridMaxRow; i++)
             {
                 for (int j = 0; j < Board.GridMaxCol; j++)
                 {
                     // Create
                     _grid[i, j] = new SquareControl(i, j);
-                    // Locate
+
+                    // Hide & Configure
+                    _grid[i, j].Visible = false;
+                    _grid[i, j].SuspendLayout();
                     _grid[i, j].Left = 220 + (j * _grid[i, j].Width);
                     _grid[i, j].Top = 40 + (i * _grid[i, j].Height);
-                    // Add
-                    this.Controls.Add(_grid[i, j]);
                     _grid[i, j].SendToBack();
-                    _grid[i, j].Show();
+                    this.Controls.Add(_grid[i, j]);
+                    _grid[i, j].ResumeLayout();
 
                     // Add events
                     _grid[i, j].MouseMove += new MouseEventHandler(SquareControl_MouseMove);
@@ -148,72 +170,113 @@ namespace GamePages
                     _grid[i, j].Click += new EventHandler(SquareControl_Click);
                 }
             }
-            // Set the grid
+            #endregion
+
+            // Setting the grid
             _board.SetForNewGame(_game);
+            _emptySquaresList = new List<SquareControl>();
+            _emptySquaresList = SetEmptySquaresList(_emptySquaresList, _board, _grid);
             UpdateGrid(_board, _grid);
-            #endregion
 
-            #region Window elements
-            #region Add all elements
-            this.Controls.Add(_actionMenu);
-            this.Controls.Add(_scenarioBox);
-            this.Controls.Add(_stats);
-            this.Controls.Add(_infoBox);
-            this.Controls.Add(_eventFlux);
-            this.Controls.Add(_gameMenu);
-            #endregion
-            #region Configure all elements
-            // ActionMenu
-            _actionMenu.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top);
-            _actionMenu.SendToBack();
-            _actionMenu.Show();
-
-            // ScenarioBox
-            _scenarioBox.Anchor = AnchorStyles.Bottom;
-            _scenarioBox.SendToBack();
-            _scenarioBox.Show();
-
-            // Stats
-            _stats.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
-            _stats.SendToBack();
-            _stats.Show();
-            _stats.StepByStep.Visible = true;
-
-            // InfoBox
-            _infoBox.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
-            _infoBox.SetNothingSelected();
-            _infoBox.SendToBack();
-            _infoBox.Show();
-
-            // GameMenu
+            #region Create, Hide and Configure objects
+            // InGameMenu
+            _gameMenu.SuspendLayout();
             _gameMenu.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             _gameMenu.BringToFront();
+            this.Controls.Add(_gameMenu);
+            _gameMenu.ResumeLayout();
+            _gameMenu.Visible = false;
             _gameMenu.Hide();
-            //_gameMenu.ExpectGoBackToMenu += GoBackToMenu;
 
-            // EventFluw
+            // Stats
+            _stats.SuspendLayout();
+            _stats.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+            _stats.SendToBack();
+            PushGeneralGold(_game.TotalGold); //PushGeneralGold(_game.Villages[0].Gold);
+            PushPopulation(_game.TotalPop);
+            PushGeneralFaith(_game.Villages[0].Faith);
+            PushGeneralHappiness(_game.Villages[0].Happiness);
+            PushGeneralCoins(_game.Offerings);
+            PushOfferingsPointsPerTick(_game.Villages[0].OfferingsPointsPerTick);
+            this.Controls.Add(_stats);
+            _stats.ResumeLayout();
+            _stats.Visible = false;
+            _stats.Hide();
+
+            // EventFlux
+            _eventFlux.Visible = false;
+            _eventFlux.Hide();
+            _eventFlux.SuspendLayout();
             _eventFlux.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             _eventFlux.SendToBack();
-            _eventFlux.Show();
-            #endregion
+            this.Controls.Add(_eventFlux);
+            _eventFlux.ResumeLayout();
+            
+            // ActionsPanel
+            _actionsPanel.Visible = false;
+            _actionsPanel.Hide();
+            _actionsPanel.SuspendLayout();
+            _actionsPanel.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            _actionsPanel.SendToBack();
+            this.Controls.Add(_actionsPanel);
+            _actionsPanel.ResumeLayout();
+
+            // ScenarioBox
+            _scenarioBox.Visible = false;
+            _scenarioBox.Hide();
+            _scenarioBox.SuspendLayout();
+            _scenarioBox.Anchor = AnchorStyles.Bottom;
+            _scenarioBox.SendToBack();
+            this.Controls.Add(_scenarioBox);
+            _scenarioBox.ResumeLayout();
+
+            // ActionMenu
+            _actionMenu.Visible = false;
+            _actionMenu.Hide();
+            _actionMenu.SuspendLayout();
+            _actionMenu.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top);
+            _actionMenu.SendToBack();
+            this.Controls.Add(_actionMenu);
+            _actionMenu.ResumeLayout();
+            _actionMenu.Refresh();
+
+            // InfoBox
+            _infoBox.Visible = false;
+            _infoBox.Hide();
+            _infoBox.SuspendLayout();
+            _infoBox.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            _infoBox.SetNothingSelected();
+            this.Controls.Add(_infoBox);
+            _infoBox.ResumeLayout();
             #endregion
 
-            #region EventBox tests
-            /*PushAlert("coucoudfghjkjhgfd", "coucou1");
-            PushAlert("coucou2546", "coucou2");
-            PushAlert("coucou4543", "coucou3");
-            PushAlert("coucou44545", "coucou4");
-            PushAlert("coucou54545", "coucou5");
-            PushAlert("coucou65454", "coucou6");
-            PushAlert("coucou75454", "coucou7");
-            PushAlert("coucou8888", "coucou8");
-            PushAlert("coucou9", "coucou");
-            PushAlert("coucou10", "coucou");
-            PushAlert("coucou11", "coucou");
-            PushAlert("coucou12", "coucou");
-            PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");
-            PushAlert("coucou", "coucou");*/
+            // Hide loading effects
+            gleipnir_logo.Visible = false;
+            gleipnir_logo.Hide();
+            gleipnir_logo.Refresh();
+            _loading.SendToBack();
+            _loading.Visible = false;
+            _loading.Hide();
+
+            #region Show Elements
+            _actionMenu.Visible = true;
+            _actionMenu.Show();
+            _stats.Visible = true;
+            _stats.Show();
+            _eventFlux.Visible = true;
+            _eventFlux.Show();
+            _scenarioBox.Visible = true;
+            _scenarioBox.Show();
+            _infoBox.Visible = true;
+            _infoBox.Show();
+            for (int i = 0; i < Board.GridMaxRow; i++)
+            {
+                for (int j = 0; j < Board.GridMaxCol; j++)
+                {
+                    _grid[i, j].Visible = true;
+                    _grid[i, j].Show();
+                }
+            }
             #endregion
 
             #region Trace Window
@@ -221,17 +284,9 @@ namespace GamePages
             //trace.Show();
             #endregion
 
-            // Hide loading effects
-            gleipnir_logo.Hide();
-            _loading.SendToBack();
-            _loading.Hide();
-
             // Wait the scenario's end
             // LockEverything();
-
-            // Do 1 step
-            Step();
-
+            PushText("","Bienvenue à Ragnar");
             // Timer
             if (_interval == 0)
                 _timer = null;
@@ -243,45 +298,64 @@ namespace GamePages
                 _timer.Start();
             }
             GameStarted = true;
+
+            // Restart Graphics Updates
+            this.ResumeLayout();
         }
         // LoadGame
         public void LoadGame()
         {
+            // Wait Loadings Effecs
+            this.SuspendLayout();
+
             // Hide home page
+            _home.Visible = false;
             _home.Hide();
-
-            // Show loading effects
             _loading.BringToFront();
+            _loading.Visible = true;
             _loading.Show();
+            _loading.Refresh();
 
-            // Load the game
-            _game = Game.serialize.load();
+            // Restart Graphics Updates
+            this.ResumeLayout();
 
-            // Create objects
+            // Wait Windows Elements
+            this.SuspendLayout();
+
+            // Create the game & objects
+            _game = Game.Serialize.Load();
             _gameMenu = new InGameMenu(this);
-            _actionMenu = new TabIndex(this);
             _stats = new InformationsUC(this);
             _eventFlux = new EventFluxUC();
             _scenarioBox = new ScenarioBox(this);
+            _actionMenu = new TabIndex(this);
             _infoBox = new InformationBox(this);
-
-            #region grid generation
-            options = new Options();
-            _board = new Board();
+            _actionsPanel = new ActionsPanel(this);
+            _board = _game.Villages[0].VillageGrid;
             _grid = new SquareControl[Board.GridMaxRow, Board.GridMaxCol];
+            options = new Options();
+
+            #region Grid Generation
+            // Set double-buffering
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
+
             for (int i = 0; i < Board.GridMaxRow; i++)
             {
                 for (int j = 0; j < Board.GridMaxCol; j++)
                 {
                     // Create
                     _grid[i, j] = new SquareControl(i, j);
-                    // Locate
+
+                    // Hide & Configure
+                    _grid[i, j].Visible = false;
+                    _grid[i, j].SuspendLayout();
                     _grid[i, j].Left = 220 + (j * _grid[i, j].Width);
                     _grid[i, j].Top = 40 + (i * _grid[i, j].Height);
-                    // Add
-                    this.Controls.Add(_grid[i, j]);
                     _grid[i, j].SendToBack();
-                    _grid[i, j].Show();
+                    this.Controls.Add(_grid[i, j]);
+                    _grid[i, j].ResumeLayout();
 
                     // Add events
                     _grid[i, j].MouseMove += new MouseEventHandler(SquareControl_MouseMove);
@@ -289,70 +363,120 @@ namespace GamePages
                     _grid[i, j].Click += new EventHandler(SquareControl_Click);
                 }
             }
-            // Set the grid
+            #endregion
+
+            // Setting the grid
             _board.SetLoadGame(_game);
+            _emptySquaresList = new List<SquareControl>();
+            _emptySquaresList = SetEmptySquaresList(_emptySquaresList, _board, _grid);
             UpdateGrid(_board, _grid);
-            #endregion
 
-            #region Window elements
-            #region Add all elements
-            this.Controls.Add(_actionMenu);
-            this.Controls.Add(_scenarioBox);
-            this.Controls.Add(_stats);
-            this.Controls.Add(_infoBox);
-            this.Controls.Add(_eventFlux);
+            #region Create, Hide and Configure objects
+            // InGameMenu
+            _gameMenu.SuspendLayout();
+            _gameMenu.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            _gameMenu.BringToFront();
             this.Controls.Add(_gameMenu);
-            #endregion
-            #region Configure all elements
-            // ActionMenu
-            _actionMenu.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top);
-            _actionMenu.SendToBack();
-            _actionMenu.Show();
-
-            // ScenarioBox
-            _scenarioBox.Anchor = AnchorStyles.Bottom;
-            _scenarioBox.SendToBack();
-            _scenarioBox.Show();
+            _gameMenu.ResumeLayout();
+            _gameMenu.Visible = false;
+            _gameMenu.Hide();
 
             // Stats
+            _stats.SuspendLayout();
             _stats.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
             _stats.SendToBack();
-            _stats.Show();
-            //PushGeneralGold(_game.Villages[0].Gold); // Must add gold in village.Gold
-            PushGeneralGold(_game.TotalGold);
+            PushGeneralGold(_game.TotalGold); //PushGeneralGold(_game.Villages[0].Gold);
             PushPopulation(_game.TotalPop);
             PushGeneralFaith(_game.Villages[0].Faith);
             PushGeneralHappiness(_game.Villages[0].Happiness);
             PushGeneralCoins(_game.Offerings);
             PushOfferingsPointsPerTick(_game.Villages[0].OfferingsPointsPerTick);
-            _stats.StepByStep.Visible = true;
+            this.Controls.Add(_stats);
+            _stats.ResumeLayout();
+            _stats.Visible = false;
+            _stats.Hide();
 
-            // InfoBox
-            _infoBox.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
-            _infoBox.SetNothingSelected();
-            _infoBox.SendToBack();
-            _infoBox.Show();
-
-            // GameMenu
-            _gameMenu.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
-            _gameMenu.BringToFront();
-            _gameMenu.Hide();
-            //_gameMenu.ExpectGoBackToMenu += GoBackToMenu;
-
-            // EventFluw
+            // EventFlux
+            _eventFlux.Visible = false;
+            _eventFlux.Hide();
+            _eventFlux.SuspendLayout();
             _eventFlux.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             _eventFlux.SendToBack();
-            _eventFlux.Show();
-            #endregion
-            #endregion
+            this.Controls.Add(_eventFlux);
+            _eventFlux.ResumeLayout();
 
+            // ActionsPanel
+            _actionsPanel.Visible = false;
+            _actionsPanel.Hide();
+            _actionsPanel.SuspendLayout();
+            _actionsPanel.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            _actionsPanel.SendToBack();
+            this.Controls.Add(_actionsPanel);
+            _actionsPanel.ResumeLayout();
 
-            trace = new traceBox();
+            // ScenarioBox
+            _scenarioBox.Visible = false;
+            _scenarioBox.Hide();
+            _scenarioBox.SuspendLayout();
+            _scenarioBox.Anchor = AnchorStyles.Bottom;
+            _scenarioBox.SendToBack();
+            this.Controls.Add(_scenarioBox);
+            _scenarioBox.ResumeLayout();
+
+            // ActionMenu
+            _actionMenu.Visible = false;
+            _actionMenu.Hide();
+            _actionMenu.SuspendLayout();
+            _actionMenu.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top);
+            _actionMenu.SendToBack();
+            this.Controls.Add(_actionMenu);
+            _actionMenu.ResumeLayout();
+            _actionMenu.Refresh();
+
+            // InfoBox
+            _infoBox.Visible = false;
+            _infoBox.Hide();
+            _infoBox.SuspendLayout();
+            _infoBox.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            _infoBox.SetNothingSelected();
+            this.Controls.Add(_infoBox);
+            _infoBox.ResumeLayout();
+            #endregion
 
             // Hide loading effects
+            gleipnir_logo.Visible = false;
             gleipnir_logo.Hide();
+            gleipnir_logo.Refresh();
             _loading.SendToBack();
+            _loading.Visible = false;
             _loading.Hide();
+
+            #region Show Elements
+            _actionMenu.Visible = true;
+            _actionMenu.Show();
+            _stats.Visible = true;
+            _stats.Show();
+            _eventFlux.Visible = true;
+            _eventFlux.Show();
+            _scenarioBox.Visible = true;
+            _scenarioBox.Show();
+            _infoBox.Visible = true;
+            _infoBox.Show();
+            for (int i = 0; i < Board.GridMaxRow; i++)
+            {
+                for (int j = 0; j < Board.GridMaxCol; j++)
+                {
+                    _grid[i, j].Visible = true;
+                    _grid[i, j].Show();
+                }
+            }
+            #endregion
+
+            trace = new traceBox();
+            //trace.Show();
+
+            // Wait the scenario's end
+            // LockEverything();
 
             // Timer
             if (_interval == 0)
@@ -365,20 +489,27 @@ namespace GamePages
                 _timer.Start();
             }
             GameStarted = true;
+            
+            // Restart Graphics Updates
+            this.ResumeLayout();
         }
         // LostGame
         public void GameLost()
         {
             LockEverything();
             _scenarioBox.GameLostText();
+            _gameMenu.BringToFront();
+            _gameMenu.Visible = true;
             _gameMenu.Show();
             _gameMenu.IsOpen = true;
+            _gameMenu.Save.Enabled = false;
             _gameMenu.InGameQuit.Enabled = false;
         }
 
         // Window Methods
         internal void LockEverything()
         {
+            this.SuspendLayout();
             // Lock Windows Elements
             _actionMenu.Enabled = false;
             _stats.Enabled = false;
@@ -392,9 +523,11 @@ namespace GamePages
 
             // Pause Game
             PauseTimer();
+            this.ResumeLayout();
         }
         internal void UnLockEverything()
         {
+            this.SuspendLayout();
             // Unlock Windows Elements
             _actionMenu.Enabled = true;
             _stats.Enabled = true;
@@ -408,6 +541,7 @@ namespace GamePages
 
             // Restart Game
             RestartTimer();
+            this.ResumeLayout();
         }
 
         // Timer Methods
@@ -422,6 +556,13 @@ namespace GamePages
                 _timer.Start();
         }
 
+        // Timer Events
+        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var h = PropertyChanged;
+            if (h != null) h(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         // InGameMenu Events
         public void GoBackToMenu()
         {
@@ -430,14 +571,15 @@ namespace GamePages
             // Show loading effects
             _loading.BringToFront();
             _loading.Show();
+            _loading.Refresh();
+
+            // Remove gameMenu
+            this.Controls.Remove(_gameMenu);
 
             // Set double-buffering
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
-
-            // Remove gameMenu
-            this.Controls.Remove(_gameMenu);
 
             // Remove grid
             for (int i = 0; i < Board.GridMaxRow; i++)
@@ -450,6 +592,7 @@ namespace GamePages
             this.Controls.Remove(_scenarioBox);
             this.Controls.Remove(_stats);
             this.Controls.Remove(_eventFlux);
+            this.Controls.Remove(_actionsPanel);
 
             // Destroy Grid & Board
             _board = null;
@@ -463,11 +606,41 @@ namespace GamePages
             _home.Show();
             gleipnir_logo.Show();
         }
-        public void ShowParametersBox()
+        public void ShowOrHideInGameParametersBox()
         {
-            LockEverything();
-            _parametersBox.BringToFront();
-            _parametersBox.Show();
+            if (!_parametersBox.IsOpen)
+            {
+                _gameMenu.Enabled = false;
+                _parametersBox.BringToFront();
+                _parametersBox.Visible = true;
+                _parametersBox.Show();
+                _parametersBox.IsOpen = true;
+            }
+            else
+            {
+                _gameMenu.Enabled = true;
+                _parametersBox.Visible = false;
+                _parametersBox.Hide();
+                _parametersBox.IsOpen = false;
+            }
+        }
+        public void ShowOrHideParametersBox()
+        {
+            if (!_parametersBox.IsOpen)
+            {
+                _home.Enabled = false;
+                _parametersBox.BringToFront();
+                _parametersBox.Visible = true;
+                _parametersBox.Show();
+                _parametersBox.IsOpen = true;
+            }
+            else
+            {
+                _home.Enabled = true;
+                _parametersBox.Visible = false;
+                _parametersBox.Hide();
+                _parametersBox.IsOpen = false;
+            }
         }
 
         // Stats Methods
@@ -498,29 +671,40 @@ namespace GamePages
         }
         public void PushPopulation(int pop)
         {
-            _stats.population.Text = TransformHighNumberToKnumbers(pop);
+            _stats.population.Text = pop.ToString();
         }
         public string TransformHighNumberToKnumbers(int value)
         {
             string text = "";
             string nb = value.ToString();
+            int i = 0;
 
             if (value < 1000)
                 text = nb;
             else if (value > 999 && value <= 999999)
             {
-                for (int i = 0; i < nb.Count<char>() - 3; i++)
+                while(i < nb.Count<char>() - 3)
+                {
                     text += nb[i];
-                text += "K";
+                    i++;
+                }
+                text += ".";
+                text += nb[i];
+                text += " K";
             }
             else if (value > 999999 && value <= 999999999)
             {
-                for (int i = 0; i < nb.Count<char>() - 6; i++)
+                while (i < nb.Count<char>() - 6)
+                {
                     text += nb[i];
-                text += "M";
+                    i++;
+                }
+                text += ".";
+                text += nb[i];
+                text += " M";
             }
             else
-                text += "+999M";
+                text += "+999 M";
             return text;
         }
 
@@ -539,10 +723,11 @@ namespace GamePages
             trace.traceBoxViewer.Text = traceMessages;
             //PushAlert(message, "PUSHTRACE");//MARCHE
         }
-        public void PushText(string message)
+        public void PushText(string message, string title)
         {
-            _scenarioBox.TextLabel.Text = message;
+            _scenarioBox.TextLabel.Text = title + "\n" + message;
         }
+
         // Grid Methods
         private void UpdateGrid(Board board, SquareControl[,] grid)
         {
@@ -570,33 +755,50 @@ namespace GamePages
         }
         public void AddNewFamilyHouse(House house)
         {
-            // Check if new family is created
-            _board.PlaceRandomlyBuilding(house, Board.FamilyHouseInt);
-            UpdateSquare(house.HorizontalPos, house.VerticalPos, _grid, _board);
+            if (_emptySquaresList.Count > 0 && _board.HasAnyEmptyPlace())
+            {
+                if (!house.IsBought)
+                {
+                    SquareControl s = _emptySquaresList[_board.randomNumber.Next(0, _emptySquaresList.Count)];
+
+                    // Set coordinates
+                    int hPos = s.Row;
+                    int vPos = s.Col;
+
+                    // Setting the building
+                    house.SetCoordinates(hPos, vPos);
+                    house.IsBought = true;
+
+                    // Update the grid
+                    _emptySquaresList.Remove(s);
+                    _board.UpdateSquares(hPos, vPos, Board.FamilyHouseInt);
+                    UpdateSquare(house.HorizontalPos, house.VerticalPos, _grid, _board);
+                }
+            }
+            /*else
+            {
+                string message = @"La famille " + house.Family.Name + " n'a pas de maison où s'installer.";
+                string title = @"Village plein.";
+                PushAlert(message, title);
+            }*/
+        }
+        private List<SquareControl> SetEmptySquaresList(List<SquareControl> list, Board b, SquareControl[,] g)
+        {
+            for (int i = 0; i < Board.GridMaxRow; i++)
+                for (int j = 0; j < Board.GridMaxCol; j++)
+                    if(b.IsValidSquare(i, j))
+                        list.Add(g[i, j]);
+            return list;
         }
         private void ShowValidPlaces()
         {
-            for (int i = 0; i < Board.GridMaxRow; i++)
-            {
-                for (int j = 0; j < Board.GridMaxCol; j++)
-                {
-                    if (_board.IsValidSquare(i, j))
-                        _grid[i, j].IsValid = true;
-                    else
-                        _grid[i, j].IsValid = false;
-                }
-            }
+            foreach(SquareControl s in _emptySquaresList)
+                s.IsValid = true;
         }
         private void HideValidPlaces()
         {
-            for (int i = 0; i < Board.GridMaxRow; i++)
-            {
-                for (int j = 0; j < Board.GridMaxCol; j++)
-                {
-                    if (_board.IsValidSquare(i, j))
-                        _grid[i, j].IsValid = false;
-                }
-            }
+            foreach (SquareControl s in _emptySquaresList)
+                s.IsValid = false;
         }
         #region Jobs Buildings Placement
         private void PlaceApothecaryOffice(int row, int col)
@@ -973,6 +1175,7 @@ namespace GamePages
                         }
                     }
                     // Update Grid
+                    _emptySquaresList.Remove(squareControl);
                     UpdateSquare(squareControl.Row, squareControl.Col, _grid, _board);
 
                     // End Placement
@@ -986,11 +1189,8 @@ namespace GamePages
             else
             {
                 SquareControl squareControl = (SquareControl)sender;
-
-                // Set double-buffering
-                SetStyle(ControlStyles.UserPaint, true);
-                SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-                SetStyle(ControlStyles.DoubleBuffer, true);
+                _infoBox.Visible = false;
+                _infoBox.SuspendLayout();
 
                 switch (_grid[squareControl.Row, squareControl.Col].Contents)
                 {
@@ -1297,6 +1497,9 @@ namespace GamePages
                             break;
                         }
                 }
+                _infoBox.Refresh();
+                _infoBox.ResumeLayout();
+                _infoBox.Visible = true;
             }
             #endregion
         }
@@ -1323,18 +1526,25 @@ namespace GamePages
         // InGameButton Method
         public void OnClickMenu()
         {
+            this.SuspendLayout();
             if (_gameMenu.IsOpen)
             {
-                _gameMenu.Hide();
                 UnLockEverything();
+                _gameMenu.SendToBack();
+                _gameMenu.Visible = false;
+                _gameMenu.Hide();
                 _gameMenu.IsOpen = false;
             }
             else
             {
-                _gameMenu.Show();
                 LockEverything();
+                _gameMenu.BringToFront();
+                _gameMenu.Visible = true;
+                _gameMenu.Show();
+                _gameMenu.Refresh();
                 _gameMenu.IsOpen = true;
             }
+            this.ResumeLayout();
         }
         internal void CloseGame()
         {
@@ -1347,8 +1557,6 @@ namespace GamePages
             _game = null;
 
         }
-
-
 
         // Game next Step
         internal void Step()

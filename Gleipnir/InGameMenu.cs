@@ -33,28 +33,22 @@ namespace GamePages
             _page.GameStarted = false;
             _page.CloseGame();
         }
-
-
         // Back to game
         public void InGameQuit_Click(object sender, EventArgs e)
         {
             _page.OnClickMenu();
         }
-
         // Save Game
         private void Save_Click(object sender, EventArgs e)
         {
-             Game.serialize.save(_page.TheGame);
+             Game.Serialize.Save(_page.TheGame);
         }
-
         // Settings
         private void InGameSettings_Click(object sender, EventArgs e)
         {
             if (!_page.ParametersBox.IsOpen)
             {
-                _page.ParametersBox.BringToFront();
-                _page.ParametersBox.Show();
-                _page.ParametersBox.IsOpen = true;
+                _page.ShowOrHideInGameParametersBox();
             }
         }
 

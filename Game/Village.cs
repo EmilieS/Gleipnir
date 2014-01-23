@@ -22,12 +22,16 @@ namespace Game
         double _villageHappiness;
         FamilyInVillageList _familiesList;
         SamhainFest _samhainFest;
+        Board _villageGrid;
 
         internal Village(Game game, string name)
             : base(game)
         {
             Debug.Assert(!String.IsNullOrWhiteSpace(name));
             Debug.Assert(game != null, @"(village, Village) Game is null");
+
+            // Initialize village's grid
+            _villageGrid = new Board();
 
             // Initilize village's lists
             BuildingsList = new Buildings.BuildingsList(this);
@@ -46,6 +50,10 @@ namespace Game
         }
 
         // Village Properties
+        /// <summary>
+        /// Gets the village grid
+        /// </summary>
+        public Board VillageGrid { get { return _villageGrid; } }
         /// <summary>
         /// Gets village's families list
         /// </summary>
@@ -102,13 +110,17 @@ namespace Game
         /// <returns></returns>
         public Family CreateFamily(Villager mother, Villager father)
         {
-            if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE)
-                throw new InvalidOperationException(@"(village, CreateFamily) Gender issue");
-            if (mother.ParentFamily != null && father.ParentFamily != null)
+            if (mother.ParentFamily == null || father.ParentFamily == null)
+                throw new ArgumentNullException(@"(village, CreateFamily) Mother or Father is null");
+            else
+            {
+                if (mother.Gender != Genders.FEMALE || father.Gender != Genders.MALE)
+                    throw new InvalidOperationException(@"(village, CreateFamily) Gender issue");
                 if (mother.ParentFamily == father.ParentFamily)
                     throw new InvalidOperationException(@"(village, CreateFamily) Same family");
+            }
 
-            // Create family
+            // Create family if still one place in village
             var name = Game.NameList.NextName;
             var newFamily = new Family(Game, mother, father, name);
 
@@ -132,7 +144,7 @@ namespace Game
                     i++;
                 }
             }
-            else // (house == null)
+            else
                 house = new Buildings.House(this, JobsList.Construction_Worker.Workers.Count > 0);
 
             // Add house to family and family into house
@@ -232,6 +244,9 @@ namespace Game
         /// <param name="family"></param>
         internal void FamilyDestroyed(Family family)
         {
+            if (_meeting != null)
+                if (family == _meeting.Family)
+                    EndMeeting();
             Debug.Assert(family != null, @"(village, FamilyDestroyed) Family don't exist");
             _familiesList.Remove(family);
         }
@@ -339,6 +354,7 @@ namespace Game
             _villageHappiness = totalH / nbf;
             _villageFaith = totalF / nbf;
         }
+        #region Fest
 
         // GodSpells Methods
         /// <summary>
@@ -364,8 +380,38 @@ namespace Game
                 throw new InvalidOperationException(@"(village, FestEnded) SamhainFest is already null");
             _samhainFest = null;
         }
+        #endregion
 
         // Offerings Points Methods
+        #region meeting
+        Meeting _meeting;
+        public Meeting Meeting { get { return _meeting; } }
+        public bool MeetingStart(Family f)
+        {
+            if (_meeting != null)
+                return false;
+            if (f == null)
+                return false;
+            if (BuildingsList.TablePlaceList.Count == 0)
+                return false;
+
+            _meeting = new Meeting(f);
+            return true;
+        }
+        public bool EndMeeting()
+        {
+            if (_meeting == null)
+                return false;
+            _meeting.EndMeeting();
+            return true;
+        }
+        internal void MeetingEnded()
+        {
+            if (_meeting == null)
+                throw new InvalidOperationException();
+            _meeting = null;
+        }
+        #endregion
         /// <summary>
         /// Modify number offering points generated
         /// </summary>

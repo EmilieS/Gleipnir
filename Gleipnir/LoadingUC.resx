@@ -123,10 +123,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="loading_text.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Malgun Gothic, 20pt</value>
+    <value>Malgun Gothic, 20pt, style=Italic</value>
   </data>
   <data name="loading_text.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
+  </data>
+  <data name="loading_text.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="loading_text.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>

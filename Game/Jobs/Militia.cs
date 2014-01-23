@@ -17,7 +17,7 @@ namespace Game
             _job = Jobs.MILITIA;
             _coefficient = 8;
         }
-        internal override bool AddPersonPrerequisites()
+        public override bool AddPersonPrerequisites()
         {
             return true;
         }

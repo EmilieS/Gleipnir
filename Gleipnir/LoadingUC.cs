@@ -15,8 +15,6 @@ namespace GamePages
         public LoadingUC()
         {
             InitializeComponent();
-
-            loading_text.BringToFront();
         }
     }
 }

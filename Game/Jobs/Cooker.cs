@@ -40,7 +40,7 @@ namespace Game
             happinessToAdd = HappinessToAdd + _workers.Count * 0.5;
             villager.AddOrRemoveHappiness(happinessToAdd);
         }
-        internal override bool AddPersonPrerequisites()
+        public override bool AddPersonPrerequisites()
         {
             if (Owner.Owner.BuildingsList.RestaurantList.Count > 0)
                 return true;

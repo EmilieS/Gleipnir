@@ -19,6 +19,7 @@ namespace Game
             _job = Jobs.CONSTRUCTION_WORKER;
             _coefficient = 10;
         }
+<<<<<<< HEAD
 
         public string Repair(Buildings.BuildingsModel building)
         {
@@ -58,6 +59,8 @@ namespace Game
                 }
             }
         }
+=======
+>>>>>>> Meeting
         public override bool AddPersonPrerequisites()
         {
             return true;

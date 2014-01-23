@@ -9,9 +9,9 @@ using System.IO;
 
 namespace Game
 {
-    public static class serialize
+    public static class Serialize
     {
-        static public void save(Game g)
+        static public void Save(Game g)
         {
 
             IFormatter formatter = new BinaryFormatter();
@@ -20,9 +20,8 @@ namespace Game
             stream.Close();
         }
 
-        static public Game load()
+        static public Game Load()
         {
-
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream("SAVED.bin", FileMode.Open, FileAccess.Read, FileShare.Read);
             Game g = (Game)formatter.Deserialize(stream);

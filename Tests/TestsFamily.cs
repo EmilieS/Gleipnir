@@ -138,6 +138,7 @@ namespace Tests
             Assert.That(family2.FamilyMembers.Contains(boyf2));
 
             Family family3 = MyGame.Villages[0].CreateFamily(girlf1, boyf2);
+            Assert.That(family3 != null);
             Assert.That(family3.GoldStash == 20);
             Assert.That(family1.GoldStash == 90);
             Assert.That(family2.GoldStash == 90);

@@ -51,6 +51,7 @@
             this.timerTrackBar.AutoSize = false;
             this.timerTrackBar.BackColor = System.Drawing.Color.Peru;
             this.timerTrackBar.Cursor = System.Windows.Forms.Cursors.SizeWE;
+            this.timerTrackBar.LargeChange = 500;
             this.timerTrackBar.Location = new System.Drawing.Point(29, 35);
             this.timerTrackBar.Maximum = 5000;
             this.timerTrackBar.Minimum = 500;
@@ -111,7 +112,7 @@
             this.Controls.Add(this.timerTrackBar);
             this.Controls.Add(this.timerTitle);
             this.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Location = new System.Drawing.Point(440, 260);
+            this.Location = new System.Drawing.Point(420, 260);
             this.Name = "Parameters";
             this.Size = new System.Drawing.Size(335, 187);
             ((System.ComponentModel.ISupportInitialize)(this.timerTrackBar)).EndInit();

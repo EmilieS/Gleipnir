@@ -45,16 +45,16 @@
             this.menuButton = new System.Windows.Forms.Button();
             this.faithIcon = new System.Windows.Forms.PictureBox();
             this.happinessIcon = new System.Windows.Forms.PictureBox();
-            this.villageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pauseButton = new System.Windows.Forms.Button();
+            this.villageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.TaxAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.populationIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.goldIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.faithIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.happinessIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.villageBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.villageBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // offeringsPoints
@@ -64,7 +64,7 @@
             this.offeringsPoints.BackColor = System.Drawing.Color.Transparent;
             this.offeringsPoints.Font = new System.Drawing.Font("Malgun Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.offeringsPoints.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.offeringsPoints.Location = new System.Drawing.Point(485, 6);
+            this.offeringsPoints.Location = new System.Drawing.Point(483, 6);
             this.offeringsPoints.Name = "offeringsPoints";
             this.offeringsPoints.Size = new System.Drawing.Size(118, 19);
             this.offeringsPoints.TabIndex = 19;
@@ -117,7 +117,7 @@
             this.goldVillage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.goldVillage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.goldVillage.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.goldVillage.Location = new System.Drawing.Point(126, 8);
+            this.goldVillage.Location = new System.Drawing.Point(124, 8);
             this.goldVillage.Name = "goldVillage";
             this.goldVillage.Size = new System.Drawing.Size(24, 17);
             this.goldVillage.TabIndex = 15;
@@ -140,13 +140,16 @@
             // 
             // StepByStep
             // 
-            this.StepByStep.Location = new System.Drawing.Point(952, 6);
+            this.StepByStep.BackColor = System.Drawing.Color.Transparent;
+            this.StepByStep.BackgroundImage = global::GamePages.Properties.Resources.button_homepage;
+            this.StepByStep.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.StepByStep.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.StepByStep.Location = new System.Drawing.Point(941, 5);
             this.StepByStep.Name = "StepByStep";
-            this.StepByStep.Size = new System.Drawing.Size(40, 21);
+            this.StepByStep.Size = new System.Drawing.Size(38, 25);
             this.StepByStep.TabIndex = 21;
             this.StepByStep.Text = "Step";
-            this.StepByStep.UseVisualStyleBackColor = true;
-            this.StepByStep.Visible = false;
+            this.StepByStep.UseVisualStyleBackColor = false;
             this.StepByStep.Click += new System.EventHandler(this.StepByStep_Click);
             // 
             // TaxAmount
@@ -184,12 +187,17 @@
             // 
             // StepBy50
             // 
-            this.StepBy50.Location = new System.Drawing.Point(993, 6);
+            this.StepBy50.BackColor = System.Drawing.Color.Transparent;
+            this.StepBy50.BackgroundImage = global::GamePages.Properties.Resources.button_homepage;
+            this.StepBy50.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.StepBy50.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StepBy50.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.StepBy50.Location = new System.Drawing.Point(981, 5);
             this.StepBy50.Name = "StepBy50";
-            this.StepBy50.Size = new System.Drawing.Size(32, 21);
+            this.StepBy50.Size = new System.Drawing.Size(50, 26);
             this.StepBy50.TabIndex = 24;
-            this.StepBy50.Text = "x50";
-            this.StepBy50.UseVisualStyleBackColor = true;
+            this.StepBy50.Text = "Boost";
+            this.StepBy50.UseVisualStyleBackColor = false;
             this.StepBy50.Click += new System.EventHandler(this.StepX50_Click);
             // 
             // populationIcon
@@ -222,7 +230,7 @@
             this.menuButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("menuButton.BackgroundImage")));
             this.menuButton.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.menuButton.Location = new System.Drawing.Point(1032, 3);
+            this.menuButton.Location = new System.Drawing.Point(1032, 5);
             this.menuButton.Name = "menuButton";
             this.menuButton.Size = new System.Drawing.Size(103, 27);
             this.menuButton.TabIndex = 14;
@@ -252,10 +260,6 @@
             this.happinessIcon.TabIndex = 28;
             this.happinessIcon.TabStop = false;
             // 
-            // villageBindingSource
-            // 
-            this.villageBindingSource.DataSource = typeof(Game.Village);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
@@ -273,12 +277,16 @@
             this.pauseButton.BackgroundImage = global::GamePages.Properties.Resources.ButtonIcon_Pause;
             this.pauseButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pauseButton.Font = new System.Drawing.Font("Malgun Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pauseButton.Location = new System.Drawing.Point(920, 4);
+            this.pauseButton.Location = new System.Drawing.Point(915, 5);
             this.pauseButton.Name = "pauseButton";
             this.pauseButton.Size = new System.Drawing.Size(25, 25);
             this.pauseButton.TabIndex = 30;
             this.pauseButton.UseVisualStyleBackColor = false;
             this.pauseButton.Click += new System.EventHandler(this.pauseButton_Click);
+            // 
+            // villageBindingSource
+            // 
+            this.villageBindingSource.DataSource = typeof(Game.Village);
             // 
             // InformationsUC
             // 
@@ -309,8 +317,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.goldIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.faithIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.happinessIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.villageBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.villageBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

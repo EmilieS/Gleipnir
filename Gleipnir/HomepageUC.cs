@@ -30,7 +30,7 @@ namespace GamePages
         }
         private void loadGame_Click(object sender, EventArgs e)
         {
-            if (Game.serialize.load() != null)
+            if (Game.Serialize.Load() != null)
             {
                 this.Visible = false;
                 _page.LoadGame();
@@ -44,9 +44,8 @@ namespace GamePages
         {
             if (!_page.ParametersBox.IsOpen)
             {
-                _page.ParametersBox.BringToFront();
-                _page.ParametersBox.Show();
-                _page.ParametersBox.IsOpen = true;
+                _page.ShowOrHideParametersBox();
+                this.Enabled = false;
             }
         }
     }

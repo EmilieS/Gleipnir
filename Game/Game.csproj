@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -70,7 +71,7 @@
     <Compile Include="GodSpell\Earthquake.cs" />
     <Compile Include="GodSpell\Epidemic.cs" />
     <Compile Include="GodSpell\Heal.cs" />
-    <Compile Include="serialize.cs" />
+    <Compile Include="Serialize.cs" />
     <Compile Include="Virus.cs" />
     <Compile Include="Jobs\Apothecary.cs" />
     <Compile Include="Buildings\ApothecaryOffice.cs" />
@@ -123,7 +124,9 @@
     <Content Include="Extra\nameList.txt" />
     <Content Include="Extra\scenario.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
