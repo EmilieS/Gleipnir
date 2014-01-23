@@ -315,7 +315,12 @@ namespace Game
         #region called by Evolution
         internal void FamineImpact()
         {
-            ReduceLifeExpectancy(2);
+            ReduceLifeExpectancy(5);//TODO : change flag here.
+            _health.Current = Health | Healths.HUNGRY;
+        }
+        internal void NotHungry()
+        {
+            _health.Current = Health & ~Healths.HUNGRY;
         }
         private void HereticFaithImpact()
         {

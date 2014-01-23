@@ -365,19 +365,19 @@ namespace Game
                         hasFarmer = true;
                     i++;
                 }
-                if (!hasFarmer)
-                {
-                    _hungry.Current = !hasFarmer;
-                    foreach (Villager v in _familyMembersList)
-                    {
-                        v.FamineImpact();
-                    }
-                }
-                else
-                    _hungry.Current = false;
+                _hungry.Current = !hasFarmer;
             }
             else
                 _hungry.Current = false;
+            foreach (Villager v in _familyMembersList)
+            {
+
+                if (_hungry.Current == false)
+                    v.NotHungry();
+                else
+                    v.FamineImpact();
+            }
+
         }
         /// <summary>
         /// Check if family is dead or not

@@ -166,6 +166,10 @@ namespace Game
             {
                 toPush = String.Format("{0} {1} est mort de viellesse", GameItem.FirstName, _familyName);
             }
+            else if ((GameItem.Health & Healths.HUNGRY) != 0)
+            {
+                toPush = String.Format("{0} {1} est mort de malnutrition", GameItem.FirstName, _familyName);
+            }
             else
             {
                 toPush = String.Format("{0} {1} est mort mystèrieusement", GameItem.FirstName, _familyName);
