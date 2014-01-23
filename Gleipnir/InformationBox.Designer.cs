@@ -45,6 +45,7 @@
             this.membersIcon = new System.Windows.Forms.PictureBox();
             this.objectName = new System.Windows.Forms.PictureBox();
             this.StopMeeting = new System.Windows.Forms.Button();
+            this.ActionsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.buildingHealthIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.faithIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.goldIcon)).BeginInit();
@@ -222,12 +223,27 @@
             this.StopMeeting.UseVisualStyleBackColor = true;
             this.StopMeeting.Click += new System.EventHandler(this.StopMeeting_Click);
             // 
+            // ActionsButton
+            // 
+            this.ActionsButton.BackgroundImage = global::GamePages.Properties.Resources.button_homepage;
+            this.ActionsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ActionsButton.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ActionsButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ActionsButton.Location = new System.Drawing.Point(17, 74);
+            this.ActionsButton.Name = "ActionsButton";
+            this.ActionsButton.Size = new System.Drawing.Size(75, 40);
+            this.ActionsButton.TabIndex = 21;
+            this.ActionsButton.Text = "Actions";
+            this.ActionsButton.UseVisualStyleBackColor = true;
+            this.ActionsButton.Click += new System.EventHandler(this.ActionsButton_Click);
+            // 
             // InformationBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.Controls.Add(this.ActionsButton);
             this.Controls.Add(this.StopMeeting);
             this.Controls.Add(this.objectName);
             this.Controls.Add(this.membersIcon);
@@ -278,5 +294,6 @@
         private System.Windows.Forms.PictureBox membersIcon;
         private System.Windows.Forms.PictureBox objectName;
         private System.Windows.Forms.Button StopMeeting;
+        internal System.Windows.Forms.Button ActionsButton;
     }
 }

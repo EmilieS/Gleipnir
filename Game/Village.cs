@@ -232,6 +232,9 @@ namespace Game
         /// <param name="family"></param>
         internal void FamilyDestroyed(Family family)
         {
+            if (_meeting != null)
+                if (family == _meeting.Family)
+                    EndMeeting();
             Debug.Assert(family != null, @"(village, FamilyDestroyed) Family don't exist");
             _familiesList.Remove(family);
         }
@@ -426,44 +429,6 @@ namespace Game
             }
             else
                 throw new ArgumentOutOfRangeException(@"(village, TransformGoldToOfferingsPoints) Take 0 or more than 100");
-        }
-
-        /// <summary>
-        /// Remove and delete empty families
-        /// </summary>
-        /// <param name="eventList"></param>
-        internal void EmptyFamiliesCleaner(List<IEvent> eventList)
-        {
-            int nbf = FamiliesList.Count;
-            Family tmpFamily;
-
-            int i = 0;
-            while (i < nbf)
-            {
-                tmpFamily = FamiliesList[i];
-                FamiliesList[i].DieOrIsAlive(eventList);
-                if (tmpFamily.IsDestroyed)
-                    nbf--;
-                else
-                    i++;
-            }
-            tmpFamily = null;
-        }
-        /// <summary>
-        /// Remove destroyed family from families list
-        /// </summary>
-        /// <param name="family"></param>
-        internal void FamilyDestroyed(Family family)
-        {
-            if (_meeting != null)
-            {
-                if (family == _meeting.Family)
-                {
-                    EndMeeting();
-                }
-            }
-            Debug.Assert(family != null, @"(village, FamilyDestroyed) Family don't exist");
-            _familiesList.Remove(family);
         }
 
         // called by ImpactHappiness

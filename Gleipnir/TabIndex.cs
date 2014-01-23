@@ -164,140 +164,7 @@ namespace GamePages
         }
         #endregion
 
-        // God Spells Click
-        private void StartEpidemic_Click(object sender, EventArgs e)
-        {
-            if (_page.TheGame.Villages[0].FamiliesList.Count > 0)
-            {
-                int familyChoosen = rnd.Next(0, _page.TheGame.Villages[0].FamiliesList.Count);
-                int villagerChoosen = rnd.Next(0, _page.TheGame.Villages[0].FamiliesList[familyChoosen].FamilyMembers.Count);
-                Epidemic epidemic = new Epidemic(_page.TheGame, _page.TheGame.Villages[0].FamiliesList[familyChoosen].FamilyMembers[villagerChoosen]);
-            }
-        }
-        private void StartEarthquake_Click(object sender, EventArgs e)
-        {
-            Earthquake earthquake = new Earthquake(_page.TheGame, _page.TheGame.Villages[0]);
-        }
-        private void StartHeal_Click(object sender, EventArgs e)
-        {
-            Heal heal = new Heal(_page.TheGame);
-        }
-        private void StartFest_Click(object sender, EventArgs e)
-        {
-            _page.TheGame.Villages[0].FestStart();
-        }
-
-        // Villagers list
-        internal void ShowVillagerListInFamily(Family fam)
-        {
-            if (!passed)
-            {
-                ListOfVillagersToShow = new List<VillagerBannerUC>();
-                passed = true;
-            }
-            DestroyVillagerList();
-
-            for (int i = 0; i < fam.FamilyMembers.Count; i++)
-            {
-                VillagerBannerUC tmp = new VillagerBannerUC();
-
-                // Add gender icon
-                if (fam.FamilyMembers[i].Gender == Genders.FEMALE)
-                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
-                else
-                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
-
-                // Set VillagerBannerUC
-                tmp.VillagerName.Text = fam.FamilyMembers[i].FirstName + " " + fam.FamilyMembers[i].Name;
-                tmp.Location = new System.Drawing.Point(positionX, positionY);
-                tmp.Job_label.Text = "Metier : " + fam.FamilyMembers[i].Job.Name;
-                if (fam.FamilyMembers[i].Health == Healths.SICK)
-                {
-                    tmp.Sick_status_pic.Visible = true;
-                }
-                else
-                {
-                    tmp.Sick_status_pic.Visible = false;
-                }
-                // Add VillagerBannerUC to lists and show it
-                this.VillagerList.Controls.Add(tmp);
-                ListOfVillagersToShow.Add(tmp);
-                tmp.Show();
-
-                // Set position for next VillagerBannerUC
-                positionY += 62;
-            }
-        }
-        internal void ShowConvocatedVillagers(Family fam)
-        {
-            if (!passed)
-            {
-                ListOfVillagersToShow = new List<VillagerBannerUC>();
-                passed = true;
-            }
-            DestroyVillagerList();
-
-            for (int i = 0; i < fam.FamilyMembers.Count; i++)
-            {
-                VillagerBannerUC tmp = new VillagerBannerUC();
-
-                // Add gender icon
-                if (fam.FamilyMembers[i].Gender == Genders.FEMALE)
-                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
-                else
-                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
-
-                // Set VillagerBannerUC
-                tmp.VillagerName.Text = fam.FamilyMembers[i].FirstName + " " + fam.FamilyMembers[i].Name;
-                tmp.Location = new System.Drawing.Point(positionX, positionY);
-
-                // Add VillagerBannerUC to lists and show it
-                this.VillagerList.Controls.Add(tmp);
-                ListOfVillagersToShow.Add(tmp);
-                tmp.Show();
-
-                // Set position for next VillagerBannerUC
-                positionY += 62;
-            }
-        }
-        internal void ShowWorkersInJob(JobsModel job)
-        {
-            if (passed == false)
-            {
-                passed = true;
-                ListOfVillagersToShow = new List<VillagerBannerUC>();
-            }
-            DestroyVillagerList();
-
-            for (int i = 0; i < job.Workers.Count; i++)
-            {
-                VillagerBannerUC tmp = new VillagerBannerUC();
-                ListOfVillagersToShow.Add(tmp);
-                if (job.Workers[i].Gender == Genders.FEMALE)
-                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
-                else
-                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
-                tmp.VillagerName.Text = job.Workers[i].FirstName + " " + job.Workers[i].Name;
-                this.VillagerList.Controls.Add(tmp);
-                tmp.Show();
-                tmp.Location = new System.Drawing.Point(positionX, positionY);
-                positionY += 62;
-            }
-        }
-        internal void DestroyVillagerList()
-        {
-            if (ListOfVillagersToShow != null)
-            {
-                for (int i = 0; i < ListOfVillagersToShow.Count; i++)
-                {
-                    ListOfVillagersToShow[i].Hide();
-                    this.VillagerList.Controls.Remove(ListOfVillagersToShow[i]);
-                }
-                positionX = positionY = 0;
-                ListOfVillagersToShow.Clear();
-            }
-        }
-
+        // Upgrades Click
         #region Cooker's Upgrades
         private void Level1_butt_Click(object sender, EventArgs e)
         {
@@ -438,8 +305,6 @@ namespace GamePages
             }
         }
         #endregion
-
-
         #region Blacksmith's Upgrades
         private void Saw_butt_Click(object sender, EventArgs e)
         {
@@ -460,5 +325,138 @@ namespace GamePages
         }
         #endregion
 
+        // God Spells Click
+        private void StartEpidemic_Click(object sender, EventArgs e)
+        {
+            if (_page.TheGame.Villages[0].FamiliesList.Count > 0)
+            {
+                int familyChoosen = rnd.Next(0, _page.TheGame.Villages[0].FamiliesList.Count);
+                int villagerChoosen = rnd.Next(0, _page.TheGame.Villages[0].FamiliesList[familyChoosen].FamilyMembers.Count);
+                Epidemic epidemic = new Epidemic(_page.TheGame, _page.TheGame.Villages[0].FamiliesList[familyChoosen].FamilyMembers[villagerChoosen]);
+            }
+        }
+        private void StartEarthquake_Click(object sender, EventArgs e)
+        {
+            Earthquake earthquake = new Earthquake(_page.TheGame, _page.TheGame.Villages[0]);
+        }
+        private void StartHeal_Click(object sender, EventArgs e)
+        {
+            Heal heal = new Heal(_page.TheGame);
+        }
+        private void StartFest_Click(object sender, EventArgs e)
+        {
+            _page.TheGame.Villages[0].FestStart();
+        }
+
+        // Villagers list
+        internal void ShowVillagerListInFamily(Family fam)
+        {
+            if (!passed)
+            {
+                ListOfVillagersToShow = new List<VillagerBannerUC>();
+                passed = true;
+            }
+            DestroyVillagerList();
+
+            for (int i = 0; i < fam.FamilyMembers.Count; i++)
+            {
+                VillagerBannerUC tmp = new VillagerBannerUC();
+
+                // Add gender icon
+                if (fam.FamilyMembers[i].Gender == Genders.FEMALE)
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
+                else
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
+
+                // Set VillagerBannerUC
+                tmp.VillagerName.Text = fam.FamilyMembers[i].FirstName + " " + fam.FamilyMembers[i].Name;
+                tmp.Location = new System.Drawing.Point(positionX, positionY);
+                tmp.Job_label.Text = "Metier : " + fam.FamilyMembers[i].Job.Name;
+                if (fam.FamilyMembers[i].Health == Healths.SICK)
+                {
+                    tmp.Sick_status_pic.Visible = true;
+                }
+                else
+                {
+                    tmp.Sick_status_pic.Visible = false;
+                }
+                // Add VillagerBannerUC to lists and show it
+                this.VillagerList.Controls.Add(tmp);
+                ListOfVillagersToShow.Add(tmp);
+                tmp.Show();
+
+                // Set position for next VillagerBannerUC
+                positionY += 62;
+            }
+        }
+        internal void ShowConvocatedVillagers(Family fam)
+        {
+            if (!passed)
+            {
+                ListOfVillagersToShow = new List<VillagerBannerUC>();
+                passed = true;
+            }
+            DestroyVillagerList();
+
+            for (int i = 0; i < fam.FamilyMembers.Count; i++)
+            {
+                VillagerBannerUC tmp = new VillagerBannerUC();
+
+                // Add gender icon
+                if (fam.FamilyMembers[i].Gender == Genders.FEMALE)
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
+                else
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
+
+                // Set VillagerBannerUC
+                tmp.VillagerName.Text = fam.FamilyMembers[i].FirstName + " " + fam.FamilyMembers[i].Name;
+                tmp.Location = new System.Drawing.Point(positionX, positionY);
+
+                // Add VillagerBannerUC to lists and show it
+                this.VillagerList.Controls.Add(tmp);
+                ListOfVillagersToShow.Add(tmp);
+                tmp.Show();
+
+                // Set position for next VillagerBannerUC
+                positionY += 62;
+            }
+        }
+        internal void ShowWorkersInJob(JobsModel job)
+        {
+            if (passed == false)
+            {
+                passed = true;
+                ListOfVillagersToShow = new List<VillagerBannerUC>();
+            }
+            DestroyVillagerList();
+
+            for (int i = 0; i < job.Workers.Count; i++)
+            {
+                VillagerBannerUC tmp = new VillagerBannerUC();
+                ListOfVillagersToShow.Add(tmp);
+                if (job.Workers[i].Gender == Genders.FEMALE)
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Female;
+                else
+                    tmp.VillagerFace.BackgroundImage = GamePages.Properties.Resources.Gender_Male;
+                tmp.VillagerName.Text = job.Workers[i].FirstName + " " + job.Workers[i].Name;
+                this.VillagerList.Controls.Add(tmp);
+                tmp.Show();
+                tmp.Location = new System.Drawing.Point(positionX, positionY);
+                positionY += 62;
+            }
+        }
+        internal void DestroyVillagerList()
+        {
+            if (ListOfVillagersToShow != null)
+            {
+                for (int i = 0; i < ListOfVillagersToShow.Count; i++)
+                {
+                    ListOfVillagersToShow[i].Hide();
+                    this.VillagerList.Controls.Remove(ListOfVillagersToShow[i]);
+                }
+                positionX = positionY = 0;
+                ListOfVillagersToShow.Clear();
+            }
+        }
     }
 }

@@ -68,6 +68,12 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ActionsPanel.Designer.cs">
+      <DependentUpon>ActionsPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="EventFluxUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -155,6 +161,9 @@
     <Compile Include="VillagerBannerUC.Designer.cs">
       <DependentUpon>VillagerBannerUC.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ActionsPanel.resx">
+      <DependentUpon>ActionsPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EventFluxUC.resx">
       <DependentUpon>EventFluxUC.cs</DependentUpon>
     </EmbeddedResource>

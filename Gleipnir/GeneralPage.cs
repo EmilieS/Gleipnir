@@ -25,6 +25,7 @@ namespace GamePages
         EventFluxUC _eventFlux;
         ScenarioBox _scenarioBox;
         Parameters _parametersBox;
+        ActionsPanel _actionsPanel;
         Board _board;
         SquareControl[,] _grid;
         Options options;
@@ -62,6 +63,8 @@ namespace GamePages
         internal Game.Game TheGame { get { return _game; } }
         internal TabIndex ActionMenu { get { return _actionMenu; } }
         internal Parameters ParametersBox { get { return _parametersBox; } }
+        internal ActionsPanel MeetingActionsPanel { get { return _actionsPanel; } }
+        internal InformationBox InformationsBox { get { return _infoBox; } }
 
         /// <summary>
         /// Player state
@@ -123,6 +126,7 @@ namespace GamePages
             _eventFlux = new EventFluxUC();
             _scenarioBox = new ScenarioBox(this);
             _infoBox = new InformationBox(this);
+            _actionsPanel = new ActionsPanel(this);
 
             #region grid generation
             options = new Options();
@@ -161,6 +165,7 @@ namespace GamePages
             this.Controls.Add(_infoBox);
             this.Controls.Add(_eventFlux);
             this.Controls.Add(_gameMenu);
+            this.Controls.Add(_actionsPanel);
             #endregion
             #region Configure all elements
             // ActionMenu
@@ -189,12 +194,16 @@ namespace GamePages
             _gameMenu.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             _gameMenu.BringToFront();
             _gameMenu.Hide();
-            //_gameMenu.ExpectGoBackToMenu += GoBackToMenu;
 
             // EventFluw
             _eventFlux.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             _eventFlux.SendToBack();
             _eventFlux.Show();
+
+            // ActionsPanel
+            _actionsPanel.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            _actionsPanel.SendToBack();
+            _actionsPanel.Hide();
             #endregion
             #endregion
 
@@ -264,6 +273,7 @@ namespace GamePages
             _eventFlux = new EventFluxUC();
             _scenarioBox = new ScenarioBox(this);
             _infoBox = new InformationBox(this);
+            _actionsPanel = new ActionsPanel(this);
 
             #region grid generation
             options = new Options();
@@ -302,6 +312,7 @@ namespace GamePages
             this.Controls.Add(_infoBox);
             this.Controls.Add(_eventFlux);
             this.Controls.Add(_gameMenu);
+            this.Controls.Add(_actionsPanel);
             #endregion
             #region Configure all elements
             // ActionMenu
@@ -343,11 +354,16 @@ namespace GamePages
             _eventFlux.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             _eventFlux.SendToBack();
             _eventFlux.Show();
-            #endregion
-            #endregion
 
+            // ActionsPanel
+            _actionsPanel.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            _actionsPanel.SendToBack();
+            _actionsPanel.Hide();
+            #endregion
+            #endregion
 
             trace = new traceBox();
+            // trace.Show();
 
             // Hide loading effects
             gleipnir_logo.Hide();
@@ -450,6 +466,7 @@ namespace GamePages
             this.Controls.Remove(_scenarioBox);
             this.Controls.Remove(_stats);
             this.Controls.Remove(_eventFlux);
+            this.Controls.Remove(_actionsPanel);
 
             // Destroy Grid & Board
             _board = null;
@@ -1360,8 +1377,6 @@ namespace GamePages
             _game = null;
 
         }
-
-
 
         // Game next Step
         internal void Step()

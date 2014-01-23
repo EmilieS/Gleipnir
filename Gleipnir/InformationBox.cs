@@ -38,9 +38,23 @@ namespace GamePages
         private void StopMeeting_Click(object sender, EventArgs e)
         {
             if (_page.TheGame.Villages[0].EndMeeting())
+            {
                 StopMeeting.Enabled = false;
+                ActionsButton.Enabled = false;
+            }
             else
                 StopMeeting.Enabled = true;
+        }
+        private void ActionsButton_Click(object sender, EventArgs e)
+        {
+            if (!_page.MeetingActionsPanel.IsOpen && _page.TheGame.Villages[0].Meeting != null)
+            {
+                if (_page.MeetingActionsPanel.OpenPanel(_page.TheGame.Villages[0].Meeting.ActualConvocated))
+                {
+                    _page.LockEverything();
+                    ActionsButton.Enabled = false;
+                }
+            }
         }
 
         // Hide or Show elements in InfoBox
@@ -109,7 +123,8 @@ namespace GamePages
                     GodMeeting.Enabled = true;
                 StopMeeting.Visible = false;
                 StopMeeting.Enabled = false;
-
+                ActionsButton.Visible = false;
+                ActionsButton.Enabled = false;
             }
             else
             {
@@ -153,6 +168,8 @@ namespace GamePages
             GodMeeting.Enabled = false;
             StopMeeting.Visible = false;
             StopMeeting.Enabled = false;
+            ActionsButton.Visible = false;
+            ActionsButton.Enabled = false;
         }
         internal void SetJobInfo(JobsModel job, Image buildingImage)
         {
@@ -193,6 +210,8 @@ namespace GamePages
                 GodMeeting.Enabled = false;
                 StopMeeting.Visible = false;
                 StopMeeting.Enabled = false;
+                ActionsButton.Visible = false;
+                ActionsButton.Enabled = false;
             }
             else
             {
@@ -238,10 +257,17 @@ namespace GamePages
             GodMeeting.Visible = false;
             GodMeeting.Enabled = false;
             StopMeeting.Visible = true;
+            ActionsButton.Visible = true;
             if (_page.TheGame.Villages[0].Meeting != null && _page.TheGame.Villages[0].Meeting.ActualConvocated != null)
+            {
                 StopMeeting.Enabled = true;
+                ActionsButton.Enabled = true;
+            }
             else
+            {
                 StopMeeting.Enabled = false;
+                ActionsButton.Enabled = false;
+            }
         }
         internal void SetOtherBuildingsInfo(BuildingsModel building, Image buildingImage)
         {
@@ -281,6 +307,8 @@ namespace GamePages
             GodMeeting.Enabled = false;
             StopMeeting.Visible = false;
             StopMeeting.Enabled = false;
+            ActionsButton.Visible = false;
+            ActionsButton.Enabled = false;
         }
         internal void SetDestroyedBuilding(BuildingsModel building)
         {
@@ -317,6 +345,8 @@ namespace GamePages
             GodMeeting.Enabled = false;
             StopMeeting.Visible = false;
             StopMeeting.Enabled = false;
+            ActionsButton.Visible = false;
+            ActionsButton.Enabled = false;
         }
         internal void SetNothingSelected()
         {
@@ -349,6 +379,17 @@ namespace GamePages
             GodMeeting.Enabled = false;
             StopMeeting.Visible = false;
             StopMeeting.Enabled = false;
+            ActionsButton.Visible = false;
+            ActionsButton.Enabled = false;
+        }
+
+        internal void UnlockOpenActionMenuButton()
+        {
+            if (!_page.MeetingActionsPanel.IsOpen)
+            {
+                ActionsButton.Enabled = true;
+                _page.UnLockEverything();
+            }
         }
     }
 }
