@@ -374,7 +374,7 @@
             this.panel4.Controls.Add(this.Fertilizer_butt);
             this.panel4.Controls.Add(this.Scarecrow_butt);
             this.panel4.Controls.Add(this.Farmers_Label_Up);
-            this.panel4.Location = new System.Drawing.Point(8, 264);
+            this.panel4.Location = new System.Drawing.Point(8, 245);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(200, 100);
             this.panel4.TabIndex = 4;
@@ -432,7 +432,7 @@
             this.panel3.Controls.Add(this.Furnace_butt);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.Saw_butt);
-            this.panel3.Location = new System.Drawing.Point(6, 166);
+            this.panel3.Location = new System.Drawing.Point(6, 156);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(200, 90);
             this.panel3.TabIndex = 3;
@@ -488,7 +488,7 @@
             this.panel2.Controls.Add(this.Hoist_butt);
             this.panel2.Controls.Add(this.Pulley_butt);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(0, 78);
+            this.panel2.Location = new System.Drawing.Point(0, 71);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(208, 85);
             this.panel2.TabIndex = 2;
