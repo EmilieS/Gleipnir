@@ -1217,9 +1217,19 @@ namespace GamePages
                     // Restore the cursor
                     squareControl.Cursor = Cursors.Default;
 
-                    foreach (BuildingsModel b in _game.Villages[0].BuildingsList)
+                    int i=0;
+                    bool found = false;
+                    do
+                    {
+                        var b = _game.Villages[0].BuildingsList[i];
                         if (b.HorizontalPos == squareControl.Row && b.VerticalPos == squareControl.Col)
-                            b.Repair2(2);
+                        {
+                            var job = (Construction_Worker)_game.Villages[0].JobsList.Construction_Worker;
+                            job.Repair(b);
+                            found = true;
+                        }
+                        i++;
+                    } while (i < _game.Villages[0].BuildingsList.Count && !found);
 
                     HideBuildingsCanBeRepaired();
                     _actionMenu.IsRepairClick = false;
