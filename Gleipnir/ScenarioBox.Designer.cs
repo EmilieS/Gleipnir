@@ -54,7 +54,6 @@
             this.TextLabel.Name = "TextLabel";
             this.TextLabel.Size = new System.Drawing.Size(514, 114);
             this.TextLabel.TabIndex = 2;
-            this.TextLabel.Text = "label1";
             // 
             // listBox1
             // 
