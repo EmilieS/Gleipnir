@@ -731,6 +731,14 @@ namespace GamePages
         }
 
         // Grid Methods
+        private List<SquareControl> SetEmptySquaresList(List<SquareControl> list, Board b, SquareControl[,] g)
+        {
+            for (int i = 0; i < Board.GridMaxRow; i++)
+                for (int j = 0; j < Board.GridMaxCol; j++)
+                    if(b.IsValidSquare(i, j))
+                        list.Add(g[i, j]);
+            return list;
+        }
         private void UpdateGrid(Board board, SquareControl[,] grid)
         {
             // Map the current game board to the square controls.
@@ -784,14 +792,6 @@ namespace GamePages
                 PushAlert(message, title);
             }*/
         }
-        private List<SquareControl> SetEmptySquaresList(List<SquareControl> list, Board b, SquareControl[,] g)
-        {
-            for (int i = 0; i < Board.GridMaxRow; i++)
-                for (int j = 0; j < Board.GridMaxCol; j++)
-                    if(b.IsValidSquare(i, j))
-                        list.Add(g[i, j]);
-            return list;
-        }
         private void ShowValidPlaces()
         {
             foreach(SquareControl s in _emptySquaresList)
@@ -804,10 +804,16 @@ namespace GamePages
         }
         internal void ShowBuildingsCanBeRepaired()
         {
+            bool found = false;
             foreach (BuildingsModel b in _game.Villages[0].BuildingsList)
-                if (b.HorizontalPos >= 0 && b.VerticalPos >= 0 && b.Hp != b.MaxHp)
+                if ((b.HorizontalPos >= 0 && b.VerticalPos >= 0) && b.Hp < b.MaxHp)
+                {
                     _grid[b.HorizontalPos, b.VerticalPos].IsValid = true;
-            UpdateGrid(_board, _grid);
+                    found = true;
+                }
+
+            if(found)
+                UpdateGrid(_board, _grid);
         }
         internal void HideBuildingsCanBeRepaired()
         {
@@ -1200,7 +1206,7 @@ namespace GamePages
                 }
             }
             #endregion
-            #region BuildingRepair
+            #region Building repair
             else if (actionState == ActionState.SelectRepair)
             {
                 SquareControl squareControl = (SquareControl)sender;
@@ -1213,15 +1219,16 @@ namespace GamePages
 
                     foreach (BuildingsModel b in _game.Villages[0].BuildingsList)
                         if (b.HorizontalPos == squareControl.Row && b.VerticalPos == squareControl.Col)
-                            b.Repair2(1);
+                            b.Repair2(2);
 
                     HideBuildingsCanBeRepaired();
+                    _actionMenu.IsRepairClick = false;
                     actionState = ActionState.None;
                 }
                     
             }
             #endregion
-            #region Building Click
+            #region Building click
             else
             {
                 SquareControl squareControl = (SquareControl)sender;
