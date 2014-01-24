@@ -11,13 +11,14 @@ namespace Game
     {
         string _name;
         int _costPrice;
-        bool _isActivated;
+        HistorizedValue<bool,UpgradesModel> _isActivated;
         public bool IsPossible = false;
         Village _owner;
 
         internal UpgradesModel(Game g, Village v)
             : base(g)
         {
+            _isActivated = new HistorizedValue<bool, UpgradesModel>(this, "IsActivated", 5);
             _owner = v;
             IsActivated = false;
         }
@@ -35,8 +36,8 @@ namespace Game
 
         public bool IsActivated
         {
-            get { return _isActivated; }
-            internal set { _isActivated = value; }
+            get { return _isActivated.Current; }
+            internal set { _isActivated.Current = value; }
         }
         public void Buy()
         {
@@ -62,7 +63,7 @@ namespace Game
         }
         internal override void CloseStep(List<IEvent> eventList)
         {
-            if (_isActivated)
+            if (_isActivated.Conclude())
                 eventList.Add(new EventProperty<UpgradesModel>(this, "Upgrade"));
         }
     }
