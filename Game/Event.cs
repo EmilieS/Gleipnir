@@ -371,6 +371,32 @@ namespace Game
             b.PushTrace("Convocation destroyed");
         }
     }
+    [Serializable]
+    public class EpidemicBirthEvent : Event<GodSpell.Epidemic>
+    {
+        internal EpidemicBirthEvent(GodSpell.Epidemic e)
+            : base(e)
+        {
+        }
+
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushTrace(String.Format("Epedemic created."));
+        }
+    }
+    [Serializable]
+    public class MeetingCreatedEvent : Event<Meeting>
+    {
+        internal MeetingCreatedEvent(Meeting e)
+            : base(e)
+        {
+        }
+
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushTrace(String.Format("Meeting created."));
+        }
+    }
 }
 /*
 // Two good ways to challenge types!

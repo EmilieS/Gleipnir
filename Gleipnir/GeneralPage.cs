@@ -490,7 +490,11 @@ namespace GamePages
                 _timer.Start();
             }
             GameStarted = true;
-            
+            foreach (IEvent events in _game.EventList)
+            {
+                events.Do(this);
+                events.PublishMessage(this);
+            }
             // Restart Graphics Updates
             this.ResumeLayout();
         }
