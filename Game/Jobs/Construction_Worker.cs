@@ -42,11 +42,13 @@ namespace Game
                 int j = 0;
                 for (int i = 0; i < nbWorkers; i++)
                 {
-                    if (i >= toRepairNb)
+                    if (ToRepair.Count == 0)
+                        break;
+                    if (i >= ToRepair.Count)
                     {
                         j = 0;                        
                     }
-                    if (ToRepair[j].Repair2(1)|| ToRepair[j].Hp<1)
+                    if (ToRepair[j].Repair2(1)/*|| ToRepair[j].Hp<1*/)
                     {
                         ToRepair.RemoveAt(j);
                         toRepairNb--;
