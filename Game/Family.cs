@@ -59,6 +59,10 @@ namespace Game
             _familyMembersList.Add(_father);
             _mother.ParentFamily = this;
             _father.ParentFamily = this;
+
+            //=> marriage pendant convocation ? ils s'enfuyent.
+            _mother.ActivityStatus = _mother.ActivityStatus & ~ActivityStatus.CONVOCATED;
+            _father.ActivityStatus = _father.ActivityStatus & ~ActivityStatus.CONVOCATED;
         }
 
         // Properties
