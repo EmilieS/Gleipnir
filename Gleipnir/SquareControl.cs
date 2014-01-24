@@ -21,7 +21,7 @@ namespace GamePages
 
         // Default backgrounds
         public static readonly Color EmptyBackColorDefault = Color.FromArgb(50, 130, 20);
-        public static readonly Color ForestBackColorDefault = Color.FromArgb(20, 130, 75);
+        public static readonly Color ForestBackColorDefault = Color.FromArgb(20, 100, 75);
         public static readonly Color WaterBackColorDefault = Color.FromArgb(30, 170, 200);
         public static readonly Color RoadBackColorDefault = Color.FromArgb(70, 70, 70);
         public static readonly Color TableBackColorDefault = Color.FromArgb(175, 70, 0);
@@ -229,7 +229,7 @@ namespace GamePages
             ActiveSquareBackColor = Color.FromArgb(128, backColor.R, backColor.G, backColor.B);
             ValidSquareBackColor = Color.FromArgb(200, backColor.R, backColor.G, backColor.B);
             if (IsValid)
-                backColor = ValidSquareBackColor;
+                backColor = ValidPlaceBackColorDefault;
             if (IsActive)
                 backColor = ActiveSquareBackColor;
 
