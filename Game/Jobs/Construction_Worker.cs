@@ -57,6 +57,7 @@ namespace Game
                     }
                 }
             }
+            base.Evolution();
         }
         public override bool AddPersonPrerequisites()
         {

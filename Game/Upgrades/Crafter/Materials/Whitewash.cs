@@ -33,6 +33,7 @@ namespace Game
             _selected.HappinessToAdd += 2;
             foreach (var buildingsList in _owner.BuildingsList)
             {
+                buildingsList.MaxHp += 200;
                 buildingsList.Hp += 200;
             }
         }
