@@ -63,14 +63,16 @@ namespace GamePages
         internal ActionsPanel MeetingActionsPanel { get { return _actionsPanel; } }
         internal InformationBox InformationsBox { get { return _infoBox; } }
         internal BuildingTypes BuildingSelected { get { return buildingSelected; } set { buildingSelected = value; } }
+        internal ActionState ActionStatement { get { return actionState; } set { actionState = value; } }
 
         /// <summary>
         /// Player state
         /// </summary>
-        private enum ActionState
+        internal enum ActionState
         {
             None = 0,
-            InPlace = 1
+            InPlace = 1,
+            SelectRepair = 2
         }
 
         public GeneralPage()
@@ -729,6 +731,14 @@ namespace GamePages
         }
 
         // Grid Methods
+        private List<SquareControl> SetEmptySquaresList(List<SquareControl> list, Board b, SquareControl[,] g)
+        {
+            for (int i = 0; i < Board.GridMaxRow; i++)
+                for (int j = 0; j < Board.GridMaxCol; j++)
+                    if(b.IsValidSquare(i, j))
+                        list.Add(g[i, j]);
+            return list;
+        }
         private void UpdateGrid(Board board, SquareControl[,] grid)
         {
             // Map the current game board to the square controls.
@@ -782,14 +792,6 @@ namespace GamePages
                 PushAlert(message, title);
             }*/
         }
-        private List<SquareControl> SetEmptySquaresList(List<SquareControl> list, Board b, SquareControl[,] g)
-        {
-            for (int i = 0; i < Board.GridMaxRow; i++)
-                for (int j = 0; j < Board.GridMaxCol; j++)
-                    if(b.IsValidSquare(i, j))
-                        list.Add(g[i, j]);
-            return list;
-        }
         private void ShowValidPlaces()
         {
             foreach(SquareControl s in _emptySquaresList)
@@ -799,6 +801,26 @@ namespace GamePages
         {
             foreach (SquareControl s in _emptySquaresList)
                 s.IsValid = false;
+        }
+        internal void ShowBuildingsCanBeRepaired()
+        {
+            bool found = false;
+            foreach (BuildingsModel b in _game.Villages[0].BuildingsList)
+                if ((b.HorizontalPos >= 0 && b.VerticalPos >= 0) && b.Hp < b.MaxHp)
+                {
+                    _grid[b.HorizontalPos, b.VerticalPos].IsValid = true;
+                    found = true;
+                }
+
+            if(found)
+                UpdateGrid(_board, _grid);
+        }
+        internal void HideBuildingsCanBeRepaired()
+        {
+            foreach (BuildingsModel b in _game.Villages[0].BuildingsList)
+                if (b.HorizontalPos >= 0 && b.VerticalPos >= 0 && b.Hp != b.MaxHp)
+                    _grid[b.HorizontalPos, b.VerticalPos].IsValid = false;
+            UpdateGrid(_board, _grid);
         }
         #region Jobs Buildings Placement
         private void PlaceApothecaryOffice(int row, int col)
@@ -1037,11 +1059,10 @@ namespace GamePages
                 squareControl.Cursor = Cursors.Hand;
             }
             #endregion
-
-            // If the square is a building
+            // If the square is a building & the player wants repair building
             #region Select Building
             else if (_board.IsBuilding(squareControl.Row, squareControl.Col)
-                && actionState == ActionState.None)
+                && (actionState == ActionState.None || actionState == ActionState.SelectRepair))
             {
                 // If the square is selected
                 if (!squareControl.IsActive)
@@ -1185,7 +1206,39 @@ namespace GamePages
                 }
             }
             #endregion
-            #region Building Click
+            #region Building repair
+            else if (actionState == ActionState.SelectRepair)
+            {
+                SquareControl squareControl = (SquareControl)sender;
+
+                // If the place is valid, make it
+                if (_board.IsBuilding(squareControl.Row, squareControl.Col))
+                {
+                    // Restore the cursor
+                    squareControl.Cursor = Cursors.Default;
+
+                    int i=0;
+                    bool found = false;
+                    do
+                    {
+                        var b = _game.Villages[0].BuildingsList[i];
+                        if (b.HorizontalPos == squareControl.Row && b.VerticalPos == squareControl.Col)
+                        {
+                            var job = (Construction_Worker)_game.Villages[0].JobsList.Construction_Worker;
+                            job.Repair(b);
+                            found = true;
+                        }
+                        i++;
+                    } while (i < _game.Villages[0].BuildingsList.Count && !found);
+
+                    HideBuildingsCanBeRepaired();
+                    _actionMenu.IsRepairClick = false;
+                    actionState = ActionState.None;
+                }
+                    
+            }
+            #endregion
+            #region Building click
             else
             {
                 SquareControl squareControl = (SquareControl)sender;

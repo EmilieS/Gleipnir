@@ -110,7 +110,7 @@ namespace Game
                 case "Offerings": b.PushGeneralCoins(GameItem.Offerings); break;
                 case "TotalPop": b.PushPopulation(GameItem.TotalPop); if (GameItem.TotalPop == 0) { b.GameLost(); } break;
                 case "TotalGold": b.PushGeneralGold(GameItem.TotalGold); break;
-                case "AverageFaith": b.PushGeneralFaith(GameItem.AverageFaith); if(GameItem.AverageFaith==0){b.GameLost();}  break;
+                case "AverageFaith": b.PushGeneralFaith(GameItem.AverageFaith); if (GameItem.AverageFaith == 0) { b.GameLost(); } break;
                 case "AverageHappiness": b.PushGeneralHappiness(GameItem.AverageHappiness); break;
             }
         }
@@ -297,9 +297,8 @@ namespace Game
             base.Do(b);
         }
     }
-
-	[Serializable]
-    public class SamhaimFestEndedEvent: Event<SamhainFest>
+    [Serializable]
+    public class SamhaimFestEndedEvent : Event<SamhainFest>
     {
         internal SamhaimFestEndedEvent(SamhainFest fest)
             : base(fest)
@@ -307,10 +306,11 @@ namespace Game
         }
         override public void PublishMessage(IWindow b)
         {
-                b.PushAlert("Le festival est terminé.", "Festival");
-                b.PushTrace("SamhaimFest destroyed");
+            b.PushAlert("Le festival est terminé.", "Festival");
+            b.PushTrace("SamhaimFest destroyed");
         }
     }
+    [Serializable]
     public class SamhaimFestStartedEvent : Event<SamhainFest>
     {
         internal SamhaimFestStartedEvent(SamhainFest fest)

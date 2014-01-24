@@ -252,6 +252,15 @@
     <None Include="Resources\button_homepage1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Upgrade_Irrigation.png" />
+    <None Include="Resources\Upgrade_Fertilizer.png" />
+    <None Include="Resources\Upgrade_Scarecrow.png" />
+    <None Include="Resources\Upgrade_Plow.png" />
+    <None Include="Resources\Upgrade_Furnace.png" />
+    <None Include="Resources\Upgrade_Saw.png" />
+    <None Include="Resources\Upgrade_Scaffolding.png" />
+    <None Include="Resources\Upgrade_Hoist.png" />
+    <None Include="Resources\Upgrade_Pulley.png" />
     <None Include="Resources\Upgrade_RestaurantBlue4.png" />
     <None Include="Resources\Upgrade_RestaurantBlue3.png" />
     <None Include="Resources\Upgrade_RestaurantBlue2.png" />
@@ -300,6 +309,7 @@
     <None Include="Resources\Building_Brothel.png" />
     <None Include="Resources\ButtonIcon_Pause.png" />
     <None Include="Resources\ButtonIcon_start.png" />
+    <None Include="Resources\ButtonIcon_Repair.png" />
     <Content Include="Resources\Extra\firstNameList.txt" />
     <Content Include="Resources\Extra\nameList.txt" />
     <Content Include="Resources\Extra\scenario.txt" />
