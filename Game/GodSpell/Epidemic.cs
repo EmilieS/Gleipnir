@@ -103,6 +103,10 @@ namespace Game.GodSpell
         }
         override internal void CloseStep(List<IEvent> eventlist)
         {
+            if (_timeBeforeThePlayerIsWarned == 5)//5 initialy
+            {
+                eventlist.Add(new EpidemicBirthEvent(this));
+            }
             if(_timeBeforeThePlayerIsWarned> 1)
             {
                 _timeBeforeThePlayerIsWarned--; 

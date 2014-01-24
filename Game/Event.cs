@@ -57,6 +57,7 @@ namespace Game
         override public void PublishMessage(IWindow b)
         {
             b.PushAlert(String.Format("{0} s'est écroulé", GameItem.Name), "Bâtiment");
+            b.PushTrace(String.Format("{0} collapsed", GameItem.Name));
         }
 
     }
@@ -132,9 +133,7 @@ namespace Game
             {
                 case "OfferingsPointsPerTick": b.PushOfferingsPointsPerTick(GameItem.OfferingsPointsPerTick); break;
             }
-
         }
-
     }
     [Serializable]
     public class VillagerDyingEvent : Event<Villager>
@@ -174,6 +173,7 @@ namespace Game
             }
             //Debug.Assert(toPush == "i");//va bien dedans!
             b.PushAlert(toPush, "Mort");
+            b.PushTrace("Villager died.");
         }
     }
     [Serializable]
@@ -186,6 +186,7 @@ namespace Game
         override public void PublishMessage(IWindow b)
         {
             b.PushAlert(String.Format("{0} {1} prie que son malheur soit bientot terminé.", GameItem.FirstName, GameItem.ParentFamily.Name), "Prière");
+            b.PushTrace("Villager is depressed");
         }
     }
     [Serializable]
@@ -198,6 +199,7 @@ namespace Game
         override public void PublishMessage(IWindow b)
         {
             b.PushAlert("Plusieurs vilageois sont malades, la population cherche votre aide.", "Epidémie");
+            b.PushTrace("Warn player of epidemic.");
         }
 
     }
@@ -211,7 +213,7 @@ namespace Game
 
         override public void PublishMessage(IWindow b)
         {
-            b.PushTrace(String.Format("La famille {0} est terminée.", GameItem.Name));
+            b.PushTrace(String.Format("The family {0} is destroyed.", GameItem.Name));
         }
     }
     [Serializable]
@@ -265,10 +267,7 @@ namespace Game
             {
                 b.PushAlert(toPush, "Epidémie");
             }
-            else
-            {
                 b.PushTrace(toPush);
-            }
         }
     }
     [Serializable]
@@ -353,6 +352,7 @@ namespace Game
             {
                 b.PushAlert(String.Format("La famille {0} a faim.", GameItem.Name), "Famine");
             }
+            b.PushTrace("Family hunger property has changed.");
         }
     }
     [Serializable]
@@ -368,6 +368,33 @@ namespace Game
         {
             string toPush = String.Format("La convocation de la famille {0} est terminée.", _familyName);
             b.PushAlert(toPush, "Convocation");
+            b.PushTrace("Convocation destroyed");
+        }
+    }
+    [Serializable]
+    public class EpidemicBirthEvent : Event<GodSpell.Epidemic>
+    {
+        internal EpidemicBirthEvent(GodSpell.Epidemic e)
+            : base(e)
+        {
+        }
+
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushTrace(String.Format("Epedemic created."));
+        }
+    }
+    [Serializable]
+    public class MeetingCreatedEvent : Event<Meeting>
+    {
+        internal MeetingCreatedEvent(Meeting e)
+            : base(e)
+        {
+        }
+
+        override public void PublishMessage(IWindow b)
+        {
+            b.PushTrace(String.Format("Meeting created."));
         }
     }
 }

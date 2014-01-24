@@ -13,12 +13,14 @@ namespace Game
         public Family Family { get { return _family; } }
         Village _village;
         bool _endMeeting;
+        bool _justStarted;
 
         public Meeting(Family f)
             : base(f.Game)
         {
             _family = f;
             _village = f.OwnerVillage;
+            _justStarted = true;
             Convocate();
         }
 
@@ -63,7 +65,11 @@ namespace Game
         }
         internal override void CloseStep(List<IEvent> eventList)
         {
-
+            if (_justStarted == true)
+            {
+                eventList.Add(new MeetingCreatedEvent(this));
+                _justStarted = false;
+            }
         }
     }
 }

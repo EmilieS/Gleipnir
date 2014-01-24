@@ -230,6 +230,7 @@ namespace GamePages
             _scenarioBox.Anchor = AnchorStyles.Bottom;
             _scenarioBox.SendToBack();
             this.Controls.Add(_scenarioBox);
+            _scenarioBox.listBox1.Visible = false;
             _scenarioBox.ResumeLayout();
 
             // ActionMenu
@@ -491,7 +492,11 @@ namespace GamePages
                 _timer.Start();
             }
             GameStarted = true;
-            
+            foreach (IEvent events in _game.EventList)
+            {
+                events.Do(this);
+                events.PublishMessage(this);
+            }
             // Restart Graphics Updates
             this.ResumeLayout();
         }
@@ -717,13 +722,15 @@ namespace GamePages
         }
         public void PushTrace(string message)
         {
-            traceMessages = traceMessages + message + @"
-";
+            /*traceMessages = traceMessages + message + @"
+";*/
             Debug.Assert(trace != null, "trace est null (PushTrace[GeneralPage])");
             Debug.Assert(trace.traceBoxViewer != null, "trace.traceBoxViewer est null (PushTrace[GeneralPage])");
             Debug.Assert(trace.traceBoxViewer.Text != null, "trace.traceBoxViewer.Text est null (PushTrace[GeneralPage])");
-            trace.traceBoxViewer.Text = traceMessages;
+            //trace.traceBoxViewer.Text = traceMessages;
             //PushAlert(message, "PUSHTRACE");//MARCHE
+            if(this._scenarioBox.listBox1.Items.Count<8)
+                this._scenarioBox.listBox1.Items.Add(message);
         }
         public void PushText(string message, string title)
         {
@@ -1614,6 +1621,7 @@ namespace GamePages
         // Game next Step
         internal void Step()
         {
+            this._scenarioBox.listBox1.Items.Clear();
             _game.NextStep();
             foreach (IEvent events in _game.EventList)
             {

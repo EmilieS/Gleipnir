@@ -33,6 +33,8 @@ namespace GamePages
                 TextLabel.Text = "Vous êtes à Ragnar";
                 this.pictureBox1.Visible = false;
                 this.pictureBox1.Enabled = false;
+                this.listBox1.Visible = true;//a finir
+                this.listBox1.Enabled = true;
             }
             else
                 TextLabel.Text = sentence;
@@ -47,6 +49,11 @@ namespace GamePages
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             SetScenarioText();
+        }
+
+        private void listBox1_EnabledChanged(object sender, EventArgs e)
+        {
+            
         }
 
       
