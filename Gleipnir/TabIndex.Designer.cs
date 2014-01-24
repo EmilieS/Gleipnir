@@ -75,6 +75,7 @@
             this.Level1_butt = new System.Windows.Forms.Button();
             this.VillagerList = new System.Windows.Forms.TabPage();
             this.godSpellsTab = new System.Windows.Forms.TabPage();
+            this.StartRepair = new System.Windows.Forms.Button();
             this.StartFest = new System.Windows.Forms.Button();
             this.StartHeal = new System.Windows.Forms.Button();
             this.StartEarthquake = new System.Windows.Forms.Button();
@@ -373,40 +374,43 @@
             this.panel4.Controls.Add(this.Fertilizer_butt);
             this.panel4.Controls.Add(this.Scarecrow_butt);
             this.panel4.Controls.Add(this.Farmers_Label_Up);
-            this.panel4.Location = new System.Drawing.Point(8, 264);
+            this.panel4.Location = new System.Drawing.Point(8, 245);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(200, 100);
             this.panel4.TabIndex = 4;
             // 
             // Irrigation_butt
             // 
+            this.Irrigation_butt.BackgroundImage = global::GamePages.Properties.Resources.Upgrade_Irrigation;
+            this.Irrigation_butt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Irrigation_butt.Location = new System.Drawing.Point(125, 24);
             this.Irrigation_butt.Name = "Irrigation_butt";
             this.Irrigation_butt.Size = new System.Drawing.Size(45, 40);
             this.Irrigation_butt.TabIndex = 7;
-            this.Irrigation_butt.Text = "Irrigation";
             this.Irrigation_butt.UseVisualStyleBackColor = true;
             this.Irrigation_butt.Click += new System.EventHandler(this.Irrigation_butt_Click);
             this.Irrigation_butt.MouseHover += new System.EventHandler(this.Irrigation_butt_MouseHover);
             // 
             // Fertilizer_butt
             // 
+            this.Fertilizer_butt.BackgroundImage = global::GamePages.Properties.Resources.Upgrade_Fertilizer;
+            this.Fertilizer_butt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Fertilizer_butt.Location = new System.Drawing.Point(74, 24);
             this.Fertilizer_butt.Name = "Fertilizer_butt";
             this.Fertilizer_butt.Size = new System.Drawing.Size(45, 40);
             this.Fertilizer_butt.TabIndex = 6;
-            this.Fertilizer_butt.Text = "Fertilisant";
             this.Fertilizer_butt.UseVisualStyleBackColor = true;
             this.Fertilizer_butt.Click += new System.EventHandler(this.Fertilizer_butt_Click);
             this.Fertilizer_butt.MouseHover += new System.EventHandler(this.Fertilizer_butt_MouseHover);
             // 
             // Scarecrow_butt
             // 
+            this.Scarecrow_butt.BackgroundImage = global::GamePages.Properties.Resources.Upgrade_Scarecrow;
+            this.Scarecrow_butt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Scarecrow_butt.Location = new System.Drawing.Point(23, 24);
             this.Scarecrow_butt.Name = "Scarecrow_butt";
             this.Scarecrow_butt.Size = new System.Drawing.Size(45, 40);
             this.Scarecrow_butt.TabIndex = 5;
-            this.Scarecrow_butt.Text = "Epouv";
             this.Scarecrow_butt.UseVisualStyleBackColor = true;
             this.Scarecrow_butt.Click += new System.EventHandler(this.Scarecrow_butt_Click);
             this.Scarecrow_butt.MouseHover += new System.EventHandler(this.Scarecrow_butt_MouseHover);
@@ -428,28 +432,30 @@
             this.panel3.Controls.Add(this.Furnace_butt);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.Saw_butt);
-            this.panel3.Location = new System.Drawing.Point(6, 166);
+            this.panel3.Location = new System.Drawing.Point(6, 156);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(200, 90);
             this.panel3.TabIndex = 3;
             // 
             // Plow_butt
             // 
+            this.Plow_butt.BackgroundImage = global::GamePages.Properties.Resources.Upgrade_Plow;
+            this.Plow_butt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Plow_butt.Location = new System.Drawing.Point(127, 24);
             this.Plow_butt.Name = "Plow_butt";
             this.Plow_butt.Size = new System.Drawing.Size(45, 40);
             this.Plow_butt.TabIndex = 6;
-            this.Plow_butt.Text = "Charrue";
             this.Plow_butt.UseVisualStyleBackColor = true;
             this.Plow_butt.Click += new System.EventHandler(this.Plow_butt_Click);
             // 
             // Furnace_butt
             // 
+            this.Furnace_butt.BackgroundImage = global::GamePages.Properties.Resources.Upgrade_Furnace;
+            this.Furnace_butt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Furnace_butt.Location = new System.Drawing.Point(76, 24);
             this.Furnace_butt.Name = "Furnace_butt";
             this.Furnace_butt.Size = new System.Drawing.Size(45, 40);
             this.Furnace_butt.TabIndex = 5;
-            this.Furnace_butt.Text = "Furnace";
             this.Furnace_butt.UseVisualStyleBackColor = true;
             this.Furnace_butt.Click += new System.EventHandler(this.Furnace_butt_Click);
             // 
@@ -466,11 +472,12 @@
             // 
             // Saw_butt
             // 
+            this.Saw_butt.BackgroundImage = global::GamePages.Properties.Resources.Upgrade_Saw;
+            this.Saw_butt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Saw_butt.Location = new System.Drawing.Point(25, 24);
             this.Saw_butt.Name = "Saw_butt";
             this.Saw_butt.Size = new System.Drawing.Size(45, 40);
             this.Saw_butt.TabIndex = 0;
-            this.Saw_butt.Text = "Scie";
             this.Saw_butt.UseVisualStyleBackColor = true;
             this.Saw_butt.Click += new System.EventHandler(this.Saw_butt_Click);
             this.Saw_butt.MouseHover += new System.EventHandler(this.Saw_butt_MouseHover);
@@ -481,40 +488,43 @@
             this.panel2.Controls.Add(this.Hoist_butt);
             this.panel2.Controls.Add(this.Pulley_butt);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(0, 78);
+            this.panel2.Location = new System.Drawing.Point(0, 71);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(208, 85);
             this.panel2.TabIndex = 2;
             // 
             // Scaffolding_butt
             // 
+            this.Scaffolding_butt.BackgroundImage = global::GamePages.Properties.Resources.Upgrade_Scaffolding;
+            this.Scaffolding_butt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Scaffolding_butt.Location = new System.Drawing.Point(133, 34);
             this.Scaffolding_butt.Name = "Scaffolding_butt";
             this.Scaffolding_butt.Size = new System.Drawing.Size(45, 40);
             this.Scaffolding_butt.TabIndex = 3;
-            this.Scaffolding_butt.Text = "Echaffaudage";
             this.Scaffolding_butt.UseVisualStyleBackColor = true;
             this.Scaffolding_butt.Click += new System.EventHandler(this.Scaffholding_butt_Click);
             this.Scaffolding_butt.MouseHover += new System.EventHandler(this.Scaffolding_butt_MouseHover);
             // 
             // Hoist_butt
             // 
+            this.Hoist_butt.BackgroundImage = global::GamePages.Properties.Resources.Upgrade_Hoist;
+            this.Hoist_butt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Hoist_butt.Location = new System.Drawing.Point(82, 34);
             this.Hoist_butt.Name = "Hoist_butt";
             this.Hoist_butt.Size = new System.Drawing.Size(45, 40);
             this.Hoist_butt.TabIndex = 2;
-            this.Hoist_butt.Text = "Grue";
             this.Hoist_butt.UseVisualStyleBackColor = true;
             this.Hoist_butt.Click += new System.EventHandler(this.Hoist_butt_Click);
             this.Hoist_butt.MouseHover += new System.EventHandler(this.Hoist_butt_MouseHover);
             // 
             // Pulley_butt
             // 
+            this.Pulley_butt.BackgroundImage = global::GamePages.Properties.Resources.Upgrade_Pulley;
+            this.Pulley_butt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Pulley_butt.Location = new System.Drawing.Point(31, 34);
             this.Pulley_butt.Name = "Pulley_butt";
             this.Pulley_butt.Size = new System.Drawing.Size(45, 40);
             this.Pulley_butt.TabIndex = 1;
-            this.Pulley_butt.Text = "Poulie";
             this.Pulley_butt.UseVisualStyleBackColor = true;
             this.Pulley_butt.Click += new System.EventHandler(this.Pulley_butt_Click);
             this.Pulley_butt.MouseHover += new System.EventHandler(this.Pulley_butt_MouseHover);
@@ -617,6 +627,7 @@
             // 
             this.godSpellsTab.BackgroundImage = global::GamePages.Properties.Resources.ActionTab_action_background;
             this.godSpellsTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.godSpellsTab.Controls.Add(this.StartRepair);
             this.godSpellsTab.Controls.Add(this.StartFest);
             this.godSpellsTab.Controls.Add(this.StartHeal);
             this.godSpellsTab.Controls.Add(this.StartEarthquake);
@@ -627,6 +638,20 @@
             this.godSpellsTab.Size = new System.Drawing.Size(208, 528);
             this.godSpellsTab.TabIndex = 3;
             this.godSpellsTab.UseVisualStyleBackColor = true;
+            // 
+            // StartRepair
+            // 
+            this.StartRepair.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.StartRepair.Image = global::GamePages.Properties.Resources.ButtonIcon_Repair;
+            this.StartRepair.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.StartRepair.Location = new System.Drawing.Point(24, 161);
+            this.StartRepair.Name = "StartRepair";
+            this.StartRepair.Size = new System.Drawing.Size(161, 30);
+            this.StartRepair.TabIndex = 4;
+            this.StartRepair.Text = "Réparer le Bâtiment";
+            this.StartRepair.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.StartRepair.UseVisualStyleBackColor = true;
+            this.StartRepair.Click += new System.EventHandler(this.StartRepair_Click);
             // 
             // StartFest
             // 
@@ -754,5 +779,6 @@
         private System.Windows.Forms.Button Irrigation_butt;
         private System.Windows.Forms.Button Plow_butt;
         private System.Windows.Forms.Button Furnace_butt;
+        private System.Windows.Forms.Button StartRepair;
     }
 }

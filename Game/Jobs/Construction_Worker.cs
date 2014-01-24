@@ -28,7 +28,7 @@ namespace Game
                 return "Sans syndicat, les ouvriers refusent de réparer.";
             if (building == null)
                 return "Veillez choisir un bâtiment";
-            if (building.Hp > 1)
+            if (building.Hp < 1)
                 return "Un bâtiment détruit ne peut être réparé.";
             ToRepair.Add(building);
             return "Le bâtiment a bien été ajouté à la liste des bâtiments à réparer";
@@ -57,6 +57,7 @@ namespace Game
                     }
                 }
             }
+            base.Evolution();
         }
         public override bool AddPersonPrerequisites()
         {

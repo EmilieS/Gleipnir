@@ -22,13 +22,13 @@ namespace Game.Buildings
         int _maxHp;
         int _destroyedTimer;
         bool _justCreated;
-        
+        int _damageRepairTimer;
 
         internal Village _village;
         public Village Village { get { return _village; } }
 
         public BuildingsModel(Village v)
-            :base(v.Game)
+            : base(v.Game)
         {
             _hp = new HistorizedValue<int, BuildingsModel>(this, @"_hp", 20);
             _justCreated = true;
@@ -44,8 +44,8 @@ namespace Game.Buildings
         abstract internal void AddToList();
 
         public int Hp { get { return _hp.Current; } internal set { _hp.Current = value; } }
-        public int MaxHp { get{ return _maxHp; } internal set{_maxHp=value; }}
-        int _damageRepairTimer;
+        public int MaxHp { get { return _maxHp; } internal set { _maxHp = value; } }
+
         /// <summary>
         /// must be positive.
         /// </summary>
@@ -74,31 +74,29 @@ namespace Game.Buildings
         /// <param name="amount"></param>
         internal void Repair(int amount)
         {
-            if (amount < 0) { throw new ArgumentException(); }
+            if (amount < 0)
+                throw new ArgumentException(@"(BuildingsModel, Repair) Amount is negative");
             if (amount == 0)
                 return;
+
             if (_hp.Current + amount > _maxHp)
                 _hp.Current = _maxHp;
             else
-            _hp.Current += amount;
+                _hp.Current += amount;
 
             Game.DamagedBuildingsNotRepairedOrRepairedFaithImpact(5);
             _damageRepairTimer = 0;
         }
-        internal bool Repair2(int amount)
+        public bool Repair2(int amount)
         {
-            Debug.Assert(amount > 0, "(Repair2|BuildingsModel) amount is negative or null");
+            Debug.Assert(amount > 0, @"(BuildingsModel, Repair2) Amount is negative or null");
             if (_hp.Current < 1)
                 return false;
 
             if (_hp.Current + amount >= _maxHp)
-            {
                 _hp.Current = _maxHp;
-            }
             else
-            {
                 _hp.Current += amount;
-            }
 
             Game.DamagedBuildingsNotRepairedOrRepairedFaithImpact(0.1);
             _damageRepairTimer = 0;
@@ -107,7 +105,6 @@ namespace Game.Buildings
                 return true;
             return false;
         }
-
 
         public int HorizontalPos
         {
@@ -154,7 +151,7 @@ namespace Game.Buildings
         {
             /*if (x == null || y == null)
                 throw new ArgumentNullException("(buildingModel, SetCoordinates) X or Y doesn't exist");*/
-            if ((x < 0 || x > Board.GridMaxRow) ||  (y < 0 || y > Board.GridMaxCol))
+            if ((x < 0 || x > Board.GridMaxRow) || (y < 0 || y > Board.GridMaxCol))
                 throw new IndexOutOfRangeException(@"(buildingModel, SetCoordinates) Must be in tab");
             this.HorizontalPos = x;
             this.VerticalPos = y;
@@ -163,7 +160,7 @@ namespace Game.Buildings
         override internal void OnDestroy()
         {
             OnOnDestroy();
-            
+
             _village = null;
         }
         abstract internal void OnOnDestroy();
@@ -185,7 +182,7 @@ namespace Game.Buildings
             //moved into ImpactHappiness because damage in earthquake happens in evolution, repair(constructionworker) happens in evolution to.
         }
         internal override void DieOrIsAlive(List<IEvent> eventList)
-        {            
+        {
             if (_hp.Current == 0)
             {
                 if (_destroyedTimer == 3)
@@ -209,10 +206,7 @@ namespace Game.Buildings
             }
         }
 
-        virtual internal void JustCollapsed()
-        {
-
-        }
+        virtual internal void JustCollapsed() { }
 
         internal override void CloseStep(List<IEvent> eventList)
         {//event fully repaired.

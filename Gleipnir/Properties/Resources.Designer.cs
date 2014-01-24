@@ -383,6 +383,16 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ButtonIcon_Repair {
+            get {
+                object obj = ResourceManager.GetObject("ButtonIcon_Repair", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ButtonIcon_start {
             get {
                 object obj = ResourceManager.GetObject("ButtonIcon_start", resourceCulture);
@@ -663,6 +673,66 @@ namespace GamePages.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Upgrade_Fertilizer {
+            get {
+                object obj = ResourceManager.GetObject("Upgrade_Fertilizer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Upgrade_Furnace {
+            get {
+                object obj = ResourceManager.GetObject("Upgrade_Furnace", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Upgrade_Hoist {
+            get {
+                object obj = ResourceManager.GetObject("Upgrade_Hoist", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Upgrade_Irrigation {
+            get {
+                object obj = ResourceManager.GetObject("Upgrade_Irrigation", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Upgrade_Plow {
+            get {
+                object obj = ResourceManager.GetObject("Upgrade_Plow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Upgrade_Pulley {
+            get {
+                object obj = ResourceManager.GetObject("Upgrade_Pulley", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Upgrade_RestaurantBlue1 {
             get {
                 object obj = ResourceManager.GetObject("Upgrade_RestaurantBlue1", resourceCulture);
@@ -696,6 +766,36 @@ namespace GamePages.Properties {
         internal static System.Drawing.Bitmap Upgrade_RestaurantBlue4 {
             get {
                 object obj = ResourceManager.GetObject("Upgrade_RestaurantBlue4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Upgrade_Saw {
+            get {
+                object obj = ResourceManager.GetObject("Upgrade_Saw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Upgrade_Scaffolding {
+            get {
+                object obj = ResourceManager.GetObject("Upgrade_Scaffolding", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Upgrade_Scarecrow {
+            get {
+                object obj = ResourceManager.GetObject("Upgrade_Scarecrow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
